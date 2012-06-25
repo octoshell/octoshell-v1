@@ -5,6 +5,8 @@ gem 'sqlite3'
 gem 'jquery-rails'
 gem 'unicorn'
 gem 'capistrano'
+gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails'
+gem 'simple_form'
 
 group :test, :development do
   gem 'factory_girl_rails'
