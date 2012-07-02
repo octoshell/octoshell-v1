@@ -9,6 +9,7 @@ gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails'
 gem 'simple_form'
 gem 'paranoia'
 gem 'paper_trail'
+gem 'resque'
 
 group :test, :development do
   gem 'factory_girl_rails'
