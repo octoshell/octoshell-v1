@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/ryanb/cancan.git
+  revision: 6886aecb9ae45136fe1e080df8665b7d50afa581
+  branch: 2.0
+  specs:
+    cancan (2.0.0.alpha)
+
+GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
   revision: 23a4423162009ebb726ebc4fe236b713d081d0ee
   specs:
@@ -225,6 +232,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  cancan!
   capistrano
   capybara
   coffee-rails (~> 3.2.1)
