@@ -8,12 +8,12 @@ Mgu::Application.routes.draw do
   end
   
   resources :users, only: :create
-  resources :sessions, only: [:create, :destroy]
+  resources :sessions, only: [:new, :create, :destroy]
   resource :dashboard, only: :show
   resources :projects, only: [:index, :new, :create, :show]
   resources :requests do
     get :confirmation
   end
   
-  root to: 'dashboard#show'
+  root to: 'dashboards#show'
 end
