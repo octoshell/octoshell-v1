@@ -11,7 +11,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120625102409) do
+ActiveRecord::Schema.define(:version => 20120702130155) do
+
+  create_table "accounts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "deleted_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "accounts", ["project_id"], :name => "index_accounts_on_project_id"
+  add_index "accounts", ["user_id", "project_id"], :name => "index_accounts_on_user_id_and_project_id", :unique => true
+  add_index "accounts", ["user_id"], :name => "index_accounts_on_user_id"
+
+  create_table "clusters", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "credentials", :force => true do |t|
+    t.text     "public_key"
+    t.integer  "user_id"
+    t.datetime "deleted_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "credentials", ["public_key", "user_id"], :name => "index_credentials_on_public_key_and_user_id", :unique => true
+  add_index "credentials", ["public_key"], :name => "index_credentials_on_public_key"
 
   create_table "fields", :force => true do |t|
     t.string   "name"
@@ -24,9 +53,31 @@ ActiveRecord::Schema.define(:version => 20120625102409) do
   end
 
   create_table "projects", :force => true do |t|
+    t.string   "name"
     t.datetime "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "requests", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "cluster_id"
+    t.integer  "hours"
+    t.datetime "deleted_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "requests", ["cluster_id"], :name => "index_requests_on_cluster_id"
+  add_index "requests", ["project_id"], :name => "index_requests_on_project_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "middle_name"
+    t.datetime "deleted_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "values", :force => true do |t|

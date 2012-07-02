@@ -4,7 +4,7 @@ class CreateFields < ActiveRecord::Migration
       t.string :name
       t.string :code
       t.string :model_type
-      t.integer :position, :default => 1
+      t.integer :position, default: 1
       t.timestamp :deleted_at
       t.timestamps
     end

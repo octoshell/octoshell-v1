@@ -1,18 +1,16 @@
 require 'spec_helper'
 
-describe Project do
-  let(:project) { create(:project) }
-  subject { project }
+describe Cluster do
+  let(:cluster) { create(:cluster) }
+  subject { cluster }
   
   it 'should have a factory' do
     should be
   end
   
   it { should have_many(:requests) }
-  it { should have_many(:accounts) }
   
   it { should validate_presence_of(:name) }
-  it { should validate_uniqueness_of(:name) }
   
   it { should allow_mass_assignment_of(:name) }
 end
