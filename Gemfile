@@ -11,6 +11,7 @@ gem 'simple_form'
 gem 'paranoia'
 gem 'paper_trail'
 gem 'resque'
+gem 'sorcery'
 
 group :test, :development do
   gem 'factory_girl_rails'

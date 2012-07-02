@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   
 protected
   
-  def authenticate!
-    user_signed_in? or redirect_to(new_session_path)
+  def not_authenticated
+    redirect_to(new_session_path)
   end
 end
