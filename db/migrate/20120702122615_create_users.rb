@@ -11,9 +11,9 @@ class CreateUsers < ActiveRecord::Migration
       t.datetime :remember_me_token_expires_at, default: nil
       
       # sorcery reset password
-      t.string :reset_password_token,           default: nil
-      t.datetime :remember_me_token_expires_at, default: nil
-      t.datetime :reset_password_email_sent_at, default: nil
+      t.string :reset_password_token,              default: nil
+      t.datetime :reset_password_token_expires_at, default: nil
+      t.datetime :reset_password_email_sent_at,    default: nil
       
       # sorcery user activation
       t.string :activation_state,              default: nil

@@ -18,13 +18,14 @@ class PasswordsController < ApplicationController
   end
   
   def edit
-    
+    if @user = User.load_from_reset_password_token(params[:token])
+      auto_login @user
+      redirect_to_profile
+    else
+      not_authenticated
+    end
   end
-  
-  def update
     
-  end
-  
 protected
   
   def redirect_to_profile
