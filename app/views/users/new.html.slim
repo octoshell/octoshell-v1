@@ -1,0 +1,10 @@
+- title 'Регистрация'
+
+= simple_form_for @user do |f|
+  = f.input :email
+  = f.input :password
+  = f.input :password_confirmation
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :middle_name
+  = f.button :submit, 'Зарегистрироваться', id: 'user_submit'

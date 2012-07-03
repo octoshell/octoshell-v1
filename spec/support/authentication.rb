@@ -7,5 +7,6 @@ end
 
 def current_user
   User.find_by_email page.find('#user').text
+rescue Capybara::ElementNotFound
 end
 
