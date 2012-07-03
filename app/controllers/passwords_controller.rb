@@ -17,7 +17,7 @@ class PasswordsController < ApplicationController
   def confirmation
   end
   
-  def edit
+  def change
     if @user = User.load_from_reset_password_token(params[:token])
       auto_login @user
       redirect_to_profile

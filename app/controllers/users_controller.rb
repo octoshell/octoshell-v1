@@ -13,4 +13,14 @@ class UsersController < ApplicationController
       render :new
     end
   end
+  
+  def activate
+    @user = User.load_from_activation_token(params[:token])
+    if @user
+      auto_login @user
+      redirect_to after_login_path
+    else
+      not_authenticated
+    end
+  end
 end

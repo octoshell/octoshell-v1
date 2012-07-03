@@ -52,7 +52,7 @@ describe 'Password Reset' do
       let(:user) { create(:user) }
       before do
         user.deliver_reset_password_instructions!
-        visit edit_password_path(token: user.reset_password_token)
+        visit change_password_path(token: user.reset_password_token)
       end
       
       it 'should authorize user' do
@@ -65,7 +65,7 @@ describe 'Password Reset' do
     end
     
     context 'with wrong token' do
-      before { visit edit_password_path(token: 'nope') }
+      before { visit change_password_path(token: 'nope') }
       
       it 'should redirect to new session page' do
         current_path.should == new_session_path
