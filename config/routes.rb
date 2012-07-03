@@ -1,28 +1,30 @@
 Mgu::Application.routes.draw do
+  # users
   resources :users, only: [:new, :create]
   get 'users/:token' => 'users#activate', as: :activate_user
+  
+  # sessions
   resource :session, only: [:new, :create, :destroy]
+  
+  # profile
   resource :profile, only: [:show, :edit, :update]
+  
+  # passwords
   resource :password, only: [:new, :create, :update] do
     get :confirmation
   end
   get 'password/:token' => 'passwords#change', as: :change_password
+  
+  # projects
+  resources :projects, only: [:index, :new, :create, :show]
+  
+  # requests
+  resources :requests do
+    get :confirmation
+  end
+  
+  # dashboard
   resource :dashboard, only: :show
-  
-  # namespace :admin do
-  #   resource :dashboard, only: :show
-  #   resources :users do
-  #     get :unconfirmed, on: :collection
-  #   end
-  #   resources :requests
-  # end
-  # 
-  # 
-  # 
-  # resources :projects, only: [:index, :new, :create, :show]
-  # resources :requests do
-  #   get :confirmation
-  # end
-  
+
   root to: 'dashboards#show'
 end
