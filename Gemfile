@@ -12,6 +12,7 @@ gem 'paranoia'
 gem 'paper_trail'
 gem 'resque'
 gem 'sorcery'
+gem 'slim'
 
 group :test, :development do
   gem 'factory_girl_rails'

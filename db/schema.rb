@@ -79,6 +79,9 @@ ActiveRecord::Schema.define(:version => 20120702130155) do
     t.datetime "remember_me_token_expires_at"
     t.string   "reset_password_token"
     t.datetime "reset_password_email_sent_at"
+    t.string   "activation_state"
+    t.string   "activation_token"
+    t.datetime "activation_token_expires_at"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "middle_name"
@@ -87,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20120702130155) do
     t.datetime "updated_at",                   :null => false
   end
 
+  add_index "users", ["activation_token"], :name => "index_users_on_activation_token"
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"
 

@@ -7,8 +7,8 @@ Mgu::Application.routes.draw do
     resources :requests
   end
   
-  resources :users, only: :create
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :users, only: [:new, :create]
+  resource :session, only: [:new, :create, :destroy]
   resource :dashboard, only: :show
   resources :projects, only: [:index, :new, :create, :show]
   resources :requests do

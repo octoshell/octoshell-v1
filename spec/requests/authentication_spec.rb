@@ -5,7 +5,17 @@ describe 'Authentication' do
   
   context 'as non authotized user' do
     context 'with correctly filled form' do
-      it 'should authenticate user'
+      let!(:user) { create(:user) }
+      
+      before do
+        fill_in 'user_email', with: user.email
+        fill_in 'user_password', with: '123456'
+        click_on 'session_submit'
+      end
+      
+      it 'should authenticate user' do
+        current_user.should be
+      end
     end
     
     context 'with non correctly filled form' do
