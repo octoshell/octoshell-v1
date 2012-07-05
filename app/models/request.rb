@@ -6,12 +6,4 @@ class Request < ActiveRecord::Base
   validates :project, :cluster, :hours, :user, presence: true
   
   attr_accessible :hours, :cluster_id
-  
-  before_validation :assign_user, on: :create
-  
-protected
-  
-  def assign_user
-    self.user ||= project.try(:user)
-  end
 end

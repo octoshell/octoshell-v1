@@ -12,6 +12,7 @@ class ProjectsController < ApplicationController
   
   def create
     @project = current_user.projects.build(params[:project])
+    @project.requests.each { |r| r.user = current_user }
     if @project.save!
       redirect_to request_confirmation_path(@project.requests.first)
     else
