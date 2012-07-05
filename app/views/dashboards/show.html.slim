@@ -1,0 +1,16 @@
+div class="row"
+  div class="span4"
+    div id="requests"
+      table class="table table-bordered"
+        tr
+          th #
+          th = Cluster.model_name.human
+          th = Request.human_attribute_name(:created_at)
+        - @requests.each do |request|
+          tr
+            td = request.id
+            td = link_to request.cluster.name, cluster_path(request.cluster)
+            td = request.created_at.to_formatted_s(:short)
+      p = link_to I18n.t('pages.dashboard.all_requests'), requests_path
+  div class="span4"
+  div class="span4"

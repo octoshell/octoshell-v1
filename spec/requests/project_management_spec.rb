@@ -5,6 +5,7 @@ describe 'Project Management' do
     let(:user) { create(:user) }
     let(:project) { build(:project) }
     let!(:cluster) { create(:cluster) }
+    
     before do
       login(user)
       visit new_project_path

@@ -19,5 +19,17 @@ describe User do
   it { should validate_presence_of(:first_name) }
   it { should validate_presence_of(:last_name) }
   it { should ensure_length_of(:password).is_at_least(6) }
+  
+  describe '#requests' do
+    let!(:project) { create(:project) }
+    let!(:user) { create(:user) }
+    let!(:account) { create(:account, user: user, project: project) }
+    let!(:request) { create(:request, project: project) }
+    
+    subject { user.requests }
+    
+    it { should be_a_kind_of(ActiveRecord::Relation) }
+    it { should == [request] }
+  end
 
 end

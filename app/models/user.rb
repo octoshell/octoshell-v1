@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :email, presence: true
   validates :password, confirmation: true, length: { minimum: 6 }
   validates :email, uniqueness: true
+  
+  def requests
+    Request.joins(project: :accounts).where(accounts: { user_id: id })
+  end
 end

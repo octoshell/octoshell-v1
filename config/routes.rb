@@ -23,6 +23,9 @@ Mgu::Application.routes.draw do
     get :confirmation
   end
   
+  # clusters
+  resources :clusters, only: :show
+  
   # dashboard
   resource :dashboard, only: :show
 
