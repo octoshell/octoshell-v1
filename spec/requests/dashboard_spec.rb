@@ -28,5 +28,39 @@ describe 'Dashboard' do
         page.should have_link(I18n.t 'pages.dashboard.all_requests')
       end
     end
+    
+    it 'should have a link to new request' do
+      within('#requests') do
+        page.should have_link(I18n.t 'pages.dashboard.new_request')
+      end
+    end
+  end
+  
+  describe 'Projects' do
+    let!(:projects) { 3.times.map { create(:project) } }
+    let!(:user) { create(:user) }
+    
+    before do
+      projects.each do |project|
+        create(:account, user: user, project: project)
+      end
+      login user
+      visit dashboard_path
+    end
+    
+    it 'should should all projects' do
+      projects.each do |project|
+        within('#projects') do
+          page.should have_content(project.id)
+          page.should have_link(project.name)
+        end
+      end
+    end
+    
+    it 'should have link to new projects' do
+      within('#projects') do
+        page.should have_link(I18n.t 'pages.dashboard.new_project')
+      end
+    end
   end
 end

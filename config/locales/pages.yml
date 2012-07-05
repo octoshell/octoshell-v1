@@ -1,4 +1,6 @@
 en:
   pages:
     dashboard:
-      all_requests: All requests
+      all_requests: All Requests
+      new_request: New Request
+      new_project: New Project

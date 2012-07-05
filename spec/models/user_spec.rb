@@ -13,6 +13,7 @@ describe User do
   
   it { should have_many(:accounts) }
   it { should have_many(:credentials) }
+  it { should have_many(:projects).through(:accounts) }
   
   it { should validate_presence_of(:email) }
   it { should validate_uniqueness_of(:email) }

@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   
   has_many :accounts
   has_many :credentials
+  has_many :projects, :through => :accounts
   
   validates :first_name, :last_name, :email, presence: true
   validates :password, confirmation: true, length: { minimum: 6 }

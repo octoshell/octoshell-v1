@@ -1,6 +1,7 @@
 div class="row"
   div class="span4"
     div id="requests"
+      p = link_to I18n.t('pages.dashboard.new_request'), new_request_path
       table class="table table-bordered"
         tr
           th #
@@ -9,8 +10,18 @@ div class="row"
         - @requests.each do |request|
           tr
             td = request.id
-            td = link_to request.cluster.name, cluster_path(request.cluster)
+            td = link_to request.cluster.name, request.cluster
             td = request.created_at.to_formatted_s(:short)
       p = link_to I18n.t('pages.dashboard.all_requests'), requests_path
   div class="span4"
+    div id="projects"
+      p = link_to I18n.t('pages.dashboard.new_project'), new_project_path
+      table class="table table-bordered"
+        tr
+          th #
+          th = Project.model_name.human
+        - @projects.each do |project|
+          tr
+            td = project.id
+            td = link_to project.name, project
   div class="span4"
