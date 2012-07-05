@@ -6,7 +6,7 @@ def login(user)
 end
 
 def current_user
-  User.find_by_email page.find('#user').text
+  User.find_by_email page.find('#user a').text
 rescue Capybara::ElementNotFound
 end
 

@@ -36,7 +36,7 @@ describe 'Registration' do
         visit new_user_path
         fill_base_fields
         fill_in 'user_new_institute_name', with: 'New Institute'
-        fill_in 'user_new_institute_kind', with: 'ВУС'
+        select 'ВУС', from: 'user_new_institute_kind'
         click_button 'user_submit'
       end
 

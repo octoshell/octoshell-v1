@@ -1,6 +1,6 @@
 en:
   pages:
     dashboard:
-      all_requests: All Requests
-      new_request: New Request
-      new_project: New Project
+      all_requests: Все заявки
+      new_request: Новая заявка
+      new_project: Новый проект

@@ -12,9 +12,15 @@ Mgu::Application.configure do
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
-
+  
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { host: 'mgu.dev' }
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key:  'key-3h6edqsluh7kmssau3dwlxf1vd4yn5j9',
+    api_host: 'releu.mailgun.org'
+  }
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log

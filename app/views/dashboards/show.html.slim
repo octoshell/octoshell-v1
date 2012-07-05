@@ -1,6 +1,8 @@
+- title 'Рабочий кабинет'
 div class="row"
   div class="span4"
     div id="requests"
+      h2 Заявки
       p = link_to I18n.t('pages.dashboard.new_request'), new_request_path
       table class="table table-bordered"
         tr
@@ -15,6 +17,7 @@ div class="row"
       p = link_to I18n.t('pages.dashboard.all_requests'), requests_path
   div class="span4"
     div id="projects"
+      h2 Проекты
       p = link_to I18n.t('pages.dashboard.new_project'), new_project_path
       table class="table table-bordered"
         tr
@@ -25,3 +28,6 @@ div class="row"
             td = project.id
             td = link_to project.name, project
   div class="span4"
+    div id="support"
+      h2 Поддержка
+      p В разработке

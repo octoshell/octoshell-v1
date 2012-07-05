@@ -1,14 +1,17 @@
 - title 'Регистрация'
 
-= simple_form_for @user do |f|
+= simple_form_for @user, html: { class: 'form-horizontal' } do |f|
   = f.input :email
   = f.input :password
   = f.input :password_confirmation
   = f.input :first_name
   = f.input :last_name
   = f.input :middle_name
-  = f.association :institute
-  = f.simple_fields_for :new_institute do |f|
-    = f.input :name
-    = f.input :kind
-  = f.button :submit, 'Зарегистрироваться', id: 'user_submit'
+  
+  = field_set_tag "Институт" do
+    = f.association :institute
+    = f.simple_fields_for :new_institute do |f|
+      = f.input :name, :label => 'Название'
+      = f.input :kind, collection: Institute::KINDS, :label => 'Тип'
+  div class="form-actions"
+    = f.button :submit, 'Зарегистрироваться', id: 'user_submit', class: 'btn btn-primary'

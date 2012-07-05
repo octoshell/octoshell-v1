@@ -28,6 +28,8 @@
     <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon-precomposed.png">
     <!-- Size should be 32 x 32 pixels -->
     <link href="images/favicon.ico" rel="shortcut icon">
+    
+    <%= javascript_include_tag "application" %>
   </head>
   <body>
 
@@ -43,7 +45,7 @@
           <div class="container nav-collapse">
             <ul class="nav pull-right">
               <% if logged_in? %>
-                <li id="user"><%= current_user.email %></li>
+                <li id="user"><%= link_to current_user.email, profile_path %></li>
                 <li><%= link_to 'Выйти', session_path, method: :delete %></li>
               <% else %>
                 <li><%= link_to 'Регистрация', new_user_path %></li>
@@ -58,23 +60,10 @@
     <div class="container">
       <div class="content">
         <div class="row">
-           <div class="span9">
-              <div class="page-header">
-                <h1><%= yield :title %></h1>
-              </div>
-              <%= yield %>
-            </div>
-            <div class="span3">
-              <div class="well sidebar-nav">
-                <h3>Sidebar</h3>
-                <ul class="nav nav-list">
-                  <li class="nav-header">Sidebar</li>
-                  <li><%= link_to "Link1", "/path1"  %></li>
-                  <li><%= link_to "Link2", "/path2"  %></li>
-                  <li><%= link_to "Link3", "/path3"  %></li>
-                </ul>
-              </div><!--/.well -->
-            </div><!--/span-->
+          <div class="page-header">
+            <h1><%= yield :title %></h1>
+          </div>
+          <%= yield %>
         </div><!--/row-->
       </div><!--/content-->
 
@@ -83,11 +72,5 @@
       </footer>
 
     </div> <!-- /container -->
-
-    <!-- Javascripts
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag "application" %>
-
   </body>
 </html>

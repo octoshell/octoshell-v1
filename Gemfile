@@ -15,6 +15,7 @@ gem 'sorcery'
 gem 'slim'
 
 group :test, :development do
+  gem 'mailgun-rails'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'rspec-rails'
