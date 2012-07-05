@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'spec_helper'
 
 describe 'Registration' do
@@ -5,19 +6,47 @@ describe 'Registration' do
     let(:user) { build(:user) }
     let!(:institute) { create(:institute) }
     
-    before do
-      visit new_user_path
+    def fill_base_fields
       fill_in 'user_email',                 with: user.email
       fill_in 'user_password',              with: user.password
       fill_in 'user_password_confirmation', with: user.password
       fill_in 'user_first_name',            with: user.first_name
       fill_in 'user_last_name',             with: user.last_name
-      select institute.name,                from: 'user_institute_id'
-      click_button 'user_submit'
     end
     
-    it 'should create new user' do
-      User.find_by_email(user.email).should be
+    context 'with existed institute' do
+      before do
+        visit new_user_path
+        fill_base_fields
+        select institute.name, from: 'user_institute_id'
+        click_button 'user_submit'
+      end
+
+      it 'should create new user' do
+        User.find_by_email(user.email).should be
+      end
+      
+      it 'should assign selected institute' do
+        User.find_by_email(user.email).institute.should == institute
+      end
+    end
+    
+    context 'with new institute' do
+      before do
+        visit new_user_path
+        fill_base_fields
+        fill_in 'user_new_institute_name', with: 'New Institute'
+        fill_in 'user_new_institute_kind', with: 'ВУС'
+        click_button 'user_submit'
+      end
+
+      it 'should create new user' do
+        User.find_by_email(user.email).should be
+      end
+      
+      it 'should assign new institute' do
+        User.find_by_email(user.email).institute.name.should == 'New Institute'
+      end
     end
   end
   

@@ -13,4 +13,7 @@ describe Institute do
       should allow_value(kind).for(:kind)
     end
   end
+  
+  it { should allow_mass_assignment_of(:name) }
+  it { should allow_mass_assignment_of(:kind) }
 end

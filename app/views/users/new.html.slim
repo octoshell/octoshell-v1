@@ -8,4 +8,7 @@
   = f.input :last_name
   = f.input :middle_name
   = f.association :institute
+  = f.simple_fields_for :new_institute do |f|
+    = f.input :name
+    = f.input :kind
   = f.button :submit, 'Зарегистрироваться', id: 'user_submit'

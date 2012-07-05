@@ -6,4 +6,6 @@ class Institute < ActiveRecord::Base
   
   validates :name, presence: true, uniqueness: { scope: :kind }
   validates :kind, inclusion: { in: KINDS }
+  
+  attr_accessible :name, :kind
 end
