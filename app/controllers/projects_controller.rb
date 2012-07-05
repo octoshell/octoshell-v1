@@ -6,12 +6,12 @@ class ProjectsController < ApplicationController
   end
   
   def new
-    @project = Project.new
+    @project = current_user.projects.build
     @project.requests.build
   end
   
   def create
-    @project = Project.new(params[:project])
+    @project = current_user.projects.build(params[:project])
     if @project.save!
       redirect_to request_confirmation_path(@project.requests.first)
     else

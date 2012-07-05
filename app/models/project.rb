@@ -1,10 +1,12 @@
 class Project < ActiveRecord::Base
   has_paper_trail
   
+  belongs_to :user
   has_many :accounts
   has_many :requests, inverse_of: :project
   
-  validates :name, presence: true, uniqueness: true
+  validates :name, uniqueness: true
+  validates :user, :name, presence: true
   
   attr_accessible :name, :requests_attributes
   

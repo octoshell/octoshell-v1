@@ -10,8 +10,10 @@ describe Project do
   
   it { should have_many(:requests) }
   it { should have_many(:accounts) }
+  it { should belong_to(:user) }
   
   it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:user) }
   it { should validate_uniqueness_of(:name) }
   
   it { should allow_mass_assignment_of(:name) }

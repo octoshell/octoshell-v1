@@ -13,21 +13,24 @@ describe User do
   
   it { should have_many(:accounts) }
   it { should have_many(:credentials) }
-  it { should have_many(:projects).through(:accounts) }
+  it { should have_many(:projects) }
+  it { should have_many(:requests) }
+  it { should belong_to(:institute) }
   
   it { should validate_presence_of(:email) }
+  it { should validate_presence_of(:institute) }
   it { should validate_uniqueness_of(:email) }
   it { should validate_presence_of(:first_name) }
   it { should validate_presence_of(:last_name) }
   it { should ensure_length_of(:password).is_at_least(6) }
   
-  describe '#requests' do
+  describe '#all_requests' do
     let!(:project) { create(:project) }
     let!(:user) { create(:user) }
     let!(:account) { create(:account, user: user, project: project) }
     let!(:request) { create(:request, project: project) }
     
-    subject { user.requests }
+    subject { user.all_requests }
     
     it { should be_a_kind_of(ActiveRecord::Relation) }
     it { should == [request] }

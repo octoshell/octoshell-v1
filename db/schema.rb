@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120702130155) do
+ActiveRecord::Schema.define(:version => 20120705131902) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "user_id"
@@ -52,11 +52,20 @@ ActiveRecord::Schema.define(:version => 20120702130155) do
     t.datetime "updated_at",                :null => false
   end
 
+  create_table "institutes", :force => true do |t|
+    t.string   "name"
+    t.string   "kind"
+    t.boolean  "approved",   :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.datetime "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   create_table "requests", :force => true do |t|
@@ -66,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20120702130155) do
     t.datetime "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   add_index "requests", ["cluster_id"], :name => "index_requests_on_cluster_id"
@@ -89,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20120702130155) do
     t.datetime "deleted_at"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
+    t.integer  "institute_id"
   end
 
   add_index "users", ["activation_token"], :name => "index_users_on_activation_token"

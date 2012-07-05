@@ -6,7 +6,9 @@ describe 'Dashboard' do
   describe 'Requests' do
     let!(:project) { create(:project) }
     let!(:account) { create(:account, user: user, project: project) }
-    let!(:requests) { 10.times.map { create(:request, project: project) } }
+    let!(:requests) do
+      10.times.map { create(:request, project: project, user: user) }
+    end
     
     before do
       login user
@@ -37,8 +39,8 @@ describe 'Dashboard' do
   end
   
   describe 'Projects' do
-    let!(:projects) { 3.times.map { create(:project) } }
     let!(:user) { create(:user) }
+    let!(:projects) { 3.times.map { create(:project, user: user) } }
     
     before do
       projects.each do |project|

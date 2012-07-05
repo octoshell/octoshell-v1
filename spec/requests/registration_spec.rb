@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'Registration' do
   context 'as non authotized user' do
     let(:user) { build(:user) }
+    let!(:institute) { create(:institute) }
+    
     before do
       visit new_user_path
       fill_in 'user_email',                 with: user.email
@@ -10,6 +12,7 @@ describe 'Registration' do
       fill_in 'user_password_confirmation', with: user.password
       fill_in 'user_first_name',            with: user.first_name
       fill_in 'user_last_name',             with: user.last_name
+      select institute.name,                from: 'user_institute_id'
       click_button 'user_submit'
     end
     
@@ -20,6 +23,7 @@ describe 'Registration' do
   
   context 'as authotized user' do
     let(:user) { create(:user) }
+    
     before do
       login(user)
       visit new_user_path
