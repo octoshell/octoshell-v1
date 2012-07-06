@@ -3,6 +3,7 @@ en:
     models:
       user: Пользователь
       account: Аккаунт
+      cluster: Кластер
     attributes:
       user:
         email: Email
@@ -12,3 +13,6 @@ en:
         last_name: Фамилия
         middle_name: Отчество
         institute: Институт
+      project:
+        name: Название
+        hours: Процессоро-часы
