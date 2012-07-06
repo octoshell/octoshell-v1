@@ -1,4 +1,4 @@
-Mgu::Application.routes.draw do
+MSU::Application.routes.draw do
   # users
   resources :users, only: [:new, :create]
   get 'users/:token' => 'users#activate', as: :activate_user

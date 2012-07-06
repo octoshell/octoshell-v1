@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Mgu::Application.load_tasks
+MSU::Application.load_tasks
