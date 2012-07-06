@@ -14,6 +14,7 @@ gem 'paper_trail'
 gem 'resque'
 gem 'sorcery'
 gem 'slim'
+gem 'state_machine'
 
 group :test, :development do
   gem 'mailgun-rails'

@@ -4,6 +4,7 @@ en:
       user: Пользователь
       account: Аккаунт
       cluster: Кластер
+      project: Проект
     attributes:
       user:
         email: Email
@@ -15,4 +16,20 @@ en:
         institute: Институт
       project:
         name: Название
+      request:
+        cluster: Кластер
         hours: Процессоро-часы
+        created_at: Дата создания
+        state: Статус
+    state_machines:
+      request:
+        state:
+          states:
+            pending: ожидает
+            active: активен
+            declined: отказано
+            finished: отменена
+          events:
+            _activate: активировать
+            _decline: отказать
+            _finish: завершить

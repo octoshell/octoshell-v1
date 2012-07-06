@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120705131902) do
+ActiveRecord::Schema.define(:version => 20120706124026) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "user_id"
@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(:version => 20120705131902) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
+    t.integer  "state_id"
+    t.string   "state"
   end
 
   create_table "requests", :force => true do |t|
@@ -76,6 +78,8 @@ ActiveRecord::Schema.define(:version => 20120705131902) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
+    t.integer  "state_id"
+    t.string   "state"
   end
 
   add_index "requests", ["cluster_id"], :name => "index_requests_on_cluster_id"

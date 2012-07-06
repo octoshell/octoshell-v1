@@ -19,7 +19,9 @@ describe 'Dashboard' do
       requests.last(5).each do |request|
         within('#requests') do
           page.should have_content(request.id)
+          page.should have_link(request.project.name)
           page.should have_link(request.cluster.name)
+          page.should have_content(request.human_state_name)
           page.should have_content(request.created_at.to_formatted_s(:short))
         end
       end

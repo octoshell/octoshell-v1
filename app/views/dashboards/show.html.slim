@@ -7,12 +7,16 @@ div class="row"
       table class="table table-bordered"
         tr
           th #
+          th = Project.model_name.human
           th = Cluster.model_name.human
+          th = Request.human_attribute_name(:state)
           th = Request.human_attribute_name(:created_at)
         - @requests.each do |request|
           tr
             td = request.id
+            td = link_to request.project.name, request.project
             td = link_to request.cluster.name, request.cluster
+            td = request.human_state_name
             td = request.created_at.to_formatted_s(:short)
       p = link_to I18n.t('pages.dashboard.all_requests'), requests_path
   div class="span4"
