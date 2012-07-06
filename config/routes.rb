@@ -5,6 +5,7 @@ MSU::Application.routes.draw do
   
   # sessions
   resource :session, only: [:new, :create, :destroy]
+  get '/session' => 'session#destroy'
   
   # profile
   resource :profile, only: [:show, :edit, :update]

@@ -4,3 +4,5 @@ en:
       all_requests: Все заявки
       new_request: Новая заявка
       new_project: Новый проект
+    shared:
+      logout: Выйти

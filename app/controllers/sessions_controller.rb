@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_filter :handle_authorized, if: :logged_in?, except: :destroy
+  
   def new
     @user = User.new
   end
@@ -13,7 +15,16 @@ class SessionsController < ApplicationController
     end
   end
   
+  def destroy
+    logout
+    redirect_to root_path
+  end
+  
 protected
+
+  def handle_authorized
+    redirect_to after_login_path
+  end
   
   def fetch_user(hash)
     [hash[:email], hash[:password], hash[:remember]]

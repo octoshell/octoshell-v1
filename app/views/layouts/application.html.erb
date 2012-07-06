@@ -46,7 +46,7 @@
             <ul class="nav pull-right">
               <% if logged_in? %>
                 <li id="user"><%= link_to current_user.email, profile_path %></li>
-                <li><%= link_to 'Выйти', session_path, method: :delete %></li>
+                <li><%= link_to t('pages.shared.logout'), session_path, method: :delete %></li>
               <% else %>
                 <li><%= link_to 'Регистрация', new_user_path %></li>
                 <li><%= link_to 'Вход', new_session_path %></li>
