@@ -1,4 +1,4 @@
-def login(user)
+def login(user = create(:user))
   visit new_session_path
   fill_in 'user_email', with: user.email
   fill_in 'user_password', with: '123456'

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Password Reset' do
   context 'as authotized user' do
     before do
-      login create(:user)
+      login
       visit new_password_path
     end
     

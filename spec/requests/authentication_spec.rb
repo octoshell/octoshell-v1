@@ -33,7 +33,7 @@ describe 'Authentication' do
     
     context 'as authotized user' do
       before(:all) do
-        login create(:user)
+        login
         visit new_session_path
       end
       
@@ -51,7 +51,7 @@ describe 'Authentication' do
   describe 'logout' do
     context 'as authorized user' do
       before do
-        login create(:user)
+        login
         visit dashboard_path
         click_link I18n.t('pages.shared.logout')
       end

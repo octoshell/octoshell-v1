@@ -10,9 +10,12 @@ describe 'Root management' do
   end
   
   context 'as authorized user' do
+    before do
+      login
+      visit root_path
+    end
     it 'should redirect to dashboard page' do
-      pending "current_user doesn't be implemented jet"
-      current_path.should == dashboard_page
+      current_path.should == dashboard_path
     end
   end
 end
