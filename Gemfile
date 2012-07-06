@@ -5,6 +5,7 @@ gem 'sqlite3'
 gem 'jquery-rails'
 gem 'unicorn'
 gem 'capistrano'
+gem 'rvm-capistrano'
 gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails'
 gem 'cancan', github: 'ryanb/cancan', branch: '2.0'
 gem 'simple_form'
@@ -22,6 +23,10 @@ group :test, :development do
   gem 'shoulda-matchers'
   gem 'launchy'
   gem 'guard-rspec'
+end
+
+group :production do
+  gem 'pg'
 end
 
 group :test do

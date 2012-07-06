@@ -142,6 +142,7 @@ GEM
       railties (~> 3.0)
     paranoia (1.1.0)
       activerecord (>= 3.0.0)
+    pg (0.14.0)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -198,6 +199,8 @@ GEM
       railties (>= 3.0)
       rspec (~> 2.10.0)
     rubyzip (0.9.9)
+    rvm-capistrano (1.2.2)
+      capistrano (>= 2.0.0)
     sass (3.1.19)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -265,9 +268,11 @@ DEPENDENCIES
   mailgun-rails
   paper_trail
   paranoia
+  pg
   rails (= 3.2.6)
   resque
   rspec-rails
+  rvm-capistrano
   sass-rails (~> 3.2.5)
   shoulda-matchers
   simple_form
