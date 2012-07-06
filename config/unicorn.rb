@@ -21,11 +21,11 @@ pid "/tmp/unicorn.msu.pid"
 if env == "production"
   # Help ensure your application will always spawn in the symlinked
   # "current" directory that Capistrano sets up.
-  working_directory "/home/deploy/msu/current"
+  working_directory "/var/www/msu/current"
 
   # feel free to point this anywhere accessible on the filesystem
   user 'evrone', 'staff'
-  shared_path = "/home/deploy/msu/shared"
+  shared_path = "/var/www/msu/shared"
 
   stderr_path "#{shared_path}/log/unicorn.stderr.log"
   stdout_path "#{shared_path}/log/unicorn.stdout.log"
