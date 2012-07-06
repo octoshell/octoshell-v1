@@ -30,5 +30,5 @@ MSU::Application.routes.draw do
   # dashboard
   resource :dashboard, only: :show
 
-  root to: 'dashboards#show'
+  root to: 'application#dashboard'
 end

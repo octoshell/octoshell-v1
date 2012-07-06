@@ -14,6 +14,7 @@ describe 'Root management' do
       login
       visit root_path
     end
+    
     it 'should redirect to dashboard page' do
       current_path.should == dashboard_path
     end

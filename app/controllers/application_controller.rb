@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
+  def dashboard
+    redirect_to dashboard_path
+  end
+  
 protected
   
   def not_authenticated
