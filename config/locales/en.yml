@@ -14,6 +14,7 @@ en:
         last_name: Фамилия
         middle_name: Отчество
         institute: Институт
+        full_name: ФИО
       project:
         name: Название
       request:
@@ -21,6 +22,9 @@ en:
         hours: Процессоро-часы
         created_at: Дата создания
         state: Статус
+      credential:
+        name: Название
+        created_at: Дата создания
     state_machines:
       request:
         state:

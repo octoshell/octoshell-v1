@@ -5,6 +5,10 @@ en:
       new_request: Новая заявка
       new_project: Новый проект
     profile:
-      edit: Редактировать
+      edit_user: Редактировать
+      new_credential: Новый Public Key
+      destroy_credential: Удалить
+    new_credential:
+      create: Создать
     shared:
       logout: Выйти

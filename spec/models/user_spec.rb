@@ -47,6 +47,13 @@ describe User do
     it { should == [request] }
   end
   
+  describe '#full_name' do
+    let(:user) { create(:user, first_name: 'Bruce', last_name: 'Wayne') }
+    subject { user.full_name }
+    
+    it { should == 'Bruce Wayne' }
+  end
+  
   describe '#new_institute=' do
     before { user.new_institute = { name: 'Acme', kind: 'ВУС' } }
     subject { user }

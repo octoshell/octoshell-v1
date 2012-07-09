@@ -3,6 +3,9 @@ MSU::Application.routes.draw do
   resources :users, only: [:new, :create]
   get 'users/:token' => 'users#activate', as: :activate_user
   
+  # credentials
+  resources :credentials, only: [:new, :create, :destroy]
+  
   # sessions
   resource :session, only: [:new, :create, :destroy]
   get '/session' => 'session#destroy'

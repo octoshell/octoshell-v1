@@ -1,3 +1,30 @@
 - title 'Профиль'
 
-p = link_to t('pages.profile.edit'), edit_profile_path
+h2 Профиль
+
+div id="profile"
+  dl class="dl-horizontal"
+    dt = User.human_attribute_name(:full_name)
+    dd = @user.full_name
+    dt = User.human_attribute_name(:institute)
+    dd = @user.institute.name
+  
+  p = link_to t('pages.profile.edit_user'), edit_profile_path
+
+h2 Ключи
+
+div id="credentials"
+  p = link_to t('pages.profile.new_credential'), new_credential_path
+
+  table class="table table-bordered"
+    tr
+      th = Credential.human_attribute_name(:name)
+      th = Credential.human_attribute_name(:public_key)
+      th = Credential.human_attribute_name(:created_at)
+      th
+    - @user.credentials.each do |credential|
+      tr
+        td = credential.name
+        td = credential.public_key
+        td = credential.created_at.to_formatted_s(:short)
+        td = link_to t('pages.profile.destroy_credential'), credential, method: :delete
