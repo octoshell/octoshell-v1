@@ -1,6 +1,6 @@
 require 'bundler/capistrano'
 require "rvm/capistrano"
-set :rvm_type, :user
+set :rvm_type, :system
 set :rvm_ruby_string, '1.9.3@msu'
 
 set :application, "msu"
