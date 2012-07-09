@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
   belongs_to :institute
   
   validates :first_name, :last_name, :email, :institute, presence: true
-  validates :password, confirmation: true, length: { minimum: 6 }
+  validates :password, confirmation: true, length: { minimum: 6 }, on: :create
+  validates :password, confirmation: true, length: { minimum: 6 }, on: :update, if: :password?
   validates :email, uniqueness: true
   
   attr_accessible :first_name, :last_name, :middle_name, :email, :password,
@@ -27,5 +28,9 @@ class User < ActiveRecord::Base
         institute.assign_attributes(attributes)
       end
     end
+  end
+  
+  def password?
+    password.present?
   end
 end

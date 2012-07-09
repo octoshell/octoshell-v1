@@ -34,7 +34,7 @@ class Admin::FieldsController < ApplicationController
     @field.destroy
   end
   
-protected
+private
   
   def find_field(id)
     Field.find(id)

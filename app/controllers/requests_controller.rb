@@ -3,7 +3,7 @@ class RequestsController < ApplicationController
     @request = find_request(params[:request_id])
   end
   
-protected
+private
   
   def find_request(id)
     Request.find id

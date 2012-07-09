@@ -1,0 +1,12 @@
+= f.input :email
+= f.input :password
+= f.input :password_confirmation
+= f.input :first_name
+= f.input :last_name
+= f.input :middle_name
+
+= field_set_tag "Институт" do
+  = f.association :institute
+  = f.simple_fields_for :new_institute do |f|
+    = f.input :name, :label => 'Название'
+    = f.input :kind, collection: Institute::KINDS, :label => 'Тип'

@@ -26,7 +26,7 @@ class PasswordsController < ApplicationController
     end
   end
     
-protected
+private
   
   def redirect_to_profile
     redirect_to edit_profile_path

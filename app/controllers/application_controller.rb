@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     redirect_to dashboard_path
   end
   
-protected
+private
   
   def not_authenticated
     redirect_to(new_session_path)

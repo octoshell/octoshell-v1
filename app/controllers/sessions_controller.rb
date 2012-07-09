@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
   
-protected
+private
 
   def handle_authorized
     redirect_to after_login_path
