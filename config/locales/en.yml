@@ -5,6 +5,7 @@ en:
       account: Аккаунт
       cluster: Кластер
       project: Проект
+      institute: Организация
     attributes:
       user:
         email: Email
@@ -25,7 +26,17 @@ en:
       credential:
         name: Название
         created_at: Дата создания
+      institute:
+        name: Название
+      confirmation:
+        state: Статус
     state_machines:
+      confirmation:
+        state:
+          states:
+            pending: ожидает
+            canceled: отменен
+            active: автивен
       request:
         state:
           states:

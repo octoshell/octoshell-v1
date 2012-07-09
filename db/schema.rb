@@ -33,11 +33,11 @@ ActiveRecord::Schema.define(:version => 20120709131414) do
 
   create_table "confirmations", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "company_id"
+    t.integer  "institute_id"
     t.string   "state"
     t.datetime "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "credentials", :force => true do |t|

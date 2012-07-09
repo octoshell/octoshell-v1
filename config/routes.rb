@@ -6,6 +6,9 @@ MSU::Application.routes.draw do
   # credentials
   resources :credentials, only: [:new, :create, :destroy]
   
+  # confirmations
+  resources :confirmations, only: [:new, :create]
+  
   # sessions
   resource :session, only: [:new, :create, :destroy]
   get '/session' => 'session#destroy'

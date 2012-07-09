@@ -1,16 +1,34 @@
-- title 'Профиль'
-
-h2 Профиль
+- title @user.full_name
 
 div id="profile"
+  div class="page-header"
+    h2 Профиль
+  
   dl class="dl-horizontal"
     dt = User.human_attribute_name(:full_name)
     dd = @user.full_name
-    dt = User.human_attribute_name(:institute)
-    dd = @user.institute.name
+    dt = User.human_attribute_name(:email)
+    dd = @user.email
   
   p = link_to t('pages.profile.edit_user'), edit_profile_path
 
+div id="institutes"
+  div class="page-header"
+    h2 Организации
+  
+  p = link_to t('pages.profile.new_confirmation'), new_confirmation_path
+  
+  table class="table table-bordered"
+    tr
+      th = Institute.human_attribute_name(:name)
+      th = Confirmation.human_attribute_name(:state)
+      th
+    - @user.confirmations.each do |confirmation|
+      tr
+        td = confirmation.institute.name
+        td = confirmation.human_state_name
+        td = link_to I18n.t('pages.profile.confirmation'), confirmation
+    
 h2 Ключи
 
 div id="credentials"

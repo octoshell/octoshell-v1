@@ -5,8 +5,8 @@ describe Confirmation do
   subject { confirmation }
   
   it { should belong_to(:user) }
-  it { should belong_to(:company) }
+  it { should belong_to(:institute) }
   
   it { should validate_presence_of(:user) }
-  it { should validate_presence_of(:company) }
+  it { should validate_presence_of(:institute) }
 end

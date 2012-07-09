@@ -16,10 +16,10 @@ describe User do
   it { should have_many(:credentials) }
   it { should have_many(:projects) }
   it { should have_many(:requests) }
-  it { should belong_to(:institute) }
+  it { should have_many(:confirmations) }
+  it { should have_many(:institutes).through(:confirmations) }
   
   it { should validate_presence_of(:email) }
-  it { should validate_presence_of(:institute) }
   it { should validate_uniqueness_of(:email) }
   it { should validate_presence_of(:first_name) }
   it { should validate_presence_of(:last_name) }
@@ -32,7 +32,6 @@ describe User do
   it { should allow_mass_assignment_of(:password) }
   it { should allow_mass_assignment_of(:password_confirmation) }
   it { should allow_mass_assignment_of(:remember_me) }
-  it { should allow_mass_assignment_of(:institute_id) }
   it { should allow_mass_assignment_of(:new_institute) }
   
   describe '#all_requests' do
@@ -59,13 +58,29 @@ describe User do
     subject { user }
     
     it 'should build new institute' do
-      user.institute.name.should == 'Acme'
-      user.institute.kind.should == 'ВУС'
+      user.institutes.first.name.should == 'Acme'
+      user.institutes.first.kind.should == 'ВУС'
+    end
+  end
+  
+  describe '#institute_id=' do
+    let(:institute) { create(:institute) }
+    context 'new record' do
+      let(:user) { build(:user) }
+      before { user.institute_id = institute.id }
+      subject { user }
+            
+      it 'should assign users insitute' do
+        user.institutes.first.should == institute
+      end
     end
     
-    it 'should build new institute' do
-      user.new_institute.name.should == 'Acme'
-      user.new_institute.kind.should == 'ВУС'
+    context 'persisted record' do
+      let(:user) { create(:user) }
+      
+      it 'should raise exeption' do
+        expect { user.institute_id = institute.id }.to raise_error
+      end
     end
   end
 end

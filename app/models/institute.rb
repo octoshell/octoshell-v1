@@ -2,7 +2,8 @@
 class Institute < ActiveRecord::Base
   KINDS = %w(ВУС РАН)
   
-  has_many :users
+  has_many :confirmations
+  has_many :users, through: :confirmations
   
   validates :name, presence: true, uniqueness: { scope: :kind }
   validates :kind, inclusion: { in: KINDS }

@@ -2,14 +2,16 @@ class User < ActiveRecord::Base
   authenticates_with_sorcery!
   
   attr_reader :new_institute
+  attr_reader :institute_id
   
   has_many :accounts
   has_many :credentials
   has_many :requests
   has_many :projects
-  belongs_to :institute
+  has_many :confirmations
+  has_many :institutes, through: :confirmations
   
-  validates :first_name, :last_name, :email, :institute, presence: true
+  validates :first_name, :last_name, :email, presence: true
   validates :password, confirmation: true, length: { minimum: 6 }, on: :create
   validates :password, confirmation: true, length: { minimum: 6 }, on: :update, if: :password?
   validates :email, uniqueness: true
@@ -23,11 +25,14 @@ class User < ActiveRecord::Base
   
   def new_institute=(attributes)
     if attributes.values.any?(&:present?)
-      self.institute = nil
-      @new_institute = build_institute do |institute|
-        institute.assign_attributes(attributes)
-      end
+      @new_institute = institutes.build(attributes)
     end
+  end
+  
+  def institute_id=(id)
+    return if id.blank?
+    raise 'Only for new records' if persisted?
+    self.institutes = [Institute.find(id)]
   end
   
   def password?

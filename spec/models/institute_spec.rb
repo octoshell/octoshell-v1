@@ -4,7 +4,8 @@ describe Institute do
   let(:institute) { create(:institute) }
   subject { institute }
   
-  it { should have_many(:users) }
+  it { should have_many(:confirmations) }
+  it { should have_many(:users).through(:confirmations) }
   
   it { should validate_presence_of(:name) }
   it { should validate_uniqueness_of(:name).scoped_to(:kind) }

@@ -27,7 +27,7 @@ describe 'Registration' do
       end
       
       it 'should assign selected institute' do
-        User.find_by_email(user.email).institute.should == institute
+        User.find_by_email(user.email).institutes.first.should == institute
       end
     end
     
@@ -45,7 +45,8 @@ describe 'Registration' do
       end
       
       it 'should assign new institute' do
-        User.find_by_email(user.email).institute.name.should == 'New Institute'
+        institute = User.find_by_email(user.email).institutes.first
+        institute.name.should == 'New Institute'
       end
     end
   end

@@ -6,7 +6,6 @@ FactoryGirl.define do
     password '123456'
     password_confirmation '123456'
     activation_state 'active'
-    institute
     
     factory :user do
       after(:create) { |user| user.activate! }
