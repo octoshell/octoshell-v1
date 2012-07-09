@@ -6,7 +6,7 @@ describe 'Profile Managment' do
     
     describe 'Showing profile' do
       before do
-        login
+        login user
         3.times { create(:credential, user: user) }
         visit profile_path
       end
