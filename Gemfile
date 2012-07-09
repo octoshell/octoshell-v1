@@ -15,9 +15,9 @@ gem 'resque'
 gem 'sorcery'
 gem 'slim'
 gem 'state_machine'
-gem 'mailgun-rails'
 
 group :test, :development do
+  gem 'mailgun-rails'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'rspec-rails'
