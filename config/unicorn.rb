@@ -1,6 +1,6 @@
 # Set environment to development unless something else is specified
 env = ENV["RAILS_ENV"] || "production"
-
+rails_env = env
 # See http://unicorn.bogomips.org/Unicorn/Configurator.html for complete
 # documentation.
 worker_processes 2
@@ -18,18 +18,18 @@ timeout 30
 pid "/tmp/unicorn.msu.pid"
 
 # Production specific settings
-if env == "production"
+#if env == "production"
   # Help ensure your application will always spawn in the symlinked
   # "current" directory that Capistrano sets up.
   working_directory "/var/www/msu/current"
 
   # feel free to point this anywhere accessible on the filesystem
-  user 'evrone', 'staff'
+  #user 'evrone', 'staff'
   shared_path = "/var/www/msu/shared"
 
-  stderr_path "#{shared_path}/log/unicorn.stderr.log"
-  stdout_path "#{shared_path}/log/unicorn.stdout.log"
-end
+  stderr_path "#{shared_path}/log/unicorn.error.log"
+  stdout_path "#{shared_path}/log/unicorn.access.log"
+#end
 
 before_fork do |server, worker|
   # the following is highly recomended for Rails + "preload_app true"
