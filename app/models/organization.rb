@@ -6,6 +6,7 @@ class Organization < ActiveRecord::Base
   has_many :users, through: :sureties
   
   validates :name, presence: true, uniqueness: { scope: :kind }
+  validates :kind, presence: true
   validates :kind, inclusion: { in: KINDS }
   
   attr_accessible :name, :kind

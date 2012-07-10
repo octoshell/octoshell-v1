@@ -35,9 +35,11 @@ en:
         created_at: Дата создания
       organization:
         name: Название
+        kind: Тип
       surety:
         state: Статус
         organization: Организация
+        description: Описание проекта
     state_machines:
       surety:
         state:

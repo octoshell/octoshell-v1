@@ -2,9 +2,9 @@ class Surety < ActiveRecord::Base
   belongs_to :user
   belongs_to :organization
   
-  validates :user, :organization, presence: true
+  validates :user, :organization, :description, presence: true
   
-  attr_accessible :organization_id
+  attr_accessible :organization_id, :description
   
   state_machine initial: :pending do
     state :pending

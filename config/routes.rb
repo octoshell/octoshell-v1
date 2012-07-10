@@ -33,6 +33,9 @@ MSU::Application.routes.draw do
   # clusters
   resources :clusters, only: :show
   
+  # organizations
+  resources :organizations, only: [:new, :create]
+  
   # dashboard
   resource :dashboard, only: :show
 
