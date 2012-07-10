@@ -3,6 +3,8 @@ en:
     submit:
       request:
         create: Создать
+      user:
+        create: Зарегистрироваться
   activerecord:
     models:
       user: Пользователь
@@ -40,13 +42,13 @@ en:
       confirmation:
         state:
           states:
-            pending: ожидает
+            pending: ожидает подтверждения
             canceled: отменен
             active: автивен
       request:
         state:
           states:
-            pending: ожидает
+            pending: ожидает подтверждения
             active: активен
             declined: отказано
             finished: отменена

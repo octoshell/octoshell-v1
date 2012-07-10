@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      redirect_to root_url
+      redirect_to confirmation_users_path(email: @user.email)
     else
       render :new
     end
@@ -23,5 +23,8 @@ class UsersController < ApplicationController
     else
       not_authenticated
     end
+  end
+  
+  def confirmation
   end
 end

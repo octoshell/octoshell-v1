@@ -51,35 +51,4 @@ describe User do
     
     it { should == 'Bruce Wayne' }
   end
-  
-  describe '#new_institute=' do
-    before { user.new_institute = { name: 'Acme', kind: 'ВУС' } }
-    subject { user }
-    
-    it 'should build new institute' do
-      user.institutes.first.name.should == 'Acme'
-      user.institutes.first.kind.should == 'ВУС'
-    end
-  end
-  
-  describe '#institute_id=' do
-    let(:institute) { create(:institute) }
-    context 'new record' do
-      let(:user) { build(:user) }
-      before { user.institute_id = institute.id }
-      subject { user }
-            
-      it 'should assign users insitute' do
-        user.institutes.first.should == institute
-      end
-    end
-    
-    context 'persisted record' do
-      let(:user) { create(:user) }
-      
-      it 'should raise exeption' do
-        expect { user.institute_id = institute.id }.to raise_error
-      end
-    end
-  end
 end

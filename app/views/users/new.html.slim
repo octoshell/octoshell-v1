@@ -2,10 +2,5 @@
 
 = simple_form_for @user, html: { class: 'form-horizontal' } do |f|
   = render partial: 'users/form_fields', locals: { f: f }
-  = field_set_tag "Институт" do
-    = f.input :institute_id, collection: Institute.all
-    = f.simple_fields_for :new_institute do |f|
-      = f.input :name, :label => 'Название'
-      = f.input :kind, collection: Institute::KINDS, :label => 'Тип'
   div class="form-actions"
-    = f.button :submit, 'Зарегистрироваться', id: 'user_submit', class: 'btn btn-primary'
+    = f.button :submit, class: 'btn btn-primary'

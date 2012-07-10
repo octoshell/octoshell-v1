@@ -1,6 +1,8 @@
 MSU::Application.routes.draw do
   # users
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create] do
+    get 'confirmation', on: :collection
+  end
   get 'users/:token' => 'users#activate', as: :activate_user
   
   # credentials

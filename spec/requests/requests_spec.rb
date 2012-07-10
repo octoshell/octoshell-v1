@@ -1,9 +1,10 @@
+# coding: utf-8
 require 'spec_helper'
 
 describe 'Requests' do
   context 'as authorized user' do
-    let!(:user) { create(:user) }
-    let!(:project) { create(:project, user: user) }
+    let!(:user) { create(:user_with_projects) }
+    let!(:project) { user.projects.first }
     let!(:cluster) { create(:cluster) }
     
     before do
@@ -14,7 +15,7 @@ describe 'Requests' do
         select project.name, from: 'request_project_id'
         select cluster.name, from: 'request_cluster_id'
         fill_in 'request_hours', with: 10
-        submit_button 'commit'
+        click_button 'Создать'
       end
     end
     
