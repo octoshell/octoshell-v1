@@ -33,6 +33,10 @@
           </a>
           <%= link_to "Moscow State University", root_path, class: "brand" %>
           <div class="container nav-collapse">
+            <ul class="nav">
+              <li><%= link_to 'Рабочий кабинет', dashboard_path %></li>
+              <li><%= link_to 'Личный кабинет', profile_path %></li>
+            </ul>
             <ul class="nav pull-right">
               <% if logged_in? %>
                 <li id="user"><%= link_to current_user.email, profile_path %></li>

@@ -1,20 +1,20 @@
-- title @user.full_name
+- title 'Личный кабинет'
 
 div id="profile"
-  div class="page-header"
-    h2 Профиль
+  h2 Профиль
   
-  dl class="dl-horizontal"
-    dt = User.human_attribute_name(:full_name)
-    dd = @user.full_name
-    dt = User.human_attribute_name(:email)
-    dd = @user.email
+  table class="table table-bordered"
+    tr
+      th = User.human_attribute_name(:full_name)
+      td = @user.full_name
+    tr
+      th = User.human_attribute_name(:email)
+      td = @user.email
   
   p = link_to t('pages.profile.edit_user'), edit_profile_path
 
 div id="organizations"
-  div class="page-header"
-    h2 Организации
+  h2 Организации
   
   p = link_to t('pages.profile.new_surety'), new_surety_path
   
@@ -31,9 +31,8 @@ div id="organizations"
         td = surety.description
         td = link_to I18n.t('pages.profile.surety'), surety
     
-h2 Ключи
-
 div id="credentials"
+  h2 Ключи
   p = link_to t('pages.profile.new_credential'), new_credential_path
 
   table class="table table-bordered"
