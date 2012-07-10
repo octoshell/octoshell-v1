@@ -14,7 +14,8 @@ describe User do
   
   it { should have_many(:accounts) }
   it { should have_many(:credentials) }
-  it { should have_many(:projects) }
+  it { should have_many(:owned_projects) }
+  it { should have_many(:projects).through(:accounts) }
   it { should have_many(:requests) }
   it { should have_many(:confirmations) }
   it { should have_many(:institutes).through(:confirmations) }

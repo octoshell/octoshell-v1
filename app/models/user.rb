@@ -4,10 +4,11 @@ class User < ActiveRecord::Base
   attr_reader :new_institute
   attr_reader :institute_id
   
-  has_many :accounts
+  has_many :accounts, inverse_of: :user
   has_many :credentials
   has_many :requests
-  has_many :projects
+  has_many :owned_projects, class_name: :Project
+  has_many :projects, through: :accounts
   has_many :confirmations
   has_many :institutes, through: :confirmations
   

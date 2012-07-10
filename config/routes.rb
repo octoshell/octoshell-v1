@@ -7,7 +7,7 @@ MSU::Application.routes.draw do
   resources :credentials, only: [:new, :create, :destroy]
   
   # confirmations
-  resources :confirmations, only: [:new, :create]
+  resources :confirmations, only: [:new, :create, :show]
   
   # sessions
   resource :session, only: [:new, :create, :destroy]
@@ -26,9 +26,7 @@ MSU::Application.routes.draw do
   resources :projects, only: [:index, :new, :create, :show]
   
   # requests
-  resources :requests do
-    get :confirmation
-  end
+  resources :requests, only: [:new, :create]
   
   # clusters
   resources :clusters, only: :show

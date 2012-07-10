@@ -15,13 +15,24 @@ describe 'Project Management' do
       click_button 'submit_project'
     end
     
-    it 'should create new project' do
-      Project.find_by_name(project.name).should be
+    def new_project
+      Project.find_by_name(project.name)
     end
     
-    it 'should redirect to confirmation request page' do
-      request = Project.find_by_name(project.name).requests.first
-      current_path.should == request_confirmation_path(request)
+    it 'should create new project' do
+      user.projects.should include(new_project)
+    end
+    
+    it 'should create an account' do
+      user.accounts.map(&:project).should include(new_project)
+    end
+    
+    it 'should create a request' do
+      new_project.should have(1).requests
+    end
+    
+    it 'should redirect to dashboard page' do
+      current_path.should == dashboard_path
     end
   end
   

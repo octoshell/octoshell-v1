@@ -2,7 +2,7 @@ class Project < ActiveRecord::Base
   has_paper_trail
   
   belongs_to :user
-  has_many :accounts
+  has_many :accounts, inverse_of: :project
   has_many :requests, inverse_of: :project
   
   validates :name, uniqueness: true
