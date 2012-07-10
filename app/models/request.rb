@@ -1,11 +1,15 @@
 class Request < ActiveRecord::Base
+  delegate :persisted?, to: :project, prefix: true
+  
   belongs_to :project, inverse_of: :requests
   belongs_to :cluster
   belongs_to :user
   
   validates :project, :cluster, :hours, :user, presence: true
+  validates :project, inclusion: { in: proc(&:allowed_projects) },
+    on: :create, if: :project_persisted?
   
-  attr_accessible :hours, :cluster_id
+  attr_accessible :hours, :cluster_id, :project_id
   
   state_machine initial: :pending do
     state :pending
@@ -36,5 +40,13 @@ class Request < ActiveRecord::Base
   
   def finish
     _finish
+  end
+  
+  def allowed_projects
+    if user
+      user.projects
+    else
+      []
+    end
   end
 end

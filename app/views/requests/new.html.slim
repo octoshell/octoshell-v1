@@ -1,0 +1,8 @@
+- title 'Новая заявка'
+
+= simple_form_for @request, html: { class: 'form-horizontal' } do |f|
+  = f.association :project, collection: f.object.allowed_projects
+  = f.association :cluster
+  = f.input :hours
+  div class="form-actions"
+    = f.button :submit

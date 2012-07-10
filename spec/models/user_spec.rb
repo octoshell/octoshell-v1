@@ -36,10 +36,8 @@ describe User do
   it { should allow_mass_assignment_of(:new_institute) }
   
   describe '#all_requests' do
-    let!(:project) { create(:project) }
-    let!(:user) { create(:user) }
-    let!(:account) { create(:account, user: user, project: project) }
-    let!(:request) { create(:request, project: project) }
+    let!(:user) { create(:user_with_projects) }
+    let!(:request) { create(:request, project: user.projects.first) }
     
     subject { user.all_requests }
     

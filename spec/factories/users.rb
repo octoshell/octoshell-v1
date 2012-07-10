@@ -9,6 +9,13 @@ FactoryGirl.define do
     
     factory :user do
       after(:create) { |user| user.activate! }
+      
+      factory :user_with_projects do
+        after(:create) do |user|
+          FactoryGirl.create(:project, user: user)
+          FactoryGirl.create(:account, user: user)
+        end
+      end
     end
   end
 end

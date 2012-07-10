@@ -1,4 +1,8 @@
 en:
+  helpers:
+    submit:
+      request:
+        create: Создать
   activerecord:
     models:
       user: Пользователь
@@ -6,6 +10,7 @@ en:
       cluster: Кластер
       project: Проект
       institute: Организация
+      request: Заявка
     attributes:
       user:
         email: Email
@@ -20,6 +25,7 @@ en:
         name: Название
       request:
         cluster: Кластер
+        project: Проект
         hours: Процессоро-часы
         created_at: Дата создания
         state: Статус
