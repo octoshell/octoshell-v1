@@ -1,8 +1,7 @@
 en:
   helpers:
     submit:
-      request:
-        create: Создать
+      create: Создать
       user:
         create: Зарегистрироваться
   activerecord:
@@ -11,7 +10,7 @@ en:
       account: Аккаунт
       cluster: Кластер
       project: Проект
-      institute: Организация
+      organization: Организация
       request: Заявка
     attributes:
       user:
@@ -21,7 +20,7 @@ en:
         first_name: Имя
         last_name: Фамилия
         middle_name: Отчество
-        institute: Институт
+        organization: Институт
         full_name: ФИО
       project:
         name: Название
@@ -34,10 +33,11 @@ en:
       credential:
         name: Название
         created_at: Дата создания
-      institute:
+      organization:
         name: Название
       confirmation:
         state: Статус
+        organization: Организация
     state_machines:
       confirmation:
         state:

@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :confirmation do
     user
-    institute
+    organization
   end
 end

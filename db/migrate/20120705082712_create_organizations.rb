@@ -1,6 +1,6 @@
-class CreateInstitutes < ActiveRecord::Migration
+class CreateOrganizations < ActiveRecord::Migration
   def change
-    create_table :institutes do |t|
+    create_table :organizations do |t|
       t.string :name
       t.string :kind
       t.boolean :approved, default: false

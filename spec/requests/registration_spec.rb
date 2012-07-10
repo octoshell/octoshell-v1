@@ -4,7 +4,7 @@ require 'spec_helper'
 describe 'Registration' do
   context 'as non authotized user' do
     let(:user) { build(:user) }
-    let!(:institute) { create(:institute) }
+    let!(:organization) { create(:organization) }
     
     before do
       visit new_user_path

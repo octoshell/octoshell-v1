@@ -33,11 +33,11 @@ ActiveRecord::Schema.define(:version => 20120709131414) do
 
   create_table "confirmations", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "institute_id"
+    t.integer  "organization_id"
     t.string   "state"
     t.datetime "deleted_at"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "credentials", :force => true do |t|
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(:version => 20120709131414) do
     t.datetime "updated_at",                :null => false
   end
 
-  create_table "institutes", :force => true do |t|
+  create_table "organizations", :force => true do |t|
     t.string   "name"
     t.string   "kind"
     t.boolean  "approved",   :default => false
@@ -76,7 +76,6 @@ ActiveRecord::Schema.define(:version => 20120709131414) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
-    t.integer  "state_id"
     t.string   "state"
   end
 
@@ -88,7 +87,6 @@ ActiveRecord::Schema.define(:version => 20120709131414) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
-    t.integer  "state_id"
     t.string   "state"
   end
 
@@ -113,7 +111,6 @@ ActiveRecord::Schema.define(:version => 20120709131414) do
     t.datetime "deleted_at"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
-    t.integer  "company_id"
   end
 
   add_index "users", ["activation_token"], :name => "index_users_on_activation_token"

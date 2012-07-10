@@ -1,5 +1,5 @@
 # coding: utf-8
-class Institute < ActiveRecord::Base
+class Organization < ActiveRecord::Base
   KINDS = %w(ВУС РАН)
   
   has_many :confirmations

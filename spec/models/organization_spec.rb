@@ -1,16 +1,16 @@
 require 'spec_helper'
 
-describe Institute do
-  let(:institute) { create(:institute) }
-  subject { institute }
+describe Organization do
+  let(:organization) { create(:organization) }
+  subject { organization }
   
   it { should have_many(:confirmations) }
   it { should have_many(:users).through(:confirmations) }
   
   it { should validate_presence_of(:name) }
   it { should validate_uniqueness_of(:name).scoped_to(:kind) }
-  it "should ensure inclusion of kind in #{Institute::KINDS}" do
-    Institute::KINDS.each do |kind|
+  it "should ensure inclusion of kind in #{Organization::KINDS}" do
+    Organization::KINDS.each do |kind|
       should allow_value(kind).for(:kind)
     end
   end

@@ -1,10 +1,10 @@
 class Confirmation < ActiveRecord::Base
   belongs_to :user
-  belongs_to :institute
+  belongs_to :organization
   
-  validates :user, :institute, presence: true
+  validates :user, :organization, presence: true
   
-  attr_accessible :institute_id
+  attr_accessible :organization_id
   
   state_machine initial: :pending do
     state :pending

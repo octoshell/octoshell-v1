@@ -12,7 +12,7 @@ div id="profile"
   
   p = link_to t('pages.profile.edit_user'), edit_profile_path
 
-div id="institutes"
+div id="organizations"
   div class="page-header"
     h2 Организации
   
@@ -20,12 +20,12 @@ div id="institutes"
   
   table class="table table-bordered"
     tr
-      th = Institute.human_attribute_name(:name)
+      th = Organization.human_attribute_name(:name)
       th = Confirmation.human_attribute_name(:state)
       th
     - @user.confirmations.each do |confirmation|
       tr
-        td = confirmation.institute.name
+        td = confirmation.organization.name
         td = confirmation.human_state_name
         td = link_to I18n.t('pages.profile.confirmation'), confirmation
     

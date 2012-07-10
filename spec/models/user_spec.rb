@@ -18,7 +18,7 @@ describe User do
   it { should have_many(:projects).through(:accounts) }
   it { should have_many(:requests) }
   it { should have_many(:confirmations) }
-  it { should have_many(:institutes).through(:confirmations) }
+  it { should have_many(:organizations).through(:confirmations) }
   
   it { should validate_presence_of(:email) }
   it { should validate_uniqueness_of(:email) }
@@ -33,7 +33,7 @@ describe User do
   it { should allow_mass_assignment_of(:password) }
   it { should allow_mass_assignment_of(:password_confirmation) }
   it { should allow_mass_assignment_of(:remember_me) }
-  it { should allow_mass_assignment_of(:new_institute) }
+  it { should allow_mass_assignment_of(:new_organization) }
   
   describe '#all_requests' do
     let!(:user) { create(:user_with_projects) }
