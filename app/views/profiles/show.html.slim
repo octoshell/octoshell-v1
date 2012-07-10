@@ -43,6 +43,8 @@ div id="credentials"
     - @user.credentials.each do |credential|
       tr
         td = credential.name
-        td = credential.public_key
+        td
+          textarea disabled="disabled" class="public-key" rows="10"
+            = credential.public_key
         td = credential.created_at.to_formatted_s(:short)
         td = link_to t('pages.profile.destroy_credential'), credential, method: :delete

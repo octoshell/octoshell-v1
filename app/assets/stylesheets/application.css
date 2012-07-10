@@ -23,3 +23,10 @@
 #surety .center {
 	text-align: center;
 }
+
+textarea.public-key {
+  width: 400px;
+  white-space: pre-wrap;
+  cursor: text !important;
+  color: black;
+}
