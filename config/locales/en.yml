@@ -16,7 +16,7 @@ en:
       user:
         email: Email
         password: Пароль
-        password_surety: Подтверждение
+        password_confirmation: Подтверждение
         first_name: Имя
         last_name: Фамилия
         middle_name: Отчество

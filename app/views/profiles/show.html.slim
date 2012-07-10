@@ -22,11 +22,13 @@ div id="organizations"
     tr
       th = Organization.human_attribute_name(:name)
       th = Surety.human_attribute_name(:state)
+      th = Surety.human_attribute_name(:description)
       th
     - @user.sureties.each do |surety|
       tr
         td = surety.organization.name
         td = surety.human_state_name
+        td = surety.description
         td = link_to I18n.t('pages.profile.surety'), surety
     
 h2 Ключи

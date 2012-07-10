@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Project Management' do
+describe 'Project' do
   context 'as authorized user' do
     let(:user) { create(:user) }
     let(:project) { build(:project) }

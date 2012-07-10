@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Root management' do
+describe 'Root' do
   context 'as non authorized user' do
     before { visit root_path }
     

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Profile Managment' do
+describe 'Profile' do
   context 'as authorized user' do
     let(:user) { create(:user) }
     
