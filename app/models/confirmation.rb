@@ -4,6 +4,8 @@ class Confirmation < ActiveRecord::Base
   
   validates :user, :institute, presence: true
   
+  attr_accessible :institute_id
+  
   state_machine initial: :pending do
     state :pending
     state :active

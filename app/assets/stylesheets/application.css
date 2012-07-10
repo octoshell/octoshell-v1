@@ -11,3 +11,15 @@
  *= require_self
  *= require_tree .
  */
+
+#confirmation {
+	width: 600px;
+}
+
+#confirmation .right {
+	text-align: right;
+}
+
+#confirmation .center {
+	text-align: center;
+}

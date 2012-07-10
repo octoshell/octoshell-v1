@@ -9,6 +9,7 @@ en:
       new_credential: Новый Public Key
       destroy_credential: Удалить
       new_confirmation: Привязать организацию
+      confirmation: Подтверждение
     new_credential:
       create: Создать
     shared:

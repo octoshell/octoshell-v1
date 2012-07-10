@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
     @project = current_user.owned_projects.build(params[:project])
     @project.accounts.build { |a| a.user = current_user }
     @project.requests.each { |r| r.user = current_user }
-    if @project.save!
+    if @project.save
       redirect_to dashboard_path
     else
       render :new

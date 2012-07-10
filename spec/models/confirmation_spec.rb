@@ -9,4 +9,6 @@ describe Confirmation do
   
   it { should validate_presence_of(:user) }
   it { should validate_presence_of(:institute) }
+  
+  it { should allow_mass_assignment_of(:institute_id) }
 end

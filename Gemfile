@@ -16,6 +16,7 @@ gem 'sorcery'
 gem 'slim'
 gem 'state_machine'
 gem 'mailgun-rails'
+gem 'redcarpet'
 
 group :test, :development do
   gem 'factory_girl_rails'

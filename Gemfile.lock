@@ -177,6 +177,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12)
       json (~> 1.4)
+    redcarpet (2.1.1)
     redis (2.2.2)
     redis-namespace (1.0.3)
       redis (< 3.0.0)
@@ -267,6 +268,7 @@ DEPENDENCIES
   paranoia
   pg
   rails (= 3.2.6)
+  redcarpet
   resque
   rspec-rails
   rvm-capistrano
