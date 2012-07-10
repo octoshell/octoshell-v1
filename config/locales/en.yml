@@ -16,7 +16,7 @@ en:
       user:
         email: Email
         password: Пароль
-        password_confirmation: Подтверждение
+        password_surety: Подтверждение
         first_name: Имя
         last_name: Фамилия
         middle_name: Отчество
@@ -35,11 +35,11 @@ en:
         created_at: Дата создания
       organization:
         name: Название
-      confirmation:
+      surety:
         state: Статус
         organization: Организация
     state_machines:
-      confirmation:
+      surety:
         state:
           states:
             pending: ожидает подтверждения

@@ -25,6 +25,6 @@ class UsersController < ApplicationController
     end
   end
   
-  def confirmation
+  def surety
   end
 end

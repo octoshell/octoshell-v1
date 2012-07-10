@@ -31,15 +31,6 @@ ActiveRecord::Schema.define(:version => 20120709131414) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "confirmations", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "organization_id"
-    t.string   "state"
-    t.datetime "deleted_at"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
   create_table "credentials", :force => true do |t|
     t.text     "public_key"
     t.integer  "user_id"
@@ -92,6 +83,15 @@ ActiveRecord::Schema.define(:version => 20120709131414) do
 
   add_index "requests", ["cluster_id"], :name => "index_requests_on_cluster_id"
   add_index "requests", ["project_id"], :name => "index_requests_on_project_id"
+
+  create_table "sureties", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "organization_id"
+    t.string   "state"
+    t.datetime "deleted_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email"

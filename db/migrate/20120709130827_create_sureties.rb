@@ -1,6 +1,6 @@
-class CreateConfirmations < ActiveRecord::Migration
+class CreateSureties < ActiveRecord::Migration
   def change
-    create_table :confirmations do |t|
+    create_table :sureties do |t|
       t.references :user
       t.references :organization
       t.string :state

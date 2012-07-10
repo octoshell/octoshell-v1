@@ -17,8 +17,8 @@ describe User do
   it { should have_many(:owned_projects) }
   it { should have_many(:projects).through(:accounts) }
   it { should have_many(:requests) }
-  it { should have_many(:confirmations) }
-  it { should have_many(:organizations).through(:confirmations) }
+  it { should have_many(:sureties) }
+  it { should have_many(:organizations).through(:sureties) }
   
   it { should validate_presence_of(:email) }
   it { should validate_uniqueness_of(:email) }

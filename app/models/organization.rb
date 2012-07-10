@@ -2,8 +2,8 @@
 class Organization < ActiveRecord::Base
   KINDS = %w(ВУС РАН)
   
-  has_many :confirmations
-  has_many :users, through: :confirmations
+  has_many :sureties
+  has_many :users, through: :sureties
   
   validates :name, presence: true, uniqueness: { scope: :kind }
   validates :kind, inclusion: { in: KINDS }

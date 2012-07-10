@@ -12,14 +12,14 @@
  *= require_tree .
  */
 
-#confirmation {
+#surety {
 	width: 600px;
 }
 
-#confirmation .right {
+#surety .right {
 	text-align: right;
 }
 
-#confirmation .center {
+#surety .center {
 	text-align: center;
 }

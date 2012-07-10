@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Confirmation do
-  let(:confirmation) { create(:confirmation) }
-  subject { confirmation }
+describe Surety do
+  let(:surety) { create(:surety) }
+  subject { surety }
   
   it { should belong_to(:user) }
   it { should belong_to(:organization) }

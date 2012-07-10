@@ -22,7 +22,7 @@ describe 'Registration' do
       User.find_by_email(user.email).should be
     end
     
-    it 'should show confirmation page' do
+    it 'should show surety page' do
       current_path.should == confirmation_users_path
     end
   end

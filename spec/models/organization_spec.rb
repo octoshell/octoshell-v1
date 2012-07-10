@@ -4,8 +4,8 @@ describe Organization do
   let(:organization) { create(:organization) }
   subject { organization }
   
-  it { should have_many(:confirmations) }
-  it { should have_many(:users).through(:confirmations) }
+  it { should have_many(:sureties) }
+  it { should have_many(:users).through(:sureties) }
   
   it { should validate_presence_of(:name) }
   it { should validate_uniqueness_of(:name).scoped_to(:kind) }

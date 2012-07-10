@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :confirmation do
+  factory :surety do
     user
     organization
   end

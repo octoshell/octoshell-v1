@@ -8,8 +8,8 @@ en:
       edit_user: Редактировать
       new_credential: Новый Public Key
       destroy_credential: Удалить
-      new_confirmation: Привязать организацию
-      confirmation: Подтверждение
+      new_surety: Привязать организацию
+      surety: Подтверждение
     new_credential:
       create: Создать
     shared:
