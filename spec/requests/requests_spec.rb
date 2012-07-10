@@ -1,4 +1,3 @@
-# coding: utf-8
 require 'spec_helper'
 
 describe 'Requests' do
@@ -12,8 +11,8 @@ describe 'Requests' do
       visit new_request_path
       
       within('#new_request') do
-        select project.name, from: 'Проект'
-        select cluster.name, from: 'Кластер'
+        select project.name, from: 'request_project_id'
+        select cluster.name, from: 'request_cluster_id'
         fill_in 'request_hours', with: 10
         submit_button 'commit'
       end

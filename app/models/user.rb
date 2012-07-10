@@ -43,4 +43,8 @@ class User < ActiveRecord::Base
   def full_name
     [first_name, middle_name, last_name].find_all(&:present?).join(' ')
   end
+  
+  def active?
+    activation_state == 'active'
+  end
 end

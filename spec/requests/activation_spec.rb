@@ -8,6 +8,10 @@ describe 'Activation' do
       visit activate_user_path(token: user.activation_token)
     end
     
+    it 'should activate user' do
+      current_user.should be_active
+    end
+    
     it 'should authorize user' do
       current_user.should == user
     end
