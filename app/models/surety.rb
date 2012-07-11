@@ -2,9 +2,9 @@ class Surety < ActiveRecord::Base
   belongs_to :user
   belongs_to :organization
   
-  validates :user, :organization, :description, presence: true
+  validates :user, :organization, presence: true
   
-  attr_accessible :organization_id, :description
+  attr_accessible :organization_id
   
   scope :active, where(state: 'active')
   

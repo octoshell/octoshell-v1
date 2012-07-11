@@ -27,12 +27,6 @@ describe 'Dashboard' do
       end
     end
     
-    it 'should have a link to all requests' do
-      within('#requests') do
-        page.should have_link(I18n.t 'pages.dashboard.all_requests')
-      end
-    end
-    
     it 'should have a link to new request' do
       within('#requests') do
         page.should have_link(I18n.t 'pages.dashboard.new_request')

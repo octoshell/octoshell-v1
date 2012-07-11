@@ -1,6 +1,6 @@
 - title 'Рабочий кабинет'
 div class="row"
-  div class="span4"
+  div class="span6"
     div id="requests"
       h2 Заявки
       p = link_to I18n.t('pages.dashboard.new_request'), new_request_path
@@ -18,8 +18,7 @@ div class="row"
             td = link_to request.cluster.name, request.cluster
             td = request.human_state_name
             td = request.created_at.to_formatted_s(:short)
-      p = link_to I18n.t('pages.dashboard.all_requests'), requests_path
-  div class="span4"
+  div class="span6"
     div id="projects"
       h2 Проекты
       p = link_to I18n.t('pages.dashboard.new_project'), new_project_path
@@ -31,7 +30,8 @@ div class="row"
           tr
             td = project.id
             td = link_to project.name, project
-  div class="span4"
+div class="row"
+  div class="span6"
     div id="support"
       h2 Поддержка
       p В разработке

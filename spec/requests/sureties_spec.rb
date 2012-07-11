@@ -10,17 +10,12 @@ describe 'Sureties' do
       visit new_surety_path
       within('#new_surety') do
         select surety.organization.name, from: 'surety_organization_id'
-        fill_in 'surety_description', with: surety.description
         click_button 'Создать'
       end
     end
     
     it 'should show profile page' do
       current_path.should == profile_path
-    end
-    
-    it 'should create new surety' do
-      page.should have_content(surety.description)
     end
   end
   

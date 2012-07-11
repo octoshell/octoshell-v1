@@ -11,8 +11,10 @@ en:
     dashboard: &dashboard
       <<: *links
     profile:
+      <<: *links
       surety: Подтверждение
     new_credential:
+      <<: *links
       create: Создать
     shared:
       logout: Выйти

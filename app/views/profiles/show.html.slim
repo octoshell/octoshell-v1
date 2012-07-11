@@ -1,35 +1,36 @@
 - title 'Личный кабинет'
 
-div id="profile"
-  h2 Профиль
+div class="row"
+  div class="span6"
+    div id="profile"
+      h2 Профиль
+      
+      p = link_to t('pages.profile.edit_user'), edit_profile_path
+      
+      table class="table table-bordered"
+        tr
+          th = User.human_attribute_name(:full_name)
+          td = @user.full_name
+        tr
+          th = User.human_attribute_name(:email)
+          td = @user.email
   
-  table class="table table-bordered"
-    tr
-      th = User.human_attribute_name(:full_name)
-      td = @user.full_name
-    tr
-      th = User.human_attribute_name(:email)
-      td = @user.email
+  div class="span6"
+    div id="organizations"
+      h2 Организации
   
-  p = link_to t('pages.profile.edit_user'), edit_profile_path
-
-div id="organizations"
-  h2 Организации
+      p = link_to t('pages.profile.new_surety'), new_surety_path
   
-  p = link_to t('pages.profile.new_surety'), new_surety_path
-  
-  table class="table table-bordered"
-    tr
-      th = Organization.human_attribute_name(:name)
-      th = Surety.human_attribute_name(:state)
-      th = Surety.human_attribute_name(:description)
-      th
-    - @user.sureties.each do |surety|
-      tr
-        td = surety.organization.name
-        td = surety.human_state_name
-        td = surety.description
-        td = link_to I18n.t('pages.profile.surety'), surety
+      table class="table table-bordered"
+        tr
+          th = Organization.human_attribute_name(:name)
+          th = Surety.human_attribute_name(:state)
+          th
+        - @user.sureties.each do |surety|
+          tr
+            td = surety.organization.name
+            td = surety.human_state_name
+            td = link_to I18n.t('pages.profile.surety'), surety
     
 div id="credentials"
   h2 Ключи

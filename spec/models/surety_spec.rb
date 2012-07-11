@@ -8,9 +8,7 @@ describe Surety do
   it { should belong_to(:organization) }
   
   it { should validate_presence_of(:user) }
-  it { should validate_presence_of(:description) }
   it { should validate_presence_of(:organization) }
   
   it { should allow_mass_assignment_of(:organization_id) }
-  it { should allow_mass_assignment_of(:description) }
 end
