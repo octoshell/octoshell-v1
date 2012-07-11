@@ -35,6 +35,8 @@ describe Ability do
   context 'admin' do
     let(:user) { create(:admin_user) }
     
+    subject { Ability.new(user) }
+    
     it_behaves_like 'all users'
     it_behaves_like 'basic user'
     
@@ -42,7 +44,7 @@ describe Ability do
     
     it { should be_able_to(:dashboard, :'admin/base') }
     
-    it { should be_able_to(:show, :'admin/dashboard') }
+    it { should be_able_to(:show, :'admin/dashboards') }
     
     it { should be_able_to(:show, :'admin/requests') }
     it { should be_able_to(:index, :'admin/requests') }

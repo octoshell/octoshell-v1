@@ -1,20 +1,21 @@
 - title 'Заявки'
 
-table class="table table-bordered"
-  tr
-    th #
-    th = Project.model_name.human
-    th = User.model_name.human
-    th = Cluster.model_name.human
-    th = Request.human_attribute_name(:state)
-    th = Request.human_attribute_name(:created_at)
-    th 
-  - @requests.each do |request|
+div id="requests"
+  table class="table table-bordered"
     tr
-      td = request.id
-      td = link_to request.project.name, [:admin, request.project]
-      td = link_to request.user.full_name, [:admin, request.user]
-      td = link_to request.cluster.name, [:admin, request.cluster]
-      td = request.human_state_name
-      td = request.created_at.to_formatted_s(:short)
-      td = link_to 'открыть', [:admin, request]
+      th #
+      th = Project.model_name.human
+      th = User.model_name.human
+      th = Cluster.model_name.human
+      th = Request.human_attribute_name(:state)
+      th = Request.human_attribute_name(:created_at)
+      th 
+    - @requests.each do |request|
+      tr
+        td = request.id
+        td = link_to request.project.name, [:admin, request.project]
+        td = link_to request.user.full_name, [:admin, request.user]
+        td = link_to request.cluster.name, [:admin, request.cluster]
+        td = request.human_state_name
+        td = request.created_at.to_formatted_s(:short)
+        td = link_to 'открыть', [:admin, request]
