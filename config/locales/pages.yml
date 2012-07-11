@@ -8,6 +8,8 @@ en:
       new_credential: Новый Public Key
       destroy_credential: Удалить
       new_surety: Привязать организацию
+    new_request:
+      <<: *links
     dashboard: &dashboard
       <<: *links
     profile:
@@ -21,3 +23,7 @@ en:
     admin:
       dashboard:
         <<: *dashboard
+      request:
+        activate: Активировать
+        decline: Отзакать
+        finish: Завершить

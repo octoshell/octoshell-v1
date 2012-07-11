@@ -48,11 +48,20 @@ MSU::Application.routes.draw do
     resource :dashboard, only: :show
     
     # requests
-    resources :requests, only: :show do
+    resources :requests, only: [:show, :index] do
       put :activate
       put :decline
       put :finish
     end
+    
+    # users
+    resources :users
+    
+    # projects
+    resources :projects
+    
+    # clusters
+    resources :clusters
   end
 
   root to: 'application#dashboard'

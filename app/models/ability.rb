@@ -33,6 +33,8 @@ class Ability
         can :dashboard, :'admin/base'
         
         can :show, :'admin/dashboards'
+        
+        can [:index, :show, :activate, :decline, :finish], :'admin/requests'
       end
     end
   end

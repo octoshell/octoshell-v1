@@ -19,7 +19,7 @@ div class="row"
             td = link_to request.cluster.name, request.cluster
             td = request.created_at.to_formatted_s(:short)
             td = link_to 'открыть', [:admin, request]
-      p = link_to I18n.t('pages.admin.dashboard.all_requests'), requests_path
+      p = link_to I18n.t('pages.admin.dashboard.all_requests'), admin_requests_path
   div class="span6"
     div id="requests"
       h2 Поддержка

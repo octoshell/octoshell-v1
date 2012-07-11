@@ -53,7 +53,7 @@ en:
             pending: ожидает подтверждения
             active: активен
             declined: отказано
-            finished: отменена
+            finished: завершена
           events:
             _activate: активировать
             _decline: отказать

@@ -31,4 +31,23 @@ describe Ability do
     it { should be_able_to(:new, :projects) }
     it { should be_able_to(:create, :projects) }
   end
+  
+  context 'admin' do
+    let(:user) { create(:admin_user) }
+    
+    it_behaves_like 'all users'
+    it_behaves_like 'basic user'
+    
+    it { should be_able_to(:access, :admin) }
+    
+    it { should be_able_to(:dashboard, :'admin/base') }
+    
+    it { should be_able_to(:show, :'admin/dashboard') }
+    
+    it { should be_able_to(:show, :'admin/requests') }
+    it { should be_able_to(:index, :'admin/requests') }
+    it { should be_able_to(:activate, :'admin/requests') }
+    it { should be_able_to(:decline, :'admin/requests') }
+    it { should be_able_to(:finish, :'admin/requests') }
+  end
 end

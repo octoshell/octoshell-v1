@@ -6,5 +6,9 @@ FactoryGirl.define do
     before(:create) do |request|
       request.project = request.user.projects.first
     end
+    
+    factory :active_request do
+      state 'active'
+    end
   end
 end
