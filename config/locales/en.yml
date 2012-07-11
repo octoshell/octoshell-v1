@@ -46,7 +46,7 @@ en:
           states:
             pending: ожидает подтверждения
             canceled: отменен
-            active: автивен
+            active: активен
       request:
         state:
           states:

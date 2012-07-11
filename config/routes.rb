@@ -46,6 +46,13 @@ MSU::Application.routes.draw do
     
     # dashboard
     resource :dashboard, only: :show
+    
+    # requests
+    resources :requests, only: :show do
+      put :activate
+      put :decline
+      put :finish
+    end
   end
 
   root to: 'application#dashboard'

@@ -11,6 +11,8 @@ class Request < ActiveRecord::Base
   
   attr_accessible :hours, :cluster_id, :project_id
   
+  scope :last_pending, where(state: 'pending').order('id desc')
+  
   state_machine initial: :pending do
     state :pending
     state :active

@@ -1,6 +1,7 @@
-# module Admin
-  class Admin::DashboardsController < Admin::BaseController
+module Admin
+  class DashboardsController < BaseController
     def show
+      @requests = Request.last_pending
     end
   end
-# end
+end

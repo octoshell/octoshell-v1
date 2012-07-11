@@ -1,16 +1,21 @@
 en:
   pages:
-    dashboard:
+    links: &links
       all_requests: Все заявки
       new_request: Новая заявка
       new_project: Новый проект
-    profile:
       edit_user: Редактировать
       new_credential: Новый Public Key
       destroy_credential: Удалить
       new_surety: Привязать организацию
+    dashboard: &dashboard
+      <<: *links
+    profile:
       surety: Подтверждение
     new_credential:
       create: Создать
     shared:
       logout: Выйти
+    admin:
+      dashboard:
+        <<: *dashboard
