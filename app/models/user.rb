@@ -47,4 +47,8 @@ class User < ActiveRecord::Base
   def active?
     activation_state == 'active'
   end
+  
+  def sured?
+    sureties.active.exists?
+  end
 end

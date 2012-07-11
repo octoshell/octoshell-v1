@@ -51,4 +51,18 @@ describe User do
     
     it { should == 'Bruce Wayne' }
   end
+  
+  describe '#sured?' do
+    context 'basic user' do
+      let(:user) { create(:user) }
+      
+      it { should_not be_sured }
+    end
+    
+    context 'sured user' do
+      let(:user) { create(:sured_user) }
+      
+      it { should be_sured }
+    end
+  end
 end

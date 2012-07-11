@@ -14,7 +14,7 @@ class PasswordsController < ApplicationController
     end
   end
   
-  def surety
+  def confirmation
   end
   
   def change

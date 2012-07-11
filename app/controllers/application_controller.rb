@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  enable_authorization
+  
+  rescue_from CanCan::Unauthorized, with: :not_authenticated
   
   def dashboard
     redirect_to dashboard_path
@@ -8,7 +11,7 @@ class ApplicationController < ActionController::Base
 private
   
   def not_authenticated
-    redirect_to(new_session_path)
+    redirect_to new_session_path
   end
   
   def after_login_path

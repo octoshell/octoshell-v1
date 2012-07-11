@@ -6,6 +6,8 @@ class Surety < ActiveRecord::Base
   
   attr_accessible :organization_id, :description
   
+  scope :active, where(state: 'active')
+  
   state_machine initial: :pending do
     state :pending
     state :active

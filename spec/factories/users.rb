@@ -15,6 +15,18 @@ FactoryGirl.define do
           FactoryGirl.create(:project, user: user)
           FactoryGirl.create(:account, user: user)
         end
+        
+        factory :sured_user_with_projects do
+          after(:create) do |user|
+            FactoryGirl.create(:confirmed_surety, user: user)
+          end
+        end
+      end
+      
+      factory :sured_user do
+        after(:create) do |user|
+          FactoryGirl.create(:confirmed_surety, user: user)
+        end
       end
     end
   end

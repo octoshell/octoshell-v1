@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Project' do
   context 'as authorized user' do
-    let(:user) { create(:user) }
+    let(:user) { create(:sured_user) }
     let(:project) { build(:project) }
     let!(:cluster) { create(:cluster) }
     
