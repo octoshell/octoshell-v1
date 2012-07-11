@@ -26,6 +26,14 @@ class Ability
         
         can [:new, :create], :projects
       end
+      
+      if user.admin?
+        can :access, :admin
+        
+        can :dashboard, :'admin/base'
+        
+        can :show, :'admin/dashboards'
+      end
     end
   end
 end

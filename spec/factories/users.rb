@@ -28,6 +28,10 @@ FactoryGirl.define do
           FactoryGirl.create(:confirmed_surety, user: user)
         end
       end
+      
+      factory :admin_user do
+        admin true
+      end
     end
   end
 end

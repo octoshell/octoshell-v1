@@ -38,6 +38,15 @@ MSU::Application.routes.draw do
   
   # dashboard
   resource :dashboard, only: :show
+  
+  # admin namspace
+  namespace :admin do
+    # root
+    get '/' => 'base#dashboard'
+    
+    # dashboard
+    resource :dashboard, only: :show
+  end
 
   root to: 'application#dashboard'
 end

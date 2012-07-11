@@ -34,12 +34,7 @@
           <%= link_to "Moscow State University", root_path, class: "brand" %>
           <div class="container nav-collapse">
             <ul class="nav">
-              <%= content_tag :li, class: current_page?(controller: 'dashboards', action: 'show') ? 'active' : nil do%>
-                <%= link_to 'Рабочий кабинет', dashboard_path %>
-              <% end %>
-              <%= content_tag :li, class: current_page?(controller: 'profiles', action: 'show') ? 'active' : nil do %>
-                <%= link_to 'Личный кабинет', profile_path %>
-              <% end %>
+              <%= render "shared/#{namespace}_top_menu" %>
             </ul>
             <ul class="nav pull-right">
               <% if logged_in? %>

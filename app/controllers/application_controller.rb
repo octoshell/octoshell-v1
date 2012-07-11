@@ -9,6 +9,16 @@ class ApplicationController < ActionController::Base
   end
   
 private
+
+  def namespace
+    parts = self.class.to_s.split('::')
+    if parts.size > 1
+      parts.first.downcase
+    else
+      'base'
+    end
+  end
+  helper_method :namespace
   
   def not_authenticated
     redirect_to new_session_path

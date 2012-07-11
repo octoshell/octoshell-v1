@@ -1,0 +1,7 @@
+li class="#{current_page?(controller: 'dashboards', action: 'show') ? 'active' : nil}"
+  = link_to 'Рабочий кабинет', dashboard_path
+li class="#{current_page?(controller: 'profiles', action: 'show') ? 'active' : nil}"
+  = link_to 'Личный кабинет', profile_path
+- if can? :access, :admin
+  li class="#{current_page?(controller: 'admin/dashboards', action: 'show') ? 'active' : nil}"
+    = link_to 'Кабинет Админа', admin_dashboard_path

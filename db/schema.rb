@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120710150558) do
+ActiveRecord::Schema.define(:version => 20120711091210) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "user_id"
@@ -110,8 +110,9 @@ ActiveRecord::Schema.define(:version => 20120710150558) do
     t.string   "last_name"
     t.string   "middle_name"
     t.datetime "deleted_at"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
+    t.boolean  "admin",                           :default => false
   end
 
   add_index "users", ["activation_token"], :name => "index_users_on_activation_token"
