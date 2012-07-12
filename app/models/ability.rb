@@ -35,6 +35,8 @@ class Ability
         can :show, :'admin/dashboards'
         
         can [:index, :show, :activate, :decline, :finish], :'admin/requests'
+        
+        can [:index, :show, :activate, :decline, :cancel], :'admin/sureties'
       end
     end
   end

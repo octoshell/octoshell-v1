@@ -33,7 +33,7 @@
           <%= link_to "Moscow State University", root_path, class: "brand" %>
           <div class="container nav-collapse">
             <ul class="nav">
-              <%= render "shared/#{namespace}_top_menu" %>
+              <%= render "shared/#{namespace}_top_menu" if logged_in? %>
             </ul>
             <ul class="nav pull-right">
               <% if logged_in? %>
@@ -52,6 +52,13 @@
     <div class="container">
       <div class="row">
         <div class="span12">
+          <% if can? :access, :admin %>
+            <ul class="nav nav-pills">
+              <li class="<%= current_page?(controller: 'admin/sureties') ? 'active' : '' %>">
+                <%= link_to 'Поручительства', [:admin, :sureties] %>
+              </li>
+            </ul>
+          <% end %>
           <div class="page-header">
             <h1><%= yield :title %></h1>
           </div>
