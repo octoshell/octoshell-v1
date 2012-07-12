@@ -37,7 +37,7 @@ describe User do
   
   describe '#all_requests' do
     let!(:user) { create(:user_with_projects) }
-    let!(:request) { create(:request, project: user.projects.first) }
+    let!(:request) { create(:request, user: user, project: user.projects.first) }
     
     subject { user.all_requests }
     

@@ -60,20 +60,6 @@ ActiveRecord::Schema.define(:version => 20120712153438) do
     t.datetime "updated_at",      :null => false
   end
 
-  create_table "organization_fields", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "organization_positions", :force => true do |t|
-    t.string   "name"
-    t.string   "value"
-    t.integer  "membership_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
   create_table "organizations", :force => true do |t|
     t.string   "name"
     t.string   "kind"
