@@ -57,5 +57,10 @@ describe Ability do
     it { should be_able_to(:activate, :'admin/sureties') }
     it { should be_able_to(:decline, :'admin/sureties') }
     it { should be_able_to(:cancel, :'admin/sureties') }
+    
+    it { should be_able_to(:index, :'admin/organizations') }
+    it { should be_able_to(:show, :'admin/organizations') }
+    it { should be_able_to(:edit, :'admin/organizations') }
+    it { should be_able_to(:update, :'admin/organizations') }
   end
 end

@@ -1,0 +1,7 @@
+- title 'Редактирование организации'
+
+= simple_form_for [:admin, @organization], html: { class: 'form-horizontal' } do |f|
+  = f.input :name
+  = f.input :kind, collection: Organization::KINDS
+  div class="form-actions"
+    = f.button :submit, 'Сохранить', id: 'user_submit', class: 'btn btn-primary'

@@ -42,7 +42,7 @@ module Admin
     end
     
     def redirect_to_request(request)
-      request_to [:admin, request]
+      redirect_to [:admin, request]
     end
     
     def redirect_to_request_with_alert(request)

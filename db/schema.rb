@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120711130431) do
+ActiveRecord::Schema.define(:version => 20120712153438) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "user_id"
@@ -53,12 +53,47 @@ ActiveRecord::Schema.define(:version => 20120711130431) do
     t.datetime "updated_at",                :null => false
   end
 
+  create_table "memberships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "organization_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "organization_fields", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "organization_positions", :force => true do |t|
+    t.string   "name"
+    t.string   "value"
+    t.integer  "membership_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
   create_table "organizations", :force => true do |t|
     t.string   "name"
     t.string   "kind"
     t.boolean  "approved",   :default => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "position_names", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "positions", :force => true do |t|
+    t.integer  "membership_id"
+    t.string   "name"
+    t.string   "value"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "projects", :force => true do |t|

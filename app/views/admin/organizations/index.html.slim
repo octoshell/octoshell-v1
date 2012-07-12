@@ -1,0 +1,12 @@
+- title 'Организации'
+
+div id="organizations"
+  table class="table table-bordered"
+    tr
+      th #
+      th = Organization.human_attribute_name(:name)
+    - @organizations.each do |organization|
+      tr
+        td = organization.id
+        td = link_to organization.name, admin_organization_path(organization)
+        td = link_to 'редактировать', edit_admin_organization_path(organization)

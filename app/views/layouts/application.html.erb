@@ -52,10 +52,13 @@
     <div class="container">
       <div class="row">
         <div class="span12">
-          <% if can? :access, :admin %>
+          <% if can?(:access, :admin) && namespace == 'admin' %>
             <ul class="nav nav-pills">
               <li class="<%= current_page?(controller: 'admin/sureties') ? 'active' : '' %>">
                 <%= link_to 'Поручительства', [:admin, :sureties] %>
+              </li>
+              <li class="<%= current_page?(controller: 'admin/organizations') ? 'active' : '' %>">
+                <%= link_to 'Организации', [:admin, :organizations] %>
               </li>
             </ul>
           <% end %>
