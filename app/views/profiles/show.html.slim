@@ -18,12 +18,23 @@ div class="row"
   div class="span6"
     div id="organizations"
       h2 Организации
+      
+      p = link_to t('pages.profile.new_membership'), new_membership_path
+  
+      table class="table table-bordered"
+        tr
+          th = Organization.model_name.human
+          th
+        - @user.memberships.each do |membership|
+          tr
+            td = membership.organization.name
+            td = link_to 'редактировать', edit_membership_path(membership)
   
       p = link_to t('pages.profile.new_surety'), new_surety_path
   
       table class="table table-bordered"
         tr
-          th = Organization.human_attribute_name(:name)
+          th = Organization.model_name.human
           th = Surety.human_attribute_name(:state)
           th
         - @user.sureties.each do |surety|

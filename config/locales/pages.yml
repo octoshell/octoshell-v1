@@ -7,7 +7,8 @@ en:
       edit_user: Редактировать
       new_credential: Новый Public Key
       destroy_credential: Удалить
-      new_surety: Привязать организацию
+      new_surety: Новое поручительство
+      new_membership: Новое место работы
     new_request:
       <<: *links
     dashboard: &dashboard

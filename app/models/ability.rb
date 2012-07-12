@@ -18,7 +18,10 @@ class Ability
       can :show, :dashboards
       
       can [:new, :create], :organizations
+      
       can [:new, :create, :show], :sureties
+      
+      can [:new, :create, :edit, :update], :memberships
       
       # sured user
       if user.sured?

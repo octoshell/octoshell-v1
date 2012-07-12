@@ -2,7 +2,7 @@ class SuretiesController < ApplicationController
   before_filter :require_login
   
   def new
-    @surety = current_user.sureties.build(organization_id: params[:organization_id])
+    @surety = current_user.sureties.build
   end
   
   def create

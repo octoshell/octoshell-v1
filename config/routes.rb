@@ -11,6 +11,9 @@ MSU::Application.routes.draw do
   # sureties
   resources :sureties, only: [:new, :create, :show]
   
+  # memberships
+  resources :memberships, only: [:new, :create, :edit, :update]
+  
   # sessions
   resource :session, only: [:new, :create, :destroy]
   get '/session' => 'session#destroy'

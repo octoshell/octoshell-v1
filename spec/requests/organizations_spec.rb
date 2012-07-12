@@ -15,7 +15,7 @@ describe 'Organizations' do
     end
     
     it 'should show new surety page' do
-      current_path.should == new_surety_path
+      current_path.should == profile_path
     end
     
     it 'should create new organization' do

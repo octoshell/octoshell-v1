@@ -2,5 +2,6 @@
 
 = simple_form_for @surety, html: { class: 'form-horizontal' } do |f|
   = f.association :organization, hint: link_to('Добавить организацию', new_organization_path)
+  
   div class="form-actions"
     = f.button :submit

@@ -32,6 +32,11 @@ shared_examples 'basic user' do
   it { should be_able_to(:create, :sureties) }
   it { should be_able_to(:show, :sureties) }
   
+  it { should be_able_to(:new, :memberships) }
+  it { should be_able_to(:create, :memberships) }
+  it { should be_able_to(:edit, :memberships) }
+  it { should be_able_to(:update, :memberships) }
+  
   it { should be_able_to(:new, :credentials) }
   it { should be_able_to(:create, :credentials) }
   it { should be_able_to(:destroy, :credentials) }

@@ -8,7 +8,7 @@ class OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(params[:organization])
     if @organization.save
-      redirect_to new_surety_path(organization_id: @organization.id)
+      redirect_to profile_path
     else
       render :new
     end
