@@ -10,4 +10,8 @@ class Organization < ActiveRecord::Base
   validates :kind, inclusion: { in: KINDS }
   
   attr_accessible :name, :kind
+  
+  def surety_name
+    name
+  end
 end

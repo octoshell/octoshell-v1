@@ -30,6 +30,7 @@ shared_examples 'basic user' do
   
   it { should be_able_to(:new, :sureties) }
   it { should be_able_to(:create, :sureties) }
+  it { should be_able_to(:show, :sureties) }
   
   it { should be_able_to(:new, :credentials) }
   it { should be_able_to(:create, :credentials) }

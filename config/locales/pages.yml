@@ -14,7 +14,7 @@ en:
       <<: *links
     profile:
       <<: *links
-      surety: Подтверждение
+      surety: Поручительство
     new_credential:
       <<: *links
       create: Создать
