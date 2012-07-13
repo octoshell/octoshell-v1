@@ -2,6 +2,7 @@ en:
   helpers:
     submit:
       create: Создать
+      update: Сохранить
       user:
         create: Зарегистрироваться
   activerecord:

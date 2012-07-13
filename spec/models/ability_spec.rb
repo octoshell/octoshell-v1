@@ -62,5 +62,12 @@ describe Ability do
     it { should be_able_to(:show, :'admin/organizations') }
     it { should be_able_to(:edit, :'admin/organizations') }
     it { should be_able_to(:update, :'admin/organizations') }
+    
+    it { should be_able_to(:index, :'admin/position_names') }
+    it { should be_able_to(:new, :'admin/position_names') }
+    it { should be_able_to(:create, :'admin/position_names') }
+    it { should be_able_to(:edit, :'admin/position_names') }
+    it { should be_able_to(:update, :'admin/position_names') }
+    it { should be_able_to(:destroy, :'admin/position_names') }
   end
 end

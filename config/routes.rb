@@ -75,6 +75,9 @@ MSU::Application.routes.draw do
     
     # organizations
     resources :organizations, only: [:index, :show, :edit, :update]
+    
+    # position names
+    resources :position_names, except: :show
   end
 
   root to: 'application#dashboard'

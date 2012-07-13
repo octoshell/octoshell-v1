@@ -60,6 +60,9 @@
               <li class="<%= current_page?(controller: 'admin/organizations') ? 'active' : '' %>">
                 <%= link_to 'Организации', [:admin, :organizations] %>
               </li>
+              <li class="<%= current_page?(controller: 'admin/position_names') ? 'active' : '' %>">
+                <%= link_to 'Позиции в организациях', [:admin, :position_names] %>
+              </li>
             </ul>
           <% end %>
           <div class="page-header">

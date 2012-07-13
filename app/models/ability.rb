@@ -42,6 +42,8 @@ class Ability
         can [:index, :show, :activate, :decline, :cancel], :'admin/sureties'
         
         can [:index, :show, :edit, :update], :'admin/organizations'
+        
+        can [:index, :new, :create, :edit, :update, :destroy], :'admin/position_names'
       end
     end
   end
