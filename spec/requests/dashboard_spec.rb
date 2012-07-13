@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Dashboard' do
-  let!(:user) { create(:user) }
+  let!(:user) { create(:sured_user) }
   
   describe 'Requests' do
     let!(:project) { create(:project) }
@@ -35,7 +35,7 @@ describe 'Dashboard' do
   end
   
   describe 'Projects' do
-    let!(:user) { create(:user) }
+    let!(:user) { create(:sured_user) }
     let!(:projects) { 3.times.map { create(:project, user: user) } }
     
     before do
