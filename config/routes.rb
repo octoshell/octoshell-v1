@@ -71,6 +71,7 @@ MSU::Application.routes.draw do
       put :activate
       put :decline
       put :cancel
+      post :find, on: :collection
     end
     
     # organizations

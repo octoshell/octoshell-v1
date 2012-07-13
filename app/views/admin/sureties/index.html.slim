@@ -1,5 +1,13 @@
 - title 'Поручительства'
 
+= form_tag find_admin_sureties_path do
+  = field_set_tag 'Поиск поручительств' do
+    div class="control-group string optional"
+      = label_tag :id, 'ID поручительства:', class: 'string optional control-label'
+      div class="controls"
+        = text_field_tag :id
+    p = submit_tag 'Найти', class: 'btn'
+
 table class="table table-bordered"
   tr
     th #

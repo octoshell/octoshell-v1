@@ -39,7 +39,7 @@ class Ability
         
         can [:index, :show, :activate, :decline, :finish], :'admin/requests'
         
-        can [:index, :show, :activate, :decline, :cancel], :'admin/sureties'
+        can [:index, :show, :activate, :decline, :cancel, :find], :'admin/sureties'
         
         can [:index, :show, :edit, :update], :'admin/organizations'
         

@@ -10,6 +10,7 @@ module Admin
     
     def find
       @surety = find_surety(params[:id])
+      redirect_to [:admin, @surety]
     rescue ActiveRecord::RecordNotFound
       redirect_to [:admin, :sureties], alert: t('flash.alerts.surety_not_found')
     end
