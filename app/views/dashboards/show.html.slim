@@ -3,7 +3,16 @@ div class="row"
   div class="span6"
     div id="requests"
       h2 Заявки
-      p = link_to I18n.t('pages.dashboard.new_request'), new_request_path
+      - if can? :create, :requests
+        p = link_to I18n.t('pages.dashboard.new_request'), new_request_path
+      - elsif can? :create, :projects
+        p
+          | Для того чтобы создать заявку вы должны 
+          = link_to 'создать проект', new_project_path
+      - else
+        p
+          | Для начала за вас должна 
+          = link_to 'поручиться организация', new_surety_path
       table class="table table-bordered"
         tr
           th #
@@ -21,7 +30,12 @@ div class="row"
   div class="span6"
     div id="projects"
       h2 Проекты
-      p = link_to I18n.t('pages.dashboard.new_project'), new_project_path
+      - if can? :create, :projects
+        p = link_to I18n.t('pages.dashboard.new_project'), new_project_path
+      - else
+        p
+          | Для того чтобы создать проект за вас должна 
+          = link_to 'поручиться организация', new_surety_path
       table class="table table-bordered"
         tr
           th #
