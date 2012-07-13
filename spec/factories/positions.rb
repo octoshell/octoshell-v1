@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :position do
     membership
-    sequence(:name) { |n| "Name 1" }
+    sequence(:name) { |n| "Position Name #{n}" }
     value 'Atata'
   end
 end
