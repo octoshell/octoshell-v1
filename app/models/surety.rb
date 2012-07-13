@@ -36,6 +36,6 @@ class Surety < ActiveRecord::Base
   end
   
   def cancel
-    _finish
+    _cancel
   end
 end

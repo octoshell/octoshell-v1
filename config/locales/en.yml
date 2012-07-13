@@ -1,4 +1,7 @@
 en:
+  flash:
+    alerts:
+      surety_not_found: Поручительство не найдено
   helpers:
     submit:
       create: Создать
@@ -51,6 +54,11 @@ en:
             pending: ожидает подтверждения
             canceled: отменен
             active: активен
+          events:
+            _activate: Активировать
+            _decline: Отказать
+            _finish: Завершить
+            _cancel: Отменить
       request:
         state:
           states:
@@ -58,7 +66,3 @@ en:
             active: активен
             declined: отказано
             finished: завершена
-          events:
-            _activate: активировать
-            _decline: отказать
-            _finish: завершить
