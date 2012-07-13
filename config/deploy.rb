@@ -24,7 +24,8 @@ role :db,  domain, :primary => true
 namespace :deploy do
   desc "Restart Unicorn"
   task :restart do
-    run "sv restart ~/services/#{application}_unicorn"
+    "kill -USR2 `cat /tmp/unicorn.msu.pid`"
+    # run "sv restart ~/services/#{application}_unicorn"
     # run "sv restart ~/services/#{application}_resque"
   end
   
