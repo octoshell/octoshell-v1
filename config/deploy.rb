@@ -13,6 +13,8 @@ set :deploy_to, "/var/www/#{application}"
 set :keep_releases, 3
 set :normalize_asset_timestamps, false
 set :scm, :git
+set :unicorn_remote_config, '/var/www/msu/current/config/unicorn.rb'
+set :unicorn_bin, 'bundle exec unicorn_rails'
 
 role :app, domain
 role :web, domain
@@ -24,7 +26,8 @@ role :db,  domain, :primary => true
 namespace :deploy do
   desc "Restart Unicorn"
   task :restart do
-    "kill -USR2 `cat /tmp/unicorn.msu.pid`"
+    run "kill -QUIT `cat /tmp/unicorn.msu.pid`" rescue nil
+    run "cd #{current_path} && #{unicorn_bin} -c #{unicorn_remote_config} -E #{rails_env} -D"
     # run "sv restart ~/services/#{application}_unicorn"
     # run "sv restart ~/services/#{application}_resque"
   end
