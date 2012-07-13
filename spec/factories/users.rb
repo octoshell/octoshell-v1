@@ -18,14 +18,14 @@ FactoryGirl.define do
         
         factory :sured_user_with_projects do
           after(:create) do |user|
-            FactoryGirl.create(:confirmed_surety, user: user)
+            FactoryGirl.create(:active_surety, user: user)
           end
         end
       end
       
       factory :sured_user do
         after(:create) do |user|
-          FactoryGirl.create(:confirmed_surety, user: user)
+          FactoryGirl.create(:active_surety, user: user)
         end
       end
       

@@ -8,18 +8,19 @@
         = text_field_tag :id
     p = submit_tag 'Найти', class: 'btn'
 
-table class="table table-bordered"
-  tr
-    th #
-    th = User.model_name.human
-    th = Organization.model_name.human
-    th = Surety.human_attribute_name(:state)
-    th = Surety.human_attribute_name(:created_at)
-  - @sureties.each do |surety|
+div id="sureties"
+  table class="table table-bordered"
     tr
-      td = surety.id
-      td = link_to surety.user.full_name, [:admin, surety.user]
-      td = link_to surety.organization.name, [:admin, surety.organization]
-      th = surety.human_state_name
-      td = surety.created_at.to_formatted_s(:short)
-      td = link_to 'открыть', [:admin, surety]
+      th #
+      th = User.model_name.human
+      th = Organization.model_name.human
+      th = Surety.human_attribute_name(:state)
+      th = Surety.human_attribute_name(:created_at)
+    - @sureties.each do |surety|
+      tr
+        td = surety.id
+        td = link_to surety.user.full_name, [:admin, surety.user]
+        td = link_to surety.organization.name, [:admin, surety.organization]
+        th = surety.human_state_name
+        td = surety.created_at.to_formatted_s(:short)
+        td = link_to 'открыть', [:admin, surety]
