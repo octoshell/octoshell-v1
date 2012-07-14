@@ -6,6 +6,7 @@ describe Organization do
   
   it { should have_many(:sureties) }
   it { should have_many(:users).through(:sureties) }
+  it { should have_many(:memberships) }
   
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:kind) }
@@ -18,4 +19,30 @@ describe Organization do
   
   it { should allow_mass_assignment_of(:name) }
   it { should allow_mass_assignment_of(:kind) }
+  
+  describe '#merge' do
+    let!(:duplication) { create(:organization) }
+    let!(:membership) { create(:membership, organization: duplication) }
+    let!(:surety) { create(:surety, organization: duplication) }
+    
+    before { organization.merge(duplication) }
+    
+    it 'should move organizations sureties' do
+      organization.should have(1).sureties
+      organization.sureties.first.user.should == surety.user
+    end
+    
+    it 'should move organizations memberships' do
+      organization.should have(1).memberships
+      organization.memberships.first.user.should == membership.user
+    end
+    
+    context 'merge with self' do
+      let!(:duplication) { organization }
+      
+      it 'should do nothing' do
+        organization.reload.should be
+      end
+    end
+  end
 end

@@ -35,4 +35,24 @@ describe 'Admin::Organizations' do
       page.should have_content('Umbrella')
     end
   end
+  
+  describe 'merging' do
+    let!(:duplication) { create(:organization) }
+    let!(:organization) { create(:organization) }
+    
+    before do
+      login create(:admin_user)
+      visit admin_organization_path(organization)
+      select duplication.name, from: 'organization_merge_id'
+      click_button 'Объединить'
+    end
+    
+    it 'should merge double to organization' do
+      Organization.find_by_id(duplication.id).should_not be
+    end
+    
+    it 'should show organization page' do
+      current_path.should == admin_organization_path(organization)
+    end
+  end
 end

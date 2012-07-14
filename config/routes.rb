@@ -75,7 +75,9 @@ MSU::Application.routes.draw do
     end
     
     # organizations
-    resources :organizations, only: [:index, :show, :edit, :update]
+    resources :organizations, only: [:index, :show, :edit, :update] do
+      put :merge
+    end
     
     # position names
     resources :position_names, except: :show
