@@ -14,6 +14,18 @@ class Organization < ActiveRecord::Base
   
   attr_accessible :name, :kind
   
+  before_destroy do
+    sureties.each do |surety|
+      if surety.pending?
+        surety.comment = I18n.t('surety.comments.organization_deleted')
+        surety.decline!
+      elsif surety.active?
+        surety.comment = I18n.t('surety.comments.organization_deleted')
+        surety.cancel!
+      end
+    end
+  end
+  
   def surety_name
     name
   end

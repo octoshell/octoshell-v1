@@ -45,4 +45,28 @@ describe Organization do
       end
     end
   end
+  
+  describe 'destroying' do
+    context 'with pending surety' do
+      let!(:surety) { create(:surety, organization: organization) }
+      
+      before { organization.destroy }
+
+      subject { surety.reload }
+      
+      it { should be_declined }
+      its(:comment) { should == I18n.t('surety.comments.organization_deleted') }
+    end
+    
+    context 'with active surety' do
+      let!(:surety) { create(:active_surety, organization: organization) }
+      
+      before { organization.destroy }
+
+      subject { surety.reload }
+      
+      it { should be_canceled }
+      its(:comment) { should == I18n.t('surety.comments.organization_deleted') }
+    end
+  end
 end

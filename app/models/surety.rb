@@ -27,15 +27,13 @@ class Surety < ActiveRecord::Base
     end
   end
   
-  def activate
-    _activate
-  end
-  
-  def decline
-    _decline
-  end
-  
-  def cancel
-    _cancel
+  %w(activate decline cancel).each do |event|
+    define_method event do
+      send "_#{event}"
+    end
+    
+    define_method "#{event}!" do
+      send "_#{event}!"
+    end
   end
 end
