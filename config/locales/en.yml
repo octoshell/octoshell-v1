@@ -41,6 +41,7 @@ en:
       organization:
         name: Название
         kind: Тип
+        merge_id: Объединить с
       surety:
         state: Статус
         organization: Организация

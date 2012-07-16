@@ -14,6 +14,8 @@ class Organization < ActiveRecord::Base
   
   attr_accessible :name, :kind
   
+  after_create :notify_admins
+  
   before_destroy do
     sureties.each do |surety|
       if surety.pending?
@@ -37,5 +39,11 @@ class Organization < ActiveRecord::Base
       organization.memberships.update_all(organization_id: id)
       organization.destroy
     end
+  end
+  
+private
+  
+  def notify_admins
+    UserMailer.notify_new_organization(self).deliver
   end
 end

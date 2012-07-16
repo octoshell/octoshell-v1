@@ -69,4 +69,15 @@ describe Organization do
       its(:comment) { should == I18n.t('surety.comments.organization_deleted') }
     end
   end
+  
+  describe 'creating' do
+    let(:organization) { build(:organization) }
+    
+    it 'should notify admins about it' do
+      mailer = mock; mailer.should_receive(:deliver)
+      UserMailer.should_receive(:notify_new_organization).
+        with(organization).and_return(mailer)
+      organization.save
+    end
+  end
 end

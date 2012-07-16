@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :middle_name, :email, :password,
     :password_confirmation, :remember_me, :new_organization, :organization_id
   
+  scope :admins, where(admin: true)
+  
   def all_requests
     Request.joins(project: :accounts).where(accounts: { user_id: id })
   end
