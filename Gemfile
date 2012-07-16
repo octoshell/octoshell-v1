@@ -19,7 +19,6 @@ gem 'mailgun-rails'
 gem 'redcarpet'
 gem 'fivemat'
 gem 'pdfkit'
-gem 'wkhtmltopdf-binary'
 
 group :test, :development do
   gem 'factory_girl_rails'
@@ -28,6 +27,7 @@ group :test, :development do
   gem 'shoulda-matchers'
   gem 'launchy'
   gem 'guard-rspec'
+  gem 'wkhtmltopdf-binary'
 end
 
 group :production do
