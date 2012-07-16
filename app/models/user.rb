@@ -54,4 +54,25 @@ class User < ActiveRecord::Base
   def sured?
     sureties.active.exists?
   end
+  
+  def request_steps
+    steps = []
+    steps << step_name(:project) unless owned_projects.any?
+    steps << step_name(:surety) unless sured?
+    steps << step_name(:membership) unless memberships.any?
+    steps
+  end
+  
+  def project_steps
+    steps = []
+    steps << step_name(:surety) unless sured?
+    steps
+  end
+  
+private
+  
+  def step_name(name)
+    I18n.t("steps.#{name}.html").html_safe
+  end
+  
 end

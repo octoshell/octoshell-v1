@@ -4,7 +4,7 @@ describe 'Dashboard' do
   let!(:user) { create(:sured_user) }
   
   describe 'Requests' do
-    let!(:project) { create(:project) }
+    let!(:project) { create(:project, user: user) }
     let!(:account) { create(:account, user: user, project: project) }
     let!(:requests) do
       10.times.map { create(:request, project: project, user: user) }

@@ -11,6 +11,7 @@ class Request < ActiveRecord::Base
   
   attr_accessible :hours, :cluster_id, :project_id
   
+  scope :active, where(state: 'active')
   scope :last_pending, where(state: 'pending').order('id desc')
   
   state_machine initial: :pending do
@@ -46,7 +47,7 @@ class Request < ActiveRecord::Base
   
   def allowed_projects
     if user
-      user.projects
+      user.owned_projects
     else
       []
     end

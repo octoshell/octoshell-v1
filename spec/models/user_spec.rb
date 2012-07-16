@@ -38,7 +38,7 @@ describe User do
   
   describe '#all_requests' do
     let!(:user) { create(:user_with_projects) }
-    let!(:request) { create(:request, user: user, project: user.projects.first) }
+    let!(:request) { create(:request, user: user, project: user.owned_projects.first) }
     
     subject { user.all_requests }
     
@@ -64,6 +64,56 @@ describe User do
       let(:user) { create(:sured_user) }
       
       it { should be_sured }
+    end
+  end
+  
+  describe '#project_steps' do
+    def step(name)
+      I18n.t("steps.#{name}.html")
+    end
+    
+    subject { user.project_steps }
+    
+    context 'user with surety' do
+      let(:user) { create(:sured_user) }
+      
+      it { should_not include(step :surety) }
+    end
+    
+    context 'user without surety' do
+      let(:user) { create(:user) }
+      
+      it { should include(step :surety) }
+    end
+  end
+  
+  describe '#request_steps' do
+    def step(name)
+      I18n.t("steps.#{name}.html")
+    end
+    
+    subject { user.request_steps }
+    
+    it { should include(step :project) }
+    it { should include(step :surety) }
+    it { should include(step :membership) }
+    
+    context 'user with project' do
+      let(:user) { create(:user_with_projects) }
+      
+      it { should_not include(step :project) }
+    end
+    
+    context 'user with surety' do
+      let(:user) { create(:sured_user) }
+      
+      it { should_not include(step :surety) }
+    end
+    
+    context 'user with membership' do
+      let(:user) { create(:user_with_membership) }
+      
+      it { should_not include(step :membership) }
     end
   end
 end

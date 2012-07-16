@@ -11,4 +11,8 @@ class Project < ActiveRecord::Base
   attr_accessible :name, :requests_attributes
   
   accepts_nested_attributes_for :requests
+  
+  def active?
+    requests.active.exists?
+  end
 end

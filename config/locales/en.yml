@@ -8,6 +8,13 @@ en:
       update: Сохранить
       user:
         create: Зарегистрироваться
+  steps:
+    project:
+      html: <a href="/projects/new">Создать проект</a>
+    surety:
+      html: <a href="/sureties/new">Создать и прислать поручительство</a>
+    membership:
+      html: <a href="/memberships/new">Добавить место работы</a>
   activerecord:
     models:
       user: Пользователь
