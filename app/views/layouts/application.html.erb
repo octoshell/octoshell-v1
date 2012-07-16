@@ -64,6 +64,9 @@
                 <li class="<%= current_page?(controller: 'admin/position_names') ? 'active' : '' %>">
                   <%= link_to 'Позиции в организациях', [:admin, :position_names] %>
                 </li>
+                <li class="<%= current_page?(controller: 'admin/clusters') ? 'active' : '' %>">
+                  <%= link_to 'Кластеры', [:admin, :clusters] %>
+                </li>
               </ul>
             <% end %>
             <% flash.each do |type, message| %>

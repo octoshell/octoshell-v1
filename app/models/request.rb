@@ -34,16 +34,22 @@ class Request < ActiveRecord::Base
     end
   end
   
-  def activate
-    _activate
+  %w(activate decline finish).each do |event|
+    define_method event do
+      send "_#{event}"
+    end
+
+    define_method "#{event}!" do
+      send "_#{event}!"
+    end
   end
   
-  def decline
-    _decline
-  end
-  
-  def finish
-    _finish
+  def finish_or_decline!
+    if pending?
+      decline!
+    elsif active?
+      finish!
+    end
   end
   
   def allowed_projects

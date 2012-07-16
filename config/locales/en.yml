@@ -8,6 +8,8 @@ en:
       update: Сохранить
       user:
         create: Зарегистрироваться
+  requests:
+    cluster_destroyed: Кластер удален
   steps:
     project:
       html: <a href="/projects/new">Создать проект</a>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120716122113) do
+ActiveRecord::Schema.define(:version => 20120716171340) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "user_id"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20120716122113) do
     t.integer  "user_id"
     t.string   "state"
     t.integer  "size"
+    t.string   "comment"
   end
 
   add_index "requests", ["cluster_id"], :name => "index_requests_on_cluster_id"

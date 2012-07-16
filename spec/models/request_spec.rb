@@ -60,4 +60,22 @@ describe Request do
       it { should == [] }
     end
   end
+  
+  describe '#cancel_or_decline!' do
+    before { request.finish_or_decline! }
+    
+    subject { request.reload }
+    
+    context 'pending' do
+      let(:request) { create(:request) }
+      
+      it { should be_declined }
+    end
+    
+    context 'active' do
+      let(:request) { create(:active_request) }
+      
+      it { should be_finished }
+    end
+  end
 end
