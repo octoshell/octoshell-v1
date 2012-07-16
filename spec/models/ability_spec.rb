@@ -25,11 +25,17 @@ describe Ability do
     it_behaves_like 'all users'
     it_behaves_like 'basic user'
     
-    it { should be_able_to(:new, :requests) }
-    it { should be_able_to(:create, :requests) }
-    
     it { should be_able_to(:new, :projects) }
     it { should be_able_to(:create, :projects) }
+  end
+  
+  context 'confirmed user with membership' do
+    let(:user) { create(:sured_user_with_membership) }
+    
+    subject { Ability.new(user) }
+    
+    it { should be_able_to(:new, :requests) }
+    it { should be_able_to(:create, :requests) }
   end
   
   context 'admin' do

@@ -25,9 +25,11 @@ class Ability
       
       # sured user
       if user.sured?
-        can [:new, :create], :requests
-        
         can [:new, :create], :projects
+        
+        if user.memberships.any?
+          can [:new, :create], :requests
+        end
       end
       
       if user.admin?
