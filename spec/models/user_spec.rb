@@ -116,4 +116,15 @@ describe User do
       it { should_not include(step :membership) }
     end
   end
+  
+  describe '#all_accounts' do
+    let!(:user) { create(:user_with_projects) }
+    let!(:account) { user.accounts.first }
+    let!(:managed_account) { create(:account, project: user.projects.first) }
+    
+    subject { user.all_accounts }
+    
+    it { should include(account) }
+    it { should include(managed_account) }
+  end
 end

@@ -23,6 +23,8 @@ class Ability
       
       can [:new, :create, :edit, :update], :memberships
       
+      can [:activate, :decline, :destroy], :accounts, project_id: user.owned_project_ids
+      
       # sured user
       if user.sured?
         can [:new, :create], :projects

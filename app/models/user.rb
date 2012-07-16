@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     Request.joins(project: :accounts).where(accounts: { user_id: id })
   end
   
+  def all_accounts
+    owned_projects.map(&:accounts).flatten
+  end
+  
   def new_organization=(attributes)
     if attributes.values.any?(&:present?)
       @new_organization = organizations.build(attributes)

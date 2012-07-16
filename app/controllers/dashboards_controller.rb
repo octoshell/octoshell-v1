@@ -4,5 +4,6 @@ class DashboardsController < ApplicationController
   def show
     @requests = current_user.requests.includes(:cluster).last(5)
     @projects = current_user.projects
+    @accounts = current_user.all_accounts
   end
 end

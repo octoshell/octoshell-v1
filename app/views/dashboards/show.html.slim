@@ -47,3 +47,27 @@ div class="row"
     div id="support"
       h2 Поддержка
       p В разработке
+  div class="span6"
+    div id="accounts"
+      h2 Аккаунты
+      table class="table table-bordered"
+        tr
+          th #
+          th = User.model_name.human
+          th = Project.model_name.human
+          th = Account.human_attribute_name(:state)
+          th
+        - @accounts.each do |account|
+          tr
+            td = account.id
+            td = link_to account.user.full_name, user_path(account.user)
+            td = link_to account.project.name, project_path(account.project)
+            td = account.human_state_name
+            td
+              - if account.pending?
+                - if can?(:activate, account) && can?(:decline, account)
+                  = link_to Account.human_state_event_name(:_activate), account_activate_path(account), method: :put
+                  = ' / '
+                  = link_to Account.human_state_event_name(:_decline), account_decline_path(account), method: :put
+              - if account.active? && can?(:cancel, account)
+                = link_to 'удалить', account_path(account), method: :delete

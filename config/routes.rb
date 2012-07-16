@@ -1,6 +1,6 @@
 MSU::Application.routes.draw do
   # users
-  resources :users, only: [:new, :create] do
+  resources :users, only: [:new, :create, :show] do
     get :confirmation, on: :collection
   end
   get 'users/:token' => 'users#activate', as: :activate_user
@@ -38,6 +38,12 @@ MSU::Application.routes.draw do
   
   # organizations
   resources :organizations, only: [:new, :create]
+  
+  # accounts
+  resources :accounts, only: [:new, :create, :destroy] do
+    put :activate
+    put :decline
+  end
   
   # dashboard
   resource :dashboard, only: :show

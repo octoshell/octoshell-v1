@@ -81,3 +81,13 @@ en:
             active: активен
             declined: отказано
             finished: завершена
+      account:
+        state:
+          states:
+            pending: ожидает подтверждения
+            canceled: отменен
+            active: активен
+          events:
+            _activate: Активировать
+            _decline: Отказать
+            _cancel: Отменить
