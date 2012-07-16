@@ -9,20 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require bootstrap_and_overrides
+ *= require surety
  */
-
-#surety {
-	width: 600px;
-}
-
-#surety .right {
-	text-align: right;
-}
-
-#surety .center {
-	text-align: center;
-}
 
 textarea.public-key {
   width: 95%;

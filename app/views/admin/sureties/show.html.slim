@@ -9,3 +9,4 @@ p
     = link_to Surety.human_state_event_name(:_decline), admin_surety_decline_path(@surety), class: 'btn', method: :put
   - elsif @surety.active?
     = link_to Surety.human_state_event_name(:_cancel), admin_surety_cancel_path(@surety), class: 'btn', method: :put
+

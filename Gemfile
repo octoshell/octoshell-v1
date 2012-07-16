@@ -18,6 +18,8 @@ gem 'state_machine'
 gem 'mailgun-rails'
 gem 'redcarpet'
 gem 'fivemat'
+gem 'pdfkit'
+gem 'wkhtmltopdf-binary'
 
 group :test, :development do
   gem 'factory_girl_rails'

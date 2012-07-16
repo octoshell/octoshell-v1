@@ -1,4 +1,7 @@
 - title 'Поручительство'
 
+ul class="nav noprint nav-pills"
+  li = link_to_function 'Распечатать', 'javascript:window.print();'
+  li = link_to 'Скачать PDF', surety_path(@surety, format: :pdf)
+
 = render partial: 'template', locals: { surety: @surety }
-  
