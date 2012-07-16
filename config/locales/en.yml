@@ -42,6 +42,7 @@ en:
         hours: Процессоро-часы
         created_at: Дата создания
         state: Статус
+        size: 'Размер, GB'
       credential:
         name: Название
         created_at: Дата создания

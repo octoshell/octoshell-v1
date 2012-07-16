@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Dashboard' do
-  let!(:user) { create(:sured_user) }
+  let!(:user) { create(:sured_user_with_membership) }
   
   describe 'Requests' do
     let!(:project) { create(:project, user: user) }

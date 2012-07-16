@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe 'Requests' do
   context 'as authorized user' do
-    let!(:user) { create(:sured_user_with_projects) }
+    let!(:user) { create(:sured_user_with_membership) }
     let!(:project) { user.projects.first }
     let!(:cluster) { create(:cluster) }
     
@@ -15,6 +15,7 @@ describe 'Requests' do
         select project.name, from: 'request_project_id'
         select cluster.name, from: 'request_cluster_id'
         fill_in 'request_hours', with: 10
+        fill_in 'request_size', with: 10
         click_button 'Создать'
       end
     end

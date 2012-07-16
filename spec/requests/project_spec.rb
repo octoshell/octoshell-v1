@@ -12,6 +12,7 @@ describe 'Project' do
       fill_in 'project_name', with: project.name
       select cluster.name, from: 'project_requests_attributes_0_cluster_id'
       fill_in 'project_requests_attributes_0_hours', with: 1
+      fill_in 'project_requests_attributes_0_size', with: 1
       click_button 'submit_project'
     end
     

@@ -5,11 +5,12 @@ class Request < ActiveRecord::Base
   belongs_to :cluster
   belongs_to :user
   
-  validates :project, :cluster, :hours, :user, presence: true
+  validates :project, :cluster, :hours, :user, :size, presence: true
   validates :project, inclusion: { in: proc(&:allowed_projects) },
     on: :create, if: :project_persisted?
+  validates :size, numericality: { greater_than: 0 }
   
-  attr_accessible :hours, :cluster_id, :project_id
+  attr_accessible :hours, :cluster_id, :project_id, :size
   
   scope :active, where(state: 'active')
   scope :last_pending, where(state: 'pending').order('id desc')

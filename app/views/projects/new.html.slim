@@ -5,4 +5,5 @@
     = f.simple_fields_for :requests do |f|
       = f.association :cluster
       = f.input :hours
+      = f.input :size, hint: 'Более 50ти обговаривается отдельно'
   = f.button :submit, 'Создать проект', id: 'submit_project'
