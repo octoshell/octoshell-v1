@@ -16,5 +16,12 @@ class SuretiesController < ApplicationController
   
   def show
     @surety = current_user.sureties.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "surety#{@surety.id}}",
+               layout: 'pdf.html'
+      end
+    end
   end
 end
