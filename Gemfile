@@ -27,7 +27,6 @@ group :test, :development do
   gem 'shoulda-matchers'
   gem 'launchy'
   gem 'guard-rspec'
-  gem 'wkhtmltopdf-binary'
 end
 
 group :production do
