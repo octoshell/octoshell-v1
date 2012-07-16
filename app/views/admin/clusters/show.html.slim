@@ -1,0 +1,23 @@
+- title "Кластер: #{@cluster.name}"
+
+ul class="nav nav-pills"
+  li = link_to 'Редактировать', edit_admin_cluster_path(@cluster)
+  li = link_to 'Удалить', admin_cluster_path(@cluster), method: :delete, data: { confirm: 'Вы действительно хотите удалить кластер? Все заявки автоматически отменятся.' }
+
+h2 Заявки
+
+table class="table table-bordered"
+  tr
+    th #
+    th = Project.model_name.human
+    th = User.model_name.human
+    th = Request.human_attribute_name(:state)
+    th
+  - @cluster.requests.each do |request|
+    tr
+      td = request.id
+      td = link_to request.project.name, [:admin, request.project]
+      td = link_to request.user.full_name, [:admin, request.user]
+      td = request.human_state_name
+      td = link_to 'открыть', [:admin, request]
+

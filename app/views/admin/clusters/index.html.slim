@@ -1,0 +1,19 @@
+- title 'Кластеры'
+
+p = link_to 'Новый кластер', new_admin_cluster_path
+
+table class="table table-bordered"
+  tr
+    th #
+    th = Cluster.human_attribute_name(:name)
+    th = Cluster.human_attribute_name(:host)
+    th = Cluster.human_attribute_name(:description)
+    th
+  - @clusters.each do |cluster|
+    tr
+      td = cluster.id
+      td = cluster.name
+      td = cluster.host
+      td = cluster.description
+      td = link_to 'открыть', [:admin, cluster]
+      

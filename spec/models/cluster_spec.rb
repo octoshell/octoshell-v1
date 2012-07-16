@@ -11,8 +11,11 @@ describe Cluster do
   it { should have_many(:requests) }
   
   it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:host) }
   
   it { should allow_mass_assignment_of(:name) }
+  it { should allow_mass_assignment_of(:host) }
+  it { should allow_mass_assignment_of(:description) }
   
   describe 'destroying' do
     let!(:request) { create(:request, cluster: cluster) }

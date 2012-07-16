@@ -46,6 +46,8 @@ class Ability
         can [:index, :show, :edit, :update, :merge], :'admin/organizations'
         
         can [:index, :new, :create, :edit, :update, :destroy], :'admin/position_names'
+        
+        can [:index, :new, :create, :show, :edit, :update, :destroy], :'admin/clusters'
       end
     end
   end

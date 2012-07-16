@@ -1,9 +1,9 @@
 class Cluster < ActiveRecord::Base
   has_many :requests
   
-  validates :name, presence: true
+  validates :name, :host, presence: true
   
-  attr_accessible :name
+  attr_accessible :name, :host, :description
   
   before_destroy :cancel_requests
   

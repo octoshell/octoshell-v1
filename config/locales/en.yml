@@ -58,6 +58,10 @@ en:
         description: Описание проекта
       membership:
         organization: Организация
+      cluster:
+        name: Название
+        host: Хост
+        description: Описание
     state_machines:
       surety:
         state:
