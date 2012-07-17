@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20120716173428) do
-=======
-ActiveRecord::Schema.define(:version => 20120716150356) do
->>>>>>> managing accounts view
 
   create_table "accounts", :force => true do |t|
     t.integer  "user_id"
