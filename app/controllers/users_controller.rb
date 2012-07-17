@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
-  before_filter :logout
+  before_filter :logout, except: :show
   
   def new
     @user = User.new
+  end
+  
+  def show
   end
   
   def create
@@ -25,6 +28,6 @@ class UsersController < ApplicationController
     end
   end
   
-  def surety
+  def confirmation
   end
 end
