@@ -124,6 +124,7 @@ describe User do
     
     subject { user.all_accounts }
     
+    it { should be_a_kind_of(ActiveRecord::Relation) }
     it { should include(account) }
     it { should include(managed_account) }
   end

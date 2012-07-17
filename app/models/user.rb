@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   end
   
   def all_accounts
-    owned_projects.map(&:accounts).flatten
+    Account.joins(:project).where(projects: { id: owned_project_ids })
   end
   
   def new_organization=(attributes)
