@@ -40,9 +40,10 @@ MSU::Application.routes.draw do
   resources :organizations, only: [:new, :create]
   
   # accounts
-  resources :accounts, only: [:new, :create, :destroy] do
+  resources :accounts, only: [:new, :create] do
     put :activate
     put :decline
+    put :cancel
   end
   
   # dashboard

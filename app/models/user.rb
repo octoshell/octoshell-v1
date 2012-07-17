@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   end
   
   def all_accounts
-    Account.joins(:project).where(projects: { id: owned_project_ids })
+    Account.where(project_id: project_ids)
   end
   
   def new_organization=(attributes)

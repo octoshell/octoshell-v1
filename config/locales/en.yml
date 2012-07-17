@@ -62,6 +62,9 @@ en:
         name: Название
         host: Хост
         description: Описание
+      account:
+        project: Проект
+        state: Состояние
     state_machines:
       surety:
         state:

@@ -14,4 +14,6 @@ describe Account do
   it { should validate_presence_of(:user) }
   it { should validate_presence_of(:project) }
   it { should validate_uniqueness_of(:project_id).scoped_to(:user_id) }
+  
+  it { should allow_mass_assignment_of(:project_id) }
 end

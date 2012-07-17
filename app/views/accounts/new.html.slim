@@ -1,0 +1,7 @@
+- title 'Новый аккаунт'
+
+= simple_form_for @account, html: { class: 'form-horizontal' } do |f|
+  = f.association :project
+  
+  div class="form-actions"
+    = f.button :submit

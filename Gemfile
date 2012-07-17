@@ -21,6 +21,7 @@ gem 'fivemat'
 gem 'wicked_pdf'
 
 group :test, :development do
+  gem 'spin'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'rspec-rails'

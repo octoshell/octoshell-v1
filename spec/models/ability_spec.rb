@@ -17,7 +17,7 @@ describe Ability do
     it_behaves_like 'basic user'
   end
   
-  context 'confirmed user' do
+  context 'sured user' do
     let(:user) { create(:sured_user) }
     
     subject { Ability.new(user) }
@@ -27,6 +27,9 @@ describe Ability do
     
     it { should be_able_to(:new, :projects) }
     it { should be_able_to(:create, :projects) }
+    
+    it { should be_able_to(:new, :accounts) }
+    it { should be_able_to(:create, :accounts) }
   end
   
   context 'confirmed user with membership' do

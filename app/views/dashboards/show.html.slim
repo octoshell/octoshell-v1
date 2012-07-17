@@ -38,10 +38,12 @@ div class="row"
         tr
           th #
           th = Project.model_name.human
+          th Руководитель
         - @projects.each do |project|
           tr
             td = project.id
             td = link_to project.name, project
+            td = link_to project.user.full_name, project.user
 div class="row"
   div class="span6"
     div id="support"
@@ -50,6 +52,8 @@ div class="row"
   div class="span6"
     div id="accounts"
       h2 Аккаунты
+      - if can? :create, :accounts
+        p = link_to I18n.t('pages.dashboard.new_account'), new_account_path
       table class="table table-bordered"
         tr
           th #
@@ -69,5 +73,7 @@ div class="row"
                   = link_to Account.human_state_event_name(:_activate), account_activate_path(account), method: :put
                   = ' / '
                   = link_to Account.human_state_event_name(:_decline), account_decline_path(account), method: :put
-              - if account.active? && can?(:cancel, account)
-                = link_to 'удалить', account_path(account), method: :delete
+              - elsif account.active? && can?(:cancel, account)
+                = link_to 'Отменить', account_cancel_path(account), method: :put
+              - else
+                = link_to Account.human_state_event_name(:_activate), account_activate_path(account), method: :put
