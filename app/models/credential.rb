@@ -1,4 +1,6 @@
 class Credential < ActiveRecord::Base
+  include Models::Continuable
+  
   belongs_to :user
   
   attr_accessible :public_key, :name

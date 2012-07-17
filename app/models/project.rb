@@ -13,6 +13,11 @@ class Project < ActiveRecord::Base
   accepts_nested_attributes_for :requests
   
   def active?
-    requests.active.exists?
+    requests.
+    active.exists?
+  end
+  
+  def username
+    "project_#{id}"
   end
 end

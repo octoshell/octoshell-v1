@@ -45,6 +45,18 @@ class Request < ActiveRecord::Base
     end
   end
   
+  def activate!
+    self.class.transaction do
+      _activate!
+      request.project.users.active.each do |user|
+        user.credentials.each do |credential|
+          data = { public_key: credential.public_key }
+          Task.setup(credential, 'activate', 'add_openkey', data)
+        end
+      end
+    end
+  end
+  
   def finish_or_decline!
     if pending?
       decline!
@@ -59,5 +71,15 @@ class Request < ActiveRecord::Base
     else
       []
     end
+  end
+  
+  def continue!(event, procedure)
+    send "continue_#{event}_#{procedure}"
+  end
+  
+private
+  
+  def continue_activate_add_user
+    activate!
   end
 end
