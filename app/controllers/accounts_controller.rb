@@ -2,26 +2,29 @@ class AccountsController < ApplicationController
   def new
     @account = current_user.accounts.build
     @invite = current_user.accounts.build
-    authorize! :create, @account
-    authorize! :create, @invite
   end
   
   def create
     @account = current_user.accounts.build(params[:account])
+    authorize! :create, @account
     if @account.save
       redirect_to dashboard_path
     else
-      @invite = current_user.account.build
+      @invite = current_user.accounts.build
       render :new
     end
   end
   
   def invite
-    @invite = current_user.accounts.build(params[:account])
-    if @invite.save
+    user_id = params[:account].delete(:user_id)
+    @invite = Account.new(params[:account]) do |account|
+      account.user_id = user_id
+    end
+    authorize! :invite, @invite
+    if @invite.invite
       redirect_to dashboard_path
     else
-      @account = current_user.account.build
+      @account = current_user.accounts.build
       render :new
     end
   end
@@ -64,5 +67,9 @@ private
   
   def redirect_to_account_with_alert(account)
     redirect_to dashboard_path, alert: account.errors.full_messages.join(', ')
+  end
+  
+  def skip_action?
+    params[:action] == 'new'
   end
 end

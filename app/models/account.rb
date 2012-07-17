@@ -35,4 +35,13 @@ class Account < ActiveRecord::Base
       send "_#{event}!"
     end
   end
+  
+  # test it
+  def invite
+    return if invalid?
+    
+    self.class.transaction do
+      save! && activate!
+    end
+  end
 end

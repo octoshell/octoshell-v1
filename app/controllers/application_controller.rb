@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  enable_authorization
+  enable_authorization unless: :skip_action?
   
   rescue_from CanCan::Unauthorized, with: :not_authenticated
   
@@ -26,5 +26,9 @@ private
   
   def after_login_path
     dashboard_path
+  end
+  
+  def skip_action?
+    false
   end
 end
