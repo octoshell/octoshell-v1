@@ -11,6 +11,7 @@ describe Request do
   it { should belong_to(:project) }
   it { should belong_to(:cluster) }
   it { should belong_to(:user) }
+  it { should have_many(:tasks) }
   
   it { should validate_presence_of(:project) }
   it { should validate_presence_of(:cluster) }

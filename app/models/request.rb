@@ -4,6 +4,7 @@ class Request < ActiveRecord::Base
   belongs_to :project, inverse_of: :requests
   belongs_to :cluster
   belongs_to :user
+  has_many :tasks, as: :resource
   
   validates :project, :cluster, :hours, :user, :size, presence: true
   validates :project, inclusion: { in: proc(&:allowed_projects) },
