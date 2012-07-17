@@ -17,3 +17,12 @@ div class="page-header"
   = f.association :project, collection: f.object.user.owned_projects
   div class="form-actions"
     = f.button :submit, 'Пригласить'
+
+div class="page-header"
+  h2 Пригласить в проект еще не зарегистрированных людей
+
+= simple_form_for [:mailer, @mailer], html: { class: 'form-horizontal' } do |f|
+  = f.association :project, collection: f.object.user.owned_projects, prompt: false
+  = f.input :raw_emails, as: :text, input_html: { rows: 5 }, hint: 'Через запятую, например: email@example.com, example@mail.com'
+  div class="form-actions"
+    = f.button :submit, 'Пригласить'

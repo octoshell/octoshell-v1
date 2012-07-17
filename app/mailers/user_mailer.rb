@@ -20,4 +20,9 @@ class UserMailer < ActionMailer::Base
     @organization = organization
     mail to: User.admins.pluck(:email)
   end
+  
+  def invitation(account)
+    @project = account.project
+    mail to: account.emails
+  end
 end

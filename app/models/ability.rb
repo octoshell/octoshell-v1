@@ -34,6 +34,8 @@ class Ability
         can :invite, :accounts, project_id: user.owned_project_ids
         # test it
         can :create, :accounts, user_id: user.id
+        # test it
+        can :mailer, :accounts, project_id: user.owned_project_ids
         
         if user.memberships.any?
           can [:new, :create], :requests

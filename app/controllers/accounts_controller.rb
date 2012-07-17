@@ -2,6 +2,7 @@ class AccountsController < ApplicationController
   def new
     @account = current_user.accounts.build
     @invite = current_user.accounts.build
+    @mailer = current_user.accounts.build
   end
   
   def create
@@ -11,6 +12,7 @@ class AccountsController < ApplicationController
       redirect_to dashboard_path
     else
       @invite = current_user.accounts.build
+      @mailer = current_user.accounts.build
       render :new
     end
   end
@@ -25,6 +27,19 @@ class AccountsController < ApplicationController
       redirect_to dashboard_path
     else
       @account = current_user.accounts.build
+      @mailer = current_user.accounts.build
+      render :new
+    end
+  end
+  
+  def mailer
+    @mailer = current_user.accounts.build(params[:account])
+    authorize! :mailer, @mailer
+    if @mailer.send_invites
+      redirect_to dashboard_path
+    else
+      @account = current_user.accounts.build
+      @invite = current_user.accounts.build
       render :new
     end
   end
@@ -70,6 +85,6 @@ private
   end
   
   def skip_action?
-    params[:action] == 'new'
+    params[:action] == 'new' && logged_in?
   end
 end

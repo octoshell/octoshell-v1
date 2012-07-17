@@ -16,4 +16,5 @@ describe Account do
   it { should validate_uniqueness_of(:project_id).scoped_to(:user_id) }
   
   it { should allow_mass_assignment_of(:project_id) }
+  it { should allow_mass_assignment_of(:raw_emails) }
 end
