@@ -1,7 +1,19 @@
 - title 'Новый аккаунт'
 
-= simple_form_for @account, html: { class: 'form-horizontal' } do |f|
+div class="page-header"
+  h2 Запросить доступ в проект
+
+= simple_form_for [:request, @account], html: { class: 'form-horizontal' } do |f|
   = f.association :project
   
   div class="form-actions"
-    = f.button :submit
+    = f.button :submit, 'Запросить'
+
+div class="page-header"
+  h2 Пригласить в проект
+
+= simple_form_for [:invite, @account], html: { class: 'form-horizontal' } do |f|
+  = f.association :user, label_method: :full_name, collection: User.where('id != ?', f.object.user_id)
+  = f.association :project, collection: f.object.user.owned_projects
+  div class="form-actions"
+    = f.button :submit, 'Пригласить'

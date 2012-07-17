@@ -29,7 +29,11 @@ class Ability
       if user.sured?
         can [:new, :create], :projects
         
-        can [:new, :create], :accounts
+        can :new, :accounts
+        # test it
+        can :invite, :accounts, project_id: user.owned_project_ids
+        # test it
+        can :create, :accounts, user_id: user.id
         
         if user.memberships.any?
           can [:new, :create], :requests

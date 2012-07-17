@@ -39,8 +39,12 @@ MSU::Application.routes.draw do
   # organizations
   resources :organizations, only: [:new, :create]
   
+  # invitation
+  resources :invitations, only: [:new, :create]
+  
   # accounts
-  resources :accounts, only: [:new, :create] do
+  resources :accounts, only: :new do
+    post :invite, on: :collection
     put :activate
     put :decline
     put :cancel

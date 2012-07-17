@@ -53,7 +53,10 @@ div class="row"
     div id="accounts"
       h2 Аккаунты
       - if can? :create, :accounts
-        p = link_to I18n.t('pages.dashboard.new_account'), new_account_path
+        p
+          = link_to 'Новый аккаут', new_account_path
+          = " "
+          | (запросить доступ или пригласить в проект)
       table class="table table-bordered"
         tr
           th #

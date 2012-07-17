@@ -9,7 +9,6 @@ en:
       destroy_credential: Удалить
       new_surety: Новое поручительство
       new_membership: Новое место работы
-      new_account: Запросить доступ к проекту
     new_request:
       <<: *links
     dashboard: &dashboard

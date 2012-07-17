@@ -1,6 +1,9 @@
 class AccountsController < ApplicationController
   def new
     @account = current_user.accounts.build
+    @invite = current_user.accounts.build
+    authorize! :create, @account
+    authorize! :create, @invite
   end
   
   def create
@@ -8,6 +11,17 @@ class AccountsController < ApplicationController
     if @account.save
       redirect_to dashboard_path
     else
+      @invite = current_user.account.build
+      render :new
+    end
+  end
+  
+  def invite
+    @invite = current_user.accounts.build(params[:account])
+    if @invite.save
+      redirect_to dashboard_path
+    else
+      @account = current_user.account.build
       render :new
     end
   end
