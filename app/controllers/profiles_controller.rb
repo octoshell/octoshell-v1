@@ -23,4 +23,8 @@ private
   def find_user
     current_user
   end
+  
+  def namespace
+    :profile
+  end
 end

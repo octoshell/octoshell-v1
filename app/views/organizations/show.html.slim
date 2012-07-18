@@ -1,0 +1,16 @@
+- title "Организация #{@organization.name}"
+
+h2 Поручительства
+
+= render partial: 'sureties/table', locals: { sureties: @organization.sureties }
+
+h2 Работают
+
+= render partial: 'memberships/table', locals: { memberships: @organization.memberships }
+
+h2 Объединение
+= simple_form_for @organization, url: organization_merge_path(@organization), method: :put, html: { class: 'form-horizontal' } do |f|
+  = f.input :merge_id, collection: Organization.all, hint: 'Выбранная организация будет объедина с текущей.'
+  
+  div class="form-actions"
+    = f.button :submit, 'Объединить'

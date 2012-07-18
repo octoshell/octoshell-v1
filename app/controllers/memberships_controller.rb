@@ -1,4 +1,8 @@
 class MembershipsController < ApplicationController
+  def index
+    @memberships = Membership.all
+  end
+  
   def new
     @membership = current_user.memberships.build
     @membership.build_default_positions
@@ -12,6 +16,10 @@ class MembershipsController < ApplicationController
       @membership.build_default_positions
       render :new
     end
+  end
+  
+  def show
+    @membership = find_membership(params[:id])
   end
   
   def edit
@@ -32,6 +40,10 @@ class MembershipsController < ApplicationController
 private
   
   def find_membership(id)
-    current_user.memberships.find(id)
+    Membership.find(id)
+  end
+  
+  def namespace
+    (@membership && @membership.user_id != current_user.id) ? :dashboard : :profile
   end
 end

@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
-  before_filter :logout, except: :show
+  before_filter :logout, except: [:show, :index]
   
   def new
     @user = User.new
+  end
+  
+  def index
+    @users = User.all
   end
   
   def show
@@ -29,5 +33,11 @@ class UsersController < ApplicationController
   end
   
   def confirmation
+  end
+  
+private
+  
+  def namespace
+    :dashboard
   end
 end

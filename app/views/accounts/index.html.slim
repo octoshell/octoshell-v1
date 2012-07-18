@@ -1,0 +1,19 @@
+- title 'Доступы к проектам'
+
+p = link_to 'Новый доступ', new_account_path
+
+h3 Ожидают подтверждения
+
+= render partial: 'table', locals: { accounts: @accounts.pending }
+
+h3 Активные
+
+= render partial: 'table', locals: { accounts: @accounts.active }
+
+h3 Отмененные
+
+= render partial: 'table', locals: { accounts: @accounts.canceled }
+
+h3 Отказанные
+
+= render partial: 'table', locals: { accounts: @accounts.declined }

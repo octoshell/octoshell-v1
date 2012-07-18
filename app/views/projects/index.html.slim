@@ -1,0 +1,16 @@
+- title 'Проекты'
+
+p = link_to 'Новый проект', new_project_path
+
+table class="table table-bordered"
+  tr
+    th #
+    th = Project.human_attribute_name(:name)
+    th = Project.human_attribute_name(:description)
+    th
+  - @projects.each do |project|
+    tr
+      td = project.id
+      td = link_to project.name, project_path(project)
+      td = project.description
+      td = link_to 'открыть', project_path(project)

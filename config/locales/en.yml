@@ -44,6 +44,8 @@ en:
         full_name: ФИО
       project:
         name: Название
+        description: Описание
+        user: Руководитель
       request:
         cluster: Кластер
         project: Проект
@@ -51,6 +53,7 @@ en:
         created_at: Дата создания
         state: Статус
         size: 'Размер, GB'
+        user: Создатель заявки
       credential:
         name: Название
         created_at: Дата создания

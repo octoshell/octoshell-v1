@@ -1,6 +1,14 @@
 class CredentialsController < ApplicationController
   before_filter :require_login
   
+  def index
+    if current_user.admin?
+      @credentials = Credential.all
+    else
+      @credentials = current_user.credentials
+    end
+  end
+  
   def new
     @credential = find_user.credentials.build
   end
@@ -24,5 +32,9 @@ private
   
   def find_user
     current_user
+  end
+  
+  def namespace
+    :profile
   end
 end

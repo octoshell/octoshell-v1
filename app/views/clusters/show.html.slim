@@ -1,1 +1,11 @@
 - title "Кластер: #{@cluster.name}"
+
+ul class="nav nav-pills"
+  li = link_to 'Редактировать', edit_cluster_path(@cluster)
+  li = link_to 'Удалить', cluster_path(@cluster), method: :delete, data: { confirm: 'Вы действительно хотите удалить кластер? Все заявки автоматически отменятся.' }
+
+p = @cluster.description
+
+h2 Заявки
+
+= render partial: 'requests/list', locals: { requests: @cluster.requests }

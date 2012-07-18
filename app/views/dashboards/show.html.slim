@@ -3,47 +3,9 @@ div class="row"
   div class="span6"
     div id="requests"
       h2 Заявки
-      - if can? :create, :requests
-        p = link_to I18n.t('pages.dashboard.new_request'), new_request_path
-      - else
-        p Для того чтобы создать заявку вам неоходимо:
-        ul
-          - current_user.request_steps.each do |step|
-            li = step
-      table class="table table-bordered"
-        tr
-          th #
-          th = Project.model_name.human
-          th = Cluster.model_name.human
-          th = Request.human_attribute_name(:state)
-          th = Request.human_attribute_name(:created_at)
-        - @requests.each do |request|
-          tr
-            td = request.id
-            td = link_to request.project.name, request.project
-            td = link_to request.cluster.name, request.cluster
-            td = request.human_state_name
-            td = request.created_at.to_formatted_s(:short)
   div class="span6"
     div id="projects"
       h2 Проекты
-      - if can? :create, :projects
-        p = link_to I18n.t('pages.dashboard.new_project'), new_project_path
-      - else
-        p Для того чтобы создать проект вам неоходимо:
-        ul
-          - current_user.project_steps.each do |step|
-            li = step
-      table class="table table-bordered"
-        tr
-          th #
-          th = Project.model_name.human
-          th Руководитель
-        - @projects.each do |project|
-          tr
-            td = project.id
-            td = link_to project.name, project
-            td = link_to project.user.full_name, project.user
 div class="row"
   div class="span6"
     div id="support"
@@ -52,31 +14,3 @@ div class="row"
   div class="span6"
     div id="accounts"
       h2 Аккаунты
-      - if can? :create, :accounts
-        p
-          = link_to 'Новый аккаут', new_account_path
-          = " "
-          | (запросить доступ или пригласить в проект)
-      table class="table table-bordered"
-        tr
-          th #
-          th = User.model_name.human
-          th = Project.model_name.human
-          th = Account.human_attribute_name(:state)
-          th
-        - @accounts.each do |account|
-          tr
-            td = account.id
-            td = link_to account.user.full_name, user_path(account.user)
-            td = link_to account.project.name, project_path(account.project)
-            td = account.human_state_name
-            td
-              - if account.pending?
-                - if can?(:activate, account) && can?(:decline, account)
-                  = link_to Account.human_state_event_name(:_activate), account_activate_path(account), method: :put
-                  = ' / '
-                  = link_to Account.human_state_event_name(:_decline), account_decline_path(account), method: :put
-              - elsif account.active? && can?(:cancel, account)
-                = link_to 'Отменить', account_cancel_path(account), method: :put
-              - else
-                = link_to Account.human_state_event_name(:_activate), account_activate_path(account), method: :put

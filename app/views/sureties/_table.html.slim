@@ -1,0 +1,10 @@
+table class="table table-bordered"
+  tr
+    th #
+    th = User.model_name.human
+    th
+  - sureties.each do |surety|
+    tr
+      td = surety.id
+      td = link_to_user surety.user
+      td = link_to_surety surety

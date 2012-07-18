@@ -1,4 +1,12 @@
 class AccountsController < ApplicationController
+  def index
+    if current_user.admin?
+      @accounts = Account.scoped
+    else
+      @accounts = current_user.accounts
+    end
+  end
+  
   def new
     @account = current_user.accounts.build
     @invite = current_user.accounts.build
@@ -15,6 +23,10 @@ class AccountsController < ApplicationController
       @mailer = current_user.accounts.build
       render :new
     end
+  end
+  
+  def show
+    @account = find_account(params[:id])
   end
   
   def invite
@@ -36,7 +48,7 @@ class AccountsController < ApplicationController
     @mailer = current_user.accounts.build(params[:account])
     authorize! :mailer, @mailer
     if @mailer.send_invites
-      redirect_to dashboard_path
+      redirect_to @account
     else
       @account = current_user.accounts.build
       @invite = current_user.accounts.build
@@ -48,7 +60,7 @@ class AccountsController < ApplicationController
     @account = find_account(params[:account_id])
     authorize! :activate, @account
     if @account.activate
-      redirect_to dashboard_path
+      redirect_to @account
     else
       redirect_to_account_with_alert(@account)
     end
@@ -58,7 +70,7 @@ class AccountsController < ApplicationController
     @account = find_account(params[:account_id])
     authorize! :decline, @account
     if @account.decline
-      redirect_to dashboard_path
+      redirect_to @account
     else
       redirect_to_account_with_alert(@account)
     end
@@ -68,7 +80,7 @@ class AccountsController < ApplicationController
     @account = find_account(params[:account_id])
     authorize! :cancel, @account
     if @account.cancel
-      redirect_to dashboard_path
+      redirect_to @account
     else
       redirect_to_account_with_alert(@account)
     end
@@ -86,5 +98,9 @@ private
   
   def skip_action?
     params[:action] == 'new' && logged_in?
+  end
+  
+  def namespace
+    :dashboard
   end
 end

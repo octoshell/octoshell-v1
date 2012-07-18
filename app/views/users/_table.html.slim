@@ -1,0 +1,8 @@
+table class="table table-bordered"
+  tr
+    th #
+    th = User.human_attribute_name(:full_name)
+  - users.each do |user|
+    tr
+      td = user.id
+      td = link_to_user user

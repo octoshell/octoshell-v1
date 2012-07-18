@@ -1,0 +1,13 @@
+- title 'Место работы'
+
+ul class="nav nav-pills"
+  li = link_to 'редактировать', edit_membership_path(@membership)
+
+table class="table table-bordered"
+  tr
+    th = Organization.model_name.human
+    td = link_to_organization @membership.organization
+  - @membership.positions.each do |position|
+    tr
+      th = position.name
+      th = position.value

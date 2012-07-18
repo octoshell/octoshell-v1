@@ -1,0 +1,10 @@
+table class="table table-bordered"
+  tr
+    th #
+    th = User.model_name.human
+    th
+  - memberships.each do |membership|
+    tr
+      td = membership.id
+      td = link_to_user membership.user
+      td = link_to_membership membership

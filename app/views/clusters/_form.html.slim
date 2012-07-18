@@ -1,0 +1,6 @@
+= simple_form_for @cluster do |f|
+  = f.input :name
+  = f.input :host
+  = f.input :description, placeholder: 'Кластер в гостинной'
+  div class="form-actions"
+    = f.button :submit

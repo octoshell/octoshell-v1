@@ -1,7 +1,3 @@
 - title 'Новая организация'
 
-= simple_form_for @organization, html: { class: 'form-horizontal' } do |f|
-  = f.input :name
-  = f.input :kind, collection: Organization::KINDS
-  div class="form-actions"
-    = f.button :submit
+= render 'form'

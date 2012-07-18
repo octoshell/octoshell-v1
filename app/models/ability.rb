@@ -37,13 +37,15 @@ class Ability
         # test it
         can :mailer, :accounts, project_id: user.owned_project_ids
         
-        if user.memberships.any?
+        if user.memberships.any? || user.admin?
           can [:new, :create], :requests
         end
       end
       
       if user.admin?
-        can :access, :admin
+        can :access, :admins
+        
+        can [:activate, :decline, :cancel], :accounts
         
         can :dashboard, :'admin/base'
         

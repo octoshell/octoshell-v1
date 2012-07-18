@@ -10,6 +10,11 @@ class Account < ActiveRecord::Base
   
   attr_accessible :project_id, :raw_emails
   
+  scope :pending, where(state: 'pending')
+  scope :active, where(state: 'active')
+  scope :declined, where(state: 'declined')
+  scope :canceled, where(state: 'canceled')
+  
   state_machine initial: :pending do
     state :pending
     state :active

@@ -32,9 +32,11 @@
           </a>
           <%= link_to "Moscow State University", root_path, class: "brand" %>
           <div class="container nav-collapse">
-            <ul class="nav">
-              <%= render "shared/#{namespace}_top_menu" if logged_in? %>
-            </ul>
+            <% if logged_in? %>
+              <ul class="nav">
+                <%= render 'shared/top_menu' %>
+              </ul>
+            <% end %>
             <ul class="nav pull-right">
               <% if logged_in? %>
                 <li id="user"><%= link_to current_user.email, profile_path %></li>
@@ -53,20 +55,9 @@
       <div class="row">
         <div class="span12">
           <div class="noprint">
-            <% if can?(:access, :admin) && namespace == 'admin' %>
+            <% if logged_in? %>
               <ul class="nav nav-pills">
-                <li class="<%= current_page?(controller: 'admin/sureties') ? 'active' : '' %>">
-                  <%= link_to 'Поручительства', [:admin, :sureties] %>
-                </li>
-                <li class="<%= current_page?(controller: 'admin/organizations') ? 'active' : '' %>">
-                  <%= link_to 'Организации', [:admin, :organizations] %>
-                </li>
-                <li class="<%= current_page?(controller: 'admin/position_names') ? 'active' : '' %>">
-                  <%= link_to 'Позиции в организациях', [:admin, :position_names] %>
-                </li>
-                <li class="<%= current_page?(controller: 'admin/clusters') ? 'active' : '' %>">
-                  <%= link_to 'Кластеры', [:admin, :clusters] %>
-                </li>
+                <%= render "shared/#{namespace}_menu" %>
               </ul>
             <% end %>
             <% flash.each do |type, message| %>

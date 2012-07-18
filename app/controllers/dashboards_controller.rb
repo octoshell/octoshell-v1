@@ -6,4 +6,10 @@ class DashboardsController < ApplicationController
     @projects = current_user.projects
     @accounts = current_user.all_accounts.order('id desc')
   end
+  
+private
+  
+  def namespace
+    :dashboard
+  end
 end

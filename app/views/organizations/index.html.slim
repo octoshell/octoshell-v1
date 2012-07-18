@@ -1,0 +1,15 @@
+- title 'Организации'
+
+ul class="nav pills"
+  li = link_to 'Новая организация', new_organization_path
+
+div id="organizations"
+  table class="table table-bordered"
+    tr
+      th #
+      th = Organization.human_attribute_name(:name)
+    - @organizations.each do |organization|
+      tr
+        td = organization.id
+        td = link_to_organization organization
+        td = link_to 'редактировать', edit_organization_path(organization)

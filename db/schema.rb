@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120717133613) do
+ActiveRecord::Schema.define(:version => 20120718090150) do
+
+  create_table "accesses", :force => true do |t|
+    t.integer  "credential_id"
+    t.integer  "cluster_id"
+    t.integer  "project_id"
+    t.string   "state"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "accesses", ["credential_id", "cluster_id", "project_id"], :name => "index_accesses_on_credential_id_and_cluster_id_and_project_id", :unique => true
 
   create_table "accounts", :force => true do |t|
     t.integer  "user_id"
@@ -89,10 +100,11 @@ ActiveRecord::Schema.define(:version => 20120717133613) do
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.datetime "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "user_id"
     t.string   "state"
+    t.text     "description"
   end
 
   create_table "requests", :force => true do |t|
@@ -122,7 +134,7 @@ ActiveRecord::Schema.define(:version => 20120717133613) do
   end
 
   create_table "tasks", :force => true do |t|
-    t.text     "stdin"
+    t.text     "command"
     t.text     "stderr"
     t.text     "stdout"
     t.string   "state"
@@ -130,6 +142,9 @@ ActiveRecord::Schema.define(:version => 20120717133613) do
     t.integer  "resource_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.string   "procedure"
+    t.text     "data"
+    t.string   "event"
   end
 
   create_table "users", :force => true do |t|

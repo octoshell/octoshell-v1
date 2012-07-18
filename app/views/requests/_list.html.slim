@@ -1,0 +1,15 @@
+div class="page-header"
+  h3 Ожидают подтверждения
+= render partial: 'requests/table', locals: { requests: requests.pending }
+
+div class="page-header"
+  h3 Активные
+= render partial: 'requests/table', locals: { requests: requests.active }
+
+div class="page-header"
+  h3 Завершенные
+= render partial: 'requests/table', locals: { requests: requests.finished }
+
+div class="page-header"
+  h3 Отклоненные
+= render partial: 'requests/table', locals: { requests: requests.declined }

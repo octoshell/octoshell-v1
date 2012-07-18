@@ -1,9 +1,2 @@
 - title 'Новый проект'
-= simple_form_for @project do |f|
-  = f.input :name
-  = field_set_tag 'Заявка' do
-    = f.simple_fields_for :requests do |f|
-      = f.association :cluster
-      = f.input :hours
-      = f.input :size, hint: 'Более 50ти обговаривается отдельно'
-  = f.button :submit, 'Создать проект', id: 'submit_project'
+= render 'form'
