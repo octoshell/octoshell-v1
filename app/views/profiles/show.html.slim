@@ -46,18 +46,3 @@ div class="row"
 div id="credentials"
   h2 Ключи
   p = link_to t('pages.profile.new_credential'), new_credential_path
-
-  table class="table table-bordered"
-    tr
-      th = Credential.human_attribute_name(:name)
-      th = Credential.human_attribute_name(:public_key)
-      th = Credential.human_attribute_name(:created_at)
-      th
-    - @user.credentials.each do |credential|
-      tr
-        td = link_to_credential credential
-        td
-          textarea disabled="disabled" class="public-key" rows="10"
-            = credential.public_key
-        td = credential.created_at.to_formatted_s(:short)
-        td = link_to t('pages.profile.destroy_credential'), credential, method: :delete

@@ -1,4 +1,4 @@
-- title "Получительство ##{@surety.id}"
+- title "Поручительство ##{@surety.id}"
 
 ul class="nav noprint nav-pills"
   li = link_to_function 'Распечатать', 'javascript:window.print();'
@@ -8,9 +8,9 @@ ul class="nav noprint nav-pills"
 
 p 
   - if @surety.pending?
-    = link_to Surety.human_state_event_name(:_activate), admin_surety_activate_path(@surety), class: 'btn btn-success', method: :put
+    = link_to Surety.human_state_event_name(:_activate), surety_activate_path(@surety), class: 'btn btn-success', method: :put
     = " "
-    = link_to Surety.human_state_event_name(:_decline), admin_surety_decline_path(@surety), class: 'btn', method: :put
+    = link_to Surety.human_state_event_name(:_decline), surety_decline_path(@surety), class: 'btn', method: :put
   - elsif @surety.active?
-    = link_to Surety.human_state_event_name(:_cancel), admin_surety_cancel_path(@surety), class: 'btn', method: :put
+    = link_to Surety.human_state_event_name(:_cancel), surety_cancel_path(@surety), class: 'btn', method: :put
 

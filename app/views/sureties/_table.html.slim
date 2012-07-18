@@ -1,10 +1,14 @@
 table class="table table-bordered"
   tr
     th #
+    th = Organization.model_name.human
     th = User.model_name.human
+    th = Surety.human_attribute_name(:state)
     th
   - sureties.each do |surety|
     tr
       td = surety.id
+      td = link_to_organization surety.organization
       td = link_to_user surety.user
+      td = surety.human_state_name
       td = link_to_surety surety

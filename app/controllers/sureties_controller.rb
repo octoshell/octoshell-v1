@@ -1,6 +1,14 @@
 class SuretiesController < ApplicationController
   before_filter :require_login
   
+  def index
+    if admin?
+      @sureties = Surety.all
+    else
+      @sureties = current_user.sureties
+    end
+  end
+  
   def new
     @surety = current_user.sureties.build
   end
@@ -31,9 +39,9 @@ class SuretiesController < ApplicationController
   
   def find
     @surety = find_surety(params[:id])
-    redirect_to [:admin, @surety]
+    redirect_to @surety
   rescue ActiveRecord::RecordNotFound
-    redirect_to [:admin, :sureties], alert: t('flash.alerts.surety_not_found')
+    redirect_to sureties_path, alert: t('flash.alerts.surety_not_found')
   end
   
   def activate
@@ -70,11 +78,11 @@ private
   end
   
   def redirect_to_surety_with_alert(surety)
-    redirect_to [:admin, surety], alert: surety.errors.full_messages.join(', ')
+    redirect_to surety, alert: surety.errors.full_messages.join(', ')
   end
   
   def redirect_to_surety(surety)
-    redirect_to [:admin, surety]
+    redirect_to surety
   end
   
   def namespace

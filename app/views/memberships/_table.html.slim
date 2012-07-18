@@ -1,10 +1,12 @@
 table class="table table-bordered"
   tr
     th #
+    th = Organization.model_name.human
     th = User.model_name.human
     th
   - memberships.each do |membership|
     tr
       td = membership.id
+      td = link_to_organization membership.organization
       td = link_to_user membership.user
       td = link_to_membership membership
