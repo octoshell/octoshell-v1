@@ -4,7 +4,7 @@ div class="page-header"
   h2 Запросить доступ в проект
 
 = simple_form_for @account, html: { class: 'form-horizontal' } do |f|
-  = f.association :user, label_method: :full_name
+  = f.association :user, label_method: :full_name if admin?
   = f.association :project
   
   div class="form-actions"

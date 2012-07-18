@@ -1,5 +1,13 @@
 - title "Поручительство ##{@surety.id}"
 
+table class="table table-bordered"
+  tr
+    th = Organization.model_name.human
+    td = link_to_organization @surety.organization
+  tr
+    th = User.model_name.human
+    td = link_to_user @surety.user
+
 ul class="nav noprint nav-pills"
   li = link_to_function 'Распечатать', 'javascript:window.print();'
   li = link_to 'Скачать PDF', surety_path(@surety, format: :pdf)

@@ -1,9 +1,8 @@
 - title 'Новая заявка'
 
 = simple_form_for @request, html: { class: 'form-horizontal' } do |f|
-  - if admin?
-    = f.association :user, label_method: :full_name
-  = f.association :project, collection: f.object.allowed_projects, hint: link_to(t('pages.new_request.new_project'), new_project_path)
+  = f.association :user, label_method: :full_name if admin?
+  = f.association :project, collection: @projects, hint: link_to(t('pages.new_request.new_project'), new_project_path)
   = f.association :cluster
   = f.input :hours
   = f.input :size, hint: 'Более 50ти обговаривается отдельно'

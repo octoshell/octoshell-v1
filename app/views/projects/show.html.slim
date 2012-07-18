@@ -9,6 +9,10 @@ table class="table table-bordered"
     th = Project.human_attribute_name(:user)
     td = link_to_user @project.user
 
+h2 Доступы
+
+= render partial: 'accounts/table', locals: { accounts: @project.accounts }
+
 h2 Заявки
 
 p = link_to 'Новая заявка', new_request_path

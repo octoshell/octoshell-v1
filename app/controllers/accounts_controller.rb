@@ -38,7 +38,7 @@ class AccountsController < ApplicationController
     end
     authorize! :invite, @invite
     if @invite.invite
-      redirect_to @account
+      redirect_to @invite.project
     else
       @account = current_user.accounts.build
       @mailer = current_user.accounts.build
@@ -51,7 +51,7 @@ class AccountsController < ApplicationController
     @mailer = current_user.accounts.build(params[:account])
     authorize! :mailer, @mailer
     if @mailer.send_invites
-      redirect_to @account
+      redirect_to @mailer.project
     else
       @account = current_user.accounts.build
       @invite = current_user.accounts.build

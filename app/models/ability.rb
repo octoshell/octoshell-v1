@@ -45,7 +45,7 @@ class Ability
       if user.admin?
         can :access, :admins
         
-        can [:activate, :decline, :cancel], :accounts
+        can [:activate, :decline, :cancel, :invite, :create, :mailer], :accounts
         
         can :dashboard, :'admin/base'
         

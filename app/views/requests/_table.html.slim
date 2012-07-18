@@ -1,4 +1,5 @@
-div class="requests"
+
+- if requests.any?
   table class="table table-bordered"
     tr
       th #
@@ -19,3 +20,5 @@ div class="requests"
         td = request.comment
         td = request.created_at.to_formatted_s(:short)
         td = link_to 'открыть', request
+- else
+  p Нет заявок

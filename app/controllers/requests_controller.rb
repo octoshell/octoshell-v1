@@ -6,11 +6,17 @@ class RequestsController < ApplicationController
   end
   
   def new
-    @request = current_user.requests.build
+    @request = Request.new
+    if admin?
+      @projects = Project.all
+    else
+      @projects = @request.allowed_projects
+    end
   end
   
   def create
-    @request = current_user.requests.build(params[:request], as_role)
+    @request = Request.new(params[:request], as_role)
+    @request.user = current_user unless admin?
     if @request.save
       redirect_to @request
     else

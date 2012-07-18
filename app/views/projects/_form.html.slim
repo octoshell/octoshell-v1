@@ -1,5 +1,5 @@
 = simple_form_for @project do |f|
-  = f.association :user, label_method: :full_name
+  = f.association :user, label_method: :full_name if admin?
   = f.input :name
   = f.input :description, input_html: { rows: 5 }
   - if @project.new_record?
