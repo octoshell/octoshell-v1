@@ -45,13 +45,28 @@ class Request < ActiveRecord::Base
     end
   end
   
+  def waiting?
+    tasks.pending.exists?
+  end
+  
+  def activate
+    return if waiting?
+    
+    tasks.setup(:add_user)
+  end
+  
   def activate!
     self.class.transaction do
       _activate!
+      
       request.project.users.active.each do |user|
         user.credentials.each do |credential|
-          data = { public_key: credential.public_key }
-          Task.setup(credential, 'activate', 'add_openkey', data)
+          conditions = {
+            credential_id: credential.id,
+            cluster_id:    cluster.id,
+            project_id:    project.id
+          }
+          Access.where(conditions).first_or_create!
         end
       end
     end
@@ -73,13 +88,18 @@ class Request < ActiveRecord::Base
     end
   end
   
-  def continue!(event, procedure)
-    send "continue_#{event}_#{procedure}"
+  def continue!(procedure)
+    method = "continue_#{procedure}"
+    send(method) if respond_to?(method)
+  end
+  
+  def stop!
+    
   end
   
 private
   
-  def continue_activate_add_user
+  def continue_add_user
     activate!
   end
 end

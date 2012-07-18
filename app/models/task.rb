@@ -13,8 +13,6 @@ class Task < ActiveRecord::Base
   validates :command, presence: true, on: :update
   validates :procedure, inclusion: { in: PROCEDURES }
   
-  serialize :data, Hash
-  
   state_machine initial: :pending do
     state :pending
     state :successed do
@@ -33,7 +31,7 @@ class Task < ActiveRecord::Base
   
   def success!
     if _success
-      resource.continue!(event, procedure)
+      resource.continue!(procedure)
     else
       failure!
     end
@@ -41,16 +39,16 @@ class Task < ActiveRecord::Base
   
   def failure!
     if _failure
-      UserMailer.report_failed_task(self)
+      resource.stop!(procedure)
+      # UserMailer.report_failed_task(self)
     else
       raise self.errors.inspect
     end
   end
   
-  def setup(event, procedure, data = {})
-    self.event     = event
+  def setup(procedure)
     self.procedure = procedure
-    self.data      = data
+    return if invalid?
     self.class.transaction do
       save!
       Resque.enqueue TasksWorker, id
@@ -65,6 +63,7 @@ class Task < ActiveRecord::Base
 private
   
   # /usr/local/bin/add_user host project_1
+  # resource is a request
   def add_user
     args = []
     args << resource.cluster.host
@@ -81,6 +80,7 @@ private
   # end
   
   # /usr/local/bin/del_user host project_1
+  # resource is a request
   def del_user
     args = []
     args << resource.cluster.host
@@ -89,15 +89,17 @@ private
   end
   
   # /usr/local/bin/add_openkey host project_1 key
+  # resource is an access
   def add_openkey
     args = []
     args << resource.cluster.host
     args << resource.project.username
-    args << data[:public_key]
+    args << resource.public_key
     execute bin('add_openkey'), *args
   end
   
   # /usr/local/bin/del_openkey host project_1 key
+  # resource is an access
   def del_openkey
     args = []
     args << resource.cluster.host
