@@ -1,6 +1,8 @@
 - title 'Кластеры'
 
-p = link_to 'Новый кластер', new_cluster_path
+- if can? :new, :clusters
+  ul class="nav nav-pills"
+    li = link_to 'Новый кластер', new_cluster_path
 
 table class="table table-bordered"
   tr

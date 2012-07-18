@@ -3,7 +3,7 @@ class AccountsController < ApplicationController
     if current_user.admin?
       @accounts = Account.scoped
     else
-      @accounts = current_user.accounts
+      @accounts = current_user.all_accounts
     end
   end
   
@@ -29,6 +29,7 @@ class AccountsController < ApplicationController
   
   def show
     @account = find_account(params[:id])
+    authorize! :show, @account
   end
   
   def invite

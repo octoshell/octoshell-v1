@@ -4,11 +4,13 @@ table class="table table-bordered"
     th = Organization.model_name.human
     th = User.model_name.human
     th = Surety.human_attribute_name(:state)
-    th
+    - if admin?
+      th
   - sureties.each do |surety|
     tr
       td = surety.id
       td = link_to_organization surety.organization
       td = link_to_user surety.user
       td = surety.human_state_name
+    - if admin?
       td = link_to_surety surety

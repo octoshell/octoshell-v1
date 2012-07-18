@@ -1,5 +1,10 @@
 - title @user.full_name
 
+- if @user == current_user
+  p Это вы. #{link_to 'Перейти в профиль', profile_path}
+- if can? :edit, @user
+  p 'редактировать'
+
 h2 Поручительства
 
 = render partial: 'sureties/table', locals: { sureties: @user.sureties }

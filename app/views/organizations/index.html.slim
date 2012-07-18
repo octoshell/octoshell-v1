@@ -3,13 +3,17 @@
 ul class="nav nav-pills"
   li = link_to 'Новая организация', new_organization_path
 
-div id="organizations"
-  table class="table table-bordered"
+table class="table table-bordered"
+  tr
+    th #
+    th = Organization.human_attribute_name(:name)
+    th = Organization.human_attribute_name(:type)
+    - if can? :edit, :organizations
+      th
+  - @organizations.each do |organization|
     tr
-      th #
-      th = Organization.human_attribute_name(:name)
-    - @organizations.each do |organization|
-      tr
-        td = organization.id
-        td = link_to_organization organization
-        td = link_to 'редактировать', edit_organization_path(organization)
+      td = organization.id
+      td = link_to_organization organization
+      td = organization.kind
+    - if can? :edit, :organizations
+      td = link_to 'редактировать', edit_organization_path(organization)

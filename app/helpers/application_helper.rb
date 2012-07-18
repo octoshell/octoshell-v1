@@ -59,7 +59,7 @@ module ApplicationHelper
   
   def link_to_membership(membership)
     if membership
-      link_to 'Позиции', membership
+      link_to 'открыть', membership
     else
       'Удалено'
     end

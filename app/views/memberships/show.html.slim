@@ -1,15 +1,23 @@
 - title 'Место работы'
 
-p Пользователя #{link_to_user @membership.user}
-
-ul class="nav nav-pills"
-  li = link_to 'редактировать', edit_membership_path(@membership)
-
 table class="table table-bordered"
   tr
     th = Organization.model_name.human
     td = link_to_organization @membership.organization
-  - @membership.positions.each do |position|
-    tr
-      th = position.name
-      th = position.value
+  tr
+    th = User.model_name.human
+    td = link_to_user @membership.user
+
+- if can? :edit, @membership
+  ul class="nav nav-pills"
+    li = link_to 'редактировать', edit_membership_path(@membership)
+
+h2 Позиции
+
+div class="row"
+  div class="span6"
+    table class="table table-bordered"
+      - @membership.positions.each do |position|
+        tr
+          th = position.name
+          th = position.value

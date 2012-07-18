@@ -85,7 +85,7 @@ en:
           states:
             pending: ожидает подтверждения
             canceled: отменен
-            active: активен
+            active: активно
           events:
             _activate: Активировать
             _decline: Отказать

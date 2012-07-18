@@ -23,12 +23,9 @@ class SuretiesController < ApplicationController
     end
   end
   
-  def index
-    @sureties = Surety.order('id desc')
-  end
-  
   def show
     @surety = find_surety(params[:id])
+    authorize! :show, @surety
     respond_to do |format|
       format.html
       format.pdf do

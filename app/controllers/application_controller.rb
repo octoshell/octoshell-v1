@@ -1,8 +1,9 @@
+# coding: utf-8
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  # enable_authorization unless: :skip_action?
+  enable_authorization unless: :skip_action?
   
-  rescue_from CanCan::Unauthorized, with: :not_authenticated
+  rescue_from CanCan::Unauthorized, with: :not_authorized
   
   def dashboard
     redirect_to dashboard_path
@@ -22,6 +23,10 @@ private
   
   def not_authenticated
     redirect_to new_session_path
+  end
+  
+  def not_authorized
+    redirect_to dashboard_path, alert: "У вас недостаточно прав для доступа в #{"http://#{request.host}#{request.fullpath}"}"
   end
   
   def after_login_path

@@ -14,11 +14,12 @@ ul class="nav noprint nav-pills"
 
 = render partial: 'template', locals: { surety: @surety }
 
-p 
-  - if @surety.pending?
-    = link_to Surety.human_state_event_name(:_activate), surety_activate_path(@surety), class: 'btn btn-success', method: :put
-    = " "
-    = link_to Surety.human_state_event_name(:_decline), surety_decline_path(@surety), class: 'btn', method: :put
-  - elsif @surety.active?
-    = link_to Surety.human_state_event_name(:_cancel), surety_cancel_path(@surety), class: 'btn', method: :put
+- if can? :active, :sureties
+  p
+    - if @surety.pending?
+      = link_to Surety.human_state_event_name(:_activate), surety_activate_path(@surety), class: 'btn btn-success', method: :put
+      = " "
+      = link_to Surety.human_state_event_name(:_decline), surety_decline_path(@surety), class: 'btn', method: :put
+    - elsif @surety.active?
+      = link_to Surety.human_state_event_name(:_cancel), surety_cancel_path(@surety), class: 'btn', method: :put
 

@@ -15,6 +15,7 @@ class CredentialsController < ApplicationController
   
   def show
     @credential = Credential.find(params[:id])
+    authorize! :show, @credential
   end
   
   def create
@@ -29,6 +30,7 @@ class CredentialsController < ApplicationController
   
   def destroy
     @credential = Credential.find(params[:id])
+    authorize! :destroy, @credential
     @credential.destroy
     redirect_to credentials_path
   end
