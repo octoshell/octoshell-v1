@@ -10,13 +10,18 @@ class CredentialsController < ApplicationController
   end
   
   def new
-    @credential = find_user.credentials.build
+    @credential = Credential.new
+  end
+  
+  def show
+    @credential = Credential.find(params[:id])
   end
   
   def create
-    @credential = find_user.credentials.build(params[:credential])
+    @credential = Credential.new(params[:credential], as_role)
+    @credential.user = current_user unless admin?
     if @credential.save
-      redirect_to profile_path
+      redirect_to @credential
     else
       render :new
     end
@@ -25,7 +30,7 @@ class CredentialsController < ApplicationController
   def destroy
     @credential = Credential.find(params[:id])
     @credential.destroy
-    redirect_to profile_path
+    redirect_to credentials_path
   end
   
 private

@@ -1,5 +1,8 @@
 - title 'Поручительства'
 
+ul class="nav nav-pills"
+  li = link_to 'Новое поручительство', new_surety_path
+
 = form_tag find_sureties_path do
   = field_set_tag 'Поиск поручительств' do
     div class="control-group string optional"

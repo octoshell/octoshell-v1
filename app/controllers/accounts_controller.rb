@@ -11,16 +11,18 @@ class AccountsController < ApplicationController
     @account = current_user.accounts.build
     @invite = current_user.accounts.build
     @mailer = current_user.accounts.build
+    @projects = get_projects
   end
   
   def create
-    @account = current_user.accounts.build(params[:account])
+    @account = current_user.accounts.build(params[:account], as_role)
     authorize! :create, @account
     if @account.save
-      redirect_to dashboard_path
+      redirect_to @account
     else
       @invite = current_user.accounts.build
       @mailer = current_user.accounts.build
+      @projects = get_projects
       render :new
     end
   end
@@ -36,10 +38,11 @@ class AccountsController < ApplicationController
     end
     authorize! :invite, @invite
     if @invite.invite
-      redirect_to dashboard_path
+      redirect_to @account
     else
       @account = current_user.accounts.build
       @mailer = current_user.accounts.build
+      @projects = get_projects
       render :new
     end
   end
@@ -52,6 +55,7 @@ class AccountsController < ApplicationController
     else
       @account = current_user.accounts.build
       @invite = current_user.accounts.build
+      @projects = get_projects
       render :new
     end
   end
@@ -102,5 +106,9 @@ private
   
   def namespace
     :dashboard
+  end
+  
+  def get_projects
+    admin? ? Project.all : current_user.owned_projects
   end
 end

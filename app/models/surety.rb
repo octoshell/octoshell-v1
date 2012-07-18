@@ -5,6 +5,7 @@ class Surety < ActiveRecord::Base
   validates :user, :organization, presence: true
   
   attr_accessible :organization_id
+  attr_accessible :organization_id, :user_id, as: :admin
   
   scope :active, where(state: 'active')
   

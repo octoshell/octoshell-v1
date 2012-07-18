@@ -1,5 +1,7 @@
 - title 'Место работы'
 
+p Пользователя #{link_to_user @membership.user}
+
 ul class="nav nav-pills"
   li = link_to 'редактировать', edit_membership_path(@membership)
 

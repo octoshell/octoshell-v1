@@ -10,13 +10,14 @@ class SuretiesController < ApplicationController
   end
   
   def new
-    @surety = current_user.sureties.build
+    @surety = Surety.new
   end
   
   def create
-    @surety = current_user.sureties.build(params[:surety])
+    @surety = Surety.new(params[:surety], as_role)
+    @surety.user = current_user unless admin?
     if @surety.save
-      redirect_to profile_path
+      redirect_to @surety
     else
       render :new
     end
@@ -86,6 +87,6 @@ private
   end
   
   def namespace
-    :profile
+    admin? ? :admin : :profile
   end
 end

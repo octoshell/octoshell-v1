@@ -4,12 +4,12 @@ class MembershipsController < ApplicationController
   end
   
   def new
-    @membership = current_user.memberships.build
+    @membership = Membership.new
     @membership.build_default_positions
   end
   
   def create
-    @membership = current_user.memberships.build(params[:membership])
+    @membership = Membership.new(params[:membership], as_role)
     if @membership.save
       redirect_to profile_path
     else
@@ -29,8 +29,8 @@ class MembershipsController < ApplicationController
   
   def update
     @membership = find_membership(params[:id])
-    if @membership.update_attributes(params[:membership])
-      redirect_to profile_path
+    if @membership.update_attributes(params[:membership], as_role)
+      redirect_to @membership
     else
       @membership.build_default_positions
       render :edit

@@ -64,4 +64,12 @@ module ApplicationHelper
       'Удалено'
     end
   end
+  
+  def link_to_credential(credential)
+    if credential
+      link_to credential.name, credential
+    else
+      'Удалено'
+    end
+  end
 end

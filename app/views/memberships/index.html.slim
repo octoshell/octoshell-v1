@@ -1,1 +1,6 @@
 - title 'Места работы'
+
+ul class="nav nav-pills"
+  li = link_to 'Новое место работы', new_membership_path
+
+= render partial: 'table', locals: { memberships: @memberships }

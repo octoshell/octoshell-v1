@@ -1,4 +1,5 @@
 = simple_form_for @membership, html: { class: 'form-horizontal' } do |f|
+  = f.association :user, label_method: :full_name if admin?
   = f.association :organization, hint: link_to('Добавить организацию', new_organization_path)
   = f.simple_fields_for :positions do |f|
     = f.input :name, as: :hidden

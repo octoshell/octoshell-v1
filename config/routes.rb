@@ -6,7 +6,7 @@ MSU::Application.routes.draw do
   end
   
   # credentials
-  resources :credentials, only: [:index, :new, :create, :destroy]
+  resources :credentials, only: [:index, :new, :create, :destroy, :show]
   
   # sureties
   resources :sureties, only: [:new, :create, :show]
