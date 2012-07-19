@@ -40,8 +40,6 @@ class Ability
       
       # sured user
       if user.sured?
-        can [:new, :create], :projects
-        
         can :new, :accounts
         # test it
         can :invite, :accounts, project_id: user.owned_project_ids
@@ -50,13 +48,19 @@ class Ability
         # test it
         can :mailer, :accounts, project_id: user.owned_project_ids
         
+        can :show, :requests, user_id: user.id
+        
         if user.memberships.any?
           can [:new, :create], :requests
+          
+          can [:new, :create], :projects
         end
       end
       
       if user.admin?
         can :access, :admins
+        
+        can :show, :accesses
         
         can [:index, :show], :tasks
         

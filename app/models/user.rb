@@ -74,6 +74,7 @@ class User < ActiveRecord::Base
   def project_steps
     steps = []
     steps << step_name(:surety) unless sured?
+    steps << step_name(:membership) unless memberships.any?
     steps
   end
   

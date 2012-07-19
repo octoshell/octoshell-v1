@@ -10,6 +10,7 @@ class RequestsController < ApplicationController
     if admin?
       @projects = Project.all
     else
+      @request.user = current_user
       @projects = @request.allowed_projects
     end
   end
@@ -26,6 +27,7 @@ class RequestsController < ApplicationController
   
   def show
     @request = find_request(params[:id])
+    authorize! :show, @request
   end
   
   def activate

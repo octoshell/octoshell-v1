@@ -26,6 +26,7 @@ en:
       organization: Организация
       request: Заявка
       membership: Место работы
+      access: Доступ
     errors:
       models:
         account:
@@ -128,3 +129,4 @@ en:
             pending: В очереди
             successed: Выполнено
             failed: Ошибка
+      

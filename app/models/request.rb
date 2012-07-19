@@ -46,19 +46,28 @@ class Request < ActiveRecord::Base
   end
   
   def activate
-    if waiting?
-      errors.add(:base, :pending_tasks_present)
-      return
-    end
+    return unless can_create_task?
+    
     tasks.setup(:add_user)
+  end
+  
+  def finish
+    return unless can_create_task?
+    return unless can__finish?
+    
+    if last_active_request?
+      tasks.setup(:del_user)
+    else
+      _finish
+    end
   end
   
   def activate!
     self.class.transaction do
       _activate!
       
-      request.project.users.active.each do |user|
-        user.credentials.each do |credential|
+      project.accounts.active.each do |account|
+        account.user.credentials.each do |credential|
           conditions = {
             credential_id: credential.id,
             cluster_id:    cluster.id,
@@ -94,9 +103,28 @@ class Request < ActiveRecord::Base
   def stop!(procedure)
   end
   
-private
+protected
   
   def continue_add_user
     activate!
+  end
+  
+  def continue_del_user
+    finish!
+  end
+  
+private
+  
+  def can_create_task?
+    errors.add(:base, :pending_tasks_present) if waiting?
+    valid?
+  end
+  
+  def last_active_request?
+    conditions = {
+      project_id: project_id,
+      cluster_id: cluster_id
+    }
+    Request.active.where(conditions).count == 1
   end
 end

@@ -38,12 +38,7 @@ class Access < ActiveRecord::Base
     failure!
   end
   
-private
-  
-  def get_access
-    tasks.setup(:add_openkey)
-    true
-  end
+protected
   
   def continue_add_openkey
     activate!
@@ -51,5 +46,12 @@ private
   
   def continue_del_openkey
     delete
+  end
+  
+private
+  
+  def get_access
+    tasks.setup(:add_openkey)
+    true
   end
 end

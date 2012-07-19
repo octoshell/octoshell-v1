@@ -74,6 +74,9 @@ MSU::Application.routes.draw do
   # clusters
   resources :clusters
   
+  # accesses
+  resources :accesses, only: :show
+  
   # tasks
   resources :tasks
   
@@ -94,4 +97,6 @@ MSU::Application.routes.draw do
   resources :position_names, except: :show
 
   root to: 'application#dashboard'
+  
+  mount Resque::Server.new, :at => '/resque'
 end

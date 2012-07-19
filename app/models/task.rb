@@ -44,23 +44,6 @@ class Task < ActiveRecord::Base
     end
   end
   
-  def success!
-    if _success
-      resource.continue!(procedure)
-    else
-      failure!
-    end
-  end
-  
-  def failure!
-    if _failure
-      resource.stop!(procedure)
-      # UserMailer.report_failed_task(self)
-    else
-      raise self.errors.inspect
-    end
-  end
-  
   def perform
     return unless pending?
     send procedure
@@ -71,6 +54,23 @@ class Task < ActiveRecord::Base
   end
   
 private
+
+  def success!
+    if _success
+      resource.continue!(procedure)
+    else
+      failure!
+    end
+  end
+
+  def failure!
+    if _failure
+      resource.stop!(procedure)
+      # UserMailer.report_failed_task(self)
+    else
+      raise self.errors.inspect
+    end
+  end
   
   # /usr/local/bin/add_user host project_1
   # resource is a request
@@ -104,7 +104,7 @@ private
     args = []
     args << resource.cluster.host
     args << resource.project.username
-    args << resource.public_key
+    args << resource.credential.public_key
     execute bin('add_openkey'), *args
   end
   
@@ -120,7 +120,7 @@ private
   
   def execute(*args)
     self.command = args.join ' '
-    Open3.popen3(args.pop, args.join(' ')) do |stdin, stdout, stderr|
+    Open3.popen3(command) do |stdin, stdout, stderr|
       self.stderr = stderr.read
       self.stdout = stdout.read
     end
@@ -131,10 +131,11 @@ private
   end
   
   def bin(exe)
-    "/usr/local/bin/#{exe}"
+    # "/usr/local/bin/#{exe}"
+    "#{Rails.root}/script/#{exe}"
   end
   
   def no_errors
-    errors.add(:base, :failed)
+    errors.add(:base, :failed) if stdout? || stderr?
   end
 end
