@@ -1,0 +1,15 @@
+- title 'Поручительства'
+
+ul class="nav nav-pills"
+  li = link_to 'Новое поручительство', new_surety_path
+
+- if can? :find, :sureties
+  = form_tag find_sureties_path do
+    = field_set_tag 'Поиск поручительств' do
+      div class="control-group string optional"
+        = label_tag :id, 'ID поручительства:', class: 'string optional control-label'
+        div class="controls"
+          = text_field_tag :id
+      p = submit_tag 'Найти', class: 'btn'
+
+= render partial: 'sureties/table', locals: { sureties: @sureties }

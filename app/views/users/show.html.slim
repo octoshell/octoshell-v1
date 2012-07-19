@@ -1,0 +1,31 @@
+- title @user.full_name
+
+- if @user == current_user
+  p Это вы. #{link_to 'Перейти в профиль', profile_path}
+- if can? :edit, @user
+  p = link_to 'редактировать', edit_user_path(@user)
+
+h2 Поручительства
+
+= render partial: 'sureties/table', locals: { sureties: @user.sureties }
+
+h2 Места работы
+
+= render partial: 'memberships/table', locals: { memberships: @user.memberships }
+
+h2 Проекты
+
+= render partial: 'projects/table', locals: { projects: @user.projects }
+
+h2 Доступы к проектам
+
+= render partial: 'accounts/table', locals: { accounts: @user.accounts }
+
+h2 Заявки
+
+= render partial: 'requests/table', locals: { requests: @user.requests }
+
+h2 Публичные ключи
+
+= render partial: 'credentials/table', locals: { credentials: @user.credentials }
+

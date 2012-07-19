@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120718053342) do
+ActiveRecord::Schema.define(:version => 20120718090150) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -100,10 +100,11 @@ ActiveRecord::Schema.define(:version => 20120718053342) do
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.datetime "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "user_id"
     t.string   "state"
+    t.text     "description"
   end
 
   create_table "requests", :force => true do |t|

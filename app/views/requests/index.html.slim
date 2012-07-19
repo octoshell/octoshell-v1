@@ -1,0 +1,5 @@
+- title 'Заявки'
+
+p = link_to 'Новая заявка', new_request_path
+
+= render partial: 'list', locals: { requests: @requests }

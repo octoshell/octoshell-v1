@@ -1,8 +1,9 @@
+# coding: utf-8
 class ApplicationController < ActionController::Base
   protect_from_forgery
   enable_authorization unless: :skip_action?
   
-  rescue_from CanCan::Unauthorized, with: :not_authenticated
+  rescue_from CanCan::Unauthorized, with: :not_authorized
   
   def dashboard
     redirect_to dashboard_path
@@ -11,17 +12,22 @@ class ApplicationController < ActionController::Base
 private
 
   def namespace
-    parts = self.class.to_s.split('::')
-    if parts.size > 1
-      parts.first.downcase
-    else
-      'base'
-    end
+    raise 'namespace method should be implemented in controller'
   end
   helper_method :namespace
   
+  def admin?
+    current_user.admin?
+  end
+  helper_method :admin?
+  
   def not_authenticated
     redirect_to new_session_path
+  end
+  
+  def not_authorized
+    path = can?(:show, :dashboards) ? dashboard_path : new_session_path
+    redirect_to path, alert: "У вас недостаточно прав для доступа в #{"http://#{request.host}#{request.fullpath}"}"
   end
   
   def after_login_path
@@ -30,5 +36,9 @@ private
   
   def skip_action?
     false
+  end
+  
+  def as_role
+    admin? ? { as: :admin } : {}
   end
 end

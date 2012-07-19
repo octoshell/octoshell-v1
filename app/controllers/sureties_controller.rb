@@ -1,21 +1,31 @@
 class SuretiesController < ApplicationController
   before_filter :require_login
   
+  def index
+    if admin?
+      @sureties = Surety.all
+    else
+      @sureties = current_user.sureties
+    end
+  end
+  
   def new
-    @surety = current_user.sureties.build
+    @surety = Surety.new
   end
   
   def create
-    @surety = current_user.sureties.build(params[:surety])
+    @surety = Surety.new(params[:surety], as_role)
+    @surety.user = current_user unless admin?
     if @surety.save
-      redirect_to profile_path
+      redirect_to @surety
     else
       render :new
     end
   end
   
   def show
-    @surety = current_user.sureties.find(params[:id])
+    @surety = find_surety(params[:id])
+    authorize! :show, @surety
     respond_to do |format|
       format.html
       format.pdf do
@@ -23,5 +33,57 @@ class SuretiesController < ApplicationController
                layout: 'pdf.html'
       end
     end
+  end
+  
+  def find
+    @surety = find_surety(params[:id])
+    redirect_to @surety
+  rescue ActiveRecord::RecordNotFound
+    redirect_to sureties_path, alert: t('flash.alerts.surety_not_found')
+  end
+  
+  def activate
+    @surety = find_surety(params[:surety_id])
+    if @surety.activate
+      redirect_to_surety(@surety)
+    else
+      redirect_to_surety_with_alert(@surety)
+    end
+  end
+  
+  def decline
+    @surety = find_surety(params[:surety_id])
+    if @surety.decline
+      redirect_to_surety(@surety)
+    else
+      redirect_to_surety_with_alert(@surety)
+    end
+  end
+  
+  def cancel
+    @surety = find_surety(params[:surety_id])
+    if @surety.cancel
+      redirect_to_surety(@surety)
+    else
+      redirect_to_surety_with_alert(@surety)
+    end
+  end
+  
+private
+  
+  def find_surety(id)
+    Surety.find(id)
+  end
+  
+  def redirect_to_surety_with_alert(surety)
+    redirect_to surety, alert: surety.errors.full_messages.join(', ')
+  end
+  
+  def redirect_to_surety(surety)
+    redirect_to surety
+  end
+  
+  def namespace
+    admin? ? :admin : :profile
   end
 end

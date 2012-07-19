@@ -1,0 +1,11 @@
+= simple_form_for @project do |f|
+  = f.association :user, label_method: :full_name if admin?
+  = f.input :name
+  = f.input :description, input_html: { rows: 5 }
+  - if @project.new_record?
+    = field_set_tag 'Заявка' do
+      = f.simple_fields_for :requests do |f|
+        = f.association :cluster
+        = f.input :hours
+        = f.input :size, hint: 'Более 50ти обговаривается отдельно'
+  = f.button :submit

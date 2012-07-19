@@ -1,0 +1,29 @@
+- title "Заявка ##{@request.id}"
+
+div class="request"
+  table class="table table-bordered"
+    tr
+      th = Project.model_name.human
+      td = link_to_project @request.project
+    tr
+      th = Project.human_attribute_name(:description)
+      td = @request.project.description
+    tr
+      th = Request.human_attribute_name(:user)
+      td = link_to_user @request.user
+    tr
+      th = Cluster.model_name.human
+      td = link_to_cluster @request.cluster
+    tr
+      th = Request.human_attribute_name(:hours)
+      td = @request.hours
+    tr
+      th = Request.human_attribute_name(:state)
+      td = @request.human_state_name
+  p
+    - if @request.pending?
+      = link_to t('pages.admin.request.activate'), request_activate_path(@request), class: 'btn btn-success', method: :put
+      = " "
+      = link_to t('pages.admin.request.decline'), request_decline_path(@request), class: 'btn', method: :put
+    - elsif @request.active?
+      = link_to t('pages.admin.request.finish'), request_finish_path(@request), class: 'btn', method: :put

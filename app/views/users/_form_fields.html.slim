@@ -4,3 +4,5 @@
 = f.input :first_name
 = f.input :last_name
 = f.input :middle_name
+- if can? :admin, :users
+  = f.input :admin

@@ -20,6 +20,9 @@ class User < ActiveRecord::Base
   
   attr_accessible :first_name, :last_name, :middle_name, :email, :password,
     :password_confirmation, :remember_me, :new_organization, :organization_id
+  attr_accessible :first_name, :last_name, :middle_name, :email, :password,
+    :password_confirmation, :remember_me, :new_organization, :organization_id,
+    :admin, as: :admin
   
   scope :admins, where(admin: true)
   

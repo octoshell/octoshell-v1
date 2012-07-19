@@ -6,6 +6,7 @@ class Membership < ActiveRecord::Base
   validates :user, :organization, presence: true
   
   attr_accessible :organization_id, :positions_attributes
+  attr_accessible :organization_id, :positions_attributes, :user_id, as: :admin
   
   accepts_nested_attributes_for :positions, reject_if: proc { |a| a['value'].blank? }
   

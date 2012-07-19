@@ -1,28 +1,41 @@
 class MembershipsController < ApplicationController
+  before_filter :require_login
+  
+  def index
+    @memberships = Membership.all
+  end
+  
   def new
-    @membership = current_user.memberships.build
+    @membership = Membership.new
     @membership.build_default_positions
   end
   
   def create
-    @membership = current_user.memberships.build(params[:membership])
+    @membership = Membership.new(params[:membership], as_role)
+    @membership.user = current_user unless admin?
     if @membership.save
-      redirect_to profile_path
+      redirect_to @membership
     else
       @membership.build_default_positions
       render :new
     end
   end
   
+  def show
+    @membership = find_membership(params[:id])
+  end
+  
   def edit
     @membership = find_membership(params[:id])
+    authorize! :edit, @membership
     @membership.build_default_positions
   end
   
   def update
     @membership = find_membership(params[:id])
-    if @membership.update_attributes(params[:membership])
-      redirect_to profile_path
+    authorize! :update, @membership
+    if @membership.update_attributes(params[:membership], as_role)
+      redirect_to @membership
     else
       @membership.build_default_positions
       render :edit
@@ -32,6 +45,10 @@ class MembershipsController < ApplicationController
 private
   
   def find_membership(id)
-    current_user.memberships.find(id)
+    Membership.find(id)
+  end
+  
+  def namespace
+    (@membership && @membership.user_id != current_user.id) ? :dashboard : :profile
   end
 end

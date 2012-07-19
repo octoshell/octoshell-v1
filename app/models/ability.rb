@@ -13,17 +13,30 @@ class Ability
     if user
       can [:show, :edit, :update], :profiles
       
-      can [:new, :create, :destroy], :credentials
+      can [:index, :show], :clusters
+      
+      can [:index, :new, :create], :credentials
+      can [:show, :destroy], :credentials, user_id: user.id
       
       can :show, :dashboards
       
-      can [:new, :create], :organizations
+      can [:index, :show], :projects
       
-      can [:new, :create, :show], :sureties
+      can [:index, :show], :users
       
-      can [:new, :create, :edit, :update], :memberships
+      can [:index, :show, :new, :create], :organizations
       
-      can [:activate, :decline, :cancel], :accounts, project_id: user.owned_project_ids
+      can [:show, :index], :memberships
+      
+      can [:index, :new, :create], :sureties
+      can :show, :sureties, user_id: user.id
+      
+      can [:new, :create], :memberships
+      
+      can [:edit, :update], :memberships, user_id: user.id
+      
+      can [:new, :index], :accounts
+      can [:show, :activate, :decline, :cancel], :accounts, project_id: user.owned_project_ids
       
       # sured user
       if user.sured?
@@ -43,21 +56,25 @@ class Ability
       end
       
       if user.admin?
-        can :access, :admin
+        can :access, :admins
         
-        can :dashboard, :'admin/base'
+        can [:activate, :decline, :cancel, :invite, :create, :mailer], :accounts
         
-        can :show, :'admin/dashboards'
+        can [:edit, :update, :new, :create], :projects
         
-        can [:index, :show, :activate, :decline, :finish], :'admin/requests'
+        can :show, :dashboard
         
-        can [:index, :show, :activate, :decline, :cancel, :find], :'admin/sureties'
+        can [:admin, :edit, :update], :users
         
-        can [:index, :show, :edit, :update, :merge], :'admin/organizations'
+        can [:index, :new, :create, :show, :activate, :decline, :finish], :requests
         
-        can [:index, :new, :create, :edit, :update, :destroy], :'admin/position_names'
+        can [:index, :show, :activate, :decline, :cancel, :find], :sureties
         
-        can [:index, :new, :create, :show, :edit, :update, :destroy], :'admin/clusters'
+        can [:index, :show, :edit, :update, :merge], :organizations
+        
+        can [:index, :new, :create, :edit, :update, :destroy], :position_names
+        
+        can [:index, :new, :create, :show, :edit, :update, :destroy], :clusters
       end
     end
   end

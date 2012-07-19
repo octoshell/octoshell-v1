@@ -12,8 +12,12 @@ class Request < ActiveRecord::Base
   validates :size, numericality: { greater_than: 0 }
   
   attr_accessible :hours, :cluster_id, :project_id, :size
+  attr_accessible :hours, :cluster_id, :project_id, :user_id, :size, as: :admin
   
   scope :active, where(state: 'active')
+  scope :pending, where(state: 'pending')
+  scope :declined, where(state: 'declined')
+  scope :finished, where(state: 'finished')
   scope :last_pending, where(state: 'pending').order('id desc')
   
   state_machine initial: :pending do

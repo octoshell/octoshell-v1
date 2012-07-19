@@ -1,63 +1,15 @@
 - title 'Личный кабинет'
 
-div class="row"
-  div class="span6"
-    div id="profile"
-      h2 Профиль
-      
-      p = link_to t('pages.profile.edit_user'), edit_profile_path
-      
-      table class="table table-bordered"
-        tr
-          th = User.human_attribute_name(:full_name)
-          td = @user.full_name
-        tr
-          th = User.human_attribute_name(:email)
-          td = @user.email
-  
-  div class="span6"
-    div id="organizations"
-      h2 Организации
-      
-      p = link_to t('pages.profile.new_membership'), new_membership_path
-  
-      table class="table table-bordered"
-        tr
-          th = Organization.model_name.human
-          th
-        - @user.memberships.each do |membership|
-          tr
-            td = membership.organization.name
-            td = link_to 'редактировать', edit_membership_path(membership)
-  
-      p = link_to t('pages.profile.new_surety'), new_surety_path
-  
-      table class="table table-bordered"
-        tr
-          th = Organization.model_name.human
-          th = Surety.human_attribute_name(:state)
-          th
-        - @user.sureties.each do |surety|
-          tr
-            td = surety.organization.name
-            td = surety.human_state_name
-            td = link_to I18n.t('pages.profile.surety'), surety
-    
-div id="credentials"
-  h2 Ключи
-  p = link_to t('pages.profile.new_credential'), new_credential_path
+h2 Профиль
 
-  table class="table table-bordered"
-    tr
-      th = Credential.human_attribute_name(:name)
-      th = Credential.human_attribute_name(:public_key)
-      th = Credential.human_attribute_name(:created_at)
-      th
-    - @user.credentials.each do |credential|
-      tr
-        td = credential.name
-        td
-          textarea disabled="disabled" class="public-key" rows="10"
-            = credential.public_key
-        td = credential.created_at.to_formatted_s(:short)
-        td = link_to t('pages.profile.destroy_credential'), credential, method: :delete
+table class="table table-bordered"
+  tr
+    th = User.human_attribute_name(:full_name)
+    td = @user.full_name
+  tr
+    th = User.human_attribute_name(:email)
+    td = @user.email
+
+ul class="nav nav-pills"
+  li = link_to 'редактировать', edit_profile_path
+

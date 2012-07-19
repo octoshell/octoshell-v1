@@ -1,0 +1,5 @@
+- title 'Проекты'
+
+p = link_to 'Новый проект', new_project_path
+
+= render partial: 'table', locals: { projects: @projects }

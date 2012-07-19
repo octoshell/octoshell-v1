@@ -1,0 +1,4 @@
+- if can? :access, :admins
+  li class="#{active_menu?(:admin)}" = link_to 'Кабинет Администратора', admin_path
+li class="#{active_menu?(:dashboard)}" = link_to 'Рабочий кабинет', dashboard_path
+li class="#{active_menu?(:profile)}" = link_to 'Личный кабинет', profile_path

@@ -1,0 +1,16 @@
+table class="table table-bordered"
+  tr
+    th #
+    th = User.model_name.human
+    th = Project.model_name.human
+    th = Account.human_attribute_name(:state)
+    th
+  - accounts.each do |account|
+    tr
+      td = account.id
+      td = link_to_user account.user
+      td = link_to_project account.project
+      td = account.human_state_name
+      td
+        - if can? :show, account
+          = link_to 'открыть', account

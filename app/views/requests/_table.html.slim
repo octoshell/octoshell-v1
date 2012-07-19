@@ -1,0 +1,24 @@
+
+- if requests.any?
+  table class="table table-bordered"
+    tr
+      th #
+      th = Project.model_name.human
+      th = User.model_name.human
+      th = Cluster.model_name.human
+      th = Request.human_attribute_name(:state)
+      th = Request.human_attribute_name(:comment)
+      th = Request.human_attribute_name(:created_at)
+      th 
+    - requests.each do |request|
+      tr
+        td = request.id
+        td = link_to_project request.project
+        td = link_to_user request.user
+        td = link_to_cluster request.cluster
+        td = request.human_state_name
+        td = request.comment
+        td = request.created_at.to_formatted_s(:short)
+        td = link_to 'открыть', request
+- else
+  p Нет заявок

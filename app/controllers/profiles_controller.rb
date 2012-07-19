@@ -11,7 +11,7 @@ class ProfilesController < ApplicationController
   
   def update
     @user = find_user
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(params[:user], as_role)
       redirect_to profile_path
     else
       render :edit
@@ -22,5 +22,9 @@ private
   
   def find_user
     current_user
+  end
+  
+  def namespace
+    :profile
   end
 end

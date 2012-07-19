@@ -1,11 +1,17 @@
 class UsersController < ApplicationController
-  before_filter :logout, except: :show
+  before_filter :require_login, only: [:show, :index, :edit, :update]
+  before_filter :logout, except: [:show, :index, :edit, :update]
   
   def new
     @user = User.new
   end
   
+  def index
+    @users = User.all
+  end
+  
   def show
+    @user = User.find(params[:id])
   end
   
   def create
@@ -28,6 +34,25 @@ class UsersController < ApplicationController
     end
   end
   
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user], as_role)
+      redirect_to @user
+    else
+      render :edit
+    end
+  end
+  
   def confirmation
+  end
+  
+private
+  
+  def namespace
+    :dashboard
   end
 end

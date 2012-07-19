@@ -42,8 +42,11 @@ en:
         middle_name: Отчество
         organization: Институт
         full_name: ФИО
+        admin: Права администратора
       project:
         name: Название
+        description: Описание
+        user: Руководитель
       request:
         cluster: Кластер
         project: Проект
@@ -51,6 +54,8 @@ en:
         created_at: Дата создания
         state: Статус
         size: 'Размер, GB'
+        user: Создатель заявки
+        comment: Комментарий
       credential:
         name: Название
         created_at: Дата создания
@@ -73,13 +78,15 @@ en:
         state: Состояние
         user: Пользователь
         raw_emails: Emails
+      position_name:
+        name: Название
     state_machines:
       surety:
         state:
           states:
             pending: ожидает подтверждения
             canceled: отменен
-            active: активен
+            active: активно
           events:
             _activate: Активировать
             _decline: Отказать
@@ -98,6 +105,7 @@ en:
             pending: ожидает подтверждения
             canceled: отменен
             active: активен
+            declined: отказано
           events:
             _activate: Активировать
             _decline: Отказать

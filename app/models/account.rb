@@ -9,6 +9,12 @@ class Account < ActiveRecord::Base
   validate :emails_validator, if: :raw_emails
   
   attr_accessible :project_id, :raw_emails
+  attr_accessible :project_id, :raw_emails, :user_id, as: :admin
+  
+  scope :pending, where(state: 'pending')
+  scope :active, where(state: 'active')
+  scope :declined, where(state: 'declined')
+  scope :canceled, where(state: 'canceled')
   
   state_machine initial: :pending do
     state :pending
