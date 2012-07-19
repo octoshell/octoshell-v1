@@ -13,14 +13,15 @@ class Credential < ActiveRecord::Base
 private
   
   def create_accesses
-    user.requests.active.each do |request|
+    user.requests.joins(:cluster).active.each do |request|
       user.credentials.each do |credential|
         conditions = {
           project_id: request.project_id,
           cluster_id: request.cluster_id
         }
-        accesses.where(conditions).fisrt_or_create!
+        accesses.where(conditions).first_or_create!
       end
     end
+    true
   end
 end

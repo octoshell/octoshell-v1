@@ -11,6 +11,7 @@ class CredentialsController < ApplicationController
   
   def new
     @credential = Credential.new
+    @credential.user = current_user unless admin?
   end
   
   def show

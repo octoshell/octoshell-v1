@@ -1,0 +1,15 @@
+- if accesses.any?
+  table class="table table-bordered"
+    tr
+      th = User.model_name.human
+      th = Cluster.model_name.human
+      th = Project.model_name.human
+      th = Access.human_attribute_name(:state)
+    - accesses.each do |access|
+      tr
+        td = link_to_user access.credential.user
+        td = link_to_cluster access.cluster
+        td = link_to_project access.project
+        td = access.human_state_name
+- else
+  p Нет доступов

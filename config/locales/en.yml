@@ -96,7 +96,7 @@ en:
         state:
           states:
             pending: ожидает подтверждения
-            active: активен
+            active: активна
             declined: отказано
             finished: завершена
       account:

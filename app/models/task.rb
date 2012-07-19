@@ -9,9 +9,9 @@ class Task < ActiveRecord::Base
   
   belongs_to :resource, polymorphic: true
   
-  validates :resource, :procedure, :event, presence: true
+  validates :resource, :procedure, presence: true
   validates :command, presence: true, on: :update
-  validates :procedure, inclusion: { in: PROCEDURES }
+  validates :procedure_string, inclusion: { in: PROCEDURES }
   
   state_machine initial: :pending do
     state :pending
@@ -31,6 +31,15 @@ class Task < ActiveRecord::Base
   
   define_defaults_events :success, :failure
   
+  def self.setup(procedure)
+    transaction do
+      task = scoped.create! do |task|
+        task.procedure = procedure
+      end
+      Resque.enqueue TasksWorker, task.id
+    end
+  end
+  
   def success!
     if _success
       resource.continue!(procedure)
@@ -48,18 +57,13 @@ class Task < ActiveRecord::Base
     end
   end
   
-  def setup(procedure)
-    self.procedure = procedure
-    return if invalid?
-    self.class.transaction do
-      save!
-      Resque.enqueue TasksWorker, id
-    end
-  end
-  
   def perform
     return unless pending?
     send procedure
+  end
+  
+  def procedure_string
+    procedure.to_s
   end
   
 private

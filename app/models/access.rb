@@ -2,6 +2,7 @@ class Access < ActiveRecord::Base
   belongs_to :project
   belongs_to :credential
   belongs_to :cluster
+  has_many :tasks, as: :resource
   
   validates :project, :credential, :cluster, presence: true
   validates :project_id, uniqueness: { scope: [:credential_id, :cluster_id] }
@@ -34,12 +35,14 @@ class Access < ActiveRecord::Base
   end
   
   def stop!(procedure)
+    failure!
   end
   
 private
   
   def get_access
     tasks.setup(:add_openkey)
+    true
   end
   
   def continue_add_openkey
