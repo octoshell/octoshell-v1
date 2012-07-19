@@ -64,9 +64,11 @@
               <% context = type == :alert ? 'alert-error' : 'alert-info'  %>
               <%= content_tag :div, message, class: "alert #{context}" %>
             <% end %>
-            <div class="page-header">
-              <h1><%= yield :title %></h1>
-            </div>
+            <% if content_for?(:title) %>
+              <div class="page-header">
+                <h1><%= yield :title %></h1>
+              </div>
+            <% end %>
           </div>
           <%= yield %>
           <footer class="noprint">

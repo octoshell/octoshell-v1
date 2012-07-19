@@ -6,7 +6,11 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::Unauthorized, with: :not_authorized
   
   def dashboard
-    redirect_to dashboard_path
+    if admin?
+      redirect_to admin_path
+    else
+      redirect_to dashboard_path
+    end
   end
   
 private
