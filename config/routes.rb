@@ -74,6 +74,9 @@ MSU::Application.routes.draw do
   # clusters
   resources :clusters
   
+  # tasks
+  resources :tasks
+  
   # sureties
   resources :sureties, only: [:index, :show] do
     put :activate

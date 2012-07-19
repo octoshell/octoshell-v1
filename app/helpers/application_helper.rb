@@ -12,9 +12,9 @@ module ApplicationHelper
     namespace == _namespace ? 'active' : ''
   end
   
-  def submenu_item(controller_name, content)
+  def submenu_item(controller_name, link)
     klass = params[:controller].to_sym == controller_name ? 'active' : ''
-    content_tag :li, content, class: klass
+    content_tag :li, link, class: klass
   end
   
   def link_to_cluster(cluster)
@@ -71,5 +71,17 @@ module ApplicationHelper
     else
       'Удалено'
     end
+  end
+  
+  def link_to_task(task)
+    if task
+      link_to 'открыть', task
+    else
+      'Удалено'
+    end
+  end
+  
+  def link_to_task_resource(task)
+    link_to task.resource.class.model_name.human, task.resource
   end
 end

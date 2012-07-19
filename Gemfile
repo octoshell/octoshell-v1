@@ -28,14 +28,11 @@ group :test, :development do
   gem 'shoulda-matchers'
   gem 'launchy'
   gem 'guard-rspec'
+  gem 'database_cleaner'
 end
 
 group :production do
   gem 'pg'
-end
-
-group :test do
-  gem 'database_cleaner'
 end
 
 group :assets do

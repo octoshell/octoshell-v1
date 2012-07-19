@@ -32,6 +32,10 @@ en:
           attributes:
             raw_emails:
               invalid_email: "Не верный формат email: %{email}"
+        request:
+          attributes:
+            base:
+              pending_tasks_present: "Нельзя создать задание, пока есть не выполненные"
     attributes:
       user:
         email: Email
@@ -81,6 +85,13 @@ en:
         raw_emails: Emails
       position_name:
         name: Название
+      task:
+        resource: Создатель
+        procedure: Процедура
+        state: Состояние
+        command: Комманда
+        stdout: StdOut
+        stderr: StdErr
     state_machines:
       surety:
         state:
@@ -111,3 +122,9 @@ en:
             _activate: Активировать
             _decline: Отказать
             _cancel: Отменить
+      task:
+        state:
+          states:
+            pending: В очереди
+            successed: Выполнено
+            failed: Ошибка

@@ -1,0 +1,17 @@
+- if tasks.any?
+  table class="table table-bordered"
+    tr
+      th #
+      th = Task.human_attribute_name(:resource)
+      th = Task.human_attribute_name(:procedure)
+      th = Task.human_attribute_name(:state)
+      th
+    - tasks.each do |task|
+      tr
+        td = task.id
+        td = link_to_task_resource(task)
+        td = task.procedure
+        td = task.human_state_name
+        td = link_to_task task
+- else
+  p Нет задач

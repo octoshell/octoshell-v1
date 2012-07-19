@@ -9,7 +9,7 @@ class Request < ActiveRecord::Base
   validates :project, :cluster, :hours, :user, :size, presence: true
   validates :project, inclusion: { in: proc(&:allowed_projects) },
     on: :create, if: :project_persisted?
-  validates :size, numericality: { greater_than: 0 }
+  validates :size, :hours, numericality: { greater_than: 0 }
   
   attr_accessible :hours, :cluster_id, :project_id, :size
   attr_accessible :hours, :cluster_id, :project_id, :user_id, :size, as: :admin
@@ -46,8 +46,10 @@ class Request < ActiveRecord::Base
   end
   
   def activate
-    return if waiting?
-    
+    if waiting?
+      errors.add(:base, :pending_tasks_present)
+      return
+    end
     tasks.setup(:add_user)
   end
   

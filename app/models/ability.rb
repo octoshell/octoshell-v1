@@ -58,6 +58,10 @@ class Ability
       if user.admin?
         can :access, :admins
         
+        can [:index, :show], :tasks
+        
+        can :show, :accounts
+        
         can [:show, :destroy], :credentials
         
         can [:activate, :decline, :cancel, :invite, :create, :mailer], :accounts

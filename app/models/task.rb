@@ -13,6 +13,10 @@ class Task < ActiveRecord::Base
   validates :command, presence: true, on: :update
   validates :procedure_string, inclusion: { in: PROCEDURES }
   
+  scope :pending, where(state: 'pending')
+  scope :successed, where(state: 'successed')
+  scope :failed, where(state: 'failed')
+  
   state_machine initial: :pending do
     state :pending
     state :successed do

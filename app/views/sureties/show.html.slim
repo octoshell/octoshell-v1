@@ -17,8 +17,8 @@ ul class="nav noprint nav-pills noprint"
 
 = render partial: 'template', locals: { surety: @surety }
 
-- if can? :active, :sureties
-  p
+- if can? :activate, :sureties
+  p class="noprint"
     - if @surety.pending?
       = link_to Surety.human_state_event_name(:_activate), surety_activate_path(@surety), class: 'btn btn-success', method: :put
       = " "

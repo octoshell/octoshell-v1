@@ -1,0 +1,21 @@
+- title "Задание ##{@task.id}"
+
+table class="table table-bordered"
+  tr
+    th = Task.human_attribute_name(:resource)
+    td = link_to_task_resource(@task)
+  tr
+    th = Task.human_attribute_name(:procedure)
+    td = @task.procedure
+  tr
+    th = Task.human_attribute_name(:state)
+    td = @task.human_state_name
+  tr
+    th = Task.human_attribute_name(:command)
+    td = @task.command
+  tr
+    th = Task.human_attribute_name(:stdout)
+    td = @task.stdout
+  tr
+    th = Task.human_attribute_name(:stderr)
+    td = @task.stderr

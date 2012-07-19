@@ -27,3 +27,8 @@ div class="request"
       = link_to t('pages.admin.request.decline'), request_decline_path(@request), class: 'btn', method: :put
     - elsif @request.active?
       = link_to t('pages.admin.request.finish'), request_finish_path(@request), class: 'btn', method: :put
+
+- if admin?
+  h2 Задания
+  
+  = render partial: 'tasks/table', locals: { tasks: @request.tasks }

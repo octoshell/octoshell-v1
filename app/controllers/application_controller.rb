@@ -8,8 +8,10 @@ class ApplicationController < ActionController::Base
   def dashboard
     if admin?
       redirect_to admin_path
-    else
+    elsif logged_in?
       redirect_to dashboard_path
+    else
+      redirect_to new_session_path
     end
   end
   
@@ -21,7 +23,7 @@ private
   helper_method :namespace
   
   def admin?
-    current_user.admin?
+    current_user.admin? if logged_in?
   end
   helper_method :admin?
   

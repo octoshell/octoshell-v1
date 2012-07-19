@@ -13,6 +13,8 @@ class Project < ActiveRecord::Base
   
   accepts_nested_attributes_for :requests
   
+  after_create :activate_accounts
+  
   def active?
     requests.
     active.exists?
@@ -20,5 +22,11 @@ class Project < ActiveRecord::Base
   
   def username
     "project_#{id}"
+  end
+  
+private
+  
+  def activate_accounts
+    accounts.where(user_id: user_id).each(&:activate)
   end
 end
