@@ -56,6 +56,6 @@ private
   end
   
   def namespace
-    :dashboard
+    admin? ? :admin : :dashboard
   end
 end

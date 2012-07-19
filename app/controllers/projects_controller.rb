@@ -47,6 +47,6 @@ class ProjectsController < ApplicationController
 private
   
   def namespace
-    :dashboard
+    admin? ? :admin : :dashboard
   end
 end

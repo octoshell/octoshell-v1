@@ -108,7 +108,7 @@ private
   end
   
   def namespace
-    :dashboard
+    admin? ? :admin : :dashboard
   end
   
   def get_projects

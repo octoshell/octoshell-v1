@@ -43,6 +43,6 @@ private
   end
   
   def namespace
-    :profile
+    admin? ? :admin : :profile
   end
 end

@@ -58,6 +58,8 @@ class Ability
       if user.admin?
         can :access, :admins
         
+        can [:show, :destroy], :credentials
+        
         can [:activate, :decline, :cancel, :invite, :create, :mailer], :accounts
         
         can [:edit, :update, :new, :create], :projects

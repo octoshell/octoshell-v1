@@ -54,6 +54,10 @@ private
   end
   
   def namespace
-    (@membership && @membership.user_id != current_user.id) ? :dashboard : :profile
+    if admin?
+      :admin
+    else
+      (@membership && @membership.user_id != current_user.id) ? :dashboard : :profile
+    end
   end
 end

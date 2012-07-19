@@ -70,6 +70,6 @@ private
   end
   
   def namespace
-    current_user.admin? ? :admin : :dashboard
+    admin? ? :admin : :dashboard
   end
 end
