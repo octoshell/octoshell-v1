@@ -29,6 +29,8 @@ class Task < ActiveRecord::Base
     end
   end
   
+  define_defaults_events :success, :failure
+  
   def success!
     if _success
       resource.continue!(procedure)

@@ -39,15 +39,7 @@ class Request < ActiveRecord::Base
     end
   end
   
-  %w(activate decline finish).each do |event|
-    define_method event do
-      send "_#{event}"
-    end
-
-    define_method "#{event}!" do
-      send "_#{event}!"
-    end
-  end
+  define_defaults_events :activate, :decline, :finish
   
   def waiting?
     tasks.pending.exists?
@@ -97,8 +89,7 @@ class Request < ActiveRecord::Base
     send(method) if respond_to?(method)
   end
   
-  def stop!
-    
+  def stop!(procedure)
   end
   
 private

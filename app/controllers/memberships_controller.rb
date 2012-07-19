@@ -2,11 +2,16 @@ class MembershipsController < ApplicationController
   before_filter :require_login
   
   def index
-    @memberships = Membership.all
+    if admin?
+      @memberships = Membership.all
+    else
+      @memberships = current_user.memberships
+    end
   end
   
   def new
     @membership = Membership.new
+    @membership.user = current_user unless admin?
     @membership.build_default_positions
   end
   

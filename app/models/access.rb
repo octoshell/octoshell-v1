@@ -26,19 +26,14 @@ class Access < ActiveRecord::Base
     end
   end
   
-  %w(activate decline finish).each do |event|
-    define_method event do
-      send "_#{event}"
-    end
-
-    define_method "#{event}!" do
-      send "_#{event}!"
-    end
-  end
+  define_defaults_events :activate, :decline, :failure
   
   def continue!(procedure)
     method = "continue_#{procedure}"
     send(method) if respond_to?(method)
+  end
+  
+  def stop!(procedure)
   end
   
 private
@@ -49,5 +44,9 @@ private
   
   def continue_add_openkey
     activate!
+  end
+  
+  def continue_del_openkey
+    delete
   end
 end

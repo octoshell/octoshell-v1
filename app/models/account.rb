@@ -35,15 +35,7 @@ class Account < ActiveRecord::Base
     end
   end
   
-  %w(activate decline cancel).each do |event|
-    define_method event do
-      send "_#{event}"
-    end
-
-    define_method "#{event}!" do
-      send "_#{event}!"
-    end
-  end
+  define_defaults_events :activate, :decline, :cancel
   
   # test it
   def send_invites
