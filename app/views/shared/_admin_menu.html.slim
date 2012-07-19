@@ -1,5 +1,5 @@
-= submenu_item :sureties, (link_to 'Поручительства', sureties_path)
-= submenu_item :requests, (link_to 'Заявки', requests_path)
+= submenu_item :sureties, (link_to "Поручительства (#{Surety.pending.count})", sureties_path)
+= submenu_item :requests, (link_to "Заявки (#{Request.pending.count})", requests_path)
 = submenu_item :tasks, (link_to 'Задачи', tasks_path)
 = submenu_item :projects, (link_to 'Проекты', projects_path)
 / = submenu_item :accounts, (link_to 'Доступы к проектам', accounts_path)

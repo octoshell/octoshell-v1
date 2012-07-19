@@ -54,6 +54,7 @@ class Ability
           can [:new, :create], :requests
           
           can [:new, :create], :projects
+          can [:edit, :update], :projects, user_id: user.id
         end
       end
       
@@ -70,7 +71,7 @@ class Ability
         
         can [:activate, :decline, :cancel, :invite, :create, :mailer], :accounts
         
-        can [:edit, :update, :new, :create], :projects
+        can [:show, :edit, :update, :new, :create], :projects
         
         can :show, :dashboard
         

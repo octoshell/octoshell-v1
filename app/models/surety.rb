@@ -10,6 +10,9 @@ class Surety < ActiveRecord::Base
   attr_accessible :organization_id, :user_id, as: :admin
   
   scope :active, where(state: 'active')
+  scope :pending, where(state: 'pending')
+  scope :declined, where(state: 'declined')
+  scope :canceled, where(state: 'canceled')
   
   state_machine initial: :pending do
     state :pending

@@ -33,10 +33,12 @@ class ProjectsController < ApplicationController
   
   def edit
     @project = Project.find(params[:id])
+    authorize! :edit, @project
   end
   
   def update
     @project = Project.find(params[:id])
+    authorize! :update, @project
     if @project.update_attributes(params[:project], as_role)
       redirect_to @project
     else
