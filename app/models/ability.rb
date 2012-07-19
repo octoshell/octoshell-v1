@@ -60,6 +60,8 @@ class Ability
         
         can [:activate, :decline, :cancel, :invite, :create, :mailer], :accounts
         
+        can [:edit, :update, :new, :create], :projects
+        
         can :show, :dashboard
         
         can [:admin, :edit, :update], :users
