@@ -1,15 +1,10 @@
 - title 'Личный кабинет'
 
-h2 Профиль
+div class="row"
+  div class="span2"
+    div class="avatar" = image_tag 'default_avatar.png', size: '116x160'
+  div class="span10"
+    div class="page-header"
+      h2 = @user.full_name
 
-table class="table table-bordered"
-  tr
-    th = User.human_attribute_name(:full_name)
-    td = @user.full_name
-  tr
-    th = User.human_attribute_name(:email)
-    td = @user.email
-
-ul class="nav nav-pills"
-  li = link_to 'редактировать', edit_profile_path
-
+    p = link_to 'редактировать', edit_profile_path
