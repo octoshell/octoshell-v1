@@ -1,16 +1,16 @@
 - title 'Рабочий кабинет'
-div class="row"
-  div class="span6"
-    div id="requests"
-      h2 Заявки
-  div class="span6"
-    div id="projects"
-      h2 Проекты
-div class="row"
-  div class="span6"
-    div id="support"
-      h2 Поддержка
-      p В разработке
-  div class="span6"
-    div id="accounts"
-      h2 Аккаунты
+
+h2 Доступы к кластерам
+
+p В разработке
+
+h2 Заявки
+
+- @user.projects.each do |project|
+  h3 = link_to_project(project)
+  
+  - if can? :new, :requests
+    p = link_to 'Новая заявка', new_request_path
+  
+  = render partial: 'requests/table', locals: { requests: project.requests }
+

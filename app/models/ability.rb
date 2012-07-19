@@ -50,7 +50,7 @@ class Ability
         # test it
         can :mailer, :accounts, project_id: user.owned_project_ids
         
-        if user.memberships.any? || user.admin?
+        if user.memberships.any?
           can [:new, :create], :requests
         end
       end
@@ -64,7 +64,7 @@ class Ability
         
         can [:admin, :edit, :update], :users
         
-        can [:index, :show, :activate, :decline, :finish], :requests
+        can [:index, :new, :create, :show, :activate, :decline, :finish], :requests
         
         can [:index, :show, :activate, :decline, :cancel, :find], :sureties
         
