@@ -62,6 +62,8 @@ class Ability
         
         can :show, :dashboard
         
+        can [:admin, :edit, :update], :users
+        
         can [:index, :show, :activate, :decline, :finish], :requests
         
         can [:index, :show, :activate, :decline, :cancel, :find], :sureties

@@ -1,4 +1,6 @@
 class ClustersController < ApplicationController
+  before_filter :require_login
+  
   def index
     @clusters = Cluster.all
   end

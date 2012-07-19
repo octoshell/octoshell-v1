@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :logout, except: [:show, :index]
+  before_filter :require_login, only: [:show, :index, :edit, :update]
+  before_filter :logout, except: [:show, :index, :edit, :update]
   
   def new
     @user = User.new
@@ -30,6 +31,19 @@ class UsersController < ApplicationController
       redirect_to after_login_path
     else
       not_authenticated
+    end
+  end
+  
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user], as_role)
+      redirect_to @user
+    else
+      render :edit
     end
   end
   

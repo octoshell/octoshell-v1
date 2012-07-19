@@ -1,4 +1,6 @@
 class FieldsController < ApplicationController
+  before_filter :require_login
+  
   def index
     @fields = Field.order(:position).group_by &:model_type
   end

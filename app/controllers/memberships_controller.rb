@@ -1,4 +1,6 @@
 class MembershipsController < ApplicationController
+  before_filter :require_login
+  
   def index
     @memberships = Membership.all
   end

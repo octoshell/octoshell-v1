@@ -12,5 +12,5 @@ table class="table table-bordered"
       td = link_to_organization surety.organization
       td = link_to_user surety.user
       td = surety.human_state_name
-    - if admin?
-      td = link_to_surety surety
+      - if admin?
+        td = link_to_surety surety

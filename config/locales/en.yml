@@ -42,6 +42,7 @@ en:
         middle_name: Отчество
         organization: Институт
         full_name: ФИО
+        admin: Права администратора
       project:
         name: Название
         description: Описание

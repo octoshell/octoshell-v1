@@ -9,6 +9,6 @@ table class="table table-bordered"
     tr
       td = project.id
       td = link_to project.name, project_path(project)
-      th = link_to_user project.user
+      td = link_to_user project.user
       td = project.description
       td = link_to 'открыть', project_path(project)

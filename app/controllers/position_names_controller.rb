@@ -1,4 +1,6 @@
 class PositionNamesController < ApplicationController
+  before_filter :require_login
+  
   def index
     @position_names = PositionName.all
   end
