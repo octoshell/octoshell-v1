@@ -1,4 +1,6 @@
 class Account < ActiveRecord::Base
+  acts_as_paranoid
+  
   attr_accessor :raw_emails
   
   belongs_to :user, inverse_of: :accounts

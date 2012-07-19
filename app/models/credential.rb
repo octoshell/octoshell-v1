@@ -1,5 +1,7 @@
 class Credential < ActiveRecord::Base
-  has_many :accesses, dependent: :destroy
+  acts_as_paranoid
+  
+  has_many :accesses
   belongs_to :user
   
   attr_accessible :public_key, :name
@@ -9,6 +11,8 @@ class Credential < ActiveRecord::Base
   validates :public_key, uniqueness: { scope: :user_id }
   
   after_create :create_accesses
+  before_destroy :check_waiting
+  after_destroy :destroy_accesses
   
 private
   
@@ -23,5 +27,19 @@ private
       end
     end
     true
+  end
+  
+  def destroy_accesses
+    accesses.destroy_all
+    true
+  end
+  
+  def check_waiting
+    if accesses.any? { |access| access.tasks.pending.exists? }
+      errors.add(:base, :pending_tasks_present)
+      false
+    else
+      true
+    end
   end
 end

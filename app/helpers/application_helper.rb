@@ -82,6 +82,10 @@ module ApplicationHelper
   end
   
   def link_to_task_resource(task)
-    link_to task.resource.class.model_name.human, task.resource
+    if task.resource
+      link_to task.resource.class.model_name.human, task.resource
+    else
+      'Удалено'
+    end
   end
 end

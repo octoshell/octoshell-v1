@@ -1,4 +1,6 @@
 class Request < ActiveRecord::Base
+  acts_as_paranoid
+  
   delegate :persisted?, to: :project, prefix: true
   
   belongs_to :project, inverse_of: :requests

@@ -1,4 +1,6 @@
 class Position < ActiveRecord::Base
+  acts_as_paranoid
+  
   belongs_to :membership, inverse_of: :positions
   
   validates :membership, :name, :value, presence: true

@@ -37,6 +37,10 @@ en:
           attributes:
             base:
               pending_tasks_present: "Нельзя создать задание, пока есть не выполненные"
+        credential:
+          attributes:
+            base:
+              pending_tasks_present: "Удаление пока не доступно. Попробуйте немного позже"
     attributes:
       user:
         email: Email
@@ -93,6 +97,9 @@ en:
         command: Комманда
         stdout: StdOut
         stderr: StdErr
+      access:
+        credential: Публичный ключ
+        state: Состояние
     state_machines:
       surety:
         state:
@@ -129,4 +136,9 @@ en:
             pending: В очереди
             successed: Выполнено
             failed: Ошибка
+      access:
+        state:
+          states:
+            active: Активен
+            pending: В ожидании
       

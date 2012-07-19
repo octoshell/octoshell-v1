@@ -1,4 +1,6 @@
 class Cluster < ActiveRecord::Base
+  acts_as_paranoid
+  
   has_many :requests
   
   validates :name, :host, presence: true

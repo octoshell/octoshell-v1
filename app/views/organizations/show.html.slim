@@ -2,9 +2,13 @@
 
 h2 Поручительства
 
+= link_to 'Новое поручительство', new_surety_path
+
 = render partial: 'sureties/table', locals: { sureties: @organization.sureties }
 
 h2 Работают
+
+= link_to 'Новое место работы', new_membership_path
 
 = render partial: 'memberships/table', locals: { memberships: @organization.memberships }
 

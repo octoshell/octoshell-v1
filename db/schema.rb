@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120718090150) do
+ActiveRecord::Schema.define(:version => 20120719154306) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20120718090150) do
     t.string   "state"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "accesses", ["credential_id", "cluster_id", "project_id"], :name => "index_accesses_on_credential_id_and_cluster_id_and_project_id", :unique => true
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20120718090150) do
     t.datetime "updated_at",  :null => false
     t.string   "host"
     t.string   "description"
+    t.datetime "deleted_at"
   end
 
   create_table "credentials", :force => true do |t|
@@ -72,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20120718090150) do
     t.integer  "organization_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "organizations", :force => true do |t|
@@ -87,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20120718090150) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "positions", :force => true do |t|
@@ -95,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20120718090150) do
     t.string   "value"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "projects", :force => true do |t|
@@ -145,6 +150,7 @@ ActiveRecord::Schema.define(:version => 20120718090150) do
     t.string   "procedure"
     t.text     "data"
     t.string   "event"
+    t.datetime "deleted_at"
   end
 
   create_table "users", :force => true do |t|

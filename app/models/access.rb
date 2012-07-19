@@ -1,4 +1,6 @@
 class Access < ActiveRecord::Base
+  acts_as_paranoid
+  
   belongs_to :project
   belongs_to :credential
   belongs_to :cluster
@@ -8,6 +10,7 @@ class Access < ActiveRecord::Base
   validates :project_id, uniqueness: { scope: [:credential_id, :cluster_id] }
   
   after_create :get_access
+  before_destroy :del_access
   
   state_machine initial: :pending do
     state :pending
@@ -53,5 +56,10 @@ private
   def get_access
     tasks.setup(:add_openkey)
     true
+  end
+  
+  def del_access
+    tasks.setup(:del_openkey)
+    false
   end
 end

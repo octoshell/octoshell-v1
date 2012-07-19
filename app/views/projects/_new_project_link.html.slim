@@ -1,0 +1,7 @@
+- if can? :create, :projects
+  p = link_to 'Новый проект', new_project_path
+- else
+  p У вас нет доступа для создания проекта. Чтобы его получить вам нужно:
+  ul
+    - current_user.project_steps.each do |step|
+      li = step

@@ -1,5 +1,7 @@
 # coding: utf-8
 class Organization < ActiveRecord::Base
+  acts_as_paranoid
+  
   attr_accessor :merge_id
   
   KINDS = %w(ВУС РАН)

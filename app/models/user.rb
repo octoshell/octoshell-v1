@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  acts_as_paranoid
+  
   authenticates_with_sorcery!
   
   attr_reader :new_organization
@@ -61,6 +63,10 @@ class User < ActiveRecord::Base
   
   def sured?
     sureties.active.exists?
+  end
+  
+  def start_steps
+    project_steps
   end
   
   def request_steps

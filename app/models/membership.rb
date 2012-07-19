@@ -1,4 +1,6 @@
 class Membership < ActiveRecord::Base
+  acts_as_paranoid
+  
   belongs_to :user
   belongs_to :organization
   has_many :positions, inverse_of: :membership, dependent: :destroy

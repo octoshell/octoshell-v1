@@ -1,13 +1,24 @@
 - title 'Рабочий кабинет'
 
+- if @user.start_steps.any?
+  h2 Начало работы
+  p Для начала работы с системой вам нужно:
+  ul
+    - @user.start_steps.each do |step|
+      li = step
+  p После этого вы сможете создавать проекты и заявки на ресурсы кластеров.
+
 h2 Доступы к кластерам
 
 = render partial: 'accesses/table', locals: { accesses: @user.accesses }
 
 h2 Заявки
 
+- if @user.projects.empty?
+  p Нет заявок
+
 - @user.projects.each do |project|
-  h3 = link_to_project(project)
+  h3 Проект #{link_to_project(project)}
   
   - if can? :new, :requests
     p = link_to 'Новая заявка', new_request_path

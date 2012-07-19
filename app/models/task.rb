@@ -1,4 +1,6 @@
 class Task < ActiveRecord::Base
+  acts_as_paranoid
+  
   PROCEDURES = %w(
     add_user
     block_user
@@ -104,7 +106,7 @@ private
     args = []
     args << resource.cluster.host
     args << resource.project.username
-    args << resource.credential.public_key
+    args << Credential.unscoped.find(resource_id).public_key
     execute bin('add_openkey'), *args
   end
   
@@ -114,7 +116,7 @@ private
     args = []
     args << resource.cluster.host
     args << resource.project.username
-    args << data[:public_key]
+    args << Credential.unscoped.find(resource_id).public_key
     execute bin('del_openkey'), *args
   end
   
