@@ -39,6 +39,15 @@ class Account < ActiveRecord::Base
   
   define_defaults_events :activate, :decline, :cancel
   
+  def activate
+    if user.ready_to_activate_account?
+      _activate
+    else
+      errors.add(:base, :not_ready_to_be_activated)
+      false
+    end
+  end
+  
   # test it
   def send_invites
     emails_validator
@@ -52,7 +61,9 @@ class Account < ActiveRecord::Base
     return if invalid?
     
     self.class.transaction do
-      save! && activate!
+      save!
+      activate
+      true
     end
   end
   

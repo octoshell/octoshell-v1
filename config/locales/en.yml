@@ -33,6 +33,8 @@ en:
           attributes:
             raw_emails:
               invalid_email: "Не верный формат email: %{email}"
+            base:
+              not_ready_to_be_activated: Не может быть активирован. Необходимо подтвержденное поручительство и заполенное место работы.
         request:
           attributes:
             base:

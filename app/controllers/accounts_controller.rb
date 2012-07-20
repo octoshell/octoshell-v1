@@ -100,7 +100,7 @@ private
   end
   
   def redirect_to_account_with_alert(account)
-    redirect_to dashboard_path, alert: account.errors.full_messages.join(', ')
+    redirect_to account, alert: account.errors.full_messages.join(', ')
   end
   
   def skip_action?

@@ -84,6 +84,10 @@ class User < ActiveRecord::Base
     steps
   end
   
+  def ready_to_activate_account?
+    sured? && user.memberships.any?
+  end
+  
 private
   
   def step_name(name)
