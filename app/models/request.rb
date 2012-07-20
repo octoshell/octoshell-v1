@@ -1,7 +1,7 @@
 class Request < ActiveRecord::Base
   acts_as_paranoid
   
-  delegate :persisted?, to: :project, prefix: true
+  delegate :persisted?, to: :project, prefix: true, allow_nil: true
   
   belongs_to :project, inverse_of: :requests
   belongs_to :cluster
