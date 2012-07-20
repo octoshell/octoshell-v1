@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
   end
   
   def ready_to_activate_account?
-    sured? && user.memberships.any?
+    sured? && memberships.any?
   end
   
 private
