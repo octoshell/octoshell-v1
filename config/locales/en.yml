@@ -27,6 +27,7 @@ en:
       request: Заявка
       membership: Место работы
       access: Доступ
+      credential: Публичный ключ
     errors:
       models:
         account:

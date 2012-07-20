@@ -19,7 +19,7 @@ class UserMailer < ActionMailer::Base
   
   def notify_new_organization(organization)
     @organization = organization
-    mail to: User.admins.pluck(:email), subject: 'Создана новая организация "Название"'
+    mail to: User.admins.pluck(:email), subject: 'Создана новая организация в "Название"'
   end
   
   def invitation(account)
