@@ -7,7 +7,7 @@ class Access < ActiveRecord::Base
   has_many :tasks, as: :resource
   
   validates :project, :credential, :cluster, presence: true
-  validates :project_id, uniqueness: { scope: [:credential_id, :cluster_id] }
+  validates :project_id, uniqueness: { scope: [:credential_id, :cluster_id, :deleted_at] }
   
   after_create :get_access
   before_destroy :del_access

@@ -12,9 +12,14 @@ class Cluster < ActiveRecord::Base
 private
   
   def cancel_requests
-    requests.each do |request|
+    stop = proc do |request|
       request.comment = I18n.t('requests.cluster_destroyed')
-      request.finish_or_decline!
+      request.finish_or_decline
+    end
+    
+    requests.all?(&stop) || begin
+      errors.add(:base, :failed_to_stop_all_requests)
+      false
     end
   end
 end

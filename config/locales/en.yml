@@ -41,6 +41,10 @@ en:
           attributes:
             base:
               pending_tasks_present: "Удаление пока не доступно. Попробуйте немного позже"
+        cluster:
+          attributes:
+            base:
+              failed_to_stop_all_requests: "Не удалось остановить все заявки"
     attributes:
       user:
         email: Email

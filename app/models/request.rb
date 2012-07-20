@@ -8,7 +8,7 @@ class Request < ActiveRecord::Base
   belongs_to :user
   has_many :tasks, as: :resource
   
-  validates :project, :cluster, :hours, :user, :size, presence: true
+  validates :project, :cluster, :hours, :user, :size, presence: true, on: :create
   validates :project, inclusion: { in: proc(&:allowed_projects) },
     on: :create, if: :project_persisted?
   validates :size, :hours, numericality: { greater_than: 0 }
@@ -59,8 +59,26 @@ class Request < ActiveRecord::Base
     
     if last_active_request?
       tasks.setup(:del_user)
+      true
     else
       _finish
+    end
+  end
+  
+  def finish!
+    self.class.transaction do
+      _finish!
+      
+      project.accounts.each do |account|
+        account.user.credentials.each do |credential|
+          conditions = {
+            credential_id: credential.id,
+            cluster_id:    cluster.id,
+            project_id:    project.id
+          }
+          Access.where(conditions).destroy_all
+        end
+      end
     end
   end
   
@@ -86,11 +104,13 @@ class Request < ActiveRecord::Base
     end
   end
   
-  def finish_or_decline!
+  def finish_or_decline
     if pending?
-      decline!
+      decline
     elsif active?
-      finish!
+      finish
+    else
+      true
     end
   end
   

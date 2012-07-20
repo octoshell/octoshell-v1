@@ -95,7 +95,7 @@ private
   # resource is a request
   def del_user
     args = []
-    args << resource.cluster.host
+    args << Cluster.unscoped.find(resource.cluster_id).host
     args << resource.project.username
     execute bin('del_user'), *args
   end
@@ -106,7 +106,7 @@ private
     args = []
     args << resource.cluster.host
     args << resource.project.username
-    args << Credential.unscoped.find(resource_id).public_key
+    args << Credential.unscoped.find(resource.credential_id).public_key
     execute bin('add_openkey'), *args
   end
   
@@ -116,7 +116,7 @@ private
     args = []
     args << resource.cluster.host
     args << resource.project.username
-    args << Credential.unscoped.find(resource_id).public_key
+    args << Credential.unscoped.find(resource.credential_id).public_key
     execute bin('del_openkey'), *args
   end
   

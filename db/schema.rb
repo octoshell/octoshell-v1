@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120719154306) do
+ActiveRecord::Schema.define(:version => 20120720045505) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20120719154306) do
     t.datetime "deleted_at"
   end
 
-  add_index "accesses", ["credential_id", "cluster_id", "project_id"], :name => "index_accesses_on_credential_id_and_cluster_id_and_project_id", :unique => true
+  add_index "accesses", ["credential_id", "cluster_id", "project_id", "deleted_at"], :name => "unique_active", :unique => true
 
   create_table "accounts", :force => true do |t|
     t.integer  "user_id"
