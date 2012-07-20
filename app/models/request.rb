@@ -64,6 +64,11 @@ class Request < ActiveRecord::Base
     end
   end
   
+  def decline
+    return unless can_create_task?
+    _decline
+  end
+  
   def activate!
     self.class.transaction do
       _activate!
@@ -118,8 +123,9 @@ protected
 private
   
   def can_create_task?
-    errors.add(:base, :pending_tasks_present) if waiting?
     valid?
+    errors.add(:base, :pending_tasks_present) if waiting?
+    errors.empty?
   end
   
   def last_active_request?
