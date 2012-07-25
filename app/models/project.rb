@@ -26,6 +26,10 @@ class Project < ActiveRecord::Base
     "project_#{id}"
   end
   
+  def clusters
+    Cluster.joins(:requests).where(requests: { state: 'active', project_id: id })
+  end
+  
 private
   
   def activate_accounts

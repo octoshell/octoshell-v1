@@ -11,5 +11,9 @@ FactoryGirl.define do
     factory :active_request do
       state 'active'
     end
+    
+    factory :closed_request do
+      state 'closed'
+    end
   end
 end

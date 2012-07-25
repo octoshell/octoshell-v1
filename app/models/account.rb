@@ -1,6 +1,6 @@
 # Модель доступа человека к проекту
 # `activate` - активирует доступ к проекту если это возможно
-# (есть подтверждение и место работы)
+# (есть подтверждение и место работы). Создает доступы к кластерам
 # `close` - отменяет доступ к проекту. Пытается удалить доступы к кластерам
 # `decline` - отказать в доступе к проекту
 class Account < ActiveRecord::Base
@@ -44,17 +44,33 @@ class Account < ActiveRecord::Base
   
   define_defaults_events :activate, :decline, :close
   
+  # активирует аккаунт
   def activate
     if user.ready_to_activate_account?
-      _activate
+      activate!
     else
       errors.add(:base, :not_ready_to_be_activated)
       false
     end
   end
   
-  def close
-    return false unless can__close?
+  def activate!
+    self.transaction do
+      _activate!
+      user.credentials.each do |credential|
+        project.clusters.each do |cluster|
+          conditions = {
+            credential_id: credential.id,
+            project_id:    project_id,
+            cluster_id:    cluster.id
+          }
+          Access.where(conditions).first_or_create!
+        end
+      end
+    end
+  end
+  
+  def close!
     self.class.transaction do
       _close!
       accesses.non_closed.each &:close!

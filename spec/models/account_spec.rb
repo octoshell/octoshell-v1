@@ -40,10 +40,40 @@ describe Account do
     
     before { account.close }
     
+    it { should be_closed }
+    
     it 'should close all active accesses' do
       account.accesses.each do |access|
         access.should be_closing
       end
+    end
+  end
+  
+  describe '#activate' do
+    context 'possible user' do
+      let!(:user)       { create(:sured_user_with_membership) }
+      let!(:project)    { create(:project) }
+      let!(:account)    { create(:account, project: project, user: user) }
+      let!(:request)    { create(:active_request, project: project, user: project.user) }
+      let!(:credential) { create(:credential, user: user) }
+      
+      before { account.activate }
+
+      subject { account }
+      
+      it { should be_active }
+      it { account.should have(1).accesses }
+      it { account.accesses.all?(&:activing?).should be_true }
+    end
+    
+    context 'imposible user' do
+      let!(:user) { create(:user) }
+      
+      before { account.activate }
+
+      subject { account }
+      
+      it { should be_pending }
     end
   end
 end

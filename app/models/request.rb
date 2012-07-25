@@ -19,14 +19,15 @@ class Request < ActiveRecord::Base
   scope :active, where(state: 'active')
   scope :pending, where(state: 'pending')
   scope :declined, where(state: 'declined')
-  scope :finished, where(state: 'finished')
+  scope :closed, where(state: 'closed')
+  scope :non_active, where("state != 'active'")
   scope :last_pending, where(state: 'pending').order('id desc')
   
   state_machine initial: :pending do
     state :pending
     state :active
     state :declined
-    state :finished
+    state :closed
     
     event :_activate do
       transition pending: :active
@@ -36,8 +37,8 @@ class Request < ActiveRecord::Base
       transition pending: :declined
     end
     
-    event :_finish do
-      transition active: :finished
+    event :_close do
+      transition active: :closed
     end
   end
   

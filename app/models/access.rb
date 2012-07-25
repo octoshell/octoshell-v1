@@ -6,6 +6,8 @@
 class Access < ActiveRecord::Base
   include Models::Asynch
   
+  attr_accessor :skip_activation
+  
   belongs_to :project
   belongs_to :credential
   belongs_to :cluster
@@ -15,6 +17,8 @@ class Access < ActiveRecord::Base
   # validates :project_id, uniqueness: { scope: [:credential_id, :cluster_id] }
   
   scope :non_closed, where("state != 'closed'")
+  
+  after_create :activate, unless: :skip_activation
   
   state_machine initial: :pending do
     state :pending

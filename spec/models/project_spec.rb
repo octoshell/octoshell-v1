@@ -36,4 +36,18 @@ describe Project do
       it { should be_false }
     end
   end
+  
+  describe '#clusters' do
+    let!(:available_cluster) { create(:cluster) }
+    let!(:not_available_cluster) { create(:cluster) }
+    before do
+      create(:active_request, cluster: available_cluster, project: project, user: project.user)
+      create(:closed_request, cluster: not_available_cluster, project: project, user: project.user)
+    end
+    
+    subject { project.clusters }
+    
+    it { should be_a_kind_of(ActiveRecord::Relation) }
+    it { should == [available_cluster] }
+  end
 end
