@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120720045505) do
+ActiveRecord::Schema.define(:version => 20120725130726) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20120720045505) do
     t.string   "host"
     t.string   "description"
     t.datetime "deleted_at"
+    t.string   "state"
   end
 
   create_table "credentials", :force => true do |t|

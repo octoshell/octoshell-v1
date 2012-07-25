@@ -17,23 +17,15 @@ describe Cluster do
   it { should allow_mass_assignment_of(:host) }
   it { should allow_mass_assignment_of(:description) }
   
-  describe 'destroying' do
-    let!(:request) { create(:request, cluster: cluster) }
+  describe '#close' do
+    let!(:request) { create(:active_request, cluster: cluster) }
     
-    before { cluster.destroy }
+    before { cluster.close }
     
     subject { request.reload }
     
-    its(:comment) { should == I18n.t('requests.cluster_destroyed') }
-    
-    context 'pending' do
-      it { should be_declined }
-    end
-    
-    context 'active' do
-      let!(:request) { create(:active_request, cluster: cluster) }
-      
-      it { should be_finished }
-    end
+    it { cluster.should be_closed }
+    its(:comment) { should == I18n.t('requests.cluster_closed') }
+    it { should be_closed }
   end
 end

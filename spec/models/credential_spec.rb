@@ -16,4 +16,14 @@ describe Credential do
   
   it { should allow_mass_assignment_of(:name) }
   it { should allow_mass_assignment_of(:public_key) }
+  
+  describe '#grant_accesses' do
+    let!(:request) { create(:active_request, user: credential.user) }
+    
+    before { credential.grant_accesses }
+    
+    it 'should create an access for requests' do
+      
+    end
+  end
 end

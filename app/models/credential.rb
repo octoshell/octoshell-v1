@@ -1,4 +1,6 @@
 class Credential < ActiveRecord::Base
+  attr_accessor :skip_creating_accesses
+  
   include Models::Paranoid
   
   has_many :accesses
@@ -10,14 +12,12 @@ class Credential < ActiveRecord::Base
   validates :user, :public_key, :name, presence: true
   validates :public_key, uniqueness: { scope: :user_id }
   
-  after_create :create_accesses
-  before_destroy :check_waiting
-  after_destroy :destroy_accesses
+  after_create :give_accesses, unless: :skip_creating_accesses
   
-private
-  
-  def create_accesses
-    user.requests.joins(:cluster).active.each do |request|
+  def grant_accesses
+    return false if check_waiting?
+    
+    user.requests.active.each do |request|
       user.credentials.each do |credential|
         conditions = {
           project_id: request.project_id,
@@ -29,10 +29,12 @@ private
     true
   end
   
-  def destroy_accesses
+  def close_accesses
     accesses.destroy_all
     true
   end
+  
+private
   
   def check_waiting
     if accesses.any? { |access| access.tasks.pending.exists? }

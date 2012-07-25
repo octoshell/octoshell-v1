@@ -21,6 +21,7 @@ class Request < ActiveRecord::Base
   scope :declined, where(state: 'declined')
   scope :closed, where(state: 'closed')
   scope :non_active, where("state != 'active'")
+  scope :non_closed, where("state != 'closed'")
   scope :last_pending, where(state: 'pending').order('id desc')
   
   state_machine initial: :pending do
@@ -38,11 +39,18 @@ class Request < ActiveRecord::Base
     end
     
     event :_close do
-      transition active: :closed
+      transition any => :closed
     end
   end
   
-  define_defaults_events :activate, :decline, :finish
+  define_defaults_events :activate, :decline, :close
+  
+  def close!(message = nil)
+    self.class.transaction do
+      self.comment = message
+      _close!
+    end
+  end
   
   def waiting?
     tasks.pending.exists?
@@ -54,32 +62,11 @@ class Request < ActiveRecord::Base
     tasks.setup(:add_user)
   end
   
-  def finish
-    return unless can_create_task?
-    return unless can__finish?
-    
-    if last_active_request?
-      tasks.setup(:del_user)
-      true
-    else
-      _finish
-    end
-  end
-  
   def finish!
     self.class.transaction do
       _finish!
       
-      project.accounts.each do |account|
-        account.user.credentials.each do |credential|
-          conditions = {
-            credential_id: credential.id,
-            cluster_id:    cluster.id,
-            project_id:    project.id
-          }
-          Access.where(conditions).destroy_all
-        end
-      end
+      
     end
   end
   
