@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  acts_as_paranoid
+  include Models::Paranoid
   
   authenticates_with_sorcery!
   

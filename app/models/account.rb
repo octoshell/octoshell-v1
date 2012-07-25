@@ -1,5 +1,10 @@
+# Модель доступа человека к проекту
+# `activate` - активирует доступ к проекту если это возможно
+# (есть подтверждение и место работы)
+# `close` - отменяет доступ к проекту. Пытается удалить доступы к кластерам
+# `decline` - отказать в доступе к проекту
 class Account < ActiveRecord::Base
-  acts_as_paranoid
+  include Models::Paranoid
   
   attr_accessor :raw_emails
   
@@ -22,7 +27,7 @@ class Account < ActiveRecord::Base
     state :pending
     state :active
     state :declined
-    state :canceled
+    state :closed
     
     event :_activate do
       transition any => :active
@@ -32,12 +37,12 @@ class Account < ActiveRecord::Base
       transition pending: :declined
     end
     
-    event :_cancel do
-      transition active: :canceled
+    event :_close do
+      transition any => :closed
     end
   end
   
-  define_defaults_events :activate, :decline, :cancel
+  define_defaults_events :activate, :decline, :close
   
   def activate
     if user.ready_to_activate_account?
@@ -45,6 +50,14 @@ class Account < ActiveRecord::Base
     else
       errors.add(:base, :not_ready_to_be_activated)
       false
+    end
+  end
+  
+  def close
+    return false unless can__close?
+    self.class.transaction do
+      _close!
+      accesses.non_closed.each &:close!
     end
   end
   
@@ -70,6 +83,10 @@ class Account < ActiveRecord::Base
   # test it
   def emails
     raw_emails.to_s.split(',').map &:strip
+  end
+  
+  def accesses
+    Access.where(project_id: project_id, credential_id: user.credential_ids)
   end
   
 private

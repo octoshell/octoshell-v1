@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-  acts_as_paranoid
+  include Models::Paranoid
   
   PROCEDURES = %w(
     add_user

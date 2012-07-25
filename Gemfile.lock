@@ -141,8 +141,6 @@ GEM
     paper_trail (2.6.3)
       activerecord (~> 3.0)
       railties (~> 3.0)
-    paranoia (1.1.0)
-      activerecord (>= 3.0.0)
     pg (0.14.0)
     polyglot (0.3.3)
     rack (1.4.1)
@@ -269,7 +267,6 @@ DEPENDENCIES
   less-rails
   mailgun-rails
   paper_trail
-  paranoia
   pg
   rails (= 3.2.6)
   redcarpet

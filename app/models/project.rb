@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  acts_as_paranoid
+  include Models::Paranoid
   
   has_paper_trail
   

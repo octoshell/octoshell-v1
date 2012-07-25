@@ -1,5 +1,5 @@
 class Credential < ActiveRecord::Base
-  acts_as_paranoid
+  include Models::Paranoid
   
   has_many :accesses
   belongs_to :user

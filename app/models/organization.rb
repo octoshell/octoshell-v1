@@ -1,6 +1,6 @@
 # coding: utf-8
 class Organization < ActiveRecord::Base
-  acts_as_paranoid
+  include Models::Paranoid
   
   attr_accessor :merge_id
   

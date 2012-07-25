@@ -1,5 +1,5 @@
 class Surety < ActiveRecord::Base
-  acts_as_paranoid
+  include Models::Paranoid
   
   belongs_to :user
   belongs_to :organization

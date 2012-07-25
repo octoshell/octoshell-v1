@@ -1,5 +1,5 @@
 class Request < ActiveRecord::Base
-  acts_as_paranoid
+  include Models::Paranoid
   
   delegate :persisted?, to: :project, prefix: true, allow_nil: true
   

@@ -1,5 +1,5 @@
 class Position < ActiveRecord::Base
-  acts_as_paranoid
+  include Models::Paranoid
   
   belongs_to :membership, inverse_of: :positions
   

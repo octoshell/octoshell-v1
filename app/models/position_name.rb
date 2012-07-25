@@ -1,5 +1,5 @@
 class PositionName < ActiveRecord::Base
-  acts_as_paranoid
+  include Models::Paranoid
   
   validates :name, presence: true, uniqueness: true
   
