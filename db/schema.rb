@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120725130726) do
+ActiveRecord::Schema.define(:version => 20120725160758) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20120725130726) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "name"
+    t.string   "state"
   end
 
   add_index "credentials", ["public_key", "user_id"], :name => "index_credentials_on_public_key_and_user_id", :unique => true

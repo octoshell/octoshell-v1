@@ -40,7 +40,7 @@ class Access < ActiveRecord::Base
     end
     
     event :_close do
-      transition active: :closing
+      transition any => :closing
     end
     
     event :_complete_closure do
