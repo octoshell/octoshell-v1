@@ -19,7 +19,7 @@ describe Project do
   it { should allow_mass_assignment_of(:name) }
   it { should allow_mass_assignment_of(:requests_attributes) }
   
-  describe '#active?' do
+  describe '#has_active_requests?' do
     let(:user) { project.user }
     
     subject { project.active? }
@@ -49,5 +49,24 @@ describe Project do
     
     it { should be_a_kind_of(ActiveRecord::Relation) }
     it { should == [available_cluster] }
+  end
+  
+  describe '#close' do
+    let!(:request) { create(:request, project: project) }
+    let!(:account) { create(:account, project: project, user: project.user) }
+    
+    before { project.close }
+    
+    it 'should close project' do
+      project.should be_closed
+    end
+    
+    it 'should close accounts' do
+      project.accounts.all?(&:closed?).should be_true
+    end
+    
+    it 'should cancel all requests' do
+      project.requests.all?(&:closed?).should be_true
+    end
   end
 end

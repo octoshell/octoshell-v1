@@ -61,7 +61,7 @@ class Access < ActiveRecord::Base
   
   # активирует (создает задачу для доступа к кластеру)
   def activate!
-    self.class.transaction do
+    transaction do
       _activate!
       tasks.setup(:add_openkey)
     end
@@ -70,7 +70,7 @@ class Access < ActiveRecord::Base
   
   # закрывает доступ (создает задачу для закрытия доступа к кластеру)
   def close!
-    self.class.transaction do
+    transaction do
       _close!
       tasks.setup(:del_openkey)
     end

@@ -28,7 +28,7 @@ class Membership < ActiveRecord::Base
   define_defaults_events :close
   
   def close!
-    self.class.transaction do
+    transaction do
       _close!
       revalidate_user
     end
@@ -37,7 +37,7 @@ class Membership < ActiveRecord::Base
   def build_default_positions
     @existed_positions = positions.to_a.dup
     
-    self.class.transaction do
+    transaction do
       self.positions = []
       PositionName.all.each do |position_name|
         positions.build do |position|

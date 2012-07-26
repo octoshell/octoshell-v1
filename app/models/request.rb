@@ -46,7 +46,7 @@ class Request < ActiveRecord::Base
   define_defaults_events :activate, :decline, :close
   
   def close!(message = nil)
-    self.class.transaction do
+    transaction do
       self.comment = message
       _close!
     end
@@ -63,7 +63,7 @@ class Request < ActiveRecord::Base
   end
   
   def finish!
-    self.class.transaction do
+    transaction do
       _finish!
       
       
@@ -76,7 +76,7 @@ class Request < ActiveRecord::Base
   end
   
   def activate!
-    self.class.transaction do
+    transaction do
       _activate!
       
       project.accounts.active.each do |account|

@@ -25,14 +25,14 @@ class Credential < ActiveRecord::Base
   define_defaults_events :close
   
   def close!
-    self.class.transaction do
+    transaction do
       _close!
       accesses.each &:close!
     end
   end
   
   def grant_accesses
-    self.class.transaction do
+    transaction do
       user.requests.active.each do |request|
         user.credentials.each do |credential|
           conditions = {

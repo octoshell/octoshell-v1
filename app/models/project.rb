@@ -17,6 +17,23 @@ class Project < ActiveRecord::Base
   
   after_create :activate_accounts
   
+  state_machine initial: :active do
+    state :active
+    state :closed
+    
+    event :_close do
+      transition active: :closed
+    end
+  end
+  
+  def close!
+    transaction do
+      _close!
+      accounts.each &:close!
+      requests.each &:cancel!
+    end
+  end
+  
   def active?
     requests.
     active.exists?

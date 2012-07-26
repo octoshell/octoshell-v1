@@ -16,7 +16,7 @@ class Cluster < ActiveRecord::Base
   define_defaults_events :close
   
   def close!
-    self.class.transaction do
+    transaction do
       _close!
       requests.non_closed.each do |r|
         r.close!(I18n.t('requests.cluster_closed'))

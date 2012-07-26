@@ -71,7 +71,7 @@ class Account < ActiveRecord::Base
   end
   
   def close!
-    self.class.transaction do
+    transaction do
       _close!
       accesses.non_closed.each &:close!
     end
@@ -89,7 +89,7 @@ class Account < ActiveRecord::Base
   def invite
     return if invalid?
     
-    self.class.transaction do
+    transaction do
       save!
       activate
       true

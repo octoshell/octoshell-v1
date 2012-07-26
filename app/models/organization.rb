@@ -30,7 +30,7 @@ class Organization < ActiveRecord::Base
   define_defaults_events :close
   
   def close!
-    self.class.transaction do
+    transaction do
       _close!
       sureties.each do |surety|
         surety.cancel!(I18n.t 'surety.comments.organization_deleted')
@@ -56,7 +56,7 @@ class Organization < ActiveRecord::Base
   
   def merge(organization)
     return if self == organization
-    self.class.transaction do
+    transaction do
       organization.sureties.update_all(organization_id: id)
       organization.memberships.update_all(organization_id: id)
       organization.destroy
