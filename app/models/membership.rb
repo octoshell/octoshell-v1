@@ -1,4 +1,6 @@
 class Membership < ActiveRecord::Base
+  attr_accessor :skip_revalidate_user
+  
   include Models::Paranoid
   
   belongs_to :user
@@ -11,6 +13,26 @@ class Membership < ActiveRecord::Base
   attr_accessible :organization_id, :positions_attributes, :user_id, as: :admin
   
   accepts_nested_attributes_for :positions, reject_if: proc { |a| a['value'].blank? }
+  
+  after_create :revalidate_user, unless: :skip_revalidate_user
+  
+  state_machine initial: :active do
+    state :active
+    state :closed
+    
+    event :_close do
+      transition active: :closed
+    end
+  end
+  
+  define_defaults_events :close
+  
+  def close!
+    self.class.transaction do
+      _close!
+      revalidate_user
+    end
+  end
   
   def build_default_positions
     @existed_positions = positions.to_a.dup
@@ -31,5 +53,9 @@ class Membership < ActiveRecord::Base
     @existed_positions.find do |p|
       p.name == position_name.name
     end
+  end
+  
+  def revalidate_user
+    user.revalidate!
   end
 end

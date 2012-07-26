@@ -18,17 +18,37 @@ class Organization < ActiveRecord::Base
   
   after_create :notify_admins
   
-  before_destroy do
-    sureties.each do |surety|
-      if surety.pending?
-        surety.comment = I18n.t('surety.comments.organization_deleted')
-        surety.decline!
-      elsif surety.active?
-        surety.comment = I18n.t('surety.comments.organization_deleted')
-        surety.cancel!
+  state_machine initial: :active do
+    state :active
+    state :closed
+    
+    event :_close do
+      transition active: :closed
+    end
+  end
+  
+  define_defaults_events :close
+  
+  def close!
+    self.class.transaction do
+      _close!
+      sureties.each do |surety|
+        surety.cancel!(I18n.t 'surety.comments.organization_deleted')
       end
     end
   end
+  
+  # before_destroy do
+  #   sureties.each do |surety|
+  #     if surety.pending?
+  #       surety.comment = 
+  #       surety.decline!
+  #     elsif surety.active?
+  #       surety.comment = I18n.t('surety.comments.organization_deleted')
+  #       surety.cancel!
+  #     end
+  #   end
+  # end
   
   def surety_name
     name

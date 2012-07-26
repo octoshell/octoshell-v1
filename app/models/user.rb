@@ -88,6 +88,10 @@ class User < ActiveRecord::Base
     sured? && memberships.any?
   end
   
+  def revalidate!
+    
+  end
+  
 private
   
   def step_name(name)

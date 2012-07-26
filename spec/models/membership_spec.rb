@@ -27,4 +27,25 @@ describe Membership do
       subject.positions.find_all { |p| p.persisted? }.size.should == 1
     end
   end
+  
+  describe '#revalidate_user' do
+    let(:membership) { create(:generic_membership) }
+    
+    it 'should revalidate user' do
+      membership.user.should_receive(:revalidate!).once
+      membership.revalidate_user
+    end
+  end
+  
+  describe '#close' do
+    it 'should close membership' do
+      membership.close
+      membership.should be_closed
+    end
+    
+    it 'should revalidate user' do
+      membership.user.should_receive(:revalidate!).once
+      membership.close
+    end
+  end
 end

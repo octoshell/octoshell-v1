@@ -29,9 +29,14 @@ class Surety < ActiveRecord::Base
     end
     
     event :_cancel do
-      transition active: :canceled
+      transition any => :canceled
     end
   end
   
   define_defaults_events :activate, :decline, :cancel
+  
+  def cancel!(message = nil)
+    self.comment = message
+    _cancel!
+  end
 end
