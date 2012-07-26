@@ -1,6 +1,4 @@
 class Project < ActiveRecord::Base
-  include Models::Paranoid
-  
   has_paper_trail
   
   belongs_to :user
@@ -26,11 +24,13 @@ class Project < ActiveRecord::Base
     end
   end
   
+  define_defaults_events :close
+  
   def close!
     transaction do
       _close!
       accounts.each &:close!
-      requests.each &:cancel!
+      requests.each &:close!
     end
   end
   

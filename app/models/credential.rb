@@ -1,7 +1,7 @@
 class Credential < ActiveRecord::Base
-  attr_accessor :skip_creating_accesses
+  has_paper_trail
   
-  include Models::Paranoid
+  attr_accessor :skip_creating_accesses
   
   has_many :accesses
   belongs_to :user

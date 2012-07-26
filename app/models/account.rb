@@ -4,7 +4,7 @@
 # `close` - отменяет доступ к проекту. Пытается удалить доступы к кластерам
 # `decline` - отказать в доступе к проекту
 class Account < ActiveRecord::Base
-  include Models::Paranoid
+  has_paper_trail
   
   attr_accessor :raw_emails
   

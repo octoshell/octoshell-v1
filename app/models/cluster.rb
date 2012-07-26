@@ -1,4 +1,6 @@
 class Cluster < ActiveRecord::Base
+  has_paper_trail
+  
   has_many :requests
   
   validates :name, :host, presence: true

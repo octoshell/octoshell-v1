@@ -52,8 +52,8 @@ describe Project do
   end
   
   describe '#close' do
-    let!(:request) { create(:request, project: project) }
-    let!(:account) { create(:account, project: project, user: project.user) }
+    let!(:request) { create(:request, project: project, user: project.user) }
+    let!(:account) { create(:account, project: project) }
     
     before { project.close }
     
@@ -66,7 +66,9 @@ describe Project do
     end
     
     it 'should cancel all requests' do
-      project.requests.all?(&:closed?).should be_true
+      project.requests.each do |request|
+        (request.closed? || request.closing?).should be_true
+      end
     end
   end
 end

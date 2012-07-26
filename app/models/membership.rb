@@ -1,7 +1,7 @@
 class Membership < ActiveRecord::Base
-  attr_accessor :skip_revalidate_user
+  has_paper_trail
   
-  include Models::Paranoid
+  attr_accessor :skip_revalidate_user
   
   belongs_to :user
   belongs_to :organization

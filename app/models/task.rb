@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-  include Models::Paranoid
+  has_paper_trail
   
   PROCEDURES = %w(
     add_user

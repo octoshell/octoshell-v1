@@ -1,5 +1,5 @@
 class Position < ActiveRecord::Base
-  include Models::Paranoid
+  has_paper_trail
   
   belongs_to :membership, inverse_of: :positions
   

@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :account do
     project
-    user
+    association :user, factory: :sured_user
     factory :active_account do
       state 'active'
     end

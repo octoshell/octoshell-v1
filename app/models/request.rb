@@ -1,5 +1,6 @@
 class Request < ActiveRecord::Base
-  include Models::Paranoid
+  include Models::Asynch
+  has_paper_trail
   
   delegate :persisted?, to: :project, prefix: true, allow_nil: true
   
@@ -8,7 +9,7 @@ class Request < ActiveRecord::Base
   belongs_to :user
   has_many :tasks, as: :resource
   
-  validates :project, :cluster, :hours, :user, :size, presence: true, on: :create
+  validates :project, :cluster, :hours, :user, :size, presence: true
   validates :project, inclusion: { in: proc(&:allowed_projects) },
     on: :create, if: :project_persisted?
   validates :size, :hours, numericality: { greater_than: 0 }
@@ -26,12 +27,22 @@ class Request < ActiveRecord::Base
   
   state_machine initial: :pending do
     state :pending
+    state :activing
     state :active
     state :declined
+    state :closing
     state :closed
     
     event :_activate do
       transition pending: :active
+    end
+    
+    event :_complete_activation do
+      transition activing: :active
+    end
+    
+    event :_failure_activation do
+      transition activing: :pending
     end
     
     event :_decline do
@@ -39,45 +50,44 @@ class Request < ActiveRecord::Base
     end
     
     event :_close do
+      transition active: :closing
+    end
+    
+    event :_complete_closure do
+      transition closing: :closed
+    end
+    
+    event :_force_close do
       transition any => :closed
     end
   end
   
-  define_defaults_events :activate, :decline, :close
+  define_defaults_events :activate, :complete_activation, :failure_activation,
+    :complete_closure, :decline, :close
   
   def close!(message = nil)
     transaction do
       self.comment = message
-      _close!
+      if can__close?
+        _close!
+        if last_active_request?
+          tasks.setup(:block_user)
+        else
+          _complete_closure!
+        end
+      else
+        _force_close!
+      end
     end
-  end
-  
-  def waiting?
-    tasks.pending.exists?
-  end
-  
-  def activate
-    return unless can_create_task?
-    
-    tasks.setup(:add_user)
-  end
-  
-  def finish!
-    transaction do
-      _finish!
-      
-      
-    end
-  end
-  
-  def decline
-    return unless can_create_task?
-    _decline
   end
   
   def activate!
+    tasks.setup(:add_user)
+  end
+  
+  def complete_activation!
     transaction do
-      _activate!
+      _complete_activation!
       
       project.accounts.active.each do |account|
         account.user.credentials.each do |credential|
@@ -92,49 +102,21 @@ class Request < ActiveRecord::Base
     end
   end
   
-  def finish_or_decline
-    if pending?
-      decline
-    elsif active?
-      finish
-    else
-      true
-    end
-  end
-  
   def allowed_projects
-    if user
-      user.owned_projects
-    else
-      []
-    end
-  end
-  
-  def continue!(procedure)
-    method = "continue_#{procedure}"
-    send(method) if respond_to?(method)
-  end
-  
-  def stop!(procedure)
+    user ? user.owned_projects : []
   end
   
 protected
   
-  def continue_add_user
+  def continue_block_user
+    complete_closure!
+  end
+  
+  def continue_unblock_user
     activate!
   end
   
-  def continue_del_user
-    finish!
-  end
-  
 private
-  
-  def can_create_task?
-    valid?
-    errors.add(:base, :pending_tasks_present) if waiting?
-    errors.empty?
-  end
   
   def last_active_request?
     conditions = {

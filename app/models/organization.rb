@@ -1,6 +1,6 @@
 # coding: utf-8
 class Organization < ActiveRecord::Base
-  include Models::Paranoid
+  has_paper_trail
   
   attr_accessor :merge_id
   

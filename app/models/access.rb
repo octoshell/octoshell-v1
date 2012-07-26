@@ -5,6 +5,7 @@
 # (при удалении вручную или всего пользователя на кластере)
 class Access < ActiveRecord::Base
   include Models::Asynch
+  has_paper_trail
   
   attr_accessor :skip_activation
   

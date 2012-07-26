@@ -62,21 +62,11 @@ describe Request do
     end
   end
   
-  describe '#cancel_or_decline!' do
-    before { request.finish_or_decline! }
+  describe '#close' do
+    before { request.close }
     
-    subject { request.reload }
+    subject { request }
     
-    context 'pending' do
-      let(:request) { create(:request) }
-      
-      it { should be_declined }
-    end
-    
-    context 'active' do
-      let(:request) { create(:active_request) }
-      
-      it { should be_finished }
-    end
+    it { should be_closed }
   end
 end
