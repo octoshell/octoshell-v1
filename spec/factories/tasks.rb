@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :task do
-    command "command"
+    procedure Task::PROCEDURES.first
     association :resource, factory: :request
   end
 end

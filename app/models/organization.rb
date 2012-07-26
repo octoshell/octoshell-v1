@@ -33,7 +33,7 @@ class Organization < ActiveRecord::Base
     transaction do
       _close!
       sureties.each do |surety|
-        surety.cancel!(I18n.t 'surety.comments.organization_deleted')
+        surety.close!(I18n.t 'surety.comments.organization_deleted')
       end
     end
   end

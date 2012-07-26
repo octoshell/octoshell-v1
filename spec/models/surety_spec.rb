@@ -11,4 +11,16 @@ describe Surety do
   it { should validate_presence_of(:organization) }
   
   it { should allow_mass_assignment_of(:organization_id) }
+  
+  describe '#close' do
+    it do
+      surety.close
+      should be_closed
+    end
+    
+    it 'should revalidate user' do
+      surety.user.should_receive(:revalidate!).once
+      surety.close
+    end
+  end
 end

@@ -18,7 +18,7 @@ class Surety < ActiveRecord::Base
     state :pending
     state :active
     state :declined
-    state :canceled
+    state :close
     
     event :_activate do
       transition pending: :active
@@ -28,15 +28,18 @@ class Surety < ActiveRecord::Base
       transition pending: :declined
     end
     
-    event :_cancel do
-      transition any => :canceled
+    event :_close do
+      transition any => :closed
     end
   end
   
-  define_defaults_events :activate, :decline, :cancel
+  define_defaults_events :activate, :decline, :close
   
-  def cancel!(message = nil)
+  def close!(message = nil)
     self.comment = message
-    _cancel!
+    transaction do
+      _close!
+      user.revalidate!
+    end
   end
 end

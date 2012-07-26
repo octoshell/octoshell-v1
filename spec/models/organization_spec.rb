@@ -54,7 +54,7 @@ describe Organization do
 
       subject { surety.reload }
       
-      it { should be_canceled }
+      it { should be_closed }
       its(:comment) { should == I18n.t('surety.comments.organization_deleted') }
     end
     
@@ -65,7 +65,7 @@ describe Organization do
 
       subject { surety.reload }
       
-      it { should be_canceled }
+      it { should be_closed }
       its(:comment) { should == I18n.t('surety.comments.organization_deleted') }
     end
     

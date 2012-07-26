@@ -63,6 +63,8 @@ describe Request do
   end
   
   describe '#close' do
+    let(:request) { create(:active_request) }
+    
     before { request.close }
     
     subject { request }
