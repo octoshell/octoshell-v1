@@ -83,7 +83,9 @@ MSU::Application.routes.draw do
   resources :accesses, only: :show
   
   # tasks
-  resources :tasks
+  resources :tasks, only: [:show, :index] do
+    put :success
+  end
   
   # organizations
   resources :organizations, only: [:index, :show, :edit, :update] do

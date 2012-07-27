@@ -12,7 +12,6 @@ class Task < ActiveRecord::Base
   belongs_to :resource, polymorphic: true
   
   validates :resource, :procedure, presence: true
-  validates :command, presence: true, on: :update
   validates :procedure_string, inclusion: { in: PROCEDURES }
   
   scope :pending, where(state: 'pending')
@@ -21,13 +20,15 @@ class Task < ActiveRecord::Base
   
   state_machine initial: :pending do
     state :pending
-    state :successed do
-      validate :no_errors
-    end
+    state :successed
     state :failed
     
     event :_success do
       transition pending: :successed
+    end
+    
+    event :_force_success do
+      transition [:failed, :pending] => :successed
     end
     
     event :_failure do
@@ -35,7 +36,7 @@ class Task < ActiveRecord::Base
     end
   end
   
-  define_defaults_events :success, :failure
+  define_defaults_events :success, :failure, :force_success
   
   def self.setup(procedure)
     transaction do
@@ -55,13 +56,18 @@ class Task < ActiveRecord::Base
     procedure.to_s
   end
   
-private
-
   def success!
-    if _success
+    transaction do
+      validate_errors
+      _success!
       resource.continue!(procedure)
-    else
-      failure!
+    end
+  end
+  
+  def force_success!
+    transaction do
+      _force_success!
+      resource.continue!(procedure)
     end
   end
 
@@ -73,6 +79,8 @@ private
       raise self.errors.inspect
     end
   end
+  
+private
   
   # /usr/local/bin/add_user host project_1
   # resource is a request
@@ -137,7 +145,8 @@ private
     "#{Rails.root}/script/#{exe}"
   end
   
-  def no_errors
+  def validate_errors
+    errors.add(:command) unless command?
     errors.add(:base, :failed) if stdout? || stderr?
   end
 end

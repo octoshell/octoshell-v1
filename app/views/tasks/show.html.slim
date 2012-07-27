@@ -9,7 +9,7 @@ table class="table table-bordered"
     td = @task.procedure
   tr
     th = Task.human_attribute_name(:state)
-    td = @task.human_state_name
+    td id="task-#{@task.id}-status" = @task.human_state_name
   tr
     th = Task.human_attribute_name(:command)
     td = @task.command
@@ -19,3 +19,5 @@ table class="table table-bordered"
   tr
     th = Task.human_attribute_name(:stderr)
     td = @task.stderr
+- if @task.can__force_success?
+  p = link_to Task.human_state_event_name(:_force_success), task_success_path(@task), class: 'btn', method: :put

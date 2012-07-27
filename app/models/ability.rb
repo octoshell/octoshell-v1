@@ -61,7 +61,7 @@ class Ability
         
         can :show, :accesses
         
-        can [:index, :show], :tasks
+        can [:index, :show, :success], :tasks
         
         can :show, :accounts
         
