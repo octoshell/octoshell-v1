@@ -48,9 +48,9 @@ class RequestsController < ApplicationController
     end
   end
   
-  def finish
+  def close
     @request = find_request(params[:request_id])
-    if @request.finish
+    if @request.close
       redirect_to_request(@request)
     else
       redirect_to_request_with_alert(@request)

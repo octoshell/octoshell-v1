@@ -67,7 +67,7 @@ MSU::Application.routes.draw do
   resources :requests, only: [:index, :show] do
     put :activate
     put :decline
-    put :finish
+    put :close
   end
   
   # users

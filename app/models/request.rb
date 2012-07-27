@@ -34,7 +34,7 @@ class Request < ActiveRecord::Base
     state :closed
     
     event :_activate do
-      transition pending: :active
+      transition pending: :activing
     end
     
     event :_complete_activation do
@@ -69,10 +69,11 @@ class Request < ActiveRecord::Base
     transaction do
       self.comment = message
       if can__close?
-        _close!
         if last_active_request?
+          _close!
           tasks.setup(:block_user)
         else
+          _close!
           _complete_closure!
         end
       else
@@ -82,7 +83,10 @@ class Request < ActiveRecord::Base
   end
   
   def activate!
-    tasks.setup(:add_user)
+    transaction do
+      _activate!
+      tasks.setup(:add_user)
+    end
   end
   
   def complete_activation!

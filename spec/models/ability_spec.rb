@@ -80,7 +80,7 @@ describe Ability do
     it { should be_able_to(:show, :requests) }
     it { should be_able_to(:activate, :requests) }
     it { should be_able_to(:decline, :requests) }
-    it { should be_able_to(:finish, :requests) }
+    it { should be_able_to(:close, :requests) }
     
     it { should be_able_to(:index, :sureties) }
     it { should be_able_to(:show, :sureties) }

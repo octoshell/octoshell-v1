@@ -19,15 +19,15 @@ div class="request"
       td = @request.hours
     tr
       th = Request.human_attribute_name(:state)
-      td = @request.human_state_name
+      td id="request-#{@request.id}-status" = @request.human_state_name
   - if admin?
     p
       - if @request.pending?
-        = link_to t('pages.admin.request.activate'), request_activate_path(@request), class: 'btn btn-success', method: :put
+        = link_to Request.human_state_event_name(:_activate), request_activate_path(@request), class: 'btn btn-success', method: :put
         = " "
-        = link_to t('pages.admin.request.decline'), request_decline_path(@request), class: 'btn', method: :put
-      - elsif @request.active?
-        = link_to t('pages.admin.request.finish'), request_finish_path(@request), class: 'btn', method: :put
+        = link_to Request.human_state_event_name(:_decline), request_decline_path(@request), class: 'btn', method: :put
+        = " "
+      = link_to Request.human_state_event_name(:_close), request_close_path(@request), class: 'btn', method: :put
 
 - if admin?
   h2 Задания

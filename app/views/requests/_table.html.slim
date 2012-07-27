@@ -11,7 +11,7 @@
       th = Request.human_attribute_name(:created_at)
       th 
     - requests.each do |request|
-      tr
+      tr id="request-#{request.id}"
         td = request.id
         td = link_to_project request.project
         td = link_to_user request.user
