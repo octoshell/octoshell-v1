@@ -158,6 +158,10 @@ describe User do
     it 'should close all credentials' do
       user.credentials.all(&:closed?).should be_true
     end
+    
+    it 'should send last email for user'
+    
+    it 'should rename users email'
   end
   
   describe '#sure' do
