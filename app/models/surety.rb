@@ -12,7 +12,7 @@ class Surety < ActiveRecord::Base
   scope :active, where(state: 'active')
   scope :pending, where(state: 'pending')
   scope :declined, where(state: 'declined')
-  scope :canceled, where(state: 'canceled')
+  scope :closed, where(state: 'closed')
   
   state_machine initial: :pending do
     state :pending

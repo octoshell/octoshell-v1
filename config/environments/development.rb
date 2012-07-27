@@ -18,7 +18,7 @@ MSU::Application.configure do
   config.action_mailer.default_url_options = { host: 'msu.dev' }
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
-    api_key:  'key-3h6edqsluh7kmssau3dwlxf1vd4yn5j9',
+    api_key:  'key-2bbtwydaex8px6vvl7twssc1puchy2m7',
     api_host: 'releu.mailgun.org'
   }
 

@@ -77,7 +77,7 @@ class Ability
         
         can [:index, :new, :create, :show, :activate, :decline, :finish], :requests
         
-        can [:index, :show, :activate, :decline, :cancel, :find], :sureties
+        can [:index, :show, :activate, :decline, :close, :find], :sureties
         
         can [:index, :show, :edit, :update, :merge], :organizations
         

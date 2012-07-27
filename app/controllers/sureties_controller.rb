@@ -60,9 +60,9 @@ class SuretiesController < ApplicationController
     end
   end
   
-  def cancel
+  def close
     @surety = find_surety(params[:surety_id])
-    if @surety.cancel
+    if @surety.close
       redirect_to_surety(@surety)
     else
       redirect_to_surety_with_alert(@surety)

@@ -9,7 +9,12 @@ MSU::Application.routes.draw do
   resources :credentials, only: [:index, :new, :create, :destroy, :show]
   
   # sureties
-  resources :sureties, only: [:new, :create, :show]
+  resources :sureties, only: [:new, :create, :index, :show] do
+    put :activate
+    put :decline
+    put :close
+    post :find, on: :collection
+  end
   
   # memberships
   resources :memberships, only: [:index, :new, :create, :edit, :update, :show]
@@ -79,14 +84,6 @@ MSU::Application.routes.draw do
   
   # tasks
   resources :tasks
-  
-  # sureties
-  resources :sureties, only: [:index, :show] do
-    put :activate
-    put :decline
-    put :cancel
-    post :find, on: :collection
-  end
   
   # organizations
   resources :organizations, only: [:index, :show, :edit, :update] do

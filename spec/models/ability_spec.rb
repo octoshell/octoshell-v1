@@ -86,7 +86,7 @@ describe Ability do
     it { should be_able_to(:show, :sureties) }
     it { should be_able_to(:activate, :sureties) }
     it { should be_able_to(:decline, :sureties) }
-    it { should be_able_to(:cancel, :sureties) }
+    it { should be_able_to(:close, :sureties) }
     it { should be_able_to(:find, :sureties) }
     
     it { should be_able_to(:index, :organizations) }
