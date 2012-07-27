@@ -51,7 +51,7 @@ describe Account do
   
   describe '#activate' do
     context 'possible user' do
-      let!(:user)       { create(:sured_user_with_membership) }
+      let!(:user)       { create(:sured_user) }
       let!(:project)    { create(:project) }
       let!(:account)    { create(:account, project: project, user: user) }
       let!(:request)    { create(:active_request, project: project, user: project.user) }
@@ -68,10 +68,10 @@ describe Account do
     
     context 'imposible user' do
       let!(:user) { create(:user) }
+      let!(:project) { create(:project) }
+      let!(:account) { create(:account, project: project, user: user) }
       
       before { account.activate }
-
-      subject { account }
       
       it { should be_pending }
     end

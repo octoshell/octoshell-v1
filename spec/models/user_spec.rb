@@ -108,11 +108,6 @@ describe User do
       let(:user) { create(:sured_user) }
       
       it { should_not include(step :surety) }
-    end
-    
-    context 'user with membership' do
-      let(:user) { create(:user_with_membership) }
-      
       it { should_not include(step :membership) }
     end
   end
@@ -127,5 +122,72 @@ describe User do
     it { should be_a_kind_of(ActiveRecord::Relation) }
     it { should include(account) }
     it { should include(managed_account) }
+  end
+  
+  describe '#revalidate!' do
+    context 'potentially sured user' do
+      let!(:user) { create(:user) }
+      
+      before do
+        create(:active_surety, user: user)
+        create(:membership, user: user)
+        user.revalidate!
+      end
+      
+      it { should be_sured }
+    end
+    
+    context 'potentially unsured user' do
+      let!(:user) { create(:sured_user) }
+      
+      before do
+        user.sureties.delete_all
+        user.memberships.delete_all
+        user.revalidate!
+      end
+      
+      it { should be_active }
+    end
+  end
+  
+  describe '#close' do
+    let!(:credential) { create(:credential, user: user) }
+    
+    before { user.close }
+    
+    it 'should close all credentials' do
+      user.credentials.all(&:closed?).should be_true
+    end
+  end
+  
+  describe '#sure' do
+    let!(:user) { create(:user) }
+    let!(:project) { create(:project) }
+    let!(:account) { create(:account, project: project, user: user) }
+    
+    before do
+      create(:active_surety, user: user)
+      create(:generic_membership, user: user)
+      user.sure!
+    end
+    
+    it 'should activate owned accounts' do
+      conditions = { project_id: user.owned_project_ids }
+      user.accounts.where(conditions).all?(&:active?).should be_true
+    end
+  end
+  
+  describe '#unsure' do
+    let!(:user) { create(:sured_user) }
+    let!(:project) { create(:project) }
+    let!(:account) { create(:active_account, project: project, user: user) }
+    
+    before do
+      user.unsure!
+    end
+    
+    it 'should close all accounts' do
+      user.accounts.all?(&:closed?).should be_true
+    end
   end
 end

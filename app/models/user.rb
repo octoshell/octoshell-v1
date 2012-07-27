@@ -29,6 +29,26 @@ class User < ActiveRecord::Base
   
   scope :admins, where(admin: true)
   
+  state_machine initial: :active do
+    state :active
+    state :sured
+    state :closed
+    
+    event :_sure do
+      transition active: :sured
+    end
+    
+    event :_unsure do
+      transition sured: :active
+    end
+    
+    event :_close do
+      transition any => :closed
+    end
+  end
+  
+  define_defaults_events :close, :sure, :unsure
+  
   def all_requests
     Request.joins(project: :accounts).where(accounts: { user_id: id })
   end
@@ -61,10 +81,6 @@ class User < ActiveRecord::Base
     activation_state == 'active'
   end
   
-  def sured?
-    sureties.active.exists?
-  end
-  
   def start_steps
     project_steps
   end
@@ -73,14 +89,14 @@ class User < ActiveRecord::Base
     steps = []
     steps << step_name(:project) unless owned_projects.any?
     steps << step_name(:surety) unless sured?
-    steps << step_name(:membership) unless memberships.any?
+    steps << step_name(:membership) unless sured?
     steps
   end
   
   def project_steps
     steps = []
     steps << step_name(:surety) unless sured?
-    steps << step_name(:membership) unless memberships.any?
+    steps << step_name(:membership) unless sured?
     steps
   end
   
@@ -89,7 +105,25 @@ class User < ActiveRecord::Base
   end
   
   def revalidate!
-    
+    if sureties.any? && memberships.any?
+      sured? || sure!
+    else
+      active? || unsure!
+    end
+  end
+  
+  def sure!
+    transaction do
+      _sure!
+      accounts.where(project_id: owned_project_ids).each &:active!
+    end
+  end
+  
+  def unsure!
+    transaction do
+      _unsure!
+      accounts.each &:close!
+    end
   end
   
 private

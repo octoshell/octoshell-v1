@@ -4,7 +4,7 @@ FactoryGirl.define do
     organization
     
     factory :generic_membership do
-      before(:after) do |membership|
+      before(:create) do |membership|
         membership.skip_revalidate_user = true
       end
     end

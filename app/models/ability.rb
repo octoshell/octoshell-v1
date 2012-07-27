@@ -50,12 +50,10 @@ class Ability
         
         can :show, :requests, user_id: user.id
         
-        if user.memberships.any?
-          can [:new, :create], :requests
-          
-          can [:new, :create], :projects
-          can [:edit, :update], :projects, user_id: user.id
-        end
+        can [:new, :create], :requests
+        
+        can [:new, :create], :projects
+        can [:edit, :update], :projects, user_id: user.id
       end
       
       if user.admin?

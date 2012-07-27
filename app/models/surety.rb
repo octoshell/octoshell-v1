@@ -35,6 +35,13 @@ class Surety < ActiveRecord::Base
   
   define_defaults_events :activate, :decline, :close
   
+  def activate!
+    transaction do
+      _activate!
+      user.revalidate!
+    end
+  end
+  
   def close!(message = nil)
     self.comment = message
     transaction do

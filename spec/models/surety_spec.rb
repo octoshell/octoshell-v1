@@ -12,6 +12,13 @@ describe Surety do
   
   it { should allow_mass_assignment_of(:organization_id) }
   
+  describe '#activate' do
+    it 'should revalidate user' do
+      surety.user.should_receive(:revalidate!).once
+      surety.activate
+    end
+  end
+  
   describe '#close' do
     it do
       surety.close

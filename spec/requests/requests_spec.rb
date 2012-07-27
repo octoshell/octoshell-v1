@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe 'Requests' do
   context 'as authorized user' do
-    let!(:user) { create(:sured_user_with_membership) }
+    let!(:user) { create(:sured_user) }
     let!(:project) { user.projects.first }
     let!(:cluster) { create(:cluster) }
     

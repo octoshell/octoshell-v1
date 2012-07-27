@@ -27,12 +27,6 @@ describe Ability do
     
     it { should be_able_to(:new, :accounts) }
     it { should be_able_to(:create, :accounts) }
-  end
-  
-  context 'confirmed user with membership' do
-    let(:user) { create(:sured_user_with_membership) }
-    
-    subject { Ability.new(user) }
     
     it { should be_able_to(:new, :requests) }
     it { should be_able_to(:create, :requests) }
