@@ -11,7 +11,6 @@ describe Request do
   it { should belong_to(:project) }
   it { should belong_to(:cluster) }
   it { should belong_to(:user) }
-  it { should have_many(:tasks) }
   
   it { should validate_presence_of(:project) }
   it { should validate_presence_of(:cluster) }
@@ -65,16 +64,23 @@ describe Request do
   describe '#close' do
     let(:request) { create(:active_request) }
     
-    before { request.close }
+    it 'should close request' do
+      request.close
+      should be_closed
+    end
     
-    subject { request }
-    
-    it { should be_closed }
+    it 'should try to close cluster user' do
+      args = [request.project_id, request.cluster_id]
+      ClusterUser.should_receive(:close_for).with(*args).once
+      request.close
+    end
   end
   
   describe '#activate' do
-    before { request.activate }
-    
-    its(:project) { should be_activing }
+    it 'should try to activate cluster user' do
+      args = [request.project_id, request.cluster_id]
+      ClusterUser.should_receive(:activate_for).with(*args).once
+      request.activate
+    end
   end
 end

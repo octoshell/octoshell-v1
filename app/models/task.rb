@@ -19,6 +19,10 @@ class Task < ActiveRecord::Base
   scope :successed, where(state: 'successed')
   scope :failed, where(state: 'failed')
   
+  PROCEDURES.each do |proc|
+    scope proc.to_sym, where(procedure: proc)
+  end
+  
   state_machine initial: :pending do
     state :pending
     state :successed

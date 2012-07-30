@@ -9,15 +9,15 @@ FactoryGirl.define do
     end
     
     factory :active_request do
-      state 'active'
-    end
-    
-    factory :activing_request do
-      state 'activing'
+      after(:create) do |request|
+        request.activate!
+      end
     end
     
     factory :closed_request do
-      state 'closed'
+      after(:create) do |request|
+        request.close!
+      end
     end
   end
 end

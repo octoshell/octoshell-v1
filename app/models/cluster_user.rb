@@ -1,10 +1,19 @@
 # Пользователь на кластере
 class ClusterUser < ActiveRecord::Base
+  include Models::Asynch
+  
+  attr_accessor :skip_activation
+  
   belongs_to :cluster
   belongs_to :project
   has_many :tasks, as: :resource
+  has_many :accesses
   
   validates :cluster, :project, presence: true
+  
+  after_create :activate!, unless: :skip_activation
+  
+  scope :non_closed, where("state != 'closed'")
   
   state_machine initial: :pending do
     state :pending
@@ -57,10 +66,43 @@ class ClusterUser < ActiveRecord::Base
     :complete_pausing, :resume, :complete_resuming, :close, :complete_closure,
     :force_close
   
+  class << self
+    def activate_for(project_id, cluster_id)
+      conditions = { project_id: project_id, cluster_id: cluster_id }
+      if cluster_user = non_closed.where(conditions).first
+        cluster_user.activate!
+      else
+        create! do |cluster_user|
+          cluster_user.project_id = project_id
+          cluster_user.cluster_id = cluster_id
+        end
+      end
+    end
+  end
+  
+  def processing?
+    [:activing, :pausing, :resuming, :closing].include? state_name
+  end
+  
+  def activate
+    if processing?
+      errors.add(:base, :processing) 
+      false
+    else
+      activate!
+    end
+  end
+  
   def activate!
     transaction do
-      _activate!
-      tasks.setup(:add_user)
+      errors.add(:base, :processing) if processing?
+      
+      if paused?
+        resume!
+      else
+        active? or _activate!
+        tasks.setup(:add_user)
+      end
     end
   end
   
@@ -86,6 +128,18 @@ class ClusterUser < ActiveRecord::Base
       else
         _close!
         tasks.setup(:del_user)
+      end
+    end
+  end
+  
+  def complete_activation!
+    transaction do
+      _complete_activation!
+      
+      project.accounts.active.each do |account|
+        account.user.credentials.each do |credential|
+          accesses.where(credential_id: credential.id).first_or_create!
+        end
       end
     end
   end

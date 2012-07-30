@@ -1,31 +1,99 @@
 require 'spec_helper'
 
 describe ClusterUser do
-  let(:cluster_user) { create(:cluster_user) }
+  let(:cluster_user) { create(:pending_cluster_user) }
   subject { cluster_user }
   
   it { should belong_to(:project) }
   it { should belong_to(:cluster) }
   it { should have_many(:tasks) }
+  it { should have_many(:accesses) }
   
   it { should validate_presence_of(:project) }
   it { should validate_presence_of(:cluster) }
   
   it { should be_pending }
   
-  describe '#activate' do
-    before { cluster_user.activate }
+  describe '.activate_for' do
+    let!(:project) { create(:project) }
+    let!(:cluster) { create(:cluster) }
     
-    it { should be_activing }
-    it { should have(1).tasks }
+    context 'if non closed cluster user exists' do
+      let!(:cluster_user) do
+        create(:active_cluster_user, project: project, cluster: cluster)
+      end
+      
+      it 'should create new cluster user' do
+        ClusterUser.activate_for(project.id, cluster.id)
+        conditions = { project_id: project.id, cluster_id: cluster.id }
+        ClusterUser.where(conditions).count.should == 1
+      end
+    end
+    
+    context 'if cluster user not exists' do
+      it 'should create new cluster user' do
+        ClusterUser.activate_for(project.id, cluster.id)
+        conditions = { project_id: project.id, cluster_id: cluster.id }
+        ClusterUser.where(conditions).count.should == 1
+      end
+    end
+  end
+  
+  describe '#processing?' do
+    %w(activing pausing resuming closing).each do |state|
+      it "#{state} should be processing" do
+        state = create("#{state}_cluster_user")
+        state.should be_processing
+      end
+    end
+  end
+  
+  describe '#activate' do
+    context 'pending' do
+      let(:cluster_user) { create(:pending_cluster_user) }
+      
+      before { cluster_user.activate }
+      
+      it { should be_activing }
+      it { cluster_user.tasks.add_user.pending.count.should == 1 }
+    end
+    
+    context 'paused' do
+      let(:cluster_user) { create(:paused_cluster_user) }
+      
+      before { cluster_user.activate }
+      
+      it { should be_resuming }
+      it { cluster_user.tasks.unblock_user.pending.count.should == 1 }
+    end
+    
+    context 'processing state' do
+      let(:cluster_user) { create(:resuming_cluster_user) }
+      
+      it do
+        cluster_user.activate.should be_false
+        cluster_user.errors.any?.should be_true
+      end
+      
+      it do
+        expect { cluster_user.activate! }.to raise_error
+      end
+    end
   end
   
   describe '#complete_activation' do
-    let(:cluster_user) { create(:activing_cluster_user) }
+    let!(:project) { create(:project) }
+    let!(:account) { create(:active_account, project: project, user: project.user) }
+    let!(:credential) { create(:credential, user: project.user) }
+    let(:cluster_user) { create(:activing_cluster_user, project: project) }
     
     before { cluster_user.complete_activation }
     
     it { should be_active }
+    
+    it 'should create accesses for active project accounts' do
+      should have(1).accesses
+    end
   end
   
   describe '#pause' do
@@ -34,7 +102,7 @@ describe ClusterUser do
     before { cluster_user.pause }
     
     it { should be_pausing }
-    it { should have(1).tasks }
+    it { cluster_user.tasks.block_user.pending.count.should == 1 }
   end
   
   describe '#complete_pausing' do
@@ -51,7 +119,7 @@ describe ClusterUser do
     before { cluster_user.resume }
     
     it { should be_resuming }
-    it { should have(1).tasks }
+    it { cluster_user.tasks.unblock_user.pending.count.should == 1 }
   end
   
   describe '#complete_resuming' do
@@ -73,7 +141,7 @@ describe ClusterUser do
       let(:cluster_user) { create(:active_cluster_user) }
       
       it { should be_closing }
-      it { should have(1).tasks }
+      it { cluster_user.tasks.del_user.pending.count.should == 1 }
     end
   end
   
@@ -87,5 +155,7 @@ describe ClusterUser do
   
   describe '#force_close' do
     before { cluster_user.force_close }
+    
+    it { should be_closed }
   end
 end

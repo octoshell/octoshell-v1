@@ -4,35 +4,64 @@ FactoryGirl.define do
     cluster
     
     factory 'pending_cluster_user' do
-      state 'pending'
+      before(:create) do |cluster_user|
+        cluster_user.skip_activation = true
+      end
     end
     
     factory 'activing_cluster_user' do
-      state 'activing'
     end
     
     factory 'active_cluster_user' do
-      state 'active'
+      after(:create) do |cluster_user|
+        cluster_user.tasks.last.force_success
+        cluster_user.reload
+      end
     end
     
     factory 'pausing_cluster_user' do
-      state 'pausing'
+      after(:create) do |cluster_user|
+        cluster_user.tasks.last.force_success
+        cluster_user.reload
+        cluster_user.pause!
+      end
     end
     
     factory 'paused_cluster_user' do
-      state 'paused'
+      after(:create) do |cluster_user|
+        cluster_user.tasks.last.force_success
+        cluster_user.reload
+        cluster_user.pause!
+        cluster_user.tasks.last.force_success
+        cluster_user.reload
+      end
     end
     
     factory 'resuming_cluster_user' do
-      state 'resuming'
+      after(:create) do |cluster_user|
+        cluster_user.tasks.last.force_success
+        cluster_user.reload
+        cluster_user.pause!
+        cluster_user.tasks.last.force_success
+        cluster_user.reload
+        cluster_user.resume!
+      end
     end
     
     factory 'closing_cluster_user' do
-      state 'closing'
+      after(:create) do |cluster_user|
+        cluster_user.tasks.last.force_success
+        cluster_user.reload
+        cluster_user.close!
+      end
     end
     
     factory 'closed_cluster_user' do
-      state 'closed'
+      after(:create) do |cluster_user|
+        cluster_user.tasks.last.force_success
+        cluster_user.reload
+        cluster_user.force_close!
+      end
     end
   end
 end

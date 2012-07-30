@@ -9,13 +9,11 @@ class Access < ActiveRecord::Base
   
   attr_accessor :skip_activation
   
-  belongs_to :project
+  belongs_to :cluster_user
   belongs_to :credential
-  belongs_to :cluster
   has_many :tasks, as: :resource
   
-  validates :project, :credential, :cluster, presence: true
-  # validates :project_id, uniqueness: { scope: [:credential_id, :cluster_id] }
+  validates :credential, :cluster_user, presence: true
   
   scope :non_closed, where("state != 'closed'")
   
