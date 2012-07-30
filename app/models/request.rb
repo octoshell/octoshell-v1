@@ -27,43 +27,24 @@ class Request < ActiveRecord::Base
   
   state_machine initial: :pending do
     state :pending
-    state :activing
     state :active
     state :declined
-    state :closing
     state :closed
     
     event :_activate do
-      transition pending: :activing
+      transition pending: :active
     end
-    
-    event :_complete_activation do
-      transition activing: :active
-    end
-    
-    event :_failure_activation do
-      transition activing: :pending
-    end
-    
+
     event :_decline do
       transition pending: :declined
     end
     
     event :_close do
-      transition active: :closing
-    end
-    
-    event :_complete_closure do
-      transition closing: :closed
-    end
-    
-    event :_force_close do
-      transition any => :closed
+      transition any =>  :closed
     end
   end
   
-  define_defaults_events :activate, :complete_activation, :failure_activation,
-    :complete_closure, :decline, :close
+  define_defaults_events :activate, :decline, :close
   
   def close!(message = nil)
     transaction do

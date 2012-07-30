@@ -4,6 +4,7 @@ class Task < ActiveRecord::Base
   PROCEDURES = %w(
     add_user
     block_user
+    unblock_user
     del_user
     add_openkey
     del_openkey

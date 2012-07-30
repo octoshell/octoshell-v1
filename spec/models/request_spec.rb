@@ -71,4 +71,10 @@ describe Request do
     
     it { should be_closed }
   end
+  
+  describe '#activate' do
+    before { request.activate }
+    
+    its(:project) { should be_activing }
+  end
 end

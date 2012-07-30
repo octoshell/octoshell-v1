@@ -19,24 +19,6 @@ describe Project do
   it { should allow_mass_assignment_of(:name) }
   it { should allow_mass_assignment_of(:requests_attributes) }
   
-  describe '#has_active_requests?' do
-    let(:user) { project.user }
-    
-    subject { project.active? }
-    
-    context 'with active request' do
-      let!(:request) { create(:active_request, project: project, user: user) }
-      
-      it { should be_true }
-    end
-    
-    context 'without active request' do
-      let!(:request) { create(:request, project: project, user: user) }
-      
-      it { should be_false }
-    end
-  end
-  
   describe '#clusters' do
     let!(:available_cluster) { create(:cluster) }
     let!(:not_available_cluster) { create(:cluster) }
