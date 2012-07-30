@@ -34,11 +34,8 @@ class Credential < ActiveRecord::Base
   def grant_accesses
     transaction do
       user.requests.active.each do |request|
-        user.credentials.each do |credential|
-          conditions = {
-            project_id: request.project_id,
-            cluster_id: request.cluster_id
-          }
+        request.project.cluster_users.each do |cluster_user|
+          conditions = { cluster_user_id: cluster_user.id }
           accesses.where(conditions).first_or_create!
         end
       end

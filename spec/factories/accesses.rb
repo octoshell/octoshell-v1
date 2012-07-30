@@ -1,8 +1,7 @@
 FactoryGirl.define do
   factory :access do
-    project
+    cluster_user
     credential
-    cluster
     
     factory :pending_access do
       state 'pending'
@@ -11,16 +10,28 @@ FactoryGirl.define do
       end
     end
     factory :activing_access do
-      state 'activing'
     end
     factory :active_access do
-      state 'active'
+      after(:create) do |access|
+        access.tasks.last.force_success
+        access.reload
+      end
     end
     factory :closing_access do
-      state 'closing'
+      after(:create) do |access|
+        access.tasks.last.force_success
+        access.reload
+        access.close!
+      end
     end
     factory :closed_access do
-      state 'closed'
+      after(:create) do |access|
+        access.tasks.last.force_success
+        access.reload
+        access.close!
+        access.tasks.last.force_success
+        access.reload
+      end
     end
   end
 end

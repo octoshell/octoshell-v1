@@ -64,8 +64,12 @@ class Task < ActiveRecord::Base
   def success!
     transaction do
       validate_errors
-      _success!
-      resource.continue!(procedure)
+      if errors.empty?
+        _success!
+        resource.continue!(procedure)
+      else
+        failure!
+      end
     end
   end
   
@@ -77,18 +81,20 @@ class Task < ActiveRecord::Base
   end
 
   def failure!
-    if _failure
-      resource.stop!(procedure)
-      # UserMailer.report_failed_task(self)
-    else
-      raise self.errors.inspect
+    transaction do
+      if _failure
+        resource.stop!(procedure)
+        # UserMailer.report_failed_task(self)
+      else
+        raise self.errors.inspect
+      end
     end
   end
   
 private
   
   # /usr/local/bin/add_user host project_1
-  # resource is a request
+  # resource is a cluster user
   def add_user
     args = []
     args << resource.cluster.host
@@ -96,21 +102,31 @@ private
     execute bin('add_user'), *args
   end
   
-  # # /usr/local/bin/block_user host project_1
-  # def block_user
-  #   args = []
-  #   args << resource.cluster.host
-  #   args << resource.project.username
-  #   execute bin('block_user'), *args
-  # end
-  
   # /usr/local/bin/del_user host project_1
-  # resource is a request
+  # resource is a cluster user
   def del_user
     args = []
     args << Cluster.unscoped.find(resource.cluster_id).host
     args << resource.project.username
     execute bin('del_user'), *args
+  end
+  
+  # /usr/local/bin/block_user host project_1
+  # resource is a cluster user
+  def block_user
+    args = []
+    args << resource.cluster.host
+    args << resource.project.username
+    execute bin('block_user'), *args
+  end
+  
+  # /usr/local/bin/unblock_user host project_1
+  # resource is a cluster user
+  def block_user
+    args = []
+    args << resource.cluster.host
+    args << resource.project.username
+    execute bin('block_user'), *args
   end
   
   # /usr/local/bin/add_openkey host project_1 key

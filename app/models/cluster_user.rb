@@ -78,6 +78,11 @@ class ClusterUser < ActiveRecord::Base
         end
       end
     end
+    
+    def close_for(project_id, cluster_id)
+      conditions = { project_id: project_id, cluster_id: cluster_id }
+      non_closed.where(conditions).each &:close!
+    end
   end
   
   def processing?

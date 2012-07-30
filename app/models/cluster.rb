@@ -20,23 +20,10 @@ class Cluster < ActiveRecord::Base
   def close!
     transaction do
       _close!
-      requests.non_closed.each do |r|
-        r.close!(I18n.t('requests.cluster_closed'))
+      requests.non_closed.each do |request|
+        request.comment = I18n.t('requests.cluster_closed')
+        request.close!
       end
-    end
-  end
-  
-private
-  
-  def cancel_requests
-    stop = proc do |request|
-      request.comment = I18n.t('requests.cluster_destroyed')
-      request.finish_or_decline
-    end
-    
-    requests.all?(&stop) || begin
-      errors.add(:base, :failed_to_stop_all_requests)
-      false
     end
   end
 end

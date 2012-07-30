@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
   belongs_to :user
   has_many :accounts, inverse_of: :project
   has_many :requests, inverse_of: :project
+  has_many :cluster_users
   
   validates :name, uniqueness: true
   validates :user, :name, :description, presence: true

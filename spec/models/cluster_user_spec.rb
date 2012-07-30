@@ -39,6 +39,18 @@ describe ClusterUser do
     end
   end
   
+  describe '.close_for' do
+    let!(:cluster_user) { create(:cluster_user) }
+    
+    before do
+      ClusterUser.close_for(cluster_user.project_id, cluster_user.cluster_id)
+    end
+    
+    it 'should close all cluster users' do
+      cluster_user.reload.should be_closing
+    end
+  end
+  
   describe '#processing?' do
     %w(activing pausing resuming closing).each do |state|
       it "#{state} should be processing" do

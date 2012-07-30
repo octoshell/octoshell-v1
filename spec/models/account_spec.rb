@@ -19,11 +19,12 @@ describe Account do
   it { should allow_mass_assignment_of(:raw_emails) }
   
   describe '#accesses' do
-    let!(:user)       { create(:sured_user) }
-    let!(:project)    { create(:project) }
-    let!(:account)    { create(:active_account, project: project, user: user) }
-    let!(:credential) { create(:credential, user: user) }
-    let!(:access)     { create(:access, credential: credential, project: project) }
+    let!(:user)         { create(:sured_user) }
+    let!(:project)      { create(:project) }
+    let!(:account)      { create(:active_account, project: project, user: user) }
+    let!(:credential)   { create(:credential, user: user) }
+    let!(:cluster_user) { create(:cluster_user, project: project) }
+    let!(:access)       { create(:access, credential: credential, cluster_user: cluster_user) }
     
     subject { account.accesses }
     
@@ -32,11 +33,12 @@ describe Account do
   end
   
   describe '#close' do
-    let!(:user)       { create(:sured_user) }
-    let!(:project)    { create(:project) }
-    let!(:account)    { create(:active_account, project: project, user: user) }
-    let!(:credential) { create(:credential, user: user) }
-    let!(:access)     { create(:active_access, credential: credential, project: project) }
+    let!(:user)         { create(:sured_user) }
+    let!(:project)      { create(:project) }
+    let!(:account)      { create(:active_account, project: project, user: user) }
+    let!(:credential)   { create(:credential, user: user) }
+    let!(:cluster_user) { create(:cluster_user, project: project) }
+    let!(:access)       { create(:active_access, credential: credential, cluster_user: cluster_user) }
     
     before { account.close }
     
@@ -51,11 +53,11 @@ describe Account do
   
   describe '#activate' do
     context 'possible user' do
-      let!(:user)       { create(:sured_user) }
-      let!(:project)    { create(:project) }
-      let!(:account)    { create(:account, project: project, user: user) }
-      let!(:request)    { create(:active_request, project: project, user: project.user) }
-      let!(:credential) { create(:credential, user: user) }
+      let!(:user)         { create(:sured_user) }
+      let!(:project)      { create(:project) }
+      let!(:account)      { create(:account, project: project, user: user) }
+      let!(:request)      { create(:active_request, project: project, user: project.user) }
+      let!(:credential)   { create(:credential, user: user) }
       
       before { account.activate }
 

@@ -38,7 +38,7 @@ class Request < ActiveRecord::Base
     end
     
     event :_close do
-      transition any =>  :closed
+      transition any => :closed
     end
   end
   

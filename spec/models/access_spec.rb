@@ -4,14 +4,12 @@ describe Access do
   let(:access) { create(:access) }
   subject { access }
   
-  it { should belong_to(:project) }
+  it { should belong_to(:cluster_user) }
   it { should belong_to(:credential) }
-  it { should belong_to(:cluster) }
   it { should have_many(:tasks) }
   
-  it { should validate_presence_of(:project) }
   it { should validate_presence_of(:credential) }
-  it { should validate_presence_of(:cluster) }
+  it { should validate_presence_of(:cluster_user) }
   
   describe '#activate' do
     let(:access) { create(:pending_access) }
@@ -19,7 +17,7 @@ describe Access do
     before { access.activate }
     
     it { should be_activing }
-    it { access.should have(1).tasks }
+    it { access.tasks.add_openkey.pending.count.should == 1 }
   end
   
   describe '#complete_activation' do
@@ -44,7 +42,7 @@ describe Access do
     before { access.close }
     
     it { should be_closing }
-    it { access.should have(1).tasks }
+    it { access.tasks.del_openkey.pending.count.should == 1 }
   end
   
   describe '#complete_closure' do

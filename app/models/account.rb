@@ -58,13 +58,12 @@ class Account < ActiveRecord::Base
     self.transaction do
       _activate!
       user.credentials.each do |credential|
-        project.clusters.each do |cluster|
+        project.cluster_users.each do |cluster_user|
           conditions = {
-            credential_id: credential.id,
-            project_id:    project_id,
-            cluster_id:    cluster.id
+            cluster_user_id: cluster_user.id,
+            credential_id:   credential.id
           }
-          Access.where(conditions).first_or_create!
+          Access.non_closed.where(conditions).first_or_create!
         end
       end
     end
@@ -102,7 +101,10 @@ class Account < ActiveRecord::Base
   end
   
   def accesses
-    Access.where(project_id: project_id, credential_id: user.credential_ids)
+    Access.where(
+      credential_id:   user.credential_ids,
+      cluster_user_id: project.cluster_user_ids
+    )
   end
   
 private
