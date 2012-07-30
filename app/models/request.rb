@@ -18,7 +18,7 @@ class Request < ActiveRecord::Base
   attr_accessible :hours, :cluster_id, :project_id, :user_id, :size, as: :admin
   
   scope :active, where(state: 'active')
-  scope :pending, where(state: 'pending')
+  scope :pending, where(state: ['pending', 'activing'])
   scope :declined, where(state: 'declined')
   scope :closed, where(state: 'closed')
   scope :non_active, where("state != 'active'")
@@ -111,6 +111,10 @@ class Request < ActiveRecord::Base
   end
   
 protected
+  
+  def continue_add_user
+    complete_activation!
+  end
   
   def continue_block_user
     complete_closure!
