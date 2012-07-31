@@ -47,7 +47,7 @@ class Request < ActiveRecord::Base
   def close!
     transaction do
       _close!
-      ClusterUser.close_for(project_id, cluster_id)
+      ClusterUser.pause_for(project_id, cluster_id)
     end
   end
   
@@ -60,5 +60,10 @@ class Request < ActiveRecord::Base
   
   def allowed_projects
     user ? user.owned_projects : []
+  end
+  
+  def cluster_users
+    conditions = { project_id: project_id, cluster_id: cluster_id }
+    ClusterUser.where(conditions)
   end
 end

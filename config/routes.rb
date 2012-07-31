@@ -33,7 +33,9 @@ MSU::Application.routes.draw do
   get 'password/:token' => 'passwords#change', as: :change_password
   
   # projects
-  resources :projects, only: [:index, :new, :create, :show]
+  resources :projects, only: [:index, :new, :create, :show, :edit, :update] do
+    put :close
+  end
   
   # requests
   resources :requests, only: [:new, :create]
@@ -70,14 +72,16 @@ MSU::Application.routes.draw do
     put :close
   end
   
+  # cluster_users
+  resources :cluster_users, only: :show
+  
   # users
   resources :users
-  
-  # projects
-  resources :projects
-  
+    
   # clusters
-  resources :clusters
+  resources :clusters, except: :show do
+    put :close
+  end
   
   # accesses
   resources :accesses, only: :show

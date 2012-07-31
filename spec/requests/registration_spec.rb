@@ -1,7 +1,6 @@
-# coding: utf-8
 require 'spec_helper'
 
-describe 'Registration' do
+describe 'Registration', js: true do
   context 'as non authotized user' do
     let(:user) { build(:user) }
     let!(:organization) { create(:organization) }
@@ -9,12 +8,12 @@ describe 'Registration' do
     before do
       visit new_user_path
       within('#new_user') do
-        fill_in 'user_email',                 with: user.email
-        fill_in 'user_password',              with: user.password
-        fill_in 'user_password_confirmation', with: user.password
-        fill_in 'user_first_name',            with: user.first_name
-        fill_in 'user_last_name',             with: user.last_name
-        click_button 'Зарегистрироваться'
+        fill_in 'Email',                 with: user.email
+        fill_in 'Password',              with: user.password
+        fill_in 'Password confirmation', with: user.password
+        fill_in 'First name',            with: user.first_name
+        fill_in 'Last name',             with: user.last_name
+        click_button 'Create User'
       end
     end
     

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Password Reset' do
+describe 'Password Reset', js: true do
   context 'as authotized user' do
     before do
       login

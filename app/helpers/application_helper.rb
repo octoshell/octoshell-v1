@@ -81,6 +81,14 @@ module ApplicationHelper
     end
   end
   
+  def link_to_cluster_user(cluster_user)
+    if cluster_user
+      link_to 'открыть', cluster_user
+    else
+      'Удалено'
+    end
+  end
+  
   def link_to_task_resource(task)
     if task.resource
       link_to task.resource.class.model_name.human, task.resource

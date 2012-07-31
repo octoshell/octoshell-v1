@@ -2,12 +2,19 @@
 
 p = @project.description
 
-p = link_to 'редактировать', edit_project_path(@project)
+ul class="nav nav-pills"
+  li = link_to 'редактировать', edit_project_path(@project)
+  - if @project.can__close?
+    li = link_to Project.human_state_event_name(:_close), project_close_path(@project), method: :put, data: { confirm: 'Вы уверены? Закрытие проекта закроет все доступы и заявки' }
+
 
 table class="table table-bordered"
   tr
     th = Project.human_attribute_name(:user)
     td = link_to_user @project.user
+  tr
+    th = Project.human_attribute_name(:state)
+    td = @project.human_state_name
 
 h2 Доступы
 

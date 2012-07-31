@@ -5,7 +5,7 @@ class Membership < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :organization
-  has_many :positions, inverse_of: :membership, dependent: :destroy
+  has_many :positions, inverse_of: :membership
   
   validates :user, :organization, presence: true
   

@@ -71,7 +71,7 @@ describe Request do
     
     it 'should try to close cluster user' do
       args = [request.project_id, request.cluster_id]
-      ClusterUser.should_receive(:close_for).with(*args).once
+      ClusterUser.should_receive(:pause_for).with(*args).once
       request.close
     end
   end

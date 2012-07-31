@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Requests' do
-  context 'as authorized user' do
+  context 'as authorized user', js: true do
     let!(:user) { create(:sured_user) }
     let!(:project) { create(:project, user: user) }
     let!(:cluster) { create(:cluster) }
@@ -76,14 +76,13 @@ describe 'Requests' do
       
       it 'should activate request' do
         within("#request-#{request.id}-status") do
-          page.should have_content('activing')
+          page.should have_content('active')
         end
       end
       
-      it 'should create a pending task add_user' do
-        within "#task-#{request.tasks.last.id}" do
-          page.should have_content('pending')
-          page.should have_content('add_user')
+      it 'should create a cluster user' do
+        within "#cluster-user-#{request.cluster_users.last.id}" do
+          page.should have_content('activing')
         end
       end
     end
@@ -110,20 +109,19 @@ describe 'Requests' do
       before do
         login create(:admin_user)
         visit request_path(request)
+        request.cluster_users.last.complete_activation!
         click_link('close')
-        save_and_open_page
       end
       
       it 'should decline request' do
         within("#request-#{request.id}-status") do
-          page.should have_content('closing')
+          page.should have_content('closed')
         end
       end
       
-      it 'should create a pending task add_user' do
-        within "#task-#{request.tasks.last.id}" do
-          page.should have_content('pending')
-          page.should have_content('block_user')
+      it 'should close cluster user' do
+        within "#cluster-user-#{request.cluster_users.last.id}" do
+          page.should have_content('pausing')
         end
       end
     end

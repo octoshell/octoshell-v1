@@ -1,23 +1,27 @@
 require 'spec_helper'
 
-describe 'Credentials' do
+describe 'Credentials', js: true do
   context 'as authotized user' do
     before do
       login
       visit new_credential_path
       within('#new_credential') do
-        fill_in 'credential_name', with: 'iMac'
-        fill_in 'credential_public_key', with: '=== tratata'
-        click_button I18n.t('pages.new_credential.create')
+        fill_in 'Name', with: 'iMac'
+        fill_in 'Public key', with: '=== tratata'
+        click_button 'Create Credential'
       end
     end
     
+    def new_credential
+      current_user.credentials.where(public_key: '=== tratata').first
+    end
+    
     it 'should show profile page' do
-      current_path.should == profile_path
+      current_path.should == credential_path(new_credential)
     end
     
     it 'should create new credential for current user' do
-      current_user.credentials.where(public_key: '=== tratata').count.should == 1
+      new_credential.should be
     end
   end
   

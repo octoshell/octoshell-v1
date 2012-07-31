@@ -1,0 +1,16 @@
+- title "Пользователь на кластере #{@cluster_user.id}"
+
+table class="table table-bordered"
+  tr
+    th = Project.model_name.human
+    td = link_to_project @cluster_user.project
+  tr
+    th = Cluster.model_name.human
+    td = link_to_cluster @cluster_user.cluster
+  tr
+    th = ClusterUser.human_attribute_name(:state)
+    td = @cluster_user.human_state_name
+
+h2 Задания
+
+= render partial: 'tasks/table', locals: { tasks: @cluster_user.tasks }

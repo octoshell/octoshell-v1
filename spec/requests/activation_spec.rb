@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Activation' do
+describe 'Activation', js: true do
   context 'with right token' do
     let(:user) { create(:inactive_user) }
     before do

@@ -30,6 +30,6 @@ div class="request"
       = link_to Request.human_state_event_name(:_close), request_close_path(@request), class: 'btn', method: :put
 
 - if admin?
-  h2 Задания
+  h2 Пользователи на кластере
+  = render partial: 'cluster_users/table', locals: { cluster_users: @request.cluster_users }
   
-  = render partial: 'tasks/table', locals: { tasks: @request.tasks }

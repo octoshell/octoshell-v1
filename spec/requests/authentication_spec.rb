@@ -1,17 +1,17 @@
 require 'spec_helper'
 
-describe 'Authentication' do
+describe 'Authentication', js: true do
   describe 'login' do
     
     context 'as non authotized user' do
       context 'with correctly filled form' do
         let!(:user) { create(:user) }
 
-        before(:all) do
+        before do
           visit new_session_path
           fill_in 'user_email', with: user.email
           fill_in 'user_password', with: '123456'
-          click_on 'session_submit'
+          click_on I18n.t('pages.shared.login')
         end
 
         it 'should authenticate user' do
@@ -20,9 +20,9 @@ describe 'Authentication' do
       end
 
       context 'with non correctly filled form' do
-        before(:all) do
+        before do
           visit new_session_path
-          click_on 'session_submit'
+          click_on I18n.t('pages.shared.login')
         end
 
         it 'should return user to form' do
@@ -32,7 +32,7 @@ describe 'Authentication' do
     end
     
     context 'as authotized user' do
-      before(:all) do
+      before do
         login
         visit new_session_path
       end

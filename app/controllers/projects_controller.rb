@@ -46,6 +46,16 @@ class ProjectsController < ApplicationController
     end
   end
   
+  def close
+    @project = Project.find(params[:project_id])
+    authorize! :close, @project
+    if @project.close
+      redirect_to @project
+    else
+      redirect_to @project, alert: @full_messages.join(', ')
+    end
+  end
+  
 private
   
   def namespace

@@ -21,6 +21,7 @@ en:
       create: Создать
     shared:
       logout: Выйти
+      login: Войти
     admin:
       dashboard:
         <<: *dashboard

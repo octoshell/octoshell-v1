@@ -1,7 +1,6 @@
-# coding: utf-8
 require 'spec_helper'
 
-describe 'Organizations' do
+describe 'Organizations', js: true do
   context 'as authotized user' do
     let(:organization) { build(:organization) }
     before do
@@ -10,16 +9,20 @@ describe 'Organizations' do
       within('#new_organization') do
         fill_in 'organization_name', with: organization.name
         select organization.kind, from: 'organization_kind'
-        click_button 'Создать'
+        click_button 'Create Organization'
       end
     end
     
+    def new_organization
+      Organization.find_by_name(organization.name)
+    end
+    
     it 'should show new surety page' do
-      current_path.should == profile_path
+      current_path.should == organization_path(new_organization)
     end
     
     it 'should create new organization' do
-      Organization.find_by_name(organization.name).should be
+      new_organization.should be
     end
   end
   

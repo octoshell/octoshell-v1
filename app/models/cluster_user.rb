@@ -13,6 +13,7 @@ class ClusterUser < ActiveRecord::Base
   
   after_create :activate!, unless: :skip_activation
   
+  scope :active, where(state: 'active')
   scope :non_closed, where("state != 'closed'")
   
   state_machine initial: :pending do
@@ -77,6 +78,11 @@ class ClusterUser < ActiveRecord::Base
           cluster_user.cluster_id = cluster_id
         end
       end
+    end
+    
+    def pause_for(project_id, cluster_id)
+      conditions = { project_id: project_id, cluster_id: cluster_id }
+      active.where(conditions).each &:pause!
     end
     
     def close_for(project_id, cluster_id)

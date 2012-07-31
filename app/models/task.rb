@@ -15,9 +15,9 @@ class Task < ActiveRecord::Base
   validates :resource, :procedure, presence: true
   validates :procedure_string, inclusion: { in: PROCEDURES }
   
-  scope :pending, where(state: 'pending')
+  scope :pending,   where(state: 'pending')
   scope :successed, where(state: 'successed')
-  scope :failed, where(state: 'failed')
+  scope :failed,    where(state: 'failed')
   
   PROCEDURES.each do |proc|
     scope proc.to_sym, where(procedure: proc)

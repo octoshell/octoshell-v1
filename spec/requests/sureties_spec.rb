@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Sureties' do
+describe 'Sureties', js: true do
   context 'as authotized user' do
     let!(:org) { create(:organization) }
     let(:surety) { build(:surety, organization: org) }
@@ -53,7 +53,7 @@ describe 'Sureties' do
       end
     end
     
-    context 'approving surety', js: true do
+    context 'approving surety' do
       let!(:surety) { create(:surety) }
       
       before do
@@ -69,7 +69,7 @@ describe 'Sureties' do
       end
     end
     
-    context 'declining surety', js: true do
+    context 'declining surety' do
       let!(:surety) { create(:surety) }
       
       before do
@@ -85,13 +85,12 @@ describe 'Sureties' do
       end
     end
     
-    context 'closing surety', js: true do
+    context 'closing surety' do
       let!(:surety) { create(:active_surety) }
       
       before do
         login create(:admin_user)
         visit surety_path(surety)
-        save_and_open_page
         click_link('close')
       end
       

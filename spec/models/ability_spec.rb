@@ -53,6 +53,8 @@ describe Ability do
     
     it { should be_able_to(:show, :accounts) }
     
+    it { should be_able_to(:show, :cluster_users) }
+    
     it { should be_able_to(:show, :credentials) }
     it { should be_able_to(:destroy, :credentials) }
     

@@ -35,10 +35,13 @@ class ClustersController < ApplicationController
     end
   end
   
-  def destroy
+  def close
     @cluster = find_cluster(params[:id])
-    @cluster.destroy
-    redirect_to_index
+    if @cluster.close
+      redirect_to @cluster
+    else
+      redirect_to @cluster, alert: @cluster.errors.full_messages.join(', ')
+    end
   end
   
 private

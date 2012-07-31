@@ -21,6 +21,7 @@ class Ability
       can :show, :dashboards
       
       can [:index, :show], :projects
+      can :close, :projects, user_id: user.id
       
       can [:index, :show], :users
       
@@ -61,6 +62,8 @@ class Ability
         
         can :show, :accesses
         
+        can :show, :cluster_users
+        
         can [:index, :show, :success], :tasks
         
         can :show, :accounts
@@ -69,7 +72,7 @@ class Ability
         
         can [:activate, :decline, :cancel, :invite, :create, :mailer], :accounts
         
-        can [:show, :edit, :update, :new, :create], :projects
+        can [:show, :edit, :update, :new, :create, :close], :projects
         
         can :show, :dashboard
         

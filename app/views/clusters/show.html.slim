@@ -3,7 +3,7 @@
 - if can? :edit, @cluster
   ul class="nav nav-pills"
     li = link_to 'Редактировать', edit_cluster_path(@cluster)
-    li = link_to 'Удалить', cluster_path(@cluster), method: :delete, data: { confirm: 'Вы действительно хотите удалить кластер? Все заявки автоматически отменятся.' }
+    li = link_to Cluster.human_state_event_name(:_close), cluster_close_path(@cluster), method: :put, data: { confirm: 'Вы действительно хотите закрыть кластер? Все заявки автоматически отменятся.' }
 
 p = @cluster.description
 

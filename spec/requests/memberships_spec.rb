@@ -1,7 +1,6 @@
-# coding: utf-8
 require 'spec_helper'
 
-describe 'Memberships' do
+describe 'Memberships', js: true do
   describe 'creating' do
     let!(:organization) { create(:organization) }
     let!(:position_name) { create(:position_name) }
@@ -10,9 +9,9 @@ describe 'Memberships' do
     before do
       login user
       visit new_membership_path
-      select organization.name, from: 'membership_organization_id'
+      select organization.name, from: 'Organization'
       fill_in position_name.name, with: 'value'
-      click_button 'Создать'
+      click_button 'Create Membership'
     end
     
     it 'should create a membership' do

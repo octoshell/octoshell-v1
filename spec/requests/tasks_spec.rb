@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Tasks' do
+describe 'Tasks', js: true do
   context 'as admin user' do
     context 'listing' do
       let!(:tasks) { 3.times.map { create(:task) } }
@@ -18,13 +18,14 @@ describe 'Tasks' do
     end
     
     context 'successing' do
-      let!(:task) { create(:task) }
+      let!(:task) { create(:add_user_task) }
       
       context 'add_user' do
         before do
           login create(:admin_user)
           visit task_path(task)
           click_link 'force success'
+          task.resource.reload
         end
       
         it 'should success task' do
@@ -33,7 +34,7 @@ describe 'Tasks' do
           end
         end
         
-        it 'should activate request' do
+        it 'should activate cluster user' do
           task.resource.should be_active
         end
       end
@@ -43,8 +44,9 @@ describe 'Tasks' do
         
         before do
           login create(:admin_user)
-          visit task_path(:task)
-          click_link 'force successed'
+          visit task_path(task)
+          click_link 'force success'
+          task.resource.reload
         end
         
         it 'should success task' do
@@ -53,8 +55,8 @@ describe 'Tasks' do
           end
         end
         
-        it 'should avtivate access' do
-          task.resource.should be_closed
+        it 'should pause cluster user' do
+          task.resource.should be_paused
         end
       end
       
@@ -63,8 +65,9 @@ describe 'Tasks' do
         
         before do
           login create(:admin_user)
-          visit task_path(:task)
-          click_link 'force successed'
+          visit task_path(task)
+          click_link 'force success'
+          task.resource.reload
         end
         
         it 'should success task' do
@@ -73,7 +76,7 @@ describe 'Tasks' do
           end
         end
         
-        it 'should activate access' do
+        it 'should activate cluster user' do
           task.resource.should be_active
         end
       end
@@ -83,8 +86,9 @@ describe 'Tasks' do
         
         before do
           login create(:admin_user)
-          visit task_path(:task)
-          click_link 'force successed'
+          visit task_path(task)
+          click_link 'force success'
+          task.resource.reload
         end
         
         it 'should success task' do
@@ -93,7 +97,7 @@ describe 'Tasks' do
           end
         end
         
-        it 'should activate access' do
+        it 'should close cluster user' do
           task.resource.should be_closed
         end
       end
@@ -103,8 +107,9 @@ describe 'Tasks' do
         
         before do
           login create(:admin_user)
-          visit task_path(:task)
-          click_link 'force successed'
+          visit task_path(task)
+          click_link 'force success'
+          task.resource.reload
         end
         
         it 'should success task' do
@@ -115,6 +120,27 @@ describe 'Tasks' do
         
         it 'should avtivate access' do
           task.resource.should be_active
+        end
+      end
+      
+      context 'del_openkey' do
+        let(:task) { create(:del_openkey_task) }
+        
+        before do
+          login create(:admin_user)
+          visit task_path(task)
+          click_link 'force success'
+          task.resource.reload
+        end
+        
+        it 'should success task' do
+          within("#task-#{task.id}-status") do
+            page.should have_content('successed')
+          end
+        end
+        
+        it 'should close access' do
+          task.resource.should be_closed
         end
       end
     end
