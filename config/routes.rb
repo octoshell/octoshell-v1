@@ -96,6 +96,12 @@ MSU::Application.routes.draw do
     put :merge
   end
   
+  resources :tickets, only: [:new, :create, :index, :show] do
+    get :closed, on: :collection
+    put :close
+    put :resolve
+  end
+  
   # position names
   resources :position_names, except: :show
 

@@ -11,6 +11,9 @@ class Ability
     
     # basic user
     if user
+      can [:index, :new, :create, :show, :closed], :tickets
+      can :resolve, :tickets, user_id: user.id
+      
       can [:show, :edit, :update], :profiles
       
       can [:index, :show], :clusters
@@ -59,6 +62,8 @@ class Ability
       
       if user.admin?
         can :access, :admins
+        
+        can [:close], :tickets
         
         can :show, :accesses
         

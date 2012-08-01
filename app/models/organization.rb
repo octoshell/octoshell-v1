@@ -29,6 +29,8 @@ class Organization < ActiveRecord::Base
   
   define_defaults_events :close
   
+  define_state_machine_scopes
+  
   def close!
     transaction do
       _close!

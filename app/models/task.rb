@@ -15,10 +15,6 @@ class Task < ActiveRecord::Base
   validates :resource, :procedure, presence: true
   validates :procedure_string, inclusion: { in: PROCEDURES }
   
-  scope :pending,   where(state: 'pending')
-  scope :successed, where(state: 'successed')
-  scope :failed,    where(state: 'failed')
-  
   PROCEDURES.each do |proc|
     scope proc.to_sym, where(procedure: proc)
   end
@@ -42,6 +38,8 @@ class Task < ActiveRecord::Base
   end
   
   define_defaults_events :success, :failure, :force_success
+  
+  define_state_machine_scopes
   
   def self.setup(procedure)
     transaction do

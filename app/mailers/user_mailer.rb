@@ -26,4 +26,9 @@ class UserMailer < ActionMailer::Base
     @project = account.project
     mail to: account.emails, subject: %{Вас приглашают в OctoShell работать над проектом "#{@project.name}"}
   end
+  
+  def new_ticket_answer(ticket)
+    @ticket = ticket
+    mail to: ticket.user.email, subject: %{Новое сообщение от поддержки в заявке "#{@ticket.subject}"}
+  end
 end

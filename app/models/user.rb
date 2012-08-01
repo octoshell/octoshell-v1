@@ -49,6 +49,8 @@ class User < ActiveRecord::Base
   
   define_defaults_events :close, :sure, :unsure
   
+  define_state_machine_scopes
+  
   def all_requests
     Request.joins(project: :accounts).where(accounts: { user_id: id })
   end

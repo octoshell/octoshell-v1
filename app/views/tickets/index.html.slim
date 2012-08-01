@@ -1,0 +1,10 @@
+- title 'Заявки'
+
+h2 Активные
+= render partial: 'table', locals: { tickets: @tickets.active }
+
+h2 Отвеченные
+= render partial: 'table', locals: { tickets: @tickets.answered }
+
+h2 Решенные
+= render partial: 'table', locals: { tickets: @tickets.resolved }

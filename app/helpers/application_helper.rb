@@ -97,6 +97,10 @@ module ApplicationHelper
     end
   end
   
+  def link_to_ticket(ticket)
+    link_to ticket.subject, ticket
+  end
+  
   def link_to_function(name, *args, &block)
      html_options = args.extract_options!.symbolize_keys
 

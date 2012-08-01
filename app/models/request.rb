@@ -15,12 +15,6 @@ class Request < ActiveRecord::Base
   attr_accessible :hours, :cluster_id, :project_id, :size
   attr_accessible :hours, :cluster_id, :project_id, :user_id, :size, as: :admin
   
-  scope :active, where(state: 'active')
-  scope :pending, where(state: ['pending', 'activing'])
-  scope :declined, where(state: 'declined')
-  scope :closed, where(state: 'closed')
-  scope :non_active, where("state != 'active'")
-  scope :non_closed, where("state != 'closed'")
   scope :last_pending, where(state: 'pending').order('id desc')
   
   state_machine initial: :pending do
@@ -43,6 +37,8 @@ class Request < ActiveRecord::Base
   end
   
   define_defaults_events :activate, :decline, :close
+  
+  define_state_machine_scopes
   
   def close!
     transaction do

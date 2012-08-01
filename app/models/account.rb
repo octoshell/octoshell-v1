@@ -18,11 +18,6 @@ class Account < ActiveRecord::Base
   attr_accessible :project_id, :raw_emails
   attr_accessible :project_id, :raw_emails, :user_id, as: :admin
   
-  scope :pending, where(state: 'pending')
-  scope :active, where(state: 'active')
-  scope :declined, where(state: 'declined')
-  scope :canceled, where(state: 'canceled')
-  
   state_machine initial: :pending do
     state :pending
     state :active
@@ -43,6 +38,8 @@ class Account < ActiveRecord::Base
   end
   
   define_defaults_events :activate, :decline, :close
+  
+  define_state_machine_scopes
   
   # активирует аккаунт
   def activate

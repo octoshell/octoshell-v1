@@ -1,0 +1,9 @@
+p = link_to @ticket.subject, ticket_path(@ticket)
+
+- @ticket.replies.each do |reply|
+  blockquote
+  	p
+  	  strong = reply.user.full_name
+  	p = reply.message
+
+p = link_to @ticket.subject, ticket_path(@ticket)

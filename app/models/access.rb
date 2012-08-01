@@ -15,8 +15,6 @@ class Access < ActiveRecord::Base
   
   validates :credential, :cluster_user, presence: true
   
-  scope :non_closed, where("state != 'closed'")
-  
   after_create :activate, unless: :skip_activation
   
   state_machine initial: :pending do
@@ -57,6 +55,8 @@ class Access < ActiveRecord::Base
   
   define_defaults_events :activate, :complete_activation, :failure_activation,
     :close, :complete_closure, :failure_closure, :force_close
+  
+  define_state_machine_scopes
   
   # активирует (создает задачу для доступа к кластеру)
   def activate!

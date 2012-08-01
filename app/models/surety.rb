@@ -9,11 +9,6 @@ class Surety < ActiveRecord::Base
   attr_accessible :organization_id
   attr_accessible :organization_id, :user_id, as: :admin
   
-  scope :active, where(state: 'active')
-  scope :pending, where(state: 'pending')
-  scope :declined, where(state: 'declined')
-  scope :closed, where(state: 'closed')
-  
   state_machine initial: :pending do
     state :pending
     state :active
@@ -34,6 +29,8 @@ class Surety < ActiveRecord::Base
   end
   
   define_defaults_events :activate, :decline, :close
+  
+  define_state_machine_scopes
   
   def activate!
     transaction do

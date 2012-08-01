@@ -1,0 +1,9 @@
+- title 'Новая заявка'
+
+= simple_form_for @ticket, html: { class: 'form-horizontal' } do |f|
+  = f.association :user, label_method: :full_name if admin?
+  = f.input :subject
+  = f.input :message, input_html: { rows: 5 }
+  
+  div class="form-actions"
+    = f.button :submit

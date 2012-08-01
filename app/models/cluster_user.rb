@@ -13,9 +13,6 @@ class ClusterUser < ActiveRecord::Base
   
   after_create :activate!, unless: :skip_activation
   
-  scope :active, where(state: 'active')
-  scope :non_closed, where("state != 'closed'")
-  
   state_machine initial: :pending do
     state :pending
     state :activing
@@ -66,6 +63,8 @@ class ClusterUser < ActiveRecord::Base
   define_defaults_events :activate, :complete_activation, :pause,
     :complete_pausing, :resume, :complete_resuming, :close, :complete_closure,
     :force_close
+  
+  define_state_machine_scopes
   
   class << self
     def activate_for(project_id, cluster_id)

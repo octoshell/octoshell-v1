@@ -1,0 +1,8 @@
+- if replies.any?
+  - replies.each do |reply|
+    p
+      strong = link_to_user reply.user
+    blockquote
+      p = reply.message
+- else
+  p Нет ответов

@@ -1,0 +1,20 @@
+- title @ticket.subject
+
+table class="table table-bordered"
+  tr
+    th = User.model_name.human
+    td = link_to_user @ticket.user
+  tr
+    th = Ticket.human_attribute_name(:message)
+    td = @ticket.message
+  tr
+    th = Ticket.human_attribute_name(:state)
+    td = @ticket.human_state_name
+
+- if can? :close, @ticket
+  ul class="nav nav-pills"
+    li = link_to Ticket.human_state_event_name(:_close), ticket_close_path(@ticket), method: :put
+
+h2 Ответы
+
+= render partial: 'replies/table', locals: { replies: @ticket.replies }
