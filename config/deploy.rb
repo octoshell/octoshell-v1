@@ -6,7 +6,7 @@ set :rvm_ruby_string, '1.9.3@msu'
 set :application, "msu"
 set :rails_env, "production"
 set :domain, "evrone@v1.parallel.ru"
-set :repository,  "git@github.com:evrone/msu.git"
+set :repository,  "git@github.com:evrone/octoshell.git"
 set :branch, "master"
 set :use_sudo, false
 set :deploy_to, "/var/www/#{application}"
