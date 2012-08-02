@@ -1,5 +1,10 @@
 - title 'Заявки'
 
+div class="link-actions"
+  = link_to 'Новая заявка', new_ticket_path, class: 'btn'
+  = " "
+  = link_to 'Закрытые заявки', closed_tickets_path, class: 'btn'
+
 h2 Активные
 = render partial: 'table', locals: { tickets: @tickets.active }
 

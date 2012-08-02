@@ -18,7 +18,7 @@ class Ticket < ActiveRecord::Base
     end
     
     event :_reply do
-      transition [:active, :answered] => :active
+      transition [:active, :resolved, :answered] => :active
     end
     
     event :_resolve do

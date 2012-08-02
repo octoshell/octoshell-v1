@@ -24,6 +24,6 @@ ul class="nav noprint nav-pills noprint"
       = " "
       = link_to Surety.human_state_event_name(:_decline), surety_decline_path(@surety), class: 'btn', method: :put
       = " "
-    - unless @surety.closed?
-      = link_to Surety.human_state_event_name(:_close), surety_close_path(@surety), class: 'btn', method: :put
+    - if @surety.active? || @surety.declined?
+      = link_to Surety.human_state_event_name(:_close), surety_close_path(@surety), class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
 

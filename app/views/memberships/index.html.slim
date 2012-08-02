@@ -1,6 +1,6 @@
 - title 'Места работы'
 
-ul class="nav nav-pills"
-  li = link_to 'Новое место работы', new_membership_path
+div class="link-actions"
+  = link_to 'Новое место работы', new_membership_path, class: 'btn'
 
 = render partial: 'table', locals: { memberships: @memberships }

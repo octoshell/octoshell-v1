@@ -43,7 +43,7 @@ module ApplicationHelper
   
   def link_to_surety(surety)
     if surety
-      link_to I18n.t('pages.profile.surety'), surety
+      link_to 'открыть', surety
     else
       'Удалено'
     end

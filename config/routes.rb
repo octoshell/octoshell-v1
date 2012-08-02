@@ -77,7 +77,7 @@ MSU::Application.routes.draw do
   resources :users
     
   # clusters
-  resources :clusters, except: :show do
+  resources :clusters do
     put :close
   end
   
@@ -106,6 +106,9 @@ MSU::Application.routes.draw do
   
   # position names
   resources :position_names, except: :show
+  
+  # support
+  resource :support, only: :show
 
   root to: 'application#dashboard'
   

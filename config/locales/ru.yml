@@ -284,6 +284,7 @@ ru:
       membership: Место работы
       access: Доступ
       credential: Публичный ключ
+      cluster_user: Пользователь (на кластере)
     errors:
       models:
         account:
@@ -319,6 +320,7 @@ ru:
         name: Название
         description: Описание
         user: Руководитель
+        state: Состояние
       request:
         cluster: Кластер
         project: Проект
@@ -334,7 +336,7 @@ ru:
         user: Пользователь
       organization:
         name: Название
-        kind: Тип
+        organization_kind: Тип организации
         merge_id: Объединить с
       surety:
         state: Статус
@@ -363,42 +365,77 @@ ru:
       access:
         credential: Публичный ключ
         state: Состояние
+      ticket:
+        subject: Тема
+        message: Сообщение
+        state: Состояние
+        url: Ссылка 
     state_machines:
       surety:
         state:
           states:
-            pending: ожидает подтверждения
-            canceled: отменен
-            active: активно
+            pending: Ожидает подтверждения
+            closed: Закрыто
+            declined: Отказано
+            active: Активно
           events:
             _activate: Активировать
             _decline: Отказать
             _finish: Завершить
-            _cancel: Отменить
+            _close: Закрыть
+      cluster_user:
+        state:
+          states:
+            activing: Активируется
+            active: Активен
+            paused: Заблокирован
+            pausing: Блокируется
+            resuming: Разблокируется
+            closed: Закрыт
+      project:
+        state:
+          states:
+            active: Активен
+            closed: Закрыт
+        events:
+          _close: Закрыть
       request:
         state:
           states:
-            pending: ожидает подтверждения
-            active: активна
-            declined: отказано
-            finished: завершена
+            pending: Ожидает подтверждения
+            active: Активна
+            declined: Отказано
+            finished: Завершена
+        events:
+          _activate: Активировать
+          _decline: Отказать
+          _close: Закрыть
       account:
         state:
           states:
-            pending: ожидает подтверждения
-            canceled: отменен
-            active: активен
-            declined: отказано
+            pending: Ожидает подтверждения
+            canceled: Отменен
+            active: Активен
+            declined: Отказано
           events:
             _activate: Активировать
             _decline: Отказать
             _cancel: Отменить
+      ticket:
+        state:
+          states:
+            active: Активный
+            answered: Есть ответ
+            resolved: Разрешен
+            closed: Закрыт
       task:
         state:
           states:
             pending: В очереди
             successed: Выполнено
             failed: Ошибка
+          events:
+            _force_success: Пропустить задачу
       access:
         state:
           states:

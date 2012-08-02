@@ -11,6 +11,8 @@ class Ability
     
     # basic user
     if user
+      can :show, :support
+      
       can [:index, :new, :create, :show, :closed], :tickets
       can :resolve, :tickets do |ticket|
         (ticket.user_id == user.id) && ticket.can__resolve?

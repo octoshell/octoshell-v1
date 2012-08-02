@@ -80,10 +80,6 @@ class User < ActiveRecord::Base
     [first_name, middle_name, last_name].find_all(&:present?).join(' ')
   end
   
-  def active?
-    activation_state == 'active'
-  end
-  
   def start_steps
     project_steps
   end

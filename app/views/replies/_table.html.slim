@@ -1,12 +1,17 @@
 - if replies.any?
   - replies.each do |reply|
-    p class="name"
-      strong = link_to_user reply.user
-      = " ответил "
-      = time_tag reply.created_at
-    blockquote
-      p = reply.message
-    - if reply.attachment
-      p #{link_to(reply.attachment_file_name, reply.attachment.url, target: '_blank')} #{reply.attachment.size} Байт
+    div class="row"
+      div class="span8"
+        p
+          strong = link_to_user reply.user
+          small  #{time_tag(reply.created_at)}
+    div class="row"
+      div class="span8"
+        blockquote class="#{reply.user.admin? ? 'admin' : 'user'}"
+          p = reply.message
+          small class="reply"
+            - if reply.attachment.present?
+              | #{link_to(reply.attachment_file_name, reply.attachment.url, target: '_blank')} #{reply.attachment.size} byte
+            
 - else
   p Нет ответов

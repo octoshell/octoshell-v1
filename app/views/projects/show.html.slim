@@ -1,11 +1,12 @@
 - title "Проект: #{@project.name}"
 
-p = @project.description
+p class="lead" = @project.description
 
-ul class="nav nav-pills"
-  li = link_to 'редактировать', edit_project_path(@project)
+div class="link-actions"
+  = link_to 'Редактировать', edit_project_path(@project), class: 'btn'
   - if @project.can__close?
-    li = link_to Project.human_state_event_name(:_close), project_close_path(@project), method: :put, data: { confirm: 'Вы уверены? Закрытие проекта закроет все доступы и заявки' }
+    = " "
+    = link_to Project.human_state_event_name(:_close), project_close_path(@project), method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены? Закрытие проекта закроет все доступы и заявки' }
 
 
 table class="table table-bordered"

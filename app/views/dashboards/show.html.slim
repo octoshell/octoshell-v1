@@ -8,9 +8,12 @@
       li = step
   p После этого вы сможете создавать проекты и заявки на ресурсы кластеров.
 - else
-  ul class="nav nav-pills"
-    li = link_to 'Новый проект', new_project_path
-    li = link_to 'Новая заявка', new_request_path
+  div class="link-actions"
+    = link_to 'Новый проект', new_project_path, class: 'btn'
+    - if @user.projects.active.any?
+      = " "
+      = link_to 'Новая заявка', new_request_path, class: 'btn'
+
 - if !admin? && !@user.credentials.exists?
   p Для доступов к кластерам #{link_to('добавьте публичный ключ', new_credential_path)}.
 
@@ -25,9 +28,6 @@ h2 Заявки
 
 - @user.projects.each do |project|
   h3 Проект #{link_to_project(project)}
-  
-  - if can? :new, :requests
-    p = link_to 'Новая заявка', new_request_path
   
   = render partial: 'requests/table', locals: { requests: project.requests }
 

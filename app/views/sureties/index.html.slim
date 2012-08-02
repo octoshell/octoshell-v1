@@ -1,7 +1,7 @@
 - title 'Поручительства'
 
-ul class="nav nav-pills"
-  li = link_to 'Новое поручительство', new_surety_path
+div class="link-actions"
+  = link_to 'Новое поручительство', new_surety_path, class: 'btn'
 
 - if can? :find, :sureties
   = form_tag find_sureties_path do

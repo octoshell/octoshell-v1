@@ -1,5 +1,9 @@
 - title 'Место работы'
 
+- if can? :edit, @membership
+  div class="link-actions"
+    = link_to 'редактировать', edit_membership_path(@membership), class: 'btn'
+
 table class="table table-bordered"
   tr
     th = Organization.model_name.human
@@ -7,10 +11,6 @@ table class="table table-bordered"
   tr
     th = User.model_name.human
     td = link_to_user @membership.user
-
-- if can? :edit, @membership
-  ul class="nav nav-pills"
-    li = link_to 'редактировать', edit_membership_path(@membership)
 
 h2 Позиции
 

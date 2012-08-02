@@ -14,6 +14,6 @@ class RepliesController < ApplicationController
 private
 
   def namespace
-    :tracker
+    :support
   end
 end

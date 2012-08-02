@@ -66,6 +66,6 @@ class TicketsController < ApplicationController
 private
   
   def namespace
-    :tracker
+    :support
   end  
 end

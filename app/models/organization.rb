@@ -9,12 +9,12 @@ class Organization < ActiveRecord::Base
   has_many :sureties
   has_many :users, through: :sureties
   has_many :memberships
+  belongs_to :organization_kind
   
-  validates :name, presence: true, uniqueness: { scope: :kind }
-  validates :kind, presence: true
-  validates :kind, inclusion: { in: KINDS }
+  validates :name, presence: true, uniqueness: { scope: :organization_kind_id }
+  validates :organization_kind, presence: true
   
-  attr_accessible :name, :kind
+  attr_accessible :name, :organization_kind_id
   
   after_create :notify_admins
   
@@ -63,6 +63,10 @@ class Organization < ActiveRecord::Base
       organization.memberships.update_all(organization_id: id)
       organization.destroy
     end
+  end
+  
+  def kind
+    organization_kind.name
   end
   
 private

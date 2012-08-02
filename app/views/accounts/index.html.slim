@@ -1,6 +1,7 @@
 - title 'Доступы к проектам'
 
-p = link_to 'Новый доступ', new_account_path
+div class="link-actions"
+  = link_to 'Новый доступ', new_account_path, class: "btn"
 
 h3 Ожидают подтверждения
 
@@ -10,10 +11,10 @@ h3 Активные
 
 = render partial: 'table', locals: { accounts: @accounts.active }
 
-h3 Отмененные
-
-= render partial: 'table', locals: { accounts: @accounts.canceled }
-
 h3 Отказанные
 
 = render partial: 'table', locals: { accounts: @accounts.declined }
+
+h3 Закрытые
+
+= render partial: 'table', locals: { accounts: @accounts.closed }
