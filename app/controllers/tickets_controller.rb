@@ -36,6 +36,10 @@ class TicketsController < ApplicationController
   
   def show
     @ticket = Ticket.find(params[:id])
+    @replies = @ticket.replies.dup
+    @reply = @ticket.replies.build do |reply|
+      reply.user = current_user
+    end
     authorize! :show, @ticket
   end
   

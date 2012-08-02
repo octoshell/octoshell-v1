@@ -26,11 +26,15 @@ class Ticket < ActiveRecord::Base
     end
     
     event :_close do
-      transition any => :closed
+      transition [:active, :resolved, :answered] => :closed
     end
   end
   
   define_defaults_events :reply, :answer, :resolve, :close
   
   define_state_machine_scopes
+  
+  def actual?
+    not closed?
+  end
 end

@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :sureties
   has_many :organizations, through: :sureties
   has_many :accesses, through: :credentials
+  has_many :tickets
   
   validates :first_name, :last_name, :email, presence: true
   validates :password, confirmation: true, length: { minimum: 6 }, on: :create

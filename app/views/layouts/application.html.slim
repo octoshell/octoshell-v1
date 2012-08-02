@@ -1,0 +1,39 @@
+doctype html
+html
+  head
+    title = content_for?(:title) ? yield(:title) : "Octoshell"
+    = csrf_meta_tags
+    /[ if lt IE 9 ]
+      script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"
+    = stylesheet_link_tag "application", :media => 'screen'
+    = stylesheet_link_tag "print", :media => 'print'
+    = javascript_include_tag "application"
+  body
+    div class="container"
+      div class="navbar noprint"
+        div class="navbar-inner"
+        
+            = link_to "Octoshell", root_path, class: "brand"
+            - if logged_in?
+              ul class="nav"
+                = render 'shared/top_menu'
+            ul class="nav pull-right"
+              - if logged_in?
+                li id="user" = link_to current_user.email, profile_path
+                li = link_to t('pages.shared.logout'), session_path, method: :delete
+              - else
+                li = link_to 'Регистрация', new_user_path
+                li = link_to 'Вход', new_session_path
+      div class="noprint"
+        - if logged_in?
+          ul class="nav nav-pills"
+            = render "shared/#{namespace}_menu"
+        - flash.each do |type, message|
+          - context = type == :alert ? 'alert-error' : 'alert-info'
+          = content_tag :div, message, class: "alert #{context}"
+        - if content_for?(:title)
+          div class="page-header"
+            h1 = yield :title
+      = yield
+      footer class="noprint"
+        p &copy; #{link_to('Evrone', 'http://evrone.ru')} 2012

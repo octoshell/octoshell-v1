@@ -20,6 +20,7 @@ describe User do
   it { should have_many(:memberships) }
   it { should have_many(:sureties) }
   it { should have_many(:organizations).through(:sureties) }
+  it { should have_many(:tickets) }
   
   it { should validate_presence_of(:email) }
   it { should validate_uniqueness_of(:email) }

@@ -60,10 +60,8 @@ MSU::Application.routes.draw do
   # dashboard
   resource :dashboard, only: :show
   
+  # admin dashboard
   resource :admin, only: :show
-    
-  # # dashboard
-  # resource :dashboard, only: :show
   
   # requests
   resources :requests, only: [:index, :show] do
@@ -96,11 +94,15 @@ MSU::Application.routes.draw do
     put :merge
   end
   
+  # tickets
   resources :tickets, only: [:new, :create, :index, :show] do
     get :closed, on: :collection
     put :close
     put :resolve
   end
+  
+  # replies
+  resources :replies, only: :create
   
   # position names
   resources :position_names, except: :show

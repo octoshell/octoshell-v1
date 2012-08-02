@@ -14,6 +14,10 @@ describe Reply do
   it { should validate_presence_of(:user) }
   it { should validate_presence_of(:message) }
   
+  it { should allow_mass_assignment_of(:message) }
+  it { should allow_mass_assignment_of(:ticket_id) }
+  it { should allow_mass_assignment_of(:attachment) }
+  
   describe 'creating' do
     context 'as admin' do
       let(:reply) { build(:reply, user: create(:admin_user)) }

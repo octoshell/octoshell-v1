@@ -12,7 +12,11 @@ class Ability
     # basic user
     if user
       can [:index, :new, :create, :show, :closed], :tickets
-      can :resolve, :tickets, user_id: user.id
+      can :resolve, :tickets do |ticket|
+        (ticket.user_id == user.id) && ticket.can__resolve?
+      end
+      
+      can :create, :replies, ticket_id: user.ticket_ids
       
       can [:show, :edit, :update], :profiles
       
@@ -63,7 +67,9 @@ class Ability
       if user.admin?
         can :access, :admins
         
-        can [:close], :tickets
+        can :close, :tickets, can__close?: true
+        
+        can :create, :replies
         
         can :show, :accesses
         

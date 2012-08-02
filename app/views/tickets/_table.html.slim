@@ -4,10 +4,12 @@
       th #
       th = Ticket.human_attribute_name(:subject)
       th = Ticket.human_attribute_name(:state)
+      th
     - tickets.each do |ticket|
       tr id="ticket-#{ticket.id}"
         td = ticket.id
         td = link_to_ticket(ticket)
         td = ticket.human_state_name
+        td = link_to 'открыть', ticket
 - else
   p Нет заявок

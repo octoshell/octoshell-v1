@@ -1,8 +1,12 @@
 - if replies.any?
   - replies.each do |reply|
-    p
+    p class="name"
       strong = link_to_user reply.user
+      = " ответил "
+      = time_tag reply.created_at
     blockquote
       p = reply.message
+    - if reply.attachment
+      p #{link_to(reply.attachment_file_name, reply.attachment.url, target: '_blank')} #{reply.attachment.size} Байт
 - else
   p Нет ответов

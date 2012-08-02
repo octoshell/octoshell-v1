@@ -1,4 +1,4 @@
-= simple_form_for @project do |f|
+= simple_form_for @project, html: { class: 'form-horizontal' } do |f|
   = f.association :user, label_method: :full_name if admin?
   = f.input :name
   = f.input :description, input_html: { rows: 5 }
@@ -8,4 +8,5 @@
         = f.association :cluster
         = f.input :hours
         = f.input :size, hint: 'Более 50ти обговаривается отдельно'
-  = f.button :submit
+  div class="form-actions"
+    = f.button :submit
