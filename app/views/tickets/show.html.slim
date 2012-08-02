@@ -15,7 +15,7 @@ table class="table table-bordered"
     td = @ticket.human_state_name
 
 - if can?(:close, @ticket) || can?(:resolve, @ticket)
-  div class="form-actions"
+  div class="link-actions"
     = link_to Ticket.human_state_event_name(:_resolve), ticket_resolve_path(@ticket), method: :put, class: 'btn btn-success' if can?(:resolve, @ticket)
     = " "
     = link_to Ticket.human_state_event_name(:_close), ticket_close_path(@ticket), method: :put, class: 'btn btn-danger' if can?(:close, @ticket)
