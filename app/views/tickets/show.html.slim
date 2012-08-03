@@ -11,6 +11,9 @@ table class="table table-bordered"
     th = Ticket.human_attribute_name(:message)
     td = @ticket.message
   tr
+    th = Ticket.human_attribute_name(:attachment)
+    td = link_to_attachment @ticket
+  tr
     th = Ticket.human_attribute_name(:state)
     td = @ticket.human_state_name
 

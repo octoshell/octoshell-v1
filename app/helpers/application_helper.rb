@@ -110,4 +110,10 @@ module ApplicationHelper
 
      content_tag(:a, name, html_options.merge(:href => href, :onclick => onclick))
   end
+  
+  def link_to_attachment(record)
+    if record.attachment?
+      "#{link_to record.attachment_file_name, record.attachment.url, target: '_blank'} #{record.attachment.size} byte".html_safe
+    end
+  end
 end

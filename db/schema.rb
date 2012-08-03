@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120802100241) do
+ActiveRecord::Schema.define(:version => 20120803082355) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -196,8 +196,12 @@ ActiveRecord::Schema.define(:version => 20120802100241) do
     t.integer  "user_id"
     t.string   "state"
     t.string   "url"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
   end
 
   create_table "users", :force => true do |t|

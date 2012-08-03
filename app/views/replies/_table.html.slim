@@ -10,8 +10,6 @@
         blockquote class="#{reply.user.admin? ? 'admin' : 'user'}"
           p = reply.message
           small class="reply"
-            - if reply.attachment.present?
-              | #{link_to(reply.attachment_file_name, reply.attachment.url, target: '_blank')} #{reply.attachment.size} byte
-            
+            = link_to_attachment reply
 - else
-  p Нет ответов
+  p Нет сообщений

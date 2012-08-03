@@ -370,6 +370,8 @@ ru:
         message: Сообщение
         state: Состояние
         url: Ссылка
+        attachment: Файл
+        user: Пользователь
       reply:
         message: Сообщение
         attachment: Файл
