@@ -14,7 +14,7 @@ class ClustersController < ApplicationController
   end
   
   def create
-    @cluster = Cluster.new(params[:cluster])
+    @cluster = Cluster.new(params[:cluster], as_role)
     if @cluster.save
       redirect_to_cluster(@cluster)
     else
@@ -28,7 +28,7 @@ class ClustersController < ApplicationController
   
   def update
     @cluster = find_cluster(params[:id])
-    if @cluster.update_attributes(params[:cluster])
+    if @cluster.update_attributes(params[:cluster], as_role)
       redirect_to_cluster(@cluster)
     else
       render :edit

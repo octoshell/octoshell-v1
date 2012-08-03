@@ -12,7 +12,9 @@ table class="table table-bordered"
     td id="task-#{@task.id}-status" = @task.human_state_name
   tr
     th = Task.human_attribute_name(:command)
-    td = @task.command
+    td
+      textarea disabled="disabled" class="public-key" rows="10"
+        = @task.command
   tr
     th = Task.human_attribute_name(:stdout)
     td = @task.stdout

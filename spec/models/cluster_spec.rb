@@ -12,10 +12,22 @@ describe Cluster do
   
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:host) }
+  it { should validate_presence_of(:add_user) }
+  it { should validate_presence_of(:del_user) }
+  it { should validate_presence_of(:add_openkey) }
+  it { should validate_presence_of(:del_openkey) }
+  it { should validate_presence_of(:block_user) }
+  it { should validate_presence_of(:unblock_user) }
   
-  it { should allow_mass_assignment_of(:name) }
-  it { should allow_mass_assignment_of(:host) }
-  it { should allow_mass_assignment_of(:description) }
+  # it { should allow_mass_assignment_of(:name) }
+  # it { should allow_mass_assignment_of(:host) }
+  # it { should allow_mass_assignment_of(:description) }
+  # it { should allow_mass_assignment_of(:add_user) }
+  # it { should allow_mass_assignment_of(:del_user) }
+  # it { should allow_mass_assignment_of(:add_openkey) }
+  # it { should allow_mass_assignment_of(:del_openkey) }
+  # it { should allow_mass_assignment_of(:block_user) }
+  # it { should allow_mass_assignment_of(:unblock_user) }
   
   describe '#close' do
     let!(:request) { create(:active_request, cluster: cluster) }

@@ -3,9 +3,11 @@ class Cluster < ActiveRecord::Base
   
   has_many :requests
   
-  validates :name, :host, presence: true
+  validates :name, :host, :add_user, :del_user, :add_openkey,
+   :del_openkey, :block_user, :unblock_user, presence: true
   
-  attr_accessible :name, :host, :description
+  attr_accessible :name, :host, :description, :add_user, :del_user,
+    :add_openkey, :del_openkey, :block_user, :unblock_user, as: :admin
   
   state_machine initial: :active do
     state :closed

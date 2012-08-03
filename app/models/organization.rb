@@ -1,4 +1,3 @@
-# coding: utf-8
 class Organization < ActiveRecord::Base
   has_paper_trail
   
@@ -37,18 +36,6 @@ class Organization < ActiveRecord::Base
       end
     end
   end
-  
-  # before_destroy do
-  #   sureties.each do |surety|
-  #     if surety.pending?
-  #       surety.comment = 
-  #       surety.decline!
-  #     elsif surety.active?
-  #       surety.comment = I18n.t('surety.comments.organization_deleted')
-  #       surety.cancel!
-  #     end
-  #   end
-  # end
   
   def surety_name
     name

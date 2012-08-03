@@ -348,6 +348,12 @@ ru:
         name: Название
         host: Хост
         description: Описание
+        add_user: add_user
+        del_user: del_user
+        block_user: block_user
+        unblock_user: unblock_user
+        add_openkey: add_openkey
+        del_openkey: del_openkey
       account:
         project: Проект
         state: Состояние

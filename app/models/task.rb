@@ -91,65 +91,61 @@ class Task < ActiveRecord::Base
   
 private
   
-  # /usr/local/bin/add_user host project_1
-  # resource is a cluster user
   def add_user
-    args = []
-    args << resource.cluster.host
-    args << resource.project.username
-    execute bin('add_user'), *args
+    execute :add_user, {
+      user: resource.project.username,
+      host: resource.cluster.host
+    }
   end
   
-  # /usr/local/bin/del_user host project_1
-  # resource is a cluster user
   def del_user
-    args = []
-    args << Cluster.unscoped.find(resource.cluster_id).host
-    args << resource.project.username
-    execute bin('del_user'), *args
+    execute :del_user, {
+      user: resource.project.username,
+      host: resource.cluster.host
+    }
   end
   
-  # /usr/local/bin/block_user host project_1
-  # resource is a cluster user
   def block_user
-    args = []
-    args << resource.cluster.host
-    args << resource.project.username
-    execute bin('block_user'), *args
+    execute :block_user, {
+      user: resource.project.username,
+      host: resource.cluster.host
+    }
   end
   
-  # /usr/local/bin/unblock_user host project_1
-  # resource is a cluster user
-  def block_user
-    args = []
-    args << resource.cluster.host
-    args << resource.project.username
-    execute bin('block_user'), *args
+  def unblock_user
+    execute :unblock_user, {
+      user: resource.project.username,
+      host: resource.cluster.host
+    }
   end
   
-  # /usr/local/bin/add_openkey host project_1 key
-  # resource is an access
   def add_openkey
-    args = []
-    args << resource.cluster.host
-    args << resource.project.username
-    args << Credential.unscoped.find(resource.credential_id).public_key
-    execute bin('add_openkey'), *args
+    execute :add_openkey, {
+      user:       resource.cluster_user.project.username,
+      host:       resource.cluster.host,
+      public_key: resource.credential.public_key
+    }
   end
   
-  # /usr/local/bin/del_openkey host project_1 key
-  # resource is an access
   def del_openkey
-    args = []
-    args << resource.cluster.host
-    args << resource.project.username
-    args << Credential.unscoped.find(resource.credential_id).public_key
-    execute bin('del_openkey'), *args
+    execute :del_openkey, {
+      user:       resource.cluster_user.project.username,
+      host:       resource.cluster.host,
+      public_key: resource.credential.public_key
+    }
   end
   
-  def execute(*args)
-    self.command = args.join ' '
-    Open3.popen3(command) do |stdin, stdout, stderr|
+  def execute(cmd, replacement = {})
+    template = resource.cluster.send(cmd)
+    replacement.each do |key, value|
+      template.gsub! "%#{key}%", %{"#{value}"}
+    end
+    
+    self.command = template
+    
+    template.gsub! '"', '\"'
+    
+    Open3.popen3(%{bash -c "#{template}"}) do |stdin, stdout, stderr|
       self.stderr = stderr.read
       self.stdout = stdout.read
     end
@@ -159,8 +155,8 @@ private
     failure!
   end
   
-  def bin(exe)
-    # "/usr/local/bin/#{exe}"
+  def bin(cmd)
+    template = resource.cluster.send(cmd)
     "#{Rails.root}/script/#{exe}"
   end
   
