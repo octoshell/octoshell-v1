@@ -74,15 +74,31 @@ ActiveRecord::Base.transaction do
   
   Cluster.create! do |cluster|
     cluster.name = 'Ломоносов'
+    cluster.host = 'lomonosov.parallel.ru'
   end
   
   Cluster.create! do |cluster|
     cluster.name = 'Чебышёв'
+    cluster.host = 'chebyshev.parallel.ru'
   end
   
   Credential.create! do |credential|
     credential.name = 'Macbook'
     credential.public_key = '=== public key'
     credential.user = user
+  end
+  
+  Ticket.create! do |ticket|
+    ticket.subject = 'Не могу зайти на кластер'
+    ticket.message = 'пишет Permission denied'
+    ticket.user = user
+  end
+  
+  PositionName.create! do |name|
+    name.name = 'Должность'
+  end
+  
+  PositionName.create! do |name|
+    name.name = 'Кафедра'
   end
 end

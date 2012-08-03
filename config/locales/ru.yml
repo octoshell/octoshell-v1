@@ -369,7 +369,10 @@ ru:
         subject: Тема
         message: Сообщение
         state: Состояние
-        url: Ссылка 
+        url: Ссылка
+      reply:
+        message: Сообщение
+        attachment: Файл
     state_machines:
       surety:
         state:
@@ -426,8 +429,11 @@ ru:
           states:
             active: Активный
             answered: Есть ответ
-            resolved: Разрешен
+            resolved: Решено
             closed: Закрыт
+          events:
+            _resolve: Проблема решена
+            _close: Закрыть
       task:
         state:
           states:
