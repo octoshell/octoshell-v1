@@ -7,24 +7,22 @@ ActiveRecord::Base.transaction do
     DatabaseCleaner.clean
   end
   
-  if Rails.env.production?
-    User.create! do |user|
-      user.email                 = 'serg@parallel.ru'
-      user.password              = 'octoshell'
-      user.password_confirmation = 'octoshell'
-      user.first_name            = 'Sergey'
-      user.last_name             = 'Zhumatiy'
-      user.admin                 = true
-    end
+  User.create! do |user|
+    user.email                 = 'serg@parallel.ru'
+    user.password              = 'octoshell'
+    user.password_confirmation = 'octoshell'
+    user.first_name            = 'Sergey'
+    user.last_name             = 'Zhumatiy'
+    user.admin                 = true
+  end
   
-    User.create! do |user|
-      user.email                 = 'dan@parallel.ru'
-      user.password              = 'octoshell'
-      user.password_confirmation = 'octoshell'
-      user.first_name            = 'Dmitry'
-      user.last_name             = 'Nikitenko'
-      user.admin                 = true
-    end
+  User.create! do |user|
+    user.email                 = 'dan@parallel.ru'
+    user.password              = 'octoshell'
+    user.password_confirmation = 'octoshell'
+    user.first_name            = 'Dmitry'
+    user.last_name             = 'Nikitenko'
+    user.admin                 = true
   end
   
   User.create! do |user|

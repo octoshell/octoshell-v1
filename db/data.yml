@@ -1,0 +1,440 @@
+
+---
+versions:
+  columns:
+  - id
+  - item_type
+  - item_id
+  - event
+  - whodunnit
+  - object
+  - created_at
+  records: 
+  - - 1
+    - User
+    - 1
+    - create
+    - 
+    - 
+    - '2012-08-03 07:44:51.203778'
+  - - 2
+    - User
+    - 2
+    - create
+    - 
+    - 
+    - '2012-08-03 07:44:51.497829'
+  - - 3
+    - User
+    - 3
+    - create
+    - 
+    - 
+    - '2012-08-03 07:44:51.661514'
+  - - 4
+    - User
+    - 4
+    - create
+    - 
+    - 
+    - '2012-08-03 07:44:51.826215'
+  - - 5
+    - Organization
+    - 1
+    - create
+    - 
+    - 
+    - '2012-08-03 07:44:51.881092'
+  - - 6
+    - Organization
+    - 2
+    - create
+    - 
+    - 
+    - '2012-08-03 07:44:51.927111'
+  - - 7
+    - Membership
+    - 1
+    - create
+    - 
+    - 
+    - '2012-08-03 07:44:51.967861'
+  - - 8
+    - Surety
+    - 1
+    - create
+    - 
+    - 
+    - '2012-08-03 07:44:51.998440'
+  - - 9
+    - Cluster
+    - 1
+    - create
+    - 
+    - 
+    - '2012-08-03 07:44:52.054510'
+  - - 10
+    - Cluster
+    - 2
+    - create
+    - 
+    - 
+    - '2012-08-03 07:44:52.056353'
+  - - 11
+    - Credential
+    - 1
+    - create
+    - 
+    - 
+    - '2012-08-03 07:44:52.085042'
+  - - 12
+    - PositionName
+    - 1
+    - create
+    - 
+    - 
+    - '2012-08-03 07:44:52.170461'
+  - - 13
+    - PositionName
+    - 2
+    - create
+    - 
+    - 
+    - '2012-08-03 07:44:52.172619'
+  - - 14
+    - User
+    - 1
+    - update
+    - 
+    - ! "---\nemail: serg@parallel.ru\ncrypted_password: $2a$10$lIz/GLPSWDrbGJH5YtQ5ROpCYJeOFTr1.jdAKglFWXiDN.7L4V6MO\nsalt:
+      wyAuPoynFvrzghhRsJUK\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      pending\nactivation_token: Uxe6gFYg7fy7B9qzWh9D\nactivation_token_expires_at:
+      \nfirst_name: Sergey\nlast_name: Zhumatiy\nmiddle_name: \ndeleted_at: \ncreated_at:
+      2012-08-03 07:44:51.181527000 Z\nupdated_at: 2012-08-03 07:44:51.181527000 Z\nadmin:
+      true\nstate: active\nid: 1\n"
+    - '2012-08-03 07:45:03.557320'
+  - - 15
+    - User
+    - 2
+    - update
+    - 
+    - ! "---\nemail: dan@parallel.ru\ncrypted_password: $2a$10$SIrbYsROy.ty7N8ILAyrn.eUKhv9GY9PEZcJdj9bNIkeRbNnXtqtK\nsalt:
+      Ax3WXgtqszzeuy8cpQqt\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      pending\nactivation_token: MzebvGvyAxhcy1XJvtMf\nactivation_token_expires_at:
+      \nfirst_name: Dmitry\nlast_name: Nikitenko\nmiddle_name: \ndeleted_at: \ncreated_at:
+      2012-08-03 07:44:51.495904000 Z\nupdated_at: 2012-08-03 07:44:51.495904000 Z\nadmin:
+      true\nstate: active\nid: 2\n"
+    - '2012-08-03 07:45:03.575728'
+  - - 16
+    - User
+    - 3
+    - update
+    - 
+    - ! "---\nemail: releu@me.com\ncrypted_password: $2a$10$u3oF3TZzd4jBItGnTO.dGewPfcp.rAeUnL0oBnz9KOYOLmD1cNKeC\nsalt:
+      PcWMwfV9nqW4qyFg7aq3\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      pending\nactivation_token: oxpn9sRYsx1Hd2yx5zyN\nactivation_token_expires_at:
+      \nfirst_name: Jan\nlast_name: Bernacki\nmiddle_name: \ndeleted_at: \ncreated_at:
+      2012-08-03 07:44:51.659404000 Z\nupdated_at: 2012-08-03 07:44:51.659404000 Z\nadmin:
+      true\nstate: active\nid: 3\n"
+    - '2012-08-03 07:45:03.591156'
+  - - 17
+    - User
+    - 4
+    - update
+    - 
+    - ! "---\nemail: areleu@gmail.com\ncrypted_password: $2a$10$n8OTmApJbNJzUZ9JXQOvGucabdNbes4BkIWSRjbYi09F4V2h64wSi\nsalt:
+      wn46BX4JNQy7Lmq68ath\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      pending\nactivation_token: rtj3N7EtaGPJxKp5eeHA\nactivation_token_expires_at:
+      \nfirst_name: John\nlast_name: Smith\nmiddle_name: \ndeleted_at: \ncreated_at:
+      2012-08-03 07:44:51.824375000 Z\nupdated_at: 2012-08-03 07:44:51.824375000 Z\nadmin:
+      false\nstate: active\nid: 4\n"
+    - '2012-08-03 07:45:03.610296'
+
+---
+credentials:
+  columns:
+  - id
+  - public_key
+  - user_id
+  - deleted_at
+  - created_at
+  - updated_at
+  - name
+  - state
+  records: 
+  - - 1
+    - === public key
+    - 4
+    - 
+    - '2012-08-03 07:44:52.081283'
+    - '2012-08-03 07:44:52.081283'
+    - Macbook
+    - active
+
+---
+clusters:
+  columns:
+  - id
+  - name
+  - created_at
+  - updated_at
+  - host
+  - description
+  - deleted_at
+  - state
+  records: 
+  - - 1
+    - Ломоносов
+    - '2012-08-03 07:44:52.050576'
+    - '2012-08-03 07:44:52.050576'
+    - lomonosov.parallel.ru
+    - 
+    - 
+    - active
+  - - 2
+    - Чебышёв
+    - '2012-08-03 07:44:52.055436'
+    - '2012-08-03 07:44:52.055436'
+    - chebyshev.parallel.ru
+    - 
+    - 
+    - active
+
+---
+users:
+  columns:
+  - id
+  - email
+  - crypted_password
+  - salt
+  - remember_me_token
+  - remember_me_token_expires_at
+  - reset_password_token
+  - reset_password_token_expires_at
+  - reset_password_email_sent_at
+  - activation_state
+  - activation_token
+  - activation_token_expires_at
+  - first_name
+  - last_name
+  - middle_name
+  - deleted_at
+  - created_at
+  - updated_at
+  - admin
+  - state
+  records: 
+  - - 1
+    - serg@parallel.ru
+    - $2a$10$lIz/GLPSWDrbGJH5YtQ5ROpCYJeOFTr1.jdAKglFWXiDN.7L4V6MO
+    - wyAuPoynFvrzghhRsJUK
+    - 
+    - 
+    - 
+    - 
+    - 
+    - active
+    - 
+    - 
+    - Sergey
+    - Zhumatiy
+    - 
+    - 
+    - '2012-08-03 07:44:51.181527'
+    - '2012-08-03 07:45:03.550284'
+    - true
+    - active
+  - - 2
+    - dan@parallel.ru
+    - $2a$10$SIrbYsROy.ty7N8ILAyrn.eUKhv9GY9PEZcJdj9bNIkeRbNnXtqtK
+    - Ax3WXgtqszzeuy8cpQqt
+    - 
+    - 
+    - 
+    - 
+    - 
+    - active
+    - 
+    - 
+    - Dmitry
+    - Nikitenko
+    - 
+    - 
+    - '2012-08-03 07:44:51.495904'
+    - '2012-08-03 07:45:03.574673'
+    - true
+    - active
+  - - 3
+    - releu@me.com
+    - $2a$10$u3oF3TZzd4jBItGnTO.dGewPfcp.rAeUnL0oBnz9KOYOLmD1cNKeC
+    - PcWMwfV9nqW4qyFg7aq3
+    - 
+    - 
+    - 
+    - 
+    - 
+    - active
+    - 
+    - 
+    - Jan
+    - Bernacki
+    - 
+    - 
+    - '2012-08-03 07:44:51.659404'
+    - '2012-08-03 07:45:03.589817'
+    - true
+    - active
+  - - 4
+    - areleu@gmail.com
+    - $2a$10$n8OTmApJbNJzUZ9JXQOvGucabdNbes4BkIWSRjbYi09F4V2h64wSi
+    - wn46BX4JNQy7Lmq68ath
+    - 
+    - 
+    - 
+    - 
+    - 
+    - active
+    - 
+    - 
+    - John
+    - Smith
+    - 
+    - 
+    - '2012-08-03 07:44:51.824375'
+    - '2012-08-03 07:45:03.609261'
+    - false
+    - active
+
+---
+sureties:
+  columns:
+  - id
+  - user_id
+  - organization_id
+  - state
+  - deleted_at
+  - created_at
+  - updated_at
+  - comment
+  records: 
+  - - 1
+    - 4
+    - 1
+    - pending
+    - 
+    - '2012-08-03 07:44:51.994891'
+    - '2012-08-03 07:44:51.994891'
+    - 
+
+---
+memberships:
+  columns:
+  - id
+  - user_id
+  - organization_id
+  - created_at
+  - updated_at
+  - deleted_at
+  - state
+  records: 
+  - - 1
+    - 4
+    - 2
+    - '2012-08-03 07:44:51.964158'
+    - '2012-08-03 07:44:51.964158'
+    - 
+    - active
+
+---
+position_names:
+  columns:
+  - id
+  - name
+  - created_at
+  - updated_at
+  - deleted_at
+  records: 
+  - - 1
+    - Должность
+    - '2012-08-03 07:44:52.167264'
+    - '2012-08-03 07:44:52.167264'
+    - 
+  - - 2
+    - Кафедра
+    - '2012-08-03 07:44:52.171684'
+    - '2012-08-03 07:44:52.171684'
+    - 
+
+---
+tickets:
+  columns:
+  - id
+  - subject
+  - message
+  - user_id
+  - state
+  - url
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - Не могу зайти на кластер
+    - пишет Permission denied
+    - 4
+    - active
+    - 
+    - '2012-08-03 07:44:52.153839'
+    - '2012-08-03 07:44:52.153839'
+
+---
+organization_kinds:
+  columns:
+  - id
+  - name
+  - abbreviation
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - ВУЗ
+    - 
+    - '2012-08-03 07:44:51.842946'
+    - '2012-08-03 07:44:51.842946'
+  - - 2
+    - РАН
+    - 
+    - '2012-08-03 07:44:51.843989'
+    - '2012-08-03 07:44:51.843989'
+
+---
+organizations:
+  columns:
+  - id
+  - name
+  - approved
+  - created_at
+  - updated_at
+  - deleted_at
+  - state
+  - organization_kind_id
+  records: 
+  - - 1
+    - МГУ
+    - false
+    - '2012-08-03 07:44:51.877466'
+    - '2012-08-03 07:44:51.877466'
+    - 
+    - active
+    - '1'
+  - - 2
+    - Evrone
+    - false
+    - '2012-08-03 07:44:51.925831'
+    - '2012-08-03 07:44:51.925831'
+    - 
+    - active
+    - '1'

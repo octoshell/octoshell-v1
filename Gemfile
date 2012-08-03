@@ -19,6 +19,7 @@ gem 'fivemat'
 gem 'wicked_pdf'
 gem 'paperclip'
 gem 'therubyracer'
+gem 'yaml_db'
 
 group :test, :development do
   gem 'spin'
