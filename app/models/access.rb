@@ -4,6 +4,8 @@
 # `force_close` - закрывает доступ не удаляя ключ с кластера 
 # (при удалении вручную или всего пользователя на кластере)
 class Access < ActiveRecord::Base
+  delegate :cluster, to: :cluster_user
+  
   include Models::Asynch
   has_paper_trail
   
