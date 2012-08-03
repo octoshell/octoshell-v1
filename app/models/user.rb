@@ -104,7 +104,7 @@ class User < ActiveRecord::Base
   end
   
   def revalidate!
-    if sureties.any? && memberships.any?
+    if sureties.active.any? && memberships.active.any?
       sured? || sure!
     else
       active? || unsure!

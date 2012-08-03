@@ -22,8 +22,8 @@ html
               li id="user" = link_to current_user.email, profile_path
               li = link_to t('pages.shared.logout'), session_path, method: :delete
             - else
-              li = link_to 'Регистрация', new_user_path
-              li = link_to 'Вход', new_session_path
+              li = link_to t('pages.shared.sign_up'), new_user_path
+              li = link_to t('pages.shared.login'), new_session_path
       div class="noprint"
         - if logged_in?
           ul class="nav nav-pills"

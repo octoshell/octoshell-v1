@@ -49,7 +49,7 @@ describe 'Projects', js: true do
         login create(:admin_user)
         visit project_path(project)
         click_link 'close'
-        page.driver.browser.switch_to.alert.accept
+        confirm_dialog
         sleep 1
       end
       

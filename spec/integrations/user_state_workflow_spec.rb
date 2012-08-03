@@ -7,16 +7,14 @@ describe 'User State Workflow' do
     user.should be_active
     
     surety = create(:surety, user: user)
-    user.should be_active
+    user.reload.should be_active
     
-    create(:membership, user: user)
-    membership = user.should be_active
+    membership = create(:membership, user: user)
+    user.reload.should be_active
     
     surety.activate!
     
-    user.reload
-    
-    user.should be_sured
+    user.reload.should be_sured
   end
   
   it 'becoming active by closing membership' do

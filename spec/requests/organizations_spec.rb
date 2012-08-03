@@ -2,13 +2,15 @@ require 'spec_helper'
 
 describe 'Organizations', js: true do
   context 'as authotized user' do
-    let(:organization) { build(:organization) }
+    let!(:organization_kind) { create(:organization_kind) }
+    let(:organization) { build(:organization, organization_kind: organization_kind) }
+    
     before do
       login
       visit new_organization_path
       within('#new_organization') do
-        fill_in 'organization_name', with: organization.name
-        select organization.kind, from: 'organization_kind'
+        fill_in 'Name', with: organization.name
+        select organization.kind, from: 'Organization kind'
         click_button 'Create Organization'
       end
     end

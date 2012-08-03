@@ -1,3 +1,9 @@
+en:
+  pages:
+    shared:
+      logout: Logout
+      login: Login
+      sign_up: Sign Up
 ru:
   pages:
     links: &links
@@ -22,6 +28,7 @@ ru:
     shared:
       logout: Выйти
       login: Войти
+      sign_up: Регистрация
     admin:
       dashboard:
         <<: *dashboard

@@ -1,6 +1,6 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :template do
+    sequence(:subject) { |n| "subject #{n}" }
+    message 'tratata'
   end
 end

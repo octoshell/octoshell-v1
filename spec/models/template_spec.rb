@@ -7,5 +7,4 @@ describe Template do
   it { should be }
   
   it { should validate_presence_of(:subject) }
-  it { should validate_presence_of(:message) }
 end

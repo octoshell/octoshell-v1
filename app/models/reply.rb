@@ -11,7 +11,7 @@ class Reply < ActiveRecord::Base
   belongs_to :ticket
   
   validates :user, :ticket, :message, presence: true
-  validates :ticket_state_name, exclusion: { in: [:closed] }
+  validates :ticket_state_name, exclusion: { in: [:closed] }, if: :ticket
   
   attr_accessible :message, :ticket_id, :attachment
   

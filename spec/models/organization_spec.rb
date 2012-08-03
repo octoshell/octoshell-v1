@@ -9,16 +9,11 @@ describe Organization do
   it { should have_many(:memberships) }
   
   it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:kind) }
-  it { should validate_uniqueness_of(:name).scoped_to(:kind) }
-  it "should ensure inclusion of kind in #{Organization::KINDS}" do
-    Organization::KINDS.each do |kind|
-      should allow_value(kind).for(:kind)
-    end
-  end
+  it { should validate_presence_of(:organization_kind) }
+  it { should validate_uniqueness_of(:name).scoped_to(:organization_kind_id) }
   
   it { should allow_mass_assignment_of(:name) }
-  it { should allow_mass_assignment_of(:kind) }
+  it { should allow_mass_assignment_of(:organization_kind_id) }
   
   describe '#merge' do
     let!(:duplication) { create(:organization) }

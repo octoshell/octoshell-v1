@@ -92,6 +92,7 @@ describe 'Sureties', js: true do
         login create(:admin_user)
         visit surety_path(surety)
         click_link('close')
+        confirm_dialog
       end
       
       it 'should activate surety' do

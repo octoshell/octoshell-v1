@@ -1,3 +1,5 @@
 class Template < ActiveRecord::Base
-  # attr_accessible :title, :body
+  validates :subject, presence: true
+  
+  attr_accessible :subject, :message, as: :admin
 end

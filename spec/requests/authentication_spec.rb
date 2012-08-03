@@ -9,9 +9,9 @@ describe 'Authentication', js: true do
 
         before do
           visit new_session_path
-          fill_in 'user_email', with: user.email
-          fill_in 'user_password', with: '123456'
-          click_on I18n.t('pages.shared.login')
+          fill_in 'Email', with: user.email
+          fill_in 'Password', with: '123456'
+          click_button I18n.t('pages.shared.login')
         end
 
         it 'should authenticate user' do
