@@ -114,7 +114,7 @@ class User < ActiveRecord::Base
   def sure!
     transaction do
       _sure!
-      accounts.where(project_id: owned_project_ids).each &:active!
+      accounts.where(project_id: owned_project_ids).each &:activate!
     end
   end
   

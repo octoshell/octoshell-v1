@@ -4,8 +4,6 @@ class Organization < ActiveRecord::Base
   
   attr_accessor :merge_id
   
-  KINDS = %w(ВУС РАН)
-  
   has_many :sureties
   has_many :users, through: :sureties
   has_many :memberships
