@@ -436,7 +436,7 @@ ru:
             pending: Ожидает подтверждения
             active: Активна
             declined: Отказано
-            finished: Завершена
+            closed: Закрыта
         events:
           _activate: Активировать
           _decline: Отказать

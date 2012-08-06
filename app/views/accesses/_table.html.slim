@@ -6,7 +6,7 @@
       th = Project.model_name.human
       th = Access.human_attribute_name(:state)
     - accesses.each do |access|
-      tr
+      tr id="access-#{access.id}"
         td = link_to_credential access.credential
         td = link_to_cluster access.cluster
         td = link_to_cluster_user access.cluster_user

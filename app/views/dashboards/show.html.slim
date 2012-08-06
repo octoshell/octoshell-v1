@@ -19,7 +19,7 @@
 
 h2 Доступы к кластерам
 
-= render partial: 'accesses/table', locals: { accesses: @user.accesses }
+= render partial: 'accesses/table', locals: { accesses: @user.accesses.non_closed }
 
 h2 Поддержка
 

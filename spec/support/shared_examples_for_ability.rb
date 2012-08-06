@@ -44,3 +44,7 @@ shared_examples 'basic user' do
   it { should be_able_to(:create, :credentials) }
   it { should be_able_to(:destroy, :credentials) }
 end
+
+shared_examples 'non authorized user' do
+  it { current_path.should == new_session_path }
+end
