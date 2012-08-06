@@ -346,6 +346,7 @@ ru:
         name: Название
         created_at: Дата создания
         user: Пользователь
+        state: Состояние
       organization:
         name: Название
         organization_kind: Тип организации
@@ -452,7 +453,7 @@ ru:
         state:
           states:
             pending: Ожидает подтверждения
-            canceled: Отменен
+            close: Закрыт
             active: Активен
             declined: Отказано
           events:
