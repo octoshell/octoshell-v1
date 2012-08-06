@@ -32,8 +32,7 @@ class Project < ActiveRecord::Base
   def close!
     transaction do
       _close!
-      accounts.each &:close!
-      requests.each &:close!
+      [accounts, requests, cluster_users].flatten.each &:close!
     end
   end
   

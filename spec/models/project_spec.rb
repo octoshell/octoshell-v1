@@ -35,7 +35,7 @@ describe Project do
   end
   
   describe '#close' do
-    let!(:request) { create(:request, project: project, user: project.user) }
+    let!(:request) { create(:active_request, project: project, user: project.user) }
     let!(:account) { create(:account, project: project) }
     
     before { project.close }
@@ -45,10 +45,19 @@ describe Project do
     end
     
     it 'should close accounts' do
+      project.accounts.size.should > 0
       project.accounts.all?(&:closed?).should be_true
     end
     
+    it 'should close all cluster users' do
+      project.cluster_users.size.should > 0
+      project.cluster_users.all? do |cluster_user|
+        cluster_user.closed? || cluster_user.closing?
+      end.should be_true
+    end
+    
     it 'should cancel all requests' do
+      project.requests.size.should > 0
       project.requests.each do |request|
         (request.closed? || request.closing?).should be_true
       end
