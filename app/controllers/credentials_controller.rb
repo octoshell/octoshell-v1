@@ -29,12 +29,11 @@ class CredentialsController < ApplicationController
     end
   end
   
-  def destroy
-    @credential = Credential.find(params[:id])
-    authorize! :destroy, @credential
-    @credential.destroy
-    if @credential.destroyed?
-      redirect_to credentials_path
+  def close
+    @credential = Credential.find(params[:credential_id])
+    authorize! :close, @credential
+    if @credential.close
+      redirect_to @credential
     else
       flash.now[:alert] = @credential.errors.full_messages.join(', ')
       render :show

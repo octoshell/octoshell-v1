@@ -15,6 +15,7 @@ class Credential < ActiveRecord::Base
   after_create :grant_accesses, unless: :skip_creating_accesses
   
   state_machine initial: :active do
+    state :active
     state :closed
     
     event :_close do

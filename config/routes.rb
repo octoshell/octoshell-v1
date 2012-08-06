@@ -9,7 +9,9 @@ MSU::Application.routes.draw do
   resources :activations, only: [:new, :create]
   
   # credentials
-  resources :credentials, only: [:index, :new, :create, :destroy, :show]
+  resources :credentials, only: [:index, :new, :create, :show] do
+    put :close
+  end
   
   # sureties
   resources :sureties, only: [:new, :create, :index, :show] do

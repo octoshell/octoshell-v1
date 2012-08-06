@@ -407,6 +407,13 @@ ru:
             _decline: Отказать
             _finish: Завершить
             _close: Закрыть
+      credential:
+        state:
+          states:
+            active: Активный
+            closed: Закрытый
+          events:
+            _close: Закрыть
       cluster_user:
         state:
           states:
@@ -474,5 +481,8 @@ ru:
         state:
           states:
             active: Активен
+            activing: Активируется
             pending: В ожидании
+            closing: Закрывается
+            close: Закрыт
       

@@ -27,7 +27,7 @@ class Ability
       can [:index, :show], :clusters
       
       can [:index, :new, :create], :credentials
-      can [:show, :destroy], :credentials, user_id: user.id
+      can [:show, :close], :credentials, user_id: user.id
       
       can :show, :dashboards
       
@@ -84,7 +84,7 @@ class Ability
         
         can :show, :accounts
         
-        can [:show, :destroy], :credentials
+        can [:show, :close], :credentials
         
         can [:activate, :decline, :cancel, :invite, :create, :mailer], :accounts
         
