@@ -1,4 +1,4 @@
-- title "Поручительство ##{@surety.id}"
+- title "#{Surety.model_name.human} ##{@surety.id}"
 
 table class="table table-bordered noprint"
   tr
@@ -11,9 +11,12 @@ table class="table table-bordered noprint"
     th = Surety.human_attribute_name(:state)
     td id="surety-#{@surety.id}-status" = @surety.human_state_name
 
-ul class="nav noprint nav-pills noprint"
-  li = link_to_function 'Распечатать', 'javascript:window.print();'
-  li = link_to 'Скачать PDF', surety_path(@surety, format: :pdf)
+div class="link-actions noprint"
+  = link_to_function 'Распечатать', 'javascript:window.print();', class: 'btn btn-primary'
+  = " "
+  = link_to 'Скачать PDF', surety_path(@surety, format: :pdf), class: 'btn'
+  = " "
+  = link_to 'Загрузить скан', new_ticket_path(ticket: { subject: "Активация поручительства ##{@surety.id}", url: surety_path(@surety), message: 'Активируйте пожалуйста мое поручительство.' }, info: 'Прикрепите скан файла поручительства'), class: 'btn'
 
 = render partial: 'template', locals: { surety: @surety }
 

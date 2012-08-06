@@ -18,7 +18,8 @@ class TicketsController < ApplicationController
   end
   
   def new
-    @ticket = Ticket.new
+    flash.now[:info] = params[:info] if params[:info].present?
+    @ticket = Ticket.new(params[:ticket])
     @ticket.user = current_user unless admin?
     authorize! :new, @ticket
   end

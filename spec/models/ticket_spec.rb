@@ -15,6 +15,7 @@ describe Ticket do
   
   it { should allow_mass_assignment_of(:subject) }
   it { should allow_mass_assignment_of(:message) }
+  it { should allow_mass_assignment_of(:url) }
   
   it { should be_active }
   

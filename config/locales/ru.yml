@@ -286,6 +286,7 @@ ru:
       access: Доступ
       credential: Публичный ключ
       cluster_user: Пользователь (на кластере)
+      surety: Поручительство
     errors:
       models:
         account:

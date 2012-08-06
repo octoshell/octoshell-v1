@@ -6,8 +6,8 @@ class Ticket < ActiveRecord::Base
   
   validates :user, :subject, :message, presence: true
   
-  attr_accessible :message, :subject, :attachment
-  attr_accessible :message, :subject, :attachment, :user_id, as: :admin
+  attr_accessible :message, :subject, :attachment, :url
+  attr_accessible :message, :subject, :attachment, :url, :user_id, as: :admin
   
   state_machine :state, initial: :active do
     state :active
