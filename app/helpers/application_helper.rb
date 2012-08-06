@@ -83,7 +83,7 @@ module ApplicationHelper
   
   def link_to_cluster_user(cluster_user)
     if cluster_user
-      link_to 'открыть', cluster_user
+      link_to ClusterUser.model_name.human, cluster_user
     else
       'Удалено'
     end
