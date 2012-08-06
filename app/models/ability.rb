@@ -9,6 +9,8 @@ class Ability
     
     can [:new, :create, :activate, :confirmation], :users
     
+    can [:new, :create], :activations
+    
     # basic user
     if user
       can :show, :support
@@ -47,6 +49,7 @@ class Ability
       
       can [:new, :index], :accounts
       can [:show, :activate, :decline, :cancel], :accounts, project_id: user.owned_project_ids
+      can :show, :cluster_users, project_id: user.project_ids
       
       # sured user
       if user.sured?

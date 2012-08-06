@@ -16,6 +16,9 @@ shared_examples 'all users' do
   it { should be_able_to(:create, :users) }
   it { should be_able_to(:activate, :users) }
   it { should be_able_to(:confirmation, :users) }
+  
+  it { should be_able_to(:new, :activations) }
+  it { should be_able_to(:create, :activations) }
 end
 
 shared_examples 'basic user' do

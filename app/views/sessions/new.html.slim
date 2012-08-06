@@ -7,4 +7,7 @@
   div class="form-actions"
     = f.button :submit, t('pages.shared.login'), class: 'btn btn-primary'
 
-p = link_to 'Забыли пароль?', new_password_path
+p
+  = link_to 'Забыли пароль?', new_password_path
+  = " или "
+  = link_to 'Не получили инструкции по активации?', new_activation_path

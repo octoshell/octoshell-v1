@@ -5,6 +5,9 @@ MSU::Application.routes.draw do
     get :confirmation, on: :collection
   end
   
+  # activations
+  resources :activations, only: [:new, :create]
+  
   # credentials
   resources :credentials, only: [:index, :new, :create, :destroy, :show]
   

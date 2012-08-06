@@ -147,6 +147,10 @@ class User < ActiveRecord::Base
     activation_state == 'pending'
   end
   
+  def activation_active?
+    activation_state == 'active'
+  end
+  
 private
   
   def step_name(name)

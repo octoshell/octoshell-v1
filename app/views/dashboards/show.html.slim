@@ -21,6 +21,10 @@ h2 Доступы к кластерам
 
 = render partial: 'accesses/table', locals: { accesses: @user.accesses }
 
+h2 Поддержка
+
+= render partial: 'tickets/table', locals: { tickets: @user.tickets.non_closed }
+
 h2 Заявки
 
 - if @user.projects.empty?
