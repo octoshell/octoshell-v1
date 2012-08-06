@@ -256,6 +256,7 @@ ru:
     errors:
       <<: *errors
   flash:
+    user_is_activated: Пользователь активирован.
     alerts:
       surety_not_found: Поручительство не найдено
   helpers:
@@ -305,6 +306,13 @@ ru:
           attributes:
             base:
               failed_to_stop_all_requests: "Не удалось остановить все заявки"
+        user:
+          attributes:
+            base:
+              user_is_not_registered: Пользователь не зарегистрирован.
+              user_is_not_activated: Пользователь еще не активирован. Пройдите по ссылке в письме об активации.
+              user_is_closed: Пользователь заблокирован.
+              wrong_password: Не верный пароль.
     attributes:
       user:
         email: Email
@@ -354,6 +362,7 @@ ru:
         unblock_user: unblock_user
         add_openkey: add_openkey
         del_openkey: del_openkey
+        state: Состояние
       account:
         project: Проект
         state: Состояние
@@ -403,6 +412,13 @@ ru:
             pausing: Блокируется
             resuming: Разблокируется
             closed: Закрыт
+      cluster:
+        state:
+          states:
+            active: Активен
+            closed: Закрыт
+          events:
+            _close: Закрыть
       project:
         state:
           states:

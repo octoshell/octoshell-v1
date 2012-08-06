@@ -10,7 +10,8 @@ class SessionsController < ApplicationController
     if @user = login(email, password, remember)
       redirect_to root_url
     else
-      @user = User.new(email: email)
+      @user = User.initialize_with_auth_errors(email)
+      flash.now[:alert] = @user.errors.full_messages.join(', ')
       render :new
     end
   end

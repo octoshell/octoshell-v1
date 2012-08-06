@@ -1,9 +1,15 @@
 - title "Кластер: #{@cluster.name}"
 
+table class="table table-bordered"
+  tr
+    th = Cluster.human_attribute_name(:state)
+    td = @cluster.human_state_name
+
 - if can? :edit, @cluster
-  ul class="nav nav-pills"
-    li = link_to 'Редактировать', edit_cluster_path(@cluster)
-    li = link_to Cluster.human_state_event_name(:_close), cluster_close_path(@cluster), method: :put, data: { confirm: 'Вы действительно хотите закрыть кластер? Все заявки автоматически отменятся.' }
+  div class="link-actions"
+    = link_to 'Редактировать', edit_cluster_path(@cluster), class: 'btn'
+    = " "
+    = link_to Cluster.human_state_event_name(:_close), cluster_close_path(@cluster), method: :put, data: { confirm: 'Вы действительно хотите закрыть кластер? Все заявки автоматически отменятся.' }, class: 'btn btn-danger'
 
 p = @cluster.description
 

@@ -1,6 +1,6 @@
 MSU::Application.routes.draw do
   # users
-  get 'users/acitivate/:token' => 'users#activate', as: :activate_user
+  get 'users/activate/:token' => 'users#activate', as: :activate_user
   resources :users, only: [:new, :create, :show] do
     get :confirmation, on: :collection
   end

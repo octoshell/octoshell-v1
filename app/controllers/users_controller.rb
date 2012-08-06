@@ -28,6 +28,7 @@ class UsersController < ApplicationController
     if @user
       @user.activate!
       auto_login @user
+      flash[:notice] = t('flash.user_is_activated')
       redirect_to after_login_path
     else
       not_authenticated

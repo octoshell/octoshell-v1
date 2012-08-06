@@ -52,6 +52,24 @@ class User < ActiveRecord::Base
   
   define_state_machine_scopes
   
+  class << self
+    def initialize_with_auth_errors(email)
+      auth = User.new(email: email)
+      if user = User.find_by_email(email)
+        if user.closed?
+          auth.errors.add :base, :closed
+        elsif user.activation_pending?
+          auth.errors.add :base, :user_is_not_activated
+        else
+          auth.errors.add :base, :wrong_password
+        end
+      else
+        auth.errors.add :base, :user_is_not_registered
+      end
+      auth
+    end
+  end
+  
   def all_requests
     Request.joins(project: :accounts).where(accounts: { user_id: id })
   end
@@ -123,6 +141,10 @@ class User < ActiveRecord::Base
       _unsure!
       accounts.each &:close!
     end
+  end
+  
+  def activation_pending?
+    activation_state == 'pending'
   end
   
 private
