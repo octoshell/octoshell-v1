@@ -21,6 +21,10 @@ h2 Доступы
 
 = render partial: 'accounts/table', locals: { accounts: @project.accounts }
 
+h2 Пользователи на кластере
+
+= render partial: 'cluster_users/table', locals: { cluster_users: @project.cluster_users }
+
 h2 Заявки
 
 p = link_to 'Новая заявка', new_request_path

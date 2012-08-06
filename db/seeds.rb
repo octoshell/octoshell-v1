@@ -1,4 +1,7 @@
 # coding: utf-8
+
+MSU::Application.config.action_mailer.delivery_method = :test
+
 ActiveRecord::Base.transaction do
   # users
   
@@ -7,23 +10,23 @@ ActiveRecord::Base.transaction do
     DatabaseCleaner.clean
   end
   
-  User.create! do |user|
-    user.email                 = 'serg@parallel.ru'
-    user.password              = 'octoshell'
-    user.password_confirmation = 'octoshell'
-    user.first_name            = 'Sergey'
-    user.last_name             = 'Zhumatiy'
-    user.admin                 = true
-  end
-  
-  User.create! do |user|
-    user.email                 = 'dan@parallel.ru'
-    user.password              = 'octoshell'
-    user.password_confirmation = 'octoshell'
-    user.first_name            = 'Dmitry'
-    user.last_name             = 'Nikitenko'
-    user.admin                 = true
-  end
+  # User.create! do |user|
+  #   user.email                 = 'serg@parallel.ru'
+  #   user.password              = 'octoshell'
+  #   user.password_confirmation = 'octoshell'
+  #   user.first_name            = 'Sergey'
+  #   user.last_name             = 'Zhumatiy'
+  #   user.admin                 = true
+  # end
+  # 
+  # User.create! do |user|
+  #   user.email                 = 'dan@parallel.ru'
+  #   user.password              = 'octoshell'
+  #   user.password_confirmation = 'octoshell'
+  #   user.first_name            = 'Dmitry'
+  #   user.last_name             = 'Nikitenko'
+  #   user.admin                 = true
+  # end
   
   User.create! do |user|
     user.email                 = 'releu@me.com'
