@@ -15,7 +15,7 @@
     div class="controls"
       = f.hidden_field :procedure
       span class="input-xlarge uneditable-input" = f.object.procedure
-  = f.input :command, input_html: { rows: 10 }
+  = f.input :command, input_html: { rows: 10, class: 'span6 code' }
   
   div class="form-actions"
     = f.button :submit, class: 'btn-primary'

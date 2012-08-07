@@ -56,7 +56,12 @@ class Task < ActiveRecord::Base
   
   def perform
     return unless pending?
-    execute!
+    status = Timeout::timeout(10) do
+      execute!
+    end
+  rescue Timeout::Error
+    self.stderr = 'Timeout::Error'
+    failure!
   end
   
   def retry
