@@ -92,7 +92,7 @@ MSU::Application.routes.draw do
   # tasks
   resources :tasks, only: [:show, :create, :index] do
     get :retry
-    put :success
+    put :perform_callbacks
   end
   
   # organizations

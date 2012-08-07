@@ -22,9 +22,9 @@ class TasksController < ApplicationController
     end
   end
   
-  def success
+  def perform_callbacks
     @task = Task.find(params[:task_id])
-    if @task.force_success
+    if @task.perform_callbacks!
       redirect_to @task
     else
       redirect_to @task, alert: @task.errors.full_messages.join("\n")

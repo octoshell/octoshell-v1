@@ -49,7 +49,7 @@ describe Ability do
     
     it { should be_able_to(:index, :tasks) }
     it { should be_able_to(:show, :tasks) }
-    it { should be_able_to(:success, :tasks) }
+    it { should be_able_to(:perform_callbacks, :tasks) }
     it { should be_able_to(:create, :tasks) }
     it { should be_able_to(:retry, :tasks) }
     

@@ -31,16 +31,12 @@ class Task < ActiveRecord::Base
       transition pending: :successed
     end
     
-    event :_force_success do
-      transition [:failed, :pending] => :successed
-    end
-    
     event :_failure do
       transition pending: :failed
     end
   end
   
-  define_defaults_events :success, :failure, :force_success
+  define_defaults_events :success, :failure
   
   define_state_machine_scopes
   
@@ -56,11 +52,20 @@ class Task < ActiveRecord::Base
   
   def perform
     return unless pending?
-    status = Timeout::timeout(10) do
-      execute!
+    
+    Timeout::timeout(10) { execute! }
+    
+    if succeed_command?
+      success!
+      perform_callbacks!
+    else
+      failure!
     end
   rescue Timeout::Error
-    self.stderr = 'Timeout::Error'
+    self.comment = 'Timeout::Error'
+    failure!
+  rescue => e
+    self.comment = e.to_s
     failure!
   end
   
@@ -80,36 +85,6 @@ class Task < ActiveRecord::Base
     procedure.to_s
   end
   
-  def success!
-    transaction do
-      validate_errors
-      if errors.empty?
-        _success!
-        resource.continue!(procedure)
-      else
-        failure!
-      end
-    end
-  end
-  
-  def force_success!
-    transaction do
-      _force_success!
-      resource.continue!(procedure)
-    end
-  end
-
-  def failure!
-    transaction do
-      if _failure
-        resource.stop!(procedure)
-        # UserMailer.report_failed_task(self)
-      else
-        raise self.errors.inspect
-      end
-    end
-  end
-  
   def assign_command
     template = resource.cluster.send(procedure)
     procedure_replacement.each do |key, value|
@@ -117,6 +92,30 @@ class Task < ActiveRecord::Base
     end
     
     self.command = template
+  end
+  
+  def can_perform_callbacks?
+    not callbacks_performed?
+  end
+  
+  def perform_callbacks!
+    return true unless can_perform_callbacks?
+    
+    transaction do
+      self.callbacks_performed = true
+      resource.continue!(procedure)
+      save!
+    end
+  rescue StateMachine::InvalidTransition => e
+    errors.add(:base, e.to_s)
+    false
+  rescue => e
+    errors.add(:base, e.to_s)
+    false
+  end
+  
+  def description
+    I18n.t("tasks.description.#{procedure}.html").html_safe
   end
   
 private
@@ -135,19 +134,13 @@ private
   
   def execute!
     exec = command.gsub '"', '\"'
-    
     Open3.popen3(%{bash -c "#{exec}"}) do |stdin, stdout, stderr|
       self.stderr = stderr.read
       self.stdout = stdout.read
     end
-    success!
-  rescue => e
-    self.stderr ||= e.message
-    failure!
   end
   
-  def validate_errors
-    errors.add(:command) unless command?
-    errors.add(:base, :failed) if stdout? || stderr?
+  def succeed_command?
+    !(stdout? || stderr?)
   end
 end

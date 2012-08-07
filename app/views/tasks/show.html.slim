@@ -1,8 +1,11 @@
 - title "Задание ##{@task.id}"
 
+blockquote
+  = @task.description
+
 table class="table table-bordered"
   tr
-    th = Task.human_attribute_name(:resource)
+    th class="span3" = Task.human_attribute_name(:resource)
     td = link_to_task_resource(@task)
   tr
     th = Task.human_attribute_name(:procedure)
@@ -17,14 +20,21 @@ table class="table table-bordered"
         = @task.command
   tr
     th = Task.human_attribute_name(:stdout)
-    td = @task.stdout
+    td
+      textarea disabled="disabled" class="public-key" rows="10"
+        = @task.stdout
   tr
     th = Task.human_attribute_name(:stderr)
-    td = @task.stderr
+    td
+      textarea disabled="disabled" class="public-key" rows="10"
+        = @task.stderr
+  tr
+    th = Task.human_attribute_name(:callbacks_performed)
+    td = @task.callbacks_performed ? 'Да' : 'Нет'
 
   div class="link-actions"
-    - if @task.can__force_success?
-      = link_to Task.human_state_event_name(:_force_success), task_success_path(@task), class: 'btn', method: :put
+    - if @task.can_perform_callbacks?
+      = link_to 'Вызвать коллбеки', task_perform_callbacks_path(@task), class: 'btn', method: :put
       = " "
     = link_to 'Повторить задание', task_retry_path(@task), class: 'btn'
 

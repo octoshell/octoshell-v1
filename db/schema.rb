@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120803122032) do
+ActiveRecord::Schema.define(:version => 20120807113713) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -181,12 +181,14 @@ ActiveRecord::Schema.define(:version => 20120803122032) do
     t.string   "state"
     t.string   "resource_type"
     t.integer  "resource_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "procedure"
     t.text     "data"
     t.string   "event"
     t.datetime "deleted_at"
+    t.string   "comment"
+    t.boolean  "callbacks_performed", :default => false
   end
 
   create_table "templates", :force => true do |t|

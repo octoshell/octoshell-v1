@@ -1,4 +1,10 @@
 ru:
+  tasks:
+    description:
+      unblock_user:
+        html: "<p>Разблокировка <em>Пользователя на кластере</em>.</p><p>Коллбеки переводят <em>Пользователя на кластере</em> из состояния <b>Разблокировывается</b> в состояние <b>Активен</b> и создает <em>Доступы на кластер</em> если их нет.</p>"
+      block_user:
+        html: "<p>Блокировка <em>Пользователя на кластере</em>.</p><p>Коллбеки переводят <em>Пользователя на кластере</em> из состояния <b>Блокируется</b> в состояние <b>Заблокирован</b></p>"
   date:
     abbr_day_names:
     - Вс
@@ -120,6 +126,7 @@ ru:
   errors: &errors
     format: ! '%{attribute} %{message}'
     messages:
+      invalid_transition: 'Невозможно совершить действие "%{event}". "%{model}" в состоянии "%{state}".'
       accepted: нужно подтвердить
       blank: не может быть пустым
       confirmation: не совпадает с подтверждением
@@ -368,6 +375,8 @@ ru:
         add_openkey: add_openkey
         del_openkey: del_openkey
         state: Состояние
+      cluster_user:
+        state: Состояние
       account:
         project: Проект
         state: Состояние
@@ -382,6 +391,7 @@ ru:
         command: Комманда
         stdout: StdOut
         stderr: StdErr
+        callbacks_performed: Вызваны коллбеки?
       access:
         credential: Публичный ключ
         state: Состояние
@@ -424,6 +434,12 @@ ru:
             pausing: Блокируется
             resuming: Разблокируется
             closed: Закрыт
+          events:
+            _pause: Заблокировать
+            _complete_pausing: Завершить блокировку
+            _complete_resuming: Завершить разблокировку
+            _complete_closure: Завершить закрытие
+            _complete_activation: Завершить активацию
       cluster:
         state:
           states:
