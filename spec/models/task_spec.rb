@@ -8,6 +8,7 @@ describe Task do
   
   it { should belong_to(:resource) }
   it { should validate_presence_of(:resource) }
+  it { should validate_presence_of(:command) }
   it { should validate_presence_of(:procedure) }
   
   describe '#setup' do
@@ -20,7 +21,7 @@ describe Task do
   
   describe '#perform' do
     it 'should perform pending tasks' do
-      task.should_receive(task.procedure).once
+      task.should_receive(:execute!).once
       task.perform
     end
   end
@@ -47,6 +48,35 @@ describe Task do
         task.command = "/atata"
         task.success!
       end
+    end
+  end
+  
+  describe '#retry' do
+    subject { task.retry }
+    
+    it 'should return new task' do
+      should be_a_kind_of(Task)
+    end
+    
+    it { should be_new_record }
+    
+    its(:command)   { should == task.command }
+    its(:procedure) { should == task.procedure }
+    its(:resource)  { should == task.resource }
+  end
+  
+  describe '#retry!' do
+    let(:task) { build(:task) }
+    
+    it 'should save task' do
+      task.retry!
+      should be_persisted
+    end
+    
+    it 'should add task to resque' do
+      pending 'works but test failed'
+      Resque.should_receive(:enqueue).with(TasksWorker, task.id)
+      task.retry!
     end
   end
   

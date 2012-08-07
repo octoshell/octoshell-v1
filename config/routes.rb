@@ -90,7 +90,8 @@ MSU::Application.routes.draw do
   resources :accesses, only: :show
   
   # tasks
-  resources :tasks, only: [:show, :index] do
+  resources :tasks, only: [:show, :create, :index] do
+    get :retry
     put :success
   end
   

@@ -21,5 +21,10 @@ table class="table table-bordered"
   tr
     th = Task.human_attribute_name(:stderr)
     td = @task.stderr
-- if @task.can__force_success?
-  p = link_to Task.human_state_event_name(:_force_success), task_success_path(@task), class: 'btn', method: :put
+
+  div class="link-actions"
+    - if @task.can__force_success?
+      = link_to Task.human_state_event_name(:_force_success), task_success_path(@task), class: 'btn', method: :put
+      = " "
+    = link_to 'Повторить задание', task_retry_path(@task), class: 'btn'
+

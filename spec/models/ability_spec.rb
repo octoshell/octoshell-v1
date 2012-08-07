@@ -50,13 +50,15 @@ describe Ability do
     it { should be_able_to(:index, :tasks) }
     it { should be_able_to(:show, :tasks) }
     it { should be_able_to(:success, :tasks) }
+    it { should be_able_to(:create, :tasks) }
+    it { should be_able_to(:retry, :tasks) }
     
     it { should be_able_to(:show, :accounts) }
     
     it { should be_able_to(:show, :cluster_users) }
     
     it { should be_able_to(:show, :credentials) }
-    it { should be_able_to(:destroy, :credentials) }
+    it { should be_able_to(:close, :credentials) }
     
     it { should be_able_to(:activate, :accounts) }
     it { should be_able_to(:decline, :accounts) }

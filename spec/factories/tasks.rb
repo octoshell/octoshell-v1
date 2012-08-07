@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :task do
     procedure Task::PROCEDURES.first
     association :resource, factory: :access
+    command 'exit 0'
     
     factory :add_user_task do
       association :resource, factory: :activing_cluster_user

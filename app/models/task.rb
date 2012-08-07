@@ -12,8 +12,11 @@ class Task < ActiveRecord::Base
   
   belongs_to :resource, polymorphic: true
   
-  validates :resource, :procedure, presence: true
+  validates :resource, :command, :procedure, presence: true
   validates :procedure_string, inclusion: { in: PROCEDURES }
+  
+  attr_accessible :command, :procedure, :resource_type, :resource_id,
+    as: :admin
   
   PROCEDURES.each do |proc|
     scope proc.to_sym, where(procedure: proc)
@@ -45,6 +48,7 @@ class Task < ActiveRecord::Base
     transaction do
       task = scoped.create! do |task|
         task.procedure = procedure
+        task.assign_command
       end
       Resque.enqueue TasksWorker, task.id
     end
@@ -52,7 +56,19 @@ class Task < ActiveRecord::Base
   
   def perform
     return unless pending?
-    send procedure
+    execute!
+  end
+  
+  def retry
+    self.class.new do |task|
+      task.procedure = procedure
+      task.resource  = resource
+      task.command   = command
+    end
+  end
+  
+  def retry!
+    save and Resque.enqueue(TasksWorker, id)
   end
   
   def procedure_string
@@ -89,63 +105,33 @@ class Task < ActiveRecord::Base
     end
   end
   
-private
-  
-  def add_user
-    execute :add_user, {
-      user: resource.project.username,
-      host: resource.cluster.host
-    }
-  end
-  
-  def del_user
-    execute :del_user, {
-      user: resource.project.username,
-      host: resource.cluster.host
-    }
-  end
-  
-  def block_user
-    execute :block_user, {
-      user: resource.project.username,
-      host: resource.cluster.host
-    }
-  end
-  
-  def unblock_user
-    execute :unblock_user, {
-      user: resource.project.username,
-      host: resource.cluster.host
-    }
-  end
-  
-  def add_openkey
-    execute :add_openkey, {
-      user:       resource.cluster_user.project.username,
-      host:       resource.cluster.host,
-      public_key: resource.credential.public_key
-    }
-  end
-  
-  def del_openkey
-    execute :del_openkey, {
-      user:       resource.cluster_user.project.username,
-      host:       resource.cluster.host,
-      public_key: resource.credential.public_key
-    }
-  end
-  
-  def execute(cmd, replacement = {})
-    template = resource.cluster.send(cmd)
-    replacement.each do |key, value|
+  def assign_command
+    template = resource.cluster.send(procedure)
+    procedure_replacement.each do |key, value|
       template.gsub! "%#{key}%", %{"#{value}"}
     end
     
     self.command = template
+  end
+  
+private
+  
+  def procedure_replacement
+    case procedure.to_sym
+    when :add_user, :del_user, :block_user, :unblock_user then
+      { user: resource.project.username,
+        host: resource.cluster.host }
+    when :add_openkey, :del_openkey then
+      { user:       resource.cluster_user.project.username,
+        host:       resource.cluster.host,
+        public_key: resource.credential.public_key }
+    end
+  end
+  
+  def execute!
+    exec = command.gsub '"', '\"'
     
-    template.gsub! '"', '\"'
-    
-    Open3.popen3(%{bash -c "#{template}"}) do |stdin, stdout, stderr|
+    Open3.popen3(%{bash -c "#{exec}"}) do |stdin, stdout, stderr|
       self.stderr = stderr.read
       self.stdout = stdout.read
     end
@@ -153,11 +139,6 @@ private
   rescue => e
     self.stderr ||= e.message
     failure!
-  end
-  
-  def bin(cmd)
-    template = resource.cluster.send(cmd)
-    "#{Rails.root}/script/#{exe}"
   end
   
   def validate_errors

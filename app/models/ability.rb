@@ -80,7 +80,7 @@ class Ability
         
         can :show, :cluster_users
         
-        can [:index, :show, :success], :tasks
+        can [:index, :show, :success, :create, :retry], :tasks
         
         can :show, :accounts
         
