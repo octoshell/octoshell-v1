@@ -22,6 +22,7 @@ gem 'therubyracer'
 gem 'yaml_db'
 
 group :test, :development do
+  gem 'quiet_assets'
   gem 'spin'
   gem 'factory_girl_rails'
   gem 'capybara'

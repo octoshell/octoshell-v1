@@ -297,6 +297,8 @@ ru:
       credential: Публичный ключ
       cluster_user: Пользователь (на кластере)
       surety: Поручительство
+      ticket_question: Вопрос к заявке
+      ticket_field: Дополнительное поле к заявке
     errors:
       models:
         account:
@@ -405,6 +407,13 @@ ru:
       reply:
         message: Сообщение
         attachment: Файл
+      ticket_question:
+        question: Вопрос
+        ticket_question: Родительский вопрос
+      ticket_field_relation:
+        ticket_field: Дополнительное поле
+        use: Использовать?
+        required: Обязательное поле?
     state_machines:
       surety:
         state:

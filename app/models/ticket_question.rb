@@ -8,11 +8,11 @@ class TicketQuestion < ActiveRecord::Base
   validates :ticket_question_id, exclusion: { in: proc { |tq| [tq.id] } }, allow_nil: true
   
   before_create :assign_leaf
+  after_create :create_ticket_relations
   
   scope :root, where(ticket_question_id: nil)
   
-  accepts_nested_attributes_for :ticket_field_relations,
-    reject_if: proc { |attrs| attrs['use'] == '0' }, allow_destroy: true
+  accepts_nested_attributes_for :ticket_field_relations
   
   attr_accessible :question, :ticket_question_id,
     :ticket_field_relations_attributes, as: :admin
@@ -46,19 +46,6 @@ class TicketQuestion < ActiveRecord::Base
     new_record? ? TicketQuestion.all : TicketQuestion.where('id != ?', id)
   end
   
-  def available_field_relations
-    ticket_fields = TicketField.scoped
-    if ticket_field_ids.any?
-      ticket_fields = ticket_fields.where('id not in (?)', ticket_field_ids)
-    end
-    ticket_fields.map do |ticket_field|
-      TicketFieldRelation.new do |ticket_field_relation|
-        ticket_field_relation.ticket_question = self
-        ticket_field_relation.ticket_field = ticket_field
-      end
-    end
-  end
-  
 private
   
   def assign_leaf
@@ -66,5 +53,13 @@ private
       ticket_question.update_attribute(:leaf, false)
     end
     true
+  end
+  
+  def create_ticket_relations
+    TicketField.active.each do |ticket_field|
+      ticket_field_relations.create! do |ticket_field_relation|
+        ticket_field_relation.ticket_field = ticket_field
+      end
+    end
   end
 end

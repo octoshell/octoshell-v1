@@ -1,12 +1,9 @@
 - title @ticket_question.question
 
+= render partial: 'list', locals: { ticket_questions: TicketQuestion.root.active, highlight: @ticket_question.id }
+
 div class="link-actions"
   = link_to 'Редактировать', edit_ticket_question_path(@ticket_question), class: 'btn'
-
-table class="table table-bordered"
-  tr
-    th = TicketQuestion.han(:question)
-    td = @ticket_question.question
 
 h2 Дополнительные поля
 
@@ -14,46 +11,20 @@ h2 Дополнительные поля
 div class="link-actions"
   = link_to 'Новое поле', new_ticket_field_path, class: 'btn'
 
-h2 Используемые поля
-
 - if @ticket_question.ticket_field_relations.any?
   = form_for @ticket_question do |f|
     table class="table table-bordered"
       tr
         th = TicketFieldRelation.human_attribute_name(:ticket_field)
-        th Удалить?
+        th = TicketFieldRelation.human_attribute_name(:use)
         th = TicketFieldRelation.human_attribute_name(:required)
       = f.fields_for :ticket_field_relations do |f|
-        = f.hidden_field :ticket_question_id
-        = f.hidden_field :ticket_field_id
         tr
           td = link_to_ticket_field f.object.ticket_field
-          td = f.check_box :_destroy
+          td = f.check_box :use
           td = f.check_box :required
     div class="form-actions"
-      = f.button :submit, class: 'btn btn-primary'
+      = f.submit class: 'btn btn-primary'
 
-- else
-  p Нет полей
-
-h2 Не используемые поля
-
-- if @ticket_question.available_field_relations.any?
-  = form_for @ticket_question do |f|
-    table class="table table-bordered"
-      tr
-        th = TicketFieldRelation.human_attribute_name(:ticket_field)
-        th Использовать?
-        th = TicketFieldRelation.human_attribute_name(:required)
-      - @ticket_question.available_field_relations.each do |field_relation|
-        = f.fields_for :ticket_field_relations, field_relation do |f|
-          = f.hidden_field :ticket_question_id
-          = f.hidden_field :ticket_field_id
-          tr
-            td = link_to_ticket_field f.object.ticket_field
-            td = f.check_box :use
-            td = f.check_box :required
-    div class="form-actions"
-      = f.button :submit, class: 'btn btn-primary'
 - else
   p Нет полей

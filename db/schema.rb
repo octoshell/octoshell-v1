@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120808134601) do
+ActiveRecord::Schema.define(:version => 20120808143448) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -220,6 +220,7 @@ ActiveRecord::Schema.define(:version => 20120808134601) do
     t.boolean  "required",           :default => false
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
+    t.boolean  "use",                :default => false
   end
 
   create_table "ticket_field_values", :force => true do |t|
@@ -235,6 +236,7 @@ ActiveRecord::Schema.define(:version => 20120808134601) do
     t.string   "hint"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "state"
   end
 
   create_table "ticket_question_field_relations", :force => true do |t|
@@ -266,6 +268,7 @@ ActiveRecord::Schema.define(:version => 20120808134601) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
+    t.integer  "ticket_question_id"
   end
 
   create_table "users", :force => true do |t|

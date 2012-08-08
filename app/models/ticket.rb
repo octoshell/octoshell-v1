@@ -2,12 +2,14 @@ class Ticket < ActiveRecord::Base
   has_attached_file :attachment
   
   belongs_to :user
+  belongs_to :ticket_question
   has_many :replies
   
-  validates :user, :subject, :message, presence: true
+  validates :user, :subject, :message, :ticket_question, presence: true
   
-  attr_accessible :message, :subject, :attachment, :url
-  attr_accessible :message, :subject, :attachment, :url, :user_id, as: :admin
+  attr_accessible :message, :subject, :attachment, :ticket_question_id, :url
+  attr_accessible :message, :subject, :attachment, :ticket_question_id, :url,
+    :user_id, as: :admin
   
   state_machine :state, initial: :active do
     state :active

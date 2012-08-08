@@ -3,4 +3,4 @@
 div class="link-actions"
   = link_to 'Новый вопрос', new_ticket_question_path, class: 'btn'
 
-= render partial: 'list', locals: { ticket_questions: @ticket_questions.root }
+= render partial: 'list', locals: { ticket_questions: @ticket_questions.root, highlight: false }

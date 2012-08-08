@@ -1,6 +1,6 @@
 - if ticket_questions.any?
   ul
     - ticket_questions.each do |ticket_question|
-      li
+      li class="#{highlight == ticket_question.id ? 'highlight' : ''}"
         = link_to_ticket_question ticket_question
-        = render partial: 'ticket_questions/list', locals: { ticket_questions: ticket_question.ticket_questions }
+        = render partial: 'ticket_questions/list', locals: { ticket_questions: ticket_question.ticket_questions, highlight: highlight }
