@@ -26,31 +26,6 @@ describe Task do
     end
   end
   
-  describe '#success' do
-    context 'with errors' do
-      before do
-        task.stdout = "Moo"
-        task.success!
-      end
-      
-      it { should be_failed }
-    end
-    
-    context 'without errors' do
-      it 'should succeed task' do
-        task.command = "/atata"
-        task.success!
-        should be_successed
-      end
-      
-      it 'should call continue resource procedure' do
-        task.resource.should_receive(:continue!).with(task.procedure)
-        task.command = "/atata"
-        task.success!
-      end
-    end
-  end
-  
   describe '#retry' do
     subject { task.retry }
     
@@ -80,22 +55,15 @@ describe Task do
     end
   end
   
-  describe '#force_success' do
+  describe '#perform_callbacks' do
     it 'should succeed task' do
-      task.force_success!
-      should be_successed
+      task.perform_callbacks!
+      should be_callbacks_performed
     end
     
     it 'should call continue resource procedure' do
       task.resource.should_receive(:continue!).with(task.procedure)
-      task.force_success!
-    end
-  end
-  
-  describe '#failure' do
-    it 'should call stop resource procedure' do
-      task.resource.should_receive(:stop!).with(task.procedure)
-      task.failure!
+      task.perform_callbacks!
     end
   end
 end

@@ -1,0 +1,10 @@
+- title @ticket_question.question
+
+div class="link-actions"
+  = link_to 'Редактировать', edit_ticket_question_path(@ticket_question), class: 'btn'
+
+table class="table table-bordered"
+  tr
+    th = TicketQuestion.han(:question)
+    td = @ticket_question.question
+    

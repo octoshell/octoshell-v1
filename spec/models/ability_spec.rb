@@ -114,5 +114,13 @@ describe Ability do
     it { should be_able_to(:edit, :clusters) }
     it { should be_able_to(:update, :clusters) }
     it { should be_able_to(:destroy, :clusters) }
+    
+    it { should be_able_to(:index, :ticket_questions) }
+    it { should be_able_to(:show, :ticket_questions) }
+    it { should be_able_to(:new, :ticket_questions) }
+    it { should be_able_to(:create, :ticket_questions) }
+    it { should be_able_to(:edit, :ticket_questions) }
+    it { should be_able_to(:update, :ticket_questions) }
+    it { should be_able_to(:close, :ticket_questions) }
   end
 end

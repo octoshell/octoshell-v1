@@ -73,6 +73,10 @@ module ApplicationHelper
     end
   end
   
+  def link_to_ticket_question(ticket_question)
+    link_to ticket_question.question, ticket_question
+  end
+  
   def link_to_task(task)
     if task
       link_to 'открыть', task

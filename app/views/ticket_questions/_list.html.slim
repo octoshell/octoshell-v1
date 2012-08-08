@@ -1,0 +1,6 @@
+- if ticket_questions.any?
+  ul
+    - ticket_questions.each do |ticket_question|
+      li
+        = link_to_ticket_question ticket_question
+        = render partial: 'ticket_questions/list', locals: { ticket_questions: ticket_question.ticket_questions }

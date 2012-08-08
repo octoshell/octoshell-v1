@@ -82,6 +82,8 @@ class Ability
         
         can [:index, :show, :perform_callbacks, :create, :retry], :tasks
         
+        can [:new, :create, :edit, :update, :show, :index, :close], :ticket_questions
+        
         can :show, :accounts
         
         can [:show, :close], :credentials

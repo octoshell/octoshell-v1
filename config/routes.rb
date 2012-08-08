@@ -115,6 +115,9 @@ MSU::Application.routes.draw do
   
   # support
   resource :support, only: :show
+  
+  # ticket questions
+  resources :ticket_questions, except: :destroy
 
   root to: 'application#dashboard'
   
