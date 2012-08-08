@@ -29,7 +29,7 @@ class TicketQuestionsController < ApplicationController
     if @ticket_question.update_attributes(params[:ticket_question], as_role)
       redirect_to @ticket_question
     else
-      render :new
+      render :edit
     end
   end
   

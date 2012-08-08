@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120807142712) do
+ActiveRecord::Schema.define(:version => 20120808134601) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -212,6 +212,37 @@ ActiveRecord::Schema.define(:version => 20120807142712) do
     t.text     "message"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "ticket_field_relations", :force => true do |t|
+    t.integer  "ticket_question_id"
+    t.integer  "ticket_field_id"
+    t.boolean  "required",           :default => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+  end
+
+  create_table "ticket_field_values", :force => true do |t|
+    t.string   "value"
+    t.integer  "ticket_question_field_relation_id"
+    t.integer  "ticket_id"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+  end
+
+  create_table "ticket_fields", :force => true do |t|
+    t.string   "name"
+    t.string   "hint"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "ticket_question_field_relations", :force => true do |t|
+    t.integer  "ticket_question_id"
+    t.integer  "ticket_field_id"
+    t.boolean  "required",           :default => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
   end
 
   create_table "ticket_questions", :force => true do |t|

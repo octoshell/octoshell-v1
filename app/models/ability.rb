@@ -84,7 +84,7 @@ class Ability
         
         can [:new, :create, :edit, :update, :show, :index, :close], :ticket_questions
         
-        can [:index, :show, :new, :create, :edit, :update, :close], :additional_ticket_fields
+        can [:index, :show, :new, :create, :edit, :update, :close], :ticket_fields
         
         can :show, :accounts
         

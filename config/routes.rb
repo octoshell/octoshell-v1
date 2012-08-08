@@ -122,7 +122,7 @@ MSU::Application.routes.draw do
   end
   
   # additional ticket fields
-  resources :additional_ticket_fields, except: [:destroy] do
+  resources :ticket_fields, except: [:destroy] do
     put :close
   end
 

@@ -1,0 +1,6 @@
+- title 'Дополнительные поля к заявкам'
+
+div class="link-actions"
+  = link_to 'Новое поле', new_ticket_field_path, class: 'btn'
+
+= render partial: 'table', locals: { ticket_fields: @ticket_fields }

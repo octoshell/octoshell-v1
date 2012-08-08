@@ -1,19 +1,19 @@
 require 'spec_helper'
 
-describe AdditionalTicketFieldValue do
-  let(:additional_ticket_field_value) { create(:additional_ticket_field_value) }
-  subject { additional_ticket_field_value }
+describe TicketFieldValue do
+  let(:ticket_field_value) { create(:ticket_field_value) }
+  subject { ticket_field_value }
   
-  it { should belong_to(:additional_ticket_field) }
+  it { should belong_to(:ticket_field) }
   it { should belong_to(:ticket) }
   
-  it { should validate_presence_of(:additional_ticket_field) }
+  it { should validate_presence_of(:ticket_field) }
   it { should validate_presence_of(:ticket) }
   
   context 'with required additional ticket field' do
-    let(:additional_ticket_field_value) do
-      field = create(:required_additional_ticket_field)
-      create(:additional_ticket_field_value, additional_ticket_field: field)
+    let(:ticket_field_value) do
+      field = create(:required_ticket_field)
+      create(:ticket_field_value, ticket_field: field)
     end
     
     it { should validate_presence_of(:value) }
@@ -23,7 +23,7 @@ describe AdditionalTicketFieldValue do
     it { should_not validate_presence_of(:value) }
   end
   
-  it { should allow_mass_assignment_of(:additional_ticket_field_id) }
+  it { should allow_mass_assignment_of(:ticket_field_id) }
   it { should allow_mass_assignment_of(:ticket_id) }
   it { should allow_mass_assignment_of(:value) }
 end

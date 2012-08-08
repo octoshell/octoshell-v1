@@ -123,12 +123,12 @@ describe Ability do
     it { should be_able_to(:update, :ticket_questions) }
     it { should be_able_to(:close, :ticket_questions) }
     
-    it { should be_able_to(:index, :additional_ticket_field) }
-    it { should be_able_to(:show, :additional_ticket_field) }
-    it { should be_able_to(:new, :additional_ticket_field) }
-    it { should be_able_to(:create, :additional_ticket_field) }
-    it { should be_able_to(:edit, :additional_ticket_field) }
-    it { should be_able_to(:update, :additional_ticket_field) }
-    it { should be_able_to(:close, :additional_ticket_field) }
+    it { should be_able_to(:index, :ticket_field) }
+    it { should be_able_to(:show, :ticket_field) }
+    it { should be_able_to(:new, :ticket_field) }
+    it { should be_able_to(:create, :ticket_field) }
+    it { should be_able_to(:edit, :ticket_field) }
+    it { should be_able_to(:update, :ticket_field) }
+    it { should be_able_to(:close, :ticket_field) }
   end
 end

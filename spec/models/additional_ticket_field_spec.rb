@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe AdditionalTicketField do
-  let(:additional_ticket_field) { create(:additional_ticket_field) }
-  subject { additional_ticket_field }
+describe TicketField do
+  let(:ticket_field) { create(:ticket_field) }
+  subject { ticket_field }
   
   it { should be }
   
