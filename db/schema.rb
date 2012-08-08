@@ -224,10 +224,10 @@ ActiveRecord::Schema.define(:version => 20120808134601) do
 
   create_table "ticket_field_values", :force => true do |t|
     t.string   "value"
-    t.integer  "ticket_question_field_relation_id"
+    t.integer  "ticket_field_relation_id"
     t.integer  "ticket_id"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   create_table "ticket_fields", :force => true do |t|
