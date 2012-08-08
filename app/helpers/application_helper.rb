@@ -77,6 +77,10 @@ module ApplicationHelper
     link_to ticket_question.question, ticket_question
   end
   
+  def link_to_additional_ticket_field(additional_ticket_field)
+    link_to additional_ticket_field.name, additional_ticket_field
+  end
+  
   def link_to_task(task)
     if task
       link_to 'открыть', task

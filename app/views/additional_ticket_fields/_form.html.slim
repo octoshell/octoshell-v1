@@ -1,0 +1,7 @@
+= simple_form_for @additional_ticket_field, html: { class: 'form-horizontal' } do |f|
+  = f.input :name
+  = f.input :hint
+  = f.input :required
+  
+  div class="form-actions"
+    = f.button :submit, class: 'btn-primary'

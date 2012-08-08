@@ -117,7 +117,14 @@ MSU::Application.routes.draw do
   resource :support, only: :show
   
   # ticket questions
-  resources :ticket_questions, except: :destroy
+  resources :ticket_questions, except: :destroy do
+    put :close
+  end
+  
+  # additional ticket fields
+  resources :additional_ticket_fields, except: [:destroy] do
+    put :close
+  end
 
   root to: 'application#dashboard'
   

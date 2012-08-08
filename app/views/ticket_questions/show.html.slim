@@ -7,4 +7,9 @@ table class="table table-bordered"
   tr
     th = TicketQuestion.han(:question)
     td = @ticket_question.question
-    
+
+h2 Дополнительные поля
+
+
+div class="link-actions"
+  = link_to 'Новое поле', new_additional_ticket_field_path, class: 'btn'

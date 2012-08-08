@@ -6,11 +6,5 @@ describe AdditionalTicketField do
   
   it { should be }
   
-  it { should belong_to(:ticket_question) }
-  
   it { should validate_presence_of(:name) }
-  
-  it { should allow_mass_assignment_of(:name) }
-  it { should allow_mass_assignment_of(:hint) }
-  it { should allow_mass_assignment_of(:required) }
 end
