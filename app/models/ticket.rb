@@ -41,4 +41,20 @@ class Ticket < ActiveRecord::Base
   def actual?
     not closed?
   end
+  
+  def ticket_questions
+    if ticket_question
+      ticket_question.ticket_questions
+    else
+      TicketQuestion.root.active
+    end
+  end
+  
+  def show_questions?
+    !ticket_question || ticket_question.branch?
+  end
+  
+  def show_form?
+    ticket_question && ticket_question.leaf?
+  end
 end

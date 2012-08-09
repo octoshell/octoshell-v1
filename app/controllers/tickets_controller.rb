@@ -24,6 +24,13 @@ class TicketsController < ApplicationController
     authorize! :new, @ticket
   end
   
+  def continue
+    @ticket = Ticket.new(params[:ticket], as_role)
+    @ticket.user = current_user unless admin?
+    authorize! :continue, @ticket
+    render :new
+  end
+  
   def create
     @ticket = Ticket.new(params[:ticket], as_role)
     @ticket.user = current_user unless admin?

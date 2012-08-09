@@ -105,6 +105,7 @@ MSU::Application.routes.draw do
     get :closed, on: :collection
     put :close
     put :resolve
+    post :continue, on: :collection
   end
   
   # replies

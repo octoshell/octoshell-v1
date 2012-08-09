@@ -1,11 +1,33 @@
 - title 'Новая заявка'
 
-= simple_form_for @ticket, html: { class: 'form-horizontal' } do |f|
+- if @ticket.ticket_question && @ticket.ticket_question.breadcrumbs.any?
+  ul class="breadcrumb"
+    - breadcrumbs = @ticket.ticket_question.breadcrumbs
+    - breadcrumbs.each_with_index do |ticket_question, i|
+      li
+        - if i.next < breadcrumbs.size
+          = link_to ticket_question.question, new_ticket_path(ticket: { ticket_question_id: ticket_question.id })
+          span class="divider" = "/"
+        - else
+          = ticket_question.question
+
+- url = @ticket.show_questions? ? continue_tickets_path : tickets_path
+= simple_form_for @ticket, url: url, html: { class: 'form-horizontal' } do |f|
+  - if @ticket.show_questions?
+    = f.association :ticket_question, collection: @ticket.ticket_questions, label_method: :question
+  - else
+    = f.hidden_field :ticket_question_id
+    
   = f.association :user, label_method: :full_name if admin?
-  = f.input :subject
-  = f.input :url
-  = f.input :message, input_html: { rows: 5 }
-  = f.input :attachment
+  
+  - if f.object.show_form?
+    = f.input :subject
+    = f.input :url
+    = f.input :message, input_html: { rows: 5 }
+    = f.input :attachment
   
   div class="form-actions"
-    = f.button :submit, class: 'btn-primary'
+    - if f.object.show_form?
+      = f.button :submit, class: 'btn-primary'
+    - else
+      = f.button :submit, 'Продолжить', class: 'btn-primary'

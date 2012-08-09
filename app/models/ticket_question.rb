@@ -46,6 +46,22 @@ class TicketQuestion < ActiveRecord::Base
     new_record? ? TicketQuestion.all : TicketQuestion.where('id != ?', id)
   end
   
+  def breadcrumbs
+    breadcrumbs = [self]
+    
+    if ticket_question
+      breadcrumbs << ticket_question
+      
+      current_question = ticket_question
+      while ticket_question = current_question.ticket_question
+        current_question = ticket_question
+        breadcrumbs << current_question
+      end
+    end
+    
+    breadcrumbs.reverse
+  end
+  
 private
   
   def assign_leaf
