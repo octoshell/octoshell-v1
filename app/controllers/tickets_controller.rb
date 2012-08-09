@@ -28,7 +28,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new(params[:ticket], as_role)
     @ticket.user = current_user unless admin?
     if @ticket.show_form?
-      @ticket.ticket_question.ticket_field_relations.each do |relation|
+      @ticket.ticket_question.ticket_field_relations.uses.each do |relation|
         @ticket.ticket_field_values.build do |value|
           value.ticket_field_relation = relation
         end
