@@ -1,11 +1,23 @@
 - title @ticket_question.question
 
-= render partial: 'list', locals: { ticket_questions: TicketQuestion.root.active, highlight: @ticket_question.id }
+- if @ticket_question.active?
+  = render partial: 'list', locals: { ticket_questions: TicketQuestion.root.active, highlight: @ticket_question.id }
 
 div class="link-actions"
   = link_to 'Редактировать', edit_ticket_question_path(@ticket_question), class: 'btn'
   = " "
   = link_to 'Новый вопрос', new_ticket_question_path(ticket_question: { ticket_question_id: @ticket_question.id }), class: 'btn'
+  - if @ticket_question.can__close?
+    = " "
+    = link_to TicketQuestion.human_state_event_name(:_close), [@ticket_question, :close], method: :put, class: 'btn btn-danger'
+
+table class="table table-bordered"
+  tr
+    th class="span4" = TicketQuestion.human_attribute_name(:question)
+    td = @ticket_question.question
+  tr
+    th = TicketQuestion.human_attribute_name(:state)
+    td = @ticket_question.human_state_name
 
 h2 Дополнительные поля
 

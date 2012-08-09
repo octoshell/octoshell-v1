@@ -411,9 +411,11 @@ ru:
       ticket_question:
         question: Вопрос
         ticket_question: Родительский вопрос
+        state: Состояние
       ticket_field:
         name: Название
         hint: Подсказка
+        state: Состояние
       ticket_field_relation:
         ticket_field: Дополнительное поле
         use: Использовать?
@@ -498,6 +500,20 @@ ru:
             closed: Закрыт
           events:
             _resolve: Проблема решена
+            _close: Закрыть
+      ticket_question:
+        state:
+          states:
+            active: Активный
+            closed: Закрытый
+          events:
+            _close: Закрыть
+      ticket_field:
+        state:
+          states:
+            active: Активный
+            closed: Закрытый
+          events:
             _close: Закрыть
       task:
         state:

@@ -20,7 +20,7 @@ ul class="breadcrumb"
 - url = @ticket.show_questions? ? continue_tickets_path : tickets_path
 = simple_form_for @ticket, url: url, html: { class: 'form-horizontal' } do |f|
   - if @ticket.show_questions?
-    = f.association :ticket_question, collection: @ticket.ticket_questions, label_method: :question
+    = f.association :ticket_question, collection: @ticket.ticket_questions, label_method: :question, prompt: 'Выберите вариант'
   - else
     = f.hidden_field :ticket_question_id
     

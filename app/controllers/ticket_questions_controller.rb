@@ -34,7 +34,7 @@ class TicketQuestionsController < ApplicationController
   end
   
   def close
-    @ticket_question = find_ticket_question(params[:ticket_id])
+    @ticket_question = find_ticket_question(params[:ticket_question_id])
     if @ticket_question.close
       redirect_to @ticket_question
     else

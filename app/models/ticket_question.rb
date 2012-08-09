@@ -33,7 +33,7 @@ class TicketQuestion < ActiveRecord::Base
   def close!
     transaction do
       ticket_question.update_attribute(:leaf, true) if ticket_question
-      ticket_questions.each &:close!
+      ticket_questions.non_closed.each &:close!
       _close!
     end
   end
