@@ -1,8 +1,11 @@
 - title 'Новая заявка'
 
 ul class="breadcrumb"
-  li = link_to 'Начало', new_ticket_path
   - if @ticket.ticket_question && @ticket.ticket_question.breadcrumbs.any?
+    li 
+      = link_to 'Начало', new_ticket_path
+      span class="divider" = "/"
+      
     - breadcrumbs = @ticket.ticket_question.breadcrumbs
     - breadcrumbs.each_with_index do |ticket_question, i|
       li
@@ -11,6 +14,8 @@ ul class="breadcrumb"
           span class="divider" = "/"
         - else
           = ticket_question.question
+  - else
+    li = link_to 'Начало', new_ticket_path
 
 - url = @ticket.show_questions? ? continue_tickets_path : tickets_path
 = simple_form_for @ticket, url: url, html: { class: 'form-horizontal' } do |f|
