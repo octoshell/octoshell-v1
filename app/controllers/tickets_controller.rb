@@ -27,6 +27,13 @@ class TicketsController < ApplicationController
   def continue
     @ticket = Ticket.new(params[:ticket], as_role)
     @ticket.user = current_user unless admin?
+    if @ticket.show_form?
+      @ticket.ticket_question.ticket_field_relations.each do |relation|
+        @ticket.ticket_field_values.build do |value|
+          value.ticket_field_relation = relation
+        end
+      end
+    end
     authorize! :continue, @ticket
     render :new
   end

@@ -21,6 +21,10 @@ class TicketField < ActiveRecord::Base
   
   define_state_machine_scopes
   
+  def hint
+    self[:hint].blank? ? nil : self[:hint]
+  end
+  
 private
   
   def create_ticket_relations

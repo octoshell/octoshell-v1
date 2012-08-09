@@ -4,12 +4,16 @@ class Ticket < ActiveRecord::Base
   belongs_to :user
   belongs_to :ticket_question
   has_many :replies
+  has_many :ticket_field_values, inverse_of: :ticket
   
   validates :user, :subject, :message, :ticket_question, presence: true
   
-  attr_accessible :message, :subject, :attachment, :ticket_question_id, :url
+  accepts_nested_attributes_for :ticket_field_values
+  
   attr_accessible :message, :subject, :attachment, :ticket_question_id, :url,
-    :user_id, as: :admin
+    :ticket_field_values_attributes
+  attr_accessible :message, :subject, :attachment, :ticket_question_id, :url,
+    :ticket_field_values_attributes, :user_id, as: :admin
   
   state_machine :state, initial: :active do
     state :active
