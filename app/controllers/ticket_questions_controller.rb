@@ -8,7 +8,7 @@ class TicketQuestionsController < ApplicationController
   end
   
   def new
-    @ticket_question = TicketQuestion.new
+    @ticket_question = TicketQuestion.new(params[:ticket_question], as_role)
   end
   
   def create

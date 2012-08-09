@@ -4,6 +4,8 @@
 
 div class="link-actions"
   = link_to 'Редактировать', edit_ticket_question_path(@ticket_question), class: 'btn'
+  = " "
+  = link_to 'Новый вопрос', new_ticket_question_path(ticket_question: { ticket_question_id: @ticket_question.id }), class: 'btn'
 
 h2 Дополнительные поля
 

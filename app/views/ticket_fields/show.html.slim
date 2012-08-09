@@ -1,2 +1,12 @@
 - title "Дополнительное поле #{@ticket_field.name}"
 
+div class="link-actions"
+  = link_to 
+
+table class="table table-bordered"
+  tr
+    th = TicketField.human_attribute_name(:name)
+    td = @ticket_field.name
+  tr
+    th = TicketField.human_attribute_name(:hint)
+    td = @ticket_field.hint

@@ -404,12 +404,16 @@ ru:
         url: Ссылка
         attachment: Файл
         user: Пользователь
+        ticket_question: Вопрос
       reply:
         message: Сообщение
         attachment: Файл
       ticket_question:
         question: Вопрос
         ticket_question: Родительский вопрос
+      ticket_field:
+        name: Название
+        hint: Подсказка
       ticket_field_relation:
         ticket_field: Дополнительное поле
         use: Использовать?
