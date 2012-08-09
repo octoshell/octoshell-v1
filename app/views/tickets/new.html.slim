@@ -1,7 +1,8 @@
 - title 'Новая заявка'
 
-- if @ticket.ticket_question && @ticket.ticket_question.breadcrumbs.any?
-  ul class="breadcrumb"
+ul class="breadcrumb"
+  li = link_to 'Начало', new_ticket_path
+  - if @ticket.ticket_question && @ticket.ticket_question.breadcrumbs.any?
     - breadcrumbs = @ticket.ticket_question.breadcrumbs
     - breadcrumbs.each_with_index do |ticket_question, i|
       li
