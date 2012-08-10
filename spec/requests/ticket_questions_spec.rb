@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Ticket Questions' do
+describe 'Ticket Questions', js: true do
   describe 'listing' do
     let!(:ticket_question) { create(:ticket_question) }
     
