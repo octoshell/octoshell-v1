@@ -34,20 +34,12 @@ class Access < ActiveRecord::Base
       transition activing: :active
     end
     
-    event :_failure_activation do
-      transition activing: :pending
-    end
-    
     event :_close do
       transition any => :closing
     end
     
     event :_complete_closure do
       transition closing: :closed
-    end
-    
-    event :_failure_closure do
-      transition closing: :active
     end
     
     event :_force_close do
@@ -84,15 +76,7 @@ protected
     complete_activation!
   end
   
-  def stop_add_openkey
-    failure_activation!
-  end
-  
   def continue_del_openkey
     complete_closure!
-  end
-  
-  def stop_del_openkey
-    failure_closure!
   end
 end

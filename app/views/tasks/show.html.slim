@@ -34,7 +34,7 @@ table class="table table-bordered"
 
   div class="link-actions"
     - if @task.can_perform_callbacks?
-      = link_to 'Вызвать коллбеки', task_perform_callbacks_path(@task), class: 'btn', method: :put
+      = link_to t('call_callbacks'), task_perform_callbacks_path(@task), class: 'btn', method: :put
       = " "
     = link_to 'Повторить задание', task_retry_path(@task), class: 'btn'
 

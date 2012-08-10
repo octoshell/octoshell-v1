@@ -14,14 +14,14 @@ FactoryGirl.define do
     
     factory 'active_cluster_user' do
       after(:create) do |cluster_user|
-        cluster_user.tasks.last.force_success
+        cluster_user.tasks.last.perform_callbacks!
         cluster_user.reload
       end
     end
     
     factory 'pausing_cluster_user' do
       after(:create) do |cluster_user|
-        cluster_user.tasks.last.force_success
+        cluster_user.tasks.last.perform_callbacks!
         cluster_user.reload
         cluster_user.pause!
       end
@@ -29,20 +29,20 @@ FactoryGirl.define do
     
     factory 'paused_cluster_user' do
       after(:create) do |cluster_user|
-        cluster_user.tasks.last.force_success
+        cluster_user.tasks.last.perform_callbacks!
         cluster_user.reload
         cluster_user.pause!
-        cluster_user.tasks.last.force_success
+        cluster_user.tasks.last.perform_callbacks!
         cluster_user.reload
       end
     end
     
     factory 'resuming_cluster_user' do
       after(:create) do |cluster_user|
-        cluster_user.tasks.last.force_success
+        cluster_user.tasks.last.perform_callbacks!
         cluster_user.reload
         cluster_user.pause!
-        cluster_user.tasks.last.force_success
+        cluster_user.tasks.last.perform_callbacks!
         cluster_user.reload
         cluster_user.resume!
       end
@@ -50,7 +50,7 @@ FactoryGirl.define do
     
     factory 'closing_cluster_user' do
       after(:create) do |cluster_user|
-        cluster_user.tasks.last.force_success
+        cluster_user.tasks.last.perform_callbacks!
         cluster_user.reload
         cluster_user.close!
       end
@@ -58,7 +58,7 @@ FactoryGirl.define do
     
     factory 'closed_cluster_user' do
       after(:create) do |cluster_user|
-        cluster_user.tasks.last.force_success
+        cluster_user.tasks.last.perform_callbacks!
         cluster_user.reload
         cluster_user.force_close!
       end

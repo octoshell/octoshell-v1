@@ -27,15 +27,7 @@ describe Access do
     
     it { should be_active }
   end
-  
-  describe '#failure_activation' do
-    let(:access) { create(:activing_access) }
     
-    before { access.failure_activation }
-    
-    it { should be_pending }
-  end
-  
   describe '#close' do
     let(:access) { create(:active_access) }
     
@@ -52,15 +44,7 @@ describe Access do
     
     it { should be_closed }
   end
-  
-  describe '#failure_closure' do
-    let(:access) { create(:closing_access) }
     
-    before { access.failure_closure }
-    
-    it { should be_active }
-  end
-  
   describe '#force_close' do
     let(:access) { create(:access) }
     

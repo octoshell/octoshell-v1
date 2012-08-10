@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :ticket do
+    ticket_question
     user
     message 'Sausage'
     subject 'I have a problem...'

@@ -1,4 +1,5 @@
 ru:
+  call_callbacks: 'Вызвать коллбеки'
   tasks:
     description:
       unblock_user:
