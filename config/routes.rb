@@ -100,6 +100,11 @@ MSU::Application.routes.draw do
     put :merge
   end
   
+  # organization kinds
+  resources :organization_kinds, except: [:destroy] do
+    put :close
+  end
+  
   # tickets
   resources :tickets, only: [:new, :create, :index, :show] do
     get :closed, on: :collection

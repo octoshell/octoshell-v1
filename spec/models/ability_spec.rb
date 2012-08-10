@@ -113,7 +113,7 @@ describe Ability do
     it { should be_able_to(:show,    :clusters) }
     it { should be_able_to(:edit,    :clusters) }
     it { should be_able_to(:update,  :clusters) }
-    it { should be_able_to(:destroy, :clusters) }
+    it { should be_able_to(:close, :clusters) }
     
     it { should be_able_to(:index,  :ticket_questions) }
     it { should be_able_to(:show,   :ticket_questions) }
@@ -130,5 +130,13 @@ describe Ability do
     it { should be_able_to(:edit,   :ticket_fields) }
     it { should be_able_to(:update, :ticket_fields) }
     it { should be_able_to(:close,  :ticket_fields) }
+    
+    it { should be_able_to(:index,  :organization_kinds) }
+    it { should be_able_to(:show,   :organization_kinds) }
+    it { should be_able_to(:new,    :organization_kinds) }
+    it { should be_able_to(:create, :organization_kinds) }
+    it { should be_able_to(:edit,   :organization_kinds) }
+    it { should be_able_to(:update, :organization_kinds) }
+    it { should be_able_to(:close,  :organization_kinds) }
   end
 end

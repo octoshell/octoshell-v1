@@ -343,6 +343,10 @@ ru:
         description: Описание
         user: Руководитель
         state: Состояние
+      organization_kind:
+        name: Название
+        abbreviation: Аббревиатура
+        state: Состояние
       request:
         cluster: Кластер
         project: Проект
@@ -501,6 +505,13 @@ ru:
             closed: Закрыт
           events:
             _resolve: Проблема решена
+            _close: Закрыть
+      organization_kind:
+        state:
+          states:
+            active: Активный
+            closed: Закрыт
+          events:
             _close: Закрыть
       ticket_question:
         state:

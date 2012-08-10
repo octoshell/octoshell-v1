@@ -13,8 +13,12 @@ module ApplicationHelper
   end
   
   def submenu_item(controller_name, link)
-    klass = params[:controller].to_sym == controller_name ? 'active' : ''
+    klass = current_controller?(controller_name) ? 'active' : ''
     content_tag :li, link, class: klass
+  end
+  
+  def current_controller?(controller_name)
+    controller_name == params[:controller].to_sym
   end
   
   def link_to_cluster(cluster)
@@ -55,6 +59,10 @@ module ApplicationHelper
     else
       'Удалена'
     end
+  end
+  
+  def link_to_organization_kind(organization_kind)
+    link_to organization_kind.name, organization_kind
   end
   
   def link_to_membership(membership)

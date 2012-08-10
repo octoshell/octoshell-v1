@@ -1,0 +1,12 @@
+- title 'Типы организаций'
+
+div class="link-actions"
+  = link_to 'Новый тип организации', new_organization_kind_path, class: 'btn'
+
+h2 Активные
+
+= render partial: 'table', locals: { organization_kinds: @organization_kinds.active }
+
+h2 Закрытые
+
+= render partial: 'table', locals: { organization_kinds: @organization_kinds.closed }

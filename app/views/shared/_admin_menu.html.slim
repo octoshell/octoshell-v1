@@ -4,7 +4,13 @@
 = submenu_item :projects, (link_to 'Проекты', projects_path)
 / = submenu_item :accounts, (link_to 'Доступы к проектам', accounts_path)
 = submenu_item :clusters, (link_to 'Кластеры', clusters_path)
-= submenu_item :organizations, (link_to 'Организации', organizations_path)
+li class="dropdown"
+  = link_to '#', 'data-toggle' => 'dropdown' do
+    | Настройки организаций 
+    b class="caret"
+  ul class="dropdown-menu"
+    = submenu_item :organizations, (link_to 'Организаций', organizations_path)
+    = submenu_item :organization_kinds, (link_to 'Типы организаций', organization_kinds_path)
+    = submenu_item :position_names, (link_to 'Позиции', position_names_path)
 = submenu_item :users, (link_to 'Пользователи', users_path)
-= submenu_item :position_names, (link_to 'Позиции в организациях', position_names_path)
 
