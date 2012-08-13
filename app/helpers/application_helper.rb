@@ -81,6 +81,10 @@ module ApplicationHelper
     end
   end
   
+  def link_to_ticket_template(ticket_template)
+    link_to ticket_template.subject, ticket_template
+  end
+  
   def link_to_ticket_question(ticket_question)
     link_to ticket_question.question, ticket_question
   end

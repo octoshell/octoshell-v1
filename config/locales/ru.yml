@@ -421,6 +421,10 @@ ru:
         name: Название
         hint: Подсказка
         state: Состояние
+      ticket_template:
+        subject: Тема
+        message: Сообщение
+        state: Состояние
       ticket_field_relation:
         ticket_field: Дополнительное поле
         use: Использовать?
@@ -521,6 +525,13 @@ ru:
           events:
             _close: Закрыть
       ticket_field:
+        state:
+          states:
+            active: Активный
+            closed: Закрытый
+          events:
+            _close: Закрыть
+      ticket_template:
         state:
           states:
             active: Активный

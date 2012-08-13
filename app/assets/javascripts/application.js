@@ -12,6 +12,17 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require underscore
 //= require twitter-dropdown
 //= require_tree .
 
+$(document).ready(function(){
+	$('#ticket_template').on('change', function(){
+		var reply_message = $('#reply_message')
+		if (_(reply_message.val()).isEmpty()) {
+			reply_message.val($(this).val())
+		} else {
+			reply_message.val(reply_message.val() + '\n' + $(this).val())
+		}
+	})
+});

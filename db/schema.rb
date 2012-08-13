@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120810135419) do
+ActiveRecord::Schema.define(:version => 20120813070320) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -196,13 +196,6 @@ ActiveRecord::Schema.define(:version => 20120810135419) do
     t.boolean  "callbacks_performed", :default => false
   end
 
-  create_table "templates", :force => true do |t|
-    t.string   "subject"
-    t.text     "message"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "ticket_field_relations", :force => true do |t|
     t.integer  "ticket_question_id"
     t.integer  "ticket_field_id"
@@ -235,6 +228,14 @@ ActiveRecord::Schema.define(:version => 20120810135419) do
     t.string   "state"
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
+  end
+
+  create_table "ticket_templates", :force => true do |t|
+    t.string   "subject"
+    t.text     "message"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "state"
   end
 
   create_table "tickets", :force => true do |t|

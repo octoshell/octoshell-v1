@@ -1,0 +1,8 @@
+- title 'Шаблоны ответов'
+
+div class="link-actions"
+  = link_to 'Новый шаблон ответа', new_ticket_template_path, class: 'btn'
+  = " "
+  = link_to 'Закрытые', closed_ticket_templates_path, class: 'btn'
+
+= render partial: 'table', locals: { ticket_templates: @ticket_templates }

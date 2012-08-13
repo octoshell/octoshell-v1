@@ -3,3 +3,5 @@
   = submenu_item :ticket_questions, (link_to "Вопросы в заявках", ticket_questions_path)
 - if can? :index, :ticket_fields
   = submenu_item :ticket_fields, (link_to "Дополнительные поля к заявкам", ticket_fields_path)
+- if can? :index, :ticket_templates
+  = submenu_item :ticket_templates, (link_to "Шаблоны ответов", ticket_templates_path)

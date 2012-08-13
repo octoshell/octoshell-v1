@@ -1,0 +1,13 @@
+- if ticket_templates.any?
+  table class="table table-bordered"
+    tr
+      th = TicketTemplate.human_attribute_name(:subject)
+      th = TicketTemplate.human_attribute_name(:state)
+      th
+    - ticket_templates.each do |ticket_template|
+      tr
+        td = link_to_ticket_template ticket_template
+        td = ticket_template.human_state_name
+        td = link_to 'редактировать', [:edit, ticket_template]
+- else
+  p Нет шаблонов ответов.

@@ -113,6 +113,12 @@ MSU::Application.routes.draw do
     post :continue, on: :collection
   end
   
+  # ticket templates
+  resources :ticket_templates, except: :destroy do
+    get :closed, on: :collection
+    put :close
+  end
+  
   # replies
   resources :replies, only: :create
   
