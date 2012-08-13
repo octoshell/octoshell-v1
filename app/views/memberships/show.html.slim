@@ -1,8 +1,12 @@
 - title 'Место работы'
 
-- if can? :edit, @membership
+- if can?(:edit, @membership) || can?(:index, :versions)
   div class="link-actions"
-    = link_to 'редактировать', edit_membership_path(@membership), class: 'btn'
+    - if can? :edit, @membership
+      = link_to 'редактировать', edit_membership_path(@membership), class: 'btn'
+    - if can? :index, :versions
+      = " "
+      = link_to 'Версии', [@membership, :versions], class: 'btn'
 
 table class="table table-bordered"
   tr

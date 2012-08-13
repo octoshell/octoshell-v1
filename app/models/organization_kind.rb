@@ -1,4 +1,6 @@
 class OrganizationKind < ActiveRecord::Base
+  has_paper_trail
+  
   has_many :organizations
   
   validates :name, presence: true

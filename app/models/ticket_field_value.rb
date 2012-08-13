@@ -1,4 +1,6 @@
 class TicketFieldValue < ActiveRecord::Base
+  has_paper_trail
+  
   belongs_to :ticket_field_relation
   belongs_to :ticket, inverse_of: :ticket_field_values
   

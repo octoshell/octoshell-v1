@@ -1,4 +1,6 @@
 class Reply < ActiveRecord::Base
+  has_paper_trail
+  
   has_attached_file :attachment
   
   delegate :answer!, :reply!, to: :ticket

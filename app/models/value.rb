@@ -1,6 +1,4 @@
 class Value < ActiveRecord::Base
-  
-  
   has_paper_trail
   
   belongs_to :model, polymorphic: true

@@ -27,9 +27,12 @@ div class="request"
       = link_to Request.human_state_event_name(:_activate), request_activate_path(@request), class: 'btn btn-success', method: :put
       = " "
       = link_to Request.human_state_event_name(:_decline), request_decline_path(@request), class: 'btn', method: :put
-      = " "
     - if @request.active? || @request.declined?
+      = " "
       = link_to Request.human_state_event_name(:_close), request_close_path(@request), class: 'btn', method: :put
+    - if can? :index, :versions
+      = " "
+      = link_to 'Версии', [@request, :versions], class: 'btn'
 
 - if admin?
   h2 Пользователи на кластере

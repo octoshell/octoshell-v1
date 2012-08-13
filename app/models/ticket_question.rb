@@ -1,4 +1,6 @@
 class TicketQuestion < ActiveRecord::Base
+  has_paper_trail
+  
   belongs_to :ticket_question, inverse_of: :ticket_questions
   has_many :ticket_questions, inverse_of: :ticket_question
   has_many :ticket_field_relations

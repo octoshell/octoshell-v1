@@ -1,5 +1,6 @@
 # Пользователь на кластере
 class ClusterUser < ActiveRecord::Base
+  has_paper_trail
   include Models::Asynch
   
   attr_accessor :skip_activation

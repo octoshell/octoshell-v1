@@ -1,4 +1,6 @@
 class TicketTemplate < ActiveRecord::Base
+  has_paper_trail
+  
   validates :subject, presence: true
   
   attr_accessible :subject, :message, as: :admin

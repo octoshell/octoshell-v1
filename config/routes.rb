@@ -1,4 +1,4 @@
-MSU::Application.routes.draw do
+MSU::Application.routes.draw do  
   # users
   get 'users/activate/:token' => 'users#activate', as: :activate_user
   resources :users, only: [:new, :create, :show] do
@@ -11,6 +11,7 @@ MSU::Application.routes.draw do
   # credentials
   resources :credentials, only: [:index, :new, :create, :show] do
     put :close
+    resources :versions, only: [:index, :show], resource: 'Credential'
   end
   
   # sureties
@@ -19,10 +20,13 @@ MSU::Application.routes.draw do
     put :decline
     put :close
     post :find, on: :collection
+    resources :versions, only: [:index, :show], resource: 'Surety'
   end
   
   # memberships
-  resources :memberships, only: [:index, :new, :create, :edit, :update, :show]
+  resources :memberships, only: [:index, :new, :create, :edit, :update, :show] do
+    resources :versions, only: [:index, :show], resource: 'Membership'
+  end
   
   # sessions
   resource :session, only: [:new, :create, :destroy]
@@ -40,13 +44,22 @@ MSU::Application.routes.draw do
   # projects
   resources :projects, only: [:index, :new, :create, :show, :edit, :update] do
     put :close
+    resources :versions, only: [:index, :show], resource: 'Project'
   end
   
   # requests
-  resources :requests, only: [:new, :create]
+  resources :requests, only: [:new, :create, :index, :show] do
+    put :activate
+    put :decline
+    put :close
+    resources :versions, only: [:index, :show], resource: 'Request'
+  end
   
   # organizations
-  resources :organizations, only: [:new, :create]
+  resources :organizations, only: [:new, :create, :index, :show, :edit, :update] do
+    put :merge
+    resources :versions, only: [:index, :show], resource: 'Organization'
+  end
   
   # invitation
   resources :invitations, only: [:new, :create]
@@ -60,6 +73,7 @@ MSU::Application.routes.draw do
     put :activate
     put :decline
     put :cancel
+    resources :versions, only: [:index, :show], resource: 'Account'
   end
   
   # dashboard
@@ -68,62 +82,67 @@ MSU::Application.routes.draw do
   # admin dashboard
   resource :admin, only: :show
   
-  # requests
-  resources :requests, only: [:index, :show] do
-    put :activate
-    put :decline
-    put :close
+  # cluster_users
+  resources :cluster_users, only: :show do
+    resources :versions, only: [:index, :show], resource: 'ClusterUser'
   end
   
-  # cluster_users
-  resources :cluster_users, only: :show
-  
   # users
-  resources :users
+  resources :users, except: :destroy do
+    resources :versions, only: [:index, :show], resource: 'User'
+  end
     
   # clusters
   resources :clusters do
     put :close
+    resources :versions, only: [:index, :show], resource: 'Cluster'
   end
   
   # accesses
-  resources :accesses, only: :show
+  resources :accesses, only: :show do
+    resources :versions, only: [:index, :show], resource: 'Access'
+  end
   
   # tasks
   resources :tasks, only: [:show, :create, :index] do
     get :retry
     put :perform_callbacks
-  end
-  
-  # organizations
-  resources :organizations, only: [:index, :show, :edit, :update] do
-    put :merge
+    resources :versions, only: [:index, :show], resource: 'Task'
   end
   
   # organization kinds
   resources :organization_kinds, except: [:destroy] do
     put :close
+    resources :versions, only: [:index, :show], resource: 'OrganizationKind'
   end
   
   # tickets
   resources :tickets, only: [:new, :create, :index, :show] do
-    get :closed, on: :collection
+    collection do
+      get :closed
+      post :continue
+    end
     put :close
     put :resolve
-    post :continue, on: :collection
+    resources :versions, only: [:index, :show], resource: 'Ticket'
   end
   
   # ticket templates
   resources :ticket_templates, except: :destroy do
     get :closed, on: :collection
     put :close
+    resources :versions, only: [:index, :show], resource: 'TicketTemplate'
   end
   
   # replies
-  resources :replies, only: :create
+  resources :replies, only: :create do
+    resources :versions, only: [:index, :show], resource: 'Reply'
+  end
   
   # position names
-  resources :position_names, except: :show
+  resources :position_names, except: :show do
+    resources :versions, only: [:index, :show], resource: 'PositionName'
+  end
   
   # support
   resource :support, only: :show
@@ -131,11 +150,13 @@ MSU::Application.routes.draw do
   # ticket questions
   resources :ticket_questions, except: :destroy do
     put :close
+    resources :versions, only: [:index, :show], resource: 'TicketQuestion'
   end
   
-  # additional ticket fields
+  # ticket fields
   resources :ticket_fields, except: [:destroy] do
     put :close
+    resources :versions, only: [:index, :show], resource: 'TicketField'
   end
 
   root to: 'application#dashboard'

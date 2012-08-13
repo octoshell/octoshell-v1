@@ -24,11 +24,14 @@ table class="table table-bordered"
     th = Ticket.human_attribute_name(:state)
     td = @ticket.human_state_name
 
-- if can?(:close, @ticket) || can?(:resolve, @ticket)
+- if can?(:close, @ticket) || can?(:resolve, @ticket) || can?(:index, :versions)
   div class="link-actions"
     = link_to Ticket.human_state_event_name(:_resolve), ticket_resolve_path(@ticket), method: :put, class: 'btn btn-success' if can?(:resolve, @ticket)
     = " "
     = link_to Ticket.human_state_event_name(:_close), ticket_close_path(@ticket), method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' } if can?(:close, @ticket)
+    - if can? :index, :versions
+      = " "
+      = link_to 'Версии', [@ticket, :versions], class: 'btn'
 
 h2 Переписка
 

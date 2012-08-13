@@ -138,5 +138,16 @@ describe Ability do
     it { should be_able_to(:edit,   :organization_kinds) }
     it { should be_able_to(:update, :organization_kinds) }
     it { should be_able_to(:close,  :organization_kinds) }
+    
+    it { should be_able_to(:index,  :ticket_templates) }
+    it { should be_able_to(:show,   :ticket_templates) }
+    it { should be_able_to(:new,    :ticket_templates) }
+    it { should be_able_to(:create, :ticket_templates) }
+    it { should be_able_to(:edit,   :ticket_templates) }
+    it { should be_able_to(:update, :ticket_templates) }
+    it { should be_able_to(:close,  :ticket_templates) }
+    
+    it { should be_able_to(:index, :versions) }
+    it { should be_able_to(:show,  :versions) }
   end
 end

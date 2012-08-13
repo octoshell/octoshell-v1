@@ -1,5 +1,9 @@
 - title "#{ClusterUser.model_name.human} ##{@cluster_user.id}"
 
+- if can? :index, :versions
+  div class="link-actions"
+    = link_to 'Версии', [@cluster_user, :versions], class: 'btn'
+
 table class="table table-bordered"
   tr
     th = Project.model_name.human

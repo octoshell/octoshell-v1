@@ -3,6 +3,14 @@
 blockquote
   = @task.description
 
+div class="link-actions"
+  - if @task.can_perform_callbacks?
+    = link_to t('call_callbacks'), task_perform_callbacks_path(@task), class: 'btn', method: :put
+    = " "
+  = link_to 'Повторить задание', task_retry_path(@task), class: 'btn'
+  = " "
+  = link_to 'Версии', [@task, :versions], class: 'btn'
+
 table class="table table-bordered"
   tr
     th class="span3" = Task.human_attribute_name(:resource)
@@ -31,10 +39,4 @@ table class="table table-bordered"
   tr
     th = Task.human_attribute_name(:callbacks_performed)
     td = @task.callbacks_performed ? 'Да' : 'Нет'
-
-  div class="link-actions"
-    - if @task.can_perform_callbacks?
-      = link_to t('call_callbacks'), task_perform_callbacks_path(@task), class: 'btn', method: :put
-      = " "
-    = link_to 'Повторить задание', task_retry_path(@task), class: 'btn'
 

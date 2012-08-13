@@ -1,5 +1,9 @@
 - title "Доступ к проекту"
 
+- if can? :index, :versions
+  div class="link-actions"
+    = link_to 'Версии', [@account, :versions], class: 'btn'
+
 table class="table table-bordered"
   tr
     th #

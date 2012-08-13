@@ -10,6 +10,8 @@ div class="link-actions"
   - if @ticket_question.can__close?
     = " "
     = link_to TicketQuestion.human_state_event_name(:_close), [@ticket_question, :close], method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
+  = " "
+  = link_to 'Версии', [@ticket_question, :versions], class: 'btn'
 
 table class="table table-bordered"
   tr

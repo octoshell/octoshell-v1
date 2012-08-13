@@ -1,15 +1,16 @@
 - title "Доступ #{@access.id}"
 
+- if can? :index, :versions
+  div class="link-actions"
+    = link_to 'Версии', [@access, :versions], class: 'btn'
+
 table class="table table-bordered"
   tr
     th = User.model_name.human
     td = link_to_credential @access.credential
   tr
-    th = Cluster.model_name.human
-    td = link_to_cluster @access.cluster
-  tr
-    th = Project.model_name.human
-    td = link_to_project @access.project
+    th = ClusterUser.model_name.human
+    td = link_to_cluster_user @access.cluster_user
   tr
     th = Access.human_attribute_name(:state)
     td = @access.human_state_name

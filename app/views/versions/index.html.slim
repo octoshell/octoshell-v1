@@ -1,0 +1,20 @@
+- title 'Версии'
+
+table class="table table-bordered"
+  tr
+    th = Version.human_attribute_name(:item)
+    th = Version.human_attribute_name(:event)
+    th = Version.human_attribute_name(:object)
+    th = Version.human_attribute_name(:created_at)
+  - @versions.each do |version|
+    tr
+      td = link_to model.model_name.human, version.item
+      td = version.event
+      td
+        - if record = version.reify
+          table class="table table-bordered"
+            - record.attributes.each do |attribute, value|
+              tr
+                th = model.human_attribute_name(attribute)
+                td = value
+      td = version.created_at.to_formatted_s(:long)
