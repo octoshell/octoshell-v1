@@ -52,6 +52,7 @@ describe 'Ticket Questions', js: true do
       visit ticket_question_path(ticket_question)
       click_link 'close'
       confirm_dialog
+      sleep 0.5
     end
     
     it 'should close ticket question' do
