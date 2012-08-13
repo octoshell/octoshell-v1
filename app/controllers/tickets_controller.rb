@@ -78,6 +78,19 @@ class TicketsController < ApplicationController
     end
   end
   
+  def edit
+    @ticket = Ticket.find(params[:id])
+  end
+  
+  def update
+    @ticket = Ticket.find(params[:id])
+    if @ticket.update_attributes(params[:ticket], as_role)
+      redirect_to @ticket
+    else
+      render :edit
+    end
+  end
+  
 private
   
   def namespace

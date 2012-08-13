@@ -10,6 +10,7 @@ describe Project do
   
   it { should have_many(:requests) }
   it { should have_many(:accounts) }
+  it { should have_many(:tickets) }
   it { should have_many(:cluster_users) }
   it { should belong_to(:user) }
   

@@ -113,7 +113,7 @@ describe Ability do
     it { should be_able_to(:show,    :clusters) }
     it { should be_able_to(:edit,    :clusters) }
     it { should be_able_to(:update,  :clusters) }
-    it { should be_able_to(:close, :clusters) }
+    it { should be_able_to(:close,   :clusters) }
     
     it { should be_able_to(:index,  :ticket_questions) }
     it { should be_able_to(:show,   :ticket_questions) }
@@ -149,5 +149,8 @@ describe Ability do
     
     it { should be_able_to(:index, :versions) }
     it { should be_able_to(:show,  :versions) }
+    
+    it { should be_able_to(:edit,   :tickets) }
+    it { should be_able_to(:update, :tickets) }
   end
 end

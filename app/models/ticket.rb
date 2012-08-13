@@ -5,6 +5,7 @@ class Ticket < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :ticket_question
+  belongs_to :project
   has_many :replies
   has_many :ticket_field_values, inverse_of: :ticket
   
@@ -13,9 +14,10 @@ class Ticket < ActiveRecord::Base
   accepts_nested_attributes_for :ticket_field_values
   
   attr_accessible :message, :subject, :attachment, :ticket_question_id, :url,
-    :ticket_field_values_attributes
+    :ticket_field_values_attributes, :project_id, :cluster_id
   attr_accessible :message, :subject, :attachment, :ticket_question_id, :url,
-    :ticket_field_values_attributes, :user_id, as: :admin
+    :ticket_field_values_attributes, :user_id, :project_id, :cluster_id,
+    as: :admin
   
   state_machine :state, initial: :active do
     state :active

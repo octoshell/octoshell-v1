@@ -117,7 +117,7 @@ MSU::Application.routes.draw do
   end
   
   # tickets
-  resources :tickets, only: [:new, :create, :index, :show] do
+  resources :tickets, only: [:new, :create, :index, :show, :edit, :update] do
     collection do
       get :closed
       post :continue

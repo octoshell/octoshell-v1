@@ -34,3 +34,7 @@ h2 Заявки
 p = link_to 'Новая заявка', new_request_path
 
 = render partial: 'requests/table', locals: { requests: @project.requests }
+
+h2 Поддержка
+
+= render partial: 'tickets/table', locals: { tickets: @project.tickets }
