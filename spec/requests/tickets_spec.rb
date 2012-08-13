@@ -90,6 +90,7 @@ describe 'Tickets', js: true do
         login user
         visit ticket_path(ticket)
         click_link 'close'
+        confirm_dialog
         sleep 0.5
       end
       
