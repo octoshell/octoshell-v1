@@ -55,11 +55,13 @@ class Project < ActiveRecord::Base
   def allowed_organizations
     return Organization.all unless user
     
+    memberships = user.memberships
+    
     if new_record?
-      user.memberships.active.map(&:organization)
-    else
-      user.memberships.map &:organization
+      memberships = memberships.active
     end
+    
+    memberships.uniq.map &:organization
   end
   
 private
