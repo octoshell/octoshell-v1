@@ -16,6 +16,4 @@ class TicketTemplate < ActiveRecord::Base
   
   define_defaults_events :close
   define_state_machine_scopes
-  
-  
 end

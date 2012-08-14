@@ -4,5 +4,7 @@ class TicketTagRelation < ActiveRecord::Base
   
   validates :ticket, :ticket_tag, presence: true
   
-  attr_accessible :active
+  attr_accessible :active, as: :admin
+  
+  scope :active, joins(:ticket_tag).where(ticket_tags: { state: 'active' })
 end

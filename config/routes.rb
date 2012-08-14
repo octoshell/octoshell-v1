@@ -158,6 +158,12 @@ MSU::Application.routes.draw do
     put :close
     resources :versions, only: [:index, :show], resource: 'TicketField'
   end
+  
+  # ticket tags
+  resources :ticket_tags, except: :destroy do
+    put :close
+    resources :versions, only: [:index, :show], resource: 'TicketTag'
+  end
 
   root to: 'application#dashboard'
   

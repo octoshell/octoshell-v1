@@ -112,6 +112,8 @@ class Ability
         
         can [:index, :show, :new, :create, :edit, :update, :close], :ticket_templates
         
+        can [:index, :show, :new, :create, :edit, :update, :close], :ticket_tags
+        
         can [:index, :show], :versions
         
         can [:edit, :update], :tickets

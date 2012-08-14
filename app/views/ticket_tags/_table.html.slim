@@ -1,0 +1,15 @@
+- if ticket_tags.any?
+  table class="table table-bordered"
+    tr
+      th #
+      th = TicketTag.human_attribute_name(:name)
+      th = TicketTag.human_attribute_name(:state)
+      td
+    - ticket_tags.each do |ticket_tag|
+      tr
+        td = ticket_tag.id
+        td = link_to_ticket_tag ticket_tag
+        td = ticket_tag.human_state_name
+        td = link_to 'редактировать', [:edit, ticket_tag]
+- else
+  p Нет тегов

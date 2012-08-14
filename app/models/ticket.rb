@@ -13,13 +13,13 @@ class Ticket < ActiveRecord::Base
   
   validates :user, :subject, :message, :ticket_question, presence: true
   
-  accepts_nested_attributes_for :ticket_field_values
+  accepts_nested_attributes_for :ticket_field_values, :ticket_tag_relations
   
   attr_accessible :message, :subject, :attachment, :ticket_question_id, :url,
     :ticket_field_values_attributes, :project_id, :cluster_id
   attr_accessible :message, :subject, :attachment, :ticket_question_id, :url,
     :ticket_field_values_attributes, :user_id, :project_id, :cluster_id,
-    as: :admin
+    :ticket_tag_relations_attributes, as: :admin
     
   after_create :create_ticket_tag_relations
   

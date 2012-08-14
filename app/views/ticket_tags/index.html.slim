@@ -1,0 +1,12 @@
+- title 'Теги'
+
+div class="link-actions"
+  = link_to 'Новый тег', new_ticket_tag_path, class: 'btn'
+
+h2 Активные
+
+= render partial: 'table', locals: { ticket_tags: @ticket_tags.active }
+
+h2 Закрытые
+
+= render partial: 'table', locals: { ticket_tags: @ticket_tags.closed }

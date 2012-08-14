@@ -7,6 +7,7 @@ describe TicketTag do
   it { should validate_presence_of(:name) }
   
   it { should have_many(:ticket_tag_relations) }
+  it { should have_many(:tickets).through(:ticket_tag_relations) }
   
   it 'should create ticket tag relations on create' do
     ticket = create(:ticket)

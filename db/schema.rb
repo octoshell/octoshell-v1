@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120814124240) do
+ActiveRecord::Schema.define(:version => 20120814131611) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -263,6 +263,7 @@ ActiveRecord::Schema.define(:version => 20120814124240) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "state"
   end
 
   create_table "ticket_templates", :force => true do |t|

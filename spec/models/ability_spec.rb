@@ -152,5 +152,13 @@ describe Ability do
     
     it { should be_able_to(:edit,   :tickets) }
     it { should be_able_to(:update, :tickets) }
+    
+    it { should be_able_to(:index,  :ticket_tags) }
+    it { should be_able_to(:show,   :ticket_tags) }
+    it { should be_able_to(:new,    :ticket_tags) }
+    it { should be_able_to(:create, :ticket_tags) }
+    it { should be_able_to(:edit,   :ticket_tags) }
+    it { should be_able_to(:update, :ticket_tags) }
+    it { should be_able_to(:close,  :ticket_tags) }
   end
 end

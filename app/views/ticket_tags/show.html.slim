@@ -1,0 +1,19 @@
+- title "Тег #{@ticket_tag.name}"
+
+div class="link-actions"
+  - if @ticket_tag.can__close?
+    = link_to TicketTag.human_state_event_name(:_close), [@ticket_tag, :close], method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
+    = " "
+  = link_to 'Версии', [@ticket_tag, :versions], class: 'btn'
+
+table class="table table-bordered"
+  tr
+    th = TicketTag.human_attribute_name(:name)
+    td = @ticket_tag.name
+  tr
+    th = TicketTag.human_attribute_name(:state)
+    td = @ticket_tag.human_state_name
+
+h2 Поддержка
+
+= render partial: 'tickets/table', locals: { tickets: @ticket_tag.tickets.where(ticket_tag_relations: { active: true }) }

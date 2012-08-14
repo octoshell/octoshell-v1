@@ -41,6 +41,17 @@ table class="table table-bordered"
     th = Ticket.human_attribute_name(:state)
     td = @ticket.human_state_name
 
+- if admin?
+  h2 Теги
+  
+  = form_for @ticket do |f|
+    = f.fields_for :ticket_tag_relations, @ticket.ticket_tag_relations.active do |f|
+      span class="inline-checkbox"
+        = f.check_box :active
+        = f.label :active, f.object.ticket_tag.name
+    div
+      = f.submit class: 'btn btn-mini btn-success'
+
 h2 Переписка
 
 = render partial: 'replies/table', locals: { replies: @replies }
