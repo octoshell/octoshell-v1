@@ -18,7 +18,7 @@ describe Credential do
   it { should allow_mass_assignment_of(:public_key) }
   
   describe '#grant_accesses' do
-    let!(:credential) { create(:generic_credential) }
+    let!(:credential) { create(:generic_credential, user: create(:sured_user)) }
     let!(:project)    { create(:project, user: credential.user) }
     let!(:request)    { create(:active_request, user: credential.user, project: project) }
     
@@ -30,7 +30,7 @@ describe Credential do
   end
   
   describe '#close' do
-    let!(:credential) { create(:generic_credential) }
+    let!(:credential) { create(:generic_credential, user: create(:sured_user)) }
     let!(:project)    { create(:project, user: credential.user) }
     let!(:request)    { create(:active_request, user: credential.user, project: project) }
     

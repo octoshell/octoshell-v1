@@ -4,6 +4,10 @@
   div class="link-actions"
     = link_to 'Версии', [@organization, :versions], class: 'btn'
 
+h2 Проекты
+
+= render partial: 'projects/table', locals: { projects: @organization.projects }
+
 h2 Поручительства
 
 = link_to 'Новое поручительство', new_surety_path

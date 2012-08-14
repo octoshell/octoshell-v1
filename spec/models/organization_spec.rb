@@ -5,6 +5,7 @@ describe Organization do
   subject { organization }
   
   it { should have_many(:sureties) }
+  it { should have_many(:projects) }
   it { should have_many(:users).through(:sureties) }
   it { should have_many(:memberships) }
   

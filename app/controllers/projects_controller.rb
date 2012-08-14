@@ -17,6 +17,7 @@ class ProjectsController < ApplicationController
     @project = Project.new
     @project.user = current_user unless admin?
     @project.requests.build
+    @organizations
   end
   
   def create

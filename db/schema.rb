@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120813124920) do
+ActiveRecord::Schema.define(:version => 20120814065820) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -36,6 +36,22 @@ ActiveRecord::Schema.define(:version => 20120813124920) do
   add_index "accounts", ["project_id"], :name => "index_accounts_on_project_id"
   add_index "accounts", ["user_id", "project_id"], :name => "index_accounts_on_user_id_and_project_id", :unique => true
   add_index "accounts", ["user_id"], :name => "index_accounts_on_user_id"
+
+  create_table "additional_ticket_field_values", :force => true do |t|
+    t.string   "value"
+    t.integer  "additional_ticket_field_id"
+    t.integer  "ticket_id"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  create_table "additional_ticket_fields", :force => true do |t|
+    t.string   "name"
+    t.string   "hint"
+    t.boolean  "required",   :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
 
   create_table "cluster_users", :force => true do |t|
     t.integer  "project_id"
@@ -130,11 +146,12 @@ ActiveRecord::Schema.define(:version => 20120813124920) do
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.datetime "deleted_at"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "user_id"
     t.string   "state"
     t.text     "description"
+    t.integer  "organization_id"
   end
 
   create_table "replies", :force => true do |t|
@@ -170,13 +187,9 @@ ActiveRecord::Schema.define(:version => 20120813124920) do
     t.integer  "organization_id"
     t.string   "state"
     t.datetime "deleted_at"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "comment"
-    t.string   "attachment_file_name"
-    t.string   "attachment_content_type"
-    t.integer  "attachment_file_size"
-    t.datetime "attachment_updated_at"
   end
 
   create_table "tasks", :force => true do |t|
@@ -221,6 +234,14 @@ ActiveRecord::Schema.define(:version => 20120813124920) do
     t.string   "state"
   end
 
+  create_table "ticket_question_field_relations", :force => true do |t|
+    t.integer  "ticket_question_id"
+    t.integer  "ticket_field_id"
+    t.boolean  "required",           :default => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+  end
+
   create_table "ticket_questions", :force => true do |t|
     t.integer  "ticket_question_id"
     t.string   "question"
@@ -243,13 +264,13 @@ ActiveRecord::Schema.define(:version => 20120813124920) do
     t.text     "message"
     t.integer  "user_id"
     t.string   "state"
+    t.string   "url"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
-    t.string   "url"
     t.integer  "ticket_question_id"
     t.integer  "project_id"
   end

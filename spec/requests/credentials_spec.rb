@@ -27,7 +27,7 @@ describe 'Credentials', js: true do
     end
     
     context 'closing' do
-      let!(:user) { create(:user) }
+      let!(:user) { create(:sured_user) }
       let!(:credential) { create(:credential, user: user) }
       let!(:project) { create(:active_project, user: user) }
       let!(:account) { create(:active_account, user: user, project: project) }

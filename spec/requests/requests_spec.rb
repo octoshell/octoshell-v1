@@ -41,7 +41,7 @@ describe 'Requests' do
     end
     
     context 'creating' do
-      let!(:user) { create(:user) }
+      let!(:user) { create(:sured_user) }
       let!(:project) { create(:project, user: user) }
       let!(:cluster) { create(:cluster) }
       let!(:request) { build(:request, user: user) }

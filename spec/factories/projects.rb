@@ -1,8 +1,12 @@
 FactoryGirl.define do
   factory :project do
     sequence(:name) { |n| "Project #{n}" }
-    user
+    association :user, factory: :sured_user 
+    organization do
+      user.memberships.first.organization
+    end
     description 'Description'
+    
     factory :model, class: 'Project' do
     end
     

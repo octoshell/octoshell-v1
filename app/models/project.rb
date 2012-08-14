@@ -2,16 +2,19 @@ class Project < ActiveRecord::Base
   has_paper_trail
   
   belongs_to :user
+  belongs_to :organization
   has_many :accounts, inverse_of: :project
   has_many :requests, inverse_of: :project
   has_many :tickets
   has_many :cluster_users
   
   validates :name, uniqueness: true
-  validates :user, :name, :description, presence: true
+  validates :user, :name, :description, :organization, presence: true
+  validates :organization, inclusion: { in: proc(&:allowed_organizations) }
   
-  attr_accessible :name, :requests_attributes, :description
-  attr_accessible :name, :requests_attributes, :description, :user_id, as: :admin
+  attr_accessible :name, :requests_attributes, :description, :organization_id
+  attr_accessible :name, :requests_attributes, :description, :organization_id,
+    :user_id, as: :admin
   
   accepts_nested_attributes_for :requests
   
@@ -27,7 +30,6 @@ class Project < ActiveRecord::Base
   end
   
   define_defaults_events :close
-  
   define_state_machine_scopes
   
   def close!
@@ -48,6 +50,16 @@ class Project < ActiveRecord::Base
   
   def clusters
     Cluster.joins(:requests).where(requests: { state: 'active', project_id: id })
+  end
+  
+  def allowed_organizations
+    return Organization.all unless user
+    
+    if new_record?
+      user.memberships.active.map(&:organization)
+    else
+      user.memberships.map &:organization
+    end
   end
   
 private

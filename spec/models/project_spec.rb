@@ -13,13 +13,42 @@ describe Project do
   it { should have_many(:tickets) }
   it { should have_many(:cluster_users) }
   it { should belong_to(:user) }
+  it { should belong_to(:organization) }
   
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:user) }
+  it { should validate_presence_of(:organization) }
   it { should validate_uniqueness_of(:name) }
   
   it { should allow_mass_assignment_of(:name) }
   it { should allow_mass_assignment_of(:requests_attributes) }
+  it { should allow_mass_assignment_of(:organization_id) }
+  
+  describe 'organization validation' do
+    let!(:user) { create(:sured_user) }
+    let!(:project) { build(:project, user: user) }
+    
+    context 'with allowed organization' do
+      let!(:organization) { create(:organization) }
+      
+      before do
+        create(:membership, user: user, organization: organization)
+        project.organization = organization
+      end
+      
+      it { should have(:no).errors_on(:organization) }
+    end
+    
+    context 'with not allowed organization' do
+      let!(:organization) { create(:organization) }
+      
+      before do
+        project.organization = organization
+      end
+      
+      it { should have(1).errors_on(:organization) }
+    end
+  end
   
   describe '#clusters' do
     let!(:available_cluster) { create(:cluster) }
