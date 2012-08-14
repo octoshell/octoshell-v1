@@ -5,6 +5,8 @@
       th = Ticket.human_attribute_name(:subject)
       th = Ticket.human_attribute_name(:user)
       th = Ticket.human_attribute_name(:state)
+      th = Ticket.human_attribute_name(:project)
+      th = Ticket.human_attribute_name(:cluster)
       th
     - tickets.each do |ticket|
       tr id="ticket-#{ticket.id}"
@@ -12,6 +14,8 @@
         td = link_to_ticket(ticket)
         td = link_to_user(ticket.user)
         td = ticket.human_state_name
+        td = link_to_project ticket.project if ticket.project
+        td = link_to_cluster ticket.cluster if ticket.cluster
         td = link_to 'открыть', ticket
 - else
   p Нет заявок

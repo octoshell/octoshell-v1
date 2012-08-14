@@ -9,6 +9,7 @@ describe Ticket do
   it { should have_many(:replies) }
   it { should belong_to(:user) }
   it { should belong_to(:project) }
+  it { should belong_to(:cluster) }
   
   it { should validate_presence_of(:user) }
   it { should validate_presence_of(:subject) }
@@ -17,6 +18,8 @@ describe Ticket do
   it { should allow_mass_assignment_of(:subject) }
   it { should allow_mass_assignment_of(:message) }
   it { should allow_mass_assignment_of(:url) }
+  it { should allow_mass_assignment_of(:project_id) }
+  it { should allow_mass_assignment_of(:cluster_id) }
   
   it { should be_active }
   

@@ -2,8 +2,11 @@
 
 table class="table table-bordered"
   tr
-    th = Cluster.human_attribute_name(:state)
+    th class="span4" = Cluster.human_attribute_name(:state)
     td = @cluster.human_state_name
+  tr
+    th = Cluster.human_attribute_name(:description)
+    td = @cluster.description
 
 - if can?(:edit, @cluster) || can?(:index, :versions)
   div class="link-actions"
@@ -14,8 +17,39 @@ table class="table table-bordered"
       = " "
       = link_to 'Версии', [@cluster, :versions], class: 'btn'
 
-p = @cluster.description
+h2 Проекты
+
+table class="table table-bordered"
+  tr
+    th class="span4" Всего
+    td = @cluster.projects.count
+  tr
+    th Активных
+    td = @cluster.projects.select('DISTINCT "projects"."id"').where(projects: { state: 'active' }).count
+  tr
+    th Закрытых
+    td = @cluster.projects.select('DISTINCT "projects"."id"').closed.count
+
+= render partial: 'projects/table', locals: { projects: @cluster.projects }
 
 h2 Заявки
 
 = render partial: 'requests/list', locals: { requests: @cluster.requests }
+
+h2 Поддержка
+
+table class="table table-bordered"
+  tr
+    th class="span4" Всего
+    td = @cluster.tickets.count
+  tr
+    th Активных
+    td = @cluster.tickets.active.count
+  tr
+    th Проектов в поддержке
+    td = @cluster.tickets.select('distinct tickets.project_id').count
+  tr
+    th Пользователей в поддержке
+    td = @cluster.tickets.select('distinct tickets.user_id').count
+  
+= render partial: 'tickets/table', locals: { tickets: @cluster.tickets }

@@ -5,7 +5,8 @@
   = f.input :url
   = f.input :message, input_html: { rows: 5 }
   = f.input :attachment
-  = f.association :project
+  = f.association :project, label_method: :name_with_state
+  = f.association :cluster
   = f.simple_fields_for :ticket_field_values do |f|
     = f.hidden_field :ticket_field_relation_id
     = f.input :value, label: f.object.ticket_field_relation.ticket_field.name, required: f.object.ticket_field_relation.required, hint: f.object.ticket_field_relation.ticket_field.hint

@@ -21,6 +21,7 @@ class TicketsController < ApplicationController
     flash.now[:info] = params[:info] if params[:info].present?
     @ticket = Ticket.new(params[:ticket])
     @ticket.user = current_user unless admin?
+    @projects = admin? ? Project.all : current_user.projects
     authorize! :new, @ticket
   end
   

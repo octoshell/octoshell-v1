@@ -39,9 +39,12 @@ class Project < ActiveRecord::Base
     end
   end
   
+  def name_with_state
+    "#{name} [#{human_state_name}]"
+  end
+  
   def active?
-    requests.
-    active.exists?
+    requests.active.exists?
   end
   
   def username
