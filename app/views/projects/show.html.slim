@@ -12,7 +12,6 @@ p class="lead" = @project.description
       = " "
       = link_to 'Версии', [@project, :versions], class: 'btn'
 
-
 table class="table table-bordered"
   tr
     th = Project.human_attribute_name(:user)

@@ -10,7 +10,37 @@ div class="request"
       td = @request.project.description
     tr
       th = Request.human_attribute_name(:user)
-      td = link_to_user @request.user
+      td
+        table class="table table-bordered"
+          tr
+            th class="span3" = Request.human_attribute_name(:user)
+            td = link_to_user @request.user
+          tr
+            th Проектов
+            td = @request.user.projects.count
+          tr
+            th Дата регистрации
+            td
+              = @request.user.created_at.to_date
+              |  (#{(Date.current - @request.user.created_at.to_date).to_i} дн.)
+          tr
+            th Общий объем квот
+            td
+              = "#{@request.user.requests.sum(:hours)} часов | "
+              = "#{@request.user.requests.sum(:size)} Gb"
+    tr
+      th = Organization.model_name.human
+      td
+        table class="table table-bordered"
+          tr
+            th class="span3" = Organization.model_name.human
+            td = link_to_organization @request.project.organization
+          tr
+            th Пользователей
+            td = @request.project.organization.memberships.active.count
+          tr
+            th Проектов
+            td = @request.project.organization.projects.count
     tr
       th = Cluster.model_name.human
       td = link_to_cluster @request.cluster
