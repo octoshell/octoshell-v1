@@ -22,7 +22,7 @@ h2 Проекты
 table class="table table-bordered"
   tr
     th class="span4" Всего
-    td = @cluster.projects.count
+    td = @cluster.projects.select('DISTINCT "projects"."id"').count
   tr
     th Активных
     td = @cluster.projects.select('DISTINCT "projects"."id"').where(projects: { state: 'active' }).count
@@ -51,5 +51,5 @@ table class="table table-bordered"
   tr
     th Пользователей в поддержке
     td = @cluster.tickets.select('distinct tickets.user_id').count
-  
+
 = render partial: 'tickets/table', locals: { tickets: @cluster.tickets }

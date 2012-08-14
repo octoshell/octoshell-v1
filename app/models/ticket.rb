@@ -9,6 +9,7 @@ class Ticket < ActiveRecord::Base
   belongs_to :cluster
   has_many :replies
   has_many :ticket_field_values, inverse_of: :ticket
+  has_many :ticket_tag_relations
   
   validates :user, :subject, :message, :ticket_question, presence: true
   
@@ -19,6 +20,8 @@ class Ticket < ActiveRecord::Base
   attr_accessible :message, :subject, :attachment, :ticket_question_id, :url,
     :ticket_field_values_attributes, :user_id, :project_id, :cluster_id,
     as: :admin
+    
+  after_create :create_ticket_tag_relations
   
   state_machine :state, initial: :active do
     state :active
@@ -65,5 +68,15 @@ class Ticket < ActiveRecord::Base
   
   def show_form?
     ticket_question && ticket_question.leaf?
+  end
+  
+private
+  
+  def create_ticket_tag_relations
+    TicketTag.all.each do |tag|
+      ticket_tag_relations.create! do |relation|
+        relation.ticket_tag = tag
+      end
+    end
   end
 end
