@@ -4,6 +4,8 @@ class TicketTag < ActiveRecord::Base
   has_many :ticket_tag_relations
   has_many :tickets, through: :ticket_tag_relations
   
+  validates :name, presence: true
+  
   attr_accessible :name, as: :admin
   
   after_create :create_ticket_tag_relations

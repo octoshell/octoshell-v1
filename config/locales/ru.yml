@@ -300,6 +300,7 @@ ru:
       surety: Поручительство
       ticket_question: Вопрос к заявке
       ticket_field: Дополнительное поле к заявке
+      ticket_tag: Тег
     errors:
       models:
         account:
@@ -382,6 +383,9 @@ ru:
         add_openkey: add_openkey
         del_openkey: del_openkey
         state: Состояние
+      ticket_tag:
+        name: Название
+        state: Состояние
       cluster_user:
         state: Состояние
       account:
@@ -410,6 +414,8 @@ ru:
         attachment: Файл
         user: Пользователь
         ticket_question: Вопрос
+        project: Проект
+        cluster: Кластер
       reply:
         message: Сообщение
         attachment: Файл
@@ -532,6 +538,13 @@ ru:
           events:
             _close: Закрыть
       ticket_template:
+        state:
+          states:
+            active: Активный
+            closed: Закрытый
+          events:
+            _close: Закрыть
+      ticket_tag:
         state:
           states:
             active: Активный
