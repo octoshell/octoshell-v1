@@ -1,6 +1,8 @@
 - title "Тег #{@ticket_tag.name}"
 
 div class="link-actions"
+  = link_to 'Редактировать', edit_ticket_tag_path(@ticket_tag), class: 'btn'
+  = " "
   - if @ticket_tag.can__close?
     = link_to TicketTag.human_state_event_name(:_close), [@ticket_tag, :close], method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
     = " "
