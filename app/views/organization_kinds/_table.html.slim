@@ -2,12 +2,10 @@
   table class="table table-bordered"
     tr
       th class="span3" = OrganizationKind.human_attribute_name(:name)
-      th class="span2" = OrganizationKind.human_attribute_name(:abbreviation)
       th = OrganizationKind.human_attribute_name(:state)
     - organization_kinds.each do |organization_kind|
       tr
         td = link_to_organization_kind organization_kind
-        td = organization_kind.abbreviation
         td = organization_kind.human_state_name
 - else
   p Нет типов организаций

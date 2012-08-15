@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120814131611) do
+ActiveRecord::Schema.define(:version => 20120815072931) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -95,9 +95,8 @@ ActiveRecord::Schema.define(:version => 20120814131611) do
 
   create_table "organization_kinds", :force => true do |t|
     t.string   "name"
-    t.string   "abbreviation"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "state"
   end
 
@@ -109,6 +108,7 @@ ActiveRecord::Schema.define(:version => 20120814131611) do
     t.datetime "deleted_at"
     t.string   "state"
     t.string   "organization_kind_id"
+    t.string   "abbreviation"
   end
 
   create_table "position_names", :force => true do |t|

@@ -12,7 +12,8 @@ class Organization < ActiveRecord::Base
   validates :name, presence: true, uniqueness: { scope: :organization_kind_id }
   validates :organization_kind, presence: true
   
-  attr_accessible :name, :organization_kind_id
+  attr_accessible :name, :organization_kind_id, :abbreviation
+  attr_accessible :name, :organization_kind_id, :abbreviation, as: :admin
   
   after_create :notify_admins
   

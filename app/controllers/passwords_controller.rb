@@ -14,7 +14,6 @@ class PasswordsController < ApplicationController
         flash[:alert] = t('flash.user_is_not_activated')
         redirect_to new_password_path
       end
-      
     else
       flash[:alert] = t('flash.user_not_found')
       redirect_to new_password_path

@@ -10,7 +10,7 @@ class OrganizationsController < ApplicationController
   end
   
   def create
-    @organization = Organization.new(params[:organization])
+    @organization = Organization.new(params[:organization], as_role)
     if @organization.save
       redirect_to @organization
     else
@@ -28,7 +28,7 @@ class OrganizationsController < ApplicationController
 
   def update
     @organization = find_organization(params[:id])
-    if @organization.update_attributes(params[:organization])
+    if @organization.update_attributes(params[:organization], as_role)
       redirect_to @organization
     else
       render :edit

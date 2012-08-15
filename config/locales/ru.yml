@@ -348,7 +348,6 @@ ru:
         state: Состояние
       organization_kind:
         name: Название
-        abbreviation: Аббревиатура
         state: Состояние
       request:
         cluster: Кластер
@@ -367,6 +366,7 @@ ru:
       organization:
         name: Название
         organization_kind: Тип организации
+        abbreviation: Аббревиатура
         merge_id: Объединить с
       surety:
         state: Статус

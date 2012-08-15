@@ -7,6 +7,7 @@ table class="table table-bordered"
   tr
     th #
     th = Organization.human_attribute_name(:name)
+    th = Organization.human_attribute_name(:abbreviation)
     th = Organization.human_attribute_name(:type)
     th Активных проектов
     - if can? :edit, :organizations
@@ -15,6 +16,7 @@ table class="table table-bordered"
     tr
       td = organization.id
       td = link_to_organization organization
+      td = organization.abbreviation
       td = organization.kind
       td = organization.projects.active.count
       - if can? :edit, :organizations

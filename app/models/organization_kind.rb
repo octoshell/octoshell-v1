@@ -5,7 +5,7 @@ class OrganizationKind < ActiveRecord::Base
   
   validates :name, presence: true
   
-  attr_accessible :name, :abbreviation, as: :admin
+  attr_accessible :name, as: :admin
   
   state_machine initial: :active do
     state :active
