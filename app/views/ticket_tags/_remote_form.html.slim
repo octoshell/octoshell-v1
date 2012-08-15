@@ -1,0 +1,4 @@
+= simple_form_for ticket_tag, remote: true do |f|
+  h3 Новый тег
+  = f.input :name, input_html: { class: 'span2' }
+  = f.submit class: 'btn btn-mini btn-info'
