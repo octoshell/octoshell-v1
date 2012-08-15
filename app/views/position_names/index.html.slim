@@ -1,8 +1,9 @@
 - title 'Позиции в организациях'
 
 div id="organizations"
-  ul class="nav nav-pills"
-    li = link_to 'Новая позиция', new_position_name_path
+  div class="link-actions"
+    = link_to 'Новая позиция', new_position_name_path, class: 'btn'
+  
   table class="table table-bordered"
     tr
       th #
