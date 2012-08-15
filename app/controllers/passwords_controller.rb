@@ -7,9 +7,16 @@ class PasswordsController < ApplicationController
   
   def create
     if @user = User.find_by_email(params[:user][:email])
-      @user.deliver_reset_password_instructions!
-      redirect_to confirmation_password_path
+      if @user.activation_active?
+        @user.deliver_reset_password_instructions!
+        redirect_to confirmation_password_path
+      else
+        flash[:alert] = t('flash.user_is_not_activated')
+        redirect_to new_password_path
+      end
+      
     else
+      flash[:alert] = t('flash.user_not_found')
       redirect_to new_password_path
     end
   end

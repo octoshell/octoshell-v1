@@ -267,7 +267,9 @@ ru:
     user_is_activated: Пользователь активирован.
     user_is_not_registered: Пользователь не зарегистрирован.
     activation_instructions_sended: Инструкции по активации высланы.
+    user_is_not_activated: Пользователь еще не активирован
     user_is_already_activated: Пользователь уже активирован.
+    user_not_found: Пользователь не найден
     alerts:
       surety_not_found: Поручительство не найдено
   helpers:
