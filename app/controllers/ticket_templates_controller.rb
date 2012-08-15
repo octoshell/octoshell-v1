@@ -8,7 +8,7 @@ class TicketTemplatesController < ApplicationController
   end
   
   def new
-    @ticket_template = TicketTemplate.new
+    @ticket_template = TicketTemplate.new(params[:ticket_template], as_role)
   end
   
   def create

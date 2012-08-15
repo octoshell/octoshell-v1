@@ -55,4 +55,11 @@ $(document).ready(function(){
     var box = $(e.target).parents('div.toggle-box:first')
     box.find('> div.object').toggle()
   })
+  
+  $('#ticket-template-maker').on('click', function(e){
+    var data = $('#reply_message').val()
+    var url = e.target.href + '?' + 'ticket_template[message]=' + data
+    window.open(url, '_blank')
+    return false
+  })
 });
