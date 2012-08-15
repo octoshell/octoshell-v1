@@ -150,8 +150,9 @@ describe Ability do
     it { should be_able_to(:index, :versions) }
     it { should be_able_to(:show,  :versions) }
     
-    it { should be_able_to(:edit,   :tickets) }
-    it { should be_able_to(:update, :tickets) }
+    it { should be_able_to(:edit,               :tickets) }
+    it { should be_able_to(:update,             :tickets) }
+    it { should be_able_to(:tag_relations_form, :tickets) }
     
     it { should be_able_to(:index,  :ticket_tags) }
     it { should be_able_to(:show,   :ticket_tags) }

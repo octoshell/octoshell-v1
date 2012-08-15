@@ -1,0 +1,7 @@
+= form_for ticket, html: { id: 'tag_relations', data: { 'reload-url' => ticket_tag_relations_form_path(ticket) } } do |f|
+  = f.fields_for :ticket_tag_relations, ticket.ticket_tag_relations.active do |f|
+    span class="inline-checkbox"
+      = f.check_box :active
+      = f.label :active, f.object.ticket_tag.name
+  div
+    = f.submit class: 'btn btn-mini btn-success'

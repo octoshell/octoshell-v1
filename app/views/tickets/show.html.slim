@@ -44,13 +44,12 @@ table class="table table-bordered"
 - if admin?
   h2 Теги
   
-  = form_for @ticket do |f|
-    = f.fields_for :ticket_tag_relations, @ticket.ticket_tag_relations.active do |f|
-      span class="inline-checkbox"
-        = f.check_box :active
-        = f.label :active, f.object.ticket_tag.name
-    div
-      = f.submit class: 'btn btn-mini btn-success'
+  = render partial: 'tag_relations_form', locals: { ticket: @ticket }
+  
+  = simple_form_for @ticket_tag, remote: true do |f|
+    h3 Новый тег
+    = f.input :name, input_html: { class: 'span2' }
+    = f.submit class: 'btn btn-mini btn-info'
 
 h2 Переписка
 

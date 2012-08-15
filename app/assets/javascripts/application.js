@@ -24,5 +24,30 @@ $(document).ready(function(){
 		} else {
 			reply_message.val(reply_message.val() + '\n' + $(this).val())
 		}
-	})
+	});
+	
+	$(document).on('reload_form form', function(e){
+	  var form = $(e.target)
+	  $.get(form.data('reload-url'), function(data){
+	    form.replaceWith(data)
+	  })
+	});
+	
+	$(document)
+	  .on('ajax:success #new_ticket_tag', function(e, data, xhr){
+  	  $('#tag_relations').trigger('reload_form')
+  	})
+  	.on('ajax:beforeSend #new_ticket_tag', function(e){
+  	  $(e.target).find(':input').each(function(i, e){
+  	    e.disabled = true
+  	  })
+  	})
+  	.on('ajax:complete #new_ticket_tag', function(e){
+  	  $(e.target).find(':input').each(function(i, e){
+  	    if (e.type != 'submit') {
+  	      e.value = ""
+  	    }
+  	    e.disabled = false
+  	  })
+  	})
 });

@@ -122,6 +122,7 @@ MSU::Application.routes.draw do
       get :closed
       post :continue
     end
+    get :tag_relations_form
     put :close
     put :resolve
     resources :versions, only: [:index, :show], resource: 'Ticket'

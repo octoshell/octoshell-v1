@@ -116,7 +116,7 @@ class Ability
         
         can [:index, :show], :versions
         
-        can [:edit, :update], :tickets
+        can [:edit, :update, :tag_relations_form], :tickets
       end
     end
   end

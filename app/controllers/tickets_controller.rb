@@ -56,6 +56,7 @@ class TicketsController < ApplicationController
     @reply = @ticket.replies.build do |reply|
       reply.user = current_user
     end
+    @ticket_tag = TicketTag.new
     authorize! :show, @ticket
   end
   
@@ -90,6 +91,11 @@ class TicketsController < ApplicationController
     else
       render :edit
     end
+  end
+  
+  def tag_relations_form
+    @ticket = Ticket.find(params[:ticket_id])
+    render partial: 'tag_relations_form', locals: { ticket: @ticket }
   end
   
 private
