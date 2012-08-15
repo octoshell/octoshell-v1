@@ -1,7 +1,8 @@
 class TicketTag < ActiveRecord::Base
+  attr_accessor :merge_id
   has_paper_trail
   
-  has_many :ticket_tag_relations
+  has_many :ticket_tag_relations, dependent: :destroy
   has_many :tickets, through: :ticket_tag_relations
   
   validates :name, presence: true
@@ -21,6 +22,17 @@ class TicketTag < ActiveRecord::Base
   
   define_defaults_events :close
   define_state_machine_scopes
+  
+  def merge(tag)
+    return false if self == tag
+    
+    transaction do
+      active_ticket_ids = tag.ticket_tag_relations.active.pluck(:ticket_id)
+      ticket_tag_relations.where(ticket_id: active_ticket_ids).
+        update_all(active: true)
+      tag.destroy
+    end
+  end
   
 private
   

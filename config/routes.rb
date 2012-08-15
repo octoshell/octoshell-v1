@@ -162,6 +162,7 @@ MSU::Application.routes.draw do
   
   # ticket tags
   resources :ticket_tags, except: :destroy do
+    put :merge
     put :close
     resources :versions, only: [:index, :show], resource: 'TicketTag'
   end

@@ -14,6 +14,15 @@ table class="table table-bordered"
     th = TicketTag.human_attribute_name(:state)
     td = @ticket_tag.human_state_name
 
+h2 Объединие
+
+= simple_form_for @ticket_tag, url: ticket_tag_merge_path(@ticket_tag), method: :put, html: { class: 'form-horizontal' } do |f|
+  = f.input :merge_id, collection: TicketTag.all, hint: 'Выбранный тег будет объединен с текущим.'
+
+  div class="form-actions"
+    = f.button :submit, 'Объединить'
+  
+
 h2 Поддержка
 
 = render partial: 'tickets/table', locals: { tickets: @ticket_tag.tickets.where(ticket_tag_relations: { active: true }) }

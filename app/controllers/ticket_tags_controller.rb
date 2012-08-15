@@ -39,6 +39,16 @@ class TicketTagsController < ApplicationController
     redirect_to @ticket_tag
   end
   
+  def merge
+    @ticket_tag = find_ticket_tag(params[:ticket_tag_id])
+    @duplication = find_ticket_tag(params[:ticket_tag].delete(:merge_id))
+    if @ticket_tag.merge(@duplication)
+      redirect_to @ticket_tag
+    else
+      render :show
+    end
+  end
+  
 private
   
   def find_ticket_tag(id)

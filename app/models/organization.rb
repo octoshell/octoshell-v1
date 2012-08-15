@@ -27,7 +27,6 @@ class Organization < ActiveRecord::Base
   end
   
   define_defaults_events :close
-  
   define_state_machine_scopes
   
   def close!

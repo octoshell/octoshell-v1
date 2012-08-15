@@ -16,4 +16,26 @@ describe TicketTag do
     ticket_tag.save
     ticket_tag.should have(1).ticket_tag_relations
   end
+  
+  describe '#merge' do
+    let!(:first_tag)  { create(:ticket_tag) }
+    let!(:second_tag) { create(:ticket_tag) }
+    let!(:ticket)     { create(:ticket) }
+    
+    before do
+      first_tag.merge(second_tag)
+    end
+    
+    it 'should destroy second ticket' do
+      TicketTag.where(id: second_tag.id).should_not be_exists
+    end
+    
+    it 'should destroy ticket tag relations of second tag' do
+      second_tag.should have(0).ticket_tag_relations
+    end
+    
+    it 'should set active ticket tag relation' do
+      first_tag.ticket_tag_relations.first.should be_active
+    end
+  end
 end
