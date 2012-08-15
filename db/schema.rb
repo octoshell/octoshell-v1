@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120815072931) do
+ActiveRecord::Schema.define(:version => 20120815140147) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -310,12 +310,13 @@ ActiveRecord::Schema.define(:version => 20120815072931) do
   add_index "values", ["field_id", "model_id", "model_type"], :name => "index_values_on_field_id_and_model_id_and_model_type", :unique => true
 
   create_table "versions", :force => true do |t|
-    t.string   "item_type",  :null => false
-    t.integer  "item_id",    :null => false
-    t.string   "event",      :null => false
+    t.string   "item_type",      :null => false
+    t.integer  "item_id",        :null => false
+    t.string   "event",          :null => false
     t.string   "whodunnit"
     t.text     "object"
     t.datetime "created_at"
+    t.text     "object_changes"
   end
 
   add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"

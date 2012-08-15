@@ -50,4 +50,9 @@ $(document).ready(function(){
   	    e.disabled = false
   	  })
   	})
+  
+  $('div.toggle-box').on('click > div.toggle', function(e){
+    var box = $(e.target).parents('div.toggle-box:first')
+    box.find('> div.object').toggle()
+  })
 });

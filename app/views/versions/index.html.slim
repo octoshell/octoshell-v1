@@ -11,10 +11,24 @@ table class="table table-bordered"
       td = link_to model.model_name.human, version.item
       td = version.event
       td
-        - if record = version.reify
+        - if (changes = version.changeset) && changes.any?
           table class="table table-bordered"
-            - record.attributes.each do |attribute, value|
+            tr
+              th Аттрибут
+              th Было
+              th Стало
+            - changes.each do |attribute, values|
               tr
                 th = model.human_attribute_name(attribute)
-                td = value
+                td = values.first
+                td = values.last
+        - if record = version.reify
+          div class="toggle-box"
+            div class="toggle" Показать объект
+            div class="object"
+              table class="table table-bordered"
+                - record.attributes.each do |attribute, value|
+                  tr
+                    th = model.human_attribute_name(attribute)
+                    td = value
       td = version.created_at.to_formatted_s(:long)
