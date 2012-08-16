@@ -14,7 +14,10 @@ div class="link-actions"
 table class="table table-bordered"
   tr
     th class="span3" = Task.human_attribute_name(:resource)
-    td = link_to_task_resource(@task)
+    td
+      p = link_to_task_resource(@task)
+      - resource = @task.resource_type.underscore
+      = render partial: "#{resource.pluralize}/summary", locals: { resource.to_sym => @task.resource }
   tr
     th = Task.human_attribute_name(:procedure)
     td = @task.procedure
