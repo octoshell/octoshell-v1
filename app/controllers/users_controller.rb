@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :require_login, only: [:show, :index, :edit, :update]
-  before_filter :logout, except: [:show, :index, :edit, :update]
+  before_filter :require_login, only: [:show, :index, :edit, :update, :close]
+  before_filter :logout, except: [:show, :index, :edit, :update, :close]
   
   def new
     @user = User.new
@@ -49,6 +49,13 @@ class UsersController < ApplicationController
   end
   
   def confirmation
+  end
+  
+  def close
+    authorize! :close, :users
+    @user = User.find(params[:user_id])
+    @user.close
+    redirect_to @user
   end
   
 private

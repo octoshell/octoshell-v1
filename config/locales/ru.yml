@@ -349,6 +349,7 @@ ru:
         organization: Институт
         full_name: ФИО
         admin: Права администратора
+        state: Состояние
       project:
         organization: Главная организация
         name: Название
@@ -459,7 +460,14 @@ ru:
           events:
             _activate: Активировать
             _decline: Отказать
-            _finish: Завершить
+            _close: Закрыть
+      user:
+        state:
+          states:
+            active: Активен
+            sured: Доверенный
+            closed: Закрытый
+          events:
             _close: Закрыть
       credential:
         state:

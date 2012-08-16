@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
     end
     
     event :_close do
-      transition any => :closed
+      transition [:active, :sured] => :closed
     end
   end
   
@@ -140,6 +140,17 @@ class User < ActiveRecord::Base
     transaction do
       _unsure!
       accounts.each &:close!
+    end
+  end
+  
+  def close!
+    transaction do
+      owned_projects.non_closed.each &:close!
+      sureties.non_closed.each &:close!
+      memberships.non_closed.each &:close!
+      tickets.non_closed.each &:close!
+      credentials.non_closed.each &:close!
+      _close!
     end
   end
   

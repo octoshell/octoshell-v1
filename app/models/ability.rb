@@ -96,7 +96,7 @@ class Ability
         
         can :show, :dashboard
         
-        can [:admin, :edit, :update], :users
+        can [:admin, :edit, :update, :close], :users
         
         can [:index, :new, :create, :show, :activate, :decline, :close], :requests
         

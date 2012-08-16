@@ -78,6 +78,7 @@ describe Ability do
     it { should be_able_to(:admin,  :users) }
     it { should be_able_to(:edit,   :users) }
     it { should be_able_to(:update, :users) }
+    it { should be_able_to(:close,  :users) }
     
     it { should be_able_to(:index,    :requests) }
     it { should be_able_to(:new,      :requests) }

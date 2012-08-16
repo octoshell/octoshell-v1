@@ -1,5 +1,7 @@
 # coding: utf-8
 class ApplicationController < ActionController::Base
+  before_filter :block_closed_users
+  
   protect_from_forgery
   enable_authorization unless: :skip_action?
   
@@ -46,5 +48,13 @@ private
   
   def as_role
     admin? ? { as: :admin } : {}
+  end
+  
+  def block_closed_users
+    if logged_in? && current_user.closed?
+      raise current_user.inspect
+      logout
+      raise CanCan::Unauthorized
+    end
   end
 end

@@ -152,12 +152,22 @@ describe User do
   end
   
   describe '#close' do
+    let!(:user) { create(:sured_user) }
     let!(:credential) { create(:credential, user: user) }
+    let!(:ticket) { create(:ticket, user: user) }
     
     before { user.close }
     
     it 'should close all credentials' do
-      user.credentials.all(&:closed?).should be_true
+      user.credentials.all?(&:closed?).should be_true
+    end
+    
+    it 'should close all projects' do
+      user.projects.all?(&:closed?).should be_true
+    end
+    
+    it 'should close all tickets' do
+      user.tickets.all?(&:closed?).should be_true
     end
     
     it 'should send last email for user'

@@ -91,6 +91,7 @@ MSU::Application.routes.draw do
   
   # users
   resources :users, except: :destroy do
+    put :close
     resources :versions, only: [:index, :show], resource: 'User'
   end
     
