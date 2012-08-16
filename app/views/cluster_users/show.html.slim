@@ -15,9 +15,16 @@ table class="table table-bordered"
     th = ClusterUser.human_attribute_name(:state)
     td = @cluster_user.human_state_name
 
-h2 Задания
+h2 Как подключиться
 
-= render partial: 'tasks/table', locals: { tasks: @cluster_user.tasks }
+pre
+  code
+    | ssh #{@cluster_user.project.username}@#{@cluster_user.cluster.host}
+
+- if can? :index, :tasks
+  h2 Задания
+
+  = render partial: 'tasks/table', locals: { tasks: @cluster_user.tasks }
 
 h2 Доступы на кластер
 

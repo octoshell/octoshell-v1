@@ -21,17 +21,22 @@ h2 Доступы к кластерам
 
 = render partial: 'accesses/table', locals: { accesses: @user.accesses.non_closed }
 
+h2 Пользователи на кластере
+
+= render partial: 'cluster_users/table', locals: { cluster_users: @user.projects.active.map { |p| p.cluster_users.non_closed }.flatten }
+
 h2 Поддержка
 
 = render partial: 'tickets/table', locals: { tickets: @user.tickets.non_closed }
 
-h2 Заявки
+h2 Проекты
 
 - if @user.projects.empty?
   p Нет заявок
 
 - @user.projects.each do |project|
-  h3 Проект #{link_to_project(project)}
+  h3 = link_to_project(project)
   
+  h4 Заявки
   = render partial: 'requests/table', locals: { requests: project.requests }
 

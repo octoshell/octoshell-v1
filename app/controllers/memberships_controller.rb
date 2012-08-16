@@ -47,6 +47,13 @@ class MembershipsController < ApplicationController
     end
   end
   
+  def close
+    @membership = find_membership(params[:membership_id])
+    authorize! :close, @membership
+    @membership.close
+    redirect_to @membership
+  end
+  
 private
   
   def find_membership(id)

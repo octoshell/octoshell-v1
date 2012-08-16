@@ -171,13 +171,9 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
     t.integer  "organization_id"
     t.string   "state"
     t.datetime "deleted_at"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "comment"
-    t.string   "attachment_file_name"
-    t.string   "attachment_content_type"
-    t.integer  "attachment_file_size"
-    t.datetime "attachment_updated_at"
   end
 
   create_table "tasks", :force => true do |t|
@@ -259,13 +255,13 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
     t.text     "message"
     t.integer  "user_id"
     t.string   "state"
+    t.string   "url"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
-    t.string   "url"
     t.integer  "ticket_question_id"
     t.integer  "project_id"
     t.integer  "cluster_id"

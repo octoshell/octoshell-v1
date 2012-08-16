@@ -158,18 +158,18 @@ class ClusterUser < ActiveRecord::Base
 protected
   
   def continue_add_user
-    _complete_activation!
+    complete_activation!
   end
   
   def continue_block_user
-    _complete_pausing!
+    complete_pausing!
   end
   
   def continue_unblock_user
-    _complete_resuming!
+    complete_resuming!
   end
   
   def continue_del_user
-    _complete_closure!
+    complete_closure!
   end
 end

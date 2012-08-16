@@ -25,6 +25,7 @@ MSU::Application.routes.draw do
   
   # memberships
   resources :memberships, only: [:index, :new, :create, :edit, :update, :show] do
+    put :close
     resources :versions, only: [:index, :show], resource: 'Membership'
   end
   

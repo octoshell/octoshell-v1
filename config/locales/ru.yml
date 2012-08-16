@@ -342,6 +342,7 @@ ru:
         full_name: ФИО
         admin: Права администратора
       project:
+        organization: Главная организация
         name: Название
         description: Описание
         user: Руководитель
@@ -374,6 +375,7 @@ ru:
         description: Описание проекта
       membership:
         organization: Организация
+        state: Состояние
       cluster:
         name: Название
         host: Хост
@@ -465,6 +467,7 @@ ru:
             paused: Заблокирован
             pausing: Блокируется
             resuming: Разблокируется
+            closing: Закрывается
             closed: Закрыт
           events:
             _pause: Заблокировать
@@ -501,7 +504,7 @@ ru:
         state:
           states:
             pending: Ожидает подтверждения
-            close: Закрыт
+            closed: Закрыт
             active: Активен
             declined: Отказано
           events:
@@ -530,6 +533,13 @@ ru:
           states:
             active: Активный
             closed: Закрытый
+          events:
+            _close: Закрыть
+      membership:
+        state:
+          states:
+            active: Активно
+            closed: Закрыто
           events:
             _close: Закрыть
       ticket_field:
@@ -568,5 +578,5 @@ ru:
             activing: Активируется
             pending: В ожидании
             closing: Закрывается
-            close: Закрыт
+            closed: Закрыт
       

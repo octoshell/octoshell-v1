@@ -7,6 +7,6 @@ class ClusterUsersController < ApplicationController
 private
   
   def namespace
-    :admin
+    admin? ? :admin : :dashboard
   end
 end
