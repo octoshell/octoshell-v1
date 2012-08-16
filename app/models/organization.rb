@@ -32,9 +32,11 @@ class Organization < ActiveRecord::Base
   def close!
     transaction do
       _close!
-      sureties.each do |surety|
+      sureties.non_closed.each do |surety|
         surety.close!(I18n.t 'surety.comments.organization_deleted')
       end
+      memberships.non_closed.each &:close!
+      projects.non_closed.each &:close!
     end
   end
   
@@ -47,6 +49,7 @@ class Organization < ActiveRecord::Base
     transaction do
       organization.sureties.update_all(organization_id: id)
       organization.memberships.update_all(organization_id: id)
+      organization.projects.update_all(organization_id: id)
       organization.destroy
     end
   end

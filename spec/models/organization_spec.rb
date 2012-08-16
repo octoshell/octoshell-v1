@@ -17,7 +17,8 @@ describe Organization do
   it { should allow_mass_assignment_of(:organization_kind_id) }
   
   describe '#merge' do
-    let!(:duplication) { create(:organization) }
+    let!(:project) { create(:project) }
+    let!(:duplication) { project.organization }
     let!(:membership) { create(:membership, organization: duplication) }
     let!(:surety) { create(:surety, organization: duplication) }
     
@@ -29,8 +30,12 @@ describe Organization do
     end
     
     it 'should move organizations memberships' do
-      organization.should have(1).memberships
-      organization.memberships.first.user.should == membership.user
+      organization.should have(2).memberships # one from project + 1
+      organization.memberships.last.user.should == membership.user
+    end
+    
+    it 'should move organizations projects' do
+      organization.should have(1).projects
     end
     
     context 'merge with self' do

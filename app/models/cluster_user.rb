@@ -49,7 +49,7 @@ class ClusterUser < ActiveRecord::Base
     end
     
     event :_close do
-      transition any => :closing
+      transition [:pending, :activing, :active, :pausing, :paused, :resuming] => :closing
     end
     
     event :_complete_closure do
@@ -87,7 +87,7 @@ class ClusterUser < ActiveRecord::Base
     
     def close_for(project_id, cluster_id)
       conditions = { project_id: project_id, cluster_id: cluster_id }
-      non_closed.where(conditions).each &:close!
+      non_closed.non_closing.where(conditions).each &:close!
     end
   end
   
