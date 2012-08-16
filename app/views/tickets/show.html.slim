@@ -4,6 +4,7 @@
   div class="link-actions"
     - if can? :edit, @ticket
       = link_to 'Редактировать', [:edit, @ticket], class: 'btn'
+      = " "
     = link_to Ticket.human_state_event_name(:_resolve), ticket_resolve_path(@ticket), method: :put, class: 'btn btn-success' if can?(:resolve, @ticket)
     = " "
     = link_to Ticket.human_state_event_name(:_close), ticket_close_path(@ticket), method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' } if can?(:close, @ticket)
