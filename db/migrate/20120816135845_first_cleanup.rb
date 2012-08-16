@@ -1,7 +1,7 @@
 class FirstCleanup < ActiveRecord::Migration
   def up
     # accesses
-    remove_index :accesses, name: 'unique_active'
+    remove_index :accesses, name: 'unique_active' rescue nil
     remove_column :accesses, :deleted_at
     add_index :accesses, :credential_id
     add_index :accesses, :state
