@@ -16,7 +16,7 @@ div class="link-actions noprint"
   = " "
   = link_to 'Скачать PDF', surety_path(@surety, format: :pdf), class: 'btn'
   = " "
-  = link_to 'Загрузить скан', new_ticket_path(ticket: { subject: "Активация поручительства ##{@surety.id}", url: surety_path(@surety), message: 'Активируйте пожалуйста мое поручительство.' }, info: 'Прикрепите скан файла поручительства'), class: 'btn'
+  = link_to 'Загрузить скан', new_ticket_path, class: 'btn'
   - if can? :index, :versions
     = " "
     = link_to 'Версии', [@surety, :versions], class: 'btn'
