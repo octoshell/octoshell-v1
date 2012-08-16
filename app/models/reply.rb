@@ -21,6 +21,10 @@ class Reply < ActiveRecord::Base
   after_create :reply!, unless: :user_admin?
   after_create :notify_user, if: :user_admin?
   
+  def attachment_image?
+    attachment_content_type.to_s =~ /image/
+  end
+  
 private
   
   def notify_user

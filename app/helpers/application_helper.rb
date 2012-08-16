@@ -153,7 +153,13 @@ module ApplicationHelper
   
   def link_to_attachment(record)
     if record.attachment?
-      "#{link_to record.attachment_file_name, record.attachment.url, target: '_blank'} #{record.attachment.size} byte".html_safe
+      output = "#{link_to record.attachment_file_name, record.attachment.url, target: '_blank'} #{record.attachment.size} byte".html_safe
+      
+      if record.attachment_image?
+        output << link_to(image_tag(record.attachment.url, class: 'preview'), record.attachment.url, target: '_blank')
+      end
+      
+      output
     end
   end
 end

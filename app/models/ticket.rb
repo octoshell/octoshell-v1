@@ -50,6 +50,10 @@ class Ticket < ActiveRecord::Base
   
   define_state_machine_scopes
   
+  def attachment_image?
+    attachment_content_type.to_s =~ /image/
+  end
+  
   def actual?
     not closed?
   end
