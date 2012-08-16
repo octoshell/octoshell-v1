@@ -99,6 +99,7 @@ describe Ability do
     it { should be_able_to(:edit,   :organizations) }
     it { should be_able_to(:update, :organizations) }
     it { should be_able_to(:merge,  :organizations) }
+    it { should be_able_to(:close,  :organizations) }
     
     it { should be_able_to(:index,   :position_names) }
     it { should be_able_to(:new,     :position_names) }

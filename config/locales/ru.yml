@@ -369,6 +369,7 @@ ru:
         organization_kind: Тип организации
         abbreviation: Аббревиатура
         merge_id: Объединить с
+        state: Статус
       surety:
         state: Статус
         organization: Организация
@@ -561,6 +562,13 @@ ru:
           states:
             active: Активный
             closed: Закрытый
+          events:
+            _close: Закрыть
+      organization:
+        state:
+          states:
+            active: Активная
+            closed: Закрытая
           events:
             _close: Закрыть
       task:

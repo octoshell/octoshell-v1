@@ -58,6 +58,7 @@ MSU::Application.routes.draw do
   
   # organizations
   resources :organizations, only: [:new, :create, :index, :show, :edit, :update] do
+    put :close
     put :merge
     resources :versions, only: [:index, :show], resource: 'Organization'
   end

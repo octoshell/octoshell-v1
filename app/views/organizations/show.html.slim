@@ -1,10 +1,24 @@
 - title "Организация #{@organization.name}"
 
-- if can?(:index, :versions) || can?(:edit, @organization)
+- if admin?
   div class="link-actions"
     = link_to 'Редактировать', [:edit, @organization], class: 'btn'
     = ' '
     = link_to 'Версии', [@organization, :versions], class: 'btn'
+    - if @organization.can__close?
+      = ' '
+      = link_to Organization.human_state_event_name(:_close), [@organization, :close], class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
+
+table class="table table-bordered"
+  tr
+    th class="span4" = Organization.human_attribute_name(:name)
+    td = @organization.name
+  tr
+    th = Organization.human_attribute_name(:abbreviation)
+    td = @organization.abbreviation
+  tr
+    th = Organization.human_attribute_name(:state)
+    td = @organization.human_state_name
 
 h2 Проекты
 
