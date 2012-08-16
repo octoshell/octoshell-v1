@@ -11,29 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120815140147) do
+ActiveRecord::Schema.define(:version => 20120816135845) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
     t.string   "state"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.datetime "deleted_at"
     t.integer  "cluster_user_id"
   end
 
-  add_index "accesses", ["credential_id", "deleted_at"], :name => "unique_active", :unique => true
+  add_index "accesses", ["credential_id"], :name => "index_accesses_on_credential_id"
+  add_index "accesses", ["state"], :name => "index_accesses_on_state"
 
   create_table "accounts", :force => true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
-    t.datetime "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "state"
   end
 
   add_index "accounts", ["project_id"], :name => "index_accounts_on_project_id"
+  add_index "accounts", ["state"], :name => "index_accounts_on_state"
   add_index "accounts", ["user_id", "project_id"], :name => "index_accounts_on_user_id_and_project_id", :unique => true
   add_index "accounts", ["user_id"], :name => "index_accounts_on_user_id"
 
@@ -45,26 +45,29 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "cluster_users", ["cluster_id"], :name => "index_cluster_users_on_cluster_id"
+  add_index "cluster_users", ["project_id"], :name => "index_cluster_users_on_project_id"
+
   create_table "clusters", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                                                                      :null => false
-    t.datetime "updated_at",                                                                      :null => false
+    t.datetime "created_at",                                                                                  :null => false
+    t.datetime "updated_at",                                                                                  :null => false
     t.string   "host"
     t.string   "description"
-    t.datetime "deleted_at"
     t.string   "state"
-    t.text     "add_user",     :default => "'user=%user%\nhost=%host%'"
-    t.text     "del_user",     :default => "'user=%user%\nhost=%host%'"
-    t.text     "add_openkey",  :default => "'user=%user%\nhost=%host%\npublic_key=%public_key%'"
-    t.text     "del_openkey",  :default => "'user=%user%\nhost=%host%\npublic_key=%public_key%'"
-    t.text     "block_user",   :default => "'user=%user%\nhost=%host%'"
-    t.text     "unblock_user", :default => "'user=%user%\nhost=%host%'"
+    t.text     "add_user",     :default => "'''''''user=%user%\nhost=%host%'''''''"
+    t.text     "del_user",     :default => "'''''''user=%user%\nhost=%host%'''''''"
+    t.text     "add_openkey",  :default => "'''''''user=%user%\nhost=%host%\npublic_key=%public_key%'''''''"
+    t.text     "del_openkey",  :default => "'''''''user=%user%\nhost=%host%\npublic_key=%public_key%'''''''"
+    t.text     "block_user",   :default => "'''''''user=%user%\nhost=%host%'''''''"
+    t.text     "unblock_user", :default => "'''''''user=%user%\nhost=%host%'''''''"
   end
+
+  add_index "clusters", ["state"], :name => "index_clusters_on_state"
 
   create_table "credentials", :force => true do |t|
     t.text     "public_key"
     t.integer  "user_id"
-    t.datetime "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "name"
@@ -73,6 +76,8 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
 
   add_index "credentials", ["public_key", "user_id"], :name => "index_credentials_on_public_key_and_user_id", :unique => true
   add_index "credentials", ["public_key"], :name => "index_credentials_on_public_key"
+  add_index "credentials", ["user_id", "state"], :name => "index_credentials_on_user_id_and_state"
+  add_index "credentials", ["user_id"], :name => "index_credentials_on_user_id"
 
   create_table "fields", :force => true do |t|
     t.string   "name"
@@ -89,9 +94,11 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
     t.integer  "organization_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.datetime "deleted_at"
     t.string   "state"
   end
+
+  add_index "memberships", ["organization_id"], :name => "index_memberships_on_organization_id"
+  add_index "memberships", ["user_id"], :name => "index_memberships_on_user_id"
 
   create_table "organization_kinds", :force => true do |t|
     t.string   "name"
@@ -100,22 +107,25 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
     t.string   "state"
   end
 
+  add_index "organization_kinds", ["state"], :name => "index_organization_kinds_on_state"
+
   create_table "organizations", :force => true do |t|
     t.string   "name"
     t.boolean  "approved",             :default => false
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
-    t.datetime "deleted_at"
     t.string   "state"
     t.string   "organization_kind_id"
     t.string   "abbreviation"
   end
 
+  add_index "organizations", ["organization_kind_id"], :name => "index_organizations_on_organization_kind_id"
+  add_index "organizations", ["state"], :name => "index_organizations_on_state"
+
   create_table "position_names", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.datetime "deleted_at"
   end
 
   create_table "positions", :force => true do |t|
@@ -124,12 +134,12 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
     t.string   "value"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.datetime "deleted_at"
   end
+
+  add_index "positions", ["membership_id"], :name => "index_positions_on_membership_id"
 
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.datetime "deleted_at"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "user_id"
@@ -137,6 +147,10 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
     t.text     "description"
     t.integer  "organization_id"
   end
+
+  add_index "projects", ["organization_id"], :name => "index_projects_on_organization_id"
+  add_index "projects", ["state"], :name => "index_projects_on_state"
+  add_index "projects", ["user_id"], :name => "index_projects_on_user_id"
 
   create_table "replies", :force => true do |t|
     t.integer  "user_id"
@@ -150,11 +164,13 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
     t.datetime "attachment_updated_at"
   end
 
+  add_index "replies", ["ticket_id"], :name => "index_replies_on_ticket_id"
+  add_index "replies", ["user_id"], :name => "index_replies_on_user_id"
+
   create_table "requests", :force => true do |t|
     t.integer  "project_id"
     t.integer  "cluster_id"
     t.integer  "hours"
-    t.datetime "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
@@ -165,16 +181,21 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
 
   add_index "requests", ["cluster_id"], :name => "index_requests_on_cluster_id"
   add_index "requests", ["project_id"], :name => "index_requests_on_project_id"
+  add_index "requests", ["state"], :name => "index_requests_on_state"
+  add_index "requests", ["user_id"], :name => "index_requests_on_user_id"
 
   create_table "sureties", :force => true do |t|
     t.integer  "user_id"
     t.integer  "organization_id"
     t.string   "state"
-    t.datetime "deleted_at"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "comment"
   end
+
+  add_index "sureties", ["organization_id"], :name => "index_sureties_on_organization_id"
+  add_index "sureties", ["state"], :name => "index_sureties_on_state"
+  add_index "sureties", ["user_id"], :name => "index_sureties_on_user_id"
 
   create_table "tasks", :force => true do |t|
     t.text     "command"
@@ -188,10 +209,12 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
     t.string   "procedure"
     t.text     "data"
     t.string   "event"
-    t.datetime "deleted_at"
     t.string   "comment"
     t.boolean  "callbacks_performed", :default => false
   end
+
+  add_index "tasks", ["resource_id", "resource_type"], :name => "index_tasks_on_resource_id_and_resource_type"
+  add_index "tasks", ["state"], :name => "index_tasks_on_state"
 
   create_table "ticket_field_relations", :force => true do |t|
     t.integer  "ticket_question_id"
@@ -202,6 +225,9 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
     t.boolean  "use",                :default => false
   end
 
+  add_index "ticket_field_relations", ["ticket_field_id"], :name => "index_ticket_field_relations_on_ticket_field_id"
+  add_index "ticket_field_relations", ["ticket_question_id"], :name => "index_ticket_field_relations_on_ticket_question_id"
+
   create_table "ticket_field_values", :force => true do |t|
     t.string   "value"
     t.integer  "ticket_field_relation_id"
@@ -210,6 +236,9 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
     t.datetime "updated_at",               :null => false
   end
 
+  add_index "ticket_field_values", ["ticket_field_relation_id"], :name => "index_ticket_field_values_on_ticket_field_relation_id"
+  add_index "ticket_field_values", ["ticket_id"], :name => "index_ticket_field_values_on_ticket_id"
+
   create_table "ticket_fields", :force => true do |t|
     t.string   "name"
     t.string   "hint"
@@ -217,6 +246,8 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
     t.datetime "updated_at", :null => false
     t.string   "state"
   end
+
+  add_index "ticket_fields", ["state"], :name => "index_ticket_fields_on_state"
 
   create_table "ticket_questions", :force => true do |t|
     t.integer  "ticket_question_id"
@@ -227,6 +258,9 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
     t.datetime "updated_at",                           :null => false
   end
 
+  add_index "ticket_questions", ["state"], :name => "index_ticket_questions_on_state"
+  add_index "ticket_questions", ["ticket_question_id"], :name => "index_ticket_questions_on_ticket_question_id"
+
   create_table "ticket_tag_relations", :force => true do |t|
     t.integer  "ticket_id"
     t.integer  "ticket_tag_id"
@@ -235,12 +269,17 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
     t.datetime "updated_at",                       :null => false
   end
 
+  add_index "ticket_tag_relations", ["ticket_id"], :name => "index_ticket_tag_relations_on_ticket_id"
+  add_index "ticket_tag_relations", ["ticket_tag_id"], :name => "index_ticket_tag_relations_on_ticket_tag_id"
+
   create_table "ticket_tags", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "state"
   end
+
+  add_index "ticket_tags", ["state"], :name => "index_ticket_tags_on_state"
 
   create_table "ticket_templates", :force => true do |t|
     t.string   "subject"
@@ -249,6 +288,8 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
     t.datetime "updated_at", :null => false
     t.string   "state"
   end
+
+  add_index "ticket_templates", ["state"], :name => "index_ticket_templates_on_state"
 
   create_table "tickets", :force => true do |t|
     t.string   "subject"
@@ -266,6 +307,11 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
     t.integer  "project_id"
     t.integer  "cluster_id"
   end
+
+  add_index "tickets", ["cluster_id"], :name => "index_tickets_on_cluster_id"
+  add_index "tickets", ["project_id"], :name => "index_tickets_on_project_id"
+  add_index "tickets", ["state"], :name => "index_tickets_on_state"
+  add_index "tickets", ["user_id"], :name => "index_tickets_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email"
@@ -292,6 +338,7 @@ ActiveRecord::Schema.define(:version => 20120815140147) do
   add_index "users", ["activation_token"], :name => "index_users_on_activation_token"
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"
+  add_index "users", ["state"], :name => "index_users_on_state"
 
   create_table "values", :force => true do |t|
     t.integer  "field_id"
