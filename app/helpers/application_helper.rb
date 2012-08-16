@@ -156,6 +156,7 @@ module ApplicationHelper
       output = "#{link_to record.attachment_file_name, record.attachment.url, target: '_blank'} #{record.attachment.size} byte".html_safe
       
       if record.attachment_image?
+        output << "<br />".html_safe
         output << link_to(image_tag(record.attachment.url, class: 'preview'), record.attachment.url, target: '_blank')
       end
       
