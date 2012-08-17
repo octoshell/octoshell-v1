@@ -4,8 +4,8 @@ div class="page-header"
   h2 Запросить доступ в проект
 
 = simple_form_for @account, html: { class: 'form-horizontal' } do |f|
-  = f.association :user, label_method: :full_name if admin?
-  = f.association :project
+  = f.association :user, label_method: :full_name, collection: User.non_closed if admin?
+  = f.association :project, collection: Project.active
   
   div class="form-actions"
     = f.button :submit, 'Запросить'
@@ -14,7 +14,7 @@ div class="page-header"
   h2 Пригласить в проект
 
 = simple_form_for [:invite, @invite], html: { class: 'form-horizontal' } do |f|
-  = f.association :user, label_method: :full_name, collection: User.where('id != ?', f.object.user_id)
+  = f.association :user, label_method: :full_name, collection: User.where('id != ?', f.object.user_id).non_closed
   = f.association :project, collection: @projects
   div class="form-actions"
     = f.button :submit, 'Пригласить'

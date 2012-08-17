@@ -112,6 +112,6 @@ private
   end
   
   def get_projects
-    admin? ? Project.all : current_user.owned_projects
+    admin? ? Project.active : current_user.owned_projects.active
   end
 end
