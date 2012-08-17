@@ -2,7 +2,7 @@ class ClustersController < ApplicationController
   before_filter :require_login
   
   def index
-    @clusters = Cluster.all
+    @clusters = Cluster.active
   end
   
   def show
