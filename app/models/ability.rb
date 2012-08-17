@@ -53,12 +53,9 @@ class Ability
       
       # sured user
       if user.sured?
-        can :new, :accounts
-        # test it
+        can [:new, :show], :accounts
         can :invite, :accounts, project_id: user.owned_project_ids
-        # test it
         can :create, :accounts, user_id: user.id
-        # test it
         can :mailer, :accounts, project_id: user.owned_project_ids
         
         can :show, :requests, user_id: user.id

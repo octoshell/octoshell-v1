@@ -100,7 +100,7 @@ class User < ActiveRecord::Base
   
   def start_steps
     steps = []
-    steps << step_name(:project) if !owned_projects.any? && sured?
+    steps << step_name(:project) if !projects.non_closed.any? && sured?
     if !sureties.active.exists?
       if sureties.pending.exists?
         steps << step_name(:send_and_wait_approve)

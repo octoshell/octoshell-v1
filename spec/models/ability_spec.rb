@@ -66,6 +66,7 @@ describe Ability do
     it { should be_able_to(:invite,   :accounts) }
     it { should be_able_to(:create,   :accounts) }
     it { should be_able_to(:mailer,   :accounts) }
+    it { should be_able_to(:show,     :accounts) }
     
     it { should be_able_to(:show,   :projects) }
     it { should be_able_to(:edit,   :projects) }
