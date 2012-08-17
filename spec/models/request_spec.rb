@@ -24,6 +24,21 @@ describe Request do
   it { should allow_mass_assignment_of(:cluster_id) }
   it { should allow_mass_assignment_of(:project_id) }
   
+  it 'should create request only for non closed cluster' do
+    request = build(:request, cluster: create(:closed_cluster))
+    request.should have(1).errors_on(:cluster_state_name)
+  end
+  
+  it 'should create request only for sured user' do
+    request = build(:request, user: create(:closed_user))
+    request.should have(1).errors_on(:user_state_name)
+  end
+  
+  it 'should create request only for active project' do
+    request = build(:request, project: create(:closed_project))
+    request.should have(1).errors_on(:project_state_name)
+  end
+  
   describe 'validate project on create' do
     let(:request) { build(:request) }
     

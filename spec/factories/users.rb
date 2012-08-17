@@ -26,6 +26,12 @@ FactoryGirl.define do
         end
       end
       
+      factory :closed_user do
+        after(:create) do |user|
+          user.close!
+        end
+      end
+      
       factory :admin_user do
         admin true
       end

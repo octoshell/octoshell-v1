@@ -1,6 +1,8 @@
 class Membership < ActiveRecord::Base
   has_paper_trail
   
+  delegate :state_name, to: :organization, prefix: true, allow_nil: true
+  
   attr_accessor :skip_revalidate_user
   
   belongs_to :user
@@ -8,6 +10,7 @@ class Membership < ActiveRecord::Base
   has_many :positions, inverse_of: :membership
   
   validates :user, :organization, presence: true
+  validates :organization_state_name, exclusion: { in: [:closed] }, on: :create
   
   attr_accessible :organization_id, :positions_attributes
   attr_accessible :organization_id, :positions_attributes, :user_id, as: :admin
@@ -26,7 +29,6 @@ class Membership < ActiveRecord::Base
   end
   
   define_defaults_events :close
-  
   define_state_machine_scopes
   
   def close!

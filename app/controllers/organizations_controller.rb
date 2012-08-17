@@ -6,7 +6,7 @@ class OrganizationsController < ApplicationController
   end
   
   def index
-    @organizations = Organization.order(:name)
+    @organizations = Organization.active
   end
   
   def create

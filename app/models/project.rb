@@ -56,7 +56,7 @@ class Project < ActiveRecord::Base
   end
   
   def allowed_organizations
-    return Organization.all unless user
+    return Organization.active unless user
     
     memberships = user.memberships
     

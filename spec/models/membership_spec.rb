@@ -11,6 +11,11 @@ describe Membership do
   it { should validate_presence_of(:user) }
   it { should validate_presence_of(:organization) }
   
+  it 'should create membership only for non closed organization' do
+    organization = build(:membership, organization: create(:closed_organization))
+    organization.should have(1).errors_on(:organization_state_name)
+  end
+  
   describe '#build_default_positions' do
     let!(:position_names) { 3.times.map { create(:position_name) } }
     let!(:position) do

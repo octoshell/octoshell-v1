@@ -3,7 +3,9 @@ FactoryGirl.define do
     user
     organization
     factory :active_surety do
-      state 'active'
+      after(:create) do |surety|
+        surety.activate!
+      end
     end
   end
 end

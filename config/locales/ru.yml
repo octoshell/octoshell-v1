@@ -290,7 +290,7 @@ ru:
     cluster_destroyed: Кластер удален
   steps:
     project:
-      html: <a href="/projects/new">Создать проект</a>
+      html: <a href="/projects/new">Создать проект</a> или <a href="/accounts/new">Запросить доступ к существующему</a>
     surety:
       html: <a href="/sureties/new">Создать и прислать поручительство</a>
     send_and_wait_approve:

@@ -3,10 +3,12 @@ table class="table table-bordered"
     th #
     th = Organization.model_name.human
     th = User.model_name.human
+    td = Membership.human_attribute_name(:state)
     th
   - memberships.each do |membership|
     tr
       td = membership.id
       td = link_to_organization membership.organization
       td = link_to_user membership.user
+      td = membership.human_state_name
       td = link_to_membership membership

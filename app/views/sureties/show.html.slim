@@ -20,6 +20,17 @@ div class="link-actions noprint"
   - if can? :index, :versions
     = " "
     = link_to 'Версии', [@surety, :versions], class: 'btn'
+  - if can? :activate, :sureties
+    - if @surety.pending?
+      = " "
+      = link_to Surety.human_state_event_name(:_activate), surety_activate_path(@surety), class: 'btn btn-success', method: :put
+      = " "
+      = link_to Surety.human_state_event_name(:_decline), surety_decline_path(@surety), class: 'btn', method: :put
+      = " "
+    - if @surety.active? || @surety.declined?
+      = " "
+      = link_to Surety.human_state_event_name(:_close), surety_close_path(@surety), class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
+
 
 blockquote
   p
@@ -30,14 +41,3 @@ blockquote
     strong 119991 Москва, Ленинские горы, 1, стр.4
 
 = render partial: 'template', locals: { surety: @surety }
-
-- if can? :activate, :sureties
-  p class="noprint"
-    - if @surety.pending?
-      = link_to Surety.human_state_event_name(:_activate), surety_activate_path(@surety), class: 'btn btn-success', method: :put
-      = " "
-      = link_to Surety.human_state_event_name(:_decline), surety_decline_path(@surety), class: 'btn', method: :put
-      = " "
-    - if @surety.active? || @surety.declined?
-      = link_to Surety.human_state_event_name(:_close), surety_close_path(@surety), class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
-

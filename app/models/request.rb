@@ -1,7 +1,9 @@
 class Request < ActiveRecord::Base
   has_paper_trail
   
-  delegate :persisted?, to: :project, prefix: true, allow_nil: true
+  delegate :persisted?, :state_name, to: :project, prefix: true, allow_nil: true
+  delegate :state_name, to: :cluster, prefix: true, allow_nil: true
+  delegate :state_name, to: :user, prefix: true, allow_nil: true
   
   belongs_to :project, inverse_of: :requests
   belongs_to :cluster
@@ -11,6 +13,10 @@ class Request < ActiveRecord::Base
   validates :project, inclusion: { in: proc(&:allowed_projects) },
     on: :create, if: :project_persisted?
   validates :size, :hours, numericality: { greater_than: 0 }
+  
+  validates :cluster_state_name, exclusion: { in: [:closed] }, on: :create
+  validates :user_state_name, inclusion: { in: [:sured] }, on: :create
+  validates :project_state_name, inclusion: { in: [:active] }, on: :create
   
   attr_accessible :hours, :cluster_id, :project_id, :size
   attr_accessible :hours, :cluster_id, :project_id, :user_id, :size, as: :admin

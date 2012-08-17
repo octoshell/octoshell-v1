@@ -6,7 +6,7 @@
   ul
     - @user.start_steps.each do |step|
       li = step
-  p После этого вы сможете создавать проекты и заявки на ресурсы наших кластеров.
+
 - else
   div class="link-actions"
     = link_to 'Новый проект', new_project_path, class: 'btn'

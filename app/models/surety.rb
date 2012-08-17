@@ -1,10 +1,13 @@
 class Surety < ActiveRecord::Base
   has_paper_trail
   
+  delegate :state_name, to: :organization, prefix: true, allow_nil: true
+  
   belongs_to :user
   belongs_to :organization
   
   validates :user, :organization, presence: true
+  validates :organization_state_name, exclusion: { in: [:closed] }, on: :create
   
   attr_accessible :organization_id
   attr_accessible :organization_id, :user_id, as: :admin
