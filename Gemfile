@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
-gem 'sqlite3'
+gem 'pg'
 gem 'jquery-rails'
 gem 'unicorn'
 gem 'capistrano'
@@ -31,10 +31,6 @@ group :test, :development do
   gem 'launchy'
   gem 'guard-rspec'
   gem 'database_cleaner'
-end
-
-group :production do
-  gem 'pg'
 end
 
 group :assets do

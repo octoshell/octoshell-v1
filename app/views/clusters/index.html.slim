@@ -1,21 +1,9 @@
 - title 'Кластеры'
 
-- if can? :new, :clusters
+- if admin?
   div class="link-actions"
     = link_to 'Новый кластер', new_cluster_path, class: 'btn'
+    = " "
+    = link_to 'Закрытые', closed_clusters_path, class: 'btn'
 
-table class="table table-bordered"
-  tr
-    th #
-    th = Cluster.human_attribute_name(:name)
-    th = Cluster.human_attribute_name(:host)
-    th = Cluster.human_attribute_name(:description)
-    th
-  - @clusters.each do |cluster|
-    tr
-      td = cluster.id
-      td = link_to_cluster cluster
-      td = cluster.host
-      td = cluster.description
-      td = link_to 'открыть', cluster
-      
+= render partial: 'table', locals: { clusters: @clusters }

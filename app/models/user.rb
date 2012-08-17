@@ -113,6 +113,19 @@ class User < ActiveRecord::Base
     steps
   end
   
+  def project_steps
+    steps = []
+    if !sureties.active.exists?
+      if sureties.pending.exists?
+        steps << step_name(:send_and_wait_approve)
+      else
+        steps << step_name(:surety)
+      end
+    end
+    steps << step_name(:membership) unless memberships.active.any?
+    steps
+  end
+  
   def ready_to_activate_account?
     sured? && memberships.any?
   end

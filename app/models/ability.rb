@@ -106,7 +106,7 @@ class Ability
         
         can [:index, :new, :create, :edit, :update, :destroy], :position_names
         
-        can [:index, :new, :create, :show, :edit, :update, :close], :clusters
+        can [:index, :new, :create, :show, :edit, :update, :close, :closed], :clusters
         
         can [:index, :show, :new, :create, :edit, :update, :close], :organization_kinds
         

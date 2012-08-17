@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120816135845) do
+ActiveRecord::Schema.define(:version => 20120817095402) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -50,17 +50,17 @@ ActiveRecord::Schema.define(:version => 20120816135845) do
 
   create_table "clusters", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                                                                                  :null => false
-    t.datetime "updated_at",                                                                                  :null => false
+    t.datetime "created_at",                                                                    :null => false
+    t.datetime "updated_at",                                                                    :null => false
     t.string   "host"
     t.string   "description"
     t.string   "state"
-    t.text     "add_user",     :default => "'''''''user=%user%\nhost=%host%'''''''"
-    t.text     "del_user",     :default => "'''''''user=%user%\nhost=%host%'''''''"
-    t.text     "add_openkey",  :default => "'''''''user=%user%\nhost=%host%\npublic_key=%public_key%'''''''"
-    t.text     "del_openkey",  :default => "'''''''user=%user%\nhost=%host%\npublic_key=%public_key%'''''''"
-    t.text     "block_user",   :default => "'''''''user=%user%\nhost=%host%'''''''"
-    t.text     "unblock_user", :default => "'''''''user=%user%\nhost=%host%'''''''"
+    t.text     "add_user",     :default => "user=%user\n%host=%host%"
+    t.text     "del_user",     :default => "user=%user%\nhost=%host%"
+    t.text     "add_openkey",  :default => "user=%user%\nhost=%host%\npublic_key=%public_key%"
+    t.text     "del_openkey",  :default => "user=%user%\nhost=%host%\npublic_key=%public_key%"
+    t.text     "block_user",   :default => "user=%user%\nhost=%host%"
+    t.text     "unblock_user", :default => "user=%user%\nhost=%host%"
   end
 
   add_index "clusters", ["state"], :name => "index_clusters_on_state"

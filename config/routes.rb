@@ -99,6 +99,7 @@ MSU::Application.routes.draw do
   # clusters
   resources :clusters do
     put :close
+    get :closed, on: :collection
     resources :versions, only: [:index, :show], resource: 'Cluster'
   end
   

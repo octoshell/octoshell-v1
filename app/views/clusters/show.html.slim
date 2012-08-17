@@ -11,8 +11,9 @@ table class="table table-bordered"
 - if can?(:edit, @cluster) || can?(:index, :versions)
   div class="link-actions"
     = link_to 'Редактировать', edit_cluster_path(@cluster), class: 'btn'
-    = " "
-    = link_to Cluster.human_state_event_name(:_close), cluster_close_path(@cluster), method: :put, data: { confirm: 'Вы действительно хотите закрыть кластер? Все заявки автоматически отменятся.' }, class: 'btn btn-danger'
+    - if @cluster.can__close?
+      = " "
+      = link_to Cluster.human_state_event_name(:_close), cluster_close_path(@cluster), method: :put, data: { confirm: 'Вы действительно хотите закрыть кластер? Все заявки автоматически отменятся.' }, class: 'btn btn-danger'
     - if can? :index, :versions
       = " "
       = link_to 'Версии', [@cluster, :versions], class: 'btn'

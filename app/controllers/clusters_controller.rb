@@ -36,12 +36,16 @@ class ClustersController < ApplicationController
   end
   
   def close
-    @cluster = find_cluster(params[:id])
+    @cluster = find_cluster(params[:cluster_id])
     if @cluster.close
       redirect_to @cluster
     else
       redirect_to @cluster, alert: @cluster.errors.full_messages.join(', ')
     end
+  end
+  
+  def closed
+    @clusters = Cluster.closed
   end
   
 private
