@@ -99,21 +99,17 @@ class User < ActiveRecord::Base
   end
   
   def start_steps
-    project_steps
-  end
-  
-  def request_steps
     steps = []
-    steps << step_name(:project) unless owned_projects.any?
-    steps << step_name(:surety) unless sured?
-    steps << step_name(:membership) unless sured?
-    steps
-  end
-  
-  def project_steps
-    steps = []
-    steps << step_name(:surety) unless sured?
-    steps << step_name(:membership) unless sured?
+    steps << step_name(:project) if !owned_projects.any? && sured?
+    if !sureties.active.exists?
+      if sureties.pending.exists?
+        steps << step_name(:send_and_wait_approve)
+      else
+        steps << step_name(:surety)
+      end
+    end
+    steps << step_name(:membership) unless memberships.active.any?
+    steps << step_name(:credential) unless credentials.active.any?
     steps
   end
   

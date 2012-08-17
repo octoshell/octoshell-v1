@@ -51,6 +51,10 @@ class OrganizationsController < ApplicationController
     redirect_to @organization
   end
   
+  def closed
+    @organizations = Organization.closed
+  end
+  
 private
   
   def find_organization(id)

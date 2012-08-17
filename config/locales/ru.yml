@@ -293,8 +293,12 @@ ru:
       html: <a href="/projects/new">Создать проект</a>
     surety:
       html: <a href="/sureties/new">Создать и прислать поручительство</a>
+    send_and_wait_approve:
+      html: <a href="tickets/new">Прислать скан поручительства</a> и дождаться его подтверждения
     membership:
       html: <a href="/memberships/new">Добавить место работы</a>
+    credential:
+      html: <a href="/credentials/new">Добавить публичный ключ (для доступа к кластерам)</a>
   activerecord:
     models:
       user: Пользователь

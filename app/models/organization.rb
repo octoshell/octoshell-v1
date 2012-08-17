@@ -1,6 +1,8 @@
 class Organization < ActiveRecord::Base
   has_paper_trail
   
+  delegate :state_name, to: :organization_kind, prefix: true, allow_nil: true
+  
   attr_accessor :merge_id
   
   has_many :sureties
@@ -11,6 +13,7 @@ class Organization < ActiveRecord::Base
   
   validates :name, presence: true, uniqueness: { scope: :organization_kind_id }
   validates :organization_kind, presence: true
+  validates :organization_kind_state_name, exclusion: { in: [:closed] }
   
   attr_accessible :name, :organization_kind_id, :abbreviation
   attr_accessible :name, :organization_kind_id, :abbreviation, as: :admin

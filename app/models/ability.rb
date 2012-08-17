@@ -36,7 +36,7 @@ class Ability
       
       can [:index, :show], :users
       
-      can [:index, :show, :new, :create], :organizations
+      can [:index, :show, :new, :create, :closed], :organizations
       
       can [:show, :index, :close], :memberships
       

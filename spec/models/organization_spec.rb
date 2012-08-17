@@ -13,6 +13,11 @@ describe Organization do
   it { should validate_presence_of(:organization_kind) }
   it { should validate_uniqueness_of(:name).scoped_to(:organization_kind_id) }
   
+  it 'should create organization only for non closed organization type' do
+    organization = build(:organization, organization_kind: create(:closed_organization_kind))
+    organization.should have(1).errors_on(:organization_kind_state_name)
+  end
+  
   it { should allow_mass_assignment_of(:name) }
   it { should allow_mass_assignment_of(:organization_kind_id) }
   

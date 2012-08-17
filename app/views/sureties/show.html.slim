@@ -21,6 +21,14 @@ div class="link-actions noprint"
     = " "
     = link_to 'Версии', [@surety, :versions], class: 'btn'
 
+blockquote
+  p
+    | Вы должны 
+    strong распечатать поручительтво, поставить ФИО, подпись и печать.
+  p
+    | После этого отослать по адресу: 
+    strong 119991 Москва, Ленинские горы, 1, стр.4
+
 = render partial: 'template', locals: { surety: @surety }
 
 - if can? :activate, :sureties
