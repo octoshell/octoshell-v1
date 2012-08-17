@@ -61,7 +61,7 @@ class Request < ActiveRecord::Base
   end
   
   def allowed_projects
-    user ? user.owned_projects : []
+    user ? user.owned_projects.active : []
   end
   
   def cluster_users

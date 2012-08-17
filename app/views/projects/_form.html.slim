@@ -6,7 +6,7 @@
   - if @project.new_record?
     = field_set_tag 'Заявка' do
       = f.simple_fields_for :requests do |f|
-        = f.association :cluster
+        = f.association :cluster, collection: Cluster.active
         = f.input :hours
         = f.input :size, hint: 'Более 50ти обговаривается отдельно'
   div class="form-actions"

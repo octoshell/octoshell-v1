@@ -8,7 +8,7 @@ class RequestsController < ApplicationController
   def new
     @request = Request.new
     if admin?
-      @projects = Project.all
+      @projects = Project.active
     else
       @request.user = current_user
       @projects = @request.allowed_projects
@@ -21,6 +21,11 @@ class RequestsController < ApplicationController
     if @request.save
       redirect_to @request
     else
+      if admin?
+        @projects = Project.active
+      else
+        @projects = @request.allowed_projects
+      end
       render :new
     end
   end
