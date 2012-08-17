@@ -87,32 +87,7 @@ describe User do
       it { should include(step :surety) }
     end
   end
-  
-  describe '#request_steps' do
-    def step(name)
-      I18n.t("steps.#{name}.html")
-    end
     
-    subject { user.request_steps }
-    
-    it { should include(step :project) }
-    it { should include(step :surety) }
-    it { should include(step :membership) }
-    
-    context 'user with project' do
-      let(:user) { create(:user_with_projects) }
-      
-      it { should_not include(step :project) }
-    end
-    
-    context 'user with surety' do
-      let(:user) { create(:sured_user) }
-      
-      it { should_not include(step :surety) }
-      it { should_not include(step :membership) }
-    end
-  end
-  
   describe '#all_accounts' do
     let!(:user) { create(:user_with_projects) }
     let!(:account) { user.accounts.first }

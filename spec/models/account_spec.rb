@@ -18,6 +18,17 @@ describe Account do
   it { should allow_mass_assignment_of(:project_id) }
   it { should allow_mass_assignment_of(:raw_emails) }
   
+  it 'should create account only for sured users' do
+    account = build(:account, user: create(:closed_user))
+    account.activate
+    account.errors[:user_state_name].should be
+  end
+  
+  it 'should create account only for active projects' do
+    account = build(:account, project: create(:closed_project))
+    account.should have(1).errors_on(:project_state_name)
+  end
+  
   describe '#accesses' do
     let!(:user)         { create(:sured_user) }
     let!(:project)      { create(:project) }

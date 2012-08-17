@@ -6,6 +6,9 @@
 class Account < ActiveRecord::Base
   has_paper_trail
   
+  delegate :state_name, to: :user, prefix: true, allow_nil: true
+  delegate :state_name, to: :project, prefix: true, allow_nil: true
+  
   attr_accessor :raw_emails
   
   belongs_to :user, inverse_of: :accounts
@@ -13,6 +16,9 @@ class Account < ActiveRecord::Base
   
   validates :user, :project, presence: true
   validates :project_id, uniqueness: { scope: :user_id }
+  validates :project_state_name, inclusion: { in: [:active] }, if: :active_or_pending?
+  validates :user_state_name, inclusion: { in: [:sured] }, if: :active?
+  validates :user_state_name, exclusion: { in: [:closed] }, if: :active?
   validate :emails_validator, if: :raw_emails
   
   attr_accessible :project_id, :raw_emails
@@ -102,6 +108,10 @@ class Account < ActiveRecord::Base
       credential_id:   user.credential_ids,
       cluster_user_id: project.cluster_user_ids
     )
+  end
+  
+  def active_or_pending?
+    active? || pending?
   end
   
 private

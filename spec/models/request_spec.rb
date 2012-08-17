@@ -62,9 +62,9 @@ describe Request do
       let(:user) { create(:user_with_projects) }
       let(:request) { build(:request, user: user) }
       
-      subject { request.allowed_projects }
+      subject { request.allowed_projects.to_a }
       
-      it { should == user.projects }
+      it { should == user.projects.active.to_a }
     end
     
     context 'without user' do

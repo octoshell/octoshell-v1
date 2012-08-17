@@ -52,6 +52,7 @@ describe 'Organization Kinds', js: true do
       visit organization_kind_path(organization_kind)
       click_link 'close'
       confirm_dialog
+      sleep 0.5
     end
     
     it 'should close organization kind' do
