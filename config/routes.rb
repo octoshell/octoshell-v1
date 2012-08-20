@@ -16,10 +16,13 @@ MSU::Application.routes.draw do
   
   # sureties
   resources :sureties, only: [:new, :create, :index, :show] do
+    collection do
+      get :closed
+      post :find
+    end
     put :activate
     put :decline
     put :close
-    post :find, on: :collection
     resources :versions, only: [:index, :show], resource: 'Surety'
   end
   

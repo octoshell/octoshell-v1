@@ -9,6 +9,8 @@ class Access < ActiveRecord::Base
   include Models::Asynch
   has_paper_trail
   
+  default_scope order("#{table_name}.id desc")
+  
   attr_accessor :skip_activation
   
   belongs_to :cluster_user

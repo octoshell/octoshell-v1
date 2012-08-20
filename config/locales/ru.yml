@@ -1,4 +1,10 @@
 ru:
+  views:
+    pagination:
+      next: Следующая
+      first: Начало
+      last: Конец
+      previous: Предыдущая
   call_callbacks: 'Вызвать коллбеки'
   tasks:
     description:
@@ -299,6 +305,18 @@ ru:
       html: <a href="/memberships/new">Добавить место работы</a>
     credential:
       html: <a href="/credentials/new">Добавить публичный ключ (для доступа к кластерам)</a>
+  meta_search:
+    or: 'or-diddly'
+    predicates:
+      contains: '<em>%{attribute}</em> содержит'
+      equals: '<em>%{attribute}</em>'
+      in: '<em>%{attribute}</em>'
+      is_true: '<em>%{attribute}</em>'
+    attributes:
+      company:
+        reverse_name: "Company reverse name-diddly"
+      developer:
+        name_contains: "Developer name-diddly contains-aroonie"
   activerecord:
     models:
       user: Пользователь

@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_paper_trail
   
+  default_scope order("#{table_name}.id desc")
+  
   authenticates_with_sorcery!
   
   attr_reader :new_organization

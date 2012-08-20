@@ -1,6 +1,8 @@
 class Organization < ActiveRecord::Base
   has_paper_trail
   
+  default_scope order("#{table_name}.name asc")
+  
   delegate :state_name, to: :organization_kind, prefix: true, allow_nil: true
   
   attr_accessor :merge_id

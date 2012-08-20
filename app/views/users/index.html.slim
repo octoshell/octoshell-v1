@@ -1,3 +1,14 @@
 - title 'Пользователи'
 
+= simple_form_for @search, url: users_path, method: :get, html: { class: 'form-horizontal' } do |f|
+  = f.input :last_name_contains
+  = f.input :email_contains
+  = f.input :state_in, collection: User.human_state_names, input_html: { multiple: true }, selected: f.object.state_in || :active
+  div class="form-actions"
+    = f.button :submit, 'Найти', class: 'btn-primary'
+
+= paginate @users
+
 = render partial: 'table', locals: { users: @users }
+
+= paginate @users

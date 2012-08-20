@@ -6,7 +6,8 @@ class OrganizationsController < ApplicationController
   end
   
   def index
-    @organizations = Organization.active
+    @search = Organization.active.search(params[:search])
+    @organizations = @search.page(params[:page])
   end
   
   def create

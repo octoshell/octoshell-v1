@@ -1,6 +1,8 @@
 class Cluster < ActiveRecord::Base
   has_paper_trail
   
+  default_scope order("#{table_name}.name asc")
+  
   has_many :requests
   has_many :cluster_users
   has_many :tickets

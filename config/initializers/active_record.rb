@@ -19,4 +19,10 @@ class ActiveRecord::Base
       end
     end
   end
+  
+  def self.human_state_names
+    Hash[state_machine.states.map do |state|
+      [state.human_name, state.name]
+    end]
+  end
 end

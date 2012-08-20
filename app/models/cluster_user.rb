@@ -3,6 +3,8 @@ class ClusterUser < ActiveRecord::Base
   has_paper_trail
   include Models::Asynch
   
+  default_scope order("#{table_name}.id desc")
+  
   attr_accessor :skip_activation
   
   belongs_to :cluster

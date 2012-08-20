@@ -1,6 +1,8 @@
 class OrganizationKind < ActiveRecord::Base
   has_paper_trail
   
+  default_scope order("#{table_name}.name asc")
+  
   has_many :organizations
   
   validates :name, presence: true

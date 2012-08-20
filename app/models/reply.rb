@@ -1,6 +1,8 @@
 class Reply < ActiveRecord::Base
   has_paper_trail
   
+  default_scope order("#{table_name}.id asc")
+  
   has_attached_file :attachment
   
   delegate :answer!, :reply!, to: :ticket

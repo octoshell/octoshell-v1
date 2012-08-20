@@ -1,6 +1,8 @@
 class Ticket < ActiveRecord::Base
   has_paper_trail
   
+  default_scope order("#{table_name}.id desc")
+  
   has_attached_file :attachment
   
   belongs_to :user

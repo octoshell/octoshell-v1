@@ -1,6 +1,8 @@
 class Credential < ActiveRecord::Base
   has_paper_trail
   
+  default_scope order("#{table_name}.id desc")
+  
   attr_accessor :skip_creating_accesses
   
   has_many :accesses

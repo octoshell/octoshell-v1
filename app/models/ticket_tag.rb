@@ -2,6 +2,8 @@ class TicketTag < ActiveRecord::Base
   attr_accessor :merge_id
   has_paper_trail
   
+  default_scope order("#{table_name}.name asc")
+  
   has_many :ticket_tag_relations, dependent: :destroy
   has_many :tickets, through: :ticket_tag_relations
   

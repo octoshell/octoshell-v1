@@ -20,6 +20,8 @@ gem 'wicked_pdf'
 gem 'paperclip'
 gem 'therubyracer'
 gem 'yaml_db'
+gem 'meta_search'
+gem 'kaminari'
 
 group :test, :development do
   gem 'quiet_assets'

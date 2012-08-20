@@ -1,6 +1,8 @@
 class Task < ActiveRecord::Base
   has_paper_trail
   
+  default_scope order("#{table_name}.id desc")
+  
   PROCEDURES = %w(
     add_user
     block_user

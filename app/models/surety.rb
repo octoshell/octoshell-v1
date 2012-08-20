@@ -1,6 +1,8 @@
 class Surety < ActiveRecord::Base
   has_paper_trail
   
+  default_scope order("#{table_name}.id desc")
+  
   delegate :state_name, to: :organization, prefix: true, allow_nil: true
   
   belongs_to :user

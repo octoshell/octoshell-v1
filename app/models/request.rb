@@ -1,6 +1,8 @@
 class Request < ActiveRecord::Base
   has_paper_trail
   
+  default_scope order("#{table_name}.id desc")
+  
   delegate :persisted?, :state_name, to: :project, prefix: true, allow_nil: true
   delegate :state_name, to: :cluster, prefix: true, allow_nil: true
   delegate :state_name, to: :user, prefix: true, allow_nil: true
