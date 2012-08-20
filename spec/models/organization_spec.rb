@@ -36,7 +36,7 @@ describe Organization do
     
     it 'should move organizations memberships' do
       organization.should have(2).memberships # one from project + 1
-      organization.memberships.last.user.should == membership.user
+      organization.memberships.first.user.should == membership.user
     end
     
     it 'should move organizations projects' do
