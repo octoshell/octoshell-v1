@@ -19,6 +19,9 @@ table class="table table-bordered"
   tr
     th = Organization.human_attribute_name(:state)
     td = @organization.human_state_name
+  tr
+    th = Organization.human_attribute_name(:organization_kind_id)
+    td = link_to_organization_kind @organization.organization_kind
 
 h2 Проекты
 

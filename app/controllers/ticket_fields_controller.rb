@@ -1,6 +1,9 @@
 class TicketFieldsController < ApplicationController
+  before_filter :setup_default_filter, only: :index
+  
   def index
-    @ticket_fields = TicketField.scoped
+    @search = TicketField.search(params[:search])
+    @ticket_fields = @search.page(params[:page])
   end
   
   def show
@@ -51,5 +54,9 @@ private
   
   def redirect_to_index
     redirect_to ticket_fields_path
+  end
+  
+  def setup_default_filter
+    params[:search] ||= { state_in: ['active'] }
   end
 end

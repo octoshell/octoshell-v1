@@ -1,11 +1,14 @@
 class AccountsController < ApplicationController
   before_filter :require_login
+  before_filter :setup_default_filter, only: :index
   
   def index
     if current_user.admin?
-      @accounts = Account.scoped
+      @search = Account.search(params[:search])
+      @accounts = @search.page(params[:page])
     else
-      @accounts = current_user.all_accounts
+      @search = current_user.all_accounts.search(params[:search])
+      @accounts = @search.page(params[:page])
     end
   end
   
@@ -113,5 +116,9 @@ private
   
   def get_projects
     admin? ? Project.active : current_user.owned_projects.active
+  end
+  
+  def setup_default_filter
+    params[:search] ||= { state_in: ['pending', 'active'] }
   end
 end

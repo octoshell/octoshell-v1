@@ -1,8 +1,10 @@
 class ClustersController < ApplicationController
   before_filter :require_login
+  before_filter :setup_default_filter, only: :index
   
   def index
-    @clusters = Cluster.active
+    @search = Cluster.search(params[:search])
+    @clusters = @search.page(params[:page])
   end
   
   def show
@@ -64,5 +66,9 @@ private
   
   def namespace
     admin? ? :admin : :dashboard
+  end
+  
+  def setup_default_filter
+    params[:search] ||= { state_in: ['active'] }
   end
 end

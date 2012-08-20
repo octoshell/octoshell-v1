@@ -3,7 +3,15 @@
 - if admin?
   div class="link-actions"
     = link_to 'Новый кластер', new_cluster_path, class: 'btn'
-    = " "
-    = link_to 'Закрытые', closed_clusters_path, class: 'btn'
+
+= simple_form_for @search, url: users_path, method: :get, html: { class: 'form-horizontal' } do |f|
+  = f.input :name_contains
+  = f.input :state_in, collection: User.human_state_names, input_html: { multiple: true }
+  div class="form-actions"
+    = f.button :submit, 'Найти', class: 'btn-primary'
+
+= paginate @clusters
 
 = render partial: 'table', locals: { clusters: @clusters }
+
+= paginate @clusters

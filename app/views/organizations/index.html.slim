@@ -10,8 +10,6 @@
 
 div class="link-actions"
   = link_to 'Новая организация', new_organization_path, class: 'btn'
-  = " "
-  = link_to 'Закрытые', closed_organizations_path, class: 'btn'
 
 = paginate @organizations
 

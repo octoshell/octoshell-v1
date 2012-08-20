@@ -1,6 +1,9 @@
 class TicketTemplatesController < ApplicationController
+  before_filter :setup_default_filter, only: :index
+  
   def index
-    @ticket_templates = TicketTemplate.active
+    @search = TicketTemplate.search(params[:search])
+    @ticket_templates = @search.page(params[:page])
   end
   
   def show
@@ -47,5 +50,9 @@ private
   
   def namespace
     :support
+  end
+  
+  def setup_default_filter
+    params[:search] ||= { state_in: ['active'] }
   end
 end

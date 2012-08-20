@@ -377,6 +377,8 @@ ru:
         name: Название
         description: Описание
         user: Руководитель
+        user_id: Руководитель
+        organization_id: Главная организация
         state: Состояние
       organization_kind:
         name: Название
@@ -384,6 +386,7 @@ ru:
       request:
         cluster: Кластер
         project: Проект
+        project_id: Проект
         hours: Процессоро-часы
         created_at: Дата создания
         state: Статус
@@ -451,7 +454,9 @@ ru:
         user: Пользователь
         ticket_question: Вопрос
         project: Проект
+        project_id: Проект
         cluster: Кластер
+        cluster_id: Кластер
       reply:
         message: Сообщение
         attachment: Файл

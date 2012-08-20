@@ -1,11 +1,14 @@
 class TicketsController < ApplicationController
   before_filter :require_login
+  before_filter :setup_default_filter, only: :index
   
   def index
     if admin?
-      @tickets = Ticket.scoped
+      @search = Ticket.search(params[:search])
+      @tickets = @search.page(params[:page])
     else
-      @tickets = current_user.tickets
+      @search = current_user.tickets.search(params[:search])
+      @tickets = @search.page(params[:page])
     end
   end
   
@@ -102,4 +105,8 @@ private
   def namespace
     :support
   end  
+  
+  def setup_default_filter
+    params[:search] ||= { state_in: ['active', 'answered'] }
+  end
 end

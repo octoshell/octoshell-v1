@@ -48,7 +48,7 @@ class TicketQuestion < ActiveRecord::Base
   end
   
   def available_parents
-    new_record? ? TicketQuestion.all : TicketQuestion.where('id != ?', id)
+    new_record? ? TicketQuestion.scoped : TicketQuestion.where('id != ?', id)
   end
   
   def breadcrumbs

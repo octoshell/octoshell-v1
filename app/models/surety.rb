@@ -18,7 +18,7 @@ class Surety < ActiveRecord::Base
     state :pending
     state :active
     state :declined
-    state :close
+    state :closed
     
     event :_activate do
       transition pending: :active

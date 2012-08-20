@@ -1,11 +1,14 @@
 class ProjectsController < ApplicationController
   before_filter :require_login
+  before_filter :setup_default_filter, only: :index
   
   def index
     if admin?
-      @projects = Project.all
+      @search = Project.search(params[:search])
+      @projects = @search.page(params[:page])
     else
-      @projects = current_user.projects
+      @search = current_user.projects.search(params[:search])
+      @projects = @search.page(params[:page])
     end
   end
   
@@ -61,5 +64,9 @@ private
   
   def namespace
     admin? ? :admin : :dashboard
+  end
+  
+  def setup_default_filter
+    params[:search] ||= { state_in: ['active'] }
   end
 end

@@ -1,6 +1,9 @@
 class TicketTagsController < ApplicationController
+  before_filter :setup_default_filter, only: :index
+  
   def index
-    @ticket_tags = TicketTag.scoped
+    @search = TicketTag.search(params[:search])
+    @ticket_tags = @search.page(params[:page])
   end
   
   def show
@@ -57,5 +60,9 @@ private
   
   def namespace
     :support
+  end
+  
+  def setup_default_filter
+    params[:search] ||= { state_in: ['active'] }
   end
 end

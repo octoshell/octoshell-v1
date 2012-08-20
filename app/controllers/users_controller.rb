@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :require_login, only: [:show, :index, :edit, :update, :close]
   before_filter :logout, except: [:show, :index, :edit, :update, :close]
+  before_filter :setup_default_filter, only: :index
   
   def new
     @user = User.new
@@ -63,5 +64,9 @@ private
   
   def namespace
     admin? ? :admin : :dashboard
+  end
+  
+  def setup_default_filter
+    params[:search] ||= { state_in: ['active'] }
   end
 end

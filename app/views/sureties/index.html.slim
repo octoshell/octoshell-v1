@@ -3,13 +3,14 @@
 div class="link-actions"
   = link_to 'Новое поручительство', new_surety_path, class: 'btn'
 
-- if can? :find, :sureties
-  = form_tag find_sureties_path do
-    = field_set_tag 'Поиск поручительств' do
-      div class="control-group string optional"
-        = label_tag :id, 'ID поручительства:', class: 'string optional control-label'
-        div class="controls"
-          = text_field_tag :id
-      p = submit_tag 'Найти', class: 'btn'
+= simple_form_for @search, url: sureties_path, method: :get, html: { class: 'form-horizontal' } do |f|
+  = f.input :id_eq if admin?
+  = f.input :state_in, collection: Surety.human_state_names, input_html: { multiple: true }
+  div class="form-actions"
+    = f.button :submit, 'Найти', class: 'btn-primary'
+
+= paginate @sureties
 
 = render partial: 'sureties/table', locals: { sureties: @sureties }
+
+= paginate @sureties

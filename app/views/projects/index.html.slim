@@ -2,4 +2,16 @@
 
 = render 'new_project_link'
 
+= simple_form_for @search, url: projects_path, method: :get, html: { class: 'form-horizontal' } do |f|
+  = f.input :name_contains
+  = f.input :user_id_eq, collection: User.all, label_method: :full_name if admin?
+  = f.input :organization_id_eq, collection: Organization.all if admin?
+  = f.input :state_in, collection: Project.human_state_names, input_html: { multiple: true }
+  div class="form-actions"
+    = f.button :submit, 'Найти', class: 'btn-primary'
+
+= paginate @projects
+
 = render partial: 'table', locals: { projects: @projects }
+
+= paginate @projects

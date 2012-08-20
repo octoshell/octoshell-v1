@@ -1,12 +1,13 @@
 class OrganizationsController < ApplicationController
   before_filter :require_login
+  before_filter :setup_default_filter, only: :index
   
   def new
     @organization = Organization.new
   end
   
   def index
-    @search = Organization.active.search(params[:search])
+    @search = Organization.search(params[:search])
     @organizations = @search.page(params[:page])
   end
   
@@ -52,10 +53,6 @@ class OrganizationsController < ApplicationController
     redirect_to @organization
   end
   
-  def closed
-    @organizations = Organization.closed
-  end
-  
 private
   
   def find_organization(id)
@@ -64,5 +61,9 @@ private
   
   def namespace
     admin? ? :admin : :dashboard
+  end
+  
+  def setup_default_filter
+    params[:search] ||= { state_in: ['active'] }
   end
 end

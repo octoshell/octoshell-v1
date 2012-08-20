@@ -17,3 +17,5 @@ table class="table table-bordered"
     th = OrganizationKind.human_attribute_name(:state)
     td = @organization_kind.human_state_name
   
+  
+= render partial: 'organizations/table', locals: { organizations: @organization_kind.organizations }

@@ -1,8 +1,10 @@
 class RequestsController < ApplicationController
   before_filter :require_login
+  before_filter :setup_default_filter, only: :index
   
   def index
-    @requests = Request.scoped
+    @search = Request.search(params[:search])
+    @requests = @search.page(params[:page])
   end
   
   def new
@@ -78,5 +80,9 @@ private
   
   def namespace
     admin? ? :admin : :dashboard
+  end
+  
+  def setup_default_filter
+    params[:search] ||= { state_in: ['pending', 'active'] }
   end
 end

@@ -1,6 +1,9 @@
 class OrganizationKindsController < ApplicationController
+  before_filter :setup_default_filter, only: :index
+  
   def index
-    @organization_kinds = OrganizationKind.scoped
+    @search = OrganizationKind.search(params[:search])
+    @organization_kinds = @search.page(params[:page])
   end
   
   def show
@@ -47,5 +50,9 @@ private
   
   def namespace
     :admin
+  end
+  
+  def setup_default_filter
+    params[:search] ||= { state_in: ['active'] }
   end
 end

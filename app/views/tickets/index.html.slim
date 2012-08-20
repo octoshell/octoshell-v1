@@ -2,14 +2,16 @@
 
 div class="link-actions"
   = link_to 'Новая заявка', new_ticket_path, class: 'btn'
-  = " "
-  = link_to 'Закрытые заявки', closed_tickets_path, class: 'btn'
 
-h2 Активные
-= render partial: 'table', locals: { tickets: @tickets.active }
+= simple_form_for @search, url: tickets_path, method: :get, html: { class: 'form-horizontal' } do |f|
+  = f.input :project_id_eq, collection: Project.all if admin?
+  = f.input :cluster_id_eq, collection: Cluster.all if admin?
+  = f.input :state_in, collection: Ticket.human_state_names, input_html: { multiple: true }
+  div class="form-actions"
+    = f.button :submit, 'Найти', class: 'btn-primary'
 
-h2 Отвеченные
-= render partial: 'table', locals: { tickets: @tickets.answered }
+= paginate @tickets
 
-h2 Решенные
-= render partial: 'table', locals: { tickets: @tickets.resolved }
+= render partial: 'table', locals: { tickets: @tickets }
+
+= paginate @tickets

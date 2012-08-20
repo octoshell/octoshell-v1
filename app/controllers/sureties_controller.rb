@@ -1,11 +1,14 @@
 class SuretiesController < ApplicationController
   before_filter :require_login
+  before_filter :setup_default_filter, only: :index
   
   def index
     if admin?
-      @sureties = Surety.all
+      @search = Surety.search(params[:search])
+      @sureties = @search.page(params[:page])
     else
-      @sureties = current_user.sureties
+      @search = curretn_user.sureties.search(params[:search])
+      @sureties = @search.page(params[:page])
     end
   end
   
@@ -85,5 +88,9 @@ private
   
   def namespace
     admin? ? :admin : :profile
+  end
+  
+  def setup_default_filter
+    params[:search] ||= { state_in: ['pending'] }
   end
 end
