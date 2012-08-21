@@ -11,88 +11,65 @@ versions:
   - created_at
   - object_changes
   records: 
-  - - 1
+  - - '1'
     - User
-    - 1
+    - '1'
     - create
     - f
     - 
-    - '2012-08-17 08:08:32.637325'
+    - '2012-08-21 06:23:18.747393'
     - 
-  - - 2
+  - - '2'
     - User
-    - 2
-    - create
-    - f
-    - 
-    - '2012-08-17 08:08:57.453568'
-    - 
-  - - 3
-    - User
-    - 3
-    - create
-    - f
-    - 
-    - '2012-08-17 08:09:21.258784'
-    - 
-  - - 4
-    - User
-    - 2
-    - update
-    - f
-    - ! "---\nemail: areleu@gmail.com\ncrypted_password: $2a$10$cylKfXTGGGU3xL6Ewe5tkOrJn23VJ1zhEXQtCjCkZVsgyO4uWLik.\nsalt:
-      e5GnioxepYFs6phSf3LE\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
-      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
-      pending\nactivation_token: pv2VFygLm5hEBKznkXT6\nactivation_token_expires_at:
-      \nfirst_name: Admin\nlast_name: Admin\nmiddle_name: ''\ndeleted_at: \ncreated_at:
-      2012-08-17 08:08:57.450129000 Z\nupdated_at: 2012-08-17 08:08:57.450129000 Z\nadmin:
-      false\nstate: active\nid: 2\n"
-    - '2012-08-17 08:09:33.286507'
-    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nactivation_token:\n-
-      pv2VFygLm5hEBKznkXT6\n- \nactivation_state:\n- pending\n- active\n"
-  - - 5
-    - User
-    - 3
-    - update
     - '2'
-    - ! "---\nemail: a.releu@gmail.com\ncrypted_password: $2a$10$3wiyJHCEx0E7azmMU/Q0E.ok.128bF4IvrRjCpWAVc3kELrK0Gbp2\nsalt:
-      rDm7w7AtP9d5wGpqTsWC\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
-      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
-      pending\nactivation_token: wXtssewea5a9uYwNbpyR\nactivation_token_expires_at:
-      \nfirst_name: Coworker\nlast_name: Coworker\nmiddle_name: ''\ndeleted_at: \ncreated_at:
-      2012-08-17 08:09:21.255450000 Z\nupdated_at: 2012-08-17 08:09:21.255450000 Z\nadmin:
-      false\nstate: active\nid: 3\n"
-    - '2012-08-17 08:09:36.791656'
-    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nactivation_token:\n-
-      wXtssewea5a9uYwNbpyR\n- \nactivation_state:\n- pending\n- active\n"
-  - - 6
+    - create
+    - f
+    - 
+    - '2012-08-21 06:23:36.352892'
+    - 
+  - - '3'
     - User
-    - 1
+    - '1'
     - update
-    - '3'
-    - ! "---\nemail: releu@me.com\ncrypted_password: $2a$10$76piHARZcKnjq81vbMhumuiso6uvXXHZxcrEoL9zRBSQ.BJ9m7BJi\nsalt:
-      6HmhztTmxKAcp6ikxxB8\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+    - f
+    - ! "---\nemail: releu@me.com\ncrypted_password: $2a$10$GpiGlwjdNV5nF5B2TEGHP.J8VVWPpxRDgm3hrpLpfpYs5rey6Upkm\nsalt:
+      b4Pz3hVYCPqH3DvYuupf\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
       \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
-      pending\nactivation_token: gqcsSnTvQ2UxUdLFjG47\nactivation_token_expires_at:
-      \nfirst_name: User\nlast_name: User\nmiddle_name: ''\ndeleted_at: \ncreated_at:
-      2012-08-17 08:08:32.618503000 Z\nupdated_at: 2012-08-17 08:08:32.618503000 Z\nadmin:
+      pending\nactivation_token: qrMQ2Dxsb7Q7cYTznnu2\nactivation_token_expires_at:
+      \nfirst_name: Sergey\nlast_name: Tolubaev\nmiddle_name: ''\ndeleted_at: \ncreated_at:
+      2012-08-21 06:23:18.692945000 Z\nupdated_at: 2012-08-21 06:23:18.692945000 Z\nadmin:
       false\nstate: active\nid: 1\n"
-    - '2012-08-17 08:09:40.039891'
+    - '2012-08-21 06:23:45.958435'
     - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nactivation_token:\n-
-      gqcsSnTvQ2UxUdLFjG47\n- \nactivation_state:\n- pending\n- active\n"
-  - - 7
+      qrMQ2Dxsb7Q7cYTznnu2\n- \nactivation_state:\n- pending\n- active\n"
+  - - '4'
     - User
-    - 2
+    - '2'
+    - update
+    - '1'
+    - ! "---\nemail: janbernacki@me.com\ncrypted_password: $2a$10$q3k1M2aXmkjSwpQvtF3LO.RzNqO6VzHTE4hGUn9D.GMrOPavnvDoS\nsalt:
+      4hxd6XqqGVpYpD31x4BD\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      pending\nactivation_token: cRTGudYUUXS9DQuYZvzv\nactivation_token_expires_at:
+      \nfirst_name: Jan\nlast_name: Bernacki\nmiddle_name: ''\ndeleted_at: \ncreated_at:
+      2012-08-21 06:23:36.350856000 Z\nupdated_at: 2012-08-21 06:23:36.350856000 Z\nadmin:
+      false\nstate: active\nid: 2\n"
+    - '2012-08-21 06:23:50.119222'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nactivation_token:\n-
+      cRTGudYUUXS9DQuYZvzv\n- \nactivation_state:\n- pending\n- active\n"
+  - - '5'
+    - User
+    - '2'
     - update
     - 
-    - ! "---\nemail: areleu@gmail.com\ncrypted_password: $2a$10$cylKfXTGGGU3xL6Ewe5tkOrJn23VJ1zhEXQtCjCkZVsgyO4uWLik.\nsalt:
-      e5GnioxepYFs6phSf3LE\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+    - ! "---\nemail: janbernacki@me.com\ncrypted_password: $2a$10$q3k1M2aXmkjSwpQvtF3LO.RzNqO6VzHTE4hGUn9D.GMrOPavnvDoS\nsalt:
+      4hxd6XqqGVpYpD31x4BD\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
       \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
-      active\nactivation_token: \nactivation_token_expires_at: \nfirst_name: Admin\nlast_name:
-      Admin\nmiddle_name: ''\ndeleted_at: \ncreated_at: 2012-08-17 08:08:57.450129000
-      Z\nupdated_at: 2012-08-17 08:09:33.284578000 Z\nadmin: false\nstate: active\nid:
+      active\nactivation_token: \nactivation_token_expires_at: \nfirst_name: Jan\nlast_name:
+      Bernacki\nmiddle_name: ''\ndeleted_at: \ncreated_at: 2012-08-21 06:23:36.350856000
+      Z\nupdated_at: 2012-08-21 06:23:50.117934000 Z\nadmin: false\nstate: active\nid:
       2\n"
-    - '2012-08-17 08:50:35.872559'
+    - '2012-08-21 06:45:01.350396'
     - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
 
       admin:
@@ -102,67 +79,684 @@ versions:
       - true
 
 '
-  - - 8
-    - OrganizationKind
-    - 1
+  - - '6'
+    - TicketField
+    - '1'
     - create
     - '2'
     - 
-    - '2012-08-17 08:50:58.168332'
+    - '2012-08-21 06:45:22.299547'
     - 
-  - - 9
+  - - '7'
+    - TicketTag
+    - '1'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 07:10:17.692427'
+    - 
+  - - '8'
+    - TicketTemplate
+    - '1'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 07:12:40.246053'
+    - 
+  - - '9'
     - OrganizationKind
-    - 1
+    - '1'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 08:04:23.133702'
+    - 
+  - - '10'
+    - OrganizationKind
+    - '2'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 08:05:59.849556'
+    - 
+  - - '11'
+    - OrganizationKind
+    - '3'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 08:06:10.475399'
+    - 
+  - - '12'
+    - PositionName
+    - '1'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 08:07:17.426551'
+    - 
+  - - '13'
+    - PositionName
+    - '2'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 08:07:22.781642'
+    - 
+  - - '14'
+    - PositionName
+    - '3'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 08:07:36.273878'
+    - 
+  - - '15'
+    - PositionName
+    - '4'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 08:07:43.287003'
+    - 
+  - - '16'
+    - Organization
+    - '1'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 08:08:29.583868'
+    - 
+  - - '17'
+    - Organization
+    - '2'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 08:10:10.403731'
+    - 
+  - - '18'
+    - Membership
+    - '1'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 08:31:06.884426'
+    - 
+  - - '19'
+    - Position
+    - '1'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 08:31:06.890296'
+    - 
+  - - '20'
+    - Cluster
+    - '1'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 08:35:00.529502'
+    - 
+  - - '21'
+    - TicketQuestion
+    - '1'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 08:42:08.418586'
+    - 
+  - - '22'
+    - TicketFieldRelation
+    - '1'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 08:42:08.469592'
+    - 
+  - - '23'
+    - Ticket
+    - '1'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 08:43:04.688299'
+    - 
+  - - '24'
+    - TicketTag
+    - '2'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 08:52:53.728941'
+    - 
+  - - '25'
+    - Credential
+    - '1'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 09:00:43.746375'
+    - 
+  - - '26'
+    - Credential
+    - '2'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 10:20:30.299832'
+    - 
+  - - '27'
+    - Credential
+    - '2'
     - update
     - '2'
+    - ! "---\npublic_key: ! 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD\n
+      \ releu@me.com\n\n'\nuser_id: 1\ncreated_at: 2012-08-21 10:20:30.289557000 Z\nupdated_at:
+      2012-08-21 10:20:30.289557000 Z\nname: iMac\nstate: active\nid: 2\n"
+    - '2012-08-21 10:21:28.787389'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - closed
+
+'
+  - - '28'
+    - Surety
+    - '1'
+    - create
+    - '1'
+    - 
+    - '2012-08-21 11:38:29.787082'
+    - 
+  - - '29'
+    - Ticket
+    - '2'
+    - create
+    - '1'
+    - 
+    - '2012-08-21 11:40:35.020262'
+    - 
+  - - '30'
+    - Ticket
+    - '2'
+    - update
+    - '1'
+    - ! "---\nsubject: Скан поручительства\nmessage: Вот скан\nuser_id: 1\nstate:
+      active\nurl: ''\ncreated_at: 2012-08-21 11:40:35.000960000 Z\nupdated_at: 2012-08-21
+      11:40:35.000960000 Z\nattachment_file_name: \nattachment_content_type: \nattachment_file_size:
+      \nattachment_updated_at: \nticket_question_id: 1\nproject_id: \ncluster_id:
+      \nid: 2\n"
+    - '2012-08-21 11:40:38.09737'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - resolved
+
+'
+  - - '31'
+    - Surety
+    - '1'
+    - update
+    - '2'
+    - ! "---\nuser_id: 1\norganization_id: 1\nstate: pending\ncreated_at: 2012-08-21
+      11:38:29.726470000 Z\nupdated_at: 2012-08-21 11:38:29.726470000 Z\ncomment:
+      \nid: 1\n"
+    - '2012-08-21 11:45:00.840367'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - pending
+
+      - active
+
+'
+  - - '32'
+    - User
+    - '1'
+    - update
+    - '2'
+    - ! "---\nemail: releu@me.com\ncrypted_password: $2a$10$GpiGlwjdNV5nF5B2TEGHP.J8VVWPpxRDgm3hrpLpfpYs5rey6Upkm\nsalt:
+      b4Pz3hVYCPqH3DvYuupf\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      active\nactivation_token: \nactivation_token_expires_at: \nfirst_name: Sergey\nlast_name:
+      Tolubaev\nmiddle_name: ''\ndeleted_at: \ncreated_at: 2012-08-21 06:23:18.692945000
+      Z\nupdated_at: 2012-08-21 06:23:45.956831000 Z\nadmin: false\nstate: active\nid:
+      1\n"
+    - '2012-08-21 11:45:00.92594'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - sured
+
+'
+  - - '33'
+    - Project
+    - '1'
+    - create
+    - '1'
+    - 
+    - '2012-08-21 11:45:49.663039'
+    - 
+  - - '34'
+    - Account
+    - '1'
+    - create
+    - '1'
+    - 
+    - '2012-08-21 11:45:49.670784'
+    - 
+  - - '35'
+    - Request
+    - '1'
+    - create
+    - '1'
+    - 
+    - '2012-08-21 11:45:49.676376'
+    - 
+  - - '36'
+    - Account
+    - '1'
+    - update
+    - '1'
     - ! '---
 
-      name: ВУЗ
+      user_id: 1
 
-      created_at: 2012-08-17 08:50:58.146866000 Z
+      project_id: 1
 
-      updated_at: 2012-08-17 08:50:58.146866000 Z
+      created_at: 2012-08-21 11:45:49.667293000 Z
 
-      state: active
+      updated_at: 2012-08-21 11:45:49.667293000 Z
+
+      state: pending
 
       id: 1
 
 '
-    - '2012-08-17 08:51:03.716657'
+    - '2012-08-21 11:45:49.686587'
     - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
 
       state:
 
+      - pending
+
       - active
 
-      - closed
-
 '
-  - - 10
-    - OrganizationKind
-    - 2
-    - create
-    - '2'
-    - 
-    - '2012-08-17 08:51:20.100603'
-    - 
-  - - 11
-    - Organization
-    - 1
-    - create
+  - - '37'
+    - Request
     - '1'
-    - 
-    - '2012-08-17 09:01:53.170064'
-    - 
-  - - 12
-    - Organization
-    - 1
     - update
     - '2'
-    - ! "---\nname: Evrone\napproved: false\ncreated_at: 2012-08-17 09:01:53.165634000
-      Z\nupdated_at: 2012-08-17 09:01:53.165634000 Z\ndeleted_at: \nstate: active\norganization_kind_id:
-      '2'\nabbreviation: evrone\nid: 1\n"
-    - '2012-08-17 09:02:27.536581'
+    - ! "---\nproject_id: 1\ncluster_id: 1\nhours: 8\ncreated_at: 2012-08-21 11:45:49.672558000
+      Z\nupdated_at: 2012-08-21 11:45:49.672558000 Z\nuser_id: 1\nstate: pending\nsize:
+      80\ncomment: \nid: 1\n"
+    - '2012-08-21 12:06:34.925342'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - pending
+
+      - active
+
+'
+  - - '38'
+    - ClusterUser
+    - '1'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:06:34.99537'
+    - 
+  - - '39'
+    - ClusterUser
+    - '1'
+    - update
+    - '2'
+    - ! "---\nproject_id: \nstate: pending\ncluster_id: \ncreated_at: \nupdated_at:
+      \nid: \n"
+    - '2012-08-21 12:06:35.00072'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      1\ncluster_id:\n- \n- 1\ncreated_at:\n- \n- 2012-08-21 12:06:34.938125000 Z\nupdated_at:\n-
+      \n- 2012-08-21 12:06:34.938125000 Z\nid:\n- \n- 1\nstate:\n- pending\n- activing\n"
+  - - '40'
+    - Task
+    - '1'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:06:35.05015'
+    - 
+  - - '41'
+    - Task
+    - '1'
+    - update
+    - 
+    - ! "---\ncommand: ! \"user=%user\\r\\n%host=\\\"lomonosov.parallel.ru\\\"\"\nstderr:
+      \nstdout: \nstate: pending\nresource_type: ClusterUser\nresource_id: 1\ncreated_at:
+      2012-08-21 12:06:35.046108000 Z\nupdated_at: 2012-08-21 12:06:35.046108000 Z\nprocedure:
+      add_user\ndata: \nevent: \ncomment: \ncallbacks_performed: false\nid: 1\n"
+    - '2012-08-21 12:06:36.233651'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nstderr:\n- \n- !
+      'bash: line 1: fg: no job control\n\n'\nstdout:\n- \n- ''\nstate:\n- pending\n-
+      failed\n"
+  - - '42'
+    - Cluster
+    - '1'
+    - update
+    - '2'
+    - ! '---
+
+      name: Ломоносов
+
+      created_at: 2012-08-21 08:35:00.526027000 Z
+
+      updated_at: 2012-08-21 08:35:00.526027000 Z
+
+      host: lomonosov.parallel.ru
+
+      description: ''''
+
+      state: active
+
+      add_user: ! "user=%user\r\n%host=%host%"
+
+      del_user: ! "user=%user%\r\nhost=%host%"
+
+      add_openkey: ! "user=%user%\r\nhost=%host%\r\npublic_key=%public_key%"
+
+      del_openkey: ! "user=%user%\r\nhost=%host%\r\npublic_key=%public_key%"
+
+      block_user: ! "user=%user%\r\nhost=%host%"
+
+      unblock_user: ! "user=%user%\r\nhost=%host%"
+
+      id: 1
+
+'
+    - '2012-08-21 12:07:51.708173'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      add_user:
+
+      - ! "user=%user\r\n%host=%host%"
+
+      - ! "user=%user%\r\nhost=%host%"
+
+'
+  - - '43'
+    - Task
+    - '2'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:10:43.165363'
+    - 
+  - - '44'
+    - Task
+    - '2'
+    - update
+    - 
+    - ! "---\ncommand: ! \"user=\\\"project_1\\\"\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\"\nstderr:
+      \nstdout: \nstate: pending\nresource_type: ClusterUser\nresource_id: 1\ncreated_at:
+      2012-08-21 12:10:43.163073000 Z\nupdated_at: 2012-08-21 12:10:43.163073000 Z\nprocedure:
+      add_user\ndata: \nevent: \ncomment: \ncallbacks_performed: false\nid: 2\n"
+    - '2012-08-21 12:10:46.530644'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nstderr:\n- \n- ''\nstdout:\n-
+      \n- ''\nstate:\n- pending\n- successed\n"
+  - - '45'
+    - ClusterUser
+    - '1'
+    - update
+    - 
+    - ! '---
+
+      project_id: 1
+
+      state: activing
+
+      cluster_id: 1
+
+      created_at: 2012-08-21 12:06:34.938125000 Z
+
+      updated_at: 2012-08-21 12:06:34.938125000 Z
+
+      id: 1
+
+'
+    - '2012-08-21 12:10:46.576112'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '46'
+    - Access
+    - '1'
+    - create
+    - 
+    - 
+    - '2012-08-21 12:10:46.709185'
+    - 
+  - - '47'
+    - Access
+    - '1'
+    - update
+    - 
+    - ! "---\ncredential_id: \nstate: pending\ncreated_at: \nupdated_at: \ncluster_user_id:
+      \nid: \n"
+    - '2012-08-21 12:10:46.714405'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ncluster_user_id:\n-
+      \n- 1\ncredential_id:\n- \n- 2\ncreated_at:\n- \n- 2012-08-21 12:10:46.697631000
+      Z\nupdated_at:\n- \n- 2012-08-21 12:10:46.697631000 Z\nid:\n- \n- 1\nstate:\n-
+      pending\n- activing\n"
+  - - '48'
+    - Task
+    - '3'
+    - create
+    - 
+    - 
+    - '2012-08-21 12:10:46.72768'
+    - 
+  - - '49'
+    - Access
+    - '2'
+    - create
+    - 
+    - 
+    - '2012-08-21 12:10:46.735279'
+    - 
+  - - '50'
+    - Access
+    - '2'
+    - update
+    - 
+    - ! "---\ncredential_id: \nstate: pending\ncreated_at: \nupdated_at: \ncluster_user_id:
+      \nid: \n"
+    - '2012-08-21 12:10:46.739127'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ncluster_user_id:\n-
+      \n- 1\ncredential_id:\n- \n- 1\ncreated_at:\n- \n- 2012-08-21 12:10:46.733585000
+      Z\nupdated_at:\n- \n- 2012-08-21 12:10:46.733585000 Z\nid:\n- \n- 2\nstate:\n-
+      pending\n- activing\n"
+  - - '51'
+    - Task
+    - '4'
+    - create
+    - 
+    - 
+    - '2012-08-21 12:10:46.748177'
+    - 
+  - - '52'
+    - Task
+    - '2'
+    - update
+    - 
+    - ! "---\ncommand: ! \"user=\\\"project_1\\\"\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\"\nstderr:
+      ''\nstdout: ''\nstate: successed\nresource_type: ClusterUser\nresource_id: 1\ncreated_at:
+      2012-08-21 12:10:43.163073000 Z\nupdated_at: 2012-08-21 12:10:46.525737000 Z\nprocedure:
+      add_user\ndata: \nevent: \ncomment: \ncallbacks_performed: false\nid: 2\n"
+    - '2012-08-21 12:10:46.753188'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '53'
+    - Task
+    - '3'
+    - update
+    - 
+    - ! "---\ncommand: ! \"user=\\\"project_1\\\"\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\\r\\npublic_key=\\\"ssh-rsa\n
+      \ AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD\n
+      \ releu@me.com\\n\\\"\"\nstderr: \nstdout: \nstate: pending\nresource_type:
+      Access\nresource_id: 1\ncreated_at: 2012-08-21 12:10:46.725237000 Z\nupdated_at:
+      2012-08-21 12:10:46.725237000 Z\nprocedure: add_openkey\ndata: \nevent: \ncomment:
+      \ncallbacks_performed: false\nid: 3\n"
+    - '2012-08-21 12:10:46.971672'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nstderr:\n- \n- ''\nstdout:\n-
+      \n- ''\nstate:\n- pending\n- successed\n"
+  - - '54'
+    - Access
+    - '1'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 2
+
+      state: activing
+
+      created_at: 2012-08-21 12:10:46.697631000 Z
+
+      updated_at: 2012-08-21 12:10:46.697631000 Z
+
+      cluster_user_id: 1
+
+      id: 1
+
+'
+    - '2012-08-21 12:10:47.007863'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '55'
+    - Task
+    - '3'
+    - update
+    - 
+    - ! "---\ncommand: ! \"user=\\\"project_1\\\"\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\\r\\npublic_key=\\\"ssh-rsa\n
+      \ AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD\n
+      \ releu@me.com\\n\\\"\"\nstderr: ''\nstdout: ''\nstate: successed\nresource_type:
+      Access\nresource_id: 1\ncreated_at: 2012-08-21 12:10:46.725237000 Z\nupdated_at:
+      2012-08-21 12:10:46.967124000 Z\nprocedure: add_openkey\ndata: \nevent: \ncomment:
+      \ncallbacks_performed: false\nid: 3\n"
+    - '2012-08-21 12:10:47.012808'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '56'
+    - Task
+    - '4'
+    - update
+    - 
+    - ! "---\ncommand: ! \"user=\\\"project_1\\\"\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\\r\\npublic_key=\\\"atata\\\"\"\nstderr:
+      \nstdout: \nstate: pending\nresource_type: Access\nresource_id: 2\ncreated_at:
+      2012-08-21 12:10:46.746346000 Z\nupdated_at: 2012-08-21 12:10:46.746346000 Z\nprocedure:
+      add_openkey\ndata: \nevent: \ncomment: \ncallbacks_performed: false\nid: 4\n"
+    - '2012-08-21 12:10:47.237501'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nstderr:\n- \n- ''\nstdout:\n-
+      \n- ''\nstate:\n- pending\n- successed\n"
+  - - '57'
+    - Access
+    - '2'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 1
+
+      state: activing
+
+      created_at: 2012-08-21 12:10:46.733585000 Z
+
+      updated_at: 2012-08-21 12:10:46.733585000 Z
+
+      cluster_user_id: 1
+
+      id: 2
+
+'
+    - '2012-08-21 12:10:47.273146'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '58'
+    - Task
+    - '4'
+    - update
+    - 
+    - ! "---\ncommand: ! \"user=\\\"project_1\\\"\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\\r\\npublic_key=\\\"atata\\\"\"\nstderr:
+      ''\nstdout: ''\nstate: successed\nresource_type: Access\nresource_id: 2\ncreated_at:
+      2012-08-21 12:10:46.746346000 Z\nupdated_at: 2012-08-21 12:10:47.232946000 Z\nprocedure:
+      add_openkey\ndata: \nevent: \ncomment: \ncallbacks_performed: false\nid: 4\n"
+    - '2012-08-21 12:10:47.277496'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '59'
+    - Request
+    - '1'
+    - update
+    - '2'
+    - ! "---\nproject_id: 1\ncluster_id: 1\nhours: 8\ncreated_at: 2012-08-21 11:45:49.672558000
+      Z\nupdated_at: 2012-08-21 12:06:34.924125000 Z\nuser_id: 1\nstate: active\nsize:
+      80\ncomment: \nid: 1\n"
+    - '2012-08-21 12:22:14.279983'
     - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
 
       state:
@@ -172,46 +766,1016 @@ versions:
       - closed
 
 '
-  - - 13
+  - - '60'
+    - ClusterUser
+    - '1'
+    - update
+    - '2'
+    - ! '---
+
+      project_id: 1
+
+      state: active
+
+      cluster_id: 1
+
+      created_at: 2012-08-21 12:06:34.938125000 Z
+
+      updated_at: 2012-08-21 12:10:46.574798000 Z
+
+      id: 1
+
+'
+    - '2012-08-21 12:22:14.291033'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - pausing
+
+'
+  - - '61'
+    - Task
+    - '5'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:22:14.301274'
+    - 
+  - - '62'
+    - Task
+    - '5'
+    - update
+    - 
+    - ! "---\ncommand: ! \"user=\\\"project_1\\\"\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\"\nstderr:
+      \nstdout: \nstate: pending\nresource_type: ClusterUser\nresource_id: 1\ncreated_at:
+      2012-08-21 12:22:14.298482000 Z\nupdated_at: 2012-08-21 12:22:14.298482000 Z\nprocedure:
+      block_user\ndata: \nevent: \ncomment: \ncallbacks_performed: false\nid: 5\n"
+    - '2012-08-21 12:22:17.710902'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nstderr:\n- \n- ''\nstdout:\n-
+      \n- ''\nstate:\n- pending\n- successed\n"
+  - - '63'
+    - ClusterUser
+    - '1'
+    - update
+    - 
+    - ! '---
+
+      project_id: 1
+
+      state: pausing
+
+      cluster_id: 1
+
+      created_at: 2012-08-21 12:06:34.938125000 Z
+
+      updated_at: 2012-08-21 12:22:14.289712000 Z
+
+      id: 1
+
+'
+    - '2012-08-21 12:22:17.756842'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - pausing
+
+      - paused
+
+'
+  - - '64'
+    - Task
+    - '5'
+    - update
+    - 
+    - ! "---\ncommand: ! \"user=\\\"project_1\\\"\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\"\nstderr:
+      ''\nstdout: ''\nstate: successed\nresource_type: ClusterUser\nresource_id: 1\ncreated_at:
+      2012-08-21 12:22:14.298482000 Z\nupdated_at: 2012-08-21 12:22:17.705482000 Z\nprocedure:
+      block_user\ndata: \nevent: \ncomment: \ncallbacks_performed: false\nid: 5\n"
+    - '2012-08-21 12:22:17.760986'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '65'
+    - Request
+    - '2'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:28:42.407337'
+    - 
+  - - '66'
+    - Request
+    - '2'
+    - update
+    - '2'
+    - ! "---\nproject_id: 1\ncluster_id: 1\nhours: 80\ncreated_at: 2012-08-21 12:28:42.405202000
+      Z\nupdated_at: 2012-08-21 12:28:42.405202000 Z\nuser_id: 1\nstate: pending\nsize:
+      20\ncomment: \nid: 2\n"
+    - '2012-08-21 12:28:45.90087'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - pending
+
+      - active
+
+'
+  - - '67'
+    - ClusterUser
+    - '1'
+    - update
+    - '2'
+    - ! '---
+
+      project_id: 1
+
+      state: paused
+
+      cluster_id: 1
+
+      created_at: 2012-08-21 12:06:34.938125000 Z
+
+      updated_at: 2012-08-21 12:22:17.755612000 Z
+
+      id: 1
+
+'
+    - '2012-08-21 12:28:45.908818'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - paused
+
+      - resuming
+
+'
+  - - '68'
+    - Task
+    - '6'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:28:45.916626'
+    - 
+  - - '69'
+    - Task
+    - '6'
+    - update
+    - 
+    - ! "---\ncommand: ! \"user=\\\"project_1\\\"\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\"\nstderr:
+      \nstdout: \nstate: pending\nresource_type: ClusterUser\nresource_id: 1\ncreated_at:
+      2012-08-21 12:28:45.914615000 Z\nupdated_at: 2012-08-21 12:28:45.914615000 Z\nprocedure:
+      unblock_user\ndata: \nevent: \ncomment: \ncallbacks_performed: false\nid: 6\n"
+    - '2012-08-21 12:28:48.104954'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nstderr:\n- \n- ''\nstdout:\n-
+      \n- ''\nstate:\n- pending\n- successed\n"
+  - - '70'
+    - ClusterUser
+    - '1'
+    - update
+    - 
+    - ! '---
+
+      project_id: 1
+
+      state: resuming
+
+      cluster_id: 1
+
+      created_at: 2012-08-21 12:06:34.938125000 Z
+
+      updated_at: 2012-08-21 12:28:45.907841000 Z
+
+      id: 1
+
+'
+    - '2012-08-21 12:28:48.163219'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - resuming
+
+      - active
+
+'
+  - - '71'
+    - Task
+    - '6'
+    - update
+    - 
+    - ! "---\ncommand: ! \"user=\\\"project_1\\\"\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\"\nstderr:
+      ''\nstdout: ''\nstate: successed\nresource_type: ClusterUser\nresource_id: 1\ncreated_at:
+      2012-08-21 12:28:45.914615000 Z\nupdated_at: 2012-08-21 12:28:48.099911000 Z\nprocedure:
+      unblock_user\ndata: \nevent: \ncomment: \ncallbacks_performed: false\nid: 6\n"
+    - '2012-08-21 12:28:48.167945'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '72'
+    - TicketField
+    - '2'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:31:29.079961'
+    - 
+  - - '73'
+    - TicketFieldRelation
+    - '2'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:31:29.121838'
+    - 
+  - - '74'
+    - TicketTag
+    - '2'
+    - update
+    - '2'
+    - ! '---
+
+      name: atata
+
+      created_at: 2012-08-21 08:52:53.726471000 Z
+
+      updated_at: 2012-08-21 08:52:53.726471000 Z
+
+      state: active
+
+      id: 2
+
+'
+    - '2012-08-21 12:32:17.269052'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      name:
+
+      - atata
+
+      - Регистрация
+
+'
+  - - '75'
+    - TicketQuestion
+    - '2'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:33:55.241842'
+    - 
+  - - '76'
+    - TicketFieldRelation
+    - '3'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:33:55.247339'
+    - 
+  - - '77'
+    - TicketFieldRelation
+    - '4'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:33:55.250545'
+    - 
+  - - '78'
+    - TicketQuestion
+    - '2'
+    - update
+    - '2'
+    - ! "---\nticket_question_id: \nquestion: Не могу войти\nleaf: true\nstate: active\ncreated_at:
+      2012-08-21 12:33:55.221747000 Z\nupdated_at: 2012-08-21 12:33:55.221747000 Z\nid:
+      2\n"
+    - '2012-08-21 12:34:06.543284'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      leaf:
+
+      - true
+
+      - false
+
+'
+  - - '79'
+    - TicketQuestion
+    - '3'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:34:06.545879'
+    - 
+  - - '80'
+    - TicketFieldRelation
+    - '5'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:34:06.550389'
+    - 
+  - - '81'
+    - TicketFieldRelation
+    - '6'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:34:06.553875'
+    - 
+  - - '82'
+    - TicketQuestion
+    - '3'
+    - update
+    - '2'
+    - ! '---
+
+      ticket_question_id: 2
+
+      question: Не могу получить доступ
+
+      leaf: true
+
+      state: active
+
+      created_at: 2012-08-21 12:34:06.544481000 Z
+
+      updated_at: 2012-08-21 12:34:06.544481000 Z
+
+      id: 3
+
+'
+    - '2012-08-21 12:34:21.7773'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nticket_question_id:\n-
+      2\n- \n"
+  - - '83'
+    - TicketQuestion
+    - '3'
+    - update
+    - '2'
+    - ! "---\nticket_question_id: \nquestion: Не могу получить доступ\nleaf: true\nstate:
+      active\ncreated_at: 2012-08-21 12:34:06.544481000 Z\nupdated_at: 2012-08-21
+      12:34:21.776215000 Z\nid: 3\n"
+    - '2012-08-21 12:34:39.397339'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      leaf:
+
+      - true
+
+      - false
+
+'
+  - - '84'
+    - TicketQuestion
+    - '4'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:34:39.399744'
+    - 
+  - - '85'
+    - TicketFieldRelation
+    - '7'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:34:39.404129'
+    - 
+  - - '86'
+    - TicketFieldRelation
+    - '8'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:34:39.407385'
+    - 
+  - - '87'
+    - TicketQuestion
+    - '5'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:34:49.07825'
+    - 
+  - - '88'
+    - TicketFieldRelation
+    - '9'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:34:49.083077'
+    - 
+  - - '89'
+    - TicketFieldRelation
+    - '10'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:34:49.086759'
+    - 
+  - - '90'
+    - TicketQuestion
+    - '6'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:35:03.204006'
+    - 
+  - - '91'
+    - TicketFieldRelation
+    - '11'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:35:03.208732'
+    - 
+  - - '92'
+    - TicketFieldRelation
+    - '12'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:35:03.21254'
+    - 
+  - - '93'
+    - TicketQuestion
+    - '7'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:35:25.38977'
+    - 
+  - - '94'
+    - TicketFieldRelation
+    - '13'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:35:25.394729'
+    - 
+  - - '95'
+    - TicketFieldRelation
+    - '14'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 12:35:25.451151'
+    - 
+  - - '96'
+    - TicketQuestion
+    - '2'
+    - update
+    - '2'
+    - ! "---\nticket_question_id: \nquestion: Не могу войти\nleaf: false\nstate: active\ncreated_at:
+      2012-08-21 12:33:55.221747000 Z\nupdated_at: 2012-08-21 12:34:06.542092000 Z\nid:
+      2\n"
+    - '2012-08-21 12:56:11.501018'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      question:
+
+      - Не могу войти
+
+      - Не могу войти!
+
+'
+  - - '97'
+    - TicketQuestion
+    - '2'
+    - update
+    - '2'
+    - ! "---\nticket_question_id: \nquestion: Не могу войти!\nleaf: false\nstate:
+      active\ncreated_at: 2012-08-21 12:33:55.221747000 Z\nupdated_at: 2012-08-21
+      12:56:11.496882000 Z\nid: 2\n"
+    - '2012-08-21 12:56:45.700301'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nticket_question_id:\n-
+      \n- 1\n"
+  - - '98'
+    - TicketQuestion
+    - '1'
+    - update
+    - '2'
+    - ! "---\nticket_question_id: \nquestion: Другое\nleaf: true\nstate: active\ncreated_at:
+      2012-08-21 08:42:08.393941000 Z\nupdated_at: 2012-08-21 08:42:08.393941000 Z\nid:
+      1\n"
+    - '2012-08-21 12:56:45.705794'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      leaf:
+
+      - true
+
+      - false
+
+'
+  - - '99'
+    - TicketQuestion
+    - '2'
+    - update
+    - '2'
+    - ! '---
+
+      ticket_question_id: 1
+
+      question: Не могу войти!
+
+      leaf: false
+
+      state: active
+
+      created_at: 2012-08-21 12:33:55.221747000 Z
+
+      updated_at: 2012-08-21 12:56:45.699276000 Z
+
+      id: 2
+
+'
+    - '2012-08-21 12:56:50.535814'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nticket_question_id:\n-
+      1\n- \n"
+  - - '100'
+    - TicketQuestion
+    - '1'
+    - update
+    - '2'
+    - ! "---\nticket_question_id: \nquestion: Другое\nleaf: false\nstate: active\ncreated_at:
+      2012-08-21 08:42:08.393941000 Z\nupdated_at: 2012-08-21 12:56:45.704925000 Z\nid:
+      1\n"
+    - '2012-08-21 12:56:50.541321'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      leaf:
+
+      - false
+
+      - true
+
+'
+  - - '101'
+    - TicketQuestion
+    - '2'
+    - update
+    - '2'
+    - ! "---\nticket_question_id: \nquestion: Не могу войти!\nleaf: false\nstate:
+      active\ncreated_at: 2012-08-21 12:33:55.221747000 Z\nupdated_at: 2012-08-21
+      12:56:50.534588000 Z\nid: 2\n"
+    - '2012-08-21 12:59:09.742511'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nticket_question_id:\n-
+      \n- 1\nleaf:\n- false\n- true\n"
+  - - '102'
+    - TicketQuestion
+    - '2'
+    - update
+    - '2'
+    - ! '---
+
+      ticket_question_id: 1
+
+      question: Не могу войти!
+
+      leaf: true
+
+      state: active
+
+      created_at: 2012-08-21 12:33:55.221747000 Z
+
+      updated_at: 2012-08-21 12:59:09.741481000 Z
+
+      id: 2
+
+'
+    - '2012-08-21 12:59:18.362306'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nticket_question_id:\n-
+      1\n- \n"
+  - - '103'
+    - TicketQuestion
+    - '2'
+    - update
+    - '2'
+    - ! "---\nticket_question_id: \nquestion: Не могу войти!\nleaf: true\nstate: active\ncreated_at:
+      2012-08-21 12:33:55.221747000 Z\nupdated_at: 2012-08-21 12:59:18.361049000 Z\nid:
+      2\n"
+    - '2012-08-21 12:59:26.262247'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nticket_question_id:\n-
+      \n- 1\n"
+  - - '104'
+    - TicketQuestion
+    - '2'
+    - update
+    - '2'
+    - ! '---
+
+      ticket_question_id: 1
+
+      question: Не могу войти!
+
+      leaf: true
+
+      state: active
+
+      created_at: 2012-08-21 12:33:55.221747000 Z
+
+      updated_at: 2012-08-21 12:59:26.261164000 Z
+
+      id: 2
+
+'
+    - '2012-08-21 12:59:46.155953'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nticket_question_id:\n-
+      1\n- \n"
+  - - '105'
+    - TicketQuestion
+    - '2'
+    - update
+    - '2'
+    - ! "---\nticket_question_id: \nquestion: Не могу войти!\nleaf: true\nstate: active\ncreated_at:
+      2012-08-21 12:33:55.221747000 Z\nupdated_at: 2012-08-21 12:59:46.154766000 Z\nid:
+      2\n"
+    - '2012-08-21 12:59:51.440471'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nticket_question_id:\n-
+      \n- 1\n"
+  - - '106'
+    - TicketQuestion
+    - '1'
+    - update
+    - '2'
+    - ! "---\nticket_question_id: \nquestion: Другое\nleaf: true\nstate: active\ncreated_at:
+      2012-08-21 08:42:08.393941000 Z\nupdated_at: 2012-08-21 12:56:50.540492000 Z\nid:
+      1\n"
+    - '2012-08-21 12:59:51.44496'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      leaf:
+
+      - true
+
+      - false
+
+'
+  - - '107'
+    - TicketQuestion
+    - '2'
+    - update
+    - '2'
+    - ! '---
+
+      ticket_question_id: 1
+
+      question: Не могу войти!
+
+      leaf: true
+
+      state: active
+
+      created_at: 2012-08-21 12:33:55.221747000 Z
+
+      updated_at: 2012-08-21 12:59:51.439460000 Z
+
+      id: 2
+
+'
+    - '2012-08-21 13:12:24.96854'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nticket_question_id:\n-
+      1\n- \n"
+  - - '108'
+    - TicketQuestion
+    - '2'
+    - update
+    - '2'
+    - ! "---\nticket_question_id: \nquestion: Не могу войти!\nleaf: true\nstate: active\ncreated_at:
+      2012-08-21 12:33:55.221747000 Z\nupdated_at: 2012-08-21 13:12:24.967245000 Z\nid:
+      2\n"
+    - '2012-08-21 13:12:30.618853'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nticket_question_id:\n-
+      \n- 1\n"
+  - - '109'
+    - TicketQuestion
+    - '2'
+    - update
+    - '2'
+    - ! '---
+
+      ticket_question_id: 1
+
+      question: Не могу войти!
+
+      leaf: true
+
+      state: active
+
+      created_at: 2012-08-21 12:33:55.221747000 Z
+
+      updated_at: 2012-08-21 13:12:30.617901000 Z
+
+      id: 2
+
+'
+    - '2012-08-21 13:12:36.147167'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nticket_question_id:\n-
+      1\n- \n"
+  - - '110'
+    - TicketFieldRelation
+    - '13'
+    - update
+    - '2'
+    - ! '---
+
+      ticket_question_id: 7
+
+      ticket_field_id: 1
+
+      required: false
+
+      created_at: 2012-08-21 12:35:25.393172000 Z
+
+      updated_at: 2012-08-21 12:35:25.393172000 Z
+
+      use: false
+
+      id: 13
+
+'
+    - '2012-08-21 13:13:07.296023'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      use:
+
+      - false
+
+      - true
+
+      required:
+
+      - false
+
+      - true
+
+'
+  - - '111'
+    - TicketFieldRelation
+    - '14'
+    - update
+    - '2'
+    - ! '---
+
+      ticket_question_id: 7
+
+      ticket_field_id: 2
+
+      required: false
+
+      created_at: 2012-08-21 12:35:25.397188000 Z
+
+      updated_at: 2012-08-21 12:35:25.397188000 Z
+
+      use: false
+
+      id: 14
+
+'
+    - '2012-08-21 13:13:07.299648'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      use:
+
+      - false
+
+      - true
+
+      required:
+
+      - false
+
+      - true
+
+'
+  - - '113'
     - Organization
-    - 2
+    - '4'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 13:55:09.95737'
+    - 
+  - - '114'
+    - Organization
+    - '4'
+    - update
+    - '2'
+    - ! '---
+
+      name: Umbrella
+
+      approved: false
+
+      created_at: 2012-08-21 13:55:09.954994000 Z
+
+      updated_at: 2012-08-21 13:55:09.954994000 Z
+
+      state: active
+
+      abbreviation: ''''
+
+      organization_kind_id: 3
+
+      id: 4
+
+'
+    - '2012-08-21 13:56:08.799215'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - closed
+
+'
+  - - '115'
+    - User
+    - '2'
+    - update
+    - 
+    - ! "---\nemail: janbernacki@me.com\ncrypted_password: $2a$10$q3k1M2aXmkjSwpQvtF3LO.RzNqO6VzHTE4hGUn9D.GMrOPavnvDoS\nsalt:
+      4hxd6XqqGVpYpD31x4BD\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      active\nactivation_token: \nactivation_token_expires_at: \nfirst_name: Jan\nlast_name:
+      Bernacki\nmiddle_name: ''\ndeleted_at: \ncreated_at: 2012-08-21 06:23:36.350856000
+      Z\nupdated_at: 2012-08-21 06:45:01.346361000 Z\nadmin: true\nstate: active\ntoken:
+      \nid: 2\n"
+    - '2012-08-21 14:08:29.99102'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ntoken:\n- \n- !binary
+      |-\n  ZGY5ZjkwMDNjYTA2ZWIxNjgxMTUzZGRhYTFiNTg4YmFhYTlkZTYyYQ==\n"
+  - - '116'
+    - User
+    - '1'
+    - update
+    - 
+    - ! "---\nemail: releu@me.com\ncrypted_password: $2a$10$GpiGlwjdNV5nF5B2TEGHP.J8VVWPpxRDgm3hrpLpfpYs5rey6Upkm\nsalt:
+      b4Pz3hVYCPqH3DvYuupf\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      active\nactivation_token: \nactivation_token_expires_at: \nfirst_name: Sergey\nlast_name:
+      Tolubaev\nmiddle_name: ''\ndeleted_at: \ncreated_at: 2012-08-21 06:23:18.692945000
+      Z\nupdated_at: 2012-08-21 11:45:00.893954000 Z\nadmin: false\nstate: sured\ntoken:
+      \nid: 1\n"
+    - '2012-08-21 14:08:29.999271'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ntoken:\n- \n- !binary
+      |-\n  ZDYwMWI0NzNlZjhlOGY1NGM1ZTA4MDQxYzkzOGU2N2JjNjRlYTdiNg==\n"
+  - - '117'
+    - User
+    - '2'
+    - update
+    - 
+    - ! "---\nemail: janbernacki@me.com\ncrypted_password: $2a$10$q3k1M2aXmkjSwpQvtF3LO.RzNqO6VzHTE4hGUn9D.GMrOPavnvDoS\nsalt:
+      4hxd6XqqGVpYpD31x4BD\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      active\nactivation_token: \nactivation_token_expires_at: \nfirst_name: Jan\nlast_name:
+      Bernacki\nmiddle_name: ''\ndeleted_at: \ncreated_at: 2012-08-21 06:23:36.350856000
+      Z\nupdated_at: 2012-08-21 14:08:29.986950000 Z\nadmin: true\nstate: active\ntoken:
+      df9f9003ca06eb1681153ddaa1b588baaa9de62a\nid: 2\n"
+    - '2012-08-21 14:16:22.98332'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ntoken:\n- df9f9003ca06eb1681153ddaa1b588baaa9de62a\n-
+      !binary |-\n  ODhlYmQ0ODMwNWNlNDdiYTYzOTViZTA3MmEzZmU3YjYzNjkxYTgzZQ==\n"
+  - - '118'
+    - User
+    - '1'
+    - update
+    - 
+    - ! "---\nemail: releu@me.com\ncrypted_password: $2a$10$GpiGlwjdNV5nF5B2TEGHP.J8VVWPpxRDgm3hrpLpfpYs5rey6Upkm\nsalt:
+      b4Pz3hVYCPqH3DvYuupf\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      active\nactivation_token: \nactivation_token_expires_at: \nfirst_name: Sergey\nlast_name:
+      Tolubaev\nmiddle_name: ''\ndeleted_at: \ncreated_at: 2012-08-21 06:23:18.692945000
+      Z\nupdated_at: 2012-08-21 14:08:29.998217000 Z\nadmin: false\nstate: sured\ntoken:
+      d601b473ef8e8f54c5e08041c938e67bc64ea7b6\nid: 1\n"
+    - '2012-08-21 14:16:22.989987'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ntoken:\n- d601b473ef8e8f54c5e08041c938e67bc64ea7b6\n-
+      !binary |-\n  NzhlNGM5NDFkMGM3OTgyODU1NjI2ZWQwY2FlY2RkOTJjMGE5YWQ5MA==\n"
+  - - '121'
+    - Reply
+    - '2'
+    - create
+    - '2'
+    - 
+    - '2012-08-21 14:21:29.619029'
+    - 
+  - - '122'
+    - Ticket
+    - '1'
+    - update
+    - '2'
+    - ! "---\nsubject: Не могу скомпилиться\nmessage: Не выходит ничего\nuser_id:
+      1\nstate: active\nurl: ''\ncreated_at: 2012-08-21 08:43:04.673299000 Z\nupdated_at:
+      2012-08-21 08:43:04.673299000 Z\nattachment_file_name: \nattachment_content_type:
+      \nattachment_file_size: \nattachment_updated_at: \nticket_question_id: 1\nproject_id:
+      \ncluster_id: 1\nid: 1\n"
+    - '2012-08-21 14:21:29.696754'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - answered
+
+'
+  - - '123'
+    - Reply
+    - '3'
     - create
     - '1'
     - 
-    - '2012-08-17 09:11:01.486849'
+    - '2012-08-21 14:34:25.010652'
     - 
-  - - 14
-    - Membership
-    - 1
-    - create
+  - - '124'
+    - Ticket
     - '1'
-    - 
-    - '2012-08-17 09:12:17.227456'
-    - 
-  - - 15
-    - Membership
-    - 2
-    - create
+    - update
     - '1'
-    - 
-    - '2012-08-17 09:12:27.008392'
-    - 
-  - - 16
-    - Surety
-    - 1
+    - ! "---\nsubject: Не могу скомпилиться\nmessage: Не выходит ничего\nuser_id:
+      1\nstate: answered\nurl: ''\ncreated_at: 2012-08-21 08:43:04.673299000 Z\nupdated_at:
+      2012-08-21 14:21:29.695602000 Z\nattachment_file_name: \nattachment_content_type:
+      \nattachment_file_size: \nattachment_updated_at: \nticket_question_id: 1\nproject_id:
+      \ncluster_id: 1\nid: 1\n"
+    - '2012-08-21 14:34:25.022034'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - answered
+
+      - active
+
+'
+  - - '125'
+    - Reply
+    - '4'
     - create
+    - '2'
+    - 
+    - '2012-08-21 14:34:54.154474'
+    - 
+  - - '126'
+    - Ticket
     - '1'
-    - 
-    - '2012-08-17 09:13:21.969939'
-    - 
-  - - 17
-    - Credential
-    - 1
+    - update
+    - '2'
+    - ! "---\nsubject: Не могу скомпилиться\nmessage: Не выходит ничего\nuser_id:
+      1\nstate: active\nurl: ''\ncreated_at: 2012-08-21 08:43:04.673299000 Z\nupdated_at:
+      2012-08-21 14:34:25.020653000 Z\nattachment_file_name: \nattachment_content_type:
+      \nattachment_file_size: \nattachment_updated_at: \nticket_question_id: 1\nproject_id:
+      \ncluster_id: 1\nid: 1\n"
+    - '2012-08-21 14:34:54.162712'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - answered
+
+'
+  - - '127'
+    - User
+    - '3'
     - create
-    - '1'
+    - f
     - 
-    - '2012-08-17 09:31:34.937042'
+    - '2012-08-21 14:59:18.613878'
     - 
+  - - '128'
+    - User
+    - '3'
+    - update
+    - f
+    - ! "---\nemail: areleu@gmail.com\ncrypted_password: $2a$10$qGCJDDgbhpkcDTYMk1UmmuDhEx/sQ7BynRJa2IgwvUvs8VWrwjDd2\nsalt:
+      2Ecy97eqVzDxjqm4xJ9B\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      pending\nactivation_token: keq3wxapTzTzSRH49yqp\nactivation_token_expires_at:
+      \nfirst_name: John\nlast_name: Smith\nmiddle_name: ''\ndeleted_at: \ncreated_at:
+      2012-08-21 14:59:18.579517000 Z\nupdated_at: 2012-08-21 14:59:18.579517000 Z\nadmin:
+      false\nstate: active\ntoken: e54b65b58b2362ec7b4c7508d6f40e490528fc96\nid: 3\n"
+    - '2012-08-21 15:02:56.624737'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nactivation_token:\n-
+      keq3wxapTzTzSRH49yqp\n- \nactivation_state:\n- pending\n- active\n"
 
 ---
 users:
@@ -236,11 +1800,12 @@ users:
   - updated_at
   - admin
   - state
+  - token
   records: 
-  - - 1
+  - - '1'
     - releu@me.com
-    - $2a$10$76piHARZcKnjq81vbMhumuiso6uvXXHZxcrEoL9zRBSQ.BJ9m7BJi
-    - 6HmhztTmxKAcp6ikxxB8
+    - $2a$10$GpiGlwjdNV5nF5B2TEGHP.J8VVWPpxRDgm3hrpLpfpYs5rey6Upkm
+    - b4Pz3hVYCPqH3DvYuupf
     - 
     - 
     - 
@@ -249,18 +1814,19 @@ users:
     - active
     - 
     - 
-    - User
-    - User
+    - Sergey
+    - Tolubaev
     - ''
     - 
-    - '2012-08-17 08:08:32.618503'
-    - '2012-08-17 08:09:40.037958'
+    - '2012-08-21 06:23:18.692945'
+    - '2012-08-21 14:16:22.989033'
     - false
-    - active
-  - - 2
-    - areleu@gmail.com
-    - $2a$10$cylKfXTGGGU3xL6Ewe5tkOrJn23VJ1zhEXQtCjCkZVsgyO4uWLik.
-    - e5GnioxepYFs6phSf3LE
+    - sured
+    - 78e4c941d0c7982855626ed0caecdd92c0a9ad90
+  - - '2'
+    - janbernacki@me.com
+    - $2a$10$q3k1M2aXmkjSwpQvtF3LO.RzNqO6VzHTE4hGUn9D.GMrOPavnvDoS
+    - 4hxd6XqqGVpYpD31x4BD
     - 
     - 
     - 
@@ -269,18 +1835,19 @@ users:
     - active
     - 
     - 
-    - Admin
-    - Admin
+    - Jan
+    - Bernacki
     - ''
     - 
-    - '2012-08-17 08:08:57.450129'
-    - '2012-08-17 08:50:35.864695'
+    - '2012-08-21 06:23:36.350856'
+    - '2012-08-21 14:16:22.98216'
     - true
     - active
-  - - 3
-    - a.releu@gmail.com
-    - $2a$10$3wiyJHCEx0E7azmMU/Q0E.ok.128bF4IvrRjCpWAVc3kELrK0Gbp2
-    - rDm7w7AtP9d5wGpqTsWC
+    - 88ebd48305ce47ba6395be072a3fe7b63691a83e
+  - - '3'
+    - areleu@gmail.com
+    - $2a$10$qGCJDDgbhpkcDTYMk1UmmuDhEx/sQ7BynRJa2IgwvUvs8VWrwjDd2
+    - 2Ecy97eqVzDxjqm4xJ9B
     - 
     - 
     - 
@@ -289,34 +1856,67 @@ users:
     - active
     - 
     - 
-    - Coworker
-    - Coworker
+    - John
+    - Smith
     - ''
     - 
-    - '2012-08-17 08:09:21.255451'
-    - '2012-08-17 08:09:36.789594'
+    - '2012-08-21 14:59:18.579517'
+    - '2012-08-21 15:02:56.62316'
     - false
     - active
+    - e54b65b58b2362ec7b4c7508d6f40e490528fc96
 
 ---
-organization_kinds:
+accounts:
   columns:
   - id
-  - name
+  - user_id
+  - project_id
   - created_at
   - updated_at
   - state
   records: 
-  - - 1
-    - ВУЗ
-    - '2012-08-17 08:50:58.146866'
-    - '2012-08-17 08:51:03.713559'
-    - closed
-  - - 2
-    - ВУЗ!!
-    - '2012-08-17 08:51:20.098114'
-    - '2012-08-17 08:51:20.098114'
+  - - '1'
+    - '1'
+    - '1'
+    - '2012-08-21 11:45:49.667293'
+    - '2012-08-21 11:45:49.685165'
     - active
+
+---
+requests:
+  columns:
+  - id
+  - project_id
+  - cluster_id
+  - hours
+  - created_at
+  - updated_at
+  - user_id
+  - state
+  - size
+  - comment
+  records: 
+  - - '1'
+    - '1'
+    - '1'
+    - '8'
+    - '2012-08-21 11:45:49.672558'
+    - '2012-08-21 12:22:14.278712'
+    - '1'
+    - closed
+    - '80'
+    - 
+  - - '2'
+    - '1'
+    - '1'
+    - '80'
+    - '2012-08-21 12:28:42.405202'
+    - '2012-08-21 12:28:45.89974'
+    - '1'
+    - active
+    - '20'
+    - 
 
 ---
 credentials:
@@ -329,65 +1929,48 @@ credentials:
   - name
   - state
   records: 
-  - - 1
-    - === yahoo!
-    - 1
-    - '2012-08-17 09:31:34.932656'
-    - '2012-08-17 09:31:34.932656'
+  - - '1'
+    - atata
+    - '1'
+    - '2012-08-21 09:00:43.737834'
+    - '2012-08-21 09:00:43.737834'
     - Macbook
     - active
+  - - '2'
+    - ! 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
+      releu@me.com
+
+'
+    - '1'
+    - '2012-08-21 10:20:30.289557'
+    - '2012-08-21 10:21:28.785332'
+    - iMac
+    - closed
 
 ---
-memberships:
-  columns:
-  - id
-  - user_id
-  - organization_id
-  - created_at
-  - updated_at
-  - state
-  records: 
-  - - 1
-    - 1
-    - 1
-    - '2012-08-17 09:12:17.223570'
-    - '2012-08-17 09:12:17.223570'
-    - active
-  - - 2
-    - 1
-    - 2
-    - '2012-08-17 09:12:26.918636'
-    - '2012-08-17 09:12:26.918636'
-    - active
-
----
-organizations:
+position_names:
   columns:
   - id
   - name
-  - approved
   - created_at
   - updated_at
-  - state
-  - organization_kind_id
-  - abbreviation
   records: 
-  - - 1
-    - Evrone
-    - false
-    - '2012-08-17 09:01:53.165634'
-    - '2012-08-17 09:02:27.534386'
-    - closed
-    - '2'
-    - evrone
-  - - 2
-    - Evrone!!
-    - false
-    - '2012-08-17 09:11:01.480860'
-    - '2012-08-17 09:11:01.480860'
-    - active
-    - '2'
-    - ''
+  - - '1'
+    - Факультет
+    - '2012-08-21 08:07:17.423515'
+    - '2012-08-21 08:07:17.423515'
+  - - '2'
+    - Кафедра
+    - '2012-08-21 08:07:22.779602'
+    - '2012-08-21 08:07:22.779602'
+  - - '3'
+    - Должность
+    - '2012-08-21 08:07:36.272265'
+    - '2012-08-21 08:07:36.272265'
+  - - '4'
+    - Группа
+    - '2012-08-21 08:07:43.285538'
+    - '2012-08-21 08:07:43.285538'
 
 ---
 sureties:
@@ -400,10 +1983,666 @@ sureties:
   - updated_at
   - comment
   records: 
-  - - 1
-    - 1
-    - 1
-    - pending
-    - '2012-08-17 09:13:21.965841'
-    - '2012-08-17 09:13:21.965841'
+  - - '1'
+    - '1'
+    - '1'
+    - active
+    - '2012-08-21 11:38:29.72647'
+    - '2012-08-21 11:45:00.839115'
     - 
+
+---
+accesses:
+  columns:
+  - id
+  - credential_id
+  - state
+  - created_at
+  - updated_at
+  - cluster_user_id
+  records: 
+  - - '1'
+    - '2'
+    - active
+    - '2012-08-21 12:10:46.697631'
+    - '2012-08-21 12:10:47.006593'
+    - '1'
+  - - '2'
+    - '1'
+    - active
+    - '2012-08-21 12:10:46.733585'
+    - '2012-08-21 12:10:47.271802'
+    - '1'
+
+---
+memberships:
+  columns:
+  - id
+  - user_id
+  - organization_id
+  - created_at
+  - updated_at
+  - state
+  records: 
+  - - '1'
+    - '1'
+    - '1'
+    - '2012-08-21 08:31:06.870304'
+    - '2012-08-21 08:31:06.870304'
+    - active
+
+---
+organizations:
+  columns:
+  - id
+  - name
+  - approved
+  - created_at
+  - updated_at
+  - state
+  - abbreviation
+  - organization_kind_id
+  records: 
+  - - '1'
+    - Evrone
+    - false
+    - '2012-08-21 08:08:29.570732'
+    - '2012-08-21 08:08:29.570732'
+    - active
+    - EVR
+    - '2'
+  - - '2'
+    - Московский Государственный Институт
+    - false
+    - '2012-08-21 08:10:10.401863'
+    - '2012-08-21 08:10:10.401863'
+    - active
+    - МГУ
+    - '1'
+  - - '4'
+    - Umbrella
+    - false
+    - '2012-08-21 13:55:09.954994'
+    - '2012-08-21 13:56:08.797692'
+    - closed
+    - ''
+    - '3'
+
+---
+positions:
+  columns:
+  - id
+  - membership_id
+  - name
+  - value
+  - created_at
+  - updated_at
+  records: 
+  - - '1'
+    - '1'
+    - Должность
+    - Developer
+    - '2012-08-21 08:31:06.88706'
+    - '2012-08-21 08:31:06.88706'
+
+---
+projects:
+  columns:
+  - id
+  - name
+  - created_at
+  - updated_at
+  - user_id
+  - state
+  - description
+  - organization_id
+  records: 
+  - - '1'
+    - Octoshell
+    - '2012-08-21 11:45:49.654544'
+    - '2012-08-21 11:45:49.654544'
+    - '1'
+    - active
+    - octoshell || octoshell
+    - '1'
+
+---
+cluster_users:
+  columns:
+  - id
+  - project_id
+  - state
+  - cluster_id
+  - created_at
+  - updated_at
+  records: 
+  - - '1'
+    - '1'
+    - active
+    - '1'
+    - '2012-08-21 12:06:34.938125'
+    - '2012-08-21 12:28:48.161723'
+
+---
+tasks:
+  columns:
+  - id
+  - command
+  - stderr
+  - stdout
+  - state
+  - resource_type
+  - resource_id
+  - created_at
+  - updated_at
+  - procedure
+  - data
+  - event
+  - comment
+  - callbacks_performed
+  records: 
+  - - '1'
+    - ! "user=%user\r\n%host=\"lomonosov.parallel.ru\""
+    - ! 'bash: line 1: fg: no job control
+
+'
+    - ''
+    - failed
+    - ClusterUser
+    - '1'
+    - '2012-08-21 12:06:35.046108'
+    - '2012-08-21 12:06:36.22882'
+    - add_user
+    - 
+    - 
+    - 
+    - false
+  - - '2'
+    - ! "user=\"project_1\"\r\nhost=\"lomonosov.parallel.ru\""
+    - ''
+    - ''
+    - successed
+    - ClusterUser
+    - '1'
+    - '2012-08-21 12:10:43.163073'
+    - '2012-08-21 12:10:46.752123'
+    - add_user
+    - 
+    - 
+    - 
+    - true
+  - - '3'
+    - ! "user=\"project_1\"\r\nhost=\"lomonosov.parallel.ru\"\r\npublic_key=\"ssh-rsa
+      AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
+      releu@me.com\n\""
+    - ''
+    - ''
+    - successed
+    - Access
+    - '1'
+    - '2012-08-21 12:10:46.725237'
+    - '2012-08-21 12:10:47.011597'
+    - add_openkey
+    - 
+    - 
+    - 
+    - true
+  - - '4'
+    - ! "user=\"project_1\"\r\nhost=\"lomonosov.parallel.ru\"\r\npublic_key=\"atata\""
+    - ''
+    - ''
+    - successed
+    - Access
+    - '2'
+    - '2012-08-21 12:10:46.746346'
+    - '2012-08-21 12:10:47.276529'
+    - add_openkey
+    - 
+    - 
+    - 
+    - true
+  - - '5'
+    - ! "user=\"project_1\"\r\nhost=\"lomonosov.parallel.ru\""
+    - ''
+    - ''
+    - successed
+    - ClusterUser
+    - '1'
+    - '2012-08-21 12:22:14.298482'
+    - '2012-08-21 12:22:17.759967'
+    - block_user
+    - 
+    - 
+    - 
+    - true
+  - - '6'
+    - ! "user=\"project_1\"\r\nhost=\"lomonosov.parallel.ru\""
+    - ''
+    - ''
+    - successed
+    - ClusterUser
+    - '1'
+    - '2012-08-21 12:28:45.914615'
+    - '2012-08-21 12:28:48.166829'
+    - unblock_user
+    - 
+    - 
+    - 
+    - true
+
+---
+replies:
+  columns:
+  - id
+  - user_id
+  - ticket_id
+  - message
+  - created_at
+  - updated_at
+  - attachment_file_name
+  - attachment_content_type
+  - attachment_file_size
+  - attachment_updated_at
+  records: 
+  - - '2'
+    - '2'
+    - '1'
+    - Пришлите команду которой вы компилите
+    - '2012-08-21 14:21:29.616605'
+    - '2012-08-21 14:21:29.616605'
+    - 
+    - 
+    - 
+    - 
+  - - '3'
+    - '1'
+    - '1'
+    - gcc ~/octoprog.c
+    - '2012-08-21 14:34:25.008063'
+    - '2012-08-21 14:34:25.008063'
+    - 
+    - 
+    - 
+    - 
+  - - '4'
+    - '2'
+    - '1'
+    - Попробуйте сейчас
+    - '2012-08-21 14:34:54.152757'
+    - '2012-08-21 14:34:54.152757'
+    - 
+    - 
+    - 
+    - 
+
+---
+organization_kinds:
+  columns:
+  - id
+  - name
+  - created_at
+  - updated_at
+  - state
+  records: 
+  - - '1'
+    - ВУЗ
+    - '2012-08-21 08:04:23.083473'
+    - '2012-08-21 08:04:23.083473'
+    - active
+  - - '2'
+    - ООО
+    - '2012-08-21 08:05:59.847984'
+    - '2012-08-21 08:05:59.847984'
+    - active
+  - - '3'
+    - НИИ
+    - '2012-08-21 08:06:10.473092'
+    - '2012-08-21 08:06:10.473092'
+    - active
+
+---
+ticket_templates:
+  columns:
+  - id
+  - subject
+  - message
+  - created_at
+  - updated_at
+  - state
+  records: 
+  - - '1'
+    - Сил больше нет
+    - Закройте браузер и отойдите от компьютера
+    - '2012-08-21 07:12:40.242762'
+    - '2012-08-21 07:12:40.242762'
+    - active
+
+---
+tickets:
+  columns:
+  - id
+  - subject
+  - message
+  - user_id
+  - state
+  - url
+  - created_at
+  - updated_at
+  - attachment_file_name
+  - attachment_content_type
+  - attachment_file_size
+  - attachment_updated_at
+  - ticket_question_id
+  - project_id
+  - cluster_id
+  records: 
+  - - '1'
+    - Не могу скомпилиться
+    - Не выходит ничего
+    - '1'
+    - answered
+    - ''
+    - '2012-08-21 08:43:04.673299'
+    - '2012-08-21 14:34:54.161585'
+    - 
+    - 
+    - 
+    - 
+    - '1'
+    - 
+    - '1'
+  - - '2'
+    - Скан поручительства
+    - Вот скан
+    - '1'
+    - resolved
+    - ''
+    - '2012-08-21 11:40:35.00096'
+    - '2012-08-21 11:40:38.095689'
+    - 
+    - 
+    - 
+    - 
+    - '1'
+    - 
+    - 
+
+---
+ticket_field_relations:
+  columns:
+  - id
+  - ticket_question_id
+  - ticket_field_id
+  - required
+  - created_at
+  - updated_at
+  - use
+  records: 
+  - - '1'
+    - '1'
+    - '1'
+    - false
+    - '2012-08-21 08:42:08.466381'
+    - '2012-08-21 08:42:08.466381'
+    - false
+  - - '2'
+    - '1'
+    - '2'
+    - false
+    - '2012-08-21 12:31:29.104036'
+    - '2012-08-21 12:31:29.104036'
+    - false
+  - - '3'
+    - '2'
+    - '1'
+    - false
+    - '2012-08-21 12:33:55.246161'
+    - '2012-08-21 12:33:55.246161'
+    - false
+  - - '4'
+    - '2'
+    - '2'
+    - false
+    - '2012-08-21 12:33:55.249335'
+    - '2012-08-21 12:33:55.249335'
+    - false
+  - - '5'
+    - '3'
+    - '1'
+    - false
+    - '2012-08-21 12:34:06.549188'
+    - '2012-08-21 12:34:06.549188'
+    - false
+  - - '6'
+    - '3'
+    - '2'
+    - false
+    - '2012-08-21 12:34:06.552637'
+    - '2012-08-21 12:34:06.552637'
+    - false
+  - - '7'
+    - '4'
+    - '1'
+    - false
+    - '2012-08-21 12:34:39.402913'
+    - '2012-08-21 12:34:39.402913'
+    - false
+  - - '8'
+    - '4'
+    - '2'
+    - false
+    - '2012-08-21 12:34:39.406221'
+    - '2012-08-21 12:34:39.406221'
+    - false
+  - - '9'
+    - '5'
+    - '1'
+    - false
+    - '2012-08-21 12:34:49.081617'
+    - '2012-08-21 12:34:49.081617'
+    - false
+  - - '10'
+    - '5'
+    - '2'
+    - false
+    - '2012-08-21 12:34:49.085601'
+    - '2012-08-21 12:34:49.085601'
+    - false
+  - - '11'
+    - '6'
+    - '1'
+    - false
+    - '2012-08-21 12:35:03.207416'
+    - '2012-08-21 12:35:03.207416'
+    - false
+  - - '12'
+    - '6'
+    - '2'
+    - false
+    - '2012-08-21 12:35:03.211191'
+    - '2012-08-21 12:35:03.211191'
+    - false
+  - - '13'
+    - '7'
+    - '1'
+    - true
+    - '2012-08-21 12:35:25.393172'
+    - '2012-08-21 13:13:07.294824'
+    - true
+  - - '14'
+    - '7'
+    - '2'
+    - true
+    - '2012-08-21 12:35:25.397188'
+    - '2012-08-21 13:13:07.298816'
+    - true
+
+---
+clusters:
+  columns:
+  - id
+  - name
+  - created_at
+  - updated_at
+  - host
+  - description
+  - state
+  - add_user
+  - del_user
+  - add_openkey
+  - del_openkey
+  - block_user
+  - unblock_user
+  records: 
+  - - '1'
+    - Ломоносов
+    - '2012-08-21 08:35:00.526027'
+    - '2012-08-21 12:07:51.706836'
+    - lomonosov.parallel.ru
+    - ''
+    - active
+    - ! "user=%user%\r\nhost=%host%"
+    - ! "user=%user%\r\nhost=%host%"
+    - ! "user=%user%\r\nhost=%host%\r\npublic_key=%public_key%"
+    - ! "user=%user%\r\nhost=%host%\r\npublic_key=%public_key%"
+    - ! "user=%user%\r\nhost=%host%"
+    - ! "user=%user%\r\nhost=%host%"
+
+---
+ticket_fields:
+  columns:
+  - id
+  - name
+  - hint
+  - created_at
+  - updated_at
+  - state
+  records: 
+  - - '1'
+    - Комманда
+    - ''
+    - '2012-08-21 06:45:22.296371'
+    - '2012-08-21 06:45:22.296371'
+    - active
+  - - '2'
+    - Текущий каталог
+    - pwd
+    - '2012-08-21 12:31:29.065315'
+    - '2012-08-21 12:31:29.065315'
+    - active
+
+---
+ticket_questions:
+  columns:
+  - id
+  - ticket_question_id
+  - question
+  - leaf
+  - state
+  - created_at
+  - updated_at
+  records: 
+  - - '1'
+    - 
+    - Другое
+    - true
+    - active
+    - '2012-08-21 08:42:08.393941'
+    - '2012-08-21 12:59:51.4442'
+  - - '2'
+    - 
+    - Не могу войти!
+    - true
+    - active
+    - '2012-08-21 12:33:55.221747'
+    - '2012-08-21 13:12:36.146109'
+  - - '3'
+    - 
+    - Не могу получить доступ
+    - false
+    - active
+    - '2012-08-21 12:34:06.544481'
+    - '2012-08-21 12:34:39.396143'
+  - - '4'
+    - '3'
+    - У меня есть поручительство
+    - true
+    - active
+    - '2012-08-21 12:34:39.398512'
+    - '2012-08-21 12:34:39.398512'
+  - - '5'
+    - '3'
+    - У меня нет поручительства
+    - true
+    - active
+    - '2012-08-21 12:34:49.076685'
+    - '2012-08-21 12:34:49.076685'
+  - - '6'
+    - 
+    - Проблема с кириллицей
+    - true
+    - active
+    - '2012-08-21 12:35:03.202286'
+    - '2012-08-21 12:35:03.202286'
+  - - '7'
+    - 
+    - Проблема с компиляцией
+    - true
+    - active
+    - '2012-08-21 12:35:25.388201'
+    - '2012-08-21 12:35:25.388201'
+
+---
+ticket_tag_relations:
+  columns:
+  - id
+  - ticket_id
+  - ticket_tag_id
+  - active
+  - created_at
+  - updated_at
+  records: 
+  - - '1'
+    - '1'
+    - '1'
+    - true
+    - '2012-08-21 08:43:04.728992'
+    - '2012-08-21 08:56:31.566522'
+  - - '2'
+    - '1'
+    - '2'
+    - true
+    - '2012-08-21 08:52:53.732552'
+    - '2012-08-21 08:56:34.470577'
+  - - '3'
+    - '2'
+    - '2'
+    - false
+    - '2012-08-21 11:40:35.076117'
+    - '2012-08-21 11:40:35.076117'
+  - - '4'
+    - '2'
+    - '1'
+    - false
+    - '2012-08-21 11:40:35.126098'
+    - '2012-08-21 11:40:35.126098'
+
+---
+ticket_tags:
+  columns:
+  - id
+  - name
+  - created_at
+  - updated_at
+  - state
+  records: 
+  - - '1'
+    - Проблема с пользователем
+    - '2012-08-21 07:10:17.668068'
+    - '2012-08-21 07:10:17.668068'
+    - active
+  - - '2'
+    - Регистрация
+    - '2012-08-21 08:52:53.726471'
+    - '2012-08-21 12:32:17.267791'
+    - active
