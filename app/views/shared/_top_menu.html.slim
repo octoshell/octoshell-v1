@@ -2,5 +2,6 @@
   li class="#{active_menu?(:admin)}" = link_to 'Кабинет Администратора', admin_path
 - else
   li class="#{active_menu?(:dashboard)}" = link_to 'Рабочий кабинет', dashboard_path
-li class="#{active_menu?(:profile)}" = link_to 'Личный кабинет', profile_path
+- unless admin?
+  li class="#{active_menu?(:profile)}" = link_to 'Личный кабинет', profile_path
 li class="#{active_menu?(:support)}" = link_to 'Поддержка', support_path
