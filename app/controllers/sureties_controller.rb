@@ -7,7 +7,7 @@ class SuretiesController < ApplicationController
       @search = Surety.search(params[:search])
       @sureties = @search.page(params[:page])
     else
-      @search = curretn_user.sureties.search(params[:search])
+      @search = current_user.sureties.search(params[:search])
       @sureties = @search.page(params[:page])
     end
   end
