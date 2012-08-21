@@ -436,6 +436,8 @@ ru:
         merge_id: Тег для объединения
       cluster_user:
         state: Состояние
+        project_id: Проект
+        cluster_id: Кластер
       account:
         project: Проект
         state: Состояние
@@ -516,6 +518,7 @@ ru:
       cluster_user:
         state:
           states:
+            pending: Ожидание активации
             activing: Активируется
             active: Активен
             paused: Заблокирован

@@ -2,7 +2,7 @@
 
 = simple_form_for @search, url: accesses_path, method: :get, html: { class: 'form-horizontal' } do |f|
   = f.input :cluster_user_id_eq, collection: ClusterUser.all, label_method: :username if admin?
-  = f.input :state_in, collection: Credential.human_state_names, input_html: { multiple: true }
+  = f.input :state_in, collection: Credential.human_state_names, input_html: { multiple: true, size: Credential.human_state_names.size }
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
 
