@@ -398,7 +398,10 @@ ru:
         name: Название
         created_at: Дата создания
         user: Пользователь
+        user_id: Пользователь
         state: Состояние
+        public_key: Публичный ключ
+        public_key_file: Или загрузите файл .pub
       organization:
         name: Название
         organization_kind: Тип организации
@@ -451,6 +454,7 @@ ru:
       access:
         credential: Публичный ключ
         state: Состояние
+        cluster_user_id: Пользователь на кластере
       ticket:
         subject: Тема
         message: Сообщение

@@ -89,7 +89,7 @@ MSU::Application.routes.draw do
   resource :admin, only: :show
   
   # cluster_users
-  resources :cluster_users, only: :show do
+  resources :cluster_users, only: [:index, :show] do
     resources :versions, only: [:index, :show], resource: 'ClusterUser'
   end
   
@@ -107,7 +107,7 @@ MSU::Application.routes.draw do
   end
   
   # accesses
-  resources :accesses, only: :show do
+  resources :accesses, only: [:index, :show] do
     resources :versions, only: [:index, :show], resource: 'Access'
   end
   

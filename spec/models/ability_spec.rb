@@ -46,6 +46,7 @@ describe Ability do
     it { should be_able_to(:access, :admins) }
     
     it { should be_able_to(:show, :accesses) }
+    it { should be_able_to(:index, :accesses) }
     
     it { should be_able_to(:index,             :tasks) }
     it { should be_able_to(:show,              :tasks) }
@@ -55,7 +56,8 @@ describe Ability do
     
     it { should be_able_to(:show, :accounts) }
     
-    it { should be_able_to(:show, :cluster_users) }
+    it { should be_able_to(:show,  :cluster_users) }
+    it { should be_able_to(:index, :cluster_users) }
     
     it { should be_able_to(:show,  :credentials) }
     it { should be_able_to(:close, :credentials) }

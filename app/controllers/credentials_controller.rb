@@ -1,9 +1,11 @@
 class CredentialsController < ApplicationController
   before_filter :require_login
+  before_filter :setup_default_filter, only: :index
   
   def index
     if current_user.admin?
-      @credentials = Credential.all
+      @search = Credential.search(params[:search])
+      @credentials = @search.page(params[:page])
     else
       @credentials = current_user.credentials
     end
@@ -48,5 +50,9 @@ private
   
   def namespace
     admin? ? :admin : :profile
+  end
+  
+  def setup_default_filter
+    params[:search] ||= { state_in: ['active'] }
   end
 end

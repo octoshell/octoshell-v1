@@ -4,6 +4,7 @@ class ClusterUser < ActiveRecord::Base
   include Models::Asynch
   
   default_scope order("#{table_name}.id desc")
+  delegate :username, to: :project
   
   attr_accessor :skip_activation
   

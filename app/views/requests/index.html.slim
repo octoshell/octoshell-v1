@@ -11,7 +11,5 @@ div class="link-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
 
 = paginate @requests
-
 = render partial: 'requests/table', locals: { requests: @requests }
-
 = paginate @requests

@@ -16,6 +16,7 @@ describe Credential do
   
   it { should allow_mass_assignment_of(:name) }
   it { should allow_mass_assignment_of(:public_key) }
+  it { should allow_mass_assignment_of(:public_key_file) }
   
   describe '#grant_accesses' do
     let!(:credential) { create(:generic_credential, user: create(:sured_user)) }

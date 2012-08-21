@@ -73,9 +73,9 @@ class Ability
         
         can :create, :replies
         
-        can :show, :accesses
+        can [:show, :index], :accesses
         
-        can :show, :cluster_users
+        can [:show, :index], :cluster_users
         
         can [:index, :show, :perform_callbacks, :create, :retry], :tasks
         
