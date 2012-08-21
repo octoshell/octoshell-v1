@@ -1,4 +1,4 @@
-p = link_to 'Перейти к заявке', ticket_url(@ticket)
+= render 'header'
 
 - @ticket.replies.last(3).each do |reply|
   blockquote
@@ -6,4 +6,6 @@ p = link_to 'Перейти к заявке', ticket_url(@ticket)
       strong = reply.user.full_name
     p = reply.message
 
-p = link_to 'Перейти к заявке', ticket_url(@ticket)
+p = link_to 'Перейти к заявке', ticket_url(@ticket, token: @user.token)
+
+= render 'signature'

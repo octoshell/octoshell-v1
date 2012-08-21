@@ -1,5 +1,8 @@
 # coding: utf-8
 class ApplicationController < ActionController::Base
+  attr_accessor :skip_authentication_by_token
+  prepend_before_filter :authenticate_by_token, unless: :skip_authentication_by_token
+  
   before_filter :block_closed_users
   
   protect_from_forgery
@@ -56,5 +59,23 @@ private
       logout
       raise CanCan::Unauthorized
     end
+  end
+  
+  def authenticate_by_token
+    if token = params[:token]
+      user = User.find_by_token!(token)
+      if user.activation_active?
+        auto_login user
+        redirect_to uri_without_token
+      end
+    end
+  end
+  
+  def uri_without_token
+    uri = URI request.url
+    params = Rack::Utils.parse_query uri.query
+    params.delete('token')
+    uri.query = params.to_param
+    uri.to_s
   end
 end

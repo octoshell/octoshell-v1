@@ -1,4 +1,8 @@
+= render 'header'
+
 p Вы зарегистривались в Octoshell
 p
- | Для активации аккаунта пройдите по ссылке 
- = link_to 'Активировать', activate_user_url(token: @user.activation_token)
+  | Для активации аккаунта пройдите по ссылке 
+  = link_to 'Активировать', activate_user_url(token: @user.activation_token)
+
+= render 'signature'

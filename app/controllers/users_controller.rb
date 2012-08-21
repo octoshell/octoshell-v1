@@ -69,4 +69,8 @@ private
   def setup_default_filter
     params[:search] ||= { state_in: ['sured'] }
   end
+  
+  def skip_authentication_by_token
+    params[:action] == 'activate'
+  end
 end

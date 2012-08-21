@@ -1,2 +1,5 @@
-p Вы успешно активировали свой аккаунт в Octoshell
-p = link_to "Octoshell", dashboard_url
+= render 'header'
+
+p Вы успешно активировали свой #{link_to 'аккаунт', root_url(token: @user.token)}
+
+= render 'signature'

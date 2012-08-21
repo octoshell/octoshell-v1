@@ -1,5 +1,8 @@
 - title 'Организации'
 
+div class="link-actions"
+  = link_to 'Новая организация', new_organization_path, class: 'btn'
+
 = simple_form_for @search, url: organizations_path, method: :get, html: { class: 'form-horizontal' } do |f|
   = f.input :name_contains
   = f.input :abbreviation_contains
@@ -7,12 +10,6 @@
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
 
-
-div class="link-actions"
-  = link_to 'Новая организация', new_organization_path, class: 'btn'
-
 = paginate @organizations
-
 = render partial: 'table', locals: { organizations: @organizations }
-
 = paginate @organizations

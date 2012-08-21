@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true, length: { minimum: 6 }, on: :update, if: :password?
   validates :email, uniqueness: true
   
+  before_create :assign_token
+  
   attr_accessible :first_name, :last_name, :middle_name, :email, :password,
     :password_confirmation, :remember_me, :new_organization, :organization_id
   attr_accessible :first_name, :last_name, :middle_name, :email, :password,
@@ -179,4 +181,7 @@ private
     I18n.t("steps.#{name}.html").html_safe
   end
   
+  def assign_token
+    self.token = Digest::SHA1.hexdigest(rand.to_s)
+  end
 end
