@@ -6,7 +6,7 @@
 
 table class="table table-bordered"
   tr
-    th = User.model_name.human
+    th class="span4" = User.model_name.human
     td = link_to_credential @access.credential
   tr
     th = ClusterUser.model_name.human

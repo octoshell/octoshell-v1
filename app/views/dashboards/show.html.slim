@@ -7,34 +7,30 @@
     - @user.start_steps.each do |step|
       li = step
 
-- else
-  div class="link-actions"
-    = link_to 'Новый проект', new_project_path, class: 'btn'
-    - if @user.projects.active.any?
-      = " "
-      = link_to 'Новая заявка', new_request_path, class: 'btn'
+- elsif !@user.projects.any?
+  p
+    | Вы можете #{link_to 'создать проект', new_project_path} или #{link_to 'запросить доступ', new_account_path} к существующему
 
-
-h2 Доступы к кластерам
+h3 Доступы к кластерам
 
 = render partial: 'accesses/table', locals: { accesses: @user.accesses.non_closed }
 
-h2 Пользователи на кластере
+h3 Пользователи на кластере
 
 = render partial: 'cluster_users/table', locals: { cluster_users: @user.projects.active.map { |p| p.cluster_users.non_closed }.flatten }
 
-h2 Поддержка
-
-= render partial: 'tickets/table', locals: { tickets: @user.tickets.non_closed }
-
-h2 Проекты
+h3 Проекты
 
 - if @user.projects.empty?
   p Нет заявок
 
 - @user.projects.each do |project|
-  h3 = link_to_project(project)
+  h4 = link_to_project(project)
   
-  h4 Заявки
+  h5 Заявки
   = render partial: 'requests/table', locals: { requests: project.requests }
 
+h3 Поддержка
+
+p = link_to 'Создать заявку', new_ticket_path
+= render partial: 'tickets/table', locals: { tickets: @user.tickets.non_closed }

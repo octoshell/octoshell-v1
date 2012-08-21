@@ -1,7 +1,7 @@
 - if memberships.any?
   table class="table table-bordered"
     tr
-      th #
+      th class="span1" #
       th = Organization.model_name.human
       th = User.model_name.human
       td = Membership.human_attribute_name(:state)

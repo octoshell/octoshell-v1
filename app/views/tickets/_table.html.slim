@@ -1,7 +1,7 @@
 - if tickets.any?
   table class="table table-bordered"
     tr
-      th #
+      th class="span1" #
       th = Ticket.human_attribute_name(:subject)
       th = Ticket.human_attribute_name(:user)
       th = Ticket.human_attribute_name(:state)

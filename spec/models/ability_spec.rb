@@ -28,8 +28,9 @@ describe Ability do
     it { should be_able_to(:new, :accounts) }
     it { should be_able_to(:create, :accounts) }
     
-    it { should be_able_to(:new, :requests) }
+    it { should be_able_to(:new,    :requests) }
     it { should be_able_to(:create, :requests) }
+    it { should be_able_to(:index,  :requests) }
     
     it { should be_able_to(:new, :projects) }
     it { should be_able_to(:create, :projects) }

@@ -5,6 +5,7 @@
 # (при удалении вручную или всего пользователя на кластере)
 class Access < ActiveRecord::Base
   delegate :cluster, to: :cluster_user
+  delegate :state_name, to: :credential, prefix: true, allow_nil: true
   
   include Models::Asynch
   has_paper_trail
@@ -18,6 +19,7 @@ class Access < ActiveRecord::Base
   has_many :tasks, as: :resource
   
   validates :credential, :cluster_user, presence: true
+  validates :credential_state_name, inclusion: { in: [:active] }, on: :create
   
   after_create :activate, unless: :skip_activation
   

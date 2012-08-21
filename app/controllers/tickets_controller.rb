@@ -107,6 +107,7 @@ private
   end  
   
   def setup_default_filter
-    params[:search] ||= { state_in: ['active', 'answered'] }
+    states = admin? ? ['active'] : ['active', 'answered', 'resolved']
+    params[:search] ||= { state_in: states }
   end
 end

@@ -11,8 +11,8 @@ class TicketQuestion < ActiveRecord::Base
   validates :question, presence: true
   validates :ticket_question_id, exclusion: { in: proc { |tq| [tq.id] } }, allow_nil: true
   
-  before_create :assign_leaf
   after_create :create_ticket_relations
+  after_save :assign_leaf!
   
   scope :root, where(ticket_question_id: nil)
   
@@ -37,8 +37,6 @@ class TicketQuestion < ActiveRecord::Base
   def close!
     transaction do
       _close!
-      ticket_question.update_attribute(:leaf, true) if ticket_question
-      update_attribute(:leaf, true)
       ticket_questions.non_closed.each &:close!
     end
   end
@@ -67,14 +65,16 @@ class TicketQuestion < ActiveRecord::Base
     breadcrumbs.reverse
   end
   
-private
-  
-  def assign_leaf
-    if ticket_question && ticket_question.leaf?
-      ticket_question.update_attribute(:leaf, false)
+  def assign_leaf!
+    ticket_question.try(:assign_leaf!)
+    if ticket_question_id_was && ticket_question_id_changed?
+      self.class.find(ticket_question_id_was).assign_leaf!
     end
+    self.class.where(id: id).update_all(leaf: !ticket_questions.active.exists?)
     true
   end
+
+private
   
   def create_ticket_relations
     TicketField.active.each do |ticket_field|

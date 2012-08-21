@@ -3,8 +3,13 @@ class RequestsController < ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
-    @search = Request.search(params[:search])
-    @requests = @search.page(params[:page])
+    if admin?
+      @search = Request.search(params[:search])
+      @requests = @search.page(params[:page])
+    else
+      @search = current_user.requests.search(params[:search])
+      @requests = @search.page(params[:page])
+    end
   end
   
   def new

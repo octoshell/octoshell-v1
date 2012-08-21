@@ -1,12 +1,14 @@
 - if cluster_users.any?
   table class="table table-bordered"
     tr
+      th class="span1" #
       th = Project.model_name.human
       th = Cluster.model_name.human
       th = ClusterUser.human_attribute_name(:state)
       th
     - cluster_users.each do |cluster_user|
       tr id="cluster-user-#{cluster_user.id}"
+        td = cluster_user.id
         td = link_to_project cluster_user.project
         td = link_to_cluster cluster_user.cluster
         td = cluster_user.human_state_name

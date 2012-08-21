@@ -60,7 +60,7 @@ class Ability
         
         can :show, :requests, user_id: user.id
         
-        can [:new, :create], :requests
+        can [:new, :create, :index], :requests
         
         can [:new, :create], :projects
         can [:edit, :update], :projects, user_id: user.id

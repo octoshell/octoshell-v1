@@ -1,11 +1,13 @@
 - if ticket_fields.any?
   table class="table table-bordered"
     tr
+      th class="span1" #
       th = TicketField.human_attribute_name(:name)
       th = TicketField.human_attribute_name(:hint)
       th
     - ticket_fields.each do |field|
       tr
+        td = field.id
         td = link_to_ticket_field field
         td = field.hint
         td

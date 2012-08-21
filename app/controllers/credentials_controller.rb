@@ -7,7 +7,8 @@ class CredentialsController < ApplicationController
       @search = Credential.search(params[:search])
       @credentials = @search.page(params[:page])
     else
-      @credentials = current_user.credentials
+      @search = current_user.credentials.search(params[:search])
+      @credentials = @search.page(params[:page])
     end
   end
   

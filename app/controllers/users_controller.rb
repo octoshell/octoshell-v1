@@ -67,6 +67,6 @@ private
   end
   
   def setup_default_filter
-    params[:search] ||= { state_in: ['active'] }
+    params[:search] ||= { state_in: ['sured'] }
   end
 end

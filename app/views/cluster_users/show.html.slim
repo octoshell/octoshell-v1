@@ -6,7 +6,7 @@
 
 table class="table table-bordered"
   tr
-    th = Project.model_name.human
+    th class="span4" = Project.model_name.human
     td = link_to_project @cluster_user.project
   tr
     th = Cluster.model_name.human
@@ -15,7 +15,7 @@ table class="table table-bordered"
     th = ClusterUser.human_attribute_name(:state)
     td = @cluster_user.human_state_name
 
-h2 Как подключиться
+h3 Как подключиться
 
 pre
   code
@@ -26,6 +26,6 @@ pre
 
   = render partial: 'tasks/table', locals: { tasks: @cluster_user.tasks }
 
-h2 Доступы на кластер
+h3 Доступы на кластер
 
 = render partial: 'accesses/table', locals: { accesses: @cluster_user.accesses }

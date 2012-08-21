@@ -1,17 +1,26 @@
 - if accesses.any?
   table class="table table-bordered"
     tr
+      th class="span1" #
       th = User.model_name.human
       th = Credential.model_name.human
       th = Cluster.model_name.human
-      th = Project.model_name.human
+      th = ClusterUser.model_name.human
       th = Access.human_attribute_name(:state)
+      - if can? :show, :accesses
+        td
     - accesses.each do |access|
       tr id="access-#{access.id}"
+        td = access.id
         td = link_to_user access.credential.user
         td = link_to_credential access.credential
         td = link_to_cluster access.cluster
-        td = link_to_cluster_user access.cluster_user
+        td
+          = link_to_cluster_user access.cluster_user
+          = " "
+          small (#{access.cluster_user.human_state_name})
         td = access.human_state_name
+        - if can? :show, :accesses
+          td = link_to 'открыть', access
 - else
   p Нет доступов

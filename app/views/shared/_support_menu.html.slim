@@ -1,4 +1,4 @@
-= submenu_item :tickets, (link_to "Заявки", tickets_path)
+= submenu_item :tickets, (link_to "Заявки (#{admin? ? Ticket.active.count : current_user.tickets.answered.count})", tickets_path)
 - if can? :index, :ticket_questions
   = submenu_item :ticket_questions, (link_to "Вопросы в заявках", ticket_questions_path)
 - if can? :index, :ticket_fields

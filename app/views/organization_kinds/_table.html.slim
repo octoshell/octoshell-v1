@@ -1,7 +1,7 @@
 - if organization_kinds.any?
   table class="table table-bordered"
     tr
-      th #
+      th class="span1" #
       th class="span3" = OrganizationKind.human_attribute_name(:name)
       th = OrganizationKind.human_attribute_name(:state)
       th

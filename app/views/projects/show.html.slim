@@ -20,20 +20,20 @@ table class="table table-bordered"
     th = Project.human_attribute_name(:state)
     td = @project.human_state_name
 
-h2 Доступы
+h3 Доступы
 
 = render partial: 'accounts/table', locals: { accounts: @project.accounts }
 
-h2 Пользователи на кластере
+h3 Пользователи на кластере
 
 = render partial: 'cluster_users/table', locals: { cluster_users: @project.cluster_users }
 
-h2 Заявки
+h3 Заявки
 
 p = link_to 'Новая заявка', new_request_path
 
 = render partial: 'requests/table', locals: { requests: @project.requests }
 
-h2 Поддержка
+h3 Поддержка
 
 = render partial: 'tickets/table', locals: { tickets: @project.tickets }

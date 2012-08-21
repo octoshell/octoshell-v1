@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120817110839) do
+ActiveRecord::Schema.define(:version => 20120821120903) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(:version => 20120817110839) do
     t.string   "host"
     t.string   "description"
     t.string   "state"
-    t.text     "add_user",     :default => "user=%user\n%host=%host%"
+    t.text     "add_user",     :default => "user=%user%\nhost=%host%"
     t.text     "del_user",     :default => "user=%user%\nhost=%host%"
     t.text     "add_openkey",  :default => "user=%user%\nhost=%host%\npublic_key=%public_key%"
     t.text     "del_openkey",  :default => "user=%user%\nhost=%host%\npublic_key=%public_key%"

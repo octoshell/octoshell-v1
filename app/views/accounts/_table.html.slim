@@ -1,7 +1,7 @@
 - if accounts.any?
   table class="table table-bordered"
     tr
-      th #
+      th class="span1" #
       th = User.model_name.human
       th = Project.model_name.human
       th = Account.human_attribute_name(:state)
