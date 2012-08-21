@@ -43,8 +43,6 @@ table class="table table-bordered"
     td = @ticket.human_state_name
 
 - if admin?
-  h2 Теги
-  
   = render partial: 'tag_relations_form', locals: { ticket: @ticket }
   = render partial: 'ticket_tags/remote_form', locals: { ticket_tag: @ticket_tag }
 

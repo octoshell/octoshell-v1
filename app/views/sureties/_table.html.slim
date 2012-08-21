@@ -1,16 +1,19 @@
-table class="table table-bordered"
-  tr
-    th #
-    th = Organization.model_name.human
-    th = User.model_name.human
-    th = Surety.human_attribute_name(:state)
-    th
-  - sureties.each do |surety|
-    tr id="surety-#{surety.id}"
-      td = surety.id
-      td = link_to_organization surety.organization
-      td = link_to_user surety.user
-      td = surety.human_state_name
-      td
-        - if can? :show, surety
-          = link_to_surety surety
+- if sureties.any?
+  table class="table table-bordered"
+    tr
+      th #
+      th = Organization.model_name.human
+      th = User.model_name.human
+      th = Surety.human_attribute_name(:state)
+      th
+    - sureties.each do |surety|
+      tr id="surety-#{surety.id}"
+        td = surety.id
+        td = link_to_organization surety.organization
+        td = link_to_user surety.user
+        td = surety.human_state_name
+        td
+          - if can? :show, surety
+            = link_to_surety surety
+- else
+  p Нет поручительств

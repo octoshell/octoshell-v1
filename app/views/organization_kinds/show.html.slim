@@ -1,6 +1,8 @@
 - title @organization_kind.name
 
 div class="link-actions"
+  = link_to 'Новый тип организации', new_organization_kind_path, class: 'btn'
+  = " "
   = link_to 'Редактировать', [:edit, @organization_kind], class: 'btn'
   - if @organization_kind.can__close?
     = " "

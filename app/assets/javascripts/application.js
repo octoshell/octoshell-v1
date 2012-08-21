@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require underscore
-//= require twitter-dropdown
+//= require bootstrap
 //= require_tree .
 
 $(document).ready(function(){

@@ -1,7 +1,8 @@
-= form_for ticket, html: { id: 'tag_relations', data: { 'reload-url' => ticket_tag_relations_form_path(ticket) } } do |f|
+= form_for ticket, html: { id: 'tag_relations', class: 'form-inline', data: { 'reload-url' => ticket_tag_relations_form_path(ticket) } } do |f|
+  legend Теги
   = f.fields_for :ticket_tag_relations, ticket.ticket_tag_relations.active do |f|
-    span class="inline-checkbox"
-      = f.check_box :active
-      = f.label :active, f.object.ticket_tag.name
-  div
-    = f.submit class: 'btn btn-mini btn-success'
+      = f.label :active, class: 'checkbox' do
+        = f.object.ticket_tag.name
+        = f.check_box(:active)
+      = " "
+  = f.submit class: 'btn btn-small'

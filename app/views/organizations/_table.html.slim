@@ -6,8 +6,7 @@ table class="table table-bordered"
     th = Organization.human_attribute_name(:organization_kind)
     th = Organization.human_attribute_name(:state)
     th Активных проектов
-    - if can? :edit, :organizations
-      th
+    th
   - organizations.each do |organization|
     tr
       td = organization.id
@@ -16,5 +15,4 @@ table class="table table-bordered"
       td = organization.kind
       td = organization.human_state_name
       td = organization.projects.active.count
-      - if can? :edit, :organizations
-        td = link_to 'редактировать', edit_organization_path(organization)
+      td = link_to 'открыть', organization

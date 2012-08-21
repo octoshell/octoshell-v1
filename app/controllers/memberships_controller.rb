@@ -1,11 +1,14 @@
 class MembershipsController < ApplicationController
   before_filter :require_login
+  before_filter :setup_default_filter, only: :index
   
   def index
     if admin?
-      @memberships = Membership.all
+      @search = Membership.search(params[:search])
+      @memberships = @search.page(params[:page])
     else
-      @memberships = current_user.memberships
+      @search = current_user.memberships.search(params[:search])
+      @memberships = @search.page(params[:page])
     end
   end
   
@@ -66,5 +69,9 @@ private
     else
       (@membership && @membership.user_id != current_user.id) ? :dashboard : :profile
     end
+  end
+  
+  def setup_default_filter
+    params[:search] ||= { state_in: ['active'] }
   end
 end

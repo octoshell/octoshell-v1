@@ -385,6 +385,7 @@ ru:
         state: Состояние
       request:
         cluster: Кластер
+        cluster_id: Кластер
         project: Проект
         project_id: Проект
         hours: Процессоро-часы
@@ -407,9 +408,13 @@ ru:
       surety:
         state: Статус
         organization: Организация
+        organization_id: Организация
         description: Описание проекта
+        user: Пользователь
       membership:
         organization: Организация
+        organization_id: Организация
+        user: Пользователь
         state: Состояние
       cluster:
         name: Название
@@ -425,6 +430,7 @@ ru:
       ticket_tag:
         name: Название
         state: Состояние
+        merge_id: Тег для объединения
       cluster_user:
         state: Состояние
       account:

@@ -2,6 +2,8 @@
 
 - if admin?
   div class="link-actions"
+    = link_to 'Новая организация', new_organization_path, class: 'btn'
+    = " "
     = link_to 'Редактировать', [:edit, @organization], class: 'btn'
     = ' '
     = link_to 'Версии', [@organization, :versions], class: 'btn'
@@ -23,27 +25,23 @@ table class="table table-bordered"
     th = Organization.human_attribute_name(:organization_kind_id)
     td = link_to_organization_kind @organization.organization_kind
 
-h2 Проекты
+h3 Активные проекты
+p = link_to 'Новый проект', new_project_path
+= render partial: 'projects/table', locals: { projects: @organization.projects.active }
+p = link_to "Все проекты (#{@organization.projects.count})", projects_path(search: { state_in: Project.state_names, organization_id_eq: @organization.id })
 
-= link_to 'Добавить', new_project_path
+h3 Активные поручительства
+p = link_to 'Новое поручительство', new_project_path
+= render partial: 'sureties/table', locals: { sureties: @organization.sureties.active }
+p = link_to "Все поручительства (#{@organization.sureties.count})", sureties_path(search: { state_in: Surety.state_names, organization_id_eq: @organization.id })
 
-= render partial: 'projects/table', locals: { projects: @organization.projects }
-
-h2 Поручительства
-
-= link_to 'Добавить', new_surety_path
-
-= render partial: 'sureties/table', locals: { sureties: @organization.sureties }
-
-h2 Сотрудники
-
+h3 Активные сотрудники
 = link_to 'Добавить', new_membership_path
-
 p
   | Активных сотрудников: 
   strong #{@organization.memberships.active.count}
-
 = render partial: 'memberships/table', locals: { memberships: @organization.memberships }
+p = link_to "Все сотрудники (#{@organization.memberships.count})", memberships_path(search: { state_in: Membership.state_names, organization_id_eq: @organization.id })
 
 - if can? :merge, :organizations
   h2 Объединение

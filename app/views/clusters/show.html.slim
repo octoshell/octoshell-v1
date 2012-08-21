@@ -33,9 +33,10 @@ table class="table table-bordered"
 
 = render partial: 'projects/table', locals: { projects: @cluster.projects }
 
-h2 Заявки
+h3 Активные заявки
 
-= render partial: 'requests/list', locals: { requests: @cluster.requests }
+= render partial: 'requests/table', locals: { requests: @cluster.requests.active }
+p = link_to "Все заявки (#{@cluster.requests.count})", requests_path(search: { state_in: Request.state_names, cluster_id_eq: @cluster.id })
 
 h2 Поддержка
 
@@ -53,4 +54,8 @@ table class="table table-bordered"
     th Пользователей в поддержке
     td = @cluster.tickets.select('distinct tickets.user_id').count
 
-= render partial: 'tickets/table', locals: { tickets: @cluster.tickets }
+h3 Активные заявки
+
+= render partial: 'tickets/table', locals: { tickets: @cluster.tickets.active }
+
+p = link_to "Все заявки (#{@cluster.tickets.count})", tickets_path(search: { state_in: Ticket.state_names, cluster_id_eq: @cluster.id })

@@ -34,30 +34,22 @@ div class="row"
     - if can? :edit, @user
       p = link_to 'редактировать', edit_user_path(@user)
 
-h2 Поручительства
-
+h3 Поручительства
 = render partial: 'sureties/table', locals: { sureties: @user.sureties }
 
-h2 Места работы
-
+h3 Места работы
 = render partial: 'memberships/table', locals: { memberships: @user.memberships }
 
-h2 Проекты
-
+h3 Проекты
 = render partial: 'projects/table', locals: { projects: @user.projects }
 
-h2 Доступы к проектам
-
+h3 Доступы к проектам
 = render partial: 'accounts/table', locals: { accounts: @user.accounts }
 
-h2 Заявки
-
+h3 Заявки
 = render partial: 'requests/table', locals: { requests: @user.requests }
 
-h2 Публичные ключи
-
-div class="link-actions"
-  = link_to 'Новый публичный ключ', new_credential_path, class: 'btn'
-
+h3 Публичные ключи
+p = link_to 'Новый публичный ключ', new_credential_path
 = render partial: 'credentials/table', locals: { credentials: @user.credentials }
 
