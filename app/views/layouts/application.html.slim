@@ -26,7 +26,7 @@ html
               li = link_to t('pages.shared.login'), new_session_path
       div class="noprint"
         - if logged_in?
-          ul class="nav nav-pills"
+          ul class="nav nav-tabs"
             = render "shared/#{namespace}_menu"
         - flash.each do |type, message|
           - context = type == :alert ? 'alert-error' : 'alert-info'
