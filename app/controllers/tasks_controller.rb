@@ -1,8 +1,11 @@
 class TasksController < ApplicationController
   before_filter :require_login
   
+  before_filter :setup_default_filter, only: :index
+  
   def index
-    @tasks = Task.page(params[:page])
+    @search = Task.search(params[:search])
+    @tasks = @search.page(params[:page])
   end
   
   def show
@@ -35,5 +38,9 @@ private
   
   def namespace
     :admin
+  end
+  
+  def setup_default_filter
+    params[:search] ||= { state_in: ['pending'] }
   end
 end
