@@ -24,7 +24,11 @@
 
 div class="row"
   div class="span2"
-    div class="avatar" = image_tag 'default_avatar.png', size: '116x160'
+    div class="avatar"
+      - if @user.avatar?
+        = image_tag @user.avatar.url
+      - else
+        = image_tag 'default_avatar.png', size: '116x160'
   div class="span10"
     div class="page-header"
       h1 = @user.full_name

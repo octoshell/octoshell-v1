@@ -31,7 +31,7 @@ table class="table table-bordered"
     th Закрытых
     td = @cluster.projects.select('DISTINCT "projects"."id"').closed.count
 
-= render partial: 'projects/table', locals: { projects: @cluster.projects }
+= render partial: 'projects/table', locals: { projects: @cluster.projects.uniq }
 
 h3 Активные заявки
 

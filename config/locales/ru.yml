@@ -372,6 +372,7 @@ ru:
         full_name: ФИО
         admin: Права администратора
         state: Состояние
+        avatar: Фото
       project:
         organization: Главная организация
         name: Название

@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_paper_trail
   
+  has_attached_file :avatar
+  
   default_scope order("#{table_name}.id desc")
   
   authenticates_with_sorcery!
@@ -23,14 +25,16 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true, length: { minimum: 6 }, on: :create
   validates :password, confirmation: true, length: { minimum: 6 }, on: :update, if: :password?
   validates :email, uniqueness: true
+  validates_attachment :avatar, size: { in: 0..150.kilobytes }
   
   before_create :assign_token
   
   attr_accessible :first_name, :last_name, :middle_name, :email, :password,
-    :password_confirmation, :remember_me, :new_organization, :organization_id
+    :password_confirmation, :remember_me, :new_organization, :organization_id,
+    :avatar
   attr_accessible :first_name, :last_name, :middle_name, :email, :password,
     :password_confirmation, :remember_me, :new_organization, :organization_id,
-    :admin, as: :admin
+    :admin, :avatar, as: :admin
   
   scope :admins, where(admin: true)
   
