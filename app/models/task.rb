@@ -50,6 +50,7 @@ class Task < ActiveRecord::Base
         task.assign_command
       end
       Resque.enqueue TasksWorker, task.id
+      task
     end
   end
   

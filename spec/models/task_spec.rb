@@ -62,7 +62,7 @@ describe Task do
     end
     
     it 'should call continue resource procedure' do
-      task.resource.should_receive(:continue!).with(task.procedure)
+      task.resource.should_receive(:continue!).with(task.procedure, task)
       task.perform_callbacks!
     end
   end

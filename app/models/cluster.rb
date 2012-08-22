@@ -48,6 +48,6 @@ protected
   
   def continue_get_statistic(task)
     update_attribute :statistic, task.stdout
-    touch :statistic_updated_at
+    update_attribute :statistic_updated_at, task.updated_at
   end
 end

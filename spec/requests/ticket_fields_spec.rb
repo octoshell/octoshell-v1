@@ -53,6 +53,7 @@ describe 'Ticket Fields', js: true do
       visit ticket_field_path(ticket_field)
       click_link 'close'
       confirm_dialog
+      sleep 0.5
     end
     
     it 'should close ticket' do
