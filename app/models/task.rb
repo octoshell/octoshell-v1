@@ -54,6 +54,13 @@ class Task < ActiveRecord::Base
     end
   end
   
+  def self.human_resource_types
+    @human_resource_types ||= 
+      unscoped.select(:resource_type).uniq.map(&:resource_type).map do |klass|
+        [klass.constantize.model_name.human, klass]
+      end
+  end
+  
   def perform
     return unless pending?
     

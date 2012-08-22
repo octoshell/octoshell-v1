@@ -41,6 +41,10 @@ private
   end
   
   def setup_default_filter
-    params[:search] ||= { state_in: ['pending'] }
+    params[:search] ||= {
+      state_in: ['pending'],
+      procedure_in: Task::PROCEDURES,
+      resource_type_in: Task.human_resource_types.map(&:last)
+    }
   end
 end

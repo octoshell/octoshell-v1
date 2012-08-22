@@ -451,6 +451,7 @@ ru:
         name: Название
       task:
         resource: Создатель
+        resource_type: Тип создателя
         procedure: Процедура
         state: Состояние
         command: Комманда
