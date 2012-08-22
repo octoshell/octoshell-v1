@@ -20,8 +20,8 @@ role :app, domain
 role :web, domain
 role :db,  domain, :primary => true
 
-# set :whenever_command, "bundle exec whenever"
-# require "whenever/capistrano"
+set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano"
 
 namespace :deploy do
   desc "Restart Unicorn"

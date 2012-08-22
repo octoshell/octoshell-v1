@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_filter :require_login
   
   def index
-    @tasks = Task.order('id desc')
+    @tasks = Task.page(params[:page])
   end
   
   def show

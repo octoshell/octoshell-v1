@@ -22,6 +22,7 @@ gem 'therubyracer'
 gem 'yaml_db'
 gem 'meta_search'
 gem 'kaminari'
+gem 'whenever'
 
 group :test, :development do
   gem 'quiet_assets'

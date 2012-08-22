@@ -1,3 +1,5 @@
 - title 'Задачи'
 
+= paginate @tasks
 = render partial: 'tasks/table', locals: { tasks: @tasks }
+= paginate @tasks
