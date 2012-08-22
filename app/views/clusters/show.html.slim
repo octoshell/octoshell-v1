@@ -17,8 +17,16 @@ table class="table table-bordered"
     - if can? :index, :versions
       = " "
       = link_to 'Версии', [@cluster, :versions], class: 'btn'
+      
+- if admin?
+  h3 Статистика
+  
+  textarea disabled="disabled" class="public-key" rows="12"
+    = @cluster.statistic
+  - if @cluster.statistic_updated_at?
+    p Обновлено #{@cluster.statistic_updated_at.to_s(:long)}
 
-h2 Проекты
+h3 Проекты
 
 table class="table table-bordered"
   tr
@@ -38,7 +46,7 @@ h3 Активные заявки
 = render partial: 'requests/table', locals: { requests: @cluster.requests.active }
 p = link_to "Все заявки (#{@cluster.requests.count})", requests_path(search: { state_in: Request.state_names, cluster_id_eq: @cluster.id })
 
-h2 Поддержка
+h3 Поддержка
 
 table class="table table-bordered"
   tr

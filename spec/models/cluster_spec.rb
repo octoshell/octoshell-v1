@@ -20,6 +20,7 @@ describe Cluster do
   it { should validate_presence_of(:del_openkey) }
   it { should validate_presence_of(:block_user) }
   it { should validate_presence_of(:unblock_user) }
+  it { should validate_presence_of(:get_statistic) }
   
   # it { should allow_mass_assignment_of(:name) }
   # it { should allow_mass_assignment_of(:host) }

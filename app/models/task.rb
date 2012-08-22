@@ -10,6 +10,7 @@ class Task < ActiveRecord::Base
     del_user
     add_openkey
     del_openkey
+    get_statistic
   )
   
   belongs_to :resource, polymorphic: true
@@ -105,7 +106,7 @@ class Task < ActiveRecord::Base
     
     transaction do
       self.callbacks_performed = true
-      resource.continue!(procedure)
+      resource.continue!(procedure, self)
       save!
     end
   rescue StateMachine::InvalidTransition => e
@@ -131,6 +132,8 @@ private
       { user:       resource.cluster_user.project.username,
         host:       resource.cluster.host,
         public_key: resource.credential.public_key }
+    when :get_statistic then
+      { host: resource.host }
     end
   end
   
@@ -143,6 +146,6 @@ private
   end
   
   def succeed_command?
-    !(stdout? || stderr?)
+    !stderr?
   end
 end

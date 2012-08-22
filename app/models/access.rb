@@ -76,11 +76,11 @@ class Access < ActiveRecord::Base
   
 protected
   
-  def continue_add_openkey
+  def continue_add_openkey(task)
     complete_activation!
   end
   
-  def continue_del_openkey
+  def continue_del_openkey(task)
     complete_closure!
   end
 end

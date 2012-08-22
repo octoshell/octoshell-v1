@@ -3,9 +3,9 @@ module Models
     extend ActiveSupport::Concern
     
     # вызывет колбеки удачного продолжения процедуры
-    def continue!(procedure)
+    def continue!(procedure, task)
       method = "continue_#{procedure}"
-      send(method) if respond_to?(method)
+      send(method, task) if respond_to?(method)
     end
     
     # вызывет колбеки провального продолжения процедуры

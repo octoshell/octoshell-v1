@@ -20,6 +20,8 @@ ru:
         html: "<p>Активация <em>Доступа на кластер</em></p><p>Коллбеки переводят <em>Доступ на кластер</em> из состояния <b>Активируется</b> в состояние <b>Активен</b></p>"
       del_openkey:
         html: "<p>Закрытие <em>Доступа на кластер</em</p><p>Коллбеки переводят <em>Доступ на кластер</em> из состояния <b>Закрывается</b> в состояние <b>Закрыт</b></p>"
+      get_statistic:
+        html: "<p>Получение сводной статистики о кластере</p>"
   date:
     abbr_day_names:
     - Вс
@@ -430,6 +432,7 @@ ru:
         unblock_user: unblock_user
         add_openkey: add_openkey
         del_openkey: del_openkey
+        get_statistic: get_statistic
         state: Состояние
       ticket_tag:
         name: Название

@@ -160,19 +160,19 @@ class ClusterUser < ActiveRecord::Base
   
 protected
   
-  def continue_add_user
+  def continue_add_user(task)
     complete_activation!
   end
   
-  def continue_block_user
+  def continue_block_user(task)
     complete_pausing!
   end
   
-  def continue_unblock_user
+  def continue_unblock_user(task)
     complete_resuming!
   end
   
-  def continue_del_user
+  def continue_del_user(task)
     complete_closure!
   end
 end

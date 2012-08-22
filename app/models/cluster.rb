@@ -1,18 +1,22 @@
 class Cluster < ActiveRecord::Base
   has_paper_trail
   
+  include Models::Asynch
+  
   default_scope order("#{table_name}.name asc")
   
   has_many :requests
   has_many :cluster_users
   has_many :tickets
   has_many :projects, through: :requests
+  has_many :tasks, as: :resource
   
   validates :name, :host, :add_user, :del_user, :add_openkey,
-   :del_openkey, :block_user, :unblock_user, presence: true
+   :del_openkey, :block_user, :unblock_user, :get_statistic, presence: true
   
   attr_accessible :name, :host, :description, :add_user, :del_user,
-    :add_openkey, :del_openkey, :block_user, :unblock_user, as: :admin
+    :add_openkey, :del_openkey, :block_user, :unblock_user,
+    :get_statistic, as: :admin
   
   state_machine initial: :active do
     state :closed
@@ -34,5 +38,16 @@ class Cluster < ActiveRecord::Base
         request.close!
       end
     end
+  end
+  
+  def cluster
+    self
+  end
+  
+protected
+  
+  def continue_get_statistic(task)
+    update_attribute :statistic, task.stdout
+    touch :statistic_updated_at
   end
 end
