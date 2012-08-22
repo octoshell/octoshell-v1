@@ -54,6 +54,7 @@ h3 Заявки
 = render partial: 'requests/table', locals: { requests: @user.requests }
 
 h3 Публичные ключи
-p = link_to 'Новый публичный ключ', new_credential_path
+- if admin?
+  p = link_to 'Новый публичный ключ', new_credential_path
 = render partial: 'credentials/table', locals: { credentials: @user.credentials.active }
 p = link_to "Все публичные ключи (#{@user.credentials.count})", credentials_path(search: { state_in: Credential.state_names, user_id_eq: @user.id })
