@@ -83,7 +83,7 @@ class User < ActiveRecord::Base
   end
   
   def all_accounts
-    Account.where(project_id: project_ids)
+    Account.where(project_id: project_ids + owned_project_ids)
   end
   
   def new_organization=(attributes)

@@ -7,7 +7,7 @@
       th = Account.human_attribute_name(:state)
       th
     - accounts.each do |account|
-      tr
+      tr id="account-#{account.id}"
         td = account.id
         td = link_to_user account.user
         td = link_to_project account.project

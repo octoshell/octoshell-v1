@@ -86,10 +86,10 @@ class AccountsController < ApplicationController
     end
   end
   
-  def cancel
+  def close
     @account = find_account(params[:account_id])
-    authorize! :cancel, @account
-    if @account.cancel
+    authorize! :close, @account
+    if @account.close
       redirect_to @account
     else
       redirect_to_account_with_alert(@account)

@@ -55,7 +55,8 @@ describe Ability do
     it { should be_able_to(:create,            :tasks) }
     it { should be_able_to(:retry,             :tasks) }
     
-    it { should be_able_to(:show, :accounts) }
+    it { should be_able_to(:show,  :accounts) }
+    it { should be_able_to(:close, :accounts) }
     
     it { should be_able_to(:show,  :cluster_users) }
     it { should be_able_to(:index, :cluster_users) }
@@ -65,7 +66,7 @@ describe Ability do
     
     it { should be_able_to(:activate, :accounts) }
     it { should be_able_to(:decline,  :accounts) }
-    it { should be_able_to(:cancel,   :accounts) }
+    it { should be_able_to(:close,    :accounts) }
     it { should be_able_to(:invite,   :accounts) }
     it { should be_able_to(:create,   :accounts) }
     it { should be_able_to(:mailer,   :accounts) }
