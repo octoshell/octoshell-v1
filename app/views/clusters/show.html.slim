@@ -1,6 +1,6 @@
 - title "Кластер: #{@cluster.name}"
 
-table class="table table-bordered"
+table class="table table-bordered" id="cluster-#{@cluster.id}-detail"
   tr
     th class="span4" = Cluster.human_attribute_name(:state)
     td = @cluster.human_state_name
@@ -19,12 +19,13 @@ table class="table table-bordered"
       = link_to 'Версии', [@cluster, :versions], class: 'btn'
       
 - if admin?
-  h3 Статистика
+  div id="cluster-#{@cluster.id}-statistics"
+    h3 Статистика
   
-  textarea disabled="disabled" class="public-key" rows="12"
-    = @cluster.statistic
-  - if @cluster.statistic_updated_at?
-    p Обновлено #{@cluster.statistic_updated_at.to_s(:long)}
+    textarea disabled="disabled" class="public-key" rows="12"
+      = @cluster.statistic
+    - if @cluster.statistic_updated_at?
+      p Обновлено #{@cluster.statistic_updated_at.to_s(:long)}
 
 h3 Проекты
 

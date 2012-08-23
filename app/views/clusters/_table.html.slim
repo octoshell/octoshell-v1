@@ -8,7 +8,7 @@
       th = Cluster.human_attribute_name(:state)
       th
     - clusters.each do |cluster|
-      tr
+      tr id="cluster-#{cluster.id}"
         td = cluster.id
         td = link_to_cluster cluster
         td = cluster.host
