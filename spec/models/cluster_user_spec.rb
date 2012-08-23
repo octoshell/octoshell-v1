@@ -63,6 +63,16 @@ describe ClusterUser do
     end
   end
   
+  describe '#users' do
+    let!(:owner) { cluster_user.project.user }
+    let!(:invited) { create(:active_account, project: cluster_user.project).user }
+    
+    subject { cluster_user.users }
+    
+    it { should include(owner) }
+    it { should include(invited) }
+  end
+  
   describe '#processing?' do
     %w(activing pausing resuming closing).each do |state|
       it "#{state} should be processing" do

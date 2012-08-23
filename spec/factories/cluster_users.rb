@@ -14,14 +14,14 @@ FactoryGirl.define do
     
     factory 'active_cluster_user' do
       after(:create) do |cluster_user|
-        cluster_user.tasks.last.perform_callbacks!
+        cluster_user.tasks.first.perform_callbacks!
         cluster_user.reload
       end
     end
     
     factory 'pausing_cluster_user' do
       after(:create) do |cluster_user|
-        cluster_user.tasks.last.perform_callbacks!
+        cluster_user.tasks.first.perform_callbacks!
         cluster_user.reload
         cluster_user.pause!
       end

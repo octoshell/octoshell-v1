@@ -3,7 +3,7 @@ class ClusterUsersController < ApplicationController
   
   def index
     @search = ClusterUser.search(params[:search])
-    @clusters = @search.page(params[:page])
+    @cluster_users = @search.page(params[:page])
   end
   
   def show

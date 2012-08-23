@@ -94,6 +94,13 @@ class ClusterUser < ActiveRecord::Base
     end
   end
   
+  def users
+    users = []
+    users << project.user
+    users << project.accounts.active.map(&:user)
+    users.flatten.uniq
+  end
+  
   def processing?
     [:activing, :pausing, :resuming, :closing].include? state_name
   end

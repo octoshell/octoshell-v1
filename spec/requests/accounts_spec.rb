@@ -26,6 +26,17 @@ describe 'Accounts', js: true do
       end
     end
     
+    context 'as account owner' do
+      before do
+        login account.user
+        visit accounts_path
+      end
+      
+      it 'should show account' do
+        page.should have_css("#account-#{account.id}")
+      end
+    end
+    
     context 'as non authorized user' do
       before do
         visit account_path(account)
@@ -49,9 +60,20 @@ describe 'Accounts', js: true do
       end
     end
     
-    context 'as account owner' do
+    context 'as account project owner' do
       before do
         login account.project.user
+        visit account_path(account)
+      end
+      
+      it 'should show account' do
+        page.should have_css("#account-#{account.id}-detail")
+      end
+    end
+    
+    context 'as account owner' do
+      before do
+        login account.user
         visit account_path(account)
       end
       

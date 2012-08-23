@@ -55,7 +55,6 @@ private
   
   def block_closed_users
     if logged_in? && current_user.closed?
-      raise current_user.inspect
       logout
       raise CanCan::Unauthorized
     end

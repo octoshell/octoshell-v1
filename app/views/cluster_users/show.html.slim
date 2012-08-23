@@ -4,7 +4,7 @@
   div class="link-actions"
     = link_to 'Версии', [@cluster_user, :versions], class: 'btn'
 
-table class="table table-bordered"
+table class="table table-bordered" id="cluster-user-#{@cluster_user.id}-detail"
   tr
     th class="span4" = Project.model_name.human
     td = link_to_project @cluster_user.project

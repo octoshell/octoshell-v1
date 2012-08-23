@@ -49,7 +49,9 @@ class Ability
       
       can [:new, :index], :accounts
       can [:show, :activate, :decline, :close], :accounts, project_id: user.owned_project_ids
-      can :show, :cluster_users, project_id: user.project_ids
+      can :show, :cluster_users do |cluster_user|
+        cluster_user.users.include? user
+      end
       
       # sured user
       if user.sured?

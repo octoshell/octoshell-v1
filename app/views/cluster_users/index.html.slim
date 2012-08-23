@@ -6,3 +6,7 @@
   = f.input :state_in, collection: ClusterUser.human_state_names, input_html: { multiple: true }
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
+
+= paginate @cluster_users
+= render partial: 'table', locals: { cluster_users: @cluster_users }
+= paginate @cluster_users
