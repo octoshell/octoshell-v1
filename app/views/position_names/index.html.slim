@@ -10,7 +10,7 @@ div id="organizations"
       th = PositionName.human_attribute_name(:name)
       th
     - @position_names.each do |position_name|
-      tr
+      tr id="position-name-#{position_name.id}"
         td = position_name.id
         td = position_name.name
         td
