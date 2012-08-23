@@ -38,66 +38,82 @@ module ApplicationHelper
   end
   
   def link_to_cluster(cluster)
+    return unless cluster
     link_to cluster.name, cluster
   end
   
   def link_to_user(user)
+    return unless user
     link_to user.full_name, user
   end
   
   def link_to_project(project)
+    return unless project
     link_to project.name, project
   end
   
   def link_to_surety(surety)
+    return unless surety
     link_to 'открыть', surety
   end
   
   def link_to_organization(organization)
+    return unless organization
     link_to organization.name, organization
   end
   
   def link_to_organization_kind(organization_kind)
+    return unless organization_kind
     link_to organization_kind.name, organization_kind
   end
   
   def link_to_membership(membership)
+    return unless membership
     link_to 'открыть', membership
   end
   
   def link_to_credential(credential)
+    return unless credential
     link_to credential.name, credential
   end
   
   def link_to_ticket_template(ticket_template)
+    return unless ticket_template
     link_to ticket_template.subject, ticket_template
   end
   
   def link_to_ticket_question(ticket_question)
+    return unless ticket_question
     link_to ticket_question.question, ticket_question
   end
   
   def link_to_ticket_field(ticket_field)
+    return unless ticket_field
     link_to ticket_field.name, ticket_field
   end
   
   def link_to_task(task)
+    return unless task
     link_to 'открыть', task
   end
   
   def link_to_cluster_user(cluster_user)
-    link_to cluster_user.project.username, cluster_user
+    return unless cluster_user
+    link_to "@#{cluster_user.project.username}", cluster_user
   end
   
   def link_to_task_resource(task)
+    return unless task
     link_to task.resource.class.model_name.human, task.resource
   end
   
   def link_to_ticket(ticket)
+    return unless ticket
     link_to ticket.subject, ticket
   end
   
   def link_to_ticket_tag(ticket_tag)
+    return unless ticket_tag
     link_to ticket_tag.name, ticket_tag
   end
   

@@ -4,7 +4,7 @@
   div class="link-actions"
     = link_to 'Версии', [@access, :versions], class: 'btn'
 
-table class="table table-bordered"
+table class="table table-bordered" id="access-#{@access.id}-detail"
   tr
     th class="span4" = User.model_name.human
     td = link_to_credential @access.credential
