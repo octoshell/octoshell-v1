@@ -3,6 +3,24 @@ require 'spec_helper'
 describe 'Clusters', js: true do
   let!(:cluster) { create(:cluster) }
   
+  describe 'creating' do
+    context 'as admin' do
+      let!(:cluster) { build(:cluster) }
+      
+      before do
+        login create(:admin_user)
+        visit new_cluster_path
+        fill_in 'Name', with: cluster.name
+        fill_in 'Host', with: cluster.host
+        click_button 'Create Cluster'
+      end
+      
+      it 'should create cluster' do
+        Cluster.find_by_name(cluster.name).should be
+      end
+    end
+  end
+  
   describe 'listing' do
     context 'as admin' do
       before do

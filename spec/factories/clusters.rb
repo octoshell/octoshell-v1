@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :cluster do
-    name 'Cluster 1'
+    sequence(:name) { |n| "Cluster #{n}" }
     host '0.0.0.0'
     
     factory :closed_cluster do
