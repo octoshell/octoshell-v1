@@ -10,3 +10,6 @@ def current_user
 rescue Capybara::ElementNotFound
 end
 
+def logout
+  click_link I18n.t('pages.shared.logout')
+end
