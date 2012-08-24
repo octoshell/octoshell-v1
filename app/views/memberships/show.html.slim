@@ -11,7 +11,7 @@
     - if can? :index, :versions
       = link_to 'Версии', [@membership, :versions], class: 'btn'
 
-table class="table table-bordered"
+table class="table table-bordered" id="membership-#{@membership.id}-detail"
   tr
     th = Organization.model_name.human
     td = link_to_organization @membership.organization

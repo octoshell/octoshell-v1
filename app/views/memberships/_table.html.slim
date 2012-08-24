@@ -7,7 +7,7 @@
       td = Membership.human_attribute_name(:state)
       th
     - memberships.each do |membership|
-      tr
+      tr id="membership-#{membership.id}"
         td = membership.id
         td = link_to_organization membership.organization
         td = link_to_user membership.user
