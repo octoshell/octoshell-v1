@@ -7,6 +7,7 @@ describe Task do
   it { should be }
   
   it { should belong_to(:resource) }
+  it { should have_many(:tasks) }
   it { should validate_presence_of(:resource) }
   it { should validate_presence_of(:command) }
   it { should validate_presence_of(:procedure) }
@@ -41,10 +42,11 @@ describe Task do
   end
   
   describe '#retry!' do
+    let(:base_task) { create(:task) }
     let(:task) { build(:task) }
     
     it 'should save task' do
-      task.retry!
+      task.retry!(base_task.id)
       should be_persisted
     end
     

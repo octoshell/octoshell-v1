@@ -12,16 +12,21 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
   
-  def retry
-    @task = Task.find(params[:task_id]).retry
+  def new
+    @base_task = Task.find(params[:task_id])
+    @task = Task.new do |task|
+      task.command = @base_task.command
+      task.resource = @base_task.resource
+      task.procedure = @base_task.procedure
+    end
   end
   
-  def create
-    @task = Task.new(params[:task], as_role)
-    if @task.retry!
+  def retry
+    @task = Task.find(params[:task_id])
+    if @task.retry(params[:task], as_role)
       redirect_to @task
     else
-      render :retry
+      render :new
     end
   end
   

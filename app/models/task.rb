@@ -14,6 +14,8 @@ class Task < ActiveRecord::Base
   )
   
   belongs_to :resource, polymorphic: true
+  belongs_to :task
+  has_many :tasks
   
   validates :resource, :command, :procedure, presence: true
   validates :procedure_string, inclusion: { in: PROCEDURES }
@@ -79,17 +81,10 @@ class Task < ActiveRecord::Base
     self.comment = e.to_s
     failure!
   end
-  
-  def retry
-    self.class.new do |task|
-      task.procedure = procedure
-      task.resource  = resource
-      task.command   = command
-    end
-  end
-  
-  def retry!
-    save and Resque.enqueue(TasksWorker, id)
+    
+  def retry(attributes, options = {})
+    task = tasks.build(attributes, options)
+    task.save and Resque.enqueue(TasksWorker, id)
   end
   
   def procedure_string

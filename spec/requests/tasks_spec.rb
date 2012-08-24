@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'spec_helper'
 
 describe 'Tasks', js: true do
@@ -30,6 +31,21 @@ describe 'Tasks', js: true do
       subject { task }
       
       its(:callbacks_performed) { should be_true } 
+    end
+  end
+  
+  describe 'retry' do
+    let!(:base_task) { create(:task) }
+    
+    before do
+      login create(:admin_user)
+      visit task_path(base_task)
+      click_link 'Повторить задание'
+      click_button 'Create Task'
+    end
+    
+    it 'should create new task' do
+      base_task.tasks.count.should == 1
     end
   end
 end

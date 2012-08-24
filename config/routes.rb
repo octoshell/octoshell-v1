@@ -113,7 +113,8 @@ MSU::Application.routes.draw do
   
   # tasks
   resources :tasks, only: [:show, :create, :index] do
-    get :retry
+    get :retry, action: :new
+    post :retry
     put :perform_callbacks
     resources :versions, only: [:index, :show], resource: 'Task'
   end
