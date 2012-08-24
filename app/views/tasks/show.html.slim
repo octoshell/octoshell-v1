@@ -7,9 +7,12 @@ div class="link-actions"
   - if @task.can_perform_callbacks?
     = link_to t('call_callbacks'), task_perform_callbacks_path(@task), class: 'btn', method: :put
     = " "
-  = link_to 'Повторить задание', task_retry_path(@task), class: 'btn'
+  = link_to 'Повторить задание', task_retry_path(@task), class: 'btn btn-warning'
   = " "
   = link_to 'Версии', [@task, :versions], class: 'btn'
+  - if @task.can__resolve?
+    = " "
+    = link_to Task.human_state_event_name(:_resolve), task_resolve_path(@task), class: 'btn btn-success', method: :put
 
 - if @task.family
   h3 Связанные задания

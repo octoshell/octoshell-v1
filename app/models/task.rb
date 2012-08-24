@@ -39,9 +39,13 @@ class Task < ActiveRecord::Base
     event :_failure do
       transition pending: :failed
     end
+    
+    event :_resolve do
+      transition failed: :successed
+    end
   end
   
-  define_defaults_events :success, :failure
+  define_defaults_events :success, :failure, :resolve
   
   define_state_machine_scopes
   

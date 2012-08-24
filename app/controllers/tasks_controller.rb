@@ -30,6 +30,12 @@ class TasksController < ApplicationController
     end
   end
   
+  def resolve
+    @task = Task.find(params[:task_id])
+    @task.resolve
+    redirect_to @task
+  end
+  
   def perform_callbacks
     @task = Task.find(params[:task_id])
     if @task.perform_callbacks!

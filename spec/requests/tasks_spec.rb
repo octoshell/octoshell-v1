@@ -48,4 +48,18 @@ describe 'Tasks', js: true do
       base_task.tasks.count.should == 1
     end
   end
+  
+  describe 'resolve' do
+    let!(:task) { create(:failed_task) }
+    
+    before do
+      login create(:admin_user)
+      visit task_path(task)
+      click_link 'resolve'
+    end
+    
+    it 'should resolve task' do
+      task.reload.should be_successed
+    end
+  end
 end

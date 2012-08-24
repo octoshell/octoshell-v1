@@ -641,6 +641,7 @@ ru:
             failed: Ошибка
           events:
             _force_success: Пропустить задачу
+            _resolve: Пометить выполненой
       access:
         state:
           states:

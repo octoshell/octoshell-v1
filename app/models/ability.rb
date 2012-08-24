@@ -79,7 +79,7 @@ class Ability
         
         can [:show, :index], :cluster_users
         
-        can [:index, :show, :perform_callbacks, :create, :retry], :tasks
+        can [:index, :show, :perform_callbacks, :create, :retry, :resolve], :tasks
         
         can [:new, :create, :edit, :update, :show, :index, :close], :ticket_questions
         
