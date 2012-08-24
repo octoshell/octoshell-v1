@@ -1,8 +1,5 @@
-- if can? :create, :projects
-  div class="link-actions"
-    = link_to 'Новый проект', new_project_path, class: 'btn'
-- else
-  p У вас нет доступа для создания проекта. Чтобы его получить вам нужно:
-  ul
-    - current_user.project_steps.each do |step|
-      li = step
+div class="link-actions"
+  = link_to 'Новый проект', new_project_path, class: "btn #{disabled(can? :create, :projects)}"
+
+- if cannot? :create, :projects
+  = render partial: 'shared/steps', locals: { steps: current_user.project_steps, title: 'У вас нет доступа для создания проекта. Чтобы его получить вам нужно:' }

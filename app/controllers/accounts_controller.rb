@@ -3,6 +3,7 @@ class AccountsController < ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
+    authorize! :index, :accounts
     if current_user.admin?
       @search = Account.search(params[:search])
       @accounts = @search.page(params[:page])
@@ -13,6 +14,7 @@ class AccountsController < ApplicationController
   end
   
   def new
+    authorize! :new, :accounts
     @account = current_user.accounts.build
     @invite = current_user.accounts.build
     @mailer = current_user.accounts.build

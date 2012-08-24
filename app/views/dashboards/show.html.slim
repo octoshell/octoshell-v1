@@ -2,11 +2,7 @@
 
 - if @user.start_steps.any?
   h2 Начало работы
-  p Для начала работы с системой вам нужно:
-  ul
-    - @user.start_steps.each do |step|
-      li = step
-
+  = render partial: 'shared/steps', locals: { steps: @user.start_steps, title: "Для начала работы с системой вам нужно:" }
 - elsif !@user.projects.any?
   p
     | Вы можете #{link_to 'создать проект', new_project_path} или #{link_to 'запросить доступ', new_account_path} к существующему

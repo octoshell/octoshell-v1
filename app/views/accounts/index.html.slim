@@ -1,7 +1,10 @@
 - title 'Доступы к проектам'
 
 div class="link-actions"
-  = link_to 'Новый доступ', new_account_path, class: "btn"
+  = link_to 'Новый доступ', new_account_path, class: "btn #{disabled(can? :new, :accounts)}"
+
+- if cannot?(:new, :accounts)
+  = render partial: 'shared/steps', locals: { steps: current_user.project_steps, title: "Для того чтобы создать новый проект вам нужно:" }
 
 = simple_form_for @search, url: accounts_path, method: :get, html: { class: 'form-horizontal' } do |f|
   = f.input :state_in, collection: Account.human_state_names, input_html: { multiple: true }

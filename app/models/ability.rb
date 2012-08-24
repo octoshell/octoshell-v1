@@ -47,7 +47,7 @@ class Ability
       
       can [:edit, :update], :memberships, user_id: user.id
       
-      can [:new, :index], :accounts
+      can :index, :accounts
       can [:show, :activate, :decline, :close], :accounts, project_id: user.owned_project_ids
       can :show, :cluster_users do |cluster_user|
         cluster_user.users.include? user
@@ -85,11 +85,9 @@ class Ability
         
         can [:index, :show, :new, :create, :edit, :update, :close], :ticket_fields
         
-        can :show, :accounts
-        
         can [:show, :close], :credentials
         
-        can [:activate, :decline, :close, :invite, :create, :mailer], :accounts
+        can [:show, :activate, :decline, :close, :invite, :create, :mailer], :accounts
         
         can [:show, :edit, :update, :new, :create, :close], :projects
         

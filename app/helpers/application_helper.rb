@@ -139,4 +139,8 @@ module ApplicationHelper
       output
     end
   end
+  
+  def disabled(condition)
+    'disabled' unless condition
+  end
 end

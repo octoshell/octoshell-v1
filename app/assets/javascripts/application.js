@@ -62,4 +62,6 @@ $(document).ready(function(){
     window.open(url, '_blank')
     return false
   })
+  
+  $('a.disabled').on('click', function(){ return false })
 });
