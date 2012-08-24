@@ -26,37 +26,7 @@ describe Task do
       task.perform
     end
   end
-  
-  describe '#retry' do
-    subject { task.retry }
     
-    it 'should return new task' do
-      should be_a_kind_of(Task)
-    end
-    
-    it { should be_new_record }
-    
-    its(:command)   { should == task.command }
-    its(:procedure) { should == task.procedure }
-    its(:resource)  { should == task.resource }
-  end
-  
-  describe '#retry!' do
-    let(:base_task) { create(:task) }
-    let(:task) { build(:task) }
-    
-    it 'should save task' do
-      task.retry!(base_task.id)
-      should be_persisted
-    end
-    
-    it 'should add task to resque' do
-      pending 'works but test failed'
-      Resque.should_receive(:enqueue).with(TasksWorker, task.id)
-      task.retry!
-    end
-  end
-  
   describe '#perform_callbacks' do
     it 'should succeed task' do
       task.perform_callbacks!
