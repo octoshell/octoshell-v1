@@ -335,6 +335,7 @@ ru:
       ticket_question: Вопрос к заявке
       ticket_field: Дополнительное поле к заявке
       ticket_tag: Тег
+      task: Задание
     errors:
       models:
         account:

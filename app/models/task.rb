@@ -63,6 +63,10 @@ class Task < ActiveRecord::Base
       end
   end
   
+  def family
+    task ? task.tasks : (tasks.any? ? tasks : nil)
+  end
+  
   def perform
     return unless pending?
     

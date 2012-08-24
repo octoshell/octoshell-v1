@@ -11,6 +11,22 @@ div class="link-actions"
   = " "
   = link_to 'Версии', [@task, :versions], class: 'btn'
 
+- if @task.family
+  h3 Связанные задания
+  table class="table table-bordered"
+    tr
+      th #
+      th = Task.model_name.human
+      th = Task.human_attribute_name(:state)
+      th = Task.human_attribute_name(:callbacks_performed)
+    - @task.family.each do |task|
+      tr
+        td = task.id
+        td = link_to_task task
+        td = task.human_state_name
+        td = task.callbacks_performed ? 'Да' : 'Нет'
+      
+
 table class="table table-bordered"
   tr
     th class="span3" = Task.human_attribute_name(:resource)

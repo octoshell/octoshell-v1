@@ -94,7 +94,7 @@ module ApplicationHelper
   
   def link_to_task(task)
     return unless task
-    link_to 'открыть', task
+    link_to "Задание ##{task.id}", task
   end
   
   def link_to_cluster_user(cluster_user)
