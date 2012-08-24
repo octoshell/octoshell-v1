@@ -572,7 +572,7 @@ ru:
           events:
             _activate: Активировать
             _decline: Отказать
-            _cancel: Отменить
+            _close: Закрыть
       ticket:
         state:
           states:
