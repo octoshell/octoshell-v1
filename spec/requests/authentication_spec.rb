@@ -61,4 +61,16 @@ describe 'Authentication', js: true do
       end
     end
   end
+  
+  describe 'authentication by token' do
+    let!(:user) { create(:user) }
+    
+    before do
+      visit dashboard_path(token: user.token)
+    end
+    
+    it 'should authorize current user' do
+      current_user.should be
+    end
+  end
 end
