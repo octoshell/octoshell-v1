@@ -68,7 +68,7 @@ class Task < ActiveRecord::Base
   end
   
   def family
-    task ? task.tasks : (tasks.any? ? tasks : nil)
+    task ? task.tasks + [task] - [self] : (tasks.any? ? tasks : nil)
   end
   
   def perform
@@ -92,7 +92,10 @@ class Task < ActiveRecord::Base
     
   def retry(attributes, options = {})
     task = tasks.build(attributes, options)
-    task.save and Resque.enqueue(TasksWorker, id)
+    if task.save
+      Resque.enqueue(TasksWorker, task.id)
+      task
+    end
   end
   
   def procedure_string
