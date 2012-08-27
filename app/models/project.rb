@@ -1,4 +1,5 @@
 class Project < ActiveRecord::Base
+  CLUSTER_USER_TYPES = %w(account project)
   has_paper_trail
   
   default_scope order("#{table_name}.name asc")
@@ -13,13 +14,16 @@ class Project < ActiveRecord::Base
   validates :name, uniqueness: true
   validates :user, :name, :description, :organization, presence: true
   validates :organization, inclusion: { in: proc(&:allowed_organizations) }
+  validates :username, presence: true, on: :update
+  validates :cluster_user_type, inclusion: { in: CLUSTER_USER_TYPES }
   
   attr_accessible :name, :requests_attributes, :description, :organization_id
   attr_accessible :name, :requests_attributes, :description, :organization_id,
-    :user_id, as: :admin
+    :user_id, :cluster_user_type, :username, as: :admin
   
   accepts_nested_attributes_for :requests
   
+  after_create :assign_username
   after_create :activate_accounts
   
   state_machine initial: :active do
@@ -49,10 +53,6 @@ class Project < ActiveRecord::Base
     requests.active.exists?
   end
   
-  def username
-    "project_#{id}"
-  end
-  
   def clusters
     Cluster.joins(:requests).where(requests: { state: 'active', project_id: id })
   end
@@ -73,5 +73,11 @@ private
   
   def activate_accounts
     accounts.where(user_id: user_id).each(&:activate)
+    true
+  end
+  
+  def assign_username
+    update_attribute :username, "project_#{id}" unless username?
+    true
   end
 end

@@ -19,6 +19,10 @@ table class="table table-bordered"
   tr
     th = Project.human_attribute_name(:state)
     td = @project.human_state_name
+  - if admin?
+    tr
+      th = Project.human_attribute_name(:username)
+      td = @project.username
 
 h3 Доступы
 

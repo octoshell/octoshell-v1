@@ -15,12 +15,6 @@ table class="table table-bordered" id="cluster-user-#{@cluster_user.id}-detail"
     th = ClusterUser.human_attribute_name(:state)
     td = @cluster_user.human_state_name
 
-h3 Как подключиться
-
-pre
-  code
-    | ssh #{@cluster_user.project.username}@#{@cluster_user.cluster.host}
-
 - if can? :index, :tasks
   h2 Задания
 

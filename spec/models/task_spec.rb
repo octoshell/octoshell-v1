@@ -13,10 +13,10 @@ describe Task do
   it { should validate_presence_of(:procedure) }
   
   describe '#setup' do
-    let(:access) { create(:access) }
+    let(:access) { create(:cluster_user) }
     
     it 'should create new task' do
-      access.tasks.setup(:add_openkey).should be_true
+      access.tasks.setup(:add_user).should be_true
     end
   end
   

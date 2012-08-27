@@ -98,6 +98,21 @@ class AccountsController < ApplicationController
     end
   end
   
+  def edit
+    @account = find_account(params[:id])
+    authorize! :edit, @account
+  end
+  
+  def update
+    @account = find_account(params[:id])
+    authorize! :update, @account
+    if @account.update_attributes(params[:account], as_role)
+      redirect_to @account
+    else
+      render :update
+    end
+  end
+  
 private
 
   def find_account(id)

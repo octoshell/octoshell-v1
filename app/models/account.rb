@@ -1,8 +1,4 @@
 # Модель доступа человека к проекту
-# `activate` - активирует доступ к проекту если это возможно
-# (есть подтверждение и место работы). Создает доступы к кластерам
-# `close` - отменяет доступ к проекту. Пытается удалить доступы к кластерам
-# `decline` - отказать в доступе к проекту
 class Account < ActiveRecord::Base
   has_paper_trail
   
@@ -21,10 +17,13 @@ class Account < ActiveRecord::Base
   validates :project_state_name, inclusion: { in: [:active] }, if: :active_or_pending?
   validates :user_state_name, inclusion: { in: [:sured] }, if: :active?
   validates :user_state_name, exclusion: { in: [:closed] }, if: :active?
+  validates :username, presence: true, on: :update
   validate :emails_validator, if: :raw_emails
   
   attr_accessible :project_id, :raw_emails
-  attr_accessible :project_id, :raw_emails, :user_id, as: :admin
+  attr_accessible :project_id, :raw_emails, :user_id, :username, as: :admin
+  
+  after_create :assign_username
   
   state_machine initial: :pending do
     state :pending
@@ -124,5 +123,15 @@ private
         errors.add(:raw_emails, :invalid_email, email: email)
       end
     end
+  end
+  
+  def assign_username
+    username = 
+      if project.cluster_user_type == 'account'
+        "account_#{id}"
+      else
+        project.username
+      end
+    update_attribute :username, username
   end
 end

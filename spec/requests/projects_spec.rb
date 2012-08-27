@@ -14,7 +14,7 @@ describe 'Projects', js: true do
         select project.organization.name, from: 'Organization'
         fill_in 'Name',        with: project.name
         fill_in 'Description', with: project.description
-        select cluster.name, from: 'Cluster'
+        select cluster.name, from: 'project_requests_attributes_0_cluster_id'
         fill_in 'Hours', with: 1
         fill_in 'Size',  with: 1
         click_button 'Create Project'

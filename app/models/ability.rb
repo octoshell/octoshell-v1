@@ -87,7 +87,7 @@ class Ability
         
         can [:show, :close], :credentials
         
-        can [:show, :activate, :decline, :close, :invite, :create, :mailer], :accounts
+        can [:show, :activate, :decline, :close, :invite, :create, :mailer, :edit, :update], :accounts
         
         can [:show, :edit, :update, :new, :create, :close], :projects
         

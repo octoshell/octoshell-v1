@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120824091450) do
+ActiveRecord::Schema.define(:version => 20120827134130) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20120824091450) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "state"
+    t.string   "username"
   end
 
   add_index "accounts", ["project_id"], :name => "index_accounts_on_project_id"
@@ -50,20 +51,21 @@ ActiveRecord::Schema.define(:version => 20120824091450) do
 
   create_table "clusters", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                                                                            :null => false
-    t.datetime "updated_at",                                                                            :null => false
+    t.datetime "created_at",                                                                                               :null => false
+    t.datetime "updated_at",                                                                                               :null => false
     t.string   "host"
     t.string   "description"
     t.string   "state"
     t.text     "add_user",             :default => "user=%user%\nhost=%host%"
     t.text     "del_user",             :default => "user=%user%\nhost=%host%"
-    t.text     "add_openkey",          :default => "user=%user%\nhost=%host%\npublic_key=%public_key%"
-    t.text     "del_openkey",          :default => "user=%user%\nhost=%host%\npublic_key=%public_key%"
+    t.text     "add_openkey",          :default => "project=%project%\nuser=%user%\nhost=%host%\npublic_key=%public_key%"
+    t.text     "del_openkey",          :default => "project=%project%\nuser=%user%\nhost=%host%\npublic_key=%public_key%"
     t.text     "block_user",           :default => "user=%user%\nhost=%host%"
     t.text     "unblock_user",         :default => "user=%user%\nhost=%host%"
     t.text     "statistic"
     t.text     "get_statistic",        :default => "host=%host%"
     t.datetime "statistic_updated_at"
+    t.string   "cluster_user_type",    :default => "account"
   end
 
   add_index "clusters", ["state"], :name => "index_clusters_on_state"
@@ -142,12 +144,14 @@ ActiveRecord::Schema.define(:version => 20120824091450) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.integer  "user_id"
     t.string   "state"
     t.text     "description"
     t.integer  "organization_id"
+    t.string   "cluster_user_type", :default => "account"
+    t.string   "username"
   end
 
   add_index "projects", ["organization_id"], :name => "index_projects_on_organization_id"

@@ -384,6 +384,8 @@ ru:
         user_id: Руководитель
         organization_id: Главная организация
         state: Состояние
+        cluster_user_type: Тип пользователя на кластере
+        username: Логин (на кластере)
       organization_kind:
         name: Название
         state: Состояние
@@ -448,6 +450,7 @@ ru:
         state: Состояние
         user: Пользователь
         raw_emails: Emails
+        username: Логин (на кластере)
       position_name:
         name: Название
       task:

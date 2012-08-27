@@ -140,10 +140,13 @@ private
   def procedure_replacement
     case procedure.to_sym
     when :add_user, :del_user, :block_user, :unblock_user then
-      { user: resource.project.username,
+      { project: resource.project.username,
         host: resource.cluster.host }
     when :add_openkey, :del_openkey then
-      { user:       resource.cluster_user.project.username,
+      username = resource.credential.user.accounts.
+        find_by_project_id!(resource.cluster_user.project_id).username
+      { project:    resource.cluster_user.project.username,
+        user:       username,
         host:       resource.cluster.host,
         public_key: resource.credential.public_key }
     when :get_statistic then
