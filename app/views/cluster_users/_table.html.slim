@@ -5,6 +5,8 @@
       th = Project.model_name.human
       th = Cluster.model_name.human
       th = ClusterUser.human_attribute_name(:state)
+      - unless admin?
+        th Подключение
       th
     - cluster_users.each do |cluster_user|
       tr id="cluster-user-#{cluster_user.id}"
@@ -12,6 +14,12 @@
         td = link_to_project cluster_user.project
         td = link_to_cluster cluster_user.cluster
         td = cluster_user.human_state_name
-        td = link_to_cluster_user cluster_user
+        - unless admin?
+          td
+            - if account = current_user.accounts.find_by_project_id(cluster_user.project_id)
+              | #{account.username}@#{cluster_user.cluster.host}
+            - else
+              | Нет доступа к проекту
+        td = link_to 'открыть', cluster_user
 - else
   p Нет пользователей на кластере
