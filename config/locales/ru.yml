@@ -423,6 +423,7 @@ ru:
       page:
         name: Название
         url: url
+        body: Текст
       membership:
         organization: Организация
         organization_id: Организация
