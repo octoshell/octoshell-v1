@@ -1,5 +1,64 @@
 
 ---
+accounts:
+  columns:
+  - id
+  - user_id
+  - project_id
+  - created_at
+  - updated_at
+  - state
+  - username
+  records: 
+  - - '1'
+    - '1'
+    - '1'
+    - '2012-08-21 11:45:49.667293'
+    - '2012-08-28 07:02:33.096415'
+    - active
+    - account_1
+
+---
+accesses:
+  columns:
+  - id
+  - credential_id
+  - state
+  - created_at
+  - updated_at
+  - cluster_user_id
+  records: 
+  - - '1'
+    - '2'
+    - active
+    - '2012-08-21 12:10:46.697631'
+    - '2012-08-21 12:10:47.006593'
+    - '1'
+  - - '2'
+    - '1'
+    - active
+    - '2012-08-21 12:10:46.733585'
+    - '2012-08-21 12:10:47.271802'
+    - '1'
+
+---
+cluster_users:
+  columns:
+  - id
+  - project_id
+  - state
+  - cluster_id
+  - created_at
+  - updated_at
+  records: 
+  - - '1'
+    - '1'
+    - active
+    - '1'
+    - '2012-08-21 12:06:34.938125'
+    - '2012-08-21 12:28:48.161723'
+
+---
 versions:
   columns:
   - id
@@ -1776,23 +1835,176 @@ versions:
     - '2012-08-21 15:02:56.624737'
     - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nactivation_token:\n-
       keq3wxapTzTzSRH49yqp\n- \nactivation_state:\n- pending\n- active\n"
+  - - '129'
+    - Project
+    - '1'
+    - update
+    - 
+    - ! "---\nname: Octoshell\ncreated_at: 2012-08-21 11:45:49.654544000 Z\nupdated_at:
+      2012-08-21 11:45:49.654544000 Z\nuser_id: 1\nstate: active\ndescription: octoshell
+      || octoshell\norganization_id: 1\ncluster_user_type: account\nusername: \nid:
+      1\n"
+    - '2012-08-28 07:02:21.799652'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      project_1\n"
+  - - '130'
+    - Account
+    - '1'
+    - update
+    - 
+    - ! "---\nuser_id: 1\nproject_id: 1\ncreated_at: 2012-08-21 11:45:49.667293000
+      Z\nupdated_at: 2012-08-21 11:45:49.685165000 Z\nstate: active\nusername: \nid:
+      1\n"
+    - '2012-08-28 07:02:33.09769'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      account_1\n"
+  - - '131'
+    - Cluster
+    - '1'
+    - update
+    - '2'
+    - ! "---\nname: Ломоносов\ncreated_at: 2012-08-21 08:35:00.526027000 Z\nupdated_at:
+      2012-08-21 12:07:51.706836000 Z\nhost: lomonosov.parallel.ru\ndescription: ''\nstate:
+      active\nadd_user: ! \"user=%user%\\r\\nhost=%host%\"\ndel_user: ! \"user=%user%\\r\\nhost=%host%\"\nadd_openkey:
+      ! \"user=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\"\ndel_openkey:
+      ! \"user=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\"\nblock_user:
+      ! \"user=%user%\\r\\nhost=%host%\"\nunblock_user: ! \"user=%user%\\r\\nhost=%host%\"\nstatistic:
+      \nget_statistic: host=%host%\nstatistic_updated_at: \ncluster_user_type: account\nid:
+      1\n"
+    - '2012-08-28 08:02:38.396981'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
 
----
-accounts:
-  columns:
-  - id
-  - user_id
-  - project_id
-  - created_at
-  - updated_at
-  - state
-  records: 
-  - - '1'
-    - '1'
-    - '1'
-    - '2012-08-21 11:45:49.667293'
-    - '2012-08-21 11:45:49.685165'
-    - active
+      add_user:
+
+      - ! "user=%user%\r\nhost=%host%"
+
+      - ! "project=%project%\r\nhost=%host%"
+
+      del_user:
+
+      - ! "user=%user%\r\nhost=%host%"
+
+      - ! "project=%project%\r\nhost=%host%"
+
+      block_user:
+
+      - ! "user=%user%\r\nhost=%host%"
+
+      - ! "project=%project%\r\nhost=%host%"
+
+      unblock_user:
+
+      - ! "user=%user%\r\nhost=%host%"
+
+      - ! "project=%project%\r\nhost=%host%"
+
+      add_openkey:
+
+      - ! "user=%user%\r\nhost=%host%\r\npublic_key=%public_key%"
+
+      - ! "project=%project%\r\nuser=%user%\r\nhost=%host%\r\npublic_key=%public_key%"
+
+      del_openkey:
+
+      - ! "user=%user%\r\nhost=%host%\r\npublic_key=%public_key%"
+
+      - ! "project=%project%\r\nuser=%user%\r\nhost=%host%\r\npublic_key=%public_key%"
+
+'
+  - - '132'
+    - User
+    - '4'
+    - create
+    - f
+    - 
+    - '2012-08-28 08:03:54.481801'
+    - 
+  - - '133'
+    - User
+    - '5'
+    - create
+    - f
+    - 
+    - '2012-08-28 08:04:15.812177'
+    - 
+  - - '134'
+    - User
+    - '4'
+    - update
+    - 
+    - ! "---\nemail: serg@parallel.ru\ncrypted_password: $2a$10$3fpzZ/NBjr9/fEh2wEMu9.xZoL1uVHLnFgVqwv8CSbDuVkURiP4Uu\nsalt:
+      udncVgooLxmnFy8HUsVR\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      pending\nactivation_token: JSuSxP8sEscr3CoSuiaE\nactivation_token_expires_at:
+      \nfirst_name: Sergey\nlast_name: Zhumatiy\nmiddle_name: ''\ndeleted_at: \ncreated_at:
+      2012-08-28 08:03:54.456710000 Z\nupdated_at: 2012-08-28 08:03:54.456710000 Z\nadmin:
+      false\nstate: active\ntoken: bf213d523c133c0c3a4b9df9da060afe45b1545a\navatar_file_name:
+      \navatar_content_type: \navatar_file_size: \navatar_updated_at: \nid: 4\n"
+    - '2012-08-28 08:04:36.924141'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nactivation_token:\n-
+      JSuSxP8sEscr3CoSuiaE\n- \nactivation_state:\n- pending\n- active\n"
+  - - '135'
+    - User
+    - '5'
+    - update
+    - 
+    - ! "---\nemail: dan@parallel.ru\ncrypted_password: $2a$10$VuKPTACyi/6x3qqAbkS/NuLzI34kyIfuS.rK6/FS0AM9fuLgMxToa\nsalt:
+      PY2Tyay5Ssd1sKqeyqEy\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      pending\nactivation_token: g4a1scGS3Mpc7rc9fRnF\nactivation_token_expires_at:
+      \nfirst_name: Dmitry\nlast_name: Nikitenko\nmiddle_name: ''\ndeleted_at: \ncreated_at:
+      2012-08-28 08:04:15.810051000 Z\nupdated_at: 2012-08-28 08:04:15.810051000 Z\nadmin:
+      false\nstate: active\ntoken: d8ef06d3176fa9e8e1d7104ba1e2d8b970dce7ad\navatar_file_name:
+      \navatar_content_type: \navatar_file_size: \navatar_updated_at: \nid: 5\n"
+    - '2012-08-28 08:04:36.943061'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nactivation_token:\n-
+      g4a1scGS3Mpc7rc9fRnF\n- \nactivation_state:\n- pending\n- active\n"
+  - - '136'
+    - User
+    - '5'
+    - update
+    - '2'
+    - ! "---\nemail: dan@parallel.ru\ncrypted_password: $2a$10$VuKPTACyi/6x3qqAbkS/NuLzI34kyIfuS.rK6/FS0AM9fuLgMxToa\nsalt:
+      PY2Tyay5Ssd1sKqeyqEy\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      active\nactivation_token: \nactivation_token_expires_at: \nfirst_name: Dmitry\nlast_name:
+      Nikitenko\nmiddle_name: ''\ndeleted_at: \ncreated_at: 2012-08-28 08:04:15.810051000
+      Z\nupdated_at: 2012-08-28 08:04:36.941902000 Z\nadmin: false\nstate: active\ntoken:
+      d8ef06d3176fa9e8e1d7104ba1e2d8b970dce7ad\navatar_file_name: \navatar_content_type:
+      \navatar_file_size: \navatar_updated_at: \nid: 5\n"
+    - '2012-08-28 08:05:06.939938'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      admin:
+
+      - false
+
+      - true
+
+'
+  - - '137'
+    - User
+    - '4'
+    - update
+    - '2'
+    - ! "---\nemail: serg@parallel.ru\ncrypted_password: $2a$10$3fpzZ/NBjr9/fEh2wEMu9.xZoL1uVHLnFgVqwv8CSbDuVkURiP4Uu\nsalt:
+      udncVgooLxmnFy8HUsVR\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      active\nactivation_token: \nactivation_token_expires_at: \nfirst_name: Sergey\nlast_name:
+      Zhumatiy\nmiddle_name: ''\ndeleted_at: \ncreated_at: 2012-08-28 08:03:54.456710000
+      Z\nupdated_at: 2012-08-28 08:04:36.916356000 Z\nadmin: false\nstate: active\ntoken:
+      bf213d523c133c0c3a4b9df9da060afe45b1545a\navatar_file_name: \navatar_content_type:
+      \navatar_file_size: \navatar_updated_at: \nid: 4\n"
+    - '2012-08-28 08:05:20.896713'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      admin:
+
+      - false
+
+      - true
+
+'
 
 ---
 requests:
@@ -1962,6 +2174,56 @@ users:
     - 
     - 
     - 
+  - - '4'
+    - serg@parallel.ru
+    - $2a$10$3fpzZ/NBjr9/fEh2wEMu9.xZoL1uVHLnFgVqwv8CSbDuVkURiP4Uu
+    - udncVgooLxmnFy8HUsVR
+    - 
+    - 
+    - 
+    - 
+    - 
+    - active
+    - 
+    - 
+    - Sergey
+    - Zhumatiy
+    - ''
+    - 
+    - '2012-08-28 08:03:54.45671'
+    - '2012-08-28 08:05:20.895452'
+    - true
+    - active
+    - bf213d523c133c0c3a4b9df9da060afe45b1545a
+    - 
+    - 
+    - 
+    - 
+  - - '5'
+    - dan@parallel.ru
+    - $2a$10$VuKPTACyi/6x3qqAbkS/NuLzI34kyIfuS.rK6/FS0AM9fuLgMxToa
+    - PY2Tyay5Ssd1sKqeyqEy
+    - 
+    - 
+    - 
+    - 
+    - 
+    - active
+    - 
+    - 
+    - Dmitry
+    - Nikitenko
+    - ''
+    - 
+    - '2012-08-28 08:04:15.810051'
+    - '2012-08-28 08:05:06.938137'
+    - true
+    - active
+    - d8ef06d3176fa9e8e1d7104ba1e2d8b970dce7ad
+    - 
+    - 
+    - 
+    - 
 
 ---
 position_names:
@@ -2006,29 +2268,6 @@ sureties:
     - '2012-08-21 11:38:29.72647'
     - '2012-08-21 11:45:00.839115'
     - 
-
----
-accesses:
-  columns:
-  - id
-  - credential_id
-  - state
-  - created_at
-  - updated_at
-  - cluster_user_id
-  records: 
-  - - '1'
-    - '2'
-    - active
-    - '2012-08-21 12:10:46.697631'
-    - '2012-08-21 12:10:47.006593'
-    - '1'
-  - - '2'
-    - '1'
-    - active
-    - '2012-08-21 12:10:46.733585'
-    - '2012-08-21 12:10:47.271802'
-    - '1'
 
 ---
 memberships:
@@ -2112,32 +2351,19 @@ projects:
   - state
   - description
   - organization_id
+  - cluster_user_type
+  - username
   records: 
   - - '1'
     - Octoshell
     - '2012-08-21 11:45:49.654544'
-    - '2012-08-21 11:45:49.654544'
+    - '2012-08-28 07:02:21.792513'
     - '1'
     - active
     - octoshell || octoshell
     - '1'
-
----
-cluster_users:
-  columns:
-  - id
-  - project_id
-  - state
-  - cluster_id
-  - created_at
-  - updated_at
-  records: 
-  - - '1'
-    - '1'
-    - active
-    - '1'
-    - '2012-08-21 12:06:34.938125'
-    - '2012-08-21 12:28:48.161723'
+    - account
+    - project_1
 
 ---
 tasks:
@@ -2156,6 +2382,7 @@ tasks:
   - event
   - comment
   - callbacks_performed
+  - task_id
   records: 
   - - '1'
     - ! "user=%user\r\n%host=\"lomonosov.parallel.ru\""
@@ -2173,6 +2400,7 @@ tasks:
     - 
     - 
     - false
+    - 
   - - '2'
     - ! "user=\"project_1\"\r\nhost=\"lomonosov.parallel.ru\""
     - ''
@@ -2187,6 +2415,7 @@ tasks:
     - 
     - 
     - true
+    - 
   - - '3'
     - ! "user=\"project_1\"\r\nhost=\"lomonosov.parallel.ru\"\r\npublic_key=\"ssh-rsa
       AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
@@ -2203,6 +2432,7 @@ tasks:
     - 
     - 
     - true
+    - 
   - - '4'
     - ! "user=\"project_1\"\r\nhost=\"lomonosov.parallel.ru\"\r\npublic_key=\"atata\""
     - ''
@@ -2217,6 +2447,7 @@ tasks:
     - 
     - 
     - true
+    - 
   - - '5'
     - ! "user=\"project_1\"\r\nhost=\"lomonosov.parallel.ru\""
     - ''
@@ -2231,6 +2462,7 @@ tasks:
     - 
     - 
     - true
+    - 
   - - '6'
     - ! "user=\"project_1\"\r\nhost=\"lomonosov.parallel.ru\""
     - ''
@@ -2245,6 +2477,7 @@ tasks:
     - 
     - 
     - true
+    - 
 
 ---
 replies:
@@ -2651,20 +2884,22 @@ clusters:
   - statistic
   - get_statistic
   - statistic_updated_at
+  - cluster_user_type
   records: 
   - - '1'
     - Ломоносов
     - '2012-08-21 08:35:00.526027'
-    - '2012-08-21 12:07:51.706836'
+    - '2012-08-28 08:02:38.394613'
     - lomonosov.parallel.ru
     - ''
     - active
-    - ! "user=%user%\r\nhost=%host%"
-    - ! "user=%user%\r\nhost=%host%"
-    - ! "user=%user%\r\nhost=%host%\r\npublic_key=%public_key%"
-    - ! "user=%user%\r\nhost=%host%\r\npublic_key=%public_key%"
-    - ! "user=%user%\r\nhost=%host%"
-    - ! "user=%user%\r\nhost=%host%"
+    - ! "project=%project%\r\nhost=%host%"
+    - ! "project=%project%\r\nhost=%host%"
+    - ! "project=%project%\r\nuser=%user%\r\nhost=%host%\r\npublic_key=%public_key%"
+    - ! "project=%project%\r\nuser=%user%\r\nhost=%host%\r\npublic_key=%public_key%"
+    - ! "project=%project%\r\nhost=%host%"
+    - ! "project=%project%\r\nhost=%host%"
     - 
     - host=%host%
     - 
+    - account
