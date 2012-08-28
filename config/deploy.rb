@@ -40,6 +40,8 @@ namespace :deploy do
 
     run "rm -rf #{latest_release}/public/uploads"
     run "ln -s #{deploy_to}/shared/uploads #{latest_release}/public/uploads"
+    
+    run "ln -s #{deploy_to}/shared/wiki.git #{latest_release}/db"
   end
 end
 

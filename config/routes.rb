@@ -176,6 +176,8 @@ MSU::Application.routes.draw do
     put :close
     resources :versions, only: [:index, :show], resource: 'TicketTag'
   end
+  
+  resources :pages
 
   root to: 'application#dashboard'
   

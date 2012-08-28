@@ -22,6 +22,9 @@ shared_examples 'all users' do
 end
 
 shared_examples 'basic user' do
+  it { should be_able_to(:index, :pages) }
+  it { should be_able_to(:show, :pages) }
+  
   it { should be_able_to(:show, :profiles) }
   it { should be_able_to(:edit, :profiles) }
   it { should be_able_to(:update, :profiles) }

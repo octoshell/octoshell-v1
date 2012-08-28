@@ -44,6 +44,12 @@ describe Ability do
     it_behaves_like 'all users'
     it_behaves_like 'basic user'
     
+    it { should be_able_to(:new,     :pages) }
+    it { should be_able_to(:create,  :pages) }
+    it { should be_able_to(:edit,    :pages) }
+    it { should be_able_to(:update,  :pages) }
+    it { should be_able_to(:destroy, :pages) }
+    
     it { should be_able_to(:access, :admins) }
     
     it { should be_able_to(:show, :accesses) }

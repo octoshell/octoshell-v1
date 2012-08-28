@@ -15,6 +15,8 @@ class Ability
     if user
       can :show, :support
       
+      can [:show, :index], :pages
+      
       can [:index, :new, :create, :show, :closed, :continue], :tickets
       can :resolve, :tickets do |ticket|
         (ticket.user_id == user.id) && ticket.can__resolve?
@@ -70,6 +72,8 @@ class Ability
       
       if user.admin?
         can :access, :admins
+        
+        can [:new, :create, :edit, :update, :destroy], :pages
         
         can :close, :tickets, can__close?: true
         
