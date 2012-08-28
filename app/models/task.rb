@@ -144,7 +144,7 @@ private
         host: resource.cluster.host }
     when :add_openkey, :del_openkey then
       username = resource.credential.user.accounts.
-        find_by_project_id!(resource.cluster_user.project_id).username
+        find_by_project_id(resource.cluster_user.project_id).try(:username)
       { project:    resource.cluster_user.project.username,
         user:       username,
         host:       resource.cluster.host,
