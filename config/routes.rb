@@ -177,7 +177,11 @@ MSU::Application.routes.draw do
     resources :versions, only: [:index, :show], resource: 'TicketTag'
   end
   
+  # pages
   resources :pages
+  
+  # wiki urls
+  resources :wiki_urls, only: [:create, :update, :destroy]
 
   root to: 'application#dashboard'
   

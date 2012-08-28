@@ -118,6 +118,8 @@ class Ability
         can [:index, :show], :versions
         
         can [:edit, :update, :tag_relations_form], :tickets
+        
+        can [:create, :update, :destroy], :wiki_urls
       end
     end
   end

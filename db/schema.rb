@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120828135427) do
+ActiveRecord::Schema.define(:version => 20120828142248) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -386,5 +386,13 @@ ActiveRecord::Schema.define(:version => 20120828135427) do
   end
 
   add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
+
+  create_table "wiki_urls", :force => true do |t|
+    t.integer "page_id"
+    t.string  "url"
+  end
+
+  add_index "wiki_urls", ["page_id"], :name => "index_wiki_urls_on_page_id"
+  add_index "wiki_urls", ["url"], :name => "index_wiki_urls_on_url"
 
 end

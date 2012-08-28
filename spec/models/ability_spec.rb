@@ -178,5 +178,9 @@ describe Ability do
     it { should be_able_to(:edit,   :ticket_tags) }
     it { should be_able_to(:update, :ticket_tags) }
     it { should be_able_to(:close,  :ticket_tags) }
+    
+    it { should be_able_to(:create, :wiki_urls) }
+    it { should be_able_to(:update, :wiki_urls) }
+    it { should be_able_to(:destroy, :wiki_urls) }
   end
 end

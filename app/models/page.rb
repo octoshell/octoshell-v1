@@ -3,6 +3,8 @@ class Page < ActiveRecord::Base
   WIKI   = Rails.root.join("db", "wiki.git")
   COMMIT = { message: 'commit', name: 'Admin' }
   
+  has_many :wiki_urls
+  
   attr_accessor :body
   
   before_create  :create_page

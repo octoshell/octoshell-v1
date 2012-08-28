@@ -424,6 +424,8 @@ ru:
         name: Название
         url: url
         body: Текст
+      wiki_url:
+        url: URL
       membership:
         organization: Организация
         organization_id: Организация
