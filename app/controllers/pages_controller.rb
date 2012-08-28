@@ -29,6 +29,7 @@ class PagesController < ApplicationController
   
   def edit
     @page = find_page(params[:id])
+    @wiki_urls = @page.wiki_urls.to_a
     @wiki_url = @page.wiki_urls.build
   end
   
