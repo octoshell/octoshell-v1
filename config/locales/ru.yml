@@ -420,6 +420,9 @@ ru:
         organization_id: Организация
         description: Описание проекта
         user: Пользователь
+      page:
+        name: Название
+        url: url
       membership:
         organization: Организация
         organization_id: Организация
