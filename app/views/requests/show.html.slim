@@ -66,6 +66,6 @@ div class="request"
       td id="request-#{@request.id}-status" = @request.human_state_name
 
 - if admin?
-  h2 Пользователи на кластере
+  h2 Проекты на кластере
   = render partial: 'cluster_users/table', locals: { cluster_users: @request.cluster_users }
   
