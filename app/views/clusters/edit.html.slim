@@ -11,7 +11,7 @@ h3 Дополнительные поля
       th
     - @cluster_fields.each do |cluster_field|
       tr id="cluster-field-#{cluster_field.id}"
-        td = link_to cluster_field.name, cluster_field
+        td = cluster_field.name
         td = link_to "Удалить", cluster_field, class: 'btn btn-small btn-danger', method: :delete, data: { confirm: "Вы уверены?" }
 - else
   p Нет дополнительных полей
