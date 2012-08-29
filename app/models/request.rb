@@ -7,6 +7,7 @@ class Request < ActiveRecord::Base
   delegate :state_name, to: :cluster, prefix: true, allow_nil: true
   delegate :state_name, to: :user, prefix: true, allow_nil: true
   
+  has_many :request_properties
   belongs_to :project, inverse_of: :requests
   belongs_to :cluster
   belongs_to :user
@@ -21,7 +22,11 @@ class Request < ActiveRecord::Base
   validates :project_state_name, inclusion: { in: [:active] }, on: :create
   
   attr_accessible :hours, :cluster_id, :project_id, :size
-  attr_accessible :hours, :cluster_id, :project_id, :user_id, :size, as: :admin
+  attr_accessible :hours, :cluster_id, :project_id, :user_id, :size, :request_properties_attributes, as: :admin
+  
+  accepts_nested_attributes_for :request_properties
+  
+  after_create :create_request_properties
   
   scope :last_pending, where(state: 'pending').order('id desc')
   
@@ -69,5 +74,15 @@ class Request < ActiveRecord::Base
   def cluster_users
     conditions = { project_id: project_id, cluster_id: cluster_id }
     ClusterUser.where(conditions)
+  end
+  
+private
+  
+  def create_request_properties
+    cluster.cluster_fields.each do |cluster_field|
+      request_properties.create! do |request_property|
+        request_property.name = cluster_field.name
+      end
+    end
   end
 end

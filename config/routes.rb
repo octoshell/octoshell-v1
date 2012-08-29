@@ -52,7 +52,7 @@ MSU::Application.routes.draw do
   end
   
   # requests
-  resources :requests, only: [:new, :create, :index, :show] do
+  resources :requests, only: [:new, :create, :index, :show, :edit, :update] do
     put :activate
     put :decline
     put :close

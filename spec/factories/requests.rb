@@ -19,5 +19,8 @@ FactoryGirl.define do
         request.close!
       end
     end
+    
+    factory :pending_request do
+    end
   end
 end

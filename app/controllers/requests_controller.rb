@@ -37,6 +37,22 @@ class RequestsController < ApplicationController
     end
   end
   
+  def edit
+    @request = find_request(params[:id])
+    @projects = @request.allowed_projects
+  end
+  
+  def update
+    @request = find_request(params[:id])
+    @projects = @request.allowed_projects
+    if @request.update_attributes(params[:request], as_role)
+      redirect_to @request
+    else
+      @projects = @request.allowed_projects
+      render :edit
+    end
+  end
+  
   def show
     @request = find_request(params[:id])
     authorize! :show, @request

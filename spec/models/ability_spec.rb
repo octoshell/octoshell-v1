@@ -101,6 +101,8 @@ describe Ability do
     it { should be_able_to(:activate, :requests) }
     it { should be_able_to(:decline,  :requests) }
     it { should be_able_to(:close,    :requests) }
+    it { should be_able_to(:edit,     :requests) }
+    it { should be_able_to(:update,   :requests) }
     
     it { should be_able_to(:index,    :sureties) }
     it { should be_able_to(:show,     :sureties) }

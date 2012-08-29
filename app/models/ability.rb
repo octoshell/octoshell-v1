@@ -99,7 +99,7 @@ class Ability
         
         can [:admin, :edit, :update, :close], :users
         
-        can [:index, :new, :create, :show, :activate, :decline, :close], :requests
+        can [:index, :new, :create, :show, :activate, :decline, :close, :edit, :update], :requests
         
         can [:index, :show, :activate, :decline, :close, :find], :sureties
         

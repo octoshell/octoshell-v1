@@ -1,0 +1,12 @@
+= simple_form_for @request, html: { class: 'form-horizontal' } do |f|
+  = f.association :user, label_method: :full_name, collection: User.sured, disabled: f.object.persisted? if admin?
+  = f.association :project, collection: @projects, hint: link_to('Новый проект', new_project_path), disabled: f.object.persisted?
+  = f.association :cluster, collection: Cluster.active, disabled: f.object.persisted?
+  = f.input :hours
+  = f.input :size, hint: 'Более 50ти обговаривается отдельно'
+  - if f.object.persisted?
+    = f.fields_for :request_properties do |f|
+      = f.input :value, label: f.object.name
+      
+  div class="form-actions"
+    = f.button :submit, class: 'btn-primary'

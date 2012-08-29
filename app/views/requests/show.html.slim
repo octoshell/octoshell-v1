@@ -2,6 +2,8 @@
 
 - if admin?
   div class="link-actions"
+    = link_to 'Редактировать', [:edit, @request], class: 'btn'
+    = " "
     - if @request.pending?
       = link_to Request.human_state_event_name(:_activate), request_activate_path(@request), class: 'btn btn-success', method: :put
       = " "
@@ -64,6 +66,13 @@ div class="request"
     tr
       th = Request.human_attribute_name(:state)
       td id="request-#{@request.id}-status" = @request.human_state_name
+    - if @request.request_properties.any?
+      tr
+        th colspan="2" class="lead" Дополнительные параметры
+    - @request.request_properties.each do |request_property|
+      tr
+        th = request_property.name
+        td = request_property.value
 
 - if admin?
   h2 Проекты на кластере

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe 'Requests' do
-  context 'as authorized user', js: true do
+describe 'Requests', js: true do
+  context 'as authorized user' do
     let!(:user) { create(:sured_user) }
     let!(:project) { create(:project, user: user) }
     let!(:cluster) { create(:cluster) }
@@ -123,6 +123,22 @@ describe 'Requests' do
         within "#cluster-user-#{request.cluster_users.last.id}" do
           page.should have_content('pausing')
         end
+      end
+    end
+    
+    context 'updating' do
+      let!(:request) { create(:pending_request) }
+      let!(:request_property) { create(:request_property, name: 'Foo', request: request) }
+      
+      before do
+        login create(:admin_user)
+        visit edit_request_path(request)
+        fill_in 'Foo', with: 'Moo'
+        click_button 'Update Request'
+      end
+      
+      it 'should update request property' do
+        request_property.reload.value.should == 'Moo'
       end
     end
   end

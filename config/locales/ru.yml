@@ -484,6 +484,8 @@ ru:
         project_id: Проект
         cluster: Кластер
         cluster_id: Кластер
+      cluster_field:
+        name: Название
       reply:
         message: Сообщение
         attachment: Файл
