@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120828142248) do
+ActiveRecord::Schema.define(:version => 20120829062910) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -37,6 +37,13 @@ ActiveRecord::Schema.define(:version => 20120828142248) do
   add_index "accounts", ["state"], :name => "index_accounts_on_state"
   add_index "accounts", ["user_id", "project_id"], :name => "index_accounts_on_user_id_and_project_id", :unique => true
   add_index "accounts", ["user_id"], :name => "index_accounts_on_user_id"
+
+  create_table "cluster_fields", :force => true do |t|
+    t.integer "cluster_id"
+    t.string  "name"
+  end
+
+  add_index "cluster_fields", ["cluster_id"], :name => "index_cluster_fields_on_cluster_id"
 
   create_table "cluster_users", :force => true do |t|
     t.integer  "project_id"
@@ -181,6 +188,14 @@ ActiveRecord::Schema.define(:version => 20120828142248) do
 
   add_index "replies", ["ticket_id"], :name => "index_replies_on_ticket_id"
   add_index "replies", ["user_id"], :name => "index_replies_on_user_id"
+
+  create_table "request_properties", :force => true do |t|
+    t.string  "name"
+    t.string  "value"
+    t.integer "request_id"
+  end
+
+  add_index "request_properties", ["request_id"], :name => "index_request_properties_on_request_id"
 
   create_table "requests", :force => true do |t|
     t.integer  "project_id"
