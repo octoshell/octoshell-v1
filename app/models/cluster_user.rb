@@ -10,10 +10,11 @@ class ClusterUser < ActiveRecord::Base
   
   belongs_to :cluster
   belongs_to :project
+  belongs_to :request # last request
   has_many :tasks, as: :resource
   has_many :accesses
   
-  validates :cluster, :project, presence: true
+  validates :cluster, :project, :request, presence: true
   
   after_create :activate!, unless: :skip_activation
   
@@ -71,14 +72,18 @@ class ClusterUser < ActiveRecord::Base
   define_state_machine_scopes
   
   class << self
-    def activate_for(project_id, cluster_id)
+    def activate_for(project_id, cluster_id, request_id)
       conditions = { project_id: project_id, cluster_id: cluster_id }
       if cluster_user = non_closed.where(conditions).first
-        cluster_user.activate!
+        transaction do
+          cluster_user.update_attribute(:request_id, request_id)
+          cluster_user.activate!
+        end
       else
         create! do |cluster_user|
           cluster_user.project_id = project_id
           cluster_user.cluster_id = cluster_id
+          cluster_user.request_id = request_id
         end
       end
     end

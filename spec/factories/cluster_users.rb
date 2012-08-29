@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :cluster_user do
     project
     cluster
+    request
     
     factory 'pending_cluster_user' do
       before(:create) do |cluster_user|

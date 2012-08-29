@@ -63,7 +63,7 @@ class Request < ActiveRecord::Base
   def activate!
     transaction do
       _activate!
-      ClusterUser.activate_for(project_id, cluster_id)
+      ClusterUser.activate_for(project_id, cluster_id, id)
     end
   end
   
@@ -74,6 +74,20 @@ class Request < ActiveRecord::Base
   def cluster_users
     conditions = { project_id: project_id, cluster_id: cluster_id }
     ClusterUser.where(conditions)
+  end
+  
+  def task_attributes
+    attributes = { hours: hours, size: size }
+    
+    if request_properties.any?
+      properties =
+        Hash[request_properties.map do |property|
+          [property.name.to_sym, property.value]
+        end]
+      attributes.merge! properties
+    end
+    
+    attributes
   end
   
 private

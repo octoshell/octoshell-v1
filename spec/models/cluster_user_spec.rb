@@ -6,17 +6,20 @@ describe ClusterUser do
   
   it { should belong_to(:project) }
   it { should belong_to(:cluster) }
+  it { should belong_to(:request) }
   it { should have_many(:tasks) }
   it { should have_many(:accesses) }
   
   it { should validate_presence_of(:project) }
   it { should validate_presence_of(:cluster) }
+  it { should validate_presence_of(:request) }
   
   it { should be_pending }
   
   describe '.activate_for' do
-    let!(:project) { create(:project) }
-    let!(:cluster) { create(:cluster) }
+    let!(:request) { create(:request) }
+    let!(:project) { request.project }
+    let!(:cluster) { request.cluster }
     
     context 'if non closed cluster user exists' do
       let!(:cluster_user) do
@@ -24,17 +27,19 @@ describe ClusterUser do
       end
       
       it 'should create new cluster user' do
-        ClusterUser.activate_for(project.id, cluster.id)
+        ClusterUser.activate_for(project.id, cluster.id, request.id)
         conditions = { project_id: project.id, cluster_id: cluster.id }
         ClusterUser.where(conditions).count.should == 1
+        ClusterUser.where(conditions).first.request.should == request
       end
     end
     
     context 'if cluster user not exists' do
       it 'should create new cluster user' do
-        ClusterUser.activate_for(project.id, cluster.id)
+        ClusterUser.activate_for(project.id, cluster.id, request.id)
         conditions = { project_id: project.id, cluster_id: cluster.id }
         ClusterUser.where(conditions).count.should == 1
+        ClusterUser.where(conditions).first.request.should == request
       end
     end
   end

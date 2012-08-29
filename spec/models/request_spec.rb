@@ -40,6 +40,18 @@ describe Request do
     request.should have(1).errors_on(:project_state_name)
   end
   
+  describe '#task_attributes', focus: true do
+    before do
+      create(:request_property, request: request, name: 'foo', value: 'bar')
+    end
+    
+    subject { request.task_attributes }
+    
+    it { should be_a_kind_of(Hash) }
+    
+    it { should == { foo: 'bar', hours: request.hours, size: request.size } }
+  end
+  
   describe 'validate project on create' do
     let(:request) { build(:request) }
     
@@ -94,7 +106,7 @@ describe Request do
   
   describe '#activate' do
     it 'should try to activate cluster user' do
-      args = [request.project_id, request.cluster_id]
+      args = [request.project_id, request.cluster_id, request.id]
       ClusterUser.should_receive(:activate_for).with(*args).once
       request.activate
     end
