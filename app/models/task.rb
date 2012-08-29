@@ -140,17 +140,22 @@ private
   def procedure_replacement
     case procedure.to_sym
     when :add_user, :unblock_user, :del_user, :block_user then
+      # resource is cluster_user
       resource.request.task_attributes.reverse_merge(
         project: resource.project.username,
         host:    resource.cluster.host
       )
     when :add_openkey, :del_openkey then
+      # resource is access
       username = resource.credential.user.accounts.
         find_by_project_id(resource.cluster_user.project_id).try(:username)
-      { project:    resource.cluster_user.project.username,
+      
+      resource.cluster_user.request.task_attributes.reverse_merge(
+        project:    resource.cluster_user.project.username,
         user:       username,
         host:       resource.cluster.host,
-        public_key: resource.credential.public_key }
+        public_key: resource.credential.public_key
+      )
     when :get_statistic then
       { host: resource.host }
     end
