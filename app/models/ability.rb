@@ -120,6 +120,8 @@ class Ability
         can [:edit, :update, :tag_relations_form], :tickets
         
         can [:create, :update, :destroy], :wiki_urls
+        
+        can [:create, :update, :destroy], :cluster_fields
       end
     end
   end

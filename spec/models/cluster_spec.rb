@@ -11,6 +11,7 @@ describe Cluster do
   it { should have_many(:requests) }
   it { should have_many(:cluster_users) }
   it { should have_many(:tickets) }
+  it { should have_many(:cluster_fields) }
   
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:host) }

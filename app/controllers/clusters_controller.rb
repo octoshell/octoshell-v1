@@ -26,6 +26,8 @@ class ClustersController < ApplicationController
   
   def edit
     @cluster = find_cluster(params[:id])
+    @cluster_fields = @cluster.cluster_fields.to_a
+    @cluster_field = @cluster.cluster_fields.build
   end
   
   def update

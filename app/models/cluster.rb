@@ -10,6 +10,7 @@ class Cluster < ActiveRecord::Base
   has_many :tickets
   has_many :projects, through: :requests
   has_many :tasks, as: :resource
+  has_many :cluster_fields
   
   validates :name, :host, :add_user, :del_user, :add_openkey,
    :del_openkey, :block_user, :unblock_user, :get_statistic, presence: true
