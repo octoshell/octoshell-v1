@@ -23,7 +23,7 @@ gem 'meta_search'
 gem 'kaminari'
 gem 'whenever'
 gem 'redcarpet', '1.17.2'
-gem 'gollum'
+gem 'gollum', github: 'github/gollum'
 
 group :test, :development do
   gem 'quiet_assets'

@@ -1,4 +1,21 @@
 GIT
+  remote: git://github.com/github/gollum.git
+  revision: 881590ab37750305f49c1e8c9a905eb5acb367fd
+  specs:
+    gollum (2.1.7)
+      github-markdown
+      github-markup (>= 0.7.0, < 1.0.0)
+      grit (~> 2.5.0)
+      mustache (>= 0.11.2, < 1.0.0)
+      nokogiri (~> 1.4)
+      posix-spawn (~> 0.3.0)
+      pygments.rb (~> 0.2.0)
+      sanitize (~> 2.0.0)
+      sinatra (~> 1.0)
+      stringex (~> 1.4.0)
+      useragent (~> 0.4.9)
+
+GIT
   remote: git://github.com/ryanb/cancan.git
   revision: 6886aecb9ae45136fe1e080df8665b7d50afa581
   branch: 2.0
@@ -82,18 +99,6 @@ GEM
     fivemat (1.1.0)
     github-markdown (0.5.1)
     github-markup (0.7.4)
-    gollum (2.1.7)
-      github-markdown
-      github-markup (>= 0.7.0, < 1.0.0)
-      grit (~> 2.5.0)
-      mustache (>= 0.11.2, < 1.0.0)
-      nokogiri (~> 1.4)
-      posix-spawn (~> 0.3.0)
-      pygments.rb (~> 0.2.0)
-      sanitize (~> 2.0.0)
-      sinatra (~> 1.0)
-      stringex (~> 1.4.0)
-      useragent (~> 0.4.9)
     grit (2.5.0)
       diff-lcs (~> 1.1)
       mime-types (~> 1.15)
@@ -308,7 +313,7 @@ DEPENDENCIES
   database_cleaner
   factory_girl_rails
   fivemat
-  gollum
+  gollum!
   guard-rspec
   jquery-rails
   kaminari
