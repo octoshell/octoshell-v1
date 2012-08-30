@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120829094834) do
+ActiveRecord::Schema.define(:version => 20120830134800) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -230,24 +230,18 @@ ActiveRecord::Schema.define(:version => 20120829094834) do
   add_index "sureties", ["user_id"], :name => "index_sureties_on_user_id"
 
   create_table "tasks", :force => true do |t|
-    t.text     "command"
-    t.text     "stderr"
-    t.text     "stdout"
-    t.string   "state"
     t.string   "resource_type"
     t.integer  "resource_id"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "procedure"
-    t.text     "data"
-    t.string   "event"
-    t.string   "comment"
+    t.text     "comment"
     t.boolean  "callbacks_performed", :default => false
     t.integer  "task_id"
+    t.string   "state"
   end
 
   add_index "tasks", ["resource_id", "resource_type"], :name => "index_tasks_on_resource_id_and_resource_type"
-  add_index "tasks", ["state"], :name => "index_tasks_on_state"
   add_index "tasks", ["task_id"], :name => "index_tasks_on_task_id"
 
   create_table "ticket_field_relations", :force => true do |t|

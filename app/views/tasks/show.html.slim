@@ -44,20 +44,10 @@ table class="table table-bordered"
     th = Task.human_attribute_name(:state)
     td id="task-#{@task.id}-status" = @task.human_state_name
   tr
-    th = Task.human_attribute_name(:command)
+    th = Task.human_attribute_name(:comment)
     td
       textarea disabled="disabled" class="public-key" rows="10"
-        = @task.command
-  tr
-    th = Task.human_attribute_name(:stdout)
-    td
-      textarea disabled="disabled" class="public-key" rows="10"
-        = @task.stdout
-  tr
-    th = Task.human_attribute_name(:stderr)
-    td
-      textarea disabled="disabled" class="public-key" rows="10"
-        = @task.stderr
+        = @task.comment
   tr
     th = Task.human_attribute_name(:callbacks_performed)
     td = @task.callbacks_performed ? 'Да' : 'Нет'

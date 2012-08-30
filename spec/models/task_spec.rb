@@ -9,7 +9,6 @@ describe Task do
   it { should belong_to(:resource) }
   it { should have_many(:tasks) }
   it { should validate_presence_of(:resource) }
-  it { should validate_presence_of(:command) }
   it { should validate_presence_of(:procedure) }
   
   describe '#setup' do
@@ -17,13 +16,6 @@ describe Task do
     
     it 'should create new task' do
       access.tasks.setup(:add_user).should be_true
-    end
-  end
-  
-  describe '#perform' do
-    it 'should perform pending tasks' do
-      task.should_receive(:execute!).once
-      task.perform
     end
   end
     

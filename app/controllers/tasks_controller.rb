@@ -15,7 +15,6 @@ class TasksController < ApplicationController
   def new
     @base_task = Task.find(params[:task_id])
     @task = Task.new do |task|
-      task.command = @base_task.command
       task.resource = @base_task.resource
       task.procedure = @base_task.procedure
     end

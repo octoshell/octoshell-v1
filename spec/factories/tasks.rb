@@ -2,7 +2,6 @@ FactoryGirl.define do
   factory :task do
     procedure Task::PROCEDURES.first
     association :resource, factory: :cluster_user
-    command 'exit 0'
         
     factory :failed_task do
       state 'failed'

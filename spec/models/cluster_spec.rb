@@ -44,17 +44,4 @@ describe Cluster do
     its(:comment) { should == I18n.t('requests.cluster_closed') }
     it { should be_closed }
   end
-  
-  describe 'updating cluster statistics' do
-    let(:task) { cluster.tasks.setup(:get_statistic) }
-    
-    before do
-      task.stdout = "boo"
-      task.perform_callbacks!
-      cluster.reload
-    end
-    
-    it { cluster.statistic_updated_at.to_s.should == task.updated_at.to_s }
-    its(:statistic) { should == "boo" }
-  end
 end
