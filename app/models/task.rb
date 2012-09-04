@@ -11,7 +11,6 @@ class Task < ActiveRecord::Base
     del_user
     add_openkey
     del_openkey
-    get_statistic
   )
   
   belongs_to :resource, polymorphic: true
@@ -46,6 +45,7 @@ class Task < ActiveRecord::Base
         task = scoped.create! do |task|
           task.procedure = procedure
         end
+        # do it after commit !!!
         Resque.enqueue TasksRequestsWorker, task.id
         task
       end
@@ -83,9 +83,8 @@ class Task < ActiveRecord::Base
     return true unless can_perform_callbacks?
     
     transaction do
-      self.callbacks_performed = true
       resource.continue!(procedure, self)
-      save!
+      update_attribute :callbacks_performed, true
     end
   rescue StateMachine::InvalidTransition => e
     errors.add(:base, e.to_s)

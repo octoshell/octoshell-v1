@@ -21,17 +21,15 @@ class Access < ActiveRecord::Base
   validates :credential, :cluster_user, presence: true
   validates :credential_state_name, inclusion: { in: [:active] }, on: :create
   
-  after_create :activate, unless: :skip_activation
-  
-  state_machine initial: :pending do
-    state :pending
+  state_machine initial: :initialized do
+    state :initialized
     state :activing
     state :active
     state :closing
     state :closed
     
     event :_activate do
-      transition pending: :activing
+      transition initialized: :activing
     end
     
     event :_complete_activation do
@@ -39,20 +37,20 @@ class Access < ActiveRecord::Base
     end
     
     event :_close do
-      transition any => :closing
+      transition active: :closing
     end
     
     event :_complete_closure do
-      transition closing: :closed
+      transition closing: :initialized
     end
     
     event :_force_close do
-      transition any => :closed
+      transition any => :initialized
     end
   end
   
-  define_defaults_events :activate, :complete_activation, :failure_activation,
-    :close, :complete_closure, :failure_closure, :force_close
+  define_defaults_events :activate, :complete_activation, :close,
+    :complete_closure, :force_close
   
   define_state_machine_scopes
   

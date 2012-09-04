@@ -11,6 +11,7 @@ class Request < ActiveRecord::Base
   belongs_to :project, inverse_of: :requests
   belongs_to :cluster
   belongs_to :user
+  belongs_to :cluster_project
   
   validates :project, :cluster, :hours, :user, :size, presence: true
   validates :project, inclusion: { in: proc(&:allowed_projects) },
@@ -56,14 +57,16 @@ class Request < ActiveRecord::Base
   def close!
     transaction do
       _close!
-      ClusterUser.pause_for(project_id, cluster_id)
+      cluster_project.check_process!
+      cluster_project.close!
     end
   end
   
   def activate!
     transaction do
       _activate!
-      ClusterUser.activate_for(project_id, cluster_id, id)
+      cluster_project.check_process!
+      cluster_project.send(cluster_project.paused? ? :change! : :activate!)
     end
   end
   

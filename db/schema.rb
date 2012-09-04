@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120830134800) do
+ActiveRecord::Schema.define(:version => 20120903090926) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -45,18 +45,20 @@ ActiveRecord::Schema.define(:version => 20120830134800) do
 
   add_index "cluster_fields", ["cluster_id"], :name => "index_cluster_fields_on_cluster_id"
 
-  create_table "cluster_users", :force => true do |t|
-    t.integer  "project_id"
-    t.string   "state"
-    t.integer  "cluster_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "request_id"
+  create_table "cluster_projects", :force => true do |t|
+    t.string  "state"
+    t.integer "cluster_user_id"
+    t.integer "project_id"
+    t.integer "cluster_id"
   end
 
-  add_index "cluster_users", ["cluster_id"], :name => "index_cluster_users_on_cluster_id"
-  add_index "cluster_users", ["project_id"], :name => "index_cluster_users_on_project_id"
-  add_index "cluster_users", ["request_id"], :name => "index_cluster_users_on_request_id"
+  create_table "cluster_users", :force => true do |t|
+    t.string   "state"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "account_id"
+    t.integer  "cluster_project_id"
+  end
 
   create_table "clusters", :force => true do |t|
     t.string   "name"

@@ -30,4 +30,7 @@ class ActiveRecord::Base
       state_machine.states.map &:name
     end
   end
+  
+  class RecordInProcess < StandardError
+  end
 end

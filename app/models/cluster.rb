@@ -19,6 +19,8 @@ class Cluster < ActiveRecord::Base
     :add_openkey, :del_openkey, :block_user, :unblock_user,
     :get_statistic, as: :admin
   
+  after_commit :create_relations
+  
   state_machine initial: :active do
     state :closed
     
@@ -45,10 +47,11 @@ class Cluster < ActiveRecord::Base
     self
   end
   
-protected
+private
   
-  def continue_get_statistic(task)
-    update_attribute :statistic, task.stdout
-    update_attribute :statistic_updated_at, task.updated_at
-  end  
+  def create_relations
+    Project.all.each do |project|
+      cluster_projects.where(project_id: project.id).first_or_create!
+    end
+  end
 end

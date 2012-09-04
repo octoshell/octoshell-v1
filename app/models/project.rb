@@ -10,6 +10,7 @@ class Project < ActiveRecord::Base
   has_many :requests, inverse_of: :project
   has_many :tickets
   has_many :cluster_users
+  has_many :cluster_projects
   
   validates :name, uniqueness: true
   validates :user, :name, :description, :organization, presence: true
@@ -25,6 +26,7 @@ class Project < ActiveRecord::Base
   
   after_create :assign_username
   after_create :activate_accounts
+  after_commit :create_relations
   
   state_machine initial: :active do
     state :active
@@ -79,5 +81,14 @@ private
   def assign_username
     update_attribute :username, "project_#{id}" unless username?
     true
+  end
+  
+  def create_relations
+    User.all.each do |user|
+      accounts.where(user_id: user.id).first_or_create!
+    end
+    Cluster.all.each do |cluster|
+      cluster_projects.where(cluster_id: cluster.id).first_or_create!
+    end
   end
 end

@@ -12,9 +12,9 @@ class Account < ActiveRecord::Base
   belongs_to :user, inverse_of: :accounts
   belongs_to :project, inverse_of: :accounts
   
+  
   validates :user, :project, presence: true
-  validates :project_id, uniqueness: { scope: :user_id }
-  validates :project_state_name, inclusion: { in: [:active] }, if: :active_or_pending?
+  validates :project_state_name, inclusion: { in: [:active] }, if: :active?
   validates :user_state_name, inclusion: { in: [:sured] }, if: :active?
   validates :user_state_name, exclusion: { in: [:closed] }, if: :active?
   validates :username, presence: true, on: :update
@@ -23,28 +23,31 @@ class Account < ActiveRecord::Base
   attr_accessible :project_id, :raw_emails
   attr_accessible :project_id, :raw_emails, :user_id, :username, as: :admin
   
-  after_create :assign_username
+  after_create :assign_username, :create_relations
   
-  state_machine initial: :pending do
-    state :pending
+  state_machine initial: :initialized do
+    state :initialized
+    state :requested
     state :active
-    state :declined
-    state :closed
+    
+    event :_request do
+      transition initialized: :requested
+    end
     
     event :_activate do
-      transition any => :active
+      transition [:initialized, :requested] => :active
     end
     
     event :_decline do
-      transition pending: :declined
+      transition requested: :initialized
     end
     
-    event :_close do
-      transition any => :closed
+    event :_cancel do
+      transition active: :initialized
     end
   end
   
-  define_defaults_events :activate, :decline, :close
+  define_defaults_events :request, :activate, :decline, :cancel
   
   define_state_machine_scopes
   
@@ -73,9 +76,9 @@ class Account < ActiveRecord::Base
     end
   end
   
-  def close!
+  def cancel!
     transaction do
-      _close!
+      _cancel!
       accesses.non_closed.each &:close!
     end
   end
@@ -133,5 +136,12 @@ private
         project.username
       end
     update_attribute :username, username
+  end
+  
+  def create_relations
+    project.cluster_projects.each do |cluster_project|
+      conditions = { cluster_project_id: cluster_project.id }
+      cluster_users.where(conditions).first_or_create!
+    end
   end
 end

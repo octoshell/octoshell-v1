@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   validates_attachment :avatar, size: { in: 0..150.kilobytes }
   
   before_create :assign_token
+  after_commit :create_relations
   
   attr_accessible :first_name, :last_name, :middle_name, :email, :password,
     :password_confirmation, :remember_me, :new_organization, :organization_id,
@@ -187,5 +188,11 @@ private
   
   def assign_token
     self.token = Digest::SHA1.hexdigest(rand.to_s)
+  end
+  
+  def create_relations
+    Project.all.each do |project|
+      accounts.where(project_id: project.id).first_or_create!
+    end
   end
 end

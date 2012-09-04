@@ -1,67 +1,37 @@
 FactoryGirl.define do
   factory :cluster_user do
-    project
-    cluster
-    request
-    
+    account
+    cluster_project
     factory 'pending_cluster_user' do
-      before(:create) do |cluster_user|
-        cluster_user.skip_activation = true
-      end
     end
     
     factory 'activing_cluster_user' do
+      after :create do |cluster_user|
+        cluster_user.activate!
+      end
     end
     
     factory 'active_cluster_user' do
-      after(:create) do |cluster_user|
-        cluster_user.tasks.first.perform_callbacks!
-        cluster_user.reload
-      end
-    end
-    
-    factory 'pausing_cluster_user' do
-      after(:create) do |cluster_user|
-        cluster_user.tasks.first.perform_callbacks!
-        cluster_user.reload
-        cluster_user.pause!
-      end
-    end
-    
-    factory 'paused_cluster_user' do
-      after(:create) do |cluster_user|
-        cluster_user.tasks.first.perform_callbacks!
-        cluster_user.reload
-        cluster_user.pause!
-        cluster_user.tasks.first.perform_callbacks!
-        cluster_user.reload
-      end
-    end
-    
-    factory 'resuming_cluster_user' do
-      after(:create) do |cluster_user|
-        cluster_user.tasks.first.perform_callbacks!
-        cluster_user.reload
-        cluster_user.pause!
-        cluster_user.tasks.first.perform_callbacks!
-        cluster_user.reload
-        cluster_user.resume!
+      after :create do |cluster_user|
+        cluster_user.activate!
+        cluster_user.tasks.perform_callbacks!
       end
     end
     
     factory 'closing_cluster_user' do
-      after(:create) do |cluster_user|
+      after :create do |cluster_user|
+        cluster_user.activate!
         cluster_user.tasks.first.perform_callbacks!
-        cluster_user.reload
-        cluster_user.close!
+        cluster_user.reload.close!
       end
     end
     
     factory 'closed_cluster_user' do
-      after(:create) do |cluster_user|
+      after :create do |cluster_user|
+        cluster_user.activate!
         cluster_user.tasks.first.perform_callbacks!
-        cluster_user.reload
-        cluster_user.force_close!
+        cluster_user.reload.close!
+        cluster_user.tasks.first.perform_callbacks!
       end
     end
   end
