@@ -51,6 +51,7 @@ describe ClusterProject do
       cluster_project.activate
       cluster_project.complete_activation
       cluster_project.cluster_users.each &:complete_activation
+      cluster_project.close
     end
     
     it { should be_closing }
