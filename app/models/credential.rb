@@ -37,7 +37,7 @@ class Credential < ActiveRecord::Base
   def close!
     transaction do
       _close!
-      accesses.each &:close!
+      accesses.non_initialized.each &:close!
     end
   end
 

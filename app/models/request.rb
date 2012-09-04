@@ -6,22 +6,12 @@ class Request < ActiveRecord::Base
   
   default_scope order("#{table_name}.id desc")
   
-  delegate :persisted?, :state_name, to: :project, prefix: true, allow_nil: true
-  delegate :state_name, to: :cluster, prefix: true, allow_nil: true
-  delegate :state_name, to: :user, prefix: true, allow_nil: true
-  
   has_many :request_properties
   belongs_to :user
   belongs_to :cluster_project
   
   validates :cluster_project, :hours, :user, :size, presence: true
-  validates :project, inclusion: { in: proc(&:allowed_projects) },
-    on: :create, if: :project_persisted?
   validates :size, :hours, numericality: { greater_than: 0 }
-  
-  validates :cluster_state_name, exclusion: { in: [:closed] }, on: :create
-  validates :user_state_name, inclusion: { in: [:sured] }, on: :create
-  validates :project_state_name, inclusion: { in: [:active] }, on: :create
   
   attr_accessible :hours, :cluster_id, :project_id, :size
   attr_accessible :hours, :cluster_id, :project_id, :user_id, :size, :request_properties_attributes, as: :admin
@@ -47,7 +37,7 @@ class Request < ActiveRecord::Base
     end
     
     event :_close do
-      transition any => :closed
+      transition [:pending, :active, :declined] => :closed
     end
   end
   
@@ -59,7 +49,8 @@ class Request < ActiveRecord::Base
     transaction do
       _close!
       cluster_project.check_process!
-      cluster_project.pause!
+      cluster_project.pause! if cluster_project.active?
+      cluster_project.close! if cluster_project.paused?
     end
   end
   

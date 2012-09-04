@@ -70,7 +70,7 @@ class Account < ActiveRecord::Base
   def cancel!
     transaction do
       _cancel!
-      accesses.non_closed.each &:close!
+      accesses.non_initialized.each &:close!
     end
   end
   

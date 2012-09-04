@@ -39,7 +39,7 @@ class ClusterProject < ActiveRecord::Base
     end
     
     event :_close do
-      transition active: :closing
+      transition [:active, :paused] => :closing
     end
     
     event :_complete_closure do
@@ -54,8 +54,7 @@ class ClusterProject < ActiveRecord::Base
   
   def activate!
     transaction do
-      procedure =
-        initialized? ? :add_project : :unblock_project
+      procedure = initialized? ? :add_project : :unblock_project
       _activate!
       tasks.setup(procedure)
     end

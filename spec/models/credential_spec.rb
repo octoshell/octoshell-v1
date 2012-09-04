@@ -18,30 +18,18 @@ describe Credential do
   it { should allow_mass_assignment_of(:public_key) }
   it { should allow_mass_assignment_of(:public_key_file) }
   
-  describe '#grant_accesses' do
-    let!(:credential) { create(:generic_credential, user: create(:sured_user)) }
-    let!(:project)    { create(:project, user: credential.user) }
-    let!(:request)    { create(:active_request, user: credential.user, project: project) }
-    
-    before { credential.grant_accesses }
-    
-    it 'should create an access for requests' do
-      credential.user.should have(1).accesses
-    end
-  end
   
   describe '#close' do
-    let!(:credential) { create(:generic_credential, user: create(:sured_user)) }
-    let!(:project)    { create(:project, user: credential.user) }
-    let!(:request)    { create(:active_request, user: credential.user, project: project) }
+    let(:fixture) { Fixture.new }
+    let(:credential) { fixture.credential }
+    let(:access) { fixture.access }
     
     before do
-      credential.grant_accesses
+      access.activate
+      access.complete_activation
       credential.close
     end
     
-    it 'should create an access for requests' do
-      credential.user.should have(1).accesses
-    end
+    it { credential.accesses.all?(&:closing?).should be_true }
   end
 end

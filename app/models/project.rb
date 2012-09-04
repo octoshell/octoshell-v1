@@ -7,9 +7,7 @@ class Project < ActiveRecord::Base
   belongs_to :user
   belongs_to :organization
   has_many :accounts, inverse_of: :project
-  has_many :requests, inverse_of: :project
   has_many :tickets
-  has_many :cluster_users
   has_many :cluster_projects
   
   validates :name, uniqueness: true
@@ -18,11 +16,9 @@ class Project < ActiveRecord::Base
   validates :username, presence: true, on: :update
   validates :cluster_user_type, inclusion: { in: CLUSTER_USER_TYPES }
   
-  attr_accessible :name, :requests_attributes, :description, :organization_id
-  attr_accessible :name, :requests_attributes, :description, :organization_id,
-    :user_id, :cluster_user_type, :username, as: :admin
-  
-  accepts_nested_attributes_for :requests
+  attr_accessible :name, :description, :organization_id
+  attr_accessible :name, :description, :organization_id, :user_id,
+    :cluster_user_type, :username, as: :admin
   
   after_create :assign_username
   after_create :activate_accounts
@@ -43,7 +39,9 @@ class Project < ActiveRecord::Base
   def close!
     transaction do
       _close!
-      [accounts, cluster_users, requests].flatten.each &:close!
+      accounts.non_initialized.each &:close!
+      cluster_projects.non_initialized.each &:close!
+      requests.non_closed.each &:close!
     end
   end
   
@@ -51,12 +49,8 @@ class Project < ActiveRecord::Base
     "#{name} [#{human_state_name}]"
   end
   
-  def active?
-    requests.active.exists?
-  end
-  
-  def clusters
-    Cluster.joins(:requests).where(requests: { state: 'active', project_id: id })
+  def requests
+    Request.where(cluster_project_id: cluster_project_ids)
   end
   
   def allowed_organizations
