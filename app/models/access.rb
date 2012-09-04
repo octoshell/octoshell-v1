@@ -1,8 +1,3 @@
-# Модель доступа к кластеру
-# `activate` - запускает процесс добавления ключа на кластер
-# `close` - закрывает доступ удаляя ключ с кластера
-# `force_close` - закрывает доступ не удаляя ключ с кластера 
-# (при удалении вручную или всего пользователя на кластере)
 class Access < ActiveRecord::Base
   delegate :cluster, to: :cluster_user
   delegate :state_name, to: :credential, prefix: true, allow_nil: true
@@ -26,7 +21,6 @@ class Access < ActiveRecord::Base
     state :activing
     state :active
     state :closing
-    state :closed
     
     event :_activate do
       transition initialized: :activing

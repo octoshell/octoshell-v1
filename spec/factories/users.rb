@@ -10,15 +10,6 @@ FactoryGirl.define do
     factory :user do
       after(:create) { |user| user.activate! }
       
-      factory :user_with_projects do
-        after(:create) do |user|
-          FactoryGirl.create(:active_surety, user: user)
-          FactoryGirl.create(:membership, user: user)
-          project = FactoryGirl.create(:project, user: user)
-          FactoryGirl.create(:account, user: user, project: project)
-        end
-      end
-      
       factory :sured_user do
         after(:create) do |user|
           FactoryGirl.create(:active_surety, user: user)

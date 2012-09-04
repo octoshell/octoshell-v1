@@ -11,6 +11,7 @@ class Cluster < ActiveRecord::Base
   has_many :projects, through: :requests
   has_many :tasks, as: :resource
   has_many :cluster_fields
+  has_many :cluster_projects
   
   validates :name, :host, :add_user, :del_user, :add_openkey,
    :del_openkey, :block_user, :unblock_user, :get_statistic, presence: true
@@ -19,7 +20,7 @@ class Cluster < ActiveRecord::Base
     :add_openkey, :del_openkey, :block_user, :unblock_user,
     :get_statistic, as: :admin
   
-  after_commit :create_relations
+  after_create :create_relations
   
   state_machine initial: :active do
     state :closed

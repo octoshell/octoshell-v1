@@ -9,7 +9,7 @@ class ClusterUser < ActiveRecord::Base
   belongs_to :cluster_project
   has_many :accesses
   
-  after_commit :create_relations
+  after_create :create_relations
   
   state_machine initial: :initialized do
     state :initialized
@@ -69,7 +69,7 @@ protected
 private
   
   def create_relations
-    account.user.credentails.each do |credential|
+    account.user.credentials.each do |credential|
       conditions = { credential_id: credential.id, user_id: account.user_id }
       accesses.where(conditions).first_or_create!
     end

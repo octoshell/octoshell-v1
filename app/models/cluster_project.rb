@@ -4,12 +4,14 @@ class ClusterProject < ActiveRecord::Base
   
   default_scope order("#{table_name}.id desc")
   
-  belongs_to :request
   belongs_to :project
   belongs_to :cluster
   has_many :cluster_users
+  has_many :tasks, as: :resource
   
-  after_commit :create_relations
+  validates :project, :cluster, presence: true
+  
+  after_create :create_relations
   
   state_machine initial: :initialized do
     state :initialized
@@ -45,14 +47,14 @@ class ClusterProject < ActiveRecord::Base
   end
   
   define_defaults_events :activate, :complete_activation, :close,
-    :complete_closure, :complete_pausing
+    :complete_closure, :complete_pausing, :pause
   
   define_state_machine_scopes
   
   def activate!
     transaction do
       procedure =
-        initialized? ? :add_cluster_project : :unblock_cluster_project
+        initialized? ? :add_project : :unblock_project
       _activate!
       tasks.setup(procedure)
     end
@@ -61,14 +63,14 @@ class ClusterProject < ActiveRecord::Base
   def pause!
     transaction do
       _pause!
-      tasks.setup(:block_cluster_project)
+      tasks.setup(:block_project)
     end
   end
   
   def close!
     transaction do
-      _pause!
-      tasks.setup(:unblock_cluster_project)
+      _close!
+      tasks.setup(:del_project)
     end
   end
   

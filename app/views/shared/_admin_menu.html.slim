@@ -5,14 +5,14 @@
 = submenu_item :clusters, (link_to 'Кластеры', clusters_path)
 = submenu_item :organizations, (link_to 'Организации', organizations_path)
 = submenu_item :users, (link_to 'Пользователи', users_path)
-- submenu_items = [:memberships, :credentails, :organization_kinds, :position_names, :accesses, :accounts, :cluster_users]
+- submenu_items = [:memberships, :credentials, :organization_kinds, :position_names, :accesses, :accounts, :cluster_users]
 li class="dropdown #{submenu_items.any? { |c| c.to_s == params[:controller] } ? 'active' : ''}"
   = link_to '#', 'data-toggle' => 'dropdown' do
     | Еще
     b class="caret"
   ul class="dropdown-menu"
     = submenu_item :memberships, (link_to 'Места работы', memberships_path)
-    = submenu_item :credentails, (link_to 'Публичные ключи', credentials_path)
+    = submenu_item :credentials, (link_to 'Публичные ключи', credentials_path)
     = submenu_item :organization_kinds, (link_to 'Типы организаций', organization_kinds_path)
     = submenu_item :position_names, (link_to 'Позиции в организациях', position_names_path)
     = submenu_item :accesses, (link_to 'Доступы к кластерам', accesses_path)

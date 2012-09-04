@@ -11,7 +11,7 @@ class Account < ActiveRecord::Base
   
   belongs_to :user, inverse_of: :accounts
   belongs_to :project, inverse_of: :accounts
-  
+  has_many :cluster_users
   
   validates :user, :project, presence: true
   validates :project_state_name, inclusion: { in: [:active] }, if: :active?
@@ -51,7 +51,6 @@ class Account < ActiveRecord::Base
   
   define_state_machine_scopes
   
-  # активирует аккаунт
   def activate
     if user.ready_to_activate_account?
       activate!
@@ -64,15 +63,7 @@ class Account < ActiveRecord::Base
   def activate!
     self.transaction do
       _activate!
-      user.credentials.each do |credential|
-        project.cluster_users.each do |cluster_user|
-          conditions = {
-            cluster_user_id: cluster_user.id,
-            credential_id:   credential.id
-          }
-          Access.non_closed.where(conditions).first_or_create!
-        end
-      end
+      accesses.each &:activate!
     end
   end
   
@@ -110,7 +101,7 @@ class Account < ActiveRecord::Base
   def accesses
     Access.where(
       credential_id:   user.credential_ids,
-      cluster_user_id: project.cluster_user_ids
+      cluster_user_id: cluster_user_ids
     )
   end
   

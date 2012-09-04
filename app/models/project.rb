@@ -26,7 +26,7 @@ class Project < ActiveRecord::Base
   
   after_create :assign_username
   after_create :activate_accounts
-  after_commit :create_relations
+  after_create :create_relations
   
   state_machine initial: :active do
     state :active

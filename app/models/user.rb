@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   validates_attachment :avatar, size: { in: 0..150.kilobytes }
   
   before_create :assign_token
-  after_commit :create_relations
+  after_create :create_relations
   
   attr_accessible :first_name, :last_name, :middle_name, :email, :password,
     :password_confirmation, :remember_me, :new_organization, :organization_id,

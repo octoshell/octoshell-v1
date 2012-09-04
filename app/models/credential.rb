@@ -15,7 +15,7 @@ class Credential < ActiveRecord::Base
   validates :user, :public_key, :name, presence: true
   validates :public_key, uniqueness: { scope: :user_id }
   
-  after_commit :create_relations
+  after_create :create_relations
   
   state_machine initial: :active do
     state :active
@@ -45,7 +45,7 @@ private
   
   def create_relations
     user.accounts.map(&:cluster_users).flatten.each do |cluster_user|
-      conditions = { cluster_user_id: cluster_user.id, user_id: user.id }
+      conditions = { cluster_user_id: cluster_user.id }
       accesses.where(conditions).first_or_create!
     end
   end

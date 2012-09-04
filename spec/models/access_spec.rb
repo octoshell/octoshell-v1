@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Access do
-  let(:access) { create(:access) }
+  let(:access) { Fixture.access }
   subject { access }
   
   it { should belong_to(:cluster_user) }
@@ -12,8 +12,6 @@ describe Access do
   it { should validate_presence_of(:cluster_user) }
   
   describe '#activate' do
-    let(:access) { create(:pending_access) }
-    
     before { access.activate }
     
     it { should be_activing }
@@ -21,35 +19,43 @@ describe Access do
   end
   
   describe '#complete_activation' do
-    let(:access) { create(:activing_access) }
-    
-    before { access.complete_activation }
+    before do
+      access.activate
+      access.complete_activation
+    end
     
     it { should be_active }
   end
     
   describe '#close' do
-    let(:access) { create(:active_access) }
-    
-    before { access.close }
+    before do
+      access.activate
+      access.complete_activation
+      access.close
+    end
     
     it { should be_closing }
     it { access.tasks.del_openkey.pending.count.should == 1 }
   end
   
   describe '#complete_closure' do
-    let(:access) { create(:closing_access) }
+    before do
+      access.activate
+      access.complete_activation
+      access.close
+      access.complete_closure
+    end
     
-    before { access.complete_closure }
-    
-    it { should be_closed }
+    it { should be_initialized }
   end
     
   describe '#force_close' do
-    let(:access) { create(:access) }
+    before do
+      access.activate
+      access.complete_activation
+      access.force_close
+    end
     
-    before { access.force_close }
-    
-    it { should be_closed }
+    it { should be_initialized }
   end
 end
