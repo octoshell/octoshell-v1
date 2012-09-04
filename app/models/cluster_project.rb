@@ -8,6 +8,7 @@ class ClusterProject < ActiveRecord::Base
   belongs_to :cluster
   has_many :cluster_users
   has_many :tasks, as: :resource
+  has_many :requests
   
   validates :project, :cluster, presence: true
   

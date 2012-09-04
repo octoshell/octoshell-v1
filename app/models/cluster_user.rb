@@ -8,6 +8,9 @@ class ClusterUser < ActiveRecord::Base
   belongs_to :account
   belongs_to :cluster_project
   has_many :accesses
+  has_many :tasks, as: :resource
+  
+  validates :account, :cluster_project, presence: true
   
   after_create :create_relations
   
@@ -62,7 +65,7 @@ protected
   def complete_closure!
     transaction do
       _complete_closure!
-      accesses.non_closed.each &:close!
+      accesses.non_initialized.each &:force_close!
     end
   end
 
@@ -70,7 +73,7 @@ private
   
   def create_relations
     account.user.credentials.each do |credential|
-      conditions = { credential_id: credential.id, user_id: account.user_id }
+      conditions = { credential_id: credential.id }
       accesses.where(conditions).first_or_create!
     end
   end

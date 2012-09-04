@@ -1,24 +1,15 @@
 class Cluster < ActiveRecord::Base
   has_paper_trail
   
-  include Models::Asynch
-  
   default_scope order("#{table_name}.name asc")
   
-  has_many :requests
-  has_many :cluster_users
   has_many :tickets
-  has_many :projects, through: :requests
-  has_many :tasks, as: :resource
   has_many :cluster_fields
   has_many :cluster_projects
   
-  validates :name, :host, :add_user, :del_user, :add_openkey,
-   :del_openkey, :block_user, :unblock_user, :get_statistic, presence: true
+  validates :name, :host, presence: true
   
-  attr_accessible :name, :host, :description, :add_user, :del_user,
-    :add_openkey, :del_openkey, :block_user, :unblock_user,
-    :get_statistic, as: :admin
+  attr_accessible :name, :host, :description, as: :admin
   
   after_create :create_relations
   
@@ -37,10 +28,7 @@ class Cluster < ActiveRecord::Base
   def close!
     transaction do
       _close!
-      requests.non_closed.each do |request|
-        request.comment = I18n.t('requests.cluster_closed')
-        request.close!
-      end
+      cluster_projects.non_initialized.map(&:requests).flatten.each &:close!
     end
   end
   

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120903090926) do
+ActiveRecord::Schema.define(:version => 20120904114714) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(:version => 20120903090926) do
 
   create_table "cluster_projects", :force => true do |t|
     t.string  "state"
-    t.integer "cluster_user_id"
     t.integer "project_id"
     t.integer "cluster_id"
   end
@@ -62,19 +61,12 @@ ActiveRecord::Schema.define(:version => 20120903090926) do
 
   create_table "clusters", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                                                                                               :null => false
-    t.datetime "updated_at",                                                                                               :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.string   "host"
     t.string   "description"
     t.string   "state"
-    t.text     "add_user",             :default => "project=%project%\nhost=%host%"
-    t.text     "del_user",             :default => "project=%project%\nhost=%host%"
-    t.text     "add_openkey",          :default => "project=%project%\nuser=%user%\nhost=%host%\npublic_key=%public_key%"
-    t.text     "del_openkey",          :default => "project=%project%\nuser=%user%\nhost=%host%\npublic_key=%public_key%"
-    t.text     "block_user",           :default => "project=%project%\nhost=%host%"
-    t.text     "unblock_user",         :default => "project=%project%\nhost=%host%"
     t.text     "statistic"
-    t.text     "get_statistic",        :default => "host=%host%"
     t.datetime "statistic_updated_at"
     t.string   "cluster_user_type",    :default => "account"
   end
@@ -202,19 +194,16 @@ ActiveRecord::Schema.define(:version => 20120903090926) do
   add_index "request_properties", ["request_id"], :name => "index_request_properties_on_request_id"
 
   create_table "requests", :force => true do |t|
-    t.integer  "project_id"
-    t.integer  "cluster_id"
     t.integer  "hours"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "user_id"
     t.string   "state"
     t.integer  "size"
     t.string   "comment"
+    t.integer  "cluster_project_id"
   end
 
-  add_index "requests", ["cluster_id"], :name => "index_requests_on_cluster_id"
-  add_index "requests", ["project_id"], :name => "index_requests_on_project_id"
   add_index "requests", ["state"], :name => "index_requests_on_state"
   add_index "requests", ["user_id"], :name => "index_requests_on_user_id"
 

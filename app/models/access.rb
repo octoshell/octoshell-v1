@@ -39,7 +39,7 @@ class Access < ActiveRecord::Base
     end
     
     event :_force_close do
-      transition any => :initialized
+      transition active: :initialized
     end
   end
   

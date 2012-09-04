@@ -1,4 +1,7 @@
 class Request < ActiveRecord::Base
+  delegate :cluster_users, :cluster, :project,
+    to: :cluster_project, allow_nil: true
+  
   has_paper_trail
   
   default_scope order("#{table_name}.id desc")
@@ -8,12 +11,10 @@ class Request < ActiveRecord::Base
   delegate :state_name, to: :user, prefix: true, allow_nil: true
   
   has_many :request_properties
-  belongs_to :project, inverse_of: :requests
-  belongs_to :cluster
   belongs_to :user
   belongs_to :cluster_project
   
-  validates :project, :cluster, :hours, :user, :size, presence: true
+  validates :cluster_project, :hours, :user, :size, presence: true
   validates :project, inclusion: { in: proc(&:allowed_projects) },
     on: :create, if: :project_persisted?
   validates :size, :hours, numericality: { greater_than: 0 }
@@ -58,7 +59,7 @@ class Request < ActiveRecord::Base
     transaction do
       _close!
       cluster_project.check_process!
-      cluster_project.close!
+      cluster_project.pause!
     end
   end
   
@@ -72,11 +73,6 @@ class Request < ActiveRecord::Base
   
   def allowed_projects
     user ? user.owned_projects.active : []
-  end
-  
-  def cluster_users
-    conditions = { project_id: project_id, cluster_id: cluster_id }
-    ClusterUser.where(conditions)
   end
   
   def task_attributes

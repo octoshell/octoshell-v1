@@ -1,6 +1,6 @@
 class Fixture
   MODELS = [:user, :project, :cluster, :credential, :cluster_project,
-    :account, :access, :cluster_user]
+    :account, :access, :cluster_user, :request]
   
   attr_reader *MODELS
   
@@ -13,6 +13,7 @@ class Fixture
     @account = Account.where(user_id: @user.id, project_id: @project.id).first
     @cluster_user = ClusterUser.where(cluster_project_id: @cluster_project.id, account_id: @account.id).first
     @access = Access.where(cluster_user_id: @cluster_user.id, credential_id: @credential.id).first
+    @request = FactoryGirl.create(:request, cluster_project_id: @cluster_project.id, user: @project.user)
   end
   
   class << self
