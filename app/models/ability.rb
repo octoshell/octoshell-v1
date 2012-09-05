@@ -122,6 +122,8 @@ class Ability
         can [:create, :update, :destroy], :wiki_urls
         
         can [:create, :update, :destroy], :cluster_fields
+        
+        can [:index, :show], :cluster_projects
       end
     end
   end

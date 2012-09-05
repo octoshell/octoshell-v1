@@ -4,11 +4,14 @@
       th = Cluster.model_name.human
       th = Project.model_name.human
       th = ClusterProject.human_attribute_name(:username)
+      th = ClusterProject.human_attribute_name(:state)
+      th
     - cluster_projects.each do |cluster_project|
       tr
         td = link_to_cluster cluster_project.cluster
         td = link_to_project cluster_project.project
         td = cluster_project.username
-      
+        td = cluster_project.human_state_name
+        td = link_to 'открыть', cluster_project
 - else
   p Нет проектов на кластере

@@ -76,5 +76,5 @@ div class="request"
 
 - if admin?
   h2 Проекты на кластере
-  = render partial: 'cluster_users/table', locals: { cluster_users: @request.cluster_users }
+  = render partial: 'cluster_projects/table', locals: { cluster_projects: [@request.cluster_project] }
   

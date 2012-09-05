@@ -1,4 +1,6 @@
 class Request < ActiveRecord::Base
+  attr_accessor :cluster_id, :project_id
+  
   delegate :cluster_users, :cluster, :project,
     to: :cluster_project, allow_nil: true
   
@@ -11,6 +13,7 @@ class Request < ActiveRecord::Base
   belongs_to :cluster_project
   
   validates :cluster_project, :hours, :user, :size, presence: true
+  validates :cluster_id, :project_id, presence: true, unless: :cluster_project
   validates :size, :hours, numericality: { greater_than: 0 }
   
   attr_accessible :hours, :cluster_id, :project_id, :size
@@ -18,6 +21,7 @@ class Request < ActiveRecord::Base
   
   accepts_nested_attributes_for :request_properties
   
+  before_validation :assign_cluster_project, on: :create
   after_create :create_request_properties
   
   scope :last_pending, where(state: 'pending').order('id desc')
@@ -81,6 +85,11 @@ class Request < ActiveRecord::Base
   end
   
 private
+  
+  def assign_cluster_project
+    conditions = { cluster_id: cluster_id, project_id: project_id }
+    self.cluster_project ||= ClusterProject.where(conditions).first
+  end
   
   def create_request_properties
     cluster.cluster_fields.each do |cluster_field|

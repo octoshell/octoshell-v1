@@ -330,7 +330,8 @@ ru:
       membership: Место работы
       access: Доступ
       credential: Публичный ключ
-      cluster_user: Проект (на кластере)
+      cluster_user: Пользователь на кластере
+      cluster_project: Проект на кластере
       surety: Поручительство
       ticket_question: Вопрос к заявке
       ticket_field: Дополнительное поле к заявке

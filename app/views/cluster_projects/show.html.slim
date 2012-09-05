@@ -1,0 +1,24 @@
+- title "#{ClusterProject.model_name.human} ##{@cluster_project.id}"
+
+- if can? :index, :versions
+  div class="link-actions"
+    = link_to 'Версии', [@cluster_project, :versions], class: 'btn'
+
+table class="table table-bordered" id="cluster-project-#{@cluster_project.id}-detail"
+  tr
+    th class="span4" = Project.model_name.human
+    td = link_to_project @cluster_project.project
+  tr
+    th = Cluster.model_name.human
+    td = link_to_cluster @cluster_project.cluster
+  tr
+    th = ClusterProject.human_attribute_name(:state)
+    td = @cluster_project.human_state_name
+
+- if can? :index, :tasks
+  h2 Задания
+  = render partial: 'tasks/table', locals: { tasks: @cluster_project.tasks }
+
+h3 Пользователи на кластерах
+
+= render partial: 'cluster_users/table', locals: { cluster_users: @cluster_project.cluster_users.non_initialized }

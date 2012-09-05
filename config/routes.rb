@@ -177,6 +177,11 @@ MSU::Application.routes.draw do
     resources :versions, only: [:index, :show], resource: 'TicketTag'
   end
   
+  # cluster projects
+  resources :cluster_projects, only: [:index, :show] do
+    resources :versions, only: [:index, :show], resource: 'ClusterProject'
+  end
+  
   # pages
   resources :pages
   

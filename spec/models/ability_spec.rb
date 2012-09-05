@@ -188,5 +188,8 @@ describe Ability do
     it { should be_able_to(:create,  :cluster_fields) }
     it { should be_able_to(:update,  :cluster_fields) }
     it { should be_able_to(:destroy, :cluster_fields) }
+    
+    it { should be_able_to(:show,  :cluster_projects) }
+    it { should be_able_to(:index, :cluster_projects) }
   end
 end
