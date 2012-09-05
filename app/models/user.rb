@@ -79,14 +79,6 @@ class User < ActiveRecord::Base
     end
   end
   
-  def all_requests
-    Request.joins(project: :accounts).where(accounts: { user_id: id })
-  end
-  
-  def all_accounts
-    Account.where(project_id: project_ids + owned_project_ids)
-  end
-  
   def new_organization=(attributes)
     if attributes.values.any?(&:present?)
       @new_organization = organizations.build(attributes)
@@ -157,7 +149,9 @@ class User < ActiveRecord::Base
   def unsure!
     transaction do
       _unsure!
-      accounts.each &:close!
+      accounts.non_initialized.each do |account|
+        account.send(account.requested? ? :decline! : :cancel! )
+      end
     end
   end
   

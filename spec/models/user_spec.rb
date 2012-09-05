@@ -37,16 +37,6 @@ describe User do
   it { should allow_mass_assignment_of(:remember_me) }
   it { should allow_mass_assignment_of(:new_organization) }
   
-  describe '#all_requests' do
-    let!(:user) { create(:user_with_projects) }
-    let!(:request) { create(:request, user: user, project: user.owned_projects.first) }
-    
-    subject { user.all_requests }
-    
-    it { should be_a_kind_of(ActiveRecord::Relation) }
-    it { should == [request] }
-  end
-  
   describe '#full_name' do
     let(:user) { create(:user, first_name: 'Bruce', last_name: 'Wayne') }
     subject { user.full_name }
@@ -88,18 +78,6 @@ describe User do
     end
   end
     
-  describe '#all_accounts' do
-    let!(:user) { create(:user_with_projects) }
-    let!(:account) { user.accounts.first }
-    let!(:managed_account) { create(:account, project: user.projects.first) }
-    
-    subject { user.all_accounts }
-    
-    it { should be_a_kind_of(ActiveRecord::Relation) }
-    it { should include(account) }
-    it { should include(managed_account) }
-  end
-  
   describe '#revalidate!' do
     context 'potentially sured user' do
       let!(:user) { create(:user) }
@@ -151,13 +129,10 @@ describe User do
   end
   
   describe '#sure' do
-    let!(:user) { create(:user) }
-    let!(:project) { create(:project) }
-    let!(:account) { create(:account, project: project, user: user) }
+    let(:user) { Fixture.user }
     
     before do
-      create(:active_surety, user: user)
-      create(:generic_membership, user: user)
+      user.unsure!
       user.sure!
     end
     
@@ -168,16 +143,12 @@ describe User do
   end
   
   describe '#unsure' do
-    let!(:user) { create(:sured_user) }
-    let!(:project) { create(:project) }
-    let!(:account) { create(:active_account, project: project, user: user) }
+    let(:user) { Fixture.user }
     
-    before do
-      user.unsure!
-    end
+    before { user.unsure! }
     
     it 'should close all accounts' do
-      user.accounts.all?(&:closed?).should be_true
+      user.accounts.all?(&:initialized?).should be_true
     end
   end
 end

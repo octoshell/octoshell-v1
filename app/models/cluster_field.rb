@@ -10,7 +10,7 @@ class ClusterField < ActiveRecord::Base
 private
 
   def create_request_properties
-    cluster.requests.each do |request|
+    cluster.cluster_projects.map(&:requests).flatten.each do |request|
       RequestProperty.create! do |request_property|
         request_property.name = name
         request_property.request = request
