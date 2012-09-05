@@ -5,6 +5,8 @@ class ClusterUser < ActiveRecord::Base
   
   default_scope order("#{table_name}.id desc")
   
+  delegate :project, :cluster, to: :cluster_project, allow_nil: true
+  
   belongs_to :account
   belongs_to :cluster_project
   has_many :accesses

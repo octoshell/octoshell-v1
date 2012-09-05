@@ -9,11 +9,11 @@
 
 h3 Доступы к кластерам
 
-= render partial: 'accesses/table', locals: { accesses: @user.accesses.non_closed }
+= render partial: 'accesses/table', locals: { accesses: @user.accesses.non_initialized }
 
 h3 Проекты на кластере
 
-= render partial: 'cluster_users/table', locals: { cluster_users: @user.projects.active.map { |p| p.cluster_users.non_closed }.flatten }
+= render partial: 'cluster_users/table', locals: { cluster_users: @user.projects.active.map { |p| p.cluster_users.non_initialized }.flatten }
 
 h3 Проекты
 

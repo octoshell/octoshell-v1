@@ -5,11 +5,5 @@
   = f.input :username if admin?
   = f.input :description, input_html: { rows: 5 }
   = f.input :cluster_user_type, collection: Project::CLUSTER_USER_TYPES, hint: "<b>account</b> - У каждого пользователя свой логин (account_12) <br /> <b>project</b> - У всей команды проекта один логин (project_34)" if admin?
-  - if @project.new_record?
-    = field_set_tag 'Заявка' do
-      = f.simple_fields_for :requests do |f|
-        = f.association :cluster, collection: Cluster.active
-        = f.input :hours
-        = f.input :size, hint: 'Более 50ти обговаривается отдельно'
   div class="form-actions"
     = f.button :submit, class: 'btn-primary'

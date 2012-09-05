@@ -3,8 +3,7 @@
 - if can? :index, :requests
   = submenu_item :requests, (link_to 'Мои заявки', requests_path)
 - if can? :index, :accounts
-  - scope = current_user.all_accounts
-  = submenu_item :accounts, (link_to "Доступы к проектам (#{scope.active.count}/#{scope.where(state: ['active', 'pending']).count})", accounts_path)
+  = submenu_item :accounts, (link_to "Доступы к проектам", accounts_path)
 - if can? :index, :clusters
   = submenu_item :clusters, (link_to 'Кластеры', clusters_path)
 - if can? :index, :organizations

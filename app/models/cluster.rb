@@ -36,6 +36,10 @@ class Cluster < ActiveRecord::Base
     self
   end
   
+  def requests
+    Request.where(cluster_project_id: cluster_project_ids)
+  end
+  
 private
   
   def create_relations

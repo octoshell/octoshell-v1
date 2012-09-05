@@ -17,30 +17,21 @@ table class="table table-bordered" id="cluster-#{@cluster.id}-detail"
     - if can? :index, :versions
       = " "
       = link_to 'Версии', [@cluster, :versions], class: 'btn'
-      
-- if admin?
-  div id="cluster-#{@cluster.id}-statistics"
-    h3 Статистика
-  
-    textarea disabled="disabled" class="public-key" rows="12"
-      = @cluster.statistic
-    - if @cluster.statistic_updated_at?
-      p Обновлено #{@cluster.statistic_updated_at.to_s(:long)}
 
-h3 Проекты
+h3 Проекты на кластере
 
 table class="table table-bordered"
   tr
     th class="span4" Всего
-    td = @cluster.projects.select('DISTINCT "projects"."id"').count
+    td = @cluster.cluster_projects.non_initialized.count
   tr
     th Активных
-    td = @cluster.projects.select('DISTINCT "projects"."id"').where(projects: { state: 'active' }).count
+    td = @cluster.cluster_projects.active.count
   tr
     th Закрытых
-    td = @cluster.projects.select('DISTINCT "projects"."id"').closed.count
+    td = @cluster.cluster_projects.joins(:project).where(projects: { state: 'closed' }).count
 
-= render partial: 'projects/table', locals: { projects: @cluster.projects.uniq }
+= render partial: 'cluster_projects/table', locals: { cluster_projects: @cluster.cluster_projects }
 
 h3 Активные заявки
 

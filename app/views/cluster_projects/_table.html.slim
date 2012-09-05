@@ -1,0 +1,14 @@
+- if cluster_projects.any?
+  table class="table table-bordered"
+    tr
+      th = Cluster.model_name.human
+      th = Project.model_name.human
+      th = ClusterProject.human_attribute_name(:username)
+    - cluster_projects.each do |cluster_project|
+      tr
+        td = link_to_cluster cluster_project.cluster
+        td = link_to_project cluster_project.project
+        td = cluster_project.username
+      
+- else
+  p Нет проектов на кластере

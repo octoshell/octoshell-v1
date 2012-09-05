@@ -15,11 +15,7 @@
         td = link_to_cluster cluster_user.cluster
         td = cluster_user.human_state_name
         - unless admin?
-          td
-            - if account = current_user.accounts.find_by_project_id(cluster_user.project_id)
-              | #{account.username}@#{cluster_user.cluster.host}
-            - else
-              | Нет доступа к проекту
+          td #{cluster_user.username}@#{cluster_user.cluster_project.cluster.host}
         td = link_to 'открыть', cluster_user
 - else
   p Нет пользователей на кластере

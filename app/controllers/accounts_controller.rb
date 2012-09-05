@@ -8,7 +8,7 @@ class AccountsController < ApplicationController
       @search = Account.search(params[:search])
       @accounts = @search.page(params[:page])
     else
-      @search = current_user.all_accounts.search(params[:search])
+      @search = Account.where(project_id: current_user.owned_project_ids).search(params[:search])
       @accounts = @search.page(params[:page])
     end
   end
@@ -136,6 +136,6 @@ private
   end
   
   def setup_default_filter
-    params[:search] ||= { state_in: ['pending', 'active'] }
+    params[:search] ||= { state_in: ['requested', 'active'] }
   end
 end

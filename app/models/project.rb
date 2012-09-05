@@ -65,6 +65,10 @@ class Project < ActiveRecord::Base
     memberships.uniq.map &:organization
   end
   
+  def cluster_users
+    ClusterUser.where(cluster_project_id: cluster_project_ids)
+  end
+  
 private
   
   def activate_accounts
