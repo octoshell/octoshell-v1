@@ -1,5 +1,7 @@
 require 'bundler/capistrano'
 require "rvm/capistrano"
+require "capistrano-resque"
+
 set :rvm_type, :system
 set :rvm_ruby_string, '1.9.3@msu'
 
@@ -22,6 +24,8 @@ role :db,  domain, :primary => true
 
 set :whenever_command, "bundle exec whenever"
 require "whenever/capistrano"
+
+after "deploy:restart", "resque:restart"
 
 namespace :deploy do
   desc "Restart Unicorn"

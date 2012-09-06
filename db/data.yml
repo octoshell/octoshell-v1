@@ -1,21 +1,107 @@
 
 ---
-accounts:
+pages:
   columns:
   - id
-  - user_id
-  - project_id
+  - name
+  - url
   - created_at
   - updated_at
-  - state
-  - username
+  records: 
+  - - '1'
+    - Welcome
+    - welcome
+    - '2012-08-28 13:49:27.144334'
+    - '2012-08-28 13:49:27.144334'
+  - - '2'
+    - How_to_disconnect
+    - how_to_disconnect
+    - '2012-08-28 14:18:43.542962'
+    - '2012-08-28 14:18:43.542962'
+
+---
+wiki_urls:
+  columns:
+  - id
+  - page_id
+  - url
+  records: 
+  - - '1'
+    - '2'
+    - /admin
+
+---
+cluster_fields:
+  columns:
+  - id
+  - cluster_id
+  - name
   records: 
   - - '1'
     - '1'
+    - new_attribute
+  - - '2'
     - '1'
-    - '2012-08-21 11:45:49.667293'
-    - '2012-08-28 07:02:33.096415'
+    - is_lobby
+
+---
+request_properties:
+  columns:
+  - id
+  - name
+  - value
+  - request_id
+  records: 
+  - - '1'
+    - new_attribute
+    - New Arribute Value
+    - '2'
+  - - '2'
+    - new_attribute
+    - 
+    - '1'
+  - - '3'
+    - is_lobby
+    - 'yes'
+    - '2'
+  - - '4'
+    - is_lobby
+    - 
+    - '1'
+  - - '5'
+    - is_lobby
+    - 
+    - '3'
+  - - '6'
+    - new_attribute
+    - 
+    - '3'
+  - - '7'
+    - is_lobby
+    - 
+    - '4'
+  - - '8'
+    - new_attribute
+    - 
+    - '4'
+
+---
+cluster_users:
+  columns:
+  - id
+  - state
+  - created_at
+  - updated_at
+  - account_id
+  - cluster_project_id
+  - username
+  records: 
+  - - '1'
     - active
+    - '2012-08-21 12:06:34.938125'
+    - '2012-09-06 13:30:01.14633'
+    - '1'
+    - '1'
     - account_1
 
 ---
@@ -28,35 +114,12 @@ accesses:
   - updated_at
   - cluster_user_id
   records: 
-  - - '1'
-    - '2'
-    - active
-    - '2012-08-21 12:10:46.697631'
-    - '2012-08-21 12:10:47.006593'
+  - - '6'
     - '1'
-  - - '2'
+    - initialized
+    - '2012-09-06 13:32:52.625101'
+    - '2012-09-06 13:32:52.625101'
     - '1'
-    - active
-    - '2012-08-21 12:10:46.733585'
-    - '2012-08-21 12:10:47.271802'
-    - '1'
-
----
-cluster_users:
-  columns:
-  - id
-  - project_id
-  - state
-  - cluster_id
-  - created_at
-  - updated_at
-  records: 
-  - - '1'
-    - '1'
-    - active
-    - '1'
-    - '2012-08-21 12:06:34.938125'
-    - '2012-08-21 12:28:48.161723'
 
 ---
 versions:
@@ -2005,40 +2068,1551 @@ versions:
       - true
 
 '
+  - - '138'
+    - User
+    - '4'
+    - update
+    - f
+    - ! "---\nemail: serg@parallel.ru\ncrypted_password: $2a$10$3fpzZ/NBjr9/fEh2wEMu9.xZoL1uVHLnFgVqwv8CSbDuVkURiP4Uu\nsalt:
+      udncVgooLxmnFy8HUsVR\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      active\nactivation_token: \nactivation_token_expires_at: \nfirst_name: Sergey\nlast_name:
+      Zhumatiy\nmiddle_name: ''\ndeleted_at: \ncreated_at: 2012-08-28 08:03:54.456710000
+      Z\nupdated_at: 2012-08-28 08:05:20.895452000 Z\nadmin: true\nstate: active\ntoken:
+      bf213d523c133c0c3a4b9df9da060afe45b1545a\navatar_file_name: \navatar_content_type:
+      \navatar_file_size: \navatar_updated_at: \nid: 4\n"
+    - '2012-08-28 08:53:40.208963'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nreset_password_token:\n-
+      \n- YbsWdJKtsUQyJFhmJKke\nreset_password_email_sent_at:\n- \n- 2012-08-28 08:53:40.178903532
+      Z\n"
+  - - '139'
+    - User
+    - '4'
+    - update
+    - '4'
+    - ! "---\nemail: serg@parallel.ru\ncrypted_password: $2a$10$3fpzZ/NBjr9/fEh2wEMu9.xZoL1uVHLnFgVqwv8CSbDuVkURiP4Uu\nsalt:
+      udncVgooLxmnFy8HUsVR\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      YbsWdJKtsUQyJFhmJKke\nreset_password_token_expires_at: \nreset_password_email_sent_at:
+      2012-08-28 08:53:40.178903000 Z\nactivation_state: active\nactivation_token:
+      \nactivation_token_expires_at: \nfirst_name: Sergey\nlast_name: Zhumatiy\nmiddle_name:
+      ''\ndeleted_at: \ncreated_at: 2012-08-28 08:03:54.456710000 Z\nupdated_at: 2012-08-28
+      08:53:40.195704000 Z\nadmin: true\nstate: active\ntoken: bf213d523c133c0c3a4b9df9da060afe45b1545a\navatar_file_name:
+      \navatar_content_type: \navatar_file_size: \navatar_updated_at: \nid: 4\n"
+    - '2012-08-28 08:58:32.782453'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nsalt:\n- udncVgooLxmnFy8HUsVR\n-
+      KHfeAZ2sqWaQjhcFQzpk\ncrypted_password:\n- $2a$10$3fpzZ/NBjr9/fEh2wEMu9.xZoL1uVHLnFgVqwv8CSbDuVkURiP4Uu\n-
+      !ruby/string:BCrypt::Password\n  str: !binary |-\n    JDJhJDEwJHdidHhHaEFWcm5QMmVyWEJhN3VQeE9kUUpZN2NKTTdoeGVNdjFU\n
+      \   SDBvblNzbzFMbDRIYzhD\n  version: !ruby/string:BCrypt::Password |-\n    MmE=\n
+      \ cost: 10\n  salt: !binary |-\n    JDJhJDEwJHdidHhHaEFWcm5QMmVyWEJhN3VQeE8=\n
+      \ checksum: !binary |-\n    ZFFKWTdjSk03aHhlTXYxVEgwb25Tc28xTGw0SGM4Qw==\n"
+  - - '140'
+    - TicketTemplate
+    - '1'
+    - update
+    - '4'
+    - ! '---
 
----
-requests:
-  columns:
-  - id
-  - project_id
-  - cluster_id
-  - hours
-  - created_at
-  - updated_at
-  - user_id
-  - state
-  - size
-  - comment
-  records: 
-  - - '1'
+      subject: Сил больше нет
+
+      message: Закройте браузер и отойдите от компьютера
+
+      created_at: 2012-08-21 07:12:40.242762000 Z
+
+      updated_at: 2012-08-21 07:12:40.242762000 Z
+
+      state: active
+
+      id: 1
+
+'
+    - '2012-08-28 14:19:43.987523'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      message:
+
+      - Закройте браузер и отойдите от компьютера
+
+      - Закройте браузер и отойдите от компьютера [/pages/How_to_disconnect]
+
+'
+  - - '141'
+    - Cluster
     - '1'
+    - update
+    - '4'
+    - ! "---\nname: Ломоносов\ncreated_at: 2012-08-21 08:35:00.526027000 Z\nupdated_at:
+      2012-08-28 08:02:38.394613000 Z\nhost: lomonosov.parallel.ru\ndescription: ''\nstate:
+      active\nadd_user: ! \"project=%project%\\r\\nhost=%host%\"\ndel_user: ! \"project=%project%\\r\\nhost=%host%\"\nadd_openkey:
+      ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\"\ndel_openkey:
+      ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\"\nblock_user:
+      ! \"project=%project%\\r\\nhost=%host%\"\nunblock_user: ! \"project=%project%\\r\\nhost=%host%\"\nstatistic:
+      \nget_statistic: host=%host%\nstatistic_updated_at: \ncluster_user_type: account\nid:
+      1\n"
+    - '2012-08-28 15:09:24.971776'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nadd_user:\n- ! \"project=%project%\\r\\nhost=%host%\"\n-
+      ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\n\\r\\n#!/bin/sh\\r\\n#
+      \      cluster\n  name or address\\r\\n#       user name\\r\\n\\r\\nfunction
+      err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif\n  [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if\n
+      \ [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo\n  \\\"$user\\\" |
+      awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif ssh \\\"$addr\\\"\n
+      \ sudo /usr/sbin/adduser_extended \\\"$user\\\"; then\\r\\n  exit 0\\r\\nfi\\r\\n\\r\\nerr
+      Exit\n  code: $?\\r\\nexit 100\\r\\n\"\n"
+  - - '142'
+    - Cluster
     - '1'
-    - '8'
-    - '2012-08-21 11:45:49.672558'
-    - '2012-08-21 12:22:14.278712'
+    - update
+    - '4'
+    - ! "---\nname: Ломоносов\ncreated_at: 2012-08-21 08:35:00.526027000 Z\nupdated_at:
+      2012-08-28 15:09:24.970551000 Z\nhost: lomonosov.parallel.ru\ndescription: ''\nstate:
+      active\nadd_user: ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\n\\r\\n#!/bin/sh\\r\\n#\n
+      \ \\      cluster name or address\\r\\n#       user name\\r\\n\\r\\nfunction
+      err() {\\r\\n\n  \\ echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No cluster\n  name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$user\\\"; then\\r\\n  exit 0\\r\\nfi\\r\\n\\r\\nerr
+      Exit code: $?\\r\\nexit 100\\r\\n\"\ndel_user: ! \"project=%project%\\r\\nhost=%host%\"\nadd_openkey:
+      ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\"\ndel_openkey:
+      ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\"\nblock_user:
+      ! \"project=%project%\\r\\nhost=%host%\"\nunblock_user: ! \"project=%project%\\r\\nhost=%host%\"\nstatistic:
+      \nget_statistic: host=%host%\nstatistic_updated_at: \ncluster_user_type: account\nid:
+      1\n"
+    - '2012-08-28 15:11:35.020684'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nadd_user:\n- ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\n\\r\\n#!/bin/sh\\r\\n#
+      \      cluster\n  name or address\\r\\n#       user name\\r\\n\\r\\nfunction
+      err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif\n  [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if\n
+      \ [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo\n  \\\"$user\\\" |
+      awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif ssh \\\"$addr\\\"\n
+      \ sudo /usr/sbin/adduser_extended \\\"$user\\\"; then\\r\\n  exit 0\\r\\nfi\\r\\n\\r\\nerr
+      Exit\n  code: $?\\r\\nexit 100\\r\\n\"\n- ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\n\\r\\nfunction
+      err() {\\r\\n  echo\n  $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No cluster name\\\"\\r\\n\n  \\ exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat \\\"$1\\\"`\\r\\n#else\\r\\n\n
+      \ \\       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |
+      awk '{ gsub(/ |;|\\\\||<|>|&/,\n  \\\"_\\\"); print }'\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended \\\"$name\\\"\n  \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit 100\\r\\n\"\ndel_user:\n-
+      ! \"project=%project%\\r\\nhost=%host%\"\n- ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\n\\r\\nfunction
+      err() {\\r\\n  echo\n  $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No cluster name\\\"\\r\\n\n  \\ exit 1\\r\\nfi\\r\\n\\r\\naddr=\\\"$host\\\"\\r\\n\\r\\nname=`echo
+      \\\"$user\\\" | awk '{ gsub(/\n  |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif
+      ssh \\\"$addr\\\" sudo deluser \\\"$name\\\";\n  then\\r\\n  exit 0\\r\\nfi\\r\\n\\r\\nerr
+      Exit code: $?\\r\\nexit 100\\r\\n\"\n"
+  - - '143'
+    - Cluster
     - '1'
-    - closed
-    - '80'
+    - update
+    - '2'
+    - ! "---\nname: Ломоносов\ncreated_at: 2012-08-21 08:35:00.526027000 Z\nupdated_at:
+      2012-08-28 15:11:35.018018000 Z\nhost: lomonosov.parallel.ru\ndescription: ''\nstate:
+      active\nadd_user: ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\n\\r\\nfunction
+      err()\n  {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No cluster\n  name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$name\\\" \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit\n  100\\r\\n\"\ndel_user:
+      ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\n\\r\\nfunction
+      err()\n  {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No cluster\n  name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\naddr=\\\"$host\\\"\\r\\n\\r\\nname=`echo
+      \\\"$user\\\" | awk\n  '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif
+      ssh \\\"$addr\\\" sudo deluser \\\"$name\\\";\n  then\\r\\n  exit 0\\r\\nfi\\r\\n\\r\\nerr
+      Exit code: $?\\r\\nexit 100\\r\\n\"\nadd_openkey: ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\"\ndel_openkey:
+      ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\"\nblock_user:
+      ! \"project=%project%\\r\\nhost=%host%\"\nunblock_user: ! \"project=%project%\\r\\nhost=%host%\"\nstatistic:
+      \nget_statistic: host=%host%\nstatistic_updated_at: \ncluster_user_type: account\nid:
+      1\n"
+    - '2012-08-29 12:53:06.105579'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nadd_user:\n- ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\n\\r\\nfunction
+      err() {\\r\\n  echo\n  $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No cluster name\\\"\\r\\n\n  \\ exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat \\\"$1\\\"`\\r\\n#else\\r\\n\n
+      \ \\       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |
+      awk '{ gsub(/ |;|\\\\||<|>|&/,\n  \\\"_\\\"); print }'\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended \\\"$name\\\"\n  \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit 100\\r\\n\"\n- ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$name\\\" \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit\n  100\\r\\n\"\ndel_user:\n-
+      ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\n\\r\\nfunction
+      err() {\\r\\n  echo\n  $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No cluster name\\\"\\r\\n\n  \\ exit 1\\r\\nfi\\r\\n\\r\\naddr=\\\"$host\\\"\\r\\n\\r\\nname=`echo
+      \\\"$user\\\" | awk '{ gsub(/\n  |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif
+      ssh \\\"$addr\\\" sudo deluser \\\"$name\\\";\n  then\\r\\n  exit 0\\r\\nfi\\r\\n\\r\\nerr
+      Exit code: $?\\r\\nexit 100\\r\\n\"\n- ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\naddr=\\\"$host\\\"\\r\\n\\r\\nname=`echo
+      \\\"$user\\\"\n  | awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif
+      ssh \\\"$addr\\\" sudo deluser\n  \\\"$name\\\"; then\\r\\n  exit 0\\r\\nfi\\r\\n\\r\\nerr
+      Exit code: $?\\r\\nexit 100\"\nblock_user:\n- ! \"project=%project%\\r\\nhost=%host%\"\n-
+      ! \"project=%project%\\r\\nhost=%host%\\r\\nnew_attribute=%new_attribute%\"\nunblock_user:\n-
+      ! \"project=%project%\\r\\nhost=%host%\"\n- ! \"project=%project%\\r\\nhost=%host%\\r\\nnew_attribute=%new_attribute%\"\nadd_openkey:\n-
+      ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\"\n-
+      ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\\r\\nnew_attribute=%new_attribute%\"\ndel_openkey:\n-
+      ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\"\n-
+      ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\\r\\nnew_attribute=%new_attribute%\"\n"
+  - - '144'
+    - Cluster
+    - '1'
+    - update
+    - '4'
+    - ! "---\nname: Ломоносов\ncreated_at: 2012-08-21 08:35:00.526027000 Z\nupdated_at:
+      2012-08-29 12:53:06.100548000 Z\nhost: lomonosov.parallel.ru\ndescription: ''\nstate:
+      active\nadd_user: ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$name\\\" \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit\n  100\\r\\n\"\ndel_user:
+      ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\naddr=\\\"$host\\\"\\r\\n\\r\\nname=`echo
+      \\\"$user\\\"\n  | awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif
+      ssh \\\"$addr\\\" sudo deluser\n  \\\"$name\\\"; then\\r\\n  exit 0\\r\\nfi\\r\\n\\r\\nerr
+      Exit code: $?\\r\\nexit 100\"\nadd_openkey: ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\\r\\nnew_attribute=%new_attribute%\"\ndel_openkey:
+      ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\\r\\nnew_attribute=%new_attribute%\"\nblock_user:
+      ! \"project=%project%\\r\\nhost=%host%\\r\\nnew_attribute=%new_attribute%\"\nunblock_user:
+      ! \"project=%project%\\r\\nhost=%host%\\r\\nnew_attribute=%new_attribute%\"\nstatistic:
+      \nget_statistic: host=%host%\nstatistic_updated_at: \ncluster_user_type: account\nid:
+      1\n"
+    - '2012-08-30 08:11:28.137979'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nadd_openkey:\n-
+      ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\\r\\nnew_attribute=%new_attribute%\"\n-
+      ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\necho\n
+      \ $public_key >&2\"\n"
+  - - '145'
+    - User
+    - '6'
+    - create
+    - f
     - 
-  - - '2'
+    - '2012-08-30 08:12:23.52621'
+    - 
+  - - '146'
+    - User
+    - '6'
+    - update
+    - '4'
+    - ! "---\nemail: serg@guru.ru\ncrypted_password: $2a$10$hA8nuz7lFtlNQ6mSiKuHBeVK0ME9EVpL7qXb/7un9hmIrtolIwOq2\nsalt:
+      u4WxUkykyzgAp7pzNMGw\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      pending\nactivation_token: 5KGezD9xaodvkPFkQCpt\nactivation_token_expires_at:
+      \nfirst_name: Вассисуалий\nlast_name: Пупкин\nmiddle_name: ''\ndeleted_at: \ncreated_at:
+      2012-08-30 08:12:23.522845000 Z\nupdated_at: 2012-08-30 08:12:23.522845000 Z\nadmin:
+      false\nstate: active\ntoken: c696b4a6bd3c311ba916ad0facc2c5573a8dae31\navatar_file_name:
+      \navatar_content_type: \navatar_file_size: \navatar_updated_at: \nid: 6\n"
+    - '2012-08-30 08:13:16.256436'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nactivation_token:\n-
+      5KGezD9xaodvkPFkQCpt\n- \nactivation_state:\n- pending\n- active\n"
+  - - '147'
+    - Organization
+    - '5'
+    - create
+    - '6'
+    - 
+    - '2012-08-30 08:14:21.078548'
+    - 
+  - - '148'
+    - Surety
+    - '2'
+    - create
+    - '6'
+    - 
+    - '2012-08-30 08:14:52.806194'
+    - 
+  - - '149'
+    - Surety
+    - '2'
+    - update
+    - '4'
+    - ! "---\nuser_id: 6\norganization_id: 5\nstate: pending\ncreated_at: 2012-08-30
+      08:14:52.803318000 Z\nupdated_at: 2012-08-30 08:14:52.803318000 Z\ncomment:
+      \nid: 2\n"
+    - '2012-08-30 08:15:53.536835'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - pending
+
+      - active
+
+'
+  - - '150'
+    - Credential
+    - '3'
+    - create
+    - '6'
+    - 
+    - '2012-08-30 08:16:48.307868'
+    - 
+  - - '151'
+    - Credential
+    - '3'
+    - update
+    - '6'
+    - ! "---\npublic_key: ! 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA0irsViKCtkwRS6zTCfLHFxzSGRG04FXsDLCI0J0f7QBT6JCi1cdMITQhFWxctfz4TwF5j5mFwql6mK6PkjjoCbrXk4Sz6o53idGxJgAAU8QnbEugPs0Iz7Dsjq4QH+3VZ891C+x0xfvLjBoUxErloR5LvlCHfg++YdWr8ezyNkVkMS+Ge0sMuSd/Gjp+9hG3GYWzSpnKQvrBeLqpmmLM9RBiV54vqBt2c0qrBT1ASKQkpSY4K+kUWifbRPKSIYgBkkbUVXfcgOaWYngNldqL8rWXZahrQOmt9QBgzg2doZlx6+35Xh6+DbYTggZ0QjgmduqCDCzTinl481bUWwbCaQ==\n
+      \ serg@asi\n\n'\nuser_id: 6\ncreated_at: 2012-08-30 08:16:48.305087000 Z\nupdated_at:
+      2012-08-30 08:16:48.305087000 Z\nname: вас\nstate: active\nid: 3\n"
+    - '2012-08-30 08:17:02.150623'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - closed
+
+'
+  - - '152'
+    - Credential
+    - '4'
+    - create
+    - '6'
+    - 
+    - '2012-08-30 08:18:05.753339'
+    - 
+  - - '153'
+    - Membership
+    - '2'
+    - create
+    - '6'
+    - 
+    - '2012-08-30 08:19:15.173603'
+    - 
+  - - '154'
+    - Position
+    - '2'
+    - create
+    - '6'
+    - 
+    - '2012-08-30 08:19:15.177821'
+    - 
+  - - '155'
+    - Position
+    - '3'
+    - create
+    - '6'
+    - 
+    - '2012-08-30 08:19:15.180141'
+    - 
+  - - '156'
+    - Position
+    - '4'
+    - create
+    - '6'
+    - 
+    - '2012-08-30 08:19:15.18236'
+    - 
+  - - '157'
+    - Position
+    - '5'
+    - create
+    - '6'
+    - 
+    - '2012-08-30 08:19:15.184413'
+    - 
+  - - '158'
+    - User
+    - '6'
+    - update
+    - '6'
+    - ! "---\nemail: serg@guru.ru\ncrypted_password: $2a$10$hA8nuz7lFtlNQ6mSiKuHBeVK0ME9EVpL7qXb/7un9hmIrtolIwOq2\nsalt:
+      u4WxUkykyzgAp7pzNMGw\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      active\nactivation_token: \nactivation_token_expires_at: \nfirst_name: Вассисуалий\nlast_name:
+      Пупкин\nmiddle_name: ''\ndeleted_at: \ncreated_at: 2012-08-30 08:12:23.522845000
+      Z\nupdated_at: 2012-08-30 08:13:16.255021000 Z\nadmin: false\nstate: active\ntoken:
+      c696b4a6bd3c311ba916ad0facc2c5573a8dae31\navatar_file_name: \navatar_content_type:
+      \navatar_file_size: \navatar_updated_at: \nid: 6\n"
+    - '2012-08-30 08:19:15.199556'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - sured
+
+'
+  - - '159'
+    - Project
+    - '2'
+    - create
+    - '6'
+    - 
+    - '2012-08-30 08:20:17.307079'
+    - 
+  - - '160'
+    - Account
+    - '2'
+    - create
+    - '6'
+    - 
+    - '2012-08-30 08:20:17.313466'
+    - 
+  - - '161'
+    - Account
+    - '2'
+    - update
+    - '6'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: pending\nusername:
+      \nid: \n"
+    - '2012-08-30 08:20:17.318006'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nuser_id:\n- \n-
+      6\nproject_id:\n- \n- 2\ncreated_at:\n- \n- 2012-08-30 08:20:17.310906989 Z\nupdated_at:\n-
+      \n- 2012-08-30 08:20:17.310906989 Z\nid:\n- \n- 2\nusername:\n- \n- account_2\n"
+  - - '162'
+    - Request
+    - '3'
+    - create
+    - '6'
+    - 
+    - '2012-08-30 08:20:17.322154'
+    - 
+  - - '163'
+    - Project
+    - '2'
+    - update
+    - '6'
+    - ! "---\nname: \ncreated_at: \nupdated_at: \nuser_id: \nstate: active\ndescription:
+      \norganization_id: \ncluster_user_type: account\nusername: \nid: \n"
+    - '2012-08-30 08:20:17.339939'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\norganization_id:\n-
+      \n- 5\nname:\n- \n- оптимизация процессов клининга в труднодоступных местах\ndescription:\n-
+      \n- оптимизация процессов клининга в труднодоступных местах с использованием
+      передовых\n  нанотехнологий\nuser_id:\n- \n- 6\ncreated_at:\n- \n- 2012-08-30
+      08:20:17.304234672 Z\nupdated_at:\n- \n- 2012-08-30 08:20:17.304234672 Z\nid:\n-
+      \n- 2\nusername:\n- \n- project_2\n"
+  - - '164'
+    - Account
+    - '2'
+    - update
+    - '6'
+    - ! '---
+
+      user_id: 6
+
+      project_id: 2
+
+      created_at: 2012-08-30 08:20:17.310906000 Z
+
+      updated_at: 2012-08-30 08:20:17.310906000 Z
+
+      state: pending
+
+      username: account_2
+
+      id: 2
+
+'
+    - '2012-08-30 08:20:17.350272'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - pending
+
+      - active
+
+'
+  - - '165'
+    - Cluster
     - '1'
+    - update
+    - '4'
+    - ! "---\nname: Ломоносов\ncreated_at: 2012-08-21 08:35:00.526027000 Z\nupdated_at:
+      2012-08-30 08:11:28.135732000 Z\nhost: lomonosov.parallel.ru\ndescription: ''\nstate:
+      active\nadd_user: ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$name\\\" \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit\n  100\\r\\n\"\ndel_user:
+      ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\naddr=\\\"$host\\\"\\r\\n\\r\\nname=`echo
+      \\\"$user\\\"\n  | awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif
+      ssh \\\"$addr\\\" sudo deluser\n  \\\"$name\\\"; then\\r\\n  exit 0\\r\\nfi\\r\\n\\r\\nerr
+      Exit code: $?\\r\\nexit 100\"\nadd_openkey: ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\necho\n
+      \ $public_key >&2\"\ndel_openkey: ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\\r\\nnew_attribute=%new_attribute%\"\nblock_user:
+      ! \"project=%project%\\r\\nhost=%host%\\r\\nnew_attribute=%new_attribute%\"\nunblock_user:
+      ! \"project=%project%\\r\\nhost=%host%\\r\\nnew_attribute=%new_attribute%\"\nstatistic:
+      \nget_statistic: host=%host%\nstatistic_updated_at: \ncluster_user_type: account\nid:
+      1\n"
+    - '2012-08-30 08:21:50.539927'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nadd_user:\n- ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$name\\\" \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit\n  100\\r\\n\"\n- !
+      \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\n\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$name\\\" \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit\n  100\\r\\n\"\n"
+  - - '166'
+    - Task
+    - '7'
+    - create
+    - '4'
+    - 
+    - '2012-08-30 08:22:07.883036'
+    - 
+  - - '167'
+    - Task
+    - '7'
+    - update
+    - 
+    - ! "---\ncommand: ! \"user=%user%\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\"\nstderr:
+      \nstdout: \nstate: pending\nresource_type: ClusterUser\nresource_id: 1\ncreated_at:
+      2012-08-30 08:22:07.879717000 Z\nupdated_at: 2012-08-30 08:22:07.879717000 Z\nprocedure:
+      add_user\ndata: \nevent: \ncomment: \ncallbacks_performed: false\ntask_id: 1\nid:
+      7\n"
+    - '2012-08-30 08:22:08.823246'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nstderr:\n- \n- ''\nstdout:\n-
+      \n- ''\nstate:\n- pending\n- successed\n"
+  - - '168'
+    - Request
+    - '3'
+    - update
+    - '4'
+    - ! "---\nproject_id: 2\ncluster_id: 1\nhours: 1023\ncreated_at: 2012-08-30 08:20:17.319464000
+      Z\nupdated_at: 2012-08-30 08:20:17.319464000 Z\nuser_id: 6\nstate: pending\nsize:
+      12\ncomment: \nid: 3\n"
+    - '2012-08-30 08:34:43.215949'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - pending
+
+      - active
+
+'
+  - - '169'
+    - ClusterUser
+    - '2'
+    - create
+    - '4'
+    - 
+    - '2012-08-30 08:34:43.226669'
+    - 
+  - - '170'
+    - ClusterUser
+    - '2'
+    - update
+    - '4'
+    - ! "---\nproject_id: \nstate: pending\ncluster_id: \ncreated_at: \nupdated_at:
+      \nrequest_id: \nid: \n"
+    - '2012-08-30 08:34:43.232035'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      2\ncluster_id:\n- \n- 1\nrequest_id:\n- \n- 3\ncreated_at:\n- \n- 2012-08-30
+      08:34:43.223908356 Z\nupdated_at:\n- \n- 2012-08-30 08:34:43.223908356 Z\nid:\n-
+      \n- 2\nstate:\n- pending\n- activing\n"
+  - - '171'
+    - Task
+    - '8'
+    - create
+    - '4'
+    - 
+    - '2012-08-30 08:34:43.245459'
+    - 
+  - - '172'
+    - Task
+    - '8'
+    - update
+    - 
+    - ! "---\ncommand: ! \"project=\\\"project_2\\\"\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\\r\\nuser=%user%\\r\\n\\r\\nnew_attribute=\\\"\\\"\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$name\\\" \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit\n  100\\r\\n\"\nstderr:
+      \nstdout: \nstate: pending\nresource_type: ClusterUser\nresource_id: 2\ncreated_at:
+      2012-08-30 08:34:43.242511000 Z\nupdated_at: 2012-08-30 08:34:43.242511000 Z\nprocedure:
+      add_user\ndata: \nevent: \ncomment: \ncallbacks_performed: false\ntask_id: \nid:
+      8\n"
+    - '2012-08-30 08:34:44.398166'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nstderr:\n- \n- !
+      'sh: Syntax error: EOF in backquote substitution\n\n'\nstdout:\n- \n- ''\nstate:\n-
+      pending\n- failed\n"
+  - - '173'
+    - Cluster
     - '1'
-    - '80'
-    - '2012-08-21 12:28:42.405202'
-    - '2012-08-21 12:28:45.89974'
+    - update
+    - '4'
+    - ! "---\nname: Ломоносов\ncreated_at: 2012-08-21 08:35:00.526027000 Z\nupdated_at:
+      2012-08-30 08:21:50.538540000 Z\nhost: lomonosov.parallel.ru\ndescription: ''\nstate:
+      active\nadd_user: ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\n\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$name\\\" \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit\n  100\\r\\n\"\ndel_user:
+      ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\naddr=\\\"$host\\\"\\r\\n\\r\\nname=`echo
+      \\\"$user\\\"\n  | awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif
+      ssh \\\"$addr\\\" sudo deluser\n  \\\"$name\\\"; then\\r\\n  exit 0\\r\\nfi\\r\\n\\r\\nerr
+      Exit code: $?\\r\\nexit 100\"\nadd_openkey: ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\necho\n
+      \ $public_key >&2\"\ndel_openkey: ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\\r\\nnew_attribute=%new_attribute%\"\nblock_user:
+      ! \"project=%project%\\r\\nhost=%host%\\r\\nnew_attribute=%new_attribute%\"\nunblock_user:
+      ! \"project=%project%\\r\\nhost=%host%\\r\\nnew_attribute=%new_attribute%\"\nstatistic:
+      \nget_statistic: host=%host%\nstatistic_updated_at: \ncluster_user_type: account\nid:
+      1\n"
+    - '2012-08-30 08:36:33.012744'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nadd_user:\n- ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\n\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$name\\\" \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit\n  100\\r\\n\"\n- !
+      \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\n\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'`\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$name\\\" \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit\n  100\\r\\n\"\n"
+  - - '174'
+    - Task
+    - '9'
+    - create
+    - '4'
+    - 
+    - '2012-08-30 08:36:50.690751'
+    - 
+  - - '175'
+    - Task
+    - '9'
+    - update
+    - 
+    - ! "---\ncommand: ! \"project=\\\"project_2\\\"\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\\r\\nuser=%user%\\r\\n\\r\\nnew_attribute=\\\"\\\"\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'`\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$name\\\" \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit\n  100\\r\\n\"\nstderr:
+      \nstdout: \nstate: pending\nresource_type: ClusterUser\nresource_id: 2\ncreated_at:
+      2012-08-30 08:36:50.688807000 Z\nupdated_at: 2012-08-30 08:36:50.688807000 Z\nprocedure:
+      add_user\ndata: \nevent: \ncomment: \ncallbacks_performed: false\ntask_id: 8\nid:
+      9\n"
+    - '2012-08-30 08:36:54.741649'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nstderr:\n- \n- !
+      \"cat: : No such file or directory\\nbash: line 3: \\r: command not found\\nbash:\n
+      \ line 5: \\r: command not found\\nbash: -c: line 6: syntax error near unexpected
+      token\n  `{\\r'\\nbash: -c: line 6: `function err() {\\r'\\n\"\nstdout:\n- \n-
+      ''\nstate:\n- pending\n- failed\n"
+  - - '176'
+    - Cluster
     - '1'
-    - active
+    - update
+    - '4'
+    - ! "---\nname: Ломоносов\ncreated_at: 2012-08-21 08:35:00.526027000 Z\nupdated_at:
+      2012-08-30 08:36:33.011629000 Z\nhost: lomonosov.parallel.ru\ndescription: ''\nstate:
+      active\nadd_user: ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\n\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'`\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$name\\\" \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit\n  100\\r\\n\"\ndel_user:
+      ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\naddr=\\\"$host\\\"\\r\\n\\r\\nname=`echo
+      \\\"$user\\\"\n  | awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif
+      ssh \\\"$addr\\\" sudo deluser\n  \\\"$name\\\"; then\\r\\n  exit 0\\r\\nfi\\r\\n\\r\\nerr
+      Exit code: $?\\r\\nexit 100\"\nadd_openkey: ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\necho\n
+      \ $public_key >&2\"\ndel_openkey: ! \"project=%project%\\r\\nuser=%user%\\r\\nhost=%host%\\r\\npublic_key=%public_key%\\r\\nnew_attribute=%new_attribute%\"\nblock_user:
+      ! \"project=%project%\\r\\nhost=%host%\\r\\nnew_attribute=%new_attribute%\"\nunblock_user:
+      ! \"project=%project%\\r\\nhost=%host%\\r\\nnew_attribute=%new_attribute%\"\nstatistic:
+      \nget_statistic: host=%host%\nstatistic_updated_at: \ncluster_user_type: account\nid:
+      1\n"
+    - '2012-08-30 08:47:44.156067'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nadd_user:\n- ! \"project=%project%\\r\\nhost=%host%\\r\\nuser=%user%\\r\\n\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'`\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$name\\\" \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit\n  100\\r\\n\"\n- !
+      \"project=%project%\\r\\nhost=%host%\\r\\n#user=%user%\\r\\n\\r\\nuser=\\\"$project\\\"\\r\\n\\r\\nnew_attribute=%new_attribute%\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'`\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$name\\\" \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit\n  100\\r\\n\"\n"
+  - - '177'
+    - Task
+    - '10'
+    - create
+    - '4'
+    - 
+    - '2012-08-30 08:49:29.146738'
+    - 
+  - - '178'
+    - Task
+    - '10'
+    - update
+    - 
+    - ! "---\ncommand: ! \"project=\\\"project_2\\\"\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\\r\\n#user=%user%\\r\\nuser=\\\"$project\\\"\\r\\n\\r\\nnew_attribute=\\\"\\\"\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'`\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$name\\\" \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit\n  100\\r\\n\"\nstderr:
+      \nstdout: \nstate: pending\nresource_type: ClusterUser\nresource_id: 2\ncreated_at:
+      2012-08-30 08:49:29.144875000 Z\nupdated_at: 2012-08-30 08:49:29.144875000 Z\nprocedure:
+      add_user\ndata: \nevent: \ncomment: \ncallbacks_performed: false\ntask_id: 8\nid:
+      10\n"
+    - '2012-08-30 08:49:30.209754'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nstderr:\n- \n- !
+      \"cat: : No such file or directory\\nbash: line 4: \\r: command not found\\nbash:\n
+      \ line 6: \\r: command not found\\nbash: -c: line 7: syntax error near unexpected
+      token\n  `{\\r'\\nbash: -c: line 7: `function err() {\\r'\\n\"\nstdout:\n- \n-
+      ''\nstate:\n- pending\n- failed\n"
+  - - '179'
+    - Task
+    - '11'
+    - create
+    - '4'
+    - 
+    - '2012-08-30 10:07:29.917814'
+    - 
+  - - '180'
+    - Task
+    - '11'
+    - update
+    - 
+    - ! "---\ncommand: ! \"project=\\\"project_2\\\"\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\\r\\n#user=%user%\\r\\nuser=\\\"$project\\\"\\r\\n\\r\\nnew_attribute=\\\"\\\"\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'`\\r\\n\\r\\nif echo ssh
+      \\\"$addr\\\" sudo\n  /usr/sbin/adduser_extended \\\"$name\\\" \\\"$project\\\";
+      then\\r\\n  err ok\\r\\n  exit 0\\r\\nfi\\r\\n\\r\\nerr\n  Exit code: $?\\r\\nexit
+      100\\r\\n\"\nstderr: \nstdout: \nstate: pending\nresource_type: ClusterUser\nresource_id:
+      2\ncreated_at: 2012-08-30 10:07:29.915799000 Z\nupdated_at: 2012-08-30 10:07:29.915799000
+      Z\nprocedure: add_user\ndata: \nevent: \ncomment: \ncallbacks_performed: false\ntask_id:
+      10\nid: 11\n"
+    - '2012-08-30 10:07:31.210572'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nstderr:\n- \n- !
+      \"cat: : No such file or directory\\nbash: line 4: \\r: command not found\\nbash:\n
+      \ line 6: \\r: command not found\\nbash: -c: line 7: syntax error near unexpected
+      token\n  `{\\r'\\nbash: -c: line 7: `function err() {\\r'\\n\"\nstdout:\n- \n-
+      ''\nstate:\n- pending\n- failed\n"
+  - - '181'
+    - Task
+    - '12'
+    - create
+    - '4'
+    - 
+    - '2012-08-31 09:29:13.014733'
+    - 
+  - - '182'
+    - Credential
+    - '5'
+    - create
+    - '6'
+    - 
+    - '2012-08-31 10:19:29.655003'
+    - 
+  - - '183'
+    - Access
+    - '3'
+    - create
+    - '6'
+    - 
+    - '2012-08-31 10:19:29.750445'
+    - 
+  - - '184'
+    - Access
+    - '3'
+    - update
+    - '6'
+    - ! "---\ncredential_id: \nstate: pending\ncreated_at: \nupdated_at: \ncluster_user_id:
+      \nid: \n"
+    - '2012-08-31 10:19:29.779512'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ncredential_id:\n-
+      \n- 5\ncluster_user_id:\n- \n- 2\ncreated_at:\n- \n- 2012-08-31 10:19:29.731927756
+      Z\nupdated_at:\n- \n- 2012-08-31 10:19:29.731927756 Z\nid:\n- \n- 3\nstate:\n-
+      pending\n- activing\n"
+  - - '185'
+    - Task
+    - '13'
+    - create
+    - '6'
+    - 
+    - '2012-08-31 10:19:29.792245'
+    - 
+  - - '186'
+    - Task
+    - '11'
+    - update
+    - '4'
+    - ! "---\ncommand: ! \"project=\\\"project_2\\\"\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\\r\\n#user=%user%\\r\\nuser=\\\"$project\\\"\\r\\n\\r\\nnew_attribute=\\\"\\\"\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'`\\r\\n\\r\\nif echo ssh
+      \\\"$addr\\\" sudo\n  /usr/sbin/adduser_extended \\\"$name\\\" \\\"$project\\\";
+      then\\r\\n  err ok\\r\\n  exit 0\\r\\nfi\\r\\n\\r\\nerr\n  Exit code: $?\\r\\nexit
+      100\\r\\n\"\nstderr: ! \"cat: : No such file or directory\\nbash: line 4: \\r:
+      command not found\\nbash:\n  line 6: \\r: command not found\\nbash: -c: line
+      7: syntax error near unexpected token\n  `{\\r'\\nbash: -c: line 7: `function
+      err() {\\r'\\n\"\nstdout: ''\nstate: failed\nresource_type: ClusterUser\nresource_id:
+      2\ncreated_at: 2012-08-30 10:07:29.915799000 Z\nupdated_at: 2012-08-30 10:07:31.205816000
+      Z\nprocedure: add_user\ndata: \nevent: \ncomment: \ncallbacks_performed: false\ntask_id:
+      10\nid: 11\n"
+    - '2012-08-31 12:57:21.126178'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - failed
+
+      - successed
+
+'
+  - - '187'
+    - Task
+    - '10'
+    - update
+    - '4'
+    - ! "---\ncommand: ! \"project=\\\"project_2\\\"\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\\r\\n#user=%user%\\r\\nuser=\\\"$project\\\"\\r\\n\\r\\nnew_attribute=\\\"\\\"\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'`\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$name\\\" \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit\n  100\\r\\n\"\nstderr:
+      ! \"cat: : No such file or directory\\nbash: line 4: \\r: command not found\\nbash:\n
+      \ line 6: \\r: command not found\\nbash: -c: line 7: syntax error near unexpected
+      token\n  `{\\r'\\nbash: -c: line 7: `function err() {\\r'\\n\"\nstdout: ''\nstate:
+      failed\nresource_type: ClusterUser\nresource_id: 2\ncreated_at: 2012-08-30 08:49:29.144875000
+      Z\nupdated_at: 2012-08-30 08:49:30.204793000 Z\nprocedure: add_user\ndata: \nevent:
+      \ncomment: \ncallbacks_performed: false\ntask_id: 8\nid: 10\n"
+    - '2012-08-31 12:58:50.464653'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - failed
+
+      - successed
+
+'
+  - - '188'
+    - Task
+    - '9'
+    - update
+    - '4'
+    - ! "---\ncommand: ! \"project=\\\"project_2\\\"\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\\r\\nuser=%user%\\r\\n\\r\\nnew_attribute=\\\"\\\"\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'`\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$name\\\" \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit\n  100\\r\\n\"\nstderr:
+      ! \"cat: : No such file or directory\\nbash: line 3: \\r: command not found\\nbash:\n
+      \ line 5: \\r: command not found\\nbash: -c: line 6: syntax error near unexpected
+      token\n  `{\\r'\\nbash: -c: line 6: `function err() {\\r'\\n\"\nstdout: ''\nstate:
+      failed\nresource_type: ClusterUser\nresource_id: 2\ncreated_at: 2012-08-30 08:36:50.688807000
+      Z\nupdated_at: 2012-08-30 08:36:54.736701000 Z\nprocedure: add_user\ndata: \nevent:
+      \ncomment: \ncallbacks_performed: false\ntask_id: 8\nid: 9\n"
+    - '2012-08-31 12:58:57.396619'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - failed
+
+      - successed
+
+'
+  - - '189'
+    - Task
+    - '8'
+    - update
+    - '4'
+    - ! "---\ncommand: ! \"project=\\\"project_2\\\"\\r\\nhost=\\\"lomonosov.parallel.ru\\\"\\r\\nuser=%user%\\r\\n\\r\\nnew_attribute=\\\"\\\"\\r\\n\\r\\nfunction\n
+      \ err() {\\r\\n  echo $@ >&2\\r\\n}\\r\\n\\r\\nif [ \\\"x$host\\\" = \\\"x\\\"
+      ]; then\\r\\n  err \\\"No\n  cluster name\\\"\\r\\n  exit 1\\r\\nfi\\r\\n\\r\\n#if
+      [ -f \\\"$host\\\" ]; then\\r\\n#        addr=`cat\n  \\\"$1\\\"`\\r\\n#else\\r\\n
+      \       addr=\\\"$host\\\"\\r\\n#fi\\r\\n\\r\\nname=`echo \\\"$user\\\" |\n
+      \ awk '{ gsub(/ |;|\\\\||<|>|&/, \\\"_\\\"); print }'\\r\\n\\r\\nif ssh \\\"$addr\\\"
+      sudo /usr/sbin/adduser_extended\n  \\\"$name\\\" \\\"$project\\\"; then\\r\\n
+      \ exit 0\\r\\nfi\\r\\n\\r\\nerr Exit code: $?\\r\\nexit\n  100\\r\\n\"\nstderr:
+      ! 'sh: Syntax error: EOF in backquote substitution\n\n'\nstdout: ''\nstate:
+      failed\nresource_type: ClusterUser\nresource_id: 2\ncreated_at: 2012-08-30 08:34:43.242511000
+      Z\nupdated_at: 2012-08-30 08:34:44.393329000 Z\nprocedure: add_user\ndata: \nevent:
+      \ncomment: \ncallbacks_performed: false\ntask_id: \nid: 8\n"
+    - '2012-08-31 12:59:01.733772'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - failed
+
+      - successed
+
+'
+  - - '190'
+    - Task
+    - '1'
+    - update
+    - '4'
+    - ! "---\ncommand: ! \"user=%user\\r\\n%host=\\\"lomonosov.parallel.ru\\\"\"\nstderr:
+      ! 'bash: line 1: fg: no job control\n\n'\nstdout: ''\nstate: failed\nresource_type:
+      ClusterUser\nresource_id: 1\ncreated_at: 2012-08-21 12:06:35.046108000 Z\nupdated_at:
+      2012-08-21 12:06:36.228820000 Z\nprocedure: add_user\ndata: \nevent: \ncomment:
+      \ncallbacks_performed: false\ntask_id: \nid: 1\n"
+    - '2012-08-31 12:59:09.320093'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - failed
+
+      - successed
+
+'
+  - - '191'
+    - Credential
+    - '6'
+    - create
+    - '6'
+    - 
+    - '2012-08-31 12:59:48.039212'
+    - 
+  - - '192'
+    - Access
+    - '4'
+    - create
+    - '6'
+    - 
+    - '2012-08-31 12:59:48.052825'
+    - 
+  - - '193'
+    - Access
+    - '4'
+    - update
+    - '6'
+    - ! "---\ncredential_id: \nstate: pending\ncreated_at: \nupdated_at: \ncluster_user_id:
+      \nid: \n"
+    - '2012-08-31 12:59:48.058392'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ncredential_id:\n-
+      \n- 6\ncluster_user_id:\n- \n- 2\ncreated_at:\n- \n- 2012-08-31 12:59:48.049900107
+      Z\nupdated_at:\n- \n- 2012-08-31 12:59:48.049900107 Z\nid:\n- \n- 4\nstate:\n-
+      pending\n- activing\n"
+  - - '194'
+    - Task
+    - '14'
+    - create
+    - '6'
+    - 
+    - '2012-08-31 12:59:48.065006'
+    - 
+  - - '195'
+    - Credential
+    - '7'
+    - create
+    - '6'
+    - 
+    - '2012-08-31 13:48:20.169189'
+    - 
+  - - '196'
+    - Access
+    - '5'
+    - create
+    - '6'
+    - 
+    - '2012-08-31 13:48:20.179513'
+    - 
+  - - '197'
+    - Access
+    - '5'
+    - update
+    - '6'
+    - ! "---\ncredential_id: \nstate: pending\ncreated_at: \nupdated_at: \ncluster_user_id:
+      \nid: \n"
+    - '2012-08-31 13:48:20.184091'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ncredential_id:\n-
+      \n- 7\ncluster_user_id:\n- \n- 2\ncreated_at:\n- \n- 2012-08-31 13:48:20.177773293
+      Z\nupdated_at:\n- \n- 2012-08-31 13:48:20.177773293 Z\nid:\n- \n- 5\nstate:\n-
+      pending\n- activing\n"
+  - - '198'
+    - Task
+    - '15'
+    - create
+    - '6'
+    - 
+    - '2012-08-31 13:48:20.190614'
+    - 
+  - - '199'
+    - Project
+    - '2'
+    - update
+    - '4'
+    - ! "---\nname: оптимизация процессов клининга в труднодоступных местах\ncreated_at:
+      2012-08-30 08:20:17.304234000 Z\nupdated_at: 2012-08-30 08:20:17.304234000 Z\nuser_id:
+      6\nstate: active\ndescription: оптимизация процессов клининга в труднодоступных
+      местах с использованием\n  передовых нанотехнологий\norganization_id: 5\ncluster_user_type:
+      account\nusername: project_2\nid: 2\n"
+    - '2012-08-31 14:09:42.429866'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - closed
+
+'
+  - - '200'
+    - Account
+    - '2'
+    - update
+    - '4'
+    - ! '---
+
+      user_id: 6
+
+      project_id: 2
+
+      created_at: 2012-08-30 08:20:17.310906000 Z
+
+      updated_at: 2012-08-30 08:20:17.349266000 Z
+
+      state: active
+
+      username: account_2
+
+      id: 2
+
+'
+    - '2012-08-31 14:09:42.462465'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - closed
+
+'
+  - - '201'
+    - Access
+    - '5'
+    - update
+    - '4'
+    - ! '---
+
+      credential_id: 7
+
+      state: activing
+
+      created_at: 2012-08-31 13:48:20.177773000 Z
+
+      updated_at: 2012-08-31 13:48:20.177773000 Z
+
+      cluster_user_id: 2
+
+      id: 5
+
+'
+    - '2012-08-31 14:09:42.472357'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - closing
+
+'
+  - - '202'
+    - Task
+    - '16'
+    - create
+    - '4'
+    - 
+    - '2012-08-31 14:09:42.477787'
+    - 
+  - - '203'
+    - Access
+    - '4'
+    - update
+    - '4'
+    - ! '---
+
+      credential_id: 6
+
+      state: activing
+
+      created_at: 2012-08-31 12:59:48.049900000 Z
+
+      updated_at: 2012-08-31 12:59:48.049900000 Z
+
+      cluster_user_id: 2
+
+      id: 4
+
+'
+    - '2012-08-31 14:09:42.486528'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - closing
+
+'
+  - - '204'
+    - Task
+    - '17'
+    - create
+    - '4'
+    - 
+    - '2012-08-31 14:09:42.491747'
+    - 
+  - - '205'
+    - Access
+    - '3'
+    - update
+    - '4'
+    - ! '---
+
+      credential_id: 5
+
+      state: activing
+
+      created_at: 2012-08-31 10:19:29.731927000 Z
+
+      updated_at: 2012-08-31 10:19:29.731927000 Z
+
+      cluster_user_id: 2
+
+      id: 3
+
+'
+    - '2012-08-31 14:09:42.499473'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - closing
+
+'
+  - - '206'
+    - Task
+    - '18'
+    - create
+    - '4'
+    - 
+    - '2012-08-31 14:09:42.504638'
+    - 
+  - - '207'
+    - ClusterUser
+    - '2'
+    - update
+    - '4'
+    - ! '---
+
+      project_id: 2
+
+      state: activing
+
+      cluster_id: 1
+
+      created_at: 2012-08-30 08:34:43.223908000 Z
+
+      updated_at: 2012-08-30 08:34:43.223908000 Z
+
+      request_id: 3
+
+      id: 2
+
+'
+    - '2012-08-31 14:09:42.516163'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - closing
+
+'
+  - - '208'
+    - Task
+    - '19'
+    - create
+    - '4'
+    - 
+    - '2012-08-31 14:09:42.521374'
+    - 
+  - - '209'
+    - Request
+    - '3'
+    - update
+    - '4'
+    - ! "---\nproject_id: 2\ncluster_id: 1\nhours: 1023\ncreated_at: 2012-08-30 08:20:17.319464000
+      Z\nupdated_at: 2012-08-30 08:34:43.214476000 Z\nuser_id: 6\nstate: active\nsize:
+      12\ncomment: \nid: 3\n"
+    - '2012-08-31 14:09:42.558096'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - closed
+
+'
+  - - '210'
+    - Project
+    - '2'
+    - destroy
+    - 
+    - ! "---\nname: оптимизация процессов клининга в труднодоступных местах\ncreated_at:
+      2012-08-30 08:20:17.304234000 Z\nupdated_at: 2012-08-31 14:09:42.428223000 Z\nuser_id:
+      6\nstate: closed\ndescription: оптимизация процессов клининга в труднодоступных
+      местах с использованием\n  передовых нанотехнологий\norganization_id: 5\ncluster_user_type:
+      account\nusername: project_2\nid: 2\n"
+    - '2012-09-06 13:26:45.287319'
+    - 
+  - - '211'
+    - Account
+    - '2'
+    - destroy
+    - 
+    - ! '---
+
+      user_id: 6
+
+      project_id: 2
+
+      created_at: 2012-08-30 08:20:17.310906000 Z
+
+      updated_at: 2012-08-31 14:09:42.442552000 Z
+
+      state: closed
+
+      username: account_2
+
+      id: 2
+
+'
+    - '2012-09-06 13:27:07.188977'
+    - 
+  - - '212'
+    - ClusterUser
+    - '2'
+    - destroy
+    - 
+    - ! "---\nstate: closing\ncreated_at: 2012-08-30 08:34:43.223908000 Z\nupdated_at:
+      2012-08-31 14:09:42.515055000 Z\naccount_id: \ncluster_project_id: \nusername:
+      \nid: 2\n"
+    - '2012-09-06 13:27:39.897845'
+    - 
+  - - '215'
+    - ClusterProject
+    - '1'
+    - create
+    - 
+    - 
+    - '2012-09-06 13:28:35.810832'
+    - 
+  - - '216'
+    - ClusterProject
+    - '1'
+    - update
+    - 
+    - ! "---\nstate: initialized\nproject_id: \ncluster_id: \nusername: \nid: \n"
+    - '2012-09-06 13:28:51.592474'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      1\ncluster_id:\n- \n- 1\nusername:\n- \n- project_1\nid:\n- \n- 1\n"
+  - - '217'
+    - ClusterUser
+    - '1'
+    - update
+    - 
+    - ! "---\nstate: active\ncreated_at: 2012-08-21 12:06:34.938125000 Z\nupdated_at:
+      2012-08-21 12:28:48.161723000 Z\naccount_id: \ncluster_project_id: \nusername:
+      \nid: 1\n"
+    - '2012-09-06 13:30:01.148007'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\ncluster_project_id:\n-
+      \n- 1\nusername:\n- \n- account_1\naccount_id:\n- \n- 1\n"
+  - - '218'
+    - Access
+    - '5'
+    - destroy
+    - 
+    - ! '---
+
+      credential_id: 7
+
+      state: closing
+
+      created_at: 2012-08-31 13:48:20.177773000 Z
+
+      updated_at: 2012-08-31 14:09:42.471339000 Z
+
+      cluster_user_id: 2
+
+      id: 5
+
+'
+    - '2012-09-06 13:31:09.537948'
+    - 
+  - - '219'
+    - Access
+    - '4'
+    - destroy
+    - 
+    - ! '---
+
+      credential_id: 6
+
+      state: closing
+
+      created_at: 2012-08-31 12:59:48.049900000 Z
+
+      updated_at: 2012-08-31 14:09:42.485468000 Z
+
+      cluster_user_id: 2
+
+      id: 4
+
+'
+    - '2012-09-06 13:31:12.508923'
+    - 
+  - - '220'
+    - Access
+    - '3'
+    - destroy
+    - 
+    - ! '---
+
+      credential_id: 5
+
+      state: closing
+
+      created_at: 2012-08-31 10:19:29.731927000 Z
+
+      updated_at: 2012-08-31 14:09:42.498334000 Z
+
+      cluster_user_id: 2
+
+      id: 3
+
+'
+    - '2012-09-06 13:31:14.955164'
+    - 
+  - - '221'
+    - Access
+    - '2'
+    - destroy
+    - 
+    - ! '---
+
+      credential_id: 1
+
+      state: active
+
+      created_at: 2012-08-21 12:10:46.733585000 Z
+
+      updated_at: 2012-08-21 12:10:47.271802000 Z
+
+      cluster_user_id: 1
+
+      id: 2
+
+'
+    - '2012-09-06 13:31:19.607665'
+    - 
+  - - '222'
+    - Access
+    - '1'
+    - destroy
+    - 
+    - ! '---
+
+      credential_id: 2
+
+      state: active
+
+      created_at: 2012-08-21 12:10:46.697631000 Z
+
+      updated_at: 2012-08-21 12:10:47.006593000 Z
+
+      cluster_user_id: 1
+
+      id: 1
+
+'
+    - '2012-09-06 13:31:24.464004'
+    - 
+  - - '223'
+    - Access
+    - '6'
+    - create
+    - 
+    - 
+    - '2012-09-06 13:32:52.653858'
+    - 
+  - - '224'
+    - Request
+    - '3'
+    - destroy
+    - 
+    - ! "---\nhours: 1023\ncreated_at: 2012-08-30 08:20:17.319464000 Z\nupdated_at:
+      2012-08-31 14:09:42.530759000 Z\nuser_id: 6\nstate: closed\nsize: 12\ncomment:
+      \ncluster_project_id: \nid: 3\n"
+    - '2012-09-06 13:33:22.154158'
+    - 
+  - - '225'
+    - Request
+    - '2'
+    - destroy
+    - 
+    - ! "---\nhours: 80\ncreated_at: 2012-08-21 12:28:42.405202000 Z\nupdated_at:
+      2012-08-21 12:28:45.899740000 Z\nuser_id: 1\nstate: active\nsize: 20\ncomment:
+      \ncluster_project_id: \nid: 2\n"
+    - '2012-09-06 13:33:22.229179'
+    - 
+  - - '226'
+    - Request
+    - '1'
+    - destroy
+    - 
+    - ! "---\nhours: 8\ncreated_at: 2012-08-21 11:45:49.672558000 Z\nupdated_at: 2012-08-21
+      12:22:14.278712000 Z\nuser_id: 1\nstate: closed\nsize: 80\ncomment: \ncluster_project_id:
+      \nid: 1\n"
+    - '2012-09-06 13:33:22.239349'
+    - 
+  - - '229'
+    - ClusterProject
+    - '2'
+    - create
+    - 
+    - 
+    - '2012-09-06 13:51:02.916437'
+    - 
+  - - '230'
+    - ClusterProject
+    - '2'
+    - update
+    - 
+    - ! "---\nstate: initialized\nproject_id: \ncluster_id: \nusername: \nid: \n"
+    - '2012-09-06 13:51:11.096331'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      1\ncluster_id:\n- \n- 1\nid:\n- \n- 2\n"
+  - - '231'
+    - Request
+    - '4'
+    - create
+    - '1'
+    - 
+    - '2012-09-06 13:52:26.55908'
+    - 
+  - - '232'
+    - Request
+    - '4'
+    - update
+    - '2'
+    - ! "---\nhours: 8\ncreated_at: 2012-09-06 13:52:26.538972000 Z\nupdated_at: 2012-09-06
+      13:52:26.538972000 Z\nuser_id: 1\nstate: pending\nsize: 10\ncomment: \ncluster_project_id:
+      1\nid: 4\n"
+    - '2012-09-06 13:52:54.298791'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - pending
+
+      - active
+
+'
+  - - '233'
+    - ClusterProject
+    - '1'
+    - update
+    - '2'
+    - ! '---
+
+      state: initialized
+
+      project_id: 1
+
+      cluster_id: 1
+
+      username: project_1
+
+      id: 1
+
+'
+    - '2012-09-06 13:52:54.307899'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - initialized
+
+      - activing
+
+'
+  - - '234'
+    - Task
     - '20'
+    - create
+    - '2'
+    - 
+    - '2012-09-06 13:52:54.333541'
     - 
 
 ---
@@ -2069,6 +3643,460 @@ credentials:
     - '2012-08-21 10:21:28.785332'
     - iMac
     - closed
+  - - '3'
+    - ! 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA0irsViKCtkwRS6zTCfLHFxzSGRG04FXsDLCI0J0f7QBT6JCi1cdMITQhFWxctfz4TwF5j5mFwql6mK6PkjjoCbrXk4Sz6o53idGxJgAAU8QnbEugPs0Iz7Dsjq4QH+3VZ891C+x0xfvLjBoUxErloR5LvlCHfg++YdWr8ezyNkVkMS+Ge0sMuSd/Gjp+9hG3GYWzSpnKQvrBeLqpmmLM9RBiV54vqBt2c0qrBT1ASKQkpSY4K+kUWifbRPKSIYgBkkbUVXfcgOaWYngNldqL8rWXZahrQOmt9QBgzg2doZlx6+35Xh6+DbYTggZ0QjgmduqCDCzTinl481bUWwbCaQ==
+      serg@asi
+
+'
+    - '6'
+    - '2012-08-30 08:16:48.305087'
+    - '2012-08-30 08:17:02.149349'
+    - вас
+    - closed
+  - - '4'
+    - ! 'ssh-dss AAAAB3NzaC1kc3MAAACBAL//zfxdvniIWYKEVqUJVOmPT/lqkgYukRVWkRmoq0kc05f+0bdemzfJf9y34tJ/qX4tJYtjfyevo+7Nh/lR0NaUwXi1eqdXoRK3TfnhWX8GrtemdJDMnB2lVMGV4Pl9/QFY4hAp8IbAZJtAF6nfNtoioDf20FfSlq6x1ydSd0hRAAAAFQDeIQ55l16+H+O2a/wl3eYqrVc0KQAAAIAFPLEyNx4grRnNDFzkcIsd2M0uT3ANBPnzcDQpiBPAop4Bdtg6Hbmdv+K3q72L84Gm1OqN8j4gqel2QrJrdOOpun/TW7+NJWpuSHmpqiCiJr695nwv8zMwDXrDpSXpopXIDq+m/IifIuAaXq6gJnnTMjW7Wcbl6cCQil4mDHeBLAAAAIA2bEdg5UW3JS1OvgqKgoxEj6/AKLU8CzaQNKY5GgkKqz2q/XpuySk7OOfLPTRMVX4F38vOb+lXFqttDiZzwZPTlaVWeo5PE2TpyOAKtL2pcBE/47bzA4Gait2meMjhkZvG5RVjBVW0b/Joqbsfm7Ix0EF1tWRzwsAMQ964AmteVw==
+      serg@asi
+
+'
+    - '6'
+    - '2012-08-30 08:18:05.751446'
+    - '2012-08-30 08:18:05.751446'
+    - вас2
+    - active
+  - - '5'
+    - ! 'ssh-dss AAAAB3NzaC1kc3MAAACBAIHmeCbXtvqvcecPDKGP8CHpABBC8d0o/nANBj/HfXZNXb9sPdu8ZaxZL6v7+rRL4XKNxeUvJRs6qAMeTDJrIsNKVzewhFNOqtBsWQ/NEwNRBDnZz8Vlt1lgulQXjR8Rt8TaZulJORAcefYhYuCZxq1xddxHDXSoXC3Z1Mdby9idAAAAFQDijLXa7V7Ha8YfH26xdzP8kvZFzQAAAIBo6OCJUskOBy2idiCkSVxSDRoZLAXoY6LmpGSf/d0aZplqAF6mCjkPhme8gnMuqmG4o83OSwzrsANbpChSzZZHAq0ZVxD5TM8Yp+yINo+VqMwfcKMqwWDPNrkkOyMicfkBAPTTfqp3sU/ZiAttMJPwOvK7UpKOui/Q8nccpzNczwAAAIAv7b9gEp6vQCBJyrOsVmX0xPzZWQay2KfLFJSBgleyq72R1q+T8Uw7muyu6+rWVKDq8zzyTvW7QT8tjw6cBId2XCRxJ+JSV95zxrdOSIQ+bjva7XU7Msxt4Dfw0SEYXJVrh+SshauoVNxXQwr+MpUEUW5Bb9JF5m1YWVA/7SAZhg==
+      serg@asi
+
+'
+    - '6'
+    - '2012-08-31 10:19:29.611057'
+    - '2012-08-31 10:19:29.611057'
+    - new
+    - active
+  - - '6'
+    - qwe
+    - '6'
+    - '2012-08-31 12:59:48.036174'
+    - '2012-08-31 12:59:48.036174'
+    - new2
+    - active
+  - - '7'
+    - ssh-dss AAAAB3NzaC1kc3MAAACBAOzP+WK/401N9teELEmwWALGwwaAhyWsN5j5EhvsgtUk0c7uaYRa44D/Tboy8VU6WYC13x1YjHgt0Zt8RTMVLZU7vny8Eq/wv296eZ82xQ1y6WWkjgr8c+sitGcQLs7l1IDXFSJ6E/5nuXr9bsuSXjkxCysY8Zk0fy4ESVmWNwuPAAAAFQCGtJ1uK5IF42thC0FbyiT9Pl5NTQAAAIEAsob0Qs4hc4T71OAV+Uh8jLefXCrSPtV+3TqlmdBkxgPT/SeXLh41QcOSfH+wYHMnKRWCyVIyEapMBekmq1q+ur2P15XCehxHsgpoJ5PXBRn0ohs4wMGcueSI/RzZ1pD4gheKHrcm9vbIUmLP7Y5NUpS1987SXbHILQ23avi9zdwAAACBAI6eOirPGAgD99iZBL6+8HPdguRKZBZaGrC8jKH2Z34RXSTshf1wK3Fy5cH2+/sxQp9zG7neIeBLrVHsrFGHkrgOUxIiABC7QjPsQNC07YnYafHTISGJf/9/xA4RW7I2JqSi1BEr5l/j+olEvsB6HWeKlYt60G6heSMPMJdaNO54
+      serg@asi_n
+    - '6'
+    - '2012-08-31 13:48:20.167215'
+    - '2012-08-31 13:48:20.167215'
+    - new3
+    - active
+
+---
+cluster_projects:
+  columns:
+  - id
+  - state
+  - project_id
+  - cluster_id
+  - username
+  records: 
+  - - '1'
+    - activing
+    - '1'
+    - '1'
+    - project_1
+
+---
+accounts:
+  columns:
+  - id
+  - user_id
+  - project_id
+  - created_at
+  - updated_at
+  - state
+  - username
+  records: 
+  - - '1'
+    - '1'
+    - '1'
+    - '2012-08-21 11:45:49.667293'
+    - '2012-08-28 07:02:33.096415'
+    - active
+    - account_1
+
+---
+position_names:
+  columns:
+  - id
+  - name
+  - created_at
+  - updated_at
+  records: 
+  - - '1'
+    - Факультет
+    - '2012-08-21 08:07:17.423515'
+    - '2012-08-21 08:07:17.423515'
+  - - '2'
+    - Кафедра
+    - '2012-08-21 08:07:22.779602'
+    - '2012-08-21 08:07:22.779602'
+  - - '3'
+    - Должность
+    - '2012-08-21 08:07:36.272265'
+    - '2012-08-21 08:07:36.272265'
+  - - '4'
+    - Группа
+    - '2012-08-21 08:07:43.285538'
+    - '2012-08-21 08:07:43.285538'
+
+---
+organizations:
+  columns:
+  - id
+  - name
+  - approved
+  - created_at
+  - updated_at
+  - state
+  - abbreviation
+  - organization_kind_id
+  records: 
+  - - '1'
+    - Evrone
+    - false
+    - '2012-08-21 08:08:29.570732'
+    - '2012-08-21 08:08:29.570732'
+    - active
+    - EVR
+    - '2'
+  - - '2'
+    - Московский Государственный Институт
+    - false
+    - '2012-08-21 08:10:10.401863'
+    - '2012-08-21 08:10:10.401863'
+    - active
+    - МГУ
+    - '1'
+  - - '4'
+    - Umbrella
+    - false
+    - '2012-08-21 13:55:09.954994'
+    - '2012-08-21 13:56:08.797692'
+    - closed
+    - ''
+    - '3'
+  - - '5'
+    - Овощебаза N 5
+    - false
+    - '2012-08-30 08:14:21.019985'
+    - '2012-08-30 08:14:21.019985'
+    - active
+    - ОН5
+    - '2'
+
+---
+positions:
+  columns:
+  - id
+  - membership_id
+  - name
+  - value
+  - created_at
+  - updated_at
+  records: 
+  - - '1'
+    - '1'
+    - Должность
+    - Developer
+    - '2012-08-21 08:31:06.88706'
+    - '2012-08-21 08:31:06.88706'
+  - - '2'
+    - '2'
+    - Группа
+    - клинеры
+    - '2012-08-30 08:19:15.175198'
+    - '2012-08-30 08:19:15.175198'
+  - - '3'
+    - '2'
+    - Должность
+    - старший помощник менеджера
+    - '2012-08-30 08:19:15.178832'
+    - '2012-08-30 08:19:15.178832'
+  - - '4'
+    - '2'
+    - Кафедра
+    - Клиниг
+    - '2012-08-30 08:19:15.181064'
+    - '2012-08-30 08:19:15.181064'
+  - - '5'
+    - '2'
+    - Факультет
+    - Головной офис
+    - '2012-08-30 08:19:15.183219'
+    - '2012-08-30 08:19:15.183219'
+
+---
+tasks:
+  columns:
+  - id
+  - resource_type
+  - resource_id
+  - created_at
+  - updated_at
+  - procedure
+  - comment
+  - callbacks_performed
+  - task_id
+  - state
+  records: 
+  - - '1'
+    - ClusterUser
+    - '1'
+    - '2012-08-21 12:06:35.046108'
+    - '2012-08-31 12:59:09.318945'
+    - add_user
+    - 
+    - false
+    - 
+    - 
+  - - '2'
+    - ClusterUser
+    - '1'
+    - '2012-08-21 12:10:43.163073'
+    - '2012-08-21 12:10:46.752123'
+    - add_user
+    - 
+    - true
+    - 
+    - 
+  - - '3'
+    - Access
+    - '1'
+    - '2012-08-21 12:10:46.725237'
+    - '2012-08-21 12:10:47.011597'
+    - add_openkey
+    - 
+    - true
+    - 
+    - 
+  - - '4'
+    - Access
+    - '2'
+    - '2012-08-21 12:10:46.746346'
+    - '2012-08-21 12:10:47.276529'
+    - add_openkey
+    - 
+    - true
+    - 
+    - 
+  - - '5'
+    - ClusterUser
+    - '1'
+    - '2012-08-21 12:22:14.298482'
+    - '2012-08-21 12:22:17.759967'
+    - block_user
+    - 
+    - true
+    - 
+    - 
+  - - '6'
+    - ClusterUser
+    - '1'
+    - '2012-08-21 12:28:45.914615'
+    - '2012-08-21 12:28:48.166829'
+    - unblock_user
+    - 
+    - true
+    - 
+    - 
+  - - '7'
+    - ClusterUser
+    - '1'
+    - '2012-08-30 08:22:07.879717'
+    - '2012-08-30 08:22:08.801816'
+    - add_user
+    - 
+    - false
+    - '1'
+    - 
+  - - '8'
+    - ClusterUser
+    - '2'
+    - '2012-08-30 08:34:43.242511'
+    - '2012-08-31 12:59:01.732532'
+    - add_user
+    - 
+    - false
+    - 
+    - 
+  - - '9'
+    - ClusterUser
+    - '2'
+    - '2012-08-30 08:36:50.688807'
+    - '2012-08-31 12:58:57.395434'
+    - add_user
+    - 
+    - false
+    - '8'
+    - 
+  - - '10'
+    - ClusterUser
+    - '2'
+    - '2012-08-30 08:49:29.144875'
+    - '2012-08-31 12:58:50.463275'
+    - add_user
+    - 
+    - false
+    - '8'
+    - 
+  - - '11'
+    - ClusterUser
+    - '2'
+    - '2012-08-30 10:07:29.915799'
+    - '2012-08-31 12:57:21.124221'
+    - add_user
+    - 
+    - false
+    - '10'
+    - 
+  - - '12'
+    - ClusterUser
+    - '2'
+    - '2012-08-31 09:29:12.76412'
+    - '2012-08-31 09:29:12.76412'
+    - add_user
+    - 
+    - false
+    - '11'
+    - 
+  - - '13'
+    - Access
+    - '3'
+    - '2012-08-31 10:19:29.789331'
+    - '2012-08-31 10:19:29.789331'
+    - add_openkey
+    - 
+    - false
+    - 
+    - 
+  - - '14'
+    - Access
+    - '4'
+    - '2012-08-31 12:59:48.062992'
+    - '2012-08-31 12:59:48.062992'
+    - add_openkey
+    - 
+    - false
+    - 
+    - 
+  - - '15'
+    - Access
+    - '5'
+    - '2012-08-31 13:48:20.188426'
+    - '2012-08-31 13:48:20.188426'
+    - add_openkey
+    - 
+    - false
+    - 
+    - 
+  - - '16'
+    - Access
+    - '5'
+    - '2012-08-31 14:09:42.475751'
+    - '2012-08-31 14:09:42.475751'
+    - del_openkey
+    - 
+    - false
+    - 
+    - 
+  - - '17'
+    - Access
+    - '4'
+    - '2012-08-31 14:09:42.489955'
+    - '2012-08-31 14:09:42.489955'
+    - del_openkey
+    - 
+    - false
+    - 
+    - 
+  - - '18'
+    - Access
+    - '3'
+    - '2012-08-31 14:09:42.502849'
+    - '2012-08-31 14:09:42.502849'
+    - del_openkey
+    - 
+    - false
+    - 
+    - 
+  - - '19'
+    - ClusterUser
+    - '2'
+    - '2012-08-31 14:09:42.519496'
+    - '2012-08-31 14:09:42.519496'
+    - del_user
+    - 
+    - false
+    - 
+    - 
+  - - '20'
+    - ClusterProject
+    - '1'
+    - '2012-09-06 13:52:54.313395'
+    - '2012-09-06 13:52:54.313395'
+    - add_project
+    - 
+    - false
+    - 
+    - pending
+
+---
+requests:
+  columns:
+  - id
+  - hours
+  - created_at
+  - updated_at
+  - user_id
+  - state
+  - size
+  - comment
+  - cluster_project_id
+  records: 
+  - - '4'
+    - '8'
+    - '2012-09-06 13:52:26.538972'
+    - '2012-09-06 13:52:54.296727'
+    - '1'
+    - active
+    - '10'
+    - 
+    - '1'
+
+---
+sureties:
+  columns:
+  - id
+  - user_id
+  - organization_id
+  - state
+  - created_at
+  - updated_at
+  - comment
+  records: 
+  - - '1'
+    - '1'
+    - '1'
+    - active
+    - '2012-08-21 11:38:29.72647'
+    - '2012-08-21 11:45:00.839115'
+    - 
+  - - '2'
+    - '6'
+    - '5'
+    - active
+    - '2012-08-30 08:14:52.803318'
+    - '2012-08-30 08:15:53.535598'
+    - 
 
 ---
 users:
@@ -2176,13 +4204,13 @@ users:
     - 
   - - '4'
     - serg@parallel.ru
-    - $2a$10$3fpzZ/NBjr9/fEh2wEMu9.xZoL1uVHLnFgVqwv8CSbDuVkURiP4Uu
-    - udncVgooLxmnFy8HUsVR
+    - $2a$10$wbtxGhAVrnP2erXBa7uPxOdQJY7cJM7hxeMv1TH0onSso1Ll4Hc8C
+    - KHfeAZ2sqWaQjhcFQzpk
     - 
     - 
+    - YbsWdJKtsUQyJFhmJKke
     - 
-    - 
-    - 
+    - '2012-08-28 08:53:40.178903'
     - active
     - 
     - 
@@ -2191,7 +4219,7 @@ users:
     - ''
     - 
     - '2012-08-28 08:03:54.45671'
-    - '2012-08-28 08:05:20.895452'
+    - '2012-08-28 08:58:32.780889'
     - true
     - active
     - bf213d523c133c0c3a4b9df9da060afe45b1545a
@@ -2224,49 +4252,30 @@ users:
     - 
     - 
     - 
-
----
-position_names:
-  columns:
-  - id
-  - name
-  - created_at
-  - updated_at
-  records: 
-  - - '1'
-    - Факультет
-    - '2012-08-21 08:07:17.423515'
-    - '2012-08-21 08:07:17.423515'
-  - - '2'
-    - Кафедра
-    - '2012-08-21 08:07:22.779602'
-    - '2012-08-21 08:07:22.779602'
-  - - '3'
-    - Должность
-    - '2012-08-21 08:07:36.272265'
-    - '2012-08-21 08:07:36.272265'
-  - - '4'
-    - Группа
-    - '2012-08-21 08:07:43.285538'
-    - '2012-08-21 08:07:43.285538'
-
----
-sureties:
-  columns:
-  - id
-  - user_id
-  - organization_id
-  - state
-  - created_at
-  - updated_at
-  - comment
-  records: 
-  - - '1'
-    - '1'
-    - '1'
+  - - '6'
+    - serg@guru.ru
+    - $2a$10$hA8nuz7lFtlNQ6mSiKuHBeVK0ME9EVpL7qXb/7un9hmIrtolIwOq2
+    - u4WxUkykyzgAp7pzNMGw
+    - 
+    - 
+    - 
+    - 
+    - 
     - active
-    - '2012-08-21 11:38:29.72647'
-    - '2012-08-21 11:45:00.839115'
+    - 
+    - 
+    - Вассисуалий
+    - Пупкин
+    - ''
+    - 
+    - '2012-08-30 08:12:23.522845'
+    - '2012-08-30 08:19:15.197991'
+    - false
+    - sured
+    - c696b4a6bd3c311ba916ad0facc2c5573a8dae31
+    - 
+    - 
+    - 
     - 
 
 ---
@@ -2285,60 +4294,12 @@ memberships:
     - '2012-08-21 08:31:06.870304'
     - '2012-08-21 08:31:06.870304'
     - active
-
----
-organizations:
-  columns:
-  - id
-  - name
-  - approved
-  - created_at
-  - updated_at
-  - state
-  - abbreviation
-  - organization_kind_id
-  records: 
-  - - '1'
-    - Evrone
-    - false
-    - '2012-08-21 08:08:29.570732'
-    - '2012-08-21 08:08:29.570732'
-    - active
-    - EVR
-    - '2'
   - - '2'
-    - Московский Государственный Институт
-    - false
-    - '2012-08-21 08:10:10.401863'
-    - '2012-08-21 08:10:10.401863'
+    - '6'
+    - '5'
+    - '2012-08-30 08:19:15.170687'
+    - '2012-08-30 08:19:15.170687'
     - active
-    - МГУ
-    - '1'
-  - - '4'
-    - Umbrella
-    - false
-    - '2012-08-21 13:55:09.954994'
-    - '2012-08-21 13:56:08.797692'
-    - closed
-    - ''
-    - '3'
-
----
-positions:
-  columns:
-  - id
-  - membership_id
-  - name
-  - value
-  - created_at
-  - updated_at
-  records: 
-  - - '1'
-    - '1'
-    - Должность
-    - Developer
-    - '2012-08-21 08:31:06.88706'
-    - '2012-08-21 08:31:06.88706'
 
 ---
 projects:
@@ -2364,120 +4325,6 @@ projects:
     - '1'
     - account
     - project_1
-
----
-tasks:
-  columns:
-  - id
-  - command
-  - stderr
-  - stdout
-  - state
-  - resource_type
-  - resource_id
-  - created_at
-  - updated_at
-  - procedure
-  - data
-  - event
-  - comment
-  - callbacks_performed
-  - task_id
-  records: 
-  - - '1'
-    - ! "user=%user\r\n%host=\"lomonosov.parallel.ru\""
-    - ! 'bash: line 1: fg: no job control
-
-'
-    - ''
-    - failed
-    - ClusterUser
-    - '1'
-    - '2012-08-21 12:06:35.046108'
-    - '2012-08-21 12:06:36.22882'
-    - add_user
-    - 
-    - 
-    - 
-    - false
-    - 
-  - - '2'
-    - ! "user=\"project_1\"\r\nhost=\"lomonosov.parallel.ru\""
-    - ''
-    - ''
-    - successed
-    - ClusterUser
-    - '1'
-    - '2012-08-21 12:10:43.163073'
-    - '2012-08-21 12:10:46.752123'
-    - add_user
-    - 
-    - 
-    - 
-    - true
-    - 
-  - - '3'
-    - ! "user=\"project_1\"\r\nhost=\"lomonosov.parallel.ru\"\r\npublic_key=\"ssh-rsa
-      AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
-      releu@me.com\n\""
-    - ''
-    - ''
-    - successed
-    - Access
-    - '1'
-    - '2012-08-21 12:10:46.725237'
-    - '2012-08-21 12:10:47.011597'
-    - add_openkey
-    - 
-    - 
-    - 
-    - true
-    - 
-  - - '4'
-    - ! "user=\"project_1\"\r\nhost=\"lomonosov.parallel.ru\"\r\npublic_key=\"atata\""
-    - ''
-    - ''
-    - successed
-    - Access
-    - '2'
-    - '2012-08-21 12:10:46.746346'
-    - '2012-08-21 12:10:47.276529'
-    - add_openkey
-    - 
-    - 
-    - 
-    - true
-    - 
-  - - '5'
-    - ! "user=\"project_1\"\r\nhost=\"lomonosov.parallel.ru\""
-    - ''
-    - ''
-    - successed
-    - ClusterUser
-    - '1'
-    - '2012-08-21 12:22:14.298482'
-    - '2012-08-21 12:22:17.759967'
-    - block_user
-    - 
-    - 
-    - 
-    - true
-    - 
-  - - '6'
-    - ! "user=\"project_1\"\r\nhost=\"lomonosov.parallel.ru\""
-    - ''
-    - ''
-    - successed
-    - ClusterUser
-    - '1'
-    - '2012-08-21 12:28:45.914615'
-    - '2012-08-21 12:28:48.166829'
-    - unblock_user
-    - 
-    - 
-    - 
-    - true
-    - 
 
 ---
 replies:
@@ -2561,9 +4408,9 @@ ticket_templates:
   records: 
   - - '1'
     - Сил больше нет
-    - Закройте браузер и отойдите от компьютера
+    - Закройте браузер и отойдите от компьютера [/pages/How_to_disconnect]
     - '2012-08-21 07:12:40.242762'
-    - '2012-08-21 07:12:40.242762'
+    - '2012-08-28 14:19:43.984395'
     - active
 
 ---
@@ -2875,31 +4722,17 @@ clusters:
   - host
   - description
   - state
-  - add_user
-  - del_user
-  - add_openkey
-  - del_openkey
-  - block_user
-  - unblock_user
   - statistic
-  - get_statistic
   - statistic_updated_at
   - cluster_user_type
   records: 
   - - '1'
     - Ломоносов
     - '2012-08-21 08:35:00.526027'
-    - '2012-08-28 08:02:38.394613'
+    - '2012-08-30 08:47:44.154906'
     - lomonosov.parallel.ru
     - ''
     - active
-    - ! "project=%project%\r\nhost=%host%"
-    - ! "project=%project%\r\nhost=%host%"
-    - ! "project=%project%\r\nuser=%user%\r\nhost=%host%\r\npublic_key=%public_key%"
-    - ! "project=%project%\r\nuser=%user%\r\nhost=%host%\r\npublic_key=%public_key%"
-    - ! "project=%project%\r\nhost=%host%"
-    - ! "project=%project%\r\nhost=%host%"
     - 
-    - host=%host%
     - 
     - account
