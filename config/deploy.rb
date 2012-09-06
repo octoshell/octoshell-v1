@@ -21,6 +21,7 @@ set :unicorn_bin, 'bundle exec unicorn_rails'
 role :app, domain
 role :web, domain
 role :db,  domain, :primary => true
+role :resque_worker, domain
 
 set :whenever_command, "bundle exec whenever"
 require "whenever/capistrano"
