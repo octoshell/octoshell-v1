@@ -2,14 +2,15 @@ require 'spec_helper'
 
 describe 'Dashboard', js: true do
   context 'authorized user' do
-    let!(:user) { create(:sured_user) }
-    let!(:credential) { create(:credential, user: user) }
-    let!(:ticket) { create(:ticket, user: user) }
-    let!(:project) { create(:project, user: user) }
-    let!(:account) { create(:active_account, project: project, user: user) }
-    let!(:request) { create(:active_request, project: project, user: user) }
-    let!(:cluster_user) { request.cluster_users.first }
-    let!(:access) { cluster_user.complete_activation!; cluster_user.accesses.first }
+    let!(:fixture)      { Fixture.new }
+    let!(:user)         { fixture.user }
+    let!(:credential)   { fixture.credential }
+    let!(:ticket)       { create(:ticket, user: user) }
+    let!(:project)      { fixture.project }
+    let!(:account)      { fixture.account }
+    let!(:request)      { fixture.request }
+    let!(:cluster_user) { fixture.cluster_user }
+    let!(:access)       { fixture.access }
     
     before do
       login user
@@ -21,10 +22,6 @@ describe 'Dashboard', js: true do
     
     it 'should show requests' do
       page.should have_css("#request-#{request.id}")
-    end
-    
-    it 'should show accesses' do
-      page.should have_css("#access-#{access.id}")
     end
   end
   

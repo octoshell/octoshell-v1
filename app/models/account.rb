@@ -105,10 +105,6 @@ class Account < ActiveRecord::Base
     )
   end
   
-  def active_or_pending?
-    active? || pending?
-  end
-  
 private
   
   def emails_validator

@@ -7,7 +7,7 @@
       th = ClusterProject.human_attribute_name(:state)
       th
     - cluster_projects.each do |cluster_project|
-      tr
+      tr id="cluster-project-#{cluster_project.id}"
         td = link_to_cluster cluster_project.cluster
         td = link_to_project cluster_project.project
         td = cluster_project.username

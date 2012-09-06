@@ -18,5 +18,35 @@ class Fixture
   
   class << self
     delegate *MODELS, to: :new
+    
+    def active_access
+      fixture = new
+      fixture.access.activate!
+      fixture.access.complete_activation!
+      fixture.access
+    end
+    
+    def active_account
+      fixture = new
+      fixture.account.activate!
+      fixture.access.reload.complete_activation!
+      fixture.account
+    end
+    
+    def active_cluster_user
+      fixture = new
+      fixture.cluster_user.activate
+      fixture.cluster_user.complete_activation
+      fixture.cluster_user
+    end
+    
+    def active_request
+      fixture = new
+      fixture.request.activate!
+      fixture.cluster_project.reload.complete_activation!
+      fixture.cluster_user.reload.complete_activation!
+      fixture.access.reload.complete_activation!
+      fixture.request
+    end
   end
 end

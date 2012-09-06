@@ -27,16 +27,19 @@ describe 'Credentials', js: true do
     end
     
     context 'closing' do
-      let!(:user) { create(:sured_user) }
-      let!(:credential) { create(:credential, user: user) }
-      let!(:project) { create(:active_project, user: user) }
-      let!(:account) { create(:active_account, user: user, project: project) }
-      let!(:request) { create(:active_request, user: user, project: project) }
-      let!(:cluster_user) { cu = project.cluster_users.first; cu.complete_activation!; cu }
-      let!(:access) { project.cluster_users.first.accesses.first }
+      let!(:fixture)      { Fixture.new }
+      let!(:user)         { fixture.user }
+      let!(:credential)   { fixture.credential }
+      let!(:project)      { fixture.project }
+      let!(:account)      { fixture.account }
+      let!(:request)      { fixture.request }
+      let!(:cluster_user) { fixture.cluster_user }
+      let!(:access)       { fixture.access }
       
       before do
         login user
+        access.activate
+        access.complete_activation
         visit credential_path(credential)
         click_link 'close'
         confirm_dialog

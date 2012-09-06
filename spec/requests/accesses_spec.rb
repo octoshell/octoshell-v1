@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Accesses', js: true do
-  let!(:access) { create(:active_access) }
+  let!(:access) { a = Fixture.active_access }
   
   context 'listing' do
     context 'as admin' do

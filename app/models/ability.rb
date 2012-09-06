@@ -50,9 +50,9 @@ class Ability
       can [:edit, :update], :memberships, user_id: user.id
       
       can :index, :accounts
-      can [:show, :activate, :decline, :close], :accounts, project_id: user.owned_project_ids
+      can [:show, :activate, :decline, :cancel], :accounts, project_id: user.owned_project_ids
       can :show, :cluster_users do |cluster_user|
-        cluster_user.users.include? user
+        cluster_user.account.user == user
       end
       
       # sured user
@@ -91,7 +91,7 @@ class Ability
         
         can [:show, :close], :credentials
         
-        can [:show, :activate, :decline, :close, :invite, :create, :mailer, :edit, :update], :accounts
+        can [:show, :activate, :decline, :cancel, :invite, :create, :mailer, :edit, :update], :accounts
         
         can [:show, :edit, :update, :new, :create, :close], :projects
         

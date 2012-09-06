@@ -102,10 +102,6 @@ describe 'Clusters', js: true do
       it 'should show cluster' do
         page.should have_css("#cluster-#{cluster.id}-detail")
       end
-      
-      it 'should show cluster statistics' do
-        page.should have_css("#cluster-#{cluster.id}-statistics")
-      end
     end
     
     context 'as user' do

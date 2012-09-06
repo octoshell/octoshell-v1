@@ -78,7 +78,7 @@ MSU::Application.routes.draw do
     end
     put :activate
     put :decline
-    put :close
+    put :cancel
     resources :versions, only: [:index, :show], resource: 'Account'
   end
   

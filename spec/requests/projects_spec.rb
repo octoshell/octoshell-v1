@@ -14,9 +14,6 @@ describe 'Projects', js: true do
         select project.organization.name, from: 'Organization'
         fill_in 'Name',        with: project.name
         fill_in 'Description', with: project.description
-        select cluster.name, from: 'project_requests_attributes_0_cluster_id'
-        fill_in 'Hours', with: 1
-        fill_in 'Size',  with: 1
         click_button 'Create Project'
       end
     
@@ -28,9 +25,10 @@ describe 'Projects', js: true do
     end
     
     context 'closing' do
-      let!(:project) { create(:active_project) }
-      let!(:account) { create(:active_account, project: project) }
-      let!(:request) { create(:active_request, project: project, user: project.user) }
+      let!(:fixture) { Fixture.new }
+      let!(:project) { fixture.project }
+      let!(:account) { fixture.account }
+      let!(:request) { fixture.request }
       
       before do
         login create(:admin_user)
@@ -41,7 +39,7 @@ describe 'Projects', js: true do
       end
       
       it { project.reload.should be_closed }
-      it { account.reload.should be_closed }
+      it { account.reload.should be_initialized }
       it { request.reload.should be_closed }
     end
   end
@@ -58,9 +56,6 @@ describe 'Projects', js: true do
         fill_in 'Name',        with: project.name
         fill_in 'Description', with: project.description
         select project.organization.name, from: 'Organization'
-        select cluster.name, from: 'Cluster'
-        fill_in 'Hours', with: 1
-        fill_in 'Size',  with: 1
         click_button 'Create Project'
       end
     
@@ -72,10 +67,11 @@ describe 'Projects', js: true do
     end
     
     context 'closing' do
-      let!(:user)    { create(:sured_user) }
-      let!(:project) { create(:active_project, user: user) }
-      let!(:account) { create(:active_account, project: project) }
-      let!(:request) { create(:active_request, project: project, user: user) }
+      let!(:fixture) { Fixture.new }
+      let!(:user)    { fixture.project.user }
+      let!(:project) { fixture.project }
+      let!(:account) { fixture.account }
+      let!(:request) { fixture.request }
       
       before do
         login user
@@ -86,7 +82,7 @@ describe 'Projects', js: true do
       end
       
       it { project.reload.should be_closed }
-      it { account.reload.should be_closed }
+      it { account.reload.should be_initialized }
       it { request.reload.should be_closed }
     end
   end

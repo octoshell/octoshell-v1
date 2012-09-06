@@ -11,8 +11,14 @@ div class="link-actions"
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
 
+- unless admin?
+  h3 Мои доступы
+
+  = render partial: 'table', locals: { accounts: current_user.accounts.where(state: ['active', 'requested']) }
+
 = paginate @accounts
 
 = render partial: 'table', locals: { accounts: @accounts }
 
 = paginate @accounts
+

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Accounts', js: true do
-  let!(:account) { create(:active_account) }
+  let!(:account) { Fixture.active_account }
   
   describe 'listing' do
     context 'as admin' do
@@ -93,17 +93,17 @@ describe 'Accounts', js: true do
     end
   end
   
-  describe 'closing' do
+  describe 'closing', focus: true do
     context 'as admin' do
       before do
         login create(:admin_user)
         visit account_path(account)
-        click_link 'close'
+        click_link 'cancel'
         confirm_dialog
       end
       
-      it 'should close account' do
-        account.reload.should be_closed
+      it 'should cancel account' do
+        account.reload.should be_initialized
       end
     end
     
@@ -111,12 +111,12 @@ describe 'Accounts', js: true do
       before do
         login account.project.user
         visit account_path(account)
-        click_link 'close'
+        click_link 'cancel'
         confirm_dialog
       end
       
       it 'should close account' do
-        account.reload.should be_closed
+        account.reload.should be_initialized
       end
     end
     

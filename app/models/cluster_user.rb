@@ -56,8 +56,6 @@ class ClusterUser < ActiveRecord::Base
     end
   end
   
-protected
-  
   def complete_activation!
     transaction do
       _complete_activation!

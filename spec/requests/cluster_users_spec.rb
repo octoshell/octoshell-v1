@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Cluster Users', js: true do
-  let!(:cluster_user) { create(:active_cluster_user) }
+  let!(:cluster_user) { Fixture.active_cluster_user }
   
   context 'listing' do
     context 'as admin' do
@@ -30,6 +30,7 @@ describe 'Cluster Users', js: true do
       before do
         visit cluster_users_path
       end
+      
       it 'should redirect to login page' do
         current_path.should == new_session_path
       end
@@ -48,17 +49,6 @@ describe 'Cluster Users', js: true do
       end
     end
     
-    context 'as participate user' do
-      before do
-        login cluster_user.users.first
-        visit cluster_user_path(cluster_user)
-      end
-      
-      it 'should show cluster user' do
-        page.should have_css("#cluster-user-#{cluster_user.id}-detail")
-      end
-    end
-
     context 'as other user' do
       before do
         login

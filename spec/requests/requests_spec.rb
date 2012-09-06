@@ -2,31 +2,33 @@ require 'spec_helper'
 
 describe 'Requests', js: true do
   context 'as authorized user' do
-    let!(:user) { create(:sured_user) }
-    let!(:project) { create(:project, user: user) }
-    let!(:cluster) { create(:cluster) }
+    describe 'creation' do
+      let!(:user) { create(:sured_user) }
+      let!(:project) { create(:project, user: user) }
+      let!(:cluster) { create(:cluster) }
     
-    before do
-      login user
-      visit new_request_path
+      before do
+        login user
+        visit new_request_path
       
-      within('#new_request') do
-        select project.name, from: 'Project'
-        select cluster.name, from: 'Cluster'
-        fill_in 'Hours', with: 10
-        fill_in 'Size', with: 10
-        click_button 'Create Request'
+        within('#new_request') do
+          select project.name, from: 'Project'
+          select cluster.name, from: 'Cluster'
+          fill_in 'Hours', with: 10
+          fill_in 'Size', with: 10
+          click_button 'Create Request'
+        end
       end
-    end
     
-    it 'should redirect to dashboard_path' do
-      current_path.should == request_path(Request.last)
+      it 'should redirect to request path' do
+        current_path.should == request_path(Request.last)
+      end
     end
   end
   
   context 'as admin user' do
     context 'listing' do
-      let!(:requests) { 3.times.map { create(:request) } }
+      let!(:request) { Fixture.request }
       
       before do
         login create(:admin_user)
@@ -34,16 +36,15 @@ describe 'Requests', js: true do
       end
       
       it 'should show requests' do
-        requests.each do |request|
-          page.should have_css("#request-#{request.id}")
-        end
+        page.should have_css("#request-#{request.id}")
       end
     end
     
     context 'creating' do
-      let!(:user) { create(:sured_user) }
-      let!(:project) { create(:project, user: user) }
-      let!(:cluster) { create(:cluster) }
+      let!(:fixture) { Fixture.new }
+      let!(:user) { fixture.project.user }
+      let!(:project) { fixture.project }
+      let!(:cluster) { fixture.cluster }
       let!(:request) { build(:request, user: user) }
       
       before do
@@ -61,12 +62,12 @@ describe 'Requests', js: true do
       end
       
       it 'should create new request for user' do
-        request.user.should have(1).requests
+        user.should have(2).requests
       end
     end
     
     context 'activing' do
-      let!(:request) { create(:request) }
+      let!(:request) { Fixture.request }
       
       before do
         login create(:admin_user)
@@ -79,16 +80,10 @@ describe 'Requests', js: true do
           page.should have_content('active')
         end
       end
-      
-      it 'should create a cluster user' do
-        within "#cluster-user-#{request.cluster_users.last.id}" do
-          page.should have_content('activing')
-        end
-      end
     end
     
     context 'declining' do
-      let!(:request) { create(:request) }
+      let!(:request) { Fixture.request }
       
       before do
         login create(:admin_user)
@@ -103,13 +98,12 @@ describe 'Requests', js: true do
       end
     end
     
-    context 'closing' do
-      let!(:request) { create(:active_request) }
+    context 'closing', focus: true do
+      let!(:request) { Fixture.active_request }
       
       before do
         login create(:admin_user)
         visit request_path(request)
-        request.cluster_users.last.complete_activation!
         click_link('close')
       end
       
@@ -119,15 +113,15 @@ describe 'Requests', js: true do
         end
       end
       
-      it 'should close cluster user' do
-        within "#cluster-user-#{request.cluster_users.last.id}" do
+      it 'should close cluster project' do
+        within "#cluster-project-#{request.cluster_project_id}" do
           page.should have_content('pausing')
         end
       end
     end
     
     context 'updating' do
-      let!(:request) { create(:pending_request) }
+      let!(:request) { Fixture.request }
       let!(:request_property) { create(:request_property, name: 'Foo', request: request) }
       
       before do
