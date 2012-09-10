@@ -15,6 +15,7 @@ set :deploy_to, "/var/www/#{application}"
 set :keep_releases, 3
 set :normalize_asset_timestamps, false
 set :scm, :git
+set :workers, { "task_callbacks" => 1 }
 
 role :app, domain
 role :web, domain
