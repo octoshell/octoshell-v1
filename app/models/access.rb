@@ -14,7 +14,6 @@ class Access < ActiveRecord::Base
   has_many :tasks, as: :resource
   
   validates :credential, :cluster_user, presence: true
-  validates :credential_state_name, inclusion: { in: [:active] }, on: :create
   
   state_machine initial: :initialized do
     state :initialized
