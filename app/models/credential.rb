@@ -13,7 +13,7 @@ class Credential < ActiveRecord::Base
   attr_accessible :public_key, :name, :user_id, :public_key_file, as: :admin
   
   validates :user, :public_key, :name, presence: true
-  validates :public_key, uniqueness: { scope: :user_id }
+  validates :public_key, uniqueness: { scope: [:state, :user_id] }, if: :active?
   
   after_create :create_relations
   
