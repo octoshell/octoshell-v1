@@ -74,16 +74,10 @@ class ClusterProject < ActiveRecord::Base
     end
   end
   
-  def check_process!
-    if [:activing, :pausing, :closing].include?(state_name)
-      raise RecordInProcess
-    end
-  end
-  
   def complete_activation!
     transaction do
       _complete_activation!
-      cluster_users.each &:activate!
+      cluster_users.non_active.each &:activate!
     end
   end
   
@@ -97,8 +91,31 @@ class ClusterProject < ActiveRecord::Base
   def complete_pausing!
     transaction do
       _complete_pausing!
-      cluster_users.each &:close!
     end
+  end
+  
+  def check_process!
+    if [:activing, :pausing, :closing].include?(state_name)
+     raise RecordInProcess
+    end
+  end
+  
+protected
+  
+  def continue_add_project(task)
+    complete_activation!
+  end
+  
+  def continue_del_project(task)
+    complete_closure!
+  end
+  
+  def continue_block_project(task)
+    complete_pausing!
+  end
+  
+  def continue_unblock_project(task)
+    complete_activation!
   end
   
 private

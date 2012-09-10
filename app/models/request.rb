@@ -62,7 +62,7 @@ class Request < ActiveRecord::Base
     transaction do
       _activate!
       cluster_project.check_process!
-      cluster_project.send(cluster_project.paused? ? :change! : :activate!)
+      cluster_project.activate!
     end
   end
   

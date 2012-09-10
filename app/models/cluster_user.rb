@@ -69,6 +69,16 @@ class ClusterUser < ActiveRecord::Base
       accesses.non_initialized.each &:force_close!
     end
   end
+  
+protected
+  
+  def continue_add_user(task)
+    complete_activation!
+  end
+  
+  def continue_del_user(task)
+    complete_closure!
+  end
 
 private
   

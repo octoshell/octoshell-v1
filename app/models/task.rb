@@ -6,13 +6,13 @@ class Task < ActiveRecord::Base
   
   PROCEDURES = %w(
     add_user
-    block_project
-    unblock_project
     del_user
     add_openkey
     del_openkey
     add_project
     del_project
+    block_project
+    unblock_project
   )
   
   belongs_to :resource, polymorphic: true
