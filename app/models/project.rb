@@ -8,7 +8,7 @@ class Project < ActiveRecord::Base
   belongs_to :organization
   has_many :accounts, inverse_of: :project
   has_many :tickets
-  has_many :cluster_projects
+  has_many :cluster_projects, autosave: true
   
   validates :name, uniqueness: true
   validates :user, :name, :description, :organization, presence: true
@@ -67,6 +67,11 @@ class Project < ActiveRecord::Base
   
   def cluster_users
     ClusterUser.where(cluster_project_id: cluster_project_ids)
+  end
+  
+  def username=(username)
+    self[:username] = username
+    cluster_projects.each { |cp| cp.username = username }
   end
   
 private

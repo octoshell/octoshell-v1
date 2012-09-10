@@ -11,7 +11,7 @@ class Account < ActiveRecord::Base
   
   belongs_to :user, inverse_of: :accounts
   belongs_to :project, inverse_of: :accounts
-  has_many :cluster_users
+  has_many :cluster_users, autosave: true
   
   validates :user, :project, presence: true
   validates :project_state_name, inclusion: { in: [:active] }, if: :active?
@@ -103,6 +103,11 @@ class Account < ActiveRecord::Base
       credential_id:   user.credential_ids,
       cluster_user_id: cluster_user_ids
     )
+  end
+  
+  def username=(username)
+    self[:username] = username
+    cluster_users.each { |cu| cu.username = username }
   end
   
 private
