@@ -49,6 +49,22 @@ class ClusterUser < ActiveRecord::Base
   
   define_state_machine_scopes
   
+  def activate!
+    return unless account.active?
+    
+    transaction do
+      _activate!
+      tasks.setup(:add_user)
+    end
+  end
+  
+  def close!
+    transaction do
+      _close!
+      tasks.setup(:del_user)
+    end
+  end
+  
   def force_close!
     transaction do
       _force_close!

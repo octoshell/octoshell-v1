@@ -78,7 +78,7 @@ class ClusterProject < ActiveRecord::Base
   def complete_activation!
     transaction do
       _complete_activation!
-      cluster_users.non_active.each &:activate!
+      cluster_users.each &:activate!
     end
   end
   
