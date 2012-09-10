@@ -29,7 +29,6 @@ require 'capistrano-unicorn'
 after "deploy:restart", "resque:restart"
 
 namespace :deploy do
-  desc "Restart Unicorn"
   task :restart do
   end
   
