@@ -4,6 +4,8 @@
       th class="span1" #
       th = Project.model_name.human
       th = Cluster.model_name.human
+      th = User.model_name.human
+      th = ClusterUser.human_attribute_name(:username)
       th = ClusterUser.human_attribute_name(:state)
       - unless admin?
         th Подключение
@@ -13,6 +15,8 @@
         td = cluster_user.id
         td = link_to_project cluster_user.project
         td = link_to_cluster cluster_user.cluster
+        td = link_to_user cluster_user.account.user
+        td = cluster_user.username
         td = cluster_user.human_state_name
         - unless admin?
           td #{cluster_user.username}@#{cluster_user.cluster_project.cluster.host}

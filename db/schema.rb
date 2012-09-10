@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120905131138) do
+ActiveRecord::Schema.define(:version => 20120910122728) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20120905131138) do
     t.integer  "cluster_user_id"
   end
 
+  add_index "accesses", ["credential_id", "cluster_user_id"], :name => "index_accesses_on_credential_id_and_cluster_user_id", :unique => true
   add_index "accesses", ["credential_id"], :name => "index_accesses_on_credential_id"
   add_index "accesses", ["state"], :name => "index_accesses_on_state"
 
@@ -52,6 +53,8 @@ ActiveRecord::Schema.define(:version => 20120905131138) do
     t.string  "username"
   end
 
+  add_index "cluster_projects", ["cluster_id", "project_id"], :name => "index_cluster_projects_on_cluster_id_and_project_id", :unique => true
+
   create_table "cluster_users", :force => true do |t|
     t.string   "state"
     t.datetime "created_at",         :null => false
@@ -60,6 +63,8 @@ ActiveRecord::Schema.define(:version => 20120905131138) do
     t.integer  "cluster_project_id"
     t.string   "username"
   end
+
+  add_index "cluster_users", ["cluster_project_id", "account_id"], :name => "index_cluster_users_on_cluster_project_id_and_account_id", :unique => true
 
   create_table "clusters", :force => true do |t|
     t.string   "name"

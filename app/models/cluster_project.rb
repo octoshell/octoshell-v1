@@ -13,6 +13,7 @@ class ClusterProject < ActiveRecord::Base
   validates :project, :cluster, presence: true
   
   after_create :create_relations
+  before_create :assign_username
   
   state_machine initial: :initialized do
     state :initialized
@@ -124,5 +125,10 @@ private
     project.accounts.each do |account|
       cluster_users.where(account_id: account.id).first_or_create!
     end
+  end
+  
+  def assign_username
+    self.username ||= project.username
+    true
   end
 end
