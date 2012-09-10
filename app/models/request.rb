@@ -15,7 +15,7 @@ class Request < ActiveRecord::Base
   validates :cluster_project, :hours, :user, :size, presence: true
   validates :cluster_id, :project_id, presence: true, unless: :cluster_project
   validates :size, :hours, numericality: { greater_than: 0 }
-  validates :state, uniqueness: { scope: [:project_id, :cluster_id] }, if: :active?
+  validates :state, uniqueness: { scope: [:cluster_project_id] }, if: :active?
   
   attr_accessible :hours, :cluster_id, :project_id, :size
   attr_accessible :hours, :cluster_id, :project_id, :user_id, :size, :request_properties_attributes, as: :admin
