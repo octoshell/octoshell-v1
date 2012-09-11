@@ -63,14 +63,14 @@ class Account < ActiveRecord::Base
   def activate!
     self.transaction do
       _activate!
-      accesses.each &:activate!
+      cluster_users(true).each &:activate!
     end
   end
   
   def cancel!
     transaction do
       _cancel!
-      accesses.non_closed.each &:close!
+      cluster_users(true).non_closed.each &:close!
     end
   end
   

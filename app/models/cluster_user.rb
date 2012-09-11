@@ -3,6 +3,8 @@ class ClusterUser < ActiveRecord::Base
   has_paper_trail
   include Models::Asynch
   
+  delegate :state_name, to: :account, allow_nil: true, prefix: true
+  
   default_scope order("#{table_name}.id desc")
   
   delegate :project, :cluster, to: :cluster_project, allow_nil: true
@@ -14,6 +16,7 @@ class ClusterUser < ActiveRecord::Base
   has_many :tasks, as: :resource, dependent: :destroy
   
   validates :account, :cluster_project, presence: true
+  validates :account_state_name, inclusion: { in: [:active] }, if: proc { |c| c.active? || c.activing? }
   
   after_create :create_relations
   
@@ -40,7 +43,7 @@ class ClusterUser < ActiveRecord::Base
     end
     
     event :_force_close do
-      transition [:closed, :active] => :closed
+      transition active: :closed
     end
   end
   
@@ -50,8 +53,6 @@ class ClusterUser < ActiveRecord::Base
   define_state_machine_scopes
   
   def activate!
-    return unless account.active?
-    
     transaction do
       _activate!
       tasks.setup(:add_user)

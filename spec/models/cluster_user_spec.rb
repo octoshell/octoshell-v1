@@ -18,28 +18,24 @@ describe ClusterUser do
   
   it { should be_closed }
   
-  describe '#activate' do
-    before { cluster_user.activate }
+  describe '#activate', focus: true do
+    before { cluster_user.account.activate! }
     
-    it { should be_activing }
+    it { cluster_user.reload.should be_activing }
   end
   
-  describe '#close' do
-    before do
-      cluster_user.activate
-      cluster_user.complete_activation
-      cluster_user.close
-    end
+  describe '#close', focus: true do
+    let(:cluster_user) { create(:active_cluster_user) }
+    
+    before { cluster_user.close }
     
     it { should be_closing }
   end
   
   describe '#complete_closure' do
+    let(:cluster_user) { create(:closing_cluster_user) }
+    
     before do
-      cluster_user.activate
-      cluster_user.complete_activation
-      cluster_user.close
-      cluster_user.accesses.each &:complete_activation
       cluster_user.complete_closure
     end
     
