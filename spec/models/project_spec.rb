@@ -48,11 +48,11 @@ describe Project do
     end
   end
   
-  describe '#close' do
-    let!(:fixture)      { Fixture.new }
-    let!(:project)      { fixture.project }
-    let!(:account)      { fixture.account }
-    let!(:cluster_user) { fixture.cluster_user }
+  describe '#close', focus: true do
+    let!(:project) { create(:project) }
+    let!(:account) { create(:active_account, project: project) }
+    let!(:cluster_project) { create(:cluster_project, project: project) }
+    let!(:cluster_user) { create(:cluster_user, cluster_project: cluster_project) }
     
     before { project.close }
     
@@ -61,7 +61,7 @@ describe Project do
     end
     
     it 'should close accounts' do
-      project.accounts.all?(&:closed?).should be_true
+      project.accounts(true).all?(&:closed?).should be_true
     end
     
     it 'should close all cluster projects' do
