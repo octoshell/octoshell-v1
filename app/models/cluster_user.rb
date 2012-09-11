@@ -19,6 +19,7 @@ class ClusterUser < ActiveRecord::Base
   validates :account_state_name, inclusion: { in: [:active] }, if: proc { |c| c.active? || c.activing? }
   
   after_create :create_relations
+  before_create :assign_username
   
   state_machine initial: :closed do
     state :closed
@@ -104,5 +105,10 @@ private
       conditions = { credential_id: credential.id }
       accesses.where(conditions).first_or_create!
     end
+  end
+  
+  def assign_username
+    self.username ||= account.username
+    true
   end
 end

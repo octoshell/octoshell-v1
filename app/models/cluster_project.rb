@@ -78,7 +78,9 @@ class ClusterProject < ActiveRecord::Base
   def complete_activation!
     transaction do
       _complete_activation!
-      cluster_users.each &:activate!
+      cluster_users.joins(:account).where(
+        accounts: { state: 'active' }
+      ).includes(:account).each &:activate!
     end
   end
   
@@ -97,7 +99,7 @@ class ClusterProject < ActiveRecord::Base
   
   def check_process!
     if [:activing, :pausing, :closing].include?(state_name)
-     raise RecordInProcess
+      raise RecordInProcess
     end
   end
   

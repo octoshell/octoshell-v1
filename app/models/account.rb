@@ -63,7 +63,9 @@ class Account < ActiveRecord::Base
   def activate!
     self.transaction do
       _activate!
-      cluster_users(true).each &:activate!
+      cluster_users.joins(:cluster_project).where(
+        cluster_projects: { state: 'active' }
+      ).includes(:cluster_project).each &:activate!
     end
   end
   
@@ -131,9 +133,10 @@ private
   end
   
   def create_relations
-    project.cluster_projects.each do |cluster_project|
+    project.cluster_projects(true).each do |cluster_project|
       conditions = { cluster_project_id: cluster_project.id }
       cluster_users.where(conditions).first_or_create!
     end
+    true
   end
 end
