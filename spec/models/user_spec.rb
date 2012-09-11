@@ -129,7 +129,7 @@ describe User do
   end
   
   describe '#sure' do
-    let(:user) { Fixture.user }
+    let!(:user) { create(:project).user }
     
     before do
       user.unsure!
@@ -143,7 +143,7 @@ describe User do
   end
   
   describe '#unsure' do
-    let(:user) { Fixture.user }
+    let(:user) { create(:project).user }
     
     before { user.unsure! }
     
