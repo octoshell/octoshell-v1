@@ -4,6 +4,10 @@ describe Position do
   let(:position) { create(:position) }
   subject { position }
   
+  it 'should have a factory', factory: true do
+    should be
+  end
+  
   it { should belong_to(:membership) }
   
   it { should validate_presence_of(:membership) }

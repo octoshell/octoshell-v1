@@ -10,21 +10,21 @@ class ClusterUser < ActiveRecord::Base
   
   belongs_to :account
   belongs_to :cluster_project
-  has_many :accesses
-  has_many :tasks, as: :resource
+  has_many :accesses, dependent: :destroy
+  has_many :tasks, as: :resource, dependent: :destroy
   
   validates :account, :cluster_project, presence: true
   
   after_create :create_relations
   
-  state_machine initial: :initialized do
-    state :initialized
+  state_machine initial: :closed do
+    state :closed
     state :activing
     state :active
     state :closing
     
     event :_activate do
-      transition initialized: :activing
+      transition closed: :activing
     end
     
     event :_complete_activation do
@@ -36,11 +36,11 @@ class ClusterUser < ActiveRecord::Base
     end
     
     event :_complete_closure do
-      transition closing: :initialized
+      transition closing: :closed
     end
     
     event :_force_close do
-      transition [:initialized, :active] => :closed
+      transition [:closed, :active] => :closed
     end
   end
   
@@ -82,7 +82,7 @@ class ClusterUser < ActiveRecord::Base
   def complete_closure!
     transaction do
       _complete_closure!
-      accesses.non_initialized.each &:force_close!
+      accesses.non_closed.each &:force_close!
     end
   end
   

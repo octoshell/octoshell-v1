@@ -103,7 +103,7 @@ describe 'Accounts', js: true do
       end
       
       it 'should cancel account' do
-        account.reload.should be_initialized
+        account.reload.should be_closed
       end
     end
     
@@ -116,7 +116,7 @@ describe 'Accounts', js: true do
       end
       
       it 'should close account' do
-        account.reload.should be_initialized
+        account.reload.should be_closed
       end
     end
     

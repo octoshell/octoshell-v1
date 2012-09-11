@@ -28,7 +28,7 @@ class Cluster < ActiveRecord::Base
   def close!
     transaction do
       _close!
-      cluster_projects.non_initialized.map(&:requests).flatten.each &:close!
+      cluster_projects.non_closed.map(&:requests).flatten.each &:close!
     end
   end
   

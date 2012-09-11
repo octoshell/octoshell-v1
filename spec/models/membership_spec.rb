@@ -4,6 +4,10 @@ describe Membership do
   let(:membership) { create(:membership) }
   subject { membership }
   
+  it 'should have a factory', factory: true do
+    should be
+  end
+  
   it { should belong_to(:user) }
   it { should belong_to(:organization) }
   it { should have_many(:positions) }

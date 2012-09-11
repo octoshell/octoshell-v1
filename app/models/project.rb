@@ -39,8 +39,8 @@ class Project < ActiveRecord::Base
   def close!
     transaction do
       _close!
-      accounts.non_initialized.each &:close!
-      cluster_projects.non_initialized.each &:close!
+      accounts.non_closed.each &:close!
+      cluster_projects.non_closed.each &:close!
       requests.non_closed.each &:close!
     end
   end

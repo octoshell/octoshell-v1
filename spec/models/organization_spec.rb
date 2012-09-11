@@ -4,6 +4,10 @@ describe Organization do
   let(:organization) { create(:organization) }
   subject { organization }
   
+  it 'should have a factory', factory: true do
+    should be
+  end
+  
   it { should have_many(:sureties) }
   it { should have_many(:projects) }
   it { should have_many(:users).through(:sureties) }

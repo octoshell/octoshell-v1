@@ -6,17 +6,17 @@ class ClusterProject < ActiveRecord::Base
   
   belongs_to :project
   belongs_to :cluster
-  has_many :cluster_users
-  has_many :tasks, as: :resource
-  has_many :requests
+  has_many :cluster_users, dependent: :destroy
+  has_many :tasks, as: :resource, dependent: :destroy
+  has_many :requests, dependent: :destroy
   
   validates :project, :cluster, presence: true
   
   after_create :create_relations
   before_create :assign_username
   
-  state_machine initial: :initialized do
-    state :initialized
+  state_machine initial: :closed do
+    state :closed
     state :activing
     state :active
     state :pausing
@@ -24,7 +24,7 @@ class ClusterProject < ActiveRecord::Base
     state :closing
     
     event :_activate do
-      transition [:initialized, :paused] => :activing
+      transition [:closed, :paused] => :activing
     end
     
     event :_complete_activation do
@@ -44,7 +44,7 @@ class ClusterProject < ActiveRecord::Base
     end
     
     event :_complete_closure do
-      transition closing: :initialized
+      transition closing: :closed
     end
   end
   
@@ -55,7 +55,7 @@ class ClusterProject < ActiveRecord::Base
   
   def activate!
     transaction do
-      procedure = initialized? ? :add_project : :unblock_project
+      procedure = closed? ? :add_project : :unblock_project
       _activate!
       tasks.setup(procedure)
     end

@@ -149,7 +149,7 @@ class User < ActiveRecord::Base
   def unsure!
     transaction do
       _unsure!
-      accounts.non_initialized.each do |account|
+      accounts.non_closed.each do |account|
         account.send(account.requested? ? :decline! : :cancel! )
       end
     end

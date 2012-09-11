@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe Account do
-  let(:account) { Fixture.account }
+  let(:account) { create(:account) }
   subject { account }
   
-  it 'should have a factory' do
+  it 'should have a factory', factory: true do
     should be
   end
   
@@ -49,7 +49,7 @@ describe Account do
     
     before { account.cancel }
     
-    it { should be_initialized }
+    it { should be_closed }
     it { account.accesses.all(&:closing?).should be_true }
   end
   

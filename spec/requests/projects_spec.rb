@@ -39,7 +39,7 @@ describe 'Projects', js: true do
       end
       
       it { project.reload.should be_closed }
-      it { account.reload.should be_initialized }
+      it { account.reload.should be_closed }
       it { request.reload.should be_closed }
     end
   end
@@ -82,7 +82,7 @@ describe 'Projects', js: true do
       end
       
       it { project.reload.should be_closed }
-      it { account.reload.should be_initialized }
+      it { account.reload.should be_closed }
       it { request.reload.should be_closed }
     end
   end

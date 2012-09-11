@@ -1,5 +1,7 @@
 FactoryGirl.define do
   factory :request do
+    user
+    cluster_project
     hours 1
     size 1
     

@@ -16,6 +16,7 @@ class Credential < ActiveRecord::Base
   validates :public_key, uniqueness: { scope: [:state, :user_id] }, if: :active?
   
   after_create :create_relations
+  after_create :activate_accesses
   
   state_machine initial: :active do
     state :active
@@ -37,7 +38,7 @@ class Credential < ActiveRecord::Base
   def close!
     transaction do
       _close!
-      accesses.non_initialized.each &:close!
+      accesses.non_closed.each &:close!
     end
   end
 
@@ -48,5 +49,9 @@ private
       conditions = { cluster_user_id: cluster_user.id }
       accesses.where(conditions).first_or_create!
     end
+  end
+  
+  def activate_accesses
+    accesses.each &:try_to_activate
   end
 end

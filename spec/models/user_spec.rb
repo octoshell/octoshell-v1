@@ -5,7 +5,7 @@ describe User do
   let(:user) { create(:user) }
   subject { user }
   
-  it 'should have a factory' do
+  it 'should have a factory', factory: true do
     should be
   end
   
@@ -148,7 +148,7 @@ describe User do
     before { user.unsure! }
     
     it 'should close all accounts' do
-      user.accounts.all?(&:initialized?).should be_true
+      user.accounts.all?(&:closed?).should be_true
     end
   end
 end

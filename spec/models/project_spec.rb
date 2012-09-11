@@ -4,7 +4,7 @@ describe Project do
   let(:project) { create(:project) }
   subject { project }
   
-  it 'should have a factory' do
+  it 'should have a factory', factory: true do
     should be
   end
   
@@ -61,11 +61,11 @@ describe Project do
     end
     
     it 'should close accounts' do
-      project.accounts.all?(&:initialized?).should be_true
+      project.accounts.all?(&:closed?).should be_true
     end
     
     it 'should close all cluster projects' do
-      project.cluster_projects.non_initialized.all?(&:closing?).should be_true
+      project.cluster_projects.non_closed.all?(&:closing?).should be_true
     end
     
     it 'should cancel all requests' do

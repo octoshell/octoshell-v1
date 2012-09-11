@@ -1,16 +1,18 @@
 require 'spec_helper'
 
 describe ClusterProject do
-  let(:cluster_project) { Fixture.cluster_project }
+  let(:cluster_project) { create(:cluster_project) }
   subject { cluster_project }
   
-  it { should be }
+  it 'should have a factory', factory: true do
+    should be
+  end
   
   it { should validate_presence_of(:project) }
   it { should validate_presence_of(:cluster) }
   
   describe '#activate' do
-    context 'initialized' do
+    context 'closed' do
       before do
         cluster_project.activate
       end

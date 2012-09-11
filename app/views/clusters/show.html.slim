@@ -23,7 +23,7 @@ h3 Проекты на кластере
 table class="table table-bordered"
   tr
     th class="span4" Всего
-    td = @cluster.cluster_projects.non_initialized.count
+    td = @cluster.cluster_projects.non_closed.count
   tr
     th Активных
     td = @cluster.cluster_projects.active.count

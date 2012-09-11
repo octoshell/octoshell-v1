@@ -116,7 +116,7 @@ accesses:
   records: 
   - - '6'
     - '1'
-    - initialized
+    - closed
     - '2012-09-06 13:32:52.625101'
     - '2012-09-06 13:32:52.625101'
     - '1'
@@ -3372,7 +3372,7 @@ versions:
     - '1'
     - update
     - 
-    - ! "---\nstate: initialized\nproject_id: \ncluster_id: \nusername: \nid: \n"
+    - ! "---\nstate: closed\nproject_id: \ncluster_id: \nusername: \nid: \n"
     - '2012-09-06 13:28:51.592474'
     - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
       1\ncluster_id:\n- \n- 1\nusername:\n- \n- project_1\nid:\n- \n- 1\n"
@@ -3548,7 +3548,7 @@ versions:
     - '2'
     - update
     - 
-    - ! "---\nstate: initialized\nproject_id: \ncluster_id: \nusername: \nid: \n"
+    - ! "---\nstate: closed\nproject_id: \ncluster_id: \nusername: \nid: \n"
     - '2012-09-06 13:51:11.096331'
     - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
       1\ncluster_id:\n- \n- 1\nid:\n- \n- 2\n"
@@ -3585,7 +3585,7 @@ versions:
     - '2'
     - ! '---
 
-      state: initialized
+      state: closed
 
       project_id: 1
 
@@ -3601,7 +3601,7 @@ versions:
 
       state:
 
-      - initialized
+      - closed
 
       - activing
 

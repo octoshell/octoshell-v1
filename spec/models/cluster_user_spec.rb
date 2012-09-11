@@ -1,8 +1,12 @@
 require 'spec_helper'
 
 describe ClusterUser do
-  let(:cluster_user) { Fixture.cluster_user }
+  let(:cluster_user) { create(:cluster_user) }
   subject { cluster_user }
+  
+  it 'should have a factory', factory: true do
+    should be
+  end
   
   it { should belong_to(:account) }
   it { should belong_to(:cluster_project) }
@@ -12,7 +16,7 @@ describe ClusterUser do
   it { should validate_presence_of(:account) }
   it { should validate_presence_of(:cluster_project) }
   
-  it { should be_initialized }
+  it { should be_closed }
   
   describe '#activate' do
     before { cluster_user.activate }
@@ -39,7 +43,7 @@ describe ClusterUser do
       cluster_user.complete_closure
     end
     
-    it { should be_initialized }
-    it { cluster_user.accesses.reload.all?(&:initialized?).should be_true }
+    it { should be_closed }
+    it { cluster_user.accesses.reload.all?(&:closed?).should be_true }
   end
 end

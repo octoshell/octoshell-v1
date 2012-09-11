@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe Request do
-  let(:request) { Fixture.request }
+  let(:request) { create(:request) }
   subject { request }
   
-  it 'should have a factory' do
+  it 'should have a factory', factory: true do
     should be
   end
   

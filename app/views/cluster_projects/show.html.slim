@@ -21,4 +21,4 @@ table class="table table-bordered" id="cluster-project-#{@cluster_project.id}-de
 
 h3 Пользователи на кластерах
 
-= render partial: 'cluster_users/table', locals: { cluster_users: @cluster_project.cluster_users.non_initialized }
+= render partial: 'cluster_users/table', locals: { cluster_users: @cluster_project.cluster_users.non_closed }

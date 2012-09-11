@@ -5,7 +5,9 @@ describe Reply do
   
   subject { reply }
   
-  it { should be }
+  it 'should have a factory', factory: true do
+    should be
+  end
   
   it { should belong_to(:ticket) }
   it { should belong_to(:user) }

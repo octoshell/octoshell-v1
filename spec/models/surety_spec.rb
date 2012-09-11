@@ -4,6 +4,10 @@ describe Surety do
   let(:surety) { create(:surety) }
   subject { surety }
   
+  it 'should have a factory', factory: true do
+    should be
+  end
+  
   it { should belong_to(:user) }
   it { should belong_to(:organization) }
   

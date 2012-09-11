@@ -7,11 +7,11 @@ class Account < ActiveRecord::Base
   delegate :state_name, to: :user, prefix: true, allow_nil: true
   delegate :state_name, to: :project, prefix: true, allow_nil: true
   
-  attr_accessor :raw_emails
+  attr_accessor :raw_emails, :factory
   
   belongs_to :user, inverse_of: :accounts
   belongs_to :project, inverse_of: :accounts
-  has_many :cluster_users, autosave: true
+  has_many :cluster_users, autosave: true, dependent: :destroy
   
   validates :user, :project, presence: true
   validates :project_state_name, inclusion: { in: [:active] }, if: :active?
@@ -25,25 +25,25 @@ class Account < ActiveRecord::Base
   
   after_create :assign_username, :create_relations
   
-  state_machine initial: :initialized do
-    state :initialized
+  state_machine initial: :closed do
+    state :closed
     state :requested
     state :active
     
     event :_request do
-      transition initialized: :requested
+      transition closed: :requested
     end
     
     event :_activate do
-      transition [:initialized, :requested] => :active
+      transition [:closed, :requested] => :active
     end
     
     event :_decline do
-      transition requested: :initialized
+      transition requested: :closed
     end
     
     event :_cancel do
-      transition active: :initialized
+      transition active: :closed
     end
   end
   
@@ -70,7 +70,7 @@ class Account < ActiveRecord::Base
   def cancel!
     transaction do
       _cancel!
-      accesses.non_initialized.each &:close!
+      accesses.non_closed.each &:close!
     end
   end
   

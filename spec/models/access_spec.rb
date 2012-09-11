@@ -1,8 +1,12 @@
 require 'spec_helper'
 
 describe Access do
-  let(:access) { Fixture.access }
+  let(:access) { create(:access) }
   subject { access }
+  
+  it "should have a factory", factory: true do
+    should be
+  end
   
   it { should belong_to(:cluster_user) }
   it { should belong_to(:credential) }
@@ -46,7 +50,7 @@ describe Access do
       access.complete_closure
     end
     
-    it { should be_initialized }
+    it { should be_closed }
   end
     
   describe '#force_close' do
@@ -56,6 +60,6 @@ describe Access do
       access.force_close
     end
     
-    it { should be_initialized }
+    it { should be_closed }
   end
 end

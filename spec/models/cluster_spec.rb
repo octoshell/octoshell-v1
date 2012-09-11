@@ -4,7 +4,7 @@ describe Cluster do
   let(:cluster) { create(:cluster) }
   subject { cluster }
   
-  it 'should have a factory' do
+  it 'should have a factory', factory: true do
     should be
   end
   

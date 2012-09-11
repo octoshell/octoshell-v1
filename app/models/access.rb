@@ -11,18 +11,18 @@ class Access < ActiveRecord::Base
   
   belongs_to :cluster_user
   belongs_to :credential
-  has_many :tasks, as: :resource
+  has_many :tasks, as: :resource, dependent: :destroy
   
   validates :credential, :cluster_user, presence: true
   
-  state_machine initial: :initialized do
-    state :initialized
+  state_machine initial: :closed do
+    state :closed
     state :activing
     state :active
     state :closing
     
     event :_activate do
-      transition initialized: :activing
+      transition closed: :activing
     end
     
     event :_complete_activation do
@@ -34,11 +34,11 @@ class Access < ActiveRecord::Base
     end
     
     event :_complete_closure do
-      transition closing: :initialized
+      transition closing: :closed
     end
     
     event :_force_close do
-      transition active: :initialized
+      transition active: :closed
     end
   end
   
@@ -54,6 +54,12 @@ class Access < ActiveRecord::Base
       tasks.setup(:add_openkey)
     end
     true
+  end
+  
+  def try_to_activate
+    if cluster_user.account.active?
+      activate!
+    end
   end
   
   # закрывает доступ (создает задачу для закрытия доступа к кластеру)
