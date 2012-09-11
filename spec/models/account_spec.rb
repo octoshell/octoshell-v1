@@ -23,46 +23,21 @@ describe Account do
     account.errors[:user_state_name].should be
   end
   
-  describe '#accesses' do
-    let!(:fixture)      { Fixture.new }
-    let!(:user)         { fixture.user }
-    let!(:project)      { fixture.project }
-    let!(:account)      { fixture.account }
-    let!(:credential)   { fixture.credential }
-    let!(:cluster_user) { fixture.cluster_user }
-    let!(:access)       { fixture.access }
+  describe '#cancel', focus: true do
+    let!(:cluster) { create(:cluster) }
+    let(:account) { create(:active_account) }
     
-    subject { account.accesses }
-    
-    it { should be_a_kind_of(ActiveRecord::Relation) }
-    it { should == [access] }
-  end
-  
-  describe '#cancel' do
-    let!(:fixture)      { Fixture.new }
-    let!(:user)         { fixture.user }
-    let!(:project)      { fixture.project }
-    let!(:account)      { fixture.account }
-    let!(:credential)   { fixture.credential }
-    let!(:cluster_user) { fixture.cluster_user }
-    let!(:access)       { fixture.access }
-    
-    before { account.cancel }
+    before { account.cancel! }
     
     it { should be_closed }
     it { account.accesses.all(&:closing?).should be_true }
   end
   
-  describe '#activate!', focus: true do
-    let!(:fixture)      { Fixture.new }
-    let!(:user)         { fixture.user }
-    let!(:project)      { fixture.project }
-    let!(:account)      { fixture.account }
-    let!(:credential)   { fixture.credential }
-    
-    before { account.activate! }
-
-    subject { account }
+  describe '#activate', focus: true do
+    before do
+      create(:cluster)
+      account.activate!
+    end
     
     it { should be_active }
     it { account.accesses.all?(&:activing?).should be_true }

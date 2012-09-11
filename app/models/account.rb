@@ -7,7 +7,7 @@ class Account < ActiveRecord::Base
   delegate :state_name, to: :user, prefix: true, allow_nil: true
   delegate :state_name, to: :project, prefix: true, allow_nil: true
   
-  attr_accessor :raw_emails, :factory
+  attr_accessor :raw_emails
   
   belongs_to :user, inverse_of: :accounts
   belongs_to :project, inverse_of: :accounts

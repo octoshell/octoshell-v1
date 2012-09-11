@@ -328,7 +328,7 @@ ru:
       organization: Организация
       request: Заявка
       membership: Место работы
-      access: Доступ
+      access: Ключ на кластере
       credential: Публичный ключ
       cluster_user: Пользователь на кластере
       cluster_project: Проект на кластере
