@@ -16,13 +16,11 @@ describe Cluster do
   it { should validate_presence_of(:host) }
   
   describe '#close' do
-    let!(:fixture) { Fixture.new }
-    let!(:request) { fixture.request }
-    let!(:cluster) { fixture.cluster }
+    let!(:cluster) { create(:cluster) }
+    let!(:project) { create(:project) }
     
     before { cluster.close }
     
     it { cluster.should be_closed }
-    it { should be_closed }
   end
 end
