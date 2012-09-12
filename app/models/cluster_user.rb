@@ -108,7 +108,7 @@ private
   end
   
   def assign_username
-    self.username ||= account.username
+    self.username ||= account.reload.username
     true
   end
 end

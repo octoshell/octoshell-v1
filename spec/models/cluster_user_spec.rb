@@ -17,9 +17,14 @@ describe ClusterUser do
   it { should validate_presence_of(:cluster_project) }
   
   it { should be_closed }
+  its(:username) { should be }
   
   describe '#activate', focus: true do
-    before { cluster_user.account.activate! }
+    before do
+      cluster_user.account.activate!
+      cluster_user.cluster_project.activate!
+      cluster_user.cluster_project.complete_activation!
+    end
     
     it { cluster_user.reload.should be_activing }
   end

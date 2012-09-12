@@ -59,7 +59,13 @@ describe Account do
     let!(:cluster) { create(:cluster) }
     let(:account) { create(:active_account) }
     
-    before { account.cancel! }
+    before do
+      account.cluster_users(true).each do |cu|
+        cu.cluster_project.tap { |cp| cp.activate!; cp.complete_activation! }
+        cu.reload.complete_activation!
+      end
+      account.cancel!
+    end
     
     it { should be_closed }
     it 'should close cluster users' do
