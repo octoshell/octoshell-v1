@@ -79,7 +79,7 @@ class ClusterProject < ActiveRecord::Base
   def complete_activation!
     transaction do
       _complete_activation!
-      cluster_users.joins(:account).where(
+      cluster_users.non_active.joins(:account).where(
         accounts: { state: 'active' }
       ).includes(:account).each &:activate!
     end
