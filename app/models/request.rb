@@ -44,9 +44,13 @@ class Request < ActiveRecord::Base
     event :_close do
       transition [:pending, :active, :declined] => :closed
     end
+    
+    event :_force_close do
+      transition [:pending, :active, :declined] => :closed
+    end
   end
   
-  define_defaults_events :activate, :decline, :close
+  define_defaults_events :activate, :decline, :close, :force_close
   
   define_state_machine_scopes
   

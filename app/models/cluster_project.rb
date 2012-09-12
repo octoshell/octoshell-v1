@@ -71,6 +71,7 @@ class ClusterProject < ActiveRecord::Base
   def close!
     transaction do
       _close!
+      cluster_users.non_closed.each &:force_close!
       tasks.setup(:del_project)
     end
   end
@@ -81,13 +82,6 @@ class ClusterProject < ActiveRecord::Base
       cluster_users.joins(:account).where(
         accounts: { state: 'active' }
       ).includes(:account).each &:activate!
-    end
-  end
-  
-  def complete_closure!
-    transaction do
-      _complete_closure!
-      cluster_users.non_closed.each &:force_close!
     end
   end
   
