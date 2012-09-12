@@ -38,7 +38,7 @@ h3 Пользователи на кластере
 
 h3 Ключи на кластере
 
-= render partial: 'accesses/table', locals: { accesses: @project.accesses.non_closed }
+= render partial: 'accesses/table', locals: { accesses: @project.accesses.non_closed, current: false }
 
 h3 Заявки
 

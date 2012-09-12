@@ -7,5 +7,5 @@
     = f.button :submit, 'Найти', class: 'btn-primary'
 
 = paginate @accesses
-= render partial: 'table', locals: { accesses: @accesses }
+= render partial: 'table', locals: { accesses: @accesses, current: false }
 = paginate @accesses

@@ -25,4 +25,4 @@ table class="table table-bordered" id="cluster-user-#{@cluster_user.id}-detail"
 
 h3 Доступы к кластерам
 
-= render partial: 'accesses/table', locals: { accesses: @cluster_user.accesses }
+= render partial: 'accesses/table', locals: { accesses: @cluster_user.accesses, current: false }
