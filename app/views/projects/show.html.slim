@@ -26,11 +26,19 @@ table class="table table-bordered"
 
 h3 Доступы
 
-= render partial: 'accounts/table', locals: { accounts: @project.accounts }
+= render partial: 'accounts/table', locals: { accounts: @project.accounts.non_closed }
 
 h3 Проекты на кластере
 
-= render partial: 'cluster_projects/table', locals: { cluster_projects: @project.cluster_projects }
+= render partial: 'cluster_projects/table', locals: { cluster_projects: @project.cluster_projects.non_closed }
+
+h3 Пользователи на кластере
+
+= render partial: 'cluster_users/table', locals: { cluster_users: @project.cluster_users.non_closed }
+
+h3 Ключи на кластере
+
+= render partial: 'accesses/table', locals: { accesses: @project.accesses.non_closed }
 
 h3 Заявки
 

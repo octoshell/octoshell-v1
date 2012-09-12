@@ -69,6 +69,10 @@ class Project < ActiveRecord::Base
     ClusterUser.where(cluster_project_id: cluster_project_ids)
   end
   
+  def accesses
+    Access.where(cluster_user_id: cluster_users.pluck(:id))
+  end
+  
   def username=(username)
     self[:username] = username
     cluster_projects.each { |cp| cp.username = username }

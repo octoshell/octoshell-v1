@@ -103,6 +103,279 @@ cluster_users:
     - '1'
     - '1'
     - account_1
+  - - '7'
+    - initialized
+    - '2012-09-10 12:15:43.810309'
+    - '2012-09-10 13:58:54.135099'
+    - '1'
+    - '6'
+    - account_1
+  - - '8'
+    - active
+    - '2012-09-10 12:16:38.83235'
+    - '2012-09-11 08:22:24.904767'
+    - '14'
+    - '7'
+    - account_14
+  - - '9'
+    - active
+    - '2012-09-10 12:16:38.841065'
+    - '2012-09-11 08:24:30.626664'
+    - '13'
+    - '7'
+    - account_13
+  - - '10'
+    - active
+    - '2012-09-10 12:16:38.848999'
+    - '2012-09-11 08:30:06.06438'
+    - '12'
+    - '7'
+    - account_12
+  - - '11'
+    - activing
+    - '2012-09-10 12:16:38.856813'
+    - '2012-09-10 13:58:54.109869'
+    - '11'
+    - '7'
+    - account_11
+  - - '12'
+    - activing
+    - '2012-09-10 12:16:38.864644'
+    - '2012-09-10 13:58:54.103463'
+    - '10'
+    - '7'
+    - account_10
+  - - '13'
+    - activing
+    - '2012-09-10 12:16:38.914891'
+    - '2012-09-10 13:58:54.097064'
+    - '9'
+    - '7'
+    - account_9
+  - - '14'
+    - initialized
+    - '2012-09-10 12:16:38.942597'
+    - '2012-09-10 13:58:54.09085'
+    - '14'
+    - '8'
+    - account_14
+  - - '15'
+    - initialized
+    - '2012-09-10 12:16:38.950519'
+    - '2012-09-10 13:58:54.084524'
+    - '13'
+    - '8'
+    - account_13
+  - - '16'
+    - initialized
+    - '2012-09-10 12:16:38.958463'
+    - '2012-09-10 13:58:54.078416'
+    - '12'
+    - '8'
+    - account_12
+  - - '17'
+    - initialized
+    - '2012-09-10 12:16:38.966388'
+    - '2012-09-10 13:58:54.072'
+    - '11'
+    - '8'
+    - account_11
+  - - '18'
+    - initialized
+    - '2012-09-10 12:16:38.974325'
+    - '2012-09-10 13:58:54.065341'
+    - '10'
+    - '8'
+    - account_10
+  - - '19'
+    - initialized
+    - '2012-09-10 12:16:39.013851'
+    - '2012-09-10 13:58:54.056086'
+    - '9'
+    - '8'
+    - account_9
+  - - '20'
+    - initialized
+    - '2012-09-11 08:57:07.27488'
+    - '2012-09-11 08:57:07.27488'
+    - '15'
+    - '6'
+    - 
+  - - '21'
+    - initialized
+    - '2012-09-11 08:57:07.302969'
+    - '2012-09-11 08:57:07.302969'
+    - '15'
+    - '1'
+    - 
+  - - '22'
+    - closed
+    - '2012-09-12 07:45:23.344676'
+    - '2012-09-12 07:45:23.344676'
+    - '21'
+    - '9'
+    - 
+  - - '23'
+    - closed
+    - '2012-09-12 07:45:23.384235'
+    - '2012-09-12 07:45:23.384235'
+    - '20'
+    - '9'
+    - 
+  - - '24'
+    - closed
+    - '2012-09-12 07:45:23.392507'
+    - '2012-09-12 07:45:23.392507'
+    - '19'
+    - '9'
+    - 
+  - - '25'
+    - closed
+    - '2012-09-12 07:45:23.400631'
+    - '2012-09-12 07:45:23.400631'
+    - '18'
+    - '9'
+    - 
+  - - '26'
+    - closed
+    - '2012-09-12 07:45:23.408771'
+    - '2012-09-12 07:45:23.408771'
+    - '17'
+    - '9'
+    - 
+  - - '27'
+    - active
+    - '2012-09-12 07:45:23.448194'
+    - '2012-09-12 07:50:19.054803'
+    - '16'
+    - '9'
+    - account_16
+  - - '28'
+    - closed
+    - '2012-09-12 07:45:23.475613'
+    - '2012-09-12 07:45:23.475613'
+    - '21'
+    - '10'
+    - 
+  - - '29'
+    - closed
+    - '2012-09-12 07:45:23.489884'
+    - '2012-09-12 07:45:23.489884'
+    - '20'
+    - '10'
+    - 
+  - - '30'
+    - closed
+    - '2012-09-12 07:45:23.497735'
+    - '2012-09-12 07:45:23.497735'
+    - '19'
+    - '10'
+    - 
+  - - '31'
+    - closed
+    - '2012-09-12 07:45:23.505594'
+    - '2012-09-12 07:45:23.505594'
+    - '18'
+    - '10'
+    - 
+  - - '32'
+    - closed
+    - '2012-09-12 07:45:23.513486'
+    - '2012-09-12 07:45:23.513486'
+    - '17'
+    - '10'
+    - 
+  - - '33'
+    - closed
+    - '2012-09-12 07:45:23.601843'
+    - '2012-09-12 07:45:23.601843'
+    - '16'
+    - '10'
+    - 
+  - - '34'
+    - closed
+    - '2012-09-12 08:22:29.662908'
+    - '2012-09-12 08:22:29.662908'
+    - '27'
+    - '11'
+    - account_27
+  - - '35'
+    - closed
+    - '2012-09-12 08:22:29.70328'
+    - '2012-09-12 08:22:29.70328'
+    - '26'
+    - '11'
+    - account_26
+  - - '36'
+    - closed
+    - '2012-09-12 08:22:29.712263'
+    - '2012-09-12 08:22:29.712263'
+    - '25'
+    - '11'
+    - account_25
+  - - '37'
+    - closed
+    - '2012-09-12 08:22:29.720689'
+    - '2012-09-12 08:22:29.720689'
+    - '24'
+    - '11'
+    - account_24
+  - - '38'
+    - closed
+    - '2012-09-12 08:22:29.72904'
+    - '2012-09-12 08:22:29.72904'
+    - '23'
+    - '11'
+    - account_23
+  - - '39'
+    - active
+    - '2012-09-12 08:22:29.768094'
+    - '2012-09-12 08:23:03.493237'
+    - '22'
+    - '11'
+    - account_22
+  - - '40'
+    - closed
+    - '2012-09-12 08:22:29.795744'
+    - '2012-09-12 08:22:29.795744'
+    - '27'
+    - '12'
+    - account_27
+  - - '41'
+    - closed
+    - '2012-09-12 08:22:29.810361'
+    - '2012-09-12 08:22:29.810361'
+    - '26'
+    - '12'
+    - account_26
+  - - '42'
+    - closed
+    - '2012-09-12 08:22:29.818691'
+    - '2012-09-12 08:22:29.818691'
+    - '25'
+    - '12'
+    - account_25
+  - - '43'
+    - closed
+    - '2012-09-12 08:22:29.827002'
+    - '2012-09-12 08:22:29.827002'
+    - '24'
+    - '12'
+    - account_24
+  - - '44'
+    - closed
+    - '2012-09-12 08:22:29.835297'
+    - '2012-09-12 08:22:29.835297'
+    - '23'
+    - '12'
+    - account_23
+  - - '45'
+    - closed
+    - '2012-09-12 08:22:29.874989'
+    - '2012-09-12 08:22:29.874989'
+    - '22'
+    - '12'
+    - account_22
 
 ---
 accesses:
@@ -116,10 +389,322 @@ accesses:
   records: 
   - - '6'
     - '1'
-    - closed
+    - activing
     - '2012-09-06 13:32:52.625101'
-    - '2012-09-06 13:32:52.625101'
+    - '2012-09-11 08:58:14.87352'
     - '1'
+  - - '7'
+    - '2'
+    - initialized
+    - '2012-09-10 12:15:43.892655'
+    - '2012-09-10 12:15:43.892655'
+    - '7'
+  - - '8'
+    - '1'
+    - activing
+    - '2012-09-10 12:15:43.930968'
+    - '2012-09-11 08:58:14.82088'
+    - '7'
+  - - '9'
+    - '7'
+    - initialized
+    - '2012-09-10 12:16:38.883069'
+    - '2012-09-10 12:16:38.883069'
+    - '12'
+  - - '10'
+    - '6'
+    - initialized
+    - '2012-09-10 12:16:38.890171'
+    - '2012-09-10 12:16:38.890171'
+    - '12'
+  - - '11'
+    - '5'
+    - initialized
+    - '2012-09-10 12:16:38.896324'
+    - '2012-09-10 12:16:38.896324'
+    - '12'
+  - - '12'
+    - '4'
+    - initialized
+    - '2012-09-10 12:16:38.902496'
+    - '2012-09-10 12:16:38.902496'
+    - '12'
+  - - '13'
+    - '3'
+    - initialized
+    - '2012-09-10 12:16:38.908626'
+    - '2012-09-10 12:16:38.908626'
+    - '12'
+  - - '14'
+    - '2'
+    - initialized
+    - '2012-09-10 12:16:38.923057'
+    - '2012-09-10 12:16:38.923057'
+    - '13'
+  - - '15'
+    - '1'
+    - active
+    - '2012-09-10 12:16:38.929306'
+    - '2012-09-11 09:10:24.876288'
+    - '13'
+  - - '16'
+    - '7'
+    - initialized
+    - '2012-09-10 12:16:38.982584'
+    - '2012-09-10 12:16:38.982584'
+    - '18'
+  - - '17'
+    - '6'
+    - initialized
+    - '2012-09-10 12:16:38.988833'
+    - '2012-09-10 12:16:38.988833'
+    - '18'
+  - - '18'
+    - '5'
+    - initialized
+    - '2012-09-10 12:16:38.995075'
+    - '2012-09-10 12:16:38.995075'
+    - '18'
+  - - '19'
+    - '4'
+    - initialized
+    - '2012-09-10 12:16:39.001321'
+    - '2012-09-10 12:16:39.001321'
+    - '18'
+  - - '20'
+    - '3'
+    - initialized
+    - '2012-09-10 12:16:39.007566'
+    - '2012-09-10 12:16:39.007566'
+    - '18'
+  - - '21'
+    - '2'
+    - initialized
+    - '2012-09-10 12:16:39.074536'
+    - '2012-09-10 12:16:39.074536'
+    - '19'
+  - - '22'
+    - '1'
+    - activing
+    - '2012-09-10 12:16:39.080964'
+    - '2012-09-11 08:58:14.728372'
+    - '19'
+  - - '23'
+    - '8'
+    - initialized
+    - '2012-09-11 08:56:26.302518'
+    - '2012-09-11 08:56:26.302518'
+    - '14'
+  - - '24'
+    - '8'
+    - initialized
+    - '2012-09-11 08:56:26.30953'
+    - '2012-09-11 08:56:26.30953'
+    - '8'
+  - - '25'
+    - '8'
+    - initialized
+    - '2012-09-11 08:57:07.295059'
+    - '2012-09-11 08:57:07.295059'
+    - '20'
+  - - '26'
+    - '8'
+    - initialized
+    - '2012-09-11 08:57:07.311999'
+    - '2012-09-11 08:57:07.311999'
+    - '21'
+  - - '27'
+    - '8'
+    - closed
+    - '2012-09-12 07:45:23.376584'
+    - '2012-09-12 07:45:23.376584'
+    - '22'
+  - - '28'
+    - '7'
+    - closed
+    - '2012-09-12 07:45:23.417389'
+    - '2012-09-12 07:45:23.417389'
+    - '26'
+  - - '29'
+    - '6'
+    - closed
+    - '2012-09-12 07:45:23.42368'
+    - '2012-09-12 07:45:23.42368'
+    - '26'
+  - - '30'
+    - '5'
+    - closed
+    - '2012-09-12 07:45:23.429765'
+    - '2012-09-12 07:45:23.429765'
+    - '26'
+  - - '31'
+    - '4'
+    - closed
+    - '2012-09-12 07:45:23.435848'
+    - '2012-09-12 07:45:23.435848'
+    - '26'
+  - - '32'
+    - '3'
+    - closed
+    - '2012-09-12 07:45:23.441916'
+    - '2012-09-12 07:45:23.441916'
+    - '26'
+  - - '33'
+    - '2'
+    - active
+    - '2012-09-12 07:45:23.456257'
+    - '2012-09-12 07:53:31.132506'
+    - '27'
+  - - '34'
+    - '1'
+    - active
+    - '2012-09-12 07:45:23.462408'
+    - '2012-09-12 07:50:24.399955'
+    - '27'
+  - - '35'
+    - '8'
+    - closed
+    - '2012-09-12 07:45:23.483588'
+    - '2012-09-12 07:45:23.483588'
+    - '28'
+  - - '36'
+    - '7'
+    - closed
+    - '2012-09-12 07:45:23.52162'
+    - '2012-09-12 07:45:23.52162'
+    - '32'
+  - - '37'
+    - '6'
+    - closed
+    - '2012-09-12 07:45:23.527787'
+    - '2012-09-12 07:45:23.527787'
+    - '32'
+  - - '38'
+    - '5'
+    - closed
+    - '2012-09-12 07:45:23.582936'
+    - '2012-09-12 07:45:23.582936'
+    - '32'
+  - - '39'
+    - '4'
+    - closed
+    - '2012-09-12 07:45:23.589432'
+    - '2012-09-12 07:45:23.589432'
+    - '32'
+  - - '40'
+    - '3'
+    - closed
+    - '2012-09-12 07:45:23.595496'
+    - '2012-09-12 07:45:23.595496'
+    - '32'
+  - - '41'
+    - '2'
+    - closed
+    - '2012-09-12 07:45:23.609892'
+    - '2012-09-12 07:45:23.609892'
+    - '33'
+  - - '42'
+    - '1'
+    - closed
+    - '2012-09-12 07:45:23.615989'
+    - '2012-09-12 07:45:23.615989'
+    - '33'
+  - - '43'
+    - '8'
+    - closed
+    - '2012-09-12 08:22:29.694905'
+    - '2012-09-12 08:22:29.694905'
+    - '34'
+  - - '44'
+    - '7'
+    - closed
+    - '2012-09-12 08:22:29.737002'
+    - '2012-09-12 08:22:29.737002'
+    - '38'
+  - - '45'
+    - '6'
+    - closed
+    - '2012-09-12 08:22:29.743089'
+    - '2012-09-12 08:22:29.743089'
+    - '38'
+  - - '46'
+    - '5'
+    - closed
+    - '2012-09-12 08:22:29.749133'
+    - '2012-09-12 08:22:29.749133'
+    - '38'
+  - - '47'
+    - '4'
+    - closed
+    - '2012-09-12 08:22:29.755211'
+    - '2012-09-12 08:22:29.755211'
+    - '38'
+  - - '48'
+    - '3'
+    - closed
+    - '2012-09-12 08:22:29.761284'
+    - '2012-09-12 08:22:29.761284'
+    - '38'
+  - - '49'
+    - '2'
+    - activing
+    - '2012-09-12 08:22:29.775945'
+    - '2012-09-12 08:23:03.592415'
+    - '39'
+  - - '50'
+    - '1'
+    - active
+    - '2012-09-12 08:22:29.782047'
+    - '2012-09-12 08:23:08.853154'
+    - '39'
+  - - '51'
+    - '8'
+    - closed
+    - '2012-09-12 08:22:29.803549'
+    - '2012-09-12 08:22:29.803549'
+    - '40'
+  - - '52'
+    - '7'
+    - closed
+    - '2012-09-12 08:22:29.843251'
+    - '2012-09-12 08:22:29.843251'
+    - '44'
+  - - '53'
+    - '6'
+    - closed
+    - '2012-09-12 08:22:29.849434'
+    - '2012-09-12 08:22:29.849434'
+    - '44'
+  - - '54'
+    - '5'
+    - closed
+    - '2012-09-12 08:22:29.855615'
+    - '2012-09-12 08:22:29.855615'
+    - '44'
+  - - '55'
+    - '4'
+    - closed
+    - '2012-09-12 08:22:29.861833'
+    - '2012-09-12 08:22:29.861833'
+    - '44'
+  - - '56'
+    - '3'
+    - closed
+    - '2012-09-12 08:22:29.868054'
+    - '2012-09-12 08:22:29.868054'
+    - '44'
+  - - '57'
+    - '2'
+    - closed
+    - '2012-09-12 08:22:29.882924'
+    - '2012-09-12 08:22:29.882924'
+    - '45'
+  - - '58'
+    - '1'
+    - closed
+    - '2012-09-12 08:22:29.889119'
+    - '2012-09-12 08:22:29.889119'
+    - '45'
 
 ---
 versions:
@@ -3372,7 +3957,7 @@ versions:
     - '1'
     - update
     - 
-    - ! "---\nstate: closed\nproject_id: \ncluster_id: \nusername: \nid: \n"
+    - ! "---\nstate: initialized\nproject_id: \ncluster_id: \nusername: \nid: \n"
     - '2012-09-06 13:28:51.592474'
     - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
       1\ncluster_id:\n- \n- 1\nusername:\n- \n- project_1\nid:\n- \n- 1\n"
@@ -3548,7 +4133,7 @@ versions:
     - '2'
     - update
     - 
-    - ! "---\nstate: closed\nproject_id: \ncluster_id: \nusername: \nid: \n"
+    - ! "---\nstate: initialized\nproject_id: \ncluster_id: \nusername: \nid: \n"
     - '2012-09-06 13:51:11.096331'
     - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
       1\ncluster_id:\n- \n- 1\nid:\n- \n- 2\n"
@@ -3585,7 +4170,7 @@ versions:
     - '2'
     - ! '---
 
-      state: closed
+      state: initialized
 
       project_id: 1
 
@@ -3601,7 +4186,7 @@ versions:
 
       state:
 
-      - closed
+      - initialized
 
       - activing
 
@@ -3613,6 +4198,3432 @@ versions:
     - '2'
     - 
     - '2012-09-06 13:52:54.333541'
+    - 
+  - - '255'
+    - Cluster
+    - '3'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:15:43.6955'
+    - 
+  - - '256'
+    - ClusterProject
+    - '6'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:15:43.780123'
+    - 
+  - - '257'
+    - ClusterUser
+    - '7'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:15:43.812909'
+    - 
+  - - '258'
+    - Access
+    - '7'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:15:43.926232'
+    - 
+  - - '259'
+    - Access
+    - '8'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:15:43.932641'
+    - 
+  - - '260'
+    - Project
+    - '4'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.636216'
+    - 
+  - - '261'
+    - Account
+    - '9'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.650218'
+    - 
+  - - '262'
+    - Account
+    - '9'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: initialized\nusername:
+      \nid: \n"
+    - '2012-09-10 12:16:38.660527'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nuser_id:\n- \n-
+      1\nproject_id:\n- \n- 4\ncreated_at:\n- \n- 2012-09-10 12:16:38.640034675 Z\nupdated_at:\n-
+      \n- 2012-09-10 12:16:38.640034675 Z\nid:\n- \n- 9\nusername:\n- \n- account_9\n"
+  - - '263'
+    - Account
+    - '9'
+    - update
+    - '2'
+    - ! '---
+
+      user_id: 1
+
+      project_id: 4
+
+      created_at: 2012-09-10 12:16:38.640034000 Z
+
+      updated_at: 2012-09-10 12:16:38.640034000 Z
+
+      state: initialized
+
+      username: account_9
+
+      id: 9
+
+'
+    - '2012-09-10 12:16:38.672202'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - initialized
+
+      - active
+
+'
+  - - '264'
+    - Account
+    - '10'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.739375'
+    - 
+  - - '265'
+    - Account
+    - '10'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: initialized\nusername:
+      \nid: \n"
+    - '2012-09-10 12:16:38.743607'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      4\nuser_id:\n- \n- 6\ncreated_at:\n- \n- 2012-09-10 12:16:38.737637258 Z\nupdated_at:\n-
+      \n- 2012-09-10 12:16:38.737637258 Z\nid:\n- \n- 10\nusername:\n- \n- account_10\n"
+  - - '266'
+    - Account
+    - '11'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.750332'
+    - 
+  - - '267'
+    - Account
+    - '11'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: initialized\nusername:
+      \nid: \n"
+    - '2012-09-10 12:16:38.754423'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      4\nuser_id:\n- \n- 5\ncreated_at:\n- \n- 2012-09-10 12:16:38.748767995 Z\nupdated_at:\n-
+      \n- 2012-09-10 12:16:38.748767995 Z\nid:\n- \n- 11\nusername:\n- \n- account_11\n"
+  - - '268'
+    - Account
+    - '12'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.761059'
+    - 
+  - - '269'
+    - Account
+    - '12'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: initialized\nusername:
+      \nid: \n"
+    - '2012-09-10 12:16:38.765151'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      4\nuser_id:\n- \n- 4\ncreated_at:\n- \n- 2012-09-10 12:16:38.759515619 Z\nupdated_at:\n-
+      \n- 2012-09-10 12:16:38.759515619 Z\nid:\n- \n- 12\nusername:\n- \n- account_12\n"
+  - - '270'
+    - Account
+    - '13'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.771763'
+    - 
+  - - '271'
+    - Account
+    - '13'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: initialized\nusername:
+      \nid: \n"
+    - '2012-09-10 12:16:38.775827'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      4\nuser_id:\n- \n- 3\ncreated_at:\n- \n- 2012-09-10 12:16:38.770217272 Z\nupdated_at:\n-
+      \n- 2012-09-10 12:16:38.770217272 Z\nid:\n- \n- 13\nusername:\n- \n- account_13\n"
+  - - '272'
+    - Account
+    - '14'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.782406'
+    - 
+  - - '273'
+    - Account
+    - '14'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: initialized\nusername:
+      \nid: \n"
+    - '2012-09-10 12:16:38.78646'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      4\nuser_id:\n- \n- 2\ncreated_at:\n- \n- 2012-09-10 12:16:38.780856432 Z\nupdated_at:\n-
+      \n- 2012-09-10 12:16:38.780856432 Z\nid:\n- \n- 14\nusername:\n- \n- account_14\n"
+  - - '274'
+    - ClusterProject
+    - '7'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.81603'
+    - 
+  - - '275'
+    - ClusterUser
+    - '8'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.834852'
+    - 
+  - - '276'
+    - ClusterUser
+    - '9'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.842697'
+    - 
+  - - '277'
+    - ClusterUser
+    - '10'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.850629'
+    - 
+  - - '278'
+    - ClusterUser
+    - '11'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.858465'
+    - 
+  - - '279'
+    - ClusterUser
+    - '12'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.866275'
+    - 
+  - - '280'
+    - Access
+    - '9'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.885617'
+    - 
+  - - '281'
+    - Access
+    - '10'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.891786'
+    - 
+  - - '282'
+    - Access
+    - '11'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.897957'
+    - 
+  - - '283'
+    - Access
+    - '12'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.904099'
+    - 
+  - - '284'
+    - Access
+    - '13'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.910244'
+    - 
+  - - '285'
+    - ClusterUser
+    - '13'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.916555'
+    - 
+  - - '286'
+    - Access
+    - '14'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.924694'
+    - 
+  - - '287'
+    - Access
+    - '15'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.930934'
+    - 
+  - - '288'
+    - ClusterProject
+    - '8'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.936772'
+    - 
+  - - '289'
+    - ClusterUser
+    - '14'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.944244'
+    - 
+  - - '290'
+    - ClusterUser
+    - '15'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.952174'
+    - 
+  - - '291'
+    - ClusterUser
+    - '16'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.960105'
+    - 
+  - - '292'
+    - ClusterUser
+    - '17'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.968036'
+    - 
+  - - '293'
+    - ClusterUser
+    - '18'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.975958'
+    - 
+  - - '294'
+    - Access
+    - '16'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.984216'
+    - 
+  - - '295'
+    - Access
+    - '17'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.990492'
+    - 
+  - - '296'
+    - Access
+    - '18'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:38.996719'
+    - 
+  - - '297'
+    - Access
+    - '19'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:39.002955'
+    - 
+  - - '298'
+    - Access
+    - '20'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:39.009197'
+    - 
+  - - '299'
+    - ClusterUser
+    - '19'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:39.015508'
+    - 
+  - - '300'
+    - Access
+    - '21'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:39.076366'
+    - 
+  - - '301'
+    - Access
+    - '22'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:16:39.082646'
+    - 
+  - - '302'
+    - Request
+    - '5'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:17:27.674925'
+    - 
+  - - '303'
+    - Request
+    - '5'
+    - update
+    - '2'
+    - ! "---\nhours: 40\ncreated_at: 2012-09-10 12:17:27.655295000 Z\nupdated_at:
+      2012-09-10 12:17:27.655295000 Z\nuser_id: 1\nstate: pending\nsize: 40\ncomment:
+      \ncluster_project_id: 7\nid: 5\n"
+    - '2012-09-10 12:17:33.03397'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - pending
+
+      - active
+
+'
+  - - '304'
+    - ClusterProject
+    - '7'
+    - update
+    - '2'
+    - ! "---\nstate: initialized\nproject_id: 4\ncluster_id: 3\nusername: \nid: 7\n"
+    - '2012-09-10 12:17:33.040655'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - initialized
+
+      - activing
+
+'
+  - - '305'
+    - Task
+    - '21'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 12:17:33.084025'
+    - 
+  - - '306'
+    - ClusterProject
+    - '8'
+    - update
+    - 
+    - ! "---\nstate: initialized\nproject_id: 4\ncluster_id: 1\nusername: \nid: 8\n"
+    - '2012-09-10 12:42:43.846562'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      test_project\n"
+  - - '307'
+    - ClusterProject
+    - '7'
+    - update
+    - 
+    - ! "---\nstate: activing\nproject_id: 4\ncluster_id: 3\nusername: \nid: 7\n"
+    - '2012-09-10 12:42:43.899895'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      test_project\n"
+  - - '308'
+    - ClusterProject
+    - '6'
+    - update
+    - 
+    - ! "---\nstate: initialized\nproject_id: 1\ncluster_id: 3\nusername: \nid: 6\n"
+    - '2012-09-10 12:42:43.906002'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      project_1\n"
+  - - '309'
+    - ClusterProject
+    - '7'
+    - update
+    - 
+    - ! '---
+
+      state: activing
+
+      project_id: 4
+
+      cluster_id: 3
+
+      username: test_project
+
+      id: 7
+
+'
+    - '2012-09-10 12:43:36.189223'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '310'
+    - ClusterUser
+    - '13'
+    - update
+    - 
+    - ! "---\nstate: initialized\ncreated_at: 2012-09-10 12:16:38.914891000 Z\nupdated_at:
+      2012-09-10 12:16:38.914891000 Z\naccount_id: 9\ncluster_project_id: 7\nusername:
+      \nid: 13\n"
+    - '2012-09-10 12:43:36.226734'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - initialized
+
+      - activing
+
+'
+  - - '311'
+    - ClusterUser
+    - '12'
+    - update
+    - 
+    - ! "---\nstate: initialized\ncreated_at: 2012-09-10 12:16:38.864644000 Z\nupdated_at:
+      2012-09-10 12:16:38.864644000 Z\naccount_id: 10\ncluster_project_id: 7\nusername:
+      \nid: 12\n"
+    - '2012-09-10 12:43:36.233153'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - initialized
+
+      - activing
+
+'
+  - - '312'
+    - ClusterUser
+    - '11'
+    - update
+    - 
+    - ! "---\nstate: initialized\ncreated_at: 2012-09-10 12:16:38.856813000 Z\nupdated_at:
+      2012-09-10 12:16:38.856813000 Z\naccount_id: 11\ncluster_project_id: 7\nusername:
+      \nid: 11\n"
+    - '2012-09-10 12:43:36.238869'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - initialized
+
+      - activing
+
+'
+  - - '313'
+    - ClusterUser
+    - '10'
+    - update
+    - 
+    - ! "---\nstate: initialized\ncreated_at: 2012-09-10 12:16:38.848999000 Z\nupdated_at:
+      2012-09-10 12:16:38.848999000 Z\naccount_id: 12\ncluster_project_id: 7\nusername:
+      \nid: 10\n"
+    - '2012-09-10 12:43:36.24444'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - initialized
+
+      - activing
+
+'
+  - - '314'
+    - ClusterUser
+    - '9'
+    - update
+    - 
+    - ! "---\nstate: initialized\ncreated_at: 2012-09-10 12:16:38.841065000 Z\nupdated_at:
+      2012-09-10 12:16:38.841065000 Z\naccount_id: 13\ncluster_project_id: 7\nusername:
+      \nid: 9\n"
+    - '2012-09-10 12:43:36.24998'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - initialized
+
+      - activing
+
+'
+  - - '315'
+    - ClusterUser
+    - '8'
+    - update
+    - 
+    - ! "---\nstate: initialized\ncreated_at: 2012-09-10 12:16:38.832350000 Z\nupdated_at:
+      2012-09-10 12:16:38.832350000 Z\naccount_id: 14\ncluster_project_id: 7\nusername:
+      \nid: 8\n"
+    - '2012-09-10 12:43:36.255317'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - initialized
+
+      - activing
+
+'
+  - - '316'
+    - Task
+    - '21'
+    - update
+    - 
+    - ! "---\nresource_type: ClusterProject\nresource_id: 7\ncreated_at: 2012-09-10
+      12:17:33.070427000 Z\nupdated_at: 2012-09-10 16:17:33.722432000 Z\nprocedure:
+      add_project\ncomment: ! \"Add group:  on v2.parallel.ru with \\n\"\ncallbacks_performed:
+      false\ntask_id: \nstate: failed\nid: 21\n"
+    - '2012-09-10 12:43:36.260836'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '317'
+    - Task
+    - '21'
+    - update
+    - '2'
+    - ! "---\nresource_type: ClusterProject\nresource_id: 7\ncreated_at: 2012-09-10
+      12:17:33.070427000 Z\nupdated_at: 2012-09-10 12:43:36.259807000 Z\nprocedure:
+      add_project\ncomment: ! \"Add group:  on v2.parallel.ru with \\n\"\ncallbacks_performed:
+      true\ntask_id: \nstate: failed\nid: 21\n"
+    - '2012-09-10 12:53:39.560477'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - failed
+
+      - successed
+
+'
+  - - '318'
+    - Task
+    - '22'
+    - create
+    - 
+    - 
+    - '2012-09-10 13:54:15.551489'
+    - 
+  - - '319'
+    - Task
+    - '23'
+    - create
+    - 
+    - 
+    - '2012-09-10 13:54:15.561719'
+    - 
+  - - '320'
+    - Task
+    - '24'
+    - create
+    - 
+    - 
+    - '2012-09-10 13:54:15.568304'
+    - 
+  - - '321'
+    - Task
+    - '25'
+    - create
+    - 
+    - 
+    - '2012-09-10 13:54:15.57492'
+    - 
+  - - '322'
+    - Task
+    - '26'
+    - create
+    - 
+    - 
+    - '2012-09-10 13:54:15.581441'
+    - 
+  - - '323'
+    - Task
+    - '27'
+    - create
+    - 
+    - 
+    - '2012-09-10 13:54:15.587684'
+    - 
+  - - '324'
+    - Task
+    - '28'
+    - create
+    - 
+    - 
+    - '2012-09-10 13:54:15.593993'
+    - 
+  - - '325'
+    - Task
+    - '29'
+    - create
+    - 
+    - 
+    - '2012-09-10 13:54:15.600248'
+    - 
+  - - '326'
+    - Task
+    - '30'
+    - create
+    - 
+    - 
+    - '2012-09-10 13:54:15.647014'
+    - 
+  - - '327'
+    - Task
+    - '31'
+    - create
+    - 
+    - 
+    - '2012-09-10 13:54:15.653541'
+    - 
+  - - '328'
+    - Task
+    - '32'
+    - create
+    - 
+    - 
+    - '2012-09-10 13:54:15.660216'
+    - 
+  - - '329'
+    - Task
+    - '33'
+    - create
+    - 
+    - 
+    - '2012-09-10 13:54:15.666676'
+    - 
+  - - '330'
+    - ClusterUser
+    - '19'
+    - update
+    - 
+    - ! "---\nstate: initialized\ncreated_at: 2012-09-10 12:16:39.013851000 Z\nupdated_at:
+      2012-09-10 12:16:39.013851000 Z\naccount_id: 9\ncluster_project_id: 8\nusername:
+      \nid: 19\n"
+    - '2012-09-10 13:58:54.058108'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      account_9\n"
+  - - '331'
+    - ClusterUser
+    - '18'
+    - update
+    - 
+    - ! "---\nstate: initialized\ncreated_at: 2012-09-10 12:16:38.974325000 Z\nupdated_at:
+      2012-09-10 12:16:38.974325000 Z\naccount_id: 10\ncluster_project_id: 8\nusername:
+      \nid: 18\n"
+    - '2012-09-10 13:58:54.066362'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      account_10\n"
+  - - '332'
+    - ClusterUser
+    - '17'
+    - update
+    - 
+    - ! "---\nstate: initialized\ncreated_at: 2012-09-10 12:16:38.966388000 Z\nupdated_at:
+      2012-09-10 12:16:38.966388000 Z\naccount_id: 11\ncluster_project_id: 8\nusername:
+      \nid: 17\n"
+    - '2012-09-10 13:58:54.072935'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      account_11\n"
+  - - '333'
+    - ClusterUser
+    - '16'
+    - update
+    - 
+    - ! "---\nstate: initialized\ncreated_at: 2012-09-10 12:16:38.958463000 Z\nupdated_at:
+      2012-09-10 12:16:38.958463000 Z\naccount_id: 12\ncluster_project_id: 8\nusername:
+      \nid: 16\n"
+    - '2012-09-10 13:58:54.07925'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      account_12\n"
+  - - '334'
+    - ClusterUser
+    - '15'
+    - update
+    - 
+    - ! "---\nstate: initialized\ncreated_at: 2012-09-10 12:16:38.950519000 Z\nupdated_at:
+      2012-09-10 12:16:38.950519000 Z\naccount_id: 13\ncluster_project_id: 8\nusername:
+      \nid: 15\n"
+    - '2012-09-10 13:58:54.085372'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      account_13\n"
+  - - '335'
+    - ClusterUser
+    - '14'
+    - update
+    - 
+    - ! "---\nstate: initialized\ncreated_at: 2012-09-10 12:16:38.942597000 Z\nupdated_at:
+      2012-09-10 12:16:38.942597000 Z\naccount_id: 14\ncluster_project_id: 8\nusername:
+      \nid: 14\n"
+    - '2012-09-10 13:58:54.091686'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      account_14\n"
+  - - '336'
+    - ClusterUser
+    - '13'
+    - update
+    - 
+    - ! "---\nstate: activing\ncreated_at: 2012-09-10 12:16:38.914891000 Z\nupdated_at:
+      2012-09-10 12:43:36.225452000 Z\naccount_id: 9\ncluster_project_id: 7\nusername:
+      \nid: 13\n"
+    - '2012-09-10 13:58:54.09801'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      account_9\n"
+  - - '337'
+    - ClusterUser
+    - '12'
+    - update
+    - 
+    - ! "---\nstate: activing\ncreated_at: 2012-09-10 12:16:38.864644000 Z\nupdated_at:
+      2012-09-10 12:43:36.232347000 Z\naccount_id: 10\ncluster_project_id: 7\nusername:
+      \nid: 12\n"
+    - '2012-09-10 13:58:54.104294'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      account_10\n"
+  - - '338'
+    - ClusterUser
+    - '11'
+    - update
+    - 
+    - ! "---\nstate: activing\ncreated_at: 2012-09-10 12:16:38.856813000 Z\nupdated_at:
+      2012-09-10 12:43:36.238030000 Z\naccount_id: 11\ncluster_project_id: 7\nusername:
+      \nid: 11\n"
+    - '2012-09-10 13:58:54.110791'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      account_11\n"
+  - - '339'
+    - ClusterUser
+    - '10'
+    - update
+    - 
+    - ! "---\nstate: activing\ncreated_at: 2012-09-10 12:16:38.848999000 Z\nupdated_at:
+      2012-09-10 12:43:36.243555000 Z\naccount_id: 12\ncluster_project_id: 7\nusername:
+      \nid: 10\n"
+    - '2012-09-10 13:58:54.117248'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      account_12\n"
+  - - '340'
+    - ClusterUser
+    - '9'
+    - update
+    - 
+    - ! "---\nstate: activing\ncreated_at: 2012-09-10 12:16:38.841065000 Z\nupdated_at:
+      2012-09-10 12:43:36.249138000 Z\naccount_id: 13\ncluster_project_id: 7\nusername:
+      \nid: 9\n"
+    - '2012-09-10 13:58:54.123542'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      account_13\n"
+  - - '341'
+    - ClusterUser
+    - '8'
+    - update
+    - 
+    - ! "---\nstate: activing\ncreated_at: 2012-09-10 12:16:38.832350000 Z\nupdated_at:
+      2012-09-10 12:43:36.254525000 Z\naccount_id: 14\ncluster_project_id: 7\nusername:
+      \nid: 8\n"
+    - '2012-09-10 13:58:54.129464'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      account_14\n"
+  - - '342'
+    - ClusterUser
+    - '7'
+    - update
+    - 
+    - ! "---\nstate: initialized\ncreated_at: 2012-09-10 12:15:43.810309000 Z\nupdated_at:
+      2012-09-10 12:15:43.810309000 Z\naccount_id: 1\ncluster_project_id: 6\nusername:
+      \nid: 7\n"
+    - '2012-09-10 13:58:54.135954'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      account_1\n"
+  - - '343'
+    - Task
+    - '34'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 14:58:04.82083'
+    - 
+  - - '344'
+    - Task
+    - '35'
+    - create
+    - '2'
+    - 
+    - '2012-09-10 14:58:19.043094'
+    - 
+  - - '345'
+    - Task
+    - '36'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 08:07:32.423127'
+    - 
+  - - '346'
+    - Task
+    - '37'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 08:10:54.450854'
+    - 
+  - - '347'
+    - Task
+    - '38'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 08:18:11.557173'
+    - 
+  - - '348'
+    - Task
+    - '37'
+    - update
+    - '2'
+    - ! '---
+
+      resource_type: ClusterProject
+
+      resource_id: 7
+
+      created_at: 2012-09-11 08:10:54.449027000 Z
+
+      updated_at: 2012-09-11 12:10:58.575519000 Z
+
+      procedure: add_project
+
+      comment: ! "Add group: test_project on v2.parallel.ru with \n"
+
+      callbacks_performed: false
+
+      task_id: 21
+
+      state: failed
+
+      id: 37
+
+'
+    - '2012-09-11 08:22:11.630659'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - failed
+
+      - successed
+
+'
+  - - '349'
+    - Task
+    - '39'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 08:22:19.936829'
+    - 
+  - - '350'
+    - ClusterUser
+    - '8'
+    - update
+    - 
+    - ! '---
+
+      state: activing
+
+      created_at: 2012-09-10 12:16:38.832350000 Z
+
+      updated_at: 2012-09-10 13:58:54.128610000 Z
+
+      account_id: 14
+
+      cluster_project_id: 7
+
+      username: account_14
+
+      id: 8
+
+'
+    - '2012-09-11 08:22:24.909733'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '351'
+    - Task
+    - '39'
+    - update
+    - 
+    - ! '---
+
+      resource_type: ClusterUser
+
+      resource_id: 8
+
+      created_at: 2012-09-11 08:22:19.934937000 Z
+
+      updated_at: 2012-09-11 12:22:24.319133000 Z
+
+      procedure: add_user
+
+      comment: ! "Add user: account_14 test_project on v2.parallel.ru with \n"
+
+      callbacks_performed: false
+
+      task_id: 36
+
+      state: successed
+
+      id: 39
+
+'
+    - '2012-09-11 08:22:24.920171'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '352'
+    - Task
+    - '40'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 08:23:13.128021'
+    - 
+  - - '353'
+    - Task
+    - '36'
+    - update
+    - '2'
+    - ! '---
+
+      resource_type: ClusterUser
+
+      resource_id: 8
+
+      created_at: 2012-09-11 08:07:32.408009000 Z
+
+      updated_at: 2012-09-11 12:07:33.354956000 Z
+
+      procedure: add_user
+
+      comment: ! "Add user: account_14 test_project on v2.parallel.ru with \n"
+
+      callbacks_performed: false
+
+      task_id: 35
+
+      state: failed
+
+      id: 36
+
+'
+    - '2012-09-11 08:23:29.526575'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - failed
+
+      - successed
+
+'
+  - - '354'
+    - Task
+    - '35'
+    - update
+    - '2'
+    - ! '---
+
+      resource_type: ClusterUser
+
+      resource_id: 8
+
+      created_at: 2012-09-10 14:58:19.041300000 Z
+
+      updated_at: 2012-09-10 18:58:21.505295000 Z
+
+      procedure: add_user
+
+      comment: ! "Add user: account_14 test_project on v2.parallel.ru with \n"
+
+      callbacks_performed: false
+
+      task_id: 34
+
+      state: failed
+
+      id: 35
+
+'
+    - '2012-09-11 08:23:35.478163'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - failed
+
+      - successed
+
+'
+  - - '355'
+    - Task
+    - '34'
+    - update
+    - '2'
+    - ! '---
+
+      resource_type: ClusterUser
+
+      resource_id: 8
+
+      created_at: 2012-09-10 14:58:04.760378000 Z
+
+      updated_at: 2012-09-10 18:58:06.283662000 Z
+
+      procedure: add_user
+
+      comment: ! "Add user: account_14 test_project on v2.parallel.ru with \n"
+
+      callbacks_performed: false
+
+      task_id: 33
+
+      state: failed
+
+      id: 34
+
+'
+    - '2012-09-11 08:23:42.031152'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - failed
+
+      - successed
+
+'
+  - - '356'
+    - Task
+    - '33'
+    - update
+    - '2'
+    - ! "---\nresource_type: ClusterUser\nresource_id: 8\ncreated_at: 2012-09-10 13:54:15.664895000
+      Z\nupdated_at: 2012-09-10 17:54:18.620229000 Z\nprocedure: add_user\ncomment:
+      ! \"Add user:  test_project on v2.parallel.ru with \\n\"\ncallbacks_performed:
+      false\ntask_id: \nstate: failed\nid: 33\n"
+    - '2012-09-11 08:23:54.410017'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - failed
+
+      - successed
+
+'
+  - - '357'
+    - Task
+    - '41'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 08:24:29.004217'
+    - 
+  - - '358'
+    - ClusterUser
+    - '9'
+    - update
+    - 
+    - ! '---
+
+      state: activing
+
+      created_at: 2012-09-10 12:16:38.841065000 Z
+
+      updated_at: 2012-09-10 13:58:54.122715000 Z
+
+      account_id: 13
+
+      cluster_project_id: 7
+
+      username: account_13
+
+      id: 9
+
+'
+    - '2012-09-11 08:24:30.631625'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '359'
+    - Task
+    - '41'
+    - update
+    - 
+    - ! '---
+
+      resource_type: ClusterUser
+
+      resource_id: 9
+
+      created_at: 2012-09-11 08:24:29.002283000 Z
+
+      updated_at: 2012-09-11 12:24:30.155459000 Z
+
+      procedure: add_user
+
+      comment: ! "Add user: account_13 test_project on v2.parallel.ru with \n"
+
+      callbacks_performed: false
+
+      task_id: 32
+
+      state: successed
+
+      id: 41
+
+'
+    - '2012-09-11 08:24:30.642121'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '360'
+    - Task
+    - '32'
+    - update
+    - '2'
+    - ! "---\nresource_type: ClusterUser\nresource_id: 9\ncreated_at: 2012-09-10 13:54:15.658440000
+      Z\nupdated_at: 2012-09-10 17:54:18.408111000 Z\nprocedure: add_user\ncomment:
+      ! \"Add user:  test_project on v2.parallel.ru with \\n\"\ncallbacks_performed:
+      false\ntask_id: \nstate: failed\nid: 32\n"
+    - '2012-09-11 08:24:38.034083'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - failed
+
+      - successed
+
+'
+  - - '361'
+    - Task
+    - '42'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 08:29:58.42557'
+    - 
+  - - '362'
+    - ClusterUser
+    - '10'
+    - update
+    - 
+    - ! '---
+
+      state: activing
+
+      created_at: 2012-09-10 12:16:38.848999000 Z
+
+      updated_at: 2012-09-10 13:58:54.116273000 Z
+
+      account_id: 12
+
+      cluster_project_id: 7
+
+      username: account_12
+
+      id: 10
+
+'
+    - '2012-09-11 08:30:06.069357'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '363'
+    - Task
+    - '42'
+    - update
+    - 
+    - ! '---
+
+      resource_type: ClusterUser
+
+      resource_id: 10
+
+      created_at: 2012-09-11 08:29:58.423381000 Z
+
+      updated_at: 2012-09-11 12:30:00.877773000 Z
+
+      procedure: add_user
+
+      comment: ! "Add user: account_12 test_project on v2.parallel.ru with \n"
+
+      callbacks_performed: false
+
+      task_id: 31
+
+      state: successed
+
+      id: 42
+
+'
+    - '2012-09-11 08:30:06.079868'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '364'
+    - Task
+    - '43'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 08:30:15.931753'
+    - 
+  - - '365'
+    - Credential
+    - '8'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 08:56:26.28399'
+    - 
+  - - '366'
+    - Access
+    - '23'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 08:56:26.305064'
+    - 
+  - - '367'
+    - Access
+    - '24'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 08:56:26.311119'
+    - 
+  - - '368'
+    - Account
+    - '15'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 08:57:07.248343'
+    - 
+  - - '369'
+    - Account
+    - '15'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: initialized\nusername:
+      \nid: \n"
+    - '2012-09-11 08:57:07.258199'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nuser_id:\n- \n-
+      2\nproject_id:\n- \n- 1\ncreated_at:\n- \n- 2012-09-11 08:57:07.232743486 Z\nupdated_at:\n-
+      \n- 2012-09-11 08:57:07.232743486 Z\nid:\n- \n- 15\nusername:\n- \n- account_15\n"
+  - - '370'
+    - ClusterUser
+    - '20'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 08:57:07.277731'
+    - 
+  - - '371'
+    - Access
+    - '25'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 08:57:07.297927'
+    - 
+  - - '372'
+    - ClusterUser
+    - '21'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 08:57:07.304681'
+    - 
+  - - '373'
+    - Access
+    - '26'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 08:57:07.313803'
+    - 
+  - - '374'
+    - Access
+    - '22'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 1
+
+      state: initialized
+
+      created_at: 2012-09-10 12:16:39.080964000 Z
+
+      updated_at: 2012-09-10 12:16:39.080964000 Z
+
+      cluster_user_id: 19
+
+      id: 22
+
+'
+    - '2012-09-11 08:58:14.774168'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - initialized
+
+      - activing
+
+'
+  - - '375'
+    - Task
+    - '44'
+    - create
+    - 
+    - 
+    - '2012-09-11 08:58:14.798729'
+    - 
+  - - '376'
+    - Access
+    - '15'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 1
+
+      state: initialized
+
+      created_at: 2012-09-10 12:16:38.929306000 Z
+
+      updated_at: 2012-09-10 12:16:38.929306000 Z
+
+      cluster_user_id: 13
+
+      id: 15
+
+'
+    - '2012-09-11 08:58:14.809236'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - initialized
+
+      - activing
+
+'
+  - - '377'
+    - Task
+    - '45'
+    - create
+    - 
+    - 
+    - '2012-09-11 08:58:14.814271'
+    - 
+  - - '378'
+    - Access
+    - '8'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 1
+
+      state: initialized
+
+      created_at: 2012-09-10 12:15:43.930968000 Z
+
+      updated_at: 2012-09-10 12:15:43.930968000 Z
+
+      cluster_user_id: 7
+
+      id: 8
+
+'
+    - '2012-09-11 08:58:14.821833'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - initialized
+
+      - activing
+
+'
+  - - '379'
+    - Task
+    - '46'
+    - create
+    - 
+    - 
+    - '2012-09-11 08:58:14.826771'
+    - 
+  - - '380'
+    - Access
+    - '6'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 1
+
+      state: initialized
+
+      created_at: 2012-09-06 13:32:52.625101000 Z
+
+      updated_at: 2012-09-06 13:32:52.625101000 Z
+
+      cluster_user_id: 1
+
+      id: 6
+
+'
+    - '2012-09-11 08:58:14.874591'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - initialized
+
+      - activing
+
+'
+  - - '381'
+    - Task
+    - '47'
+    - create
+    - 
+    - 
+    - '2012-09-11 08:58:14.879779'
+    - 
+  - - '382'
+    - Task
+    - '22'
+    - update
+    - '2'
+    - ! "---\nresource_type: ClusterUser\nresource_id: 19\ncreated_at: 2012-09-10
+      13:54:15.536282000 Z\nupdated_at: 2012-09-10 17:54:16.626157000 Z\nprocedure:
+      add_user\ncomment: ! \"Add user:  test_project on lomonosov.parallel.ru with
+      \\n\"\ncallbacks_performed: false\ntask_id: \nstate: failed\nid: 22\n"
+    - '2012-09-11 09:00:09.457268'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - failed
+
+      - successed
+
+'
+  - - '383'
+    - Task
+    - '48'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 09:00:20.674852'
+    - 
+  - - '384'
+    - Task
+    - '49'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 09:00:29.026911'
+    - 
+  - - '385'
+    - Task
+    - '50'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 09:00:35.069309'
+    - 
+  - - '386'
+    - Task
+    - '51'
+    - create
+    - '2'
+    - 
+    - '2012-09-11 09:00:58.440713'
+    - 
+  - - '387'
+    - Task
+    - '51'
+    - update
+    - '2'
+    - ! '---
+
+      resource_type: ClusterUser
+
+      resource_id: 18
+
+      created_at: 2012-09-11 09:00:58.438821000 Z
+
+      updated_at: 2012-09-11 13:01:02.819676000 Z
+
+      procedure: add_user
+
+      comment: ! "Add user: account_10 test_project on lomonosov.parallel.ru with
+      \n"
+
+      callbacks_performed: false
+
+      task_id: 23
+
+      state: failed
+
+      id: 51
+
+'
+    - '2012-09-11 09:01:18.73121'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - failed
+
+      - successed
+
+'
+  - - '388'
+    - Task
+    - '52'
+    - create
+    - 
+    - 
+    - '2012-09-11 09:05:44.307732'
+    - 
+  - - '389'
+    - Task
+    - '53'
+    - create
+    - 
+    - 
+    - '2012-09-11 09:07:02.688309'
+    - 
+  - - '390'
+    - Task
+    - '54'
+    - create
+    - 
+    - 
+    - '2012-09-11 09:09:17.936542'
+    - 
+  - - '392'
+    - Task
+    - '55'
+    - create
+    - 
+    - 
+    - '2012-09-11 09:10:21.904184'
+    - 
+  - - '393'
+    - Access
+    - '15'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 1
+
+      state: activing
+
+      created_at: 2012-09-10 12:16:38.929306000 Z
+
+      updated_at: 2012-09-11 08:58:14.808193000 Z
+
+      cluster_user_id: 13
+
+      id: 15
+
+'
+    - '2012-09-11 09:10:24.927941'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '394'
+    - Task
+    - '55'
+    - update
+    - 
+    - ! "---\nresource_type: Access\nresource_id: 15\ncreated_at: 2012-09-11 09:10:21.901964000
+      Z\nupdated_at: 2012-09-11 13:10:23.756818000 Z\nprocedure: add_openkey\ncomment:
+      ! 'Add key: account_9 / test_project on v2.parallel.ru with atata.\n\n  Adding
+      key for account_9!\n\n  Key added\n\n'\ncallbacks_performed: false\ntask_id:
+      \nstate: successed\nid: 55\n"
+    - '2012-09-11 09:10:24.935034'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '395'
+    - Project
+    - '5'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.162696'
+    - 
+  - - '396'
+    - Account
+    - '16'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.169288'
+    - 
+  - - '397'
+    - Account
+    - '16'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: closed\nusername:
+      \nid: \n"
+    - '2012-09-12 07:45:23.17978'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nuser_id:\n- \n-
+      1\nproject_id:\n- \n- 5\ncreated_at:\n- \n- 2012-09-12 07:45:23.166549624 Z\nupdated_at:\n-
+      \n- 2012-09-12 07:45:23.166549624 Z\nid:\n- \n- 16\nusername:\n- \n- account_16\n"
+  - - '398'
+    - Project
+    - '5'
+    - update
+    - '2'
+    - ! "---\nname: \ncreated_at: \nupdated_at: \nuser_id: \nstate: active\ndescription:
+      \norganization_id: \ncluster_user_type: account\nusername: \nid: \n"
+    - '2012-09-12 07:45:23.185784'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nuser_id:\n- \n-
+      1\norganization_id:\n- \n- 1\nname:\n- \n- test2\nusername:\n- \n- project_5\ndescription:\n-
+      \n- test2\ncreated_at:\n- \n- 2012-09-12 07:45:23.137641328 Z\nupdated_at:\n-
+      \n- 2012-09-12 07:45:23.137641328 Z\nid:\n- \n- 5\n"
+  - - '399'
+    - Account
+    - '16'
+    - update
+    - '2'
+    - ! '---
+
+      user_id: 1
+
+      project_id: 5
+
+      created_at: 2012-09-12 07:45:23.166549000 Z
+
+      updated_at: 2012-09-12 07:45:23.166549000 Z
+
+      state: closed
+
+      username: account_16
+
+      id: 16
+
+'
+    - '2012-09-12 07:45:23.195413'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - active
+
+'
+  - - '400'
+    - Account
+    - '17'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.205668'
+    - 
+  - - '401'
+    - Account
+    - '17'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: closed\nusername:
+      \nid: \n"
+    - '2012-09-12 07:45:23.253622'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      5\nuser_id:\n- \n- 6\ncreated_at:\n- \n- 2012-09-12 07:45:23.204009658 Z\nupdated_at:\n-
+      \n- 2012-09-12 07:45:23.204009658 Z\nid:\n- \n- 17\nusername:\n- \n- account_17\n"
+  - - '402'
+    - Account
+    - '18'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.261016'
+    - 
+  - - '403'
+    - Account
+    - '18'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: closed\nusername:
+      \nid: \n"
+    - '2012-09-12 07:45:23.265275'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      5\nuser_id:\n- \n- 5\ncreated_at:\n- \n- 2012-09-12 07:45:23.259401304 Z\nupdated_at:\n-
+      \n- 2012-09-12 07:45:23.259401304 Z\nid:\n- \n- 18\nusername:\n- \n- account_18\n"
+  - - '404'
+    - Account
+    - '19'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.27236'
+    - 
+  - - '405'
+    - Account
+    - '19'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: closed\nusername:
+      \nid: \n"
+    - '2012-09-12 07:45:23.276735'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      5\nuser_id:\n- \n- 4\ncreated_at:\n- \n- 2012-09-12 07:45:23.270744835 Z\nupdated_at:\n-
+      \n- 2012-09-12 07:45:23.270744835 Z\nid:\n- \n- 19\nusername:\n- \n- account_19\n"
+  - - '406'
+    - Account
+    - '20'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.283595'
+    - 
+  - - '407'
+    - Account
+    - '20'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: closed\nusername:
+      \nid: \n"
+    - '2012-09-12 07:45:23.287649'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      5\nuser_id:\n- \n- 3\ncreated_at:\n- \n- 2012-09-12 07:45:23.282061000 Z\nupdated_at:\n-
+      \n- 2012-09-12 07:45:23.282061000 Z\nid:\n- \n- 20\nusername:\n- \n- account_20\n"
+  - - '408'
+    - Account
+    - '21'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.294183'
+    - 
+  - - '409'
+    - Account
+    - '21'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: closed\nusername:
+      \nid: \n"
+    - '2012-09-12 07:45:23.298202'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      5\nuser_id:\n- \n- 2\ncreated_at:\n- \n- 2012-09-12 07:45:23.292644783 Z\nupdated_at:\n-
+      \n- 2012-09-12 07:45:23.292644783 Z\nid:\n- \n- 21\nusername:\n- \n- account_21\n"
+  - - '410'
+    - ClusterProject
+    - '9'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.328298'
+    - 
+  - - '411'
+    - ClusterUser
+    - '22'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.347326'
+    - 
+  - - '412'
+    - Access
+    - '27'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.379278'
+    - 
+  - - '413'
+    - ClusterUser
+    - '23'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.385938'
+    - 
+  - - '414'
+    - ClusterUser
+    - '24'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.394228'
+    - 
+  - - '415'
+    - ClusterUser
+    - '25'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.402326'
+    - 
+  - - '416'
+    - ClusterUser
+    - '26'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.410476'
+    - 
+  - - '417'
+    - Access
+    - '28'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.419061'
+    - 
+  - - '418'
+    - Access
+    - '29'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.425304'
+    - 
+  - - '419'
+    - Access
+    - '30'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.431372'
+    - 
+  - - '420'
+    - Access
+    - '31'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.437463'
+    - 
+  - - '421'
+    - Access
+    - '32'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.443533'
+    - 
+  - - '422'
+    - ClusterUser
+    - '27'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.44987'
+    - 
+  - - '423'
+    - Access
+    - '33'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.457893'
+    - 
+  - - '424'
+    - Access
+    - '34'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.464035'
+    - 
+  - - '425'
+    - ClusterProject
+    - '10'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.469844'
+    - 
+  - - '426'
+    - ClusterUser
+    - '28'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.477259'
+    - 
+  - - '427'
+    - Access
+    - '35'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.485223'
+    - 
+  - - '428'
+    - ClusterUser
+    - '29'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.491524'
+    - 
+  - - '429'
+    - ClusterUser
+    - '30'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.499375'
+    - 
+  - - '430'
+    - ClusterUser
+    - '31'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.507246'
+    - 
+  - - '431'
+    - ClusterUser
+    - '32'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.515132'
+    - 
+  - - '432'
+    - Access
+    - '36'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.523259'
+    - 
+  - - '433'
+    - Access
+    - '37'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.574965'
+    - 
+  - - '434'
+    - Access
+    - '38'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.584662'
+    - 
+  - - '435'
+    - Access
+    - '39'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.591093'
+    - 
+  - - '436'
+    - Access
+    - '40'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.59712'
+    - 
+  - - '437'
+    - ClusterUser
+    - '33'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.603494'
+    - 
+  - - '438'
+    - Access
+    - '41'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.611502'
+    - 
+  - - '439'
+    - Access
+    - '42'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:45:23.617617'
+    - 
+  - - '440'
+    - Request
+    - '6'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:46:08.368723'
+    - 
+  - - '441'
+    - Request
+    - '6'
+    - update
+    - '2'
+    - ! "---\nhours: 8\ncreated_at: 2012-09-12 07:46:08.365692000 Z\nupdated_at: 2012-09-12
+      07:46:08.365692000 Z\nuser_id: 1\nstate: pending\nsize: 8\ncomment: \ncluster_project_id:
+      9\nid: 6\n"
+    - '2012-09-12 07:46:12.105055'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - pending
+
+      - active
+
+'
+  - - '442'
+    - ClusterProject
+    - '9'
+    - update
+    - '2'
+    - ! '---
+
+      state: closed
+
+      project_id: 5
+
+      cluster_id: 3
+
+      username: project_5
+
+      id: 9
+
+'
+    - '2012-09-12 07:46:12.111821'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '443'
+    - Task
+    - '56'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:46:12.18951'
+    - 
+  - - '444'
+    - ClusterProject
+    - '9'
+    - update
+    - 
+    - ! '---
+
+      state: activing
+
+      project_id: 5
+
+      cluster_id: 3
+
+      username: project_5
+
+      id: 9
+
+'
+    - '2012-09-12 07:46:18.697032'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '445'
+    - ClusterUser
+    - '27'
+    - update
+    - 
+    - ! "---\nstate: closed\ncreated_at: 2012-09-12 07:45:23.448194000 Z\nupdated_at:
+      2012-09-12 07:45:23.448194000 Z\naccount_id: 16\ncluster_project_id: 9\nusername:
+      \nid: 27\n"
+    - '2012-09-12 07:46:18.773929'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '446'
+    - Task
+    - '57'
+    - create
+    - 
+    - 
+    - '2012-09-12 07:46:18.78149'
+    - 
+  - - '447'
+    - Task
+    - '56'
+    - update
+    - 
+    - ! "---\nresource_type: ClusterProject\nresource_id: 9\ncreated_at: 2012-09-12
+      07:46:12.186124000 Z\nupdated_at: 2012-09-12 11:46:17.454693000 Z\nprocedure:
+      add_project\ncomment: ! \"Add group: project_5 on v2.parallel.ru with \\n\"\ncallbacks_performed:
+      false\ntask_id: \nstate: successed\nid: 56\n"
+    - '2012-09-12 07:46:18.78716'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '448'
+    - Task
+    - '58'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:47:17.156654'
+    - 
+  - - '449'
+    - ClusterUser
+    - '27'
+    - update
+    - 
+    - ! "---\nstate: activing\ncreated_at: 2012-09-12 07:45:23.448194000 Z\nupdated_at:
+      2012-09-12 07:46:18.772857000 Z\naccount_id: 16\ncluster_project_id: 9\nusername:
+      \nid: 27\n"
+    - '2012-09-12 07:49:46.508427'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nusername:\n- \n-
+      account_16\n"
+  - - '450'
+    - Task
+    - '59'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 07:50:13.299597'
+    - 
+  - - '451'
+    - ClusterUser
+    - '27'
+    - update
+    - 
+    - ! '---
+
+      state: activing
+
+      created_at: 2012-09-12 07:45:23.448194000 Z
+
+      updated_at: 2012-09-12 07:49:46.503884000 Z
+
+      account_id: 16
+
+      cluster_project_id: 9
+
+      username: account_16
+
+      id: 27
+
+'
+    - '2012-09-12 07:50:19.097686'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '452'
+    - Access
+    - '34'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 1
+
+      state: closed
+
+      created_at: 2012-09-12 07:45:23.462408000 Z
+
+      updated_at: 2012-09-12 07:45:23.462408000 Z
+
+      cluster_user_id: 27
+
+      id: 34
+
+'
+    - '2012-09-12 07:50:19.128793'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '453'
+    - Task
+    - '60'
+    - create
+    - 
+    - 
+    - '2012-09-12 07:50:19.13626'
+    - 
+  - - '454'
+    - Access
+    - '33'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 2
+
+      state: closed
+
+      created_at: 2012-09-12 07:45:23.456257000 Z
+
+      updated_at: 2012-09-12 07:45:23.456257000 Z
+
+      cluster_user_id: 27
+
+      id: 33
+
+'
+    - '2012-09-12 07:50:19.143395'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '455'
+    - Task
+    - '61'
+    - create
+    - 
+    - 
+    - '2012-09-12 07:50:19.148061'
+    - 
+  - - '456'
+    - Task
+    - '59'
+    - update
+    - 
+    - ! '---
+
+      resource_type: ClusterUser
+
+      resource_id: 27
+
+      created_at: 2012-09-12 07:50:13.296955000 Z
+
+      updated_at: 2012-09-12 11:50:18.656371000 Z
+
+      procedure: add_user
+
+      comment: ! "Add user: account_16 project_5 on v2.parallel.ru with \n"
+
+      callbacks_performed: false
+
+      task_id: 58
+
+      state: successed
+
+      id: 59
+
+'
+    - '2012-09-12 07:50:19.153294'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '457'
+    - Access
+    - '34'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 1
+
+      state: activing
+
+      created_at: 2012-09-12 07:45:23.462408000 Z
+
+      updated_at: 2012-09-12 07:50:19.127704000 Z
+
+      cluster_user_id: 27
+
+      id: 34
+
+'
+    - '2012-09-12 07:50:24.443052'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '458'
+    - Task
+    - '60'
+    - update
+    - 
+    - ! "---\nresource_type: Access\nresource_id: 34\ncreated_at: 2012-09-12 07:50:19.133770000
+      Z\nupdated_at: 2012-09-12 11:50:23.904885000 Z\nprocedure: add_openkey\ncomment:
+      ! 'Add key: account_16 / project_5 on v2.parallel.ru with atata.\n\n  Adding
+      key for account_16!\n\n  Key added\n\n'\ncallbacks_performed: false\ntask_id:
+      \nstate: successed\nid: 60\n"
+    - '2012-09-12 07:50:24.449846'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '459'
+    - Task
+    - '58'
+    - update
+    - '2'
+    - ! '---
+
+      resource_type: ClusterUser
+
+      resource_id: 27
+
+      created_at: 2012-09-12 07:47:17.154721000 Z
+
+      updated_at: 2012-09-12 11:47:17.931593000 Z
+
+      procedure: add_user
+
+      comment: ! "Add user:  project_5 on v2.parallel.ru with \n"
+
+      callbacks_performed: false
+
+      task_id: 57
+
+      state: failed
+
+      id: 58
+
+'
+    - '2012-09-12 07:51:05.652453'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - failed
+
+      - successed
+
+'
+  - - '460'
+    - Task
+    - '57'
+    - update
+    - '2'
+    - ! "---\nresource_type: ClusterUser\nresource_id: 27\ncreated_at: 2012-09-12
+      07:46:18.778930000 Z\nupdated_at: 2012-09-12 11:46:22.699020000 Z\nprocedure:
+      add_user\ncomment: ! \"Add user:  project_5 on v2.parallel.ru with \\n\"\ncallbacks_performed:
+      false\ntask_id: \nstate: failed\nid: 57\n"
+    - '2012-09-12 07:51:10.688206'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - failed
+
+      - successed
+
+'
+  - - '461'
+    - Access
+    - '33'
+    - update
+    - '2'
+    - ! '---
+
+      credential_id: 2
+
+      state: activing
+
+      created_at: 2012-09-12 07:45:23.456257000 Z
+
+      updated_at: 2012-09-12 07:50:19.142507000 Z
+
+      cluster_user_id: 27
+
+      id: 33
+
+'
+    - '2012-09-12 07:53:31.135319'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '462'
+    - Task
+    - '61'
+    - update
+    - '2'
+    - ! "---\nresource_type: Access\nresource_id: 33\ncreated_at: 2012-09-12 07:50:19.146449000
+      Z\nupdated_at: 2012-09-12 11:50:24.143623000 Z\nprocedure: add_openkey\ncomment:
+      ! 'Add key: account_16 / project_5 on v2.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD\n
+      \ releu@me.com\n\n  .\n\n  Adding key for account_16!\n\n  Key added\n\n'\ncallbacks_performed:
+      false\ntask_id: \nstate: failed\nid: 61\n"
+    - '2012-09-12 07:53:31.142031'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '463'
+    - Task
+    - '61'
+    - update
+    - '2'
+    - ! "---\nresource_type: Access\nresource_id: 33\ncreated_at: 2012-09-12 07:50:19.146449000
+      Z\nupdated_at: 2012-09-12 07:53:31.140957000 Z\nprocedure: add_openkey\ncomment:
+      ! 'Add key: account_16 / project_5 on v2.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD\n
+      \ releu@me.com\n\n  .\n\n  Adding key for account_16!\n\n  Key added\n\n'\ncallbacks_performed:
+      true\ntask_id: \nstate: failed\nid: 61\n"
+    - '2012-09-12 07:53:33.145942'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - failed
+
+      - successed
+
+'
+  - - '464'
+    - Project
+    - '6'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.473098'
+    - 
+  - - '465'
+    - Account
+    - '22'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.479694'
+    - 
+  - - '466'
+    - Account
+    - '22'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: closed\nusername:
+      \nid: \n"
+    - '2012-09-12 08:22:29.490497'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nuser_id:\n- \n-
+      1\nproject_id:\n- \n- 6\ncreated_at:\n- \n- 2012-09-12 08:22:29.476915008 Z\nupdated_at:\n-
+      \n- 2012-09-12 08:22:29.476915008 Z\nid:\n- \n- 22\nusername:\n- \n- account_22\n"
+  - - '467'
+    - Project
+    - '6'
+    - update
+    - '2'
+    - ! "---\nname: \ncreated_at: \nupdated_at: \nuser_id: \nstate: active\ndescription:
+      \norganization_id: \ncluster_user_type: account\nusername: \nid: \n"
+    - '2012-09-12 08:22:29.496524'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nuser_id:\n- \n-
+      1\norganization_id:\n- \n- 1\nname:\n- \n- test3\nusername:\n- \n- project_6\ndescription:\n-
+      \n- test3\ncreated_at:\n- \n- 2012-09-12 08:22:29.458315222 Z\nupdated_at:\n-
+      \n- 2012-09-12 08:22:29.458315222 Z\nid:\n- \n- 6\n"
+  - - '468'
+    - Account
+    - '22'
+    - update
+    - '2'
+    - ! '---
+
+      user_id: 1
+
+      project_id: 6
+
+      created_at: 2012-09-12 08:22:29.476915000 Z
+
+      updated_at: 2012-09-12 08:22:29.476915000 Z
+
+      state: closed
+
+      username: account_22
+
+      id: 22
+
+'
+    - '2012-09-12 08:22:29.506221'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - active
+
+'
+  - - '469'
+    - Account
+    - '23'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.516562'
+    - 
+  - - '470'
+    - Account
+    - '23'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: closed\nusername:
+      \nid: \n"
+    - '2012-09-12 08:22:29.520954'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      6\nuser_id:\n- \n- 6\ncreated_at:\n- \n- 2012-09-12 08:22:29.514924642 Z\nupdated_at:\n-
+      \n- 2012-09-12 08:22:29.514924642 Z\nid:\n- \n- 23\nusername:\n- \n- account_23\n"
+  - - '471'
+    - Account
+    - '24'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.527986'
+    - 
+  - - '472'
+    - Account
+    - '24'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: closed\nusername:
+      \nid: \n"
+    - '2012-09-12 08:22:29.532324'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      6\nuser_id:\n- \n- 5\ncreated_at:\n- \n- 2012-09-12 08:22:29.526361108 Z\nupdated_at:\n-
+      \n- 2012-09-12 08:22:29.526361108 Z\nid:\n- \n- 24\nusername:\n- \n- account_24\n"
+  - - '473'
+    - Account
+    - '25'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.539377'
+    - 
+  - - '474'
+    - Account
+    - '25'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: closed\nusername:
+      \nid: \n"
+    - '2012-09-12 08:22:29.543669'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      6\nuser_id:\n- \n- 4\ncreated_at:\n- \n- 2012-09-12 08:22:29.537758157 Z\nupdated_at:\n-
+      \n- 2012-09-12 08:22:29.537758157 Z\nid:\n- \n- 25\nusername:\n- \n- account_25\n"
+  - - '475'
+    - Account
+    - '26'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.550608'
+    - 
+  - - '476'
+    - Account
+    - '26'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: closed\nusername:
+      \nid: \n"
+    - '2012-09-12 08:22:29.554659'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      6\nuser_id:\n- \n- 3\ncreated_at:\n- \n- 2012-09-12 08:22:29.549074483 Z\nupdated_at:\n-
+      \n- 2012-09-12 08:22:29.549074483 Z\nid:\n- \n- 26\nusername:\n- \n- account_26\n"
+  - - '477'
+    - Account
+    - '27'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.56117'
+    - 
+  - - '478'
+    - Account
+    - '27'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: closed\nusername:
+      \nid: \n"
+    - '2012-09-12 08:22:29.565263'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      6\nuser_id:\n- \n- 2\ncreated_at:\n- \n- 2012-09-12 08:22:29.559625804 Z\nupdated_at:\n-
+      \n- 2012-09-12 08:22:29.559625804 Z\nid:\n- \n- 27\nusername:\n- \n- account_27\n"
+  - - '479'
+    - ClusterProject
+    - '11'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.645179'
+    - 
+  - - '480'
+    - ClusterUser
+    - '34'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.665509'
+    - 
+  - - '481'
+    - Access
+    - '43'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.697657'
+    - 
+  - - '482'
+    - ClusterUser
+    - '35'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.704964'
+    - 
+  - - '483'
+    - ClusterUser
+    - '36'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.71395'
+    - 
+  - - '484'
+    - ClusterUser
+    - '37'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.722281'
+    - 
+  - - '485'
+    - ClusterUser
+    - '38'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.730625'
+    - 
+  - - '486'
+    - Access
+    - '44'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.738633'
+    - 
+  - - '487'
+    - Access
+    - '45'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.744711'
+    - 
+  - - '488'
+    - Access
+    - '46'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.750747'
+    - 
+  - - '489'
+    - Access
+    - '47'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.756834'
+    - 
+  - - '490'
+    - Access
+    - '48'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.762908'
+    - 
+  - - '491'
+    - ClusterUser
+    - '39'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.769683'
+    - 
+  - - '492'
+    - Access
+    - '49'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.777574'
+    - 
+  - - '493'
+    - Access
+    - '50'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.783663'
+    - 
+  - - '494'
+    - ClusterProject
+    - '12'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.789424'
+    - 
+  - - '495'
+    - ClusterUser
+    - '40'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.797329'
+    - 
+  - - '496'
+    - Access
+    - '51'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.805171'
+    - 
+  - - '497'
+    - ClusterUser
+    - '41'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.811942'
+    - 
+  - - '498'
+    - ClusterUser
+    - '42'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.820279'
+    - 
+  - - '499'
+    - ClusterUser
+    - '43'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.82858'
+    - 
+  - - '500'
+    - ClusterUser
+    - '44'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.836893'
+    - 
+  - - '501'
+    - Access
+    - '52'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.844883'
+    - 
+  - - '502'
+    - Access
+    - '53'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.851074'
+    - 
+  - - '503'
+    - Access
+    - '54'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.857272'
+    - 
+  - - '504'
+    - Access
+    - '55'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.863492'
+    - 
+  - - '505'
+    - Access
+    - '56'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.869692'
+    - 
+  - - '506'
+    - ClusterUser
+    - '45'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.8766'
+    - 
+  - - '507'
+    - Access
+    - '57'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.884581'
+    - 
+  - - '508'
+    - Access
+    - '58'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:29.890751'
+    - 
+  - - '509'
+    - Request
+    - '7'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:48.667439'
+    - 
+  - - '510'
+    - Request
+    - '7'
+    - update
+    - '2'
+    - ! "---\nhours: 1\ncreated_at: 2012-09-12 08:22:48.605322000 Z\nupdated_at: 2012-09-12
+      08:22:48.605322000 Z\nuser_id: 1\nstate: pending\nsize: 1\ncomment: \ncluster_project_id:
+      11\nid: 7\n"
+    - '2012-09-12 08:22:50.941758'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - pending
+
+      - active
+
+'
+  - - '511'
+    - ClusterProject
+    - '11'
+    - update
+    - '2'
+    - ! '---
+
+      state: closed
+
+      project_id: 6
+
+      cluster_id: 3
+
+      username: project_6
+
+      id: 11
+
+'
+    - '2012-09-12 08:22:50.950663'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '512'
+    - Task
+    - '62'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:22:50.971347'
+    - 
+  - - '513'
+    - ClusterProject
+    - '11'
+    - update
+    - 
+    - ! '---
+
+      state: activing
+
+      project_id: 6
+
+      cluster_id: 3
+
+      username: project_6
+
+      id: 11
+
+'
+    - '2012-09-12 08:22:58.164089'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '514'
+    - ClusterUser
+    - '39'
+    - update
+    - 
+    - ! '---
+
+      state: closed
+
+      created_at: 2012-09-12 08:22:29.768094000 Z
+
+      updated_at: 2012-09-12 08:22:29.768094000 Z
+
+      account_id: 22
+
+      cluster_project_id: 11
+
+      username: account_22
+
+      id: 39
+
+'
+    - '2012-09-12 08:22:58.202128'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '515'
+    - Task
+    - '63'
+    - create
+    - 
+    - 
+    - '2012-09-12 08:22:58.209663'
+    - 
+  - - '516'
+    - Task
+    - '62'
+    - update
+    - 
+    - ! "---\nresource_type: ClusterProject\nresource_id: 11\ncreated_at: 2012-09-12
+      08:22:50.968561000 Z\nupdated_at: 2012-09-12 12:22:54.561297000 Z\nprocedure:
+      add_project\ncomment: ! \"Add group: project_6 on v2.parallel.ru with \\n\"\ncallbacks_performed:
+      false\ntask_id: \nstate: successed\nid: 62\n"
+    - '2012-09-12 08:22:58.215388'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '517'
+    - ClusterUser
+    - '39'
+    - update
+    - 
+    - ! '---
+
+      state: activing
+
+      created_at: 2012-09-12 08:22:29.768094000 Z
+
+      updated_at: 2012-09-12 08:22:58.201077000 Z
+
+      account_id: 22
+
+      cluster_project_id: 11
+
+      username: account_22
+
+      id: 39
+
+'
+    - '2012-09-12 08:23:03.545241'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '518'
+    - Access
+    - '50'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 1
+
+      state: closed
+
+      created_at: 2012-09-12 08:22:29.782047000 Z
+
+      updated_at: 2012-09-12 08:22:29.782047000 Z
+
+      cluster_user_id: 39
+
+      id: 50
+
+'
+    - '2012-09-12 08:23:03.577908'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '519'
+    - Task
+    - '64'
+    - create
+    - 
+    - 
+    - '2012-09-12 08:23:03.585696'
+    - 
+  - - '520'
+    - Access
+    - '49'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 2
+
+      state: closed
+
+      created_at: 2012-09-12 08:22:29.775945000 Z
+
+      updated_at: 2012-09-12 08:22:29.775945000 Z
+
+      cluster_user_id: 39
+
+      id: 49
+
+'
+    - '2012-09-12 08:23:03.593413'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '521'
+    - Task
+    - '65'
+    - create
+    - 
+    - 
+    - '2012-09-12 08:23:03.598272'
+    - 
+  - - '522'
+    - Task
+    - '63'
+    - update
+    - 
+    - ! "---\nresource_type: ClusterUser\nresource_id: 39\ncreated_at: 2012-09-12
+      08:22:58.207154000 Z\nupdated_at: 2012-09-12 12:23:00.496229000 Z\nprocedure:
+      add_user\ncomment: ! \"Add user: account_22 project_6 on v2.parallel.ru with
+      \\n\"\ncallbacks_performed: false\ntask_id: \nstate: successed\nid: 63\n"
+    - '2012-09-12 08:23:03.60382'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '523'
+    - Access
+    - '50'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 1
+
+      state: activing
+
+      created_at: 2012-09-12 08:22:29.782047000 Z
+
+      updated_at: 2012-09-12 08:23:03.576752000 Z
+
+      cluster_user_id: 39
+
+      id: 50
+
+'
+    - '2012-09-12 08:23:08.896904'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '524'
+    - Task
+    - '64'
+    - update
+    - 
+    - ! "---\nresource_type: Access\nresource_id: 50\ncreated_at: 2012-09-12 08:23:03.583093000
+      Z\nupdated_at: 2012-09-12 12:23:05.730317000 Z\nprocedure: add_openkey\ncomment:
+      ! 'Add key: account_22 / project_6 on v2.parallel.ru with atata.\n\n  Adding
+      key for account_22!\n\n  Key added\n\n'\ncallbacks_performed: false\ntask_id:
+      \nstate: successed\nid: 64\n"
+    - '2012-09-12 08:23:08.903872'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '525'
+    - Task
+    - '66'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:42:05.535804'
+    - 
+  - - '526'
+    - Task
+    - '67'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 08:52:32.931244'
     - 
 
 ---
@@ -3688,6 +7699,13 @@ credentials:
     - '2012-08-31 13:48:20.167215'
     - new3
     - active
+  - - '8'
+    - atata
+    - '2'
+    - '2012-09-11 08:56:26.22591'
+    - '2012-09-11 08:56:26.22591'
+    - iMac
+    - active
 
 ---
 cluster_projects:
@@ -3703,6 +7721,41 @@ cluster_projects:
     - '1'
     - '1'
     - project_1
+  - - '6'
+    - initialized
+    - '1'
+    - '3'
+    - project_1
+  - - '7'
+    - active
+    - '4'
+    - '3'
+    - test_project
+  - - '8'
+    - initialized
+    - '4'
+    - '1'
+    - test_project
+  - - '9'
+    - active
+    - '5'
+    - '3'
+    - project_5
+  - - '10'
+    - closed
+    - '5'
+    - '1'
+    - project_5
+  - - '11'
+    - active
+    - '6'
+    - '3'
+    - project_6
+  - - '12'
+    - closed
+    - '6'
+    - '1'
+    - project_6
 
 ---
 accounts:
@@ -3722,6 +7775,139 @@ accounts:
     - '2012-08-28 07:02:33.096415'
     - active
     - account_1
+  - - '9'
+    - '1'
+    - '4'
+    - '2012-09-10 12:16:38.640034'
+    - '2012-09-10 12:16:38.671197'
+    - active
+    - account_9
+  - - '10'
+    - '6'
+    - '4'
+    - '2012-09-10 12:16:38.737637'
+    - '2012-09-10 12:16:38.737637'
+    - initialized
+    - account_10
+  - - '11'
+    - '5'
+    - '4'
+    - '2012-09-10 12:16:38.748767'
+    - '2012-09-10 12:16:38.748767'
+    - initialized
+    - account_11
+  - - '12'
+    - '4'
+    - '4'
+    - '2012-09-10 12:16:38.759515'
+    - '2012-09-10 12:16:38.759515'
+    - initialized
+    - account_12
+  - - '13'
+    - '3'
+    - '4'
+    - '2012-09-10 12:16:38.770217'
+    - '2012-09-10 12:16:38.770217'
+    - initialized
+    - account_13
+  - - '14'
+    - '2'
+    - '4'
+    - '2012-09-10 12:16:38.780856'
+    - '2012-09-10 12:16:38.780856'
+    - initialized
+    - account_14
+  - - '15'
+    - '2'
+    - '1'
+    - '2012-09-11 08:57:07.232743'
+    - '2012-09-11 08:57:07.232743'
+    - initialized
+    - account_15
+  - - '16'
+    - '1'
+    - '5'
+    - '2012-09-12 07:45:23.166549'
+    - '2012-09-12 07:45:23.194414'
+    - active
+    - account_16
+  - - '17'
+    - '6'
+    - '5'
+    - '2012-09-12 07:45:23.204009'
+    - '2012-09-12 07:45:23.204009'
+    - closed
+    - account_17
+  - - '18'
+    - '5'
+    - '5'
+    - '2012-09-12 07:45:23.259401'
+    - '2012-09-12 07:45:23.259401'
+    - closed
+    - account_18
+  - - '19'
+    - '4'
+    - '5'
+    - '2012-09-12 07:45:23.270744'
+    - '2012-09-12 07:45:23.270744'
+    - closed
+    - account_19
+  - - '20'
+    - '3'
+    - '5'
+    - '2012-09-12 07:45:23.282061'
+    - '2012-09-12 07:45:23.282061'
+    - closed
+    - account_20
+  - - '21'
+    - '2'
+    - '5'
+    - '2012-09-12 07:45:23.292644'
+    - '2012-09-12 07:45:23.292644'
+    - closed
+    - account_21
+  - - '22'
+    - '1'
+    - '6'
+    - '2012-09-12 08:22:29.476915'
+    - '2012-09-12 08:22:29.50521'
+    - active
+    - account_22
+  - - '23'
+    - '6'
+    - '6'
+    - '2012-09-12 08:22:29.514924'
+    - '2012-09-12 08:22:29.514924'
+    - closed
+    - account_23
+  - - '24'
+    - '5'
+    - '6'
+    - '2012-09-12 08:22:29.526361'
+    - '2012-09-12 08:22:29.526361'
+    - closed
+    - account_24
+  - - '25'
+    - '4'
+    - '6'
+    - '2012-09-12 08:22:29.537758'
+    - '2012-09-12 08:22:29.537758'
+    - closed
+    - account_25
+  - - '26'
+    - '3'
+    - '6'
+    - '2012-09-12 08:22:29.549074'
+    - '2012-09-12 08:22:29.549074'
+    - closed
+    - account_26
+  - - '27'
+    - '2'
+    - '6'
+    - '2012-09-12 08:22:29.559625'
+    - '2012-09-12 08:22:29.559625'
+    - closed
+    - account_27
 
 ---
 position_names:
@@ -3848,16 +8034,211 @@ tasks:
   - task_id
   - state
   records: 
-  - - '20'
+  - - '52'
     - ClusterProject
-    - '1'
-    - '2012-09-06 13:52:54.313395'
-    - '2012-09-06 13:52:54.313395'
+    - '7'
+    - '2012-09-11 09:05:44.305425'
+    - '2012-09-11 13:05:48.071229'
     - add_project
-    - 
+    - ! "Add group: test_project on v2.parallel.ru with \nGroup test_project already
+      exists. Ok!\n"
     - false
     - 
-    - pending
+    - successed
+  - - '54'
+    - ClusterUser
+    - '13'
+    - '2012-09-11 09:09:17.934294'
+    - '2012-09-11 13:09:18.506018'
+    - add_user
+    - ! "Add user: account_9 test_project on v2.parallel.ru with \n"
+    - false
+    - 
+    - successed
+  - - '55'
+    - Access
+    - '15'
+    - '2012-09-11 09:10:21.901964'
+    - '2012-09-11 09:10:24.933981'
+    - add_openkey
+    - ! 'Add key: account_9 / test_project on v2.parallel.ru with atata.
+
+      Adding key for account_9!
+
+      Key added
+
+'
+    - true
+    - 
+    - successed
+  - - '56'
+    - ClusterProject
+    - '9'
+    - '2012-09-12 07:46:12.186124'
+    - '2012-09-12 07:46:18.786156'
+    - add_project
+    - ! "Add group: project_5 on v2.parallel.ru with \n"
+    - true
+    - 
+    - successed
+  - - '57'
+    - ClusterUser
+    - '27'
+    - '2012-09-12 07:46:18.77893'
+    - '2012-09-12 07:51:10.68701'
+    - add_user
+    - ! "Add user:  project_5 on v2.parallel.ru with \n"
+    - false
+    - 
+    - successed
+  - - '58'
+    - ClusterUser
+    - '27'
+    - '2012-09-12 07:47:17.154721'
+    - '2012-09-12 07:51:05.651246'
+    - add_user
+    - ! "Add user:  project_5 on v2.parallel.ru with \n"
+    - false
+    - '57'
+    - successed
+  - - '59'
+    - ClusterUser
+    - '27'
+    - '2012-09-12 07:50:13.296955'
+    - '2012-09-12 07:50:19.152279'
+    - add_user
+    - ! "Add user: account_16 project_5 on v2.parallel.ru with \n"
+    - true
+    - '58'
+    - successed
+  - - '60'
+    - Access
+    - '34'
+    - '2012-09-12 07:50:19.13377'
+    - '2012-09-12 07:50:24.448792'
+    - add_openkey
+    - ! 'Add key: account_16 / project_5 on v2.parallel.ru with atata.
+
+      Adding key for account_16!
+
+      Key added
+
+'
+    - true
+    - 
+    - successed
+  - - '61'
+    - Access
+    - '33'
+    - '2012-09-12 07:50:19.146449'
+    - '2012-09-12 07:53:33.144863'
+    - add_openkey
+    - ! 'Add key: account_16 / project_5 on v2.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
+      releu@me.com
+
+      .
+
+      Adding key for account_16!
+
+      Key added
+
+'
+    - true
+    - 
+    - successed
+  - - '62'
+    - ClusterProject
+    - '11'
+    - '2012-09-12 08:22:50.968561'
+    - '2012-09-12 08:22:58.214383'
+    - add_project
+    - ! "Add group: project_6 on v2.parallel.ru with \n"
+    - true
+    - 
+    - successed
+  - - '63'
+    - ClusterUser
+    - '39'
+    - '2012-09-12 08:22:58.207154'
+    - '2012-09-12 08:23:03.60275'
+    - add_user
+    - ! "Add user: account_22 project_6 on v2.parallel.ru with \n"
+    - true
+    - 
+    - successed
+  - - '64'
+    - Access
+    - '50'
+    - '2012-09-12 08:23:03.583093'
+    - '2012-09-12 08:23:08.902776'
+    - add_openkey
+    - ! 'Add key: account_22 / project_6 on v2.parallel.ru with atata.
+
+      Adding key for account_22!
+
+      Key added
+
+'
+    - true
+    - 
+    - successed
+  - - '65'
+    - Access
+    - '49'
+    - '2012-09-12 08:23:03.596593'
+    - '2012-09-12 12:23:05.968077'
+    - add_openkey
+    - ! 'Add key: account_22 / project_6 on v2.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
+      releu@me.com
+
+      .
+
+      Adding key for account_22!
+
+      Key added
+
+'
+    - false
+    - 
+    - failed
+  - - '66'
+    - Access
+    - '49'
+    - '2012-09-12 08:42:05.533976'
+    - '2012-09-12 12:42:06.324277'
+    - add_openkey
+    - ! 'Add key: account_22 / project_6 on v2.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
+      releu@me.com
+
+      .
+
+      Adding key for account_22!
+
+      Key added
+
+'
+    - false
+    - '65'
+    - failed
+  - - '67'
+    - Access
+    - '49'
+    - '2012-09-12 08:52:32.929405'
+    - '2012-09-12 12:52:34.964406'
+    - add_openkey
+    - ! 'Add key: account_22 / project_6 on v2.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
+      releu@me.com
+
+      .
+
+      Adding key for account_22!
+
+      Key added
+
+      #<Process::Status: pid 26959 exit 127>127'
+    - false
+    - '66'
+    - failed
 
 ---
 requests:
@@ -3881,6 +8262,33 @@ requests:
     - '10'
     - 
     - '1'
+  - - '5'
+    - '40'
+    - '2012-09-10 12:17:27.655295'
+    - '2012-09-10 12:17:33.032835'
+    - '1'
+    - active
+    - '40'
+    - 
+    - '7'
+  - - '6'
+    - '8'
+    - '2012-09-12 07:46:08.365692'
+    - '2012-09-12 07:46:12.103913'
+    - '1'
+    - active
+    - '8'
+    - 
+    - '9'
+  - - '7'
+    - '1'
+    - '2012-09-12 08:22:48.605322'
+    - '2012-09-12 08:22:50.940218'
+    - '1'
+    - active
+    - '1'
+    - 
+    - '11'
 
 ---
 sureties:
@@ -4135,6 +8543,36 @@ projects:
     - '1'
     - account
     - project_1
+  - - '4'
+    - test_project
+    - '2012-09-10 12:16:38.621443'
+    - '2012-09-10 12:16:38.621443'
+    - '1'
+    - active
+    - Test
+    - '1'
+    - account
+    - test_project
+  - - '5'
+    - test2
+    - '2012-09-12 07:45:23.137641'
+    - '2012-09-12 07:45:23.137641'
+    - '1'
+    - active
+    - test2
+    - '1'
+    - account
+    - project_5
+  - - '6'
+    - test3
+    - '2012-09-12 08:22:29.458315'
+    - '2012-09-12 08:22:29.458315'
+    - '1'
+    - active
+    - test3
+    - '1'
+    - account
+    - project_6
 
 ---
 replies:
@@ -4542,6 +8980,16 @@ clusters:
     - '2012-08-30 08:47:44.154906'
     - lomonosov.parallel.ru
     - ''
+    - active
+    - 
+    - 
+    - account
+  - - '3'
+    - V2
+    - '2012-09-10 12:15:43.679854'
+    - '2012-09-10 12:15:43.679854'
+    - v2.parallel.ru
+    - Test host
     - active
     - 
     - 
