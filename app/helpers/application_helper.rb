@@ -99,7 +99,7 @@ module ApplicationHelper
   
   def link_to_cluster_user(cluster_user)
     return unless cluster_user
-    link_to cluster_user.project.username, cluster_user
+    link_to cluster_user.username, cluster_user
   end
   
   def link_to_task_resource(task)

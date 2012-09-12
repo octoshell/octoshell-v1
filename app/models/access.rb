@@ -71,6 +71,10 @@ class Access < ActiveRecord::Base
     true
   end
   
+  def available?
+    cluster_user.active? && cluster_user.cluster_project.active?
+  end
+  
 protected
   
   def continue_add_openkey(task)

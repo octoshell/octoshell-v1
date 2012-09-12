@@ -7,13 +7,9 @@
   p
     | Вы можете #{link_to 'создать проект', new_project_path} или #{link_to 'запросить доступ', new_account_path} к существующему
 
-h3 Доступы к кластерам
+h3 Доступы к проектам
 
-= render partial: 'accesses/table', locals: { accesses: @user.accesses.non_closed }
-
-h3 Проекты на кластере
-
-= render partial: 'cluster_users/table', locals: { cluster_users: @user.projects.active.map { |p| p.cluster_users.non_closed }.flatten }
+= render partial: 'accesses/table', locals: { accesses: @user.accesses.non_closed, current: true }
 
 h3 Проекты
 

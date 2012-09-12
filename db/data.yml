@@ -412,9 +412,9 @@ cluster_users:
     - '13'
     - account_29
   - - '51'
-    - active
+    - closed
     - '2012-09-12 10:52:36.499942'
-    - '2012-09-12 10:53:00.853929'
+    - '2012-09-12 12:13:23.020034'
     - '28'
     - '13'
     - account_28
@@ -460,6 +460,90 @@ cluster_users:
     - '28'
     - '14'
     - account_28
+  - - '58'
+    - closed
+    - '2012-09-12 12:14:14.677636'
+    - '2012-09-12 12:14:14.677636'
+    - '39'
+    - '15'
+    - account_39
+  - - '59'
+    - closed
+    - '2012-09-12 12:14:14.75848'
+    - '2012-09-12 12:14:14.75848'
+    - '38'
+    - '15'
+    - account_38
+  - - '60'
+    - closed
+    - '2012-09-12 12:14:14.767437'
+    - '2012-09-12 12:14:14.767437'
+    - '37'
+    - '15'
+    - account_37
+  - - '61'
+    - closed
+    - '2012-09-12 12:14:14.776688'
+    - '2012-09-12 12:14:14.776688'
+    - '36'
+    - '15'
+    - account_36
+  - - '62'
+    - closed
+    - '2012-09-12 12:14:14.785623'
+    - '2012-09-12 12:14:14.785623'
+    - '35'
+    - '15'
+    - account_35
+  - - '63'
+    - active
+    - '2012-09-12 12:14:14.827979'
+    - '2012-09-12 12:14:45.595667'
+    - '34'
+    - '15'
+    - account_34
+  - - '64'
+    - closed
+    - '2012-09-12 12:14:14.859586'
+    - '2012-09-12 12:14:14.859586'
+    - '39'
+    - '16'
+    - account_39
+  - - '65'
+    - closed
+    - '2012-09-12 12:14:14.875692'
+    - '2012-09-12 12:14:14.875692'
+    - '38'
+    - '16'
+    - account_38
+  - - '66'
+    - closed
+    - '2012-09-12 12:14:14.884841'
+    - '2012-09-12 12:14:14.884841'
+    - '37'
+    - '16'
+    - account_37
+  - - '67'
+    - closed
+    - '2012-09-12 12:14:14.893964'
+    - '2012-09-12 12:14:14.893964'
+    - '36'
+    - '16'
+    - account_36
+  - - '68'
+    - closed
+    - '2012-09-12 12:14:14.903042'
+    - '2012-09-12 12:14:14.903042'
+    - '35'
+    - '16'
+    - account_35
+  - - '69'
+    - closed
+    - '2012-09-12 12:14:14.944738'
+    - '2012-09-12 12:14:14.944738'
+    - '34'
+    - '16'
+    - account_34
 
 ---
 accesses:
@@ -827,15 +911,15 @@ accesses:
     - '50'
   - - '65'
     - '2'
-    - active
+    - closed
     - '2012-09-12 10:52:36.507782'
-    - '2012-09-12 10:53:06.520503'
+    - '2012-09-12 12:13:23.056984'
     - '51'
   - - '66'
     - '1'
-    - active
+    - closed
     - '2012-09-12 10:52:36.513863'
-    - '2012-09-12 10:53:06.213092'
+    - '2012-09-12 12:13:23.050561'
     - '51'
   - - '67'
     - '8'
@@ -885,6 +969,174 @@ accesses:
     - '2012-09-12 10:52:36.625618'
     - '2012-09-12 10:52:36.625618'
     - '57'
+  - - '75'
+    - '8'
+    - closed
+    - '2012-09-12 12:14:14.749101'
+    - '2012-09-12 12:14:14.749101'
+    - '58'
+  - - '76'
+    - '7'
+    - closed
+    - '2012-09-12 12:14:14.794011'
+    - '2012-09-12 12:14:14.794011'
+    - '62'
+  - - '77'
+    - '6'
+    - closed
+    - '2012-09-12 12:14:14.800359'
+    - '2012-09-12 12:14:14.800359'
+    - '62'
+  - - '78'
+    - '5'
+    - closed
+    - '2012-09-12 12:14:14.807007'
+    - '2012-09-12 12:14:14.807007'
+    - '62'
+  - - '79'
+    - '4'
+    - closed
+    - '2012-09-12 12:14:14.813729'
+    - '2012-09-12 12:14:14.813729'
+    - '62'
+  - - '80'
+    - '3'
+    - closed
+    - '2012-09-12 12:14:14.820452'
+    - '2012-09-12 12:14:14.820452'
+    - '62'
+  - - '81'
+    - '2'
+    - active
+    - '2012-09-12 12:14:14.836894'
+    - '2012-09-12 12:14:51.248709'
+    - '63'
+  - - '82'
+    - '1'
+    - active
+    - '2012-09-12 12:14:14.843835'
+    - '2012-09-12 12:14:50.969732'
+    - '63'
+  - - '83'
+    - '8'
+    - closed
+    - '2012-09-12 12:14:14.86823'
+    - '2012-09-12 12:14:14.86823'
+    - '64'
+  - - '84'
+    - '7'
+    - closed
+    - '2012-09-12 12:14:14.911641'
+    - '2012-09-12 12:14:14.911641'
+    - '68'
+  - - '85'
+    - '6'
+    - closed
+    - '2012-09-12 12:14:14.918296'
+    - '2012-09-12 12:14:14.918296'
+    - '68'
+  - - '86'
+    - '5'
+    - closed
+    - '2012-09-12 12:14:14.924784'
+    - '2012-09-12 12:14:14.924784'
+    - '68'
+  - - '87'
+    - '4'
+    - closed
+    - '2012-09-12 12:14:14.931306'
+    - '2012-09-12 12:14:14.931306'
+    - '68'
+  - - '88'
+    - '3'
+    - closed
+    - '2012-09-12 12:14:14.937734'
+    - '2012-09-12 12:14:14.937734'
+    - '68'
+  - - '89'
+    - '2'
+    - closed
+    - '2012-09-12 12:14:14.952695'
+    - '2012-09-12 12:14:14.952695'
+    - '69'
+  - - '90'
+    - '1'
+    - closed
+    - '2012-09-12 12:14:14.959254'
+    - '2012-09-12 12:14:14.959254'
+    - '69'
+  - - '91'
+    - '9'
+    - activing
+    - '2012-09-12 12:16:53.654753'
+    - '2012-09-12 12:16:53.909219'
+    - '69'
+  - - '92'
+    - '9'
+    - active
+    - '2012-09-12 12:16:53.66385'
+    - '2012-09-12 12:17:02.065357'
+    - '63'
+  - - '93'
+    - '9'
+    - closed
+    - '2012-09-12 12:16:53.670091'
+    - '2012-09-12 12:16:53.670091'
+    - '57'
+  - - '94'
+    - '9'
+    - closed
+    - '2012-09-12 12:16:53.675923'
+    - '2012-09-12 12:16:53.675923'
+    - '51'
+  - - '95'
+    - '9'
+    - activing
+    - '2012-09-12 12:16:53.681778'
+    - '2012-09-12 12:16:53.879882'
+    - '45'
+  - - '96'
+    - '9'
+    - active
+    - '2012-09-12 12:16:53.687682'
+    - '2012-09-12 12:17:01.799077'
+    - '39'
+  - - '97'
+    - '9'
+    - closed
+    - '2012-09-12 12:16:53.693481'
+    - '2012-09-12 12:16:53.693481'
+    - '33'
+  - - '98'
+    - '9'
+    - closed
+    - '2012-09-12 12:16:53.699414'
+    - '2012-09-12 12:16:53.699414'
+    - '27'
+  - - '99'
+    - '9'
+    - activing
+    - '2012-09-12 12:16:53.70559'
+    - '2012-09-12 12:16:53.780663'
+    - '19'
+  - - '100'
+    - '9'
+    - active
+    - '2012-09-12 12:16:53.714332'
+    - '2012-09-12 12:17:01.531053'
+    - '13'
+  - - '101'
+    - '9'
+    - activing
+    - '2012-09-12 12:16:53.721041'
+    - '2012-09-12 12:16:53.74996'
+    - '7'
+  - - '102'
+    - '9'
+    - activing
+    - '2012-09-12 12:16:53.726898'
+    - '2012-09-12 12:16:53.736313'
+    - '1'
 
 ---
 versions:
@@ -9301,6 +9553,1605 @@ versions:
       - true
 
 '
+  - - '635'
+    - Project
+    - '7'
+    - update
+    - '2'
+    - ! '---
+
+      name: Test4
+
+      created_at: 2012-09-12 10:52:36.203384000 Z
+
+      updated_at: 2012-09-12 10:52:36.203384000 Z
+
+      user_id: 1
+
+      state: active
+
+      description: ! "test4\r\n"
+
+      organization_id: 1
+
+      cluster_user_type: account
+
+      username: project_7
+
+      id: 7
+
+'
+    - '2012-09-12 12:13:22.911907'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - closed
+
+'
+  - - '636'
+    - ClusterProject
+    - '13'
+    - update
+    - '2'
+    - ! '---
+
+      state: active
+
+      project_id: 7
+
+      cluster_id: 3
+
+      username: project_7
+
+      id: 13
+
+'
+    - '2012-09-12 12:13:22.988639'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - closing
+
+'
+  - - '637'
+    - ClusterUser
+    - '51'
+    - update
+    - '2'
+    - ! '---
+
+      state: active
+
+      created_at: 2012-09-12 10:52:36.499942000 Z
+
+      updated_at: 2012-09-12 10:53:00.853929000 Z
+
+      account_id: 28
+
+      cluster_project_id: 13
+
+      username: account_28
+
+      id: 51
+
+'
+    - '2012-09-12 12:13:23.021163'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - closed
+
+'
+  - - '638'
+    - Access
+    - '66'
+    - update
+    - '2'
+    - ! '---
+
+      credential_id: 1
+
+      state: active
+
+      created_at: 2012-09-12 10:52:36.513862000 Z
+
+      updated_at: 2012-09-12 10:53:06.213092000 Z
+
+      cluster_user_id: 51
+
+      id: 66
+
+'
+    - '2012-09-12 12:13:23.051709'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - closed
+
+'
+  - - '639'
+    - Access
+    - '65'
+    - update
+    - '2'
+    - ! '---
+
+      credential_id: 2
+
+      state: active
+
+      created_at: 2012-09-12 10:52:36.507781000 Z
+
+      updated_at: 2012-09-12 10:53:06.520503000 Z
+
+      cluster_user_id: 51
+
+      id: 65
+
+'
+    - '2012-09-12 12:13:23.057873'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - closed
+
+'
+  - - '640'
+    - Task
+    - '85'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:13:23.078646'
+    - 
+  - - '641'
+    - Account
+    - '28'
+    - update
+    - '2'
+    - ! '---
+
+      user_id: 1
+
+      project_id: 7
+
+      created_at: 2012-09-12 10:52:36.221710000 Z
+
+      updated_at: 2012-09-12 10:52:36.249600000 Z
+
+      state: active
+
+      username: account_28
+
+      id: 28
+
+'
+    - '2012-09-12 12:13:23.138157'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - closed
+
+'
+  - - '642'
+    - Request
+    - '9'
+    - update
+    - '2'
+    - ! "---\nhours: 5\ncreated_at: 2012-09-12 10:54:13.242093000 Z\nupdated_at: 2012-09-12
+      10:54:16.757028000 Z\nuser_id: 1\nstate: active\nsize: 56\ncomment: \ncluster_project_id:
+      13\nid: 9\n"
+    - '2012-09-12 12:13:23.163676'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - closed
+
+'
+  - - '643'
+    - ClusterProject
+    - '13'
+    - update
+    - 
+    - ! '---
+
+      state: closing
+
+      project_id: 7
+
+      cluster_id: 3
+
+      username: project_7
+
+      id: 13
+
+'
+    - '2012-09-12 12:13:29.97763'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closing
+
+      - closed
+
+'
+  - - '644'
+    - Task
+    - '85'
+    - update
+    - 
+    - ! "---\nresource_type: ClusterProject\nresource_id: 13\ncreated_at: 2012-09-12
+      12:13:23.075837000 Z\nupdated_at: 2012-09-12 16:13:26.430710000 Z\nprocedure:
+      del_project\ncomment: ''\ncallbacks_performed: false\ntask_id: \nstate: successed\nid:
+      85\n"
+    - '2012-09-12 12:13:29.986928'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '645'
+    - Project
+    - '8'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.571712'
+    - 
+  - - '646'
+    - Account
+    - '34'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.578766'
+    - 
+  - - '647'
+    - Account
+    - '34'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: closed\nusername:
+      \nid: \n"
+    - '2012-09-12 12:14:14.588019'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nuser_id:\n- \n-
+      1\nproject_id:\n- \n- 8\ncreated_at:\n- \n- 2012-09-12 12:14:14.575870145 Z\nupdated_at:\n-
+      \n- 2012-09-12 12:14:14.575870145 Z\nid:\n- \n- 34\nusername:\n- \n- account_34\n"
+  - - '648'
+    - Account
+    - '34'
+    - update
+    - '2'
+    - ! '---
+
+      user_id: 1
+
+      project_id: 8
+
+      created_at: 2012-09-12 12:14:14.575870000 Z
+
+      updated_at: 2012-09-12 12:14:14.575870000 Z
+
+      state: closed
+
+      username: account_34
+
+      id: 34
+
+'
+    - '2012-09-12 12:14:14.598681'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - active
+
+'
+  - - '649'
+    - Account
+    - '35'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.608711'
+    - 
+  - - '650'
+    - Account
+    - '35'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: closed\nusername:
+      \nid: \n"
+    - '2012-09-12 12:14:14.613156'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      8\nuser_id:\n- \n- 6\ncreated_at:\n- \n- 2012-09-12 12:14:14.607064429 Z\nupdated_at:\n-
+      \n- 2012-09-12 12:14:14.607064429 Z\nid:\n- \n- 35\nusername:\n- \n- account_35\n"
+  - - '651'
+    - Account
+    - '36'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.620325'
+    - 
+  - - '652'
+    - Account
+    - '36'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: closed\nusername:
+      \nid: \n"
+    - '2012-09-12 12:14:14.624697'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      8\nuser_id:\n- \n- 5\ncreated_at:\n- \n- 2012-09-12 12:14:14.618678277 Z\nupdated_at:\n-
+      \n- 2012-09-12 12:14:14.618678277 Z\nid:\n- \n- 36\nusername:\n- \n- account_36\n"
+  - - '653'
+    - Account
+    - '37'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.631846'
+    - 
+  - - '654'
+    - Account
+    - '37'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: closed\nusername:
+      \nid: \n"
+    - '2012-09-12 12:14:14.636135'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      8\nuser_id:\n- \n- 4\ncreated_at:\n- \n- 2012-09-12 12:14:14.630213618 Z\nupdated_at:\n-
+      \n- 2012-09-12 12:14:14.630213618 Z\nid:\n- \n- 37\nusername:\n- \n- account_37\n"
+  - - '655'
+    - Account
+    - '38'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.642903'
+    - 
+  - - '656'
+    - Account
+    - '38'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: closed\nusername:
+      \nid: \n"
+    - '2012-09-12 12:14:14.647085'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      8\nuser_id:\n- \n- 3\ncreated_at:\n- \n- 2012-09-12 12:14:14.641329511 Z\nupdated_at:\n-
+      \n- 2012-09-12 12:14:14.641329511 Z\nid:\n- \n- 38\nusername:\n- \n- account_38\n"
+  - - '657'
+    - Account
+    - '39'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.653907'
+    - 
+  - - '658'
+    - Account
+    - '39'
+    - update
+    - '2'
+    - ! "---\nuser_id: \nproject_id: \ncreated_at: \nupdated_at: \nstate: closed\nusername:
+      \nid: \n"
+    - '2012-09-12 12:14:14.658031'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nproject_id:\n- \n-
+      8\nuser_id:\n- \n- 2\ncreated_at:\n- \n- 2012-09-12 12:14:14.652310537 Z\nupdated_at:\n-
+      \n- 2012-09-12 12:14:14.652310537 Z\nid:\n- \n- 39\nusername:\n- \n- account_39\n"
+  - - '659'
+    - ClusterProject
+    - '15'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.668541'
+    - 
+  - - '660'
+    - ClusterUser
+    - '58'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.680195'
+    - 
+  - - '661'
+    - Access
+    - '75'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.752513'
+    - 
+  - - '662'
+    - ClusterUser
+    - '59'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.760102'
+    - 
+  - - '663'
+    - ClusterUser
+    - '60'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.769169'
+    - 
+  - - '664'
+    - ClusterUser
+    - '61'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.778407'
+    - 
+  - - '665'
+    - ClusterUser
+    - '62'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.78728'
+    - 
+  - - '666'
+    - Access
+    - '76'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.795694'
+    - 
+  - - '667'
+    - Access
+    - '77'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.80203'
+    - 
+  - - '668'
+    - Access
+    - '78'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.808765'
+    - 
+  - - '669'
+    - Access
+    - '79'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.815461'
+    - 
+  - - '670'
+    - Access
+    - '80'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.822207'
+    - 
+  - - '671'
+    - ClusterUser
+    - '63'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.829837'
+    - 
+  - - '672'
+    - Access
+    - '81'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.838616'
+    - 
+  - - '673'
+    - Access
+    - '82'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.84562'
+    - 
+  - - '674'
+    - ClusterProject
+    - '16'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.852243'
+    - 
+  - - '675'
+    - ClusterUser
+    - '64'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.861333'
+    - 
+  - - '676'
+    - Access
+    - '83'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.869961'
+    - 
+  - - '677'
+    - ClusterUser
+    - '65'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.877392'
+    - 
+  - - '678'
+    - ClusterUser
+    - '66'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.886534'
+    - 
+  - - '679'
+    - ClusterUser
+    - '67'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.895622'
+    - 
+  - - '680'
+    - ClusterUser
+    - '68'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.904746'
+    - 
+  - - '681'
+    - Access
+    - '84'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.913406'
+    - 
+  - - '682'
+    - Access
+    - '85'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.919923'
+    - 
+  - - '683'
+    - Access
+    - '86'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.92648'
+    - 
+  - - '684'
+    - Access
+    - '87'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.933018'
+    - 
+  - - '685'
+    - Access
+    - '88'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.939391'
+    - 
+  - - '686'
+    - ClusterUser
+    - '69'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.946344'
+    - 
+  - - '687'
+    - Access
+    - '89'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.954346'
+    - 
+  - - '688'
+    - Access
+    - '90'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:14.960981'
+    - 
+  - - '689'
+    - Request
+    - '10'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:31.98922'
+    - 
+  - - '690'
+    - Request
+    - '10'
+    - update
+    - '2'
+    - ! "---\nhours: 40\ncreated_at: 2012-09-12 12:14:31.986724000 Z\nupdated_at:
+      2012-09-12 12:14:31.986724000 Z\nuser_id: 1\nstate: pending\nsize: 40\ncomment:
+      \ncluster_project_id: 15\nid: 10\n"
+    - '2012-09-12 12:14:33.893716'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - pending
+
+      - active
+
+'
+  - - '691'
+    - ClusterProject
+    - '15'
+    - update
+    - '2'
+    - ! '---
+
+      state: closed
+
+      project_id: 8
+
+      cluster_id: 3
+
+      username: octoshell
+
+      id: 15
+
+'
+    - '2012-09-12 12:14:33.900815'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '692'
+    - Task
+    - '86'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:14:33.922348'
+    - 
+  - - '693'
+    - ClusterProject
+    - '15'
+    - update
+    - 
+    - ! '---
+
+      state: activing
+
+      project_id: 8
+
+      cluster_id: 3
+
+      username: octoshell
+
+      id: 15
+
+'
+    - '2012-09-12 12:14:40.253309'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '694'
+    - ClusterUser
+    - '63'
+    - update
+    - 
+    - ! '---
+
+      state: closed
+
+      created_at: 2012-09-12 12:14:14.827979000 Z
+
+      updated_at: 2012-09-12 12:14:14.827979000 Z
+
+      account_id: 34
+
+      cluster_project_id: 15
+
+      username: account_34
+
+      id: 63
+
+'
+    - '2012-09-12 12:14:40.332289'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '695'
+    - Task
+    - '87'
+    - create
+    - 
+    - 
+    - '2012-09-12 12:14:40.340332'
+    - 
+  - - '696'
+    - Task
+    - '86'
+    - update
+    - 
+    - ! "---\nresource_type: ClusterProject\nresource_id: 15\ncreated_at: 2012-09-12
+      12:14:33.919615000 Z\nupdated_at: 2012-09-12 16:14:36.674037000 Z\nprocedure:
+      add_project\ncomment: ! \"Add group: octoshell on v2.parallel.ru with \\n\"\ncallbacks_performed:
+      false\ntask_id: \nstate: successed\nid: 86\n"
+    - '2012-09-12 12:14:40.346425'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '697'
+    - ClusterUser
+    - '63'
+    - update
+    - 
+    - ! '---
+
+      state: activing
+
+      created_at: 2012-09-12 12:14:14.827979000 Z
+
+      updated_at: 2012-09-12 12:14:40.331102000 Z
+
+      account_id: 34
+
+      cluster_project_id: 15
+
+      username: account_34
+
+      id: 63
+
+'
+    - '2012-09-12 12:14:45.600001'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '698'
+    - Access
+    - '82'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 1
+
+      state: closed
+
+      created_at: 2012-09-12 12:14:14.843835000 Z
+
+      updated_at: 2012-09-12 12:14:14.843835000 Z
+
+      cluster_user_id: 63
+
+      id: 82
+
+'
+    - '2012-09-12 12:14:45.671002'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '699'
+    - Task
+    - '88'
+    - create
+    - 
+    - 
+    - '2012-09-12 12:14:45.678749'
+    - 
+  - - '700'
+    - Access
+    - '81'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 2
+
+      state: closed
+
+      created_at: 2012-09-12 12:14:14.836894000 Z
+
+      updated_at: 2012-09-12 12:14:14.836894000 Z
+
+      cluster_user_id: 63
+
+      id: 81
+
+'
+    - '2012-09-12 12:14:45.686232'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '701'
+    - Task
+    - '89'
+    - create
+    - 
+    - 
+    - '2012-09-12 12:14:45.690894'
+    - 
+  - - '702'
+    - Task
+    - '87'
+    - update
+    - 
+    - ! "---\nresource_type: ClusterUser\nresource_id: 63\ncreated_at: 2012-09-12
+      12:14:40.337572000 Z\nupdated_at: 2012-09-12 16:14:42.308574000 Z\nprocedure:
+      add_user\ncomment: ! \"Add user: account_34 octoshell on v2.parallel.ru with
+      \\n\"\ncallbacks_performed: false\ntask_id: \nstate: successed\nid: 87\n"
+    - '2012-09-12 12:14:45.696189'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '703'
+    - Access
+    - '82'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 1
+
+      state: activing
+
+      created_at: 2012-09-12 12:14:14.843835000 Z
+
+      updated_at: 2012-09-12 12:14:45.669809000 Z
+
+      cluster_user_id: 63
+
+      id: 82
+
+'
+    - '2012-09-12 12:14:50.974361'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '704'
+    - Task
+    - '88'
+    - update
+    - 
+    - ! "---\nresource_type: Access\nresource_id: 82\ncreated_at: 2012-09-12 12:14:45.676152000
+      Z\nupdated_at: 2012-09-12 16:14:47.544944000 Z\nprocedure: add_openkey\ncomment:
+      ! \"Add key: account_34 / octoshell on v2.parallel.ru with atata.\\nAdding\n
+      \ key for account_34!\\nKEEPED: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDS6HBD21h/KhJtMfxQkR4etfJVF/ucQm+jsueEvYe/vVFMEH4gu/0INUuRAV0xsgUdu42dF0MVe9wplmLr+OuLk5AU0hMKie+gU65tbTo66G9kmolBswyUvnoSzhm/zenTkdVP1jE1cX9D8Qt9mtsUpWgwDi2towYo80rkAd1N98aYk93FSVwQtEoyIx9w7whtacTSdsnIYng2lv5YqNJJ74/cTzcMSPg1rd+uCAphLnzpwSchHK74+Uv2d3YlFeKvtZKhnF1YHW3j3Thsq2q6VKitv5ba0p4LKI6h30+vg3QjybcdY+mhuBSux3Gs2F9gf9aFgXFMjdnNPVn3bpXf\n
+      \ account_34@evron2\\nADDED: \\nKey added\\n\"\ncallbacks_performed: false\ntask_id:
+      \nstate: successed\nid: 88\n"
+    - '2012-09-12 12:14:50.981179'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '705'
+    - Access
+    - '81'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 2
+
+      state: activing
+
+      created_at: 2012-09-12 12:14:14.836894000 Z
+
+      updated_at: 2012-09-12 12:14:45.685337000 Z
+
+      cluster_user_id: 63
+
+      id: 81
+
+'
+    - '2012-09-12 12:14:51.25327'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '706'
+    - Task
+    - '89'
+    - update
+    - 
+    - ! "---\nresource_type: Access\nresource_id: 81\ncreated_at: 2012-09-12 12:14:45.689280000
+      Z\nupdated_at: 2012-09-12 16:14:47.780667000 Z\nprocedure: add_openkey\ncomment:
+      ! \"Add key: account_34 / octoshell on v2.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD\n
+      \ releu@me.com\\n.\\nAdding key for account_34!\\nKEEPED: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDS6HBD21h/KhJtMfxQkR4etfJVF/ucQm+jsueEvYe/vVFMEH4gu/0INUuRAV0xsgUdu42dF0MVe9wplmLr+OuLk5AU0hMKie+gU65tbTo66G9kmolBswyUvnoSzhm/zenTkdVP1jE1cX9D8Qt9mtsUpWgwDi2towYo80rkAd1N98aYk93FSVwQtEoyIx9w7whtacTSdsnIYng2lv5YqNJJ74/cTzcMSPg1rd+uCAphLnzpwSchHK74+Uv2d3YlFeKvtZKhnF1YHW3j3Thsq2q6VKitv5ba0p4LKI6h30+vg3QjybcdY+mhuBSux3Gs2F9gf9aFgXFMjdnNPVn3bpXf\n
+      \ account_34@evron2\\nKEEPED: atata\\nADDED: \\nKey added\\n\"\ncallbacks_performed:
+      false\ntask_id: \nstate: successed\nid: 89\n"
+    - '2012-09-12 12:14:51.260026'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '707'
+    - Credential
+    - '9'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.638243'
+    - 
+  - - '708'
+    - Access
+    - '91'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.65731'
+    - 
+  - - '709'
+    - Access
+    - '92'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.665716'
+    - 
+  - - '710'
+    - Access
+    - '93'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.671657'
+    - 
+  - - '711'
+    - Access
+    - '94'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.677495'
+    - 
+  - - '712'
+    - Access
+    - '95'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.683353'
+    - 
+  - - '713'
+    - Access
+    - '96'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.689236'
+    - 
+  - - '714'
+    - Access
+    - '97'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.695035'
+    - 
+  - - '715'
+    - Access
+    - '98'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.700967'
+    - 
+  - - '716'
+    - Access
+    - '99'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.707958'
+    - 
+  - - '717'
+    - Access
+    - '100'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.716754'
+    - 
+  - - '718'
+    - Access
+    - '101'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.722635'
+    - 
+  - - '719'
+    - Access
+    - '102'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.728466'
+    - 
+  - - '720'
+    - Access
+    - '102'
+    - update
+    - '2'
+    - ! '---
+
+      credential_id: 9
+
+      state: closed
+
+      created_at: 2012-09-12 12:16:53.726898000 Z
+
+      updated_at: 2012-09-12 12:16:53.726898000 Z
+
+      cluster_user_id: 1
+
+      id: 102
+
+'
+    - '2012-09-12 12:16:53.737437'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '721'
+    - Task
+    - '90'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.743155'
+    - 
+  - - '722'
+    - Access
+    - '101'
+    - update
+    - '2'
+    - ! '---
+
+      credential_id: 9
+
+      state: closed
+
+      created_at: 2012-09-12 12:16:53.721041000 Z
+
+      updated_at: 2012-09-12 12:16:53.721041000 Z
+
+      cluster_user_id: 7
+
+      id: 101
+
+'
+    - '2012-09-12 12:16:53.750851'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '723'
+    - Task
+    - '91'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.755597'
+    - 
+  - - '724'
+    - Access
+    - '100'
+    - update
+    - '2'
+    - ! '---
+
+      credential_id: 9
+
+      state: closed
+
+      created_at: 2012-09-12 12:16:53.714332000 Z
+
+      updated_at: 2012-09-12 12:16:53.714332000 Z
+
+      cluster_user_id: 13
+
+      id: 100
+
+'
+    - '2012-09-12 12:16:53.763516'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '725'
+    - Task
+    - '92'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.769782'
+    - 
+  - - '726'
+    - Access
+    - '99'
+    - update
+    - '2'
+    - ! '---
+
+      credential_id: 9
+
+      state: closed
+
+      created_at: 2012-09-12 12:16:53.705590000 Z
+
+      updated_at: 2012-09-12 12:16:53.705590000 Z
+
+      cluster_user_id: 19
+
+      id: 99
+
+'
+    - '2012-09-12 12:16:53.847013'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '727'
+    - Task
+    - '93'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.856795'
+    - 
+  - - '728'
+    - Access
+    - '96'
+    - update
+    - '2'
+    - ! '---
+
+      credential_id: 9
+
+      state: closed
+
+      created_at: 2012-09-12 12:16:53.687682000 Z
+
+      updated_at: 2012-09-12 12:16:53.687682000 Z
+
+      cluster_user_id: 39
+
+      id: 96
+
+'
+    - '2012-09-12 12:16:53.868112'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '729'
+    - Task
+    - '94'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.873071'
+    - 
+  - - '730'
+    - Access
+    - '95'
+    - update
+    - '2'
+    - ! '---
+
+      credential_id: 9
+
+      state: closed
+
+      created_at: 2012-09-12 12:16:53.681778000 Z
+
+      updated_at: 2012-09-12 12:16:53.681778000 Z
+
+      cluster_user_id: 45
+
+      id: 95
+
+'
+    - '2012-09-12 12:16:53.880791'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '731'
+    - Task
+    - '95'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.885772'
+    - 
+  - - '732'
+    - Access
+    - '92'
+    - update
+    - '2'
+    - ! '---
+
+      credential_id: 9
+
+      state: closed
+
+      created_at: 2012-09-12 12:16:53.663850000 Z
+
+      updated_at: 2012-09-12 12:16:53.663850000 Z
+
+      cluster_user_id: 63
+
+      id: 92
+
+'
+    - '2012-09-12 12:16:53.897195'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '733'
+    - Task
+    - '96'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.902264'
+    - 
+  - - '734'
+    - Access
+    - '91'
+    - update
+    - '2'
+    - ! '---
+
+      credential_id: 9
+
+      state: closed
+
+      created_at: 2012-09-12 12:16:53.654753000 Z
+
+      updated_at: 2012-09-12 12:16:53.654753000 Z
+
+      cluster_user_id: 69
+
+      id: 91
+
+'
+    - '2012-09-12 12:16:53.910093'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '735'
+    - Task
+    - '97'
+    - create
+    - '2'
+    - 
+    - '2012-09-12 12:16:53.914918'
+    - 
+  - - '736'
+    - Access
+    - '100'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 9
+
+      state: activing
+
+      created_at: 2012-09-12 12:16:53.714332000 Z
+
+      updated_at: 2012-09-12 12:16:53.762605000 Z
+
+      cluster_user_id: 13
+
+      id: 100
+
+'
+    - '2012-09-12 12:17:01.535476'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '737'
+    - Task
+    - '92'
+    - update
+    - 
+    - ! "---\nresource_type: Access\nresource_id: 100\ncreated_at: 2012-09-12 12:16:53.767171000
+      Z\nupdated_at: 2012-09-12 16:16:58.456130000 Z\nprocedure: add_openkey\ncomment:
+      ! \"Add key: account_9 / test_project on v2.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD\n
+      \ releu@me.com.\\nAdding key for account_9!\\nKEEPED: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC//y1s5SMP2RcGa8SxW8R0V811u03crhL8B2PfOIrlzK4H7a3na2pN4SaR9b/7k9YWqdPtVL/H+Ep329bYkDi+u7KTBMlhb1t1dfaPBziyikofYRPg7J4Wm9uueNahzcGYta+r7HwDktqiUhsAtogGV+tqqXb67UJ3lu8mxfGUDflcaRG+1iduZGM2Fuu0u5fqlKezBwnwyG2eFsmxPAeKNKIFxiG4RXXkBUXOTS3GMCC5ftrxoZO/6+Yb4Npm5iBb5vNidRX7t4l2Ow0Tp7YQ6YvgwD7BpxkfMfhFeZR390C1ZKXQtJNSGU6dghSRlk5A96Ld1sLFKf+tE/+xO2lR\n
+      \ account_9@evron2\\nKEEPED: atata\\nADDED: \\nKey added\\n\"\ncallbacks_performed:
+      false\ntask_id: \nstate: successed\nid: 92\n"
+    - '2012-09-12 12:17:01.542201'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '738'
+    - Access
+    - '96'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 9
+
+      state: activing
+
+      created_at: 2012-09-12 12:16:53.687682000 Z
+
+      updated_at: 2012-09-12 12:16:53.867123000 Z
+
+      cluster_user_id: 39
+
+      id: 96
+
+'
+    - '2012-09-12 12:17:01.803503'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '739'
+    - Task
+    - '94'
+    - update
+    - 
+    - ! "---\nresource_type: Access\nresource_id: 96\ncreated_at: 2012-09-12 12:16:53.871410000
+      Z\nupdated_at: 2012-09-12 16:16:58.915474000 Z\nprocedure: add_openkey\ncomment:
+      ! \"Add key: account_22 / project_6 on v2.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD\n
+      \ releu@me.com.\\nAdding key for account_22!\\nDuplicated key. Skip.\\nKEEPED:
+      ssh-rsa\n  AAAAB3NzaC1yc2EAAAADAQABAAABAQDekTMA+qiToXSgw/CBOBiRrS8c7G6L9R9VmMDk2BNzdNMvgg6TRjW2mOJ+kGi0+HYCvltc3q2yOjuW4cQMq8KLrMRVl2bbdYKhwNiAXxhtfCrvEI0jYXWvgBlh/P6FBCezh3c/jYN6tLDONrfpUOSjMZbw28z6bfTPyN1v9EWeg5u2vz9Haug4fFOCLgjhkvfJudY+4EKUkRq4KN93ZqjU8gdNeiaZ95COy0pfG82SER6lc7XZtwmTcSQnUJ41RxJoKDEbfeSDD0GM/sSodG5vGz4vp2mImrZUWHWpFYSmjZJegPZogtANGhw4pd627oXr6f49skT/Y76PIr58g1dN\n
+      \ account_22@evron2\\nKEEPED: atata\\nKEEPED: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD\n
+      \ releu@me.com\\nADDED: \\nKey added\\n\"\ncallbacks_performed: false\ntask_id:
+      \nstate: successed\nid: 94\n"
+    - '2012-09-12 12:17:01.810188'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '740'
+    - Access
+    - '92'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 9
+
+      state: activing
+
+      created_at: 2012-09-12 12:16:53.663850000 Z
+
+      updated_at: 2012-09-12 12:16:53.896177000 Z
+
+      cluster_user_id: 63
+
+      id: 92
+
+'
+    - '2012-09-12 12:17:02.069923'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '741'
+    - Task
+    - '96'
+    - update
+    - 
+    - ! "---\nresource_type: Access\nresource_id: 92\ncreated_at: 2012-09-12 12:16:53.900566000
+      Z\nupdated_at: 2012-09-12 16:16:59.331224000 Z\nprocedure: add_openkey\ncomment:
+      ! \"Add key: account_34 / octoshell on v2.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD\n
+      \ releu@me.com.\\nAdding key for account_34!\\nDuplicated key. Skip.\\nKEEPED:
+      ssh-rsa\n  AAAAB3NzaC1yc2EAAAADAQABAAABAQDS6HBD21h/KhJtMfxQkR4etfJVF/ucQm+jsueEvYe/vVFMEH4gu/0INUuRAV0xsgUdu42dF0MVe9wplmLr+OuLk5AU0hMKie+gU65tbTo66G9kmolBswyUvnoSzhm/zenTkdVP1jE1cX9D8Qt9mtsUpWgwDi2towYo80rkAd1N98aYk93FSVwQtEoyIx9w7whtacTSdsnIYng2lv5YqNJJ74/cTzcMSPg1rd+uCAphLnzpwSchHK74+Uv2d3YlFeKvtZKhnF1YHW3j3Thsq2q6VKitv5ba0p4LKI6h30+vg3QjybcdY+mhuBSux3Gs2F9gf9aFgXFMjdnNPVn3bpXf\n
+      \ account_34@evron2\\nKEEPED: atata\\nADDED: \\nKey added\\n\"\ncallbacks_performed:
+      false\ntask_id: \nstate: successed\nid: 96\n"
+    - '2012-09-12 12:17:02.076657'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
 
 ---
 credentials:
@@ -9382,6 +11233,14 @@ credentials:
     - '2012-09-11 08:56:26.22591'
     - iMac
     - active
+  - - '9'
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
+      releu@me.com
+    - '1'
+    - '2012-09-12 12:16:53.634738'
+    - '2012-09-12 12:16:53.634738'
+    - iMac
+    - active
 
 ---
 cluster_projects:
@@ -9433,7 +11292,7 @@ cluster_projects:
     - '1'
     - project_6
   - - '13'
-    - active
+    - closed
     - '7'
     - '3'
     - project_7
@@ -9442,6 +11301,16 @@ cluster_projects:
     - '7'
     - '1'
     - project_7
+  - - '15'
+    - active
+    - '8'
+    - '3'
+    - octoshell
+  - - '16'
+    - closed
+    - '8'
+    - '1'
+    - octoshell
 
 ---
 accounts:
@@ -9598,8 +11467,8 @@ accounts:
     - '1'
     - '7'
     - '2012-09-12 10:52:36.22171'
-    - '2012-09-12 10:52:36.2496'
-    - active
+    - '2012-09-12 12:13:23.136924'
+    - closed
     - account_28
   - - '29'
     - '6'
@@ -9636,6 +11505,48 @@ accounts:
     - '2012-09-12 10:52:36.34762'
     - closed
     - account_33
+  - - '34'
+    - '1'
+    - '8'
+    - '2012-09-12 12:14:14.57587'
+    - '2012-09-12 12:14:14.597653'
+    - active
+    - account_34
+  - - '35'
+    - '6'
+    - '8'
+    - '2012-09-12 12:14:14.607064'
+    - '2012-09-12 12:14:14.607064'
+    - closed
+    - account_35
+  - - '36'
+    - '5'
+    - '8'
+    - '2012-09-12 12:14:14.618678'
+    - '2012-09-12 12:14:14.618678'
+    - closed
+    - account_36
+  - - '37'
+    - '4'
+    - '8'
+    - '2012-09-12 12:14:14.630213'
+    - '2012-09-12 12:14:14.630213'
+    - closed
+    - account_37
+  - - '38'
+    - '3'
+    - '8'
+    - '2012-09-12 12:14:14.641329'
+    - '2012-09-12 12:14:14.641329'
+    - closed
+    - account_38
+  - - '39'
+    - '2'
+    - '8'
+    - '2012-09-12 12:14:14.65231'
+    - '2012-09-12 12:14:14.65231'
+    - closed
+    - account_39
 
 ---
 position_names:
@@ -10417,6 +12328,184 @@ tasks:
     - true
     - 
     - successed
+  - - '85'
+    - ClusterProject
+    - '13'
+    - '2012-09-12 12:13:23.075837'
+    - '2012-09-12 12:13:29.985807'
+    - del_project
+    - ''
+    - true
+    - 
+    - successed
+  - - '86'
+    - ClusterProject
+    - '15'
+    - '2012-09-12 12:14:33.919615'
+    - '2012-09-12 12:14:40.34528'
+    - add_project
+    - ! "Add group: octoshell on v2.parallel.ru with \n"
+    - true
+    - 
+    - successed
+  - - '87'
+    - ClusterUser
+    - '63'
+    - '2012-09-12 12:14:40.337572'
+    - '2012-09-12 12:14:45.695165'
+    - add_user
+    - ! "Add user: account_34 octoshell on v2.parallel.ru with \n"
+    - true
+    - 
+    - successed
+  - - '88'
+    - Access
+    - '82'
+    - '2012-09-12 12:14:45.676152'
+    - '2012-09-12 12:14:50.980009'
+    - add_openkey
+    - ! "Add key: account_34 / octoshell on v2.parallel.ru with atata.\nAdding key
+      for account_34!\nKEEPED: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDS6HBD21h/KhJtMfxQkR4etfJVF/ucQm+jsueEvYe/vVFMEH4gu/0INUuRAV0xsgUdu42dF0MVe9wplmLr+OuLk5AU0hMKie+gU65tbTo66G9kmolBswyUvnoSzhm/zenTkdVP1jE1cX9D8Qt9mtsUpWgwDi2towYo80rkAd1N98aYk93FSVwQtEoyIx9w7whtacTSdsnIYng2lv5YqNJJ74/cTzcMSPg1rd+uCAphLnzpwSchHK74+Uv2d3YlFeKvtZKhnF1YHW3j3Thsq2q6VKitv5ba0p4LKI6h30+vg3QjybcdY+mhuBSux3Gs2F9gf9aFgXFMjdnNPVn3bpXf
+      account_34@evron2\nADDED: \nKey added\n"
+    - true
+    - 
+    - successed
+  - - '89'
+    - Access
+    - '81'
+    - '2012-09-12 12:14:45.68928'
+    - '2012-09-12 12:14:51.258931'
+    - add_openkey
+    - ! "Add key: account_34 / octoshell on v2.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
+      releu@me.com\n.\nAdding key for account_34!\nKEEPED: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDS6HBD21h/KhJtMfxQkR4etfJVF/ucQm+jsueEvYe/vVFMEH4gu/0INUuRAV0xsgUdu42dF0MVe9wplmLr+OuLk5AU0hMKie+gU65tbTo66G9kmolBswyUvnoSzhm/zenTkdVP1jE1cX9D8Qt9mtsUpWgwDi2towYo80rkAd1N98aYk93FSVwQtEoyIx9w7whtacTSdsnIYng2lv5YqNJJ74/cTzcMSPg1rd+uCAphLnzpwSchHK74+Uv2d3YlFeKvtZKhnF1YHW3j3Thsq2q6VKitv5ba0p4LKI6h30+vg3QjybcdY+mhuBSux3Gs2F9gf9aFgXFMjdnNPVn3bpXf
+      account_34@evron2\nKEEPED: atata\nADDED: \nKey added\n"
+    - true
+    - 
+    - successed
+  - - '90'
+    - Access
+    - '102'
+    - '2012-09-12 12:16:53.741454'
+    - '2012-09-12 16:16:57.972283'
+    - add_openkey
+    - ! 'Add key: account_1 / project_1 on lomonosov.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
+      releu@me.com.
+
+      ERROR: #<Cocaine::ExitStatusError: Command ''ssh -i /var/www/octoshell-extend/releases/20120912103957/config/keys/private
+      octo@lomonosov.parallel.ru sudo /usr/octo/add_openkey  account_1 ssh-rsa\ AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu\+9PML2L8D\+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC\+jL1jEcidb95sLvc\+2wnceTNndbGOi0NBnkV\+lrDU04I7JD\
+      releu@me.com'' returned 255. Expected 0> (Command ''ssh -i /var/www/octoshell-extend/releases/20120912103957/config/keys/private
+      octo@lomonosov.parallel.ru sudo /usr/octo/add_openkey  account_1 ssh-rsa\ AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu\+9PML2L8D\+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC\+jL1jEcidb95sLvc\+2wnceTNndbGOi0NBnkV\+lrDU04I7JD\
+      releu@me.com'' returned 255. Expected 0)'
+    - false
+    - 
+    - failed
+  - - '91'
+    - Access
+    - '101'
+    - '2012-09-12 12:16:53.753932'
+    - '2012-09-12 16:16:58.204104'
+    - add_openkey
+    - ! 'Add key: account_1 / project_1 on v2.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
+      releu@me.com.
+
+      ERROR: #<Cocaine::ExitStatusError: Command ''ssh -i /var/www/octoshell-extend/releases/20120912103957/config/keys/private
+      octo@v2.parallel.ru sudo /usr/octo/add_openkey  account_1 ssh-rsa\ AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu\+9PML2L8D\+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC\+jL1jEcidb95sLvc\+2wnceTNndbGOi0NBnkV\+lrDU04I7JD\
+      releu@me.com'' returned 1. Expected 0> (Command ''ssh -i /var/www/octoshell-extend/releases/20120912103957/config/keys/private
+      octo@v2.parallel.ru sudo /usr/octo/add_openkey  account_1 ssh-rsa\ AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu\+9PML2L8D\+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC\+jL1jEcidb95sLvc\+2wnceTNndbGOi0NBnkV\+lrDU04I7JD\
+      releu@me.com'' returned 1. Expected 0)'
+    - false
+    - 
+    - failed
+  - - '92'
+    - Access
+    - '100'
+    - '2012-09-12 12:16:53.767171'
+    - '2012-09-12 12:17:01.541141'
+    - add_openkey
+    - ! "Add key: account_9 / test_project on v2.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
+      releu@me.com.\nAdding key for account_9!\nKEEPED: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC//y1s5SMP2RcGa8SxW8R0V811u03crhL8B2PfOIrlzK4H7a3na2pN4SaR9b/7k9YWqdPtVL/H+Ep329bYkDi+u7KTBMlhb1t1dfaPBziyikofYRPg7J4Wm9uueNahzcGYta+r7HwDktqiUhsAtogGV+tqqXb67UJ3lu8mxfGUDflcaRG+1iduZGM2Fuu0u5fqlKezBwnwyG2eFsmxPAeKNKIFxiG4RXXkBUXOTS3GMCC5ftrxoZO/6+Yb4Npm5iBb5vNidRX7t4l2Ow0Tp7YQ6YvgwD7BpxkfMfhFeZR390C1ZKXQtJNSGU6dghSRlk5A96Ld1sLFKf+tE/+xO2lR
+      account_9@evron2\nKEEPED: atata\nADDED: \nKey added\n"
+    - true
+    - 
+    - successed
+  - - '93'
+    - Access
+    - '99'
+    - '2012-09-12 12:16:53.854897'
+    - '2012-09-12 16:16:58.680669'
+    - add_openkey
+    - ! 'Add key: account_9 / test_project on lomonosov.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
+      releu@me.com.
+
+      ERROR: #<Cocaine::ExitStatusError: Command ''ssh -i /var/www/octoshell-extend/releases/20120912103957/config/keys/private
+      octo@lomonosov.parallel.ru sudo /usr/octo/add_openkey  account_9 ssh-rsa\ AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu\+9PML2L8D\+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC\+jL1jEcidb95sLvc\+2wnceTNndbGOi0NBnkV\+lrDU04I7JD\
+      releu@me.com'' returned 255. Expected 0> (Command ''ssh -i /var/www/octoshell-extend/releases/20120912103957/config/keys/private
+      octo@lomonosov.parallel.ru sudo /usr/octo/add_openkey  account_9 ssh-rsa\ AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu\+9PML2L8D\+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC\+jL1jEcidb95sLvc\+2wnceTNndbGOi0NBnkV\+lrDU04I7JD\
+      releu@me.com'' returned 255. Expected 0)'
+    - false
+    - 
+    - failed
+  - - '94'
+    - Access
+    - '96'
+    - '2012-09-12 12:16:53.87141'
+    - '2012-09-12 12:17:01.8091'
+    - add_openkey
+    - ! "Add key: account_22 / project_6 on v2.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
+      releu@me.com.\nAdding key for account_22!\nDuplicated key. Skip.\nKEEPED: ssh-rsa
+      AAAAB3NzaC1yc2EAAAADAQABAAABAQDekTMA+qiToXSgw/CBOBiRrS8c7G6L9R9VmMDk2BNzdNMvgg6TRjW2mOJ+kGi0+HYCvltc3q2yOjuW4cQMq8KLrMRVl2bbdYKhwNiAXxhtfCrvEI0jYXWvgBlh/P6FBCezh3c/jYN6tLDONrfpUOSjMZbw28z6bfTPyN1v9EWeg5u2vz9Haug4fFOCLgjhkvfJudY+4EKUkRq4KN93ZqjU8gdNeiaZ95COy0pfG82SER6lc7XZtwmTcSQnUJ41RxJoKDEbfeSDD0GM/sSodG5vGz4vp2mImrZUWHWpFYSmjZJegPZogtANGhw4pd627oXr6f49skT/Y76PIr58g1dN
+      account_22@evron2\nKEEPED: atata\nKEEPED: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
+      releu@me.com\nADDED: \nKey added\n"
+    - true
+    - 
+    - successed
+  - - '95'
+    - Access
+    - '95'
+    - '2012-09-12 12:16:53.884053'
+    - '2012-09-12 16:16:59.100416'
+    - add_openkey
+    - ! 'Add key: account_22 / project_6 on lomonosov.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
+      releu@me.com.
+
+      ERROR: #<Cocaine::ExitStatusError: Command ''ssh -i /var/www/octoshell-extend/releases/20120912103957/config/keys/private
+      octo@lomonosov.parallel.ru sudo /usr/octo/add_openkey  account_22 ssh-rsa\ AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu\+9PML2L8D\+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC\+jL1jEcidb95sLvc\+2wnceTNndbGOi0NBnkV\+lrDU04I7JD\
+      releu@me.com'' returned 255. Expected 0> (Command ''ssh -i /var/www/octoshell-extend/releases/20120912103957/config/keys/private
+      octo@lomonosov.parallel.ru sudo /usr/octo/add_openkey  account_22 ssh-rsa\ AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu\+9PML2L8D\+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC\+jL1jEcidb95sLvc\+2wnceTNndbGOi0NBnkV\+lrDU04I7JD\
+      releu@me.com'' returned 255. Expected 0)'
+    - false
+    - 
+    - failed
+  - - '96'
+    - Access
+    - '92'
+    - '2012-09-12 12:16:53.900566'
+    - '2012-09-12 12:17:02.075552'
+    - add_openkey
+    - ! "Add key: account_34 / octoshell on v2.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
+      releu@me.com.\nAdding key for account_34!\nDuplicated key. Skip.\nKEEPED: ssh-rsa
+      AAAAB3NzaC1yc2EAAAADAQABAAABAQDS6HBD21h/KhJtMfxQkR4etfJVF/ucQm+jsueEvYe/vVFMEH4gu/0INUuRAV0xsgUdu42dF0MVe9wplmLr+OuLk5AU0hMKie+gU65tbTo66G9kmolBswyUvnoSzhm/zenTkdVP1jE1cX9D8Qt9mtsUpWgwDi2towYo80rkAd1N98aYk93FSVwQtEoyIx9w7whtacTSdsnIYng2lv5YqNJJ74/cTzcMSPg1rd+uCAphLnzpwSchHK74+Uv2d3YlFeKvtZKhnF1YHW3j3Thsq2q6VKitv5ba0p4LKI6h30+vg3QjybcdY+mhuBSux3Gs2F9gf9aFgXFMjdnNPVn3bpXf
+      account_34@evron2\nKEEPED: atata\nADDED: \nKey added\n"
+    - true
+    - 
+    - successed
+  - - '97'
+    - Access
+    - '91'
+    - '2012-09-12 12:16:53.913244'
+    - '2012-09-12 16:16:59.548498'
+    - add_openkey
+    - ! 'Add key: account_34 / octoshell on lomonosov.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu+9PML2L8D+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC+jL1jEcidb95sLvc+2wnceTNndbGOi0NBnkV+lrDU04I7JD
+      releu@me.com.
+
+      ERROR: #<Cocaine::ExitStatusError: Command ''ssh -i /var/www/octoshell-extend/releases/20120912103957/config/keys/private
+      octo@lomonosov.parallel.ru sudo /usr/octo/add_openkey  account_34 ssh-rsa\ AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu\+9PML2L8D\+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC\+jL1jEcidb95sLvc\+2wnceTNndbGOi0NBnkV\+lrDU04I7JD\
+      releu@me.com'' returned 255. Expected 0> (Command ''ssh -i /var/www/octoshell-extend/releases/20120912103957/config/keys/private
+      octo@lomonosov.parallel.ru sudo /usr/octo/add_openkey  account_34 ssh-rsa\ AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgSu\+9PML2L8D\+eJI8zUwwnxvB42fRX7zRQINlnZDEUN2jZRb0LX9WAHjbm708T9EzFNj76atII6sHQkRn0j/SVQ4zmAyBijxmrrecJiTOD6SwFeySVF1DPgQGDvf7Jtp26CjfJ3SURapHFTpqZoD5VnqWXLpKLjpyTGeGUPnaLD8iNhL3pkn1GXubVllfTbZX7iGjQR3PZuD0mghATde/nzUHyXZcrbpBSvkBD9OzjVdoyy8cZPzqvtZw2QR6TnjYfXJct7cnLggyB4qOJjdTl9LejPOT2r5LIRsC\+jL1jEcidb95sLvc\+2wnceTNndbGOi0NBnkV\+lrDU04I7JD\
+      releu@me.com'' returned 255. Expected 0)'
+    - false
+    - 
+    - failed
 
 ---
 requests:
@@ -10479,12 +12568,21 @@ requests:
   - - '9'
     - '5'
     - '2012-09-12 10:54:13.242093'
-    - '2012-09-12 10:54:16.757028'
+    - '2012-09-12 12:13:23.162579'
     - '1'
-    - active
+    - closed
     - '56'
     - 
     - '13'
+  - - '10'
+    - '40'
+    - '2012-09-12 12:14:31.986724'
+    - '2012-09-12 12:14:33.892539'
+    - '1'
+    - active
+    - '40'
+    - 
+    - '15'
 
 ---
 sureties:
@@ -10772,13 +12870,23 @@ projects:
   - - '7'
     - Test4
     - '2012-09-12 10:52:36.203384'
-    - '2012-09-12 10:52:36.203384'
+    - '2012-09-12 12:13:22.907676'
     - '1'
-    - active
+    - closed
     - ! "test4\r\n"
     - '1'
     - account
     - project_7
+  - - '8'
+    - octoshell
+    - '2012-09-12 12:14:14.557654'
+    - '2012-09-12 12:14:14.557654'
+    - '1'
+    - active
+    - tratata
+    - '1'
+    - account
+    - octoshell
 
 ---
 replies:
