@@ -26,6 +26,7 @@ gem 'kaminari'
 gem 'whenever'
 gem 'redcarpet', '1.17.2'
 gem 'gollum', github: 'github/gollum'
+gem 'cocaine'
 
 group :test, :development do
   gem 'quiet_assets'

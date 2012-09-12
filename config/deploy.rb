@@ -1,6 +1,7 @@
 require 'bundler/capistrano'
 require "rvm/capistrano"
 require "capistrano-resque"
+require "cocaine"
 
 set :rvm_type, :system
 set :rvm_ruby_string, '1.9.3@msu'
@@ -28,6 +29,15 @@ require "whenever/capistrano"
 require 'capistrano-unicorn'
 
 after "deploy:restart", "resque:restart"
+
+namespace :db do
+  task :copy do
+    run "cd #{deploy_to}/current && RAILS_ENV=production bundle exec rake db:dump"
+    Cocaine::CommandLine.new("rm", File.expand_path("db/data.yml")).run
+    Cocaine::CommandLine.new("scp", "#{domain}:#{deploy_to}/current/db/data.yml #{File.expand_path("db")}").run
+    Cocaine::CommandLine.new("bundle", "exec rake db:load").run
+  end
+end
 
 namespace :deploy do
   task :restart do
