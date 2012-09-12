@@ -59,7 +59,7 @@ class Ability
       if user.sured?
         can [:new, :show], :accounts
         can :invite, :accounts, project_id: user.owned_project_ids
-        can :create, :accounts, user_id: user.id
+        can [:application, :request], :accounts, user_id: user.id
         can :mailer, :accounts, project_id: user.owned_project_ids
         
         can :show, :requests, user_id: user.id
@@ -91,7 +91,7 @@ class Ability
         
         can [:show, :close], :credentials
         
-        can [:show, :activate, :decline, :cancel, :invite, :create, :mailer, :edit, :update], :accounts
+        can [:new, :application, :show, :activate, :decline, :cancel, :invite, :request, :mailer, :edit, :update], :accounts
         
         can [:show, :edit, :update, :new, :create, :close], :projects
         
@@ -99,7 +99,7 @@ class Ability
         
         can [:admin, :edit, :update, :close], :users
         
-        can [:index, :new, :create, :show, :activate, :decline, :close, :edit, :update], :requests
+        can [:index, :new, :create, :show, :activate, :decline, :close, :edit, :update, :application], :requests
         
         can [:index, :show, :activate, :decline, :close, :find], :sureties
         

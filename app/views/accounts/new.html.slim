@@ -1,29 +1,26 @@
 - title 'Новый аккаунт'
 
-div class="page-header"
-  h2 Запросить доступ в проект
+h3 Запросить доступ в проект
 
-= simple_form_for @account, html: { class: 'form-horizontal', id: 'request_account' } do |f|
+= simple_form_for [:application, @account], html: { class: 'form-horizontal', id: 'new_account_request' } do |f|
   = f.association :user, label_method: :full_name, collection: User.non_closed if admin?
   = f.association :project, collection: Project.active
   
   div class="form-actions"
-    = f.button :submit, 'Запросить'
+    = f.button :submit, 'Request'
 
-div class="page-header"
-  h2 Пригласить в проект
+h3 Пригласить в проект
 
-= simple_form_for [:invite, @invite], html: { class: 'form-horizontal' } do |f|
+= simple_form_for [:invite, @invite], html: { class: 'form-horizontal', id: 'new_account_invitation' } do |f|
   = f.association :user, label_method: :full_name, collection: User.where('id != ?', f.object.user_id).non_closed
   = f.association :project, collection: @projects
   div class="form-actions"
-    = f.button :submit, 'Пригласить'
+    = f.button :submit, 'Invite'
 
-div class="page-header"
-  h2 Пригласить в проект еще не зарегистрированных людей
+h3 Пригласить в проект еще не зарегистрированных людей
 
-= simple_form_for [:mailer, @mailer], html: { class: 'form-horizontal' } do |f|
+= simple_form_for [:mailer, @mailer], html: { class: 'form-horizontal', id: 'new_account_batch_invitation' } do |f|
   = f.association :project, collection: @projects, prompt: false
   = f.input :raw_emails, as: :text, input_html: { rows: 5 }, hint: 'Через запятую, например: email@example.com, example@mail.com'
   div class="form-actions"
-    = f.button :submit, 'Пригласить'
+    = f.button :submit, 'Invite'

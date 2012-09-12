@@ -72,7 +72,7 @@ describe Ability do
     it { should be_able_to(:decline,  :accounts) }
     it { should be_able_to(:cancel,   :accounts) }
     it { should be_able_to(:invite,   :accounts) }
-    it { should be_able_to(:create,   :accounts) }
+    it { should be_able_to(:request,  :accounts) }
     it { should be_able_to(:mailer,   :accounts) }
     it { should be_able_to(:show,     :accounts) }
     it { should be_able_to(:edit,     :accounts) }

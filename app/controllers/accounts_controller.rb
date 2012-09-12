@@ -21,10 +21,12 @@ class AccountsController < ApplicationController
     @projects = get_projects
   end
   
-  def create
-    @account = current_user.accounts.build(params[:account], as_role)
-    authorize! :create, @account
-    if @account.save
+  def application
+    user_id = admin? ? params[:account][:user_id] : current_user.id
+    project_id = params[:account][:project_id]
+    @account = Account.where(user_id: user_id, project_id: project_id).first
+    authorize! :request, @account
+    if @account.request
       redirect_to @account
     else
       @invite = current_user.accounts.build
@@ -40,13 +42,11 @@ class AccountsController < ApplicationController
   end
   
   def invite
-    user_id = params[:account].delete(:user_id)
-    @invite = Account.new(params[:account]) do |account|
-      account.user_id = user_id
-    end
-    authorize! :invite, @invite
-    if @invite.invite
-      redirect_to @invite.project
+    user_id = admin? ? params[:account][:user_id] : current_user.id
+    @account = Account.where(project_id: params[:account][:project_id], user_id: user_id)
+    authorize! :activate, @account
+    if @account.activate
+      redirect_to @account
     else
       @account = current_user.accounts.build
       @mailer = current_user.accounts.build

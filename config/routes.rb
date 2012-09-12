@@ -71,10 +71,11 @@ MSU::Application.routes.draw do
   resources :invitations, only: [:new, :create]
   
   # accounts
-  resources :accounts, only: [:index, :new, :create, :show, :edit, :update] do
+  resources :accounts, only: [:index, :new, :show, :edit, :update] do
     collection do
       post :invite
       post :mailer
+      post :application
     end
     put :activate
     put :decline
