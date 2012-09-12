@@ -14,6 +14,7 @@ class Access < ActiveRecord::Base
   has_many :tasks, as: :resource, dependent: :destroy
   
   validates :credential, :cluster_user, presence: true
+  validates :credential_state_name, inclusion: { in: [:active] }, if: proc { |a| a.active? || a.activing? }
   
   state_machine initial: :closed do
     state :closed

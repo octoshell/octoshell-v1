@@ -112,7 +112,7 @@ protected
 private
   
   def create_relations
-    account.user.credentials.each do |credential|
+    account.user.credentials.active.each do |credential|
       conditions = { credential_id: credential.id }
       accesses.where(conditions).first_or_create!
     end
