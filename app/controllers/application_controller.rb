@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   enable_authorization unless: :skip_action?
   
   rescue_from CanCan::Unauthorized, with: :not_authorized
+  rescue_from ActiveRecord::RecordInProcess, with: :record_in_process
   
   def dashboard
     if admin?
@@ -76,5 +77,9 @@ private
     params.delete('token')
     uri.query = params.to_param
     uri.to_s
+  end
+  
+  def record_in_process
+    redirect_to :back, alert: 'Не возможно изменить пока связанные записи выполняются на кластере или выполнены с ошибками.'
   end
 end

@@ -40,7 +40,6 @@ class Project < ActiveRecord::Base
     transaction do
       _close!
       accounts.non_closed.each &:cancel!
-      cluster_projects.non_closed.each &:close!
       requests.non_closed.each &:close!
     end
   end

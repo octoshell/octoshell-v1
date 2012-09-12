@@ -99,7 +99,7 @@ class ClusterProject < ActiveRecord::Base
   
   def check_process!
     if [:activing, :pausing, :closing].include?(state_name)
-      raise RecordInProcess
+      raise ActiveRecord::RecordInProcess
     end
   end
   

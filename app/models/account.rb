@@ -61,7 +61,7 @@ class Account < ActiveRecord::Base
   end
   
   def activate!
-    self.transaction do
+    transaction do
       _activate!
       cluster_users.joins(:cluster_project).where(
         cluster_projects: { state: 'active' }
