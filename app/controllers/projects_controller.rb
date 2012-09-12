@@ -27,9 +27,8 @@ class ProjectsController < ApplicationController
     @project = Project.new(params[:project], as_role)
     @project.user = current_user unless admin?
     @project.accounts.build { |a| a.user = @project.user }
-    @project.requests.each { |r| r.user = @project.user }
     if @project.save
-      redirect_to @project
+      redirect_to new_request_path(project_id: @project.id)
     else
       render :new
     end

@@ -13,7 +13,7 @@ class RequestsController < ApplicationController
   end
   
   def new
-    @request = Request.new
+    @request = Request.new(project_id: params[:project_id])
     if admin?
       @projects = Project.active
     else
