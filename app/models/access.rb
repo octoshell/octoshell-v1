@@ -49,6 +49,8 @@ class Access < ActiveRecord::Base
   
   # активирует (создает задачу для доступа к кластеру)
   def activate!
+    check_process!
+    
     transaction do
       _activate!
       tasks.setup(:add_openkey)
@@ -64,6 +66,8 @@ class Access < ActiveRecord::Base
   
   # закрывает доступ (создает задачу для закрытия доступа к кластеру)
   def close!
+    check_process!
+    
     transaction do
       _close!
       tasks.setup(:del_openkey)
@@ -73,6 +77,12 @@ class Access < ActiveRecord::Base
   
   def available?
     cluster_user.active? && cluster_user.cluster_project.active?
+  end
+  
+  def check_process!
+    if [:activing, :closing].include?(state_name)
+      raise ActiveRecord::RecordInProcess
+    end
   end
   
 protected

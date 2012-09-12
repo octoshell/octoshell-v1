@@ -54,6 +54,8 @@ class ClusterProject < ActiveRecord::Base
   define_state_machine_scopes
   
   def activate!
+    check_process!
+    
     transaction do
       procedure = closed? ? :add_project : :unblock_project
       _activate!
@@ -62,6 +64,8 @@ class ClusterProject < ActiveRecord::Base
   end
   
   def pause!
+    check_process!
+    
     transaction do
       _pause!
       tasks.setup(:block_project)
@@ -69,6 +73,8 @@ class ClusterProject < ActiveRecord::Base
   end
   
   def close!
+    check_process!
+    
     transaction do
       _close!
       cluster_users.non_closed.each &:force_close!

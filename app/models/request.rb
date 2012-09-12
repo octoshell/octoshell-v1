@@ -57,7 +57,6 @@ class Request < ActiveRecord::Base
   def close!
     transaction do
       _close!
-      cluster_project.check_process!
       cluster_project.pause! if cluster_project.active?
       cluster_project.close! if cluster_project.paused?
     end
@@ -66,7 +65,6 @@ class Request < ActiveRecord::Base
   def activate!
     transaction do
       _activate!
-      cluster_project.check_process!
       cluster_project.activate!
     end
   end

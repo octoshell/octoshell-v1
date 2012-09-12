@@ -53,6 +53,8 @@ class ClusterUser < ActiveRecord::Base
   define_state_machine_scopes
   
   def activate!
+    check_process!
+    
     transaction do
       _activate!
       tasks.setup(:add_user)
@@ -60,6 +62,8 @@ class ClusterUser < ActiveRecord::Base
   end
   
   def close!
+    check_process!
+    
     transaction do
       _close!
       tasks.setup(:del_user)
@@ -67,6 +71,8 @@ class ClusterUser < ActiveRecord::Base
   end
   
   def force_close!
+    check_process!
+    
     transaction do
       _force_close!
       accesses.non_closed.each &:force_close!
@@ -84,6 +90,12 @@ class ClusterUser < ActiveRecord::Base
     transaction do
       _complete_closure!
       accesses.non_closed.each &:force_close!
+    end
+  end
+  
+  def check_process!
+    if [:activing, :closing].include?(state_name)
+      raise ActiveRecord::RecordInProcess
     end
   end
   
