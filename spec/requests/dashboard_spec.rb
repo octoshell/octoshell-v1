@@ -2,15 +2,9 @@ require 'spec_helper'
 
 describe 'Dashboard', js: true do
   context 'authorized user' do
-    let!(:fixture)      { Fixture.new }
-    let!(:user)         { fixture.user }
-    let!(:credential)   { fixture.credential }
-    let!(:ticket)       { create(:ticket, user: user) }
-    let!(:project)      { fixture.project }
-    let!(:account)      { fixture.account }
-    let!(:request)      { fixture.request }
-    let!(:cluster_user) { fixture.cluster_user }
-    let!(:access)       { fixture.access }
+    let!(:user) { create(:user) }
+    let!(:ticket) { create(:ticket, user: user) }
+    let!(:request) { create(:request, user: user) }
     
     before do
       login user

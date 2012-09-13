@@ -28,7 +28,7 @@ describe 'Requests', js: true do
   
   context 'as admin user' do
     context 'listing' do
-      let!(:request) { Fixture.request }
+      let!(:request) { create(:request) }
       
       before do
         login create(:admin_user)
@@ -41,11 +41,9 @@ describe 'Requests', js: true do
     end
     
     context 'creating' do
-      let!(:fixture) { Fixture.new }
-      let!(:user) { fixture.project.user }
-      let!(:project) { fixture.project }
-      let!(:cluster) { fixture.cluster }
-      let!(:request) { build(:request, user: user) }
+      let!(:project) { create(:project) }
+      let!(:user) { project.user }
+      let!(:cluster) { create(:cluster) }
       
       before do
         login create(:admin_user)
@@ -62,12 +60,12 @@ describe 'Requests', js: true do
       end
       
       it 'should create new request for user' do
-        user.should have(2).requests
+        user.should have(1).requests
       end
     end
     
     context 'activing' do
-      let!(:request) { Fixture.request }
+      let!(:request) { create(:request) }
       
       before do
         login create(:admin_user)
@@ -83,7 +81,7 @@ describe 'Requests', js: true do
     end
     
     context 'declining' do
-      let!(:request) { Fixture.request }
+      let!(:request) { create(:request) }
       
       before do
         login create(:admin_user)
@@ -99,7 +97,7 @@ describe 'Requests', js: true do
     end
     
     context 'closing', focus: true do
-      let!(:request) { Fixture.active_request }
+      let!(:request) { create(:active_request) }
       
       before do
         login create(:admin_user)
@@ -121,7 +119,7 @@ describe 'Requests', js: true do
     end
     
     context 'updating' do
-      let!(:request) { Fixture.request }
+      let!(:request) { create(:request) }
       let!(:request_property) { create(:request_property, name: 'Foo', request: request) }
       
       before do

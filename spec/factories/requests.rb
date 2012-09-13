@@ -8,6 +8,7 @@ FactoryGirl.define do
     factory :active_request do
       after(:create) do |request|
         request.activate!
+        request.cluster_project.reload.complete_activation!
       end
     end
     

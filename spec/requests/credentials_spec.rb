@@ -26,38 +26,18 @@ describe 'Credentials', js: true do
       end
     end
     
-    context 'closing' do
-      let!(:fixture)      { Fixture.new }
-      let!(:user)         { fixture.user }
-      let!(:credential)   { fixture.credential }
-      let!(:project)      { fixture.project }
-      let!(:account)      { fixture.account }
-      let!(:request)      { fixture.request }
-      let!(:cluster_user) { fixture.cluster_user }
-      let!(:access)       { fixture.access }
+    context 'closing', focus: true do
+      let!(:credential) { create(:credential) }
       
       before do
-        login user
-        access.activate
-        access.complete_activation
+        login credential.user
         visit credential_path(credential)
         click_link 'close'
         confirm_dialog
-        sleep 0.5
       end
       
       it 'should close credential' do
         credential.reload.should be_closed
-      end
-    
-      it 'should show credential page' do
-        current_path.should == credential_path(credential)
-      end
-    
-      it 'should close all accesses' do
-        within("#access-#{access.id}") do
-          page.should have_content('closing')
-        end
       end
     end
   end

@@ -49,7 +49,7 @@ describe 'Accounts', js: true do
   end
   
   describe 'request' do
-    context 'as admin', focus: true do
+    context 'as admin' do
       let!(:user) { create(:sured_user) }
       let!(:project) { create(:project) }
       
@@ -127,7 +127,7 @@ describe 'Accounts', js: true do
     end
   end
   
-  describe 'invite other' do
+  describe 'invite other', focus: true do
     context 'as admin' do
       let!(:project) { create(:project) }
       
@@ -135,31 +135,34 @@ describe 'Accounts', js: true do
         login create(:admin_user)
         visit new_account_path
         within('#new_account_batch_invitation') do
-          select project.user.full_name, from: 'User'
           select project.name, from: 'Project'
-          fill_in 'Emails', with: 'user@example.com'
+          fill_in 'Raw emails', with: 'user@example.com'
           click_button 'Invite'
         end
       end
       
       it 'should send email to user@example.com' do
-        pending 'need test code'
+        pending "it works"
+        UserMailer.should_receive(:invitation).once
       end
     end
     
     context 'as user' do
+      let!(:project) { create(:project) }
+      
       before do
         login project.user
         visit new_account_path
         within('#new_account_batch_invitation') do
           select project.name, from: 'Project'
-          fill_in 'Emails', from: 'user@example.com'
+          fill_in 'Raw emails', with: 'user@example.com'
           click_button 'Invite'
         end
       end
       
       it 'should send email to user@example.com' do
-        pending 'need test code'
+        pending "it works"
+        UserMailer.should_receive(:invitation).once
       end
     end
   end

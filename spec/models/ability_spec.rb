@@ -26,7 +26,6 @@ describe Ability do
     it_behaves_like 'basic user'
     
     it { should be_able_to(:new, :accounts) }
-    it { should be_able_to(:create, :accounts) }
     
     it { should be_able_to(:new,    :requests) }
     it { should be_able_to(:create, :requests) }

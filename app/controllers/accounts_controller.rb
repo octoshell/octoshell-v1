@@ -42,8 +42,12 @@ class AccountsController < ApplicationController
   end
   
   def invite
-    user_id = admin? ? params[:account][:user_id] : current_user.id
-    @account = Account.where(project_id: params[:account][:project_id], user_id: user_id)
+    scope = admin? ? Account : Account.where(project_id: current_user.owned_project_ids)
+    conditions = {
+      project_id: params[:account][:project_id],
+      user_id: params[:account][:user_id]
+    }
+    @account = Account.where(conditions).first
     authorize! :activate, @account
     if @account.activate
       redirect_to @account

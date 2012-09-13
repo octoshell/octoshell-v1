@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Cluster Users', js: true do
-  let!(:cluster_user) { Fixture.active_cluster_user }
+  let!(:cluster_user) { create(:active_cluster_user) }
   
   context 'listing' do
     context 'as admin' do
