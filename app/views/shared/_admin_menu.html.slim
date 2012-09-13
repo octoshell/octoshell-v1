@@ -1,6 +1,6 @@
 = submenu_item :sureties, (link_to "Поручительства (#{Surety.pending.count})", sureties_path)
 = submenu_item :requests, (link_to "Заявки (#{Request.pending.count})", requests_path)
-= submenu_item :tasks, (link_to "Задачи (#{Task.failed.count})", tasks_path)
+= submenu_item :tasks, (link_to "Процедуры (#{Task.failed.count})", tasks_path)
 = submenu_item :projects, (link_to 'Проекты', projects_path)
 = submenu_item :clusters, (link_to 'Кластеры', clusters_path)
 = submenu_item :organizations, (link_to 'Организации', organizations_path)

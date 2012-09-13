@@ -652,7 +652,7 @@ ru:
             successed: Выполнено
             failed: Ошибка
           events:
-            _force_success: Пропустить задачу
+            _force_success: Пропустить процедуру
             _resolve: Пометить выполненой
       access:
         state:

@@ -1,4 +1,4 @@
-- title 'Задачи'
+- title 'Процедуры'
 
 = simple_form_for @search, url: tasks_path, method: :get, html: { class: 'form-horizontal' } do |f|
   = f.input :resource_type_in, collection: Task.human_resource_types, input_html: { multiple: true }

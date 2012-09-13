@@ -48,7 +48,6 @@ class Access < ActiveRecord::Base
   
   define_state_machine_scopes
   
-  # активирует (создает задачу для доступа к кластеру)
   def activate!
     check_process!
     
@@ -65,7 +64,6 @@ class Access < ActiveRecord::Base
     end
   end
   
-  # закрывает доступ (создает задачу для закрытия доступа к кластеру)
   def close!
     check_process!
     
