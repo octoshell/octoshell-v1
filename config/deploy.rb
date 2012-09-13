@@ -39,6 +39,13 @@ namespace :db do
   end
 end
 
+namespace :app do
+  desc "Open the rails console on one of the remote servers"
+  task :console, :roles => :app do
+    exec %{ssh #{domain} -t "#{default_shell} -c 'cd #{current_path} && bundle exec rails c #{rails_env}'"}
+  end
+end
+
 namespace :deploy do
   task :restart do
   end
