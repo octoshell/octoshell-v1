@@ -9,7 +9,8 @@
       th Подключение
       - if admin?
         th = Access.human_attribute_name(:state)
-      th Доступность
+      - else
+        th Доступность
       th = ClusterUser.model_name.human
       th = ClusterProject.model_name.human
       - if can? :show, :accesses
@@ -24,7 +25,8 @@
         td = "#{access.cluster_user.username}@#{access.cluster_user.cluster_project.cluster.host}"
         - if admin?
           td = access.human_state_name
-        td = access.available? ? "Доступен" : "Не доступен"
+        - else
+          td = access.available? ? "Доступен" : "Не доступен"
         td = access.cluster_user.human_state_name
         td = access.cluster_user.cluster_project.human_state_name
         - if can? :show, :accesses

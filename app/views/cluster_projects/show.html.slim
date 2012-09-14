@@ -16,9 +16,13 @@ table class="table table-bordered" id="cluster-project-#{@cluster_project.id}-de
     td = @cluster_project.human_state_name
 
 - if can? :index, :tasks
-  h2 Задания
+  h3 Задания
   = render partial: 'tasks/table', locals: { tasks: @cluster_project.tasks }
 
 h3 Пользователи на кластерах
 
 = render partial: 'cluster_users/table', locals: { cluster_users: @cluster_project.cluster_users.non_closed }
+
+h3 Ключи на кластерах
+
+= render partial: 'accesses/table', locals: { accesses: @cluster_project.accesses.non_closed, current: false }

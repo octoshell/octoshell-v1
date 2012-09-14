@@ -1,4 +1,4 @@
-- title 'Доступы на кластер'
+- title 'Ключи на кластерах'
 
 = simple_form_for @search, url: accesses_path, method: :get, html: { class: 'form-horizontal' } do |f|
   = f.input :cluster_user_id_eq, collection: ClusterUser.all, label_method: :username if admin?

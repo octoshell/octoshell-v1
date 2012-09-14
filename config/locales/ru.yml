@@ -606,6 +606,7 @@ ru:
           events:
             _activate: Активировать
             _decline: Отказать
+            _cancel: Закрыть
             _close: Закрыть
       ticket:
         state:

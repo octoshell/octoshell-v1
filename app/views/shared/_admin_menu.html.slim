@@ -15,7 +15,7 @@ li class="dropdown #{submenu_items.any? { |c| c.to_s == params[:controller] } ? 
     = submenu_item :credentials, (link_to 'Публичные ключи', credentials_path)
     = submenu_item :organization_kinds, (link_to 'Типы организаций', organization_kinds_path)
     = submenu_item :position_names, (link_to 'Позиции в организациях', position_names_path)
-    = submenu_item :accesses, (link_to 'Доступы к кластерам', accesses_path)
     = submenu_item :accounts, (link_to 'Доступы к проектам', accounts_path)
+    = submenu_item :accesses, (link_to 'Ключи на кластерах', accesses_path)
     = submenu_item :cluster_projects, (link_to 'Проекты на кластерах', cluster_projects_path)
     = submenu_item :cluster_users, (link_to 'Пользователи на кластерах', cluster_users_path)

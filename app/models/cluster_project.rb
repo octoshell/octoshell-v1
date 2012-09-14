@@ -103,6 +103,10 @@ class ClusterProject < ActiveRecord::Base
     end
   end
   
+  def accesses
+    Access.where(cluster_user_id: cluster_user_ids)
+  end
+  
 protected
   
   def continue_add_project(task)
