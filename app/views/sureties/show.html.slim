@@ -32,7 +32,7 @@ div class="link-actions noprint"
       = link_to Surety.human_state_event_name(:_close), surety_close_path(@surety), class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
 
 
-blockquote
+blockquote class="noprint"
   p
     | Вы должны 
     strong распечатать поручительтво, поставить ФИО, подпись и печать.

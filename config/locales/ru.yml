@@ -511,21 +511,21 @@ ru:
         state:
           states:
             pending: Ожидает подтверждения
-            closed: Закрыто
+            closed: Удалено
             declined: Отказано
             active: Активно
           events:
             _activate: Активировать
             _decline: Отказать
-            _close: Закрыть
+            _close: Удалить
       user:
         state:
           states:
             active: Активен
             sured: Доверенный
-            closed: Закрытый
+            closed: Удален
           events:
-            _close: Закрыть
+            _close: Удалить
       credential:
         state:
           states:
@@ -554,16 +554,16 @@ ru:
         state:
           states:
             active: Активен
-            closed: Закрыт
+            closed: Удален
           events:
-            _close: Закрыть
+            _close: Удалить
       project:
         state:
           states:
             active: Активен
-            closed: Закрыт
+            closed: Удален
         events:
-          _close: Закрыть
+          _close: Удалить
       request:
         state:
           states:
@@ -642,9 +642,9 @@ ru:
         state:
           states:
             active: Активная
-            closed: Закрытая
+            closed: Удалена
           events:
-            _close: Закрыть
+            _close: Удалить
       task:
         state:
           states:

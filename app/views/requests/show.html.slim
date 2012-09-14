@@ -10,7 +10,7 @@
       = link_to Request.human_state_event_name(:_decline), request_decline_path(@request), class: 'btn', method: :put
     - if @request.active? || @request.declined?
       = " "
-      = link_to Request.human_state_event_name(:_close), request_close_path(@request), class: 'btn', method: :put
+      = link_to Request.human_state_event_name(:_close), request_close_path(@request), class: 'btn btn-danger', method: :put
     - if can? :index, :versions
       = " "
       = link_to 'Версии', [@request, :versions], class: 'btn'
@@ -20,7 +20,8 @@ div class="request"
   table class="table table-bordered"
     tr
       th = Project.model_name.human
-      td = link_to_project @request.project
+      td
+        strong = link_to_project @request.project
     tr
       th = Project.human_attribute_name(:description)
       td = @request.project.description
@@ -73,8 +74,3 @@ div class="request"
       tr
         th = request_property.name
         td = request_property.value
-
-- if admin?
-  h2 Проекты на кластере
-  = render partial: 'cluster_projects/table', locals: { cluster_projects: [@request.cluster_project] }
-  
