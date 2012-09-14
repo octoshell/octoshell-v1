@@ -450,6 +450,10 @@ ru:
         merge_id: Тег для объединения
       cluster_user:
         state: Состояние
+        cluster_project_project_id: Проект
+        cluster_project_cluster_id: Кластер
+      cluster_project:
+        state: Состояние
         project_id: Проект
         cluster_id: Кластер
       account:
@@ -530,10 +534,27 @@ ru:
         state:
           states:
             active: Активный
-            closed: Закрытый
+            closed: Удалено
           events:
-            _close: Закрыть
+            _close: Удалить
       cluster_user:
+        state:
+          states:
+            pending: Ожидание активации
+            activing: Активируется
+            active: Активен
+            paused: Заблокирован
+            pausing: Блокируется
+            resuming: Разблокируется
+            closing: Закрывается
+            closed: Закрыт
+          events:
+            _pause: Заблокировать
+            _complete_pausing: Завершить блокировку
+            _complete_resuming: Завершить разблокировку
+            _complete_closure: Завершить закрытие
+            _complete_activation: Завершить активацию
+      cluster_project:
         state:
           states:
             pending: Ожидание активации
@@ -581,7 +602,7 @@ ru:
             pending: Ожидает подтверждения
             closed: Закрыт
             active: Активен
-            declined: Отказано
+            requested: Запрошен
           events:
             _activate: Активировать
             _decline: Отказать
@@ -600,9 +621,9 @@ ru:
         state:
           states:
             active: Активный
-            closed: Закрыт
+            closed: Удален
           events:
-            _close: Закрыть
+            _close: Удалить
       ticket_question:
         state:
           states:
@@ -614,9 +635,9 @@ ru:
         state:
           states:
             active: Активно
-            closed: Закрыто
+            closed: Удалено
           events:
-            _close: Закрыть
+            _close: Удалить
       ticket_field:
         state:
           states:

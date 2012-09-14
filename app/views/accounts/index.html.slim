@@ -11,7 +11,7 @@
 
   = render partial: 'table', locals: { accounts: current_user.accounts.where(state: ['active', 'requested']) }
 
-h3 Доступы к моим проектам
+  h3 Доступы к моим проектам
 
 div class="link-actions"
   = link_to 'Новый доступ', new_account_path, class: "btn #{disabled(can? :new, :accounts)}"
