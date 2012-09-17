@@ -36,3 +36,13 @@ module ActiveRecord
   class RecordInProcess < StandardError
   end
 end
+
+module Generic
+  def to_generic_model
+    klass = Class.new(ActiveRecord::Base)
+    klass.table_name = table_name
+    klass
+  end
+end
+
+ActiveRecord::Base.extend(Generic)
