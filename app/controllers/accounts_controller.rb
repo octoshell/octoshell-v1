@@ -25,8 +25,9 @@ class AccountsController < ApplicationController
     user_id = admin? ? params[:account][:user_id] : current_user.id
     project_id = params[:account][:project_id]
     @account = Account.where(user_id: user_id, project_id: project_id).first
+    authorize! :application, @account
     authorize! :request, @account
-    if @account.request
+    if (@account.requested? || @account.request)
       redirect_to @account
     else
       @invite = current_user.accounts.build
@@ -48,8 +49,9 @@ class AccountsController < ApplicationController
       user_id: params[:account][:user_id]
     }
     @account = Account.where(conditions).first
+    authorize! :invite, @account
     authorize! :activate, @account
-    if @account.activate
+    if (@account.active? || @account.activate)
       redirect_to @account
     else
       @account = current_user.accounts.build
