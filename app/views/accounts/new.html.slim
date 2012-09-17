@@ -2,7 +2,7 @@
 
 h3 Запросить доступ в проект
 
-= simple_form_for [:application, @account], html: { class: 'form-horizontal', id: 'new_account_request' } do |f|
+= simple_form_for @account, url: application_accounts_path, html: { class: 'form-horizontal', id: 'new_account_request' } do |f|
   = f.association :user, label_method: :full_name, collection: User.non_closed if admin?
   = f.association :project, collection: Project.active
   
@@ -11,7 +11,7 @@ h3 Запросить доступ в проект
 
 h3 Пригласить в проект
 
-= simple_form_for [:invite, @invite], html: { class: 'form-horizontal', id: 'new_account_invitation' } do |f|
+= simple_form_for @invite, url: invite_accounts_path, html: { class: 'form-horizontal', id: 'new_account_invitation' } do |f|
   = f.association :user, label_method: :full_name, collection: User.where('id != ?', f.object.user_id).non_closed
   = f.association :project, collection: @projects
   div class="form-actions"
@@ -19,7 +19,7 @@ h3 Пригласить в проект
 
 h3 Пригласить в проект еще не зарегистрированных людей
 
-= simple_form_for [:mailer, @mailer], html: { class: 'form-horizontal', id: 'new_account_batch_invitation' } do |f|
+= simple_form_for @mailer, url: mailer_accounts_path, html: { class: 'form-horizontal', id: 'new_account_batch_invitation' } do |f|
   = f.association :project, collection: @projects, prompt: false
   = f.input :raw_emails, as: :text, input_html: { rows: 5 }, hint: 'Через запятую, например: email@example.com, example@mail.com'
   div class="form-actions"
