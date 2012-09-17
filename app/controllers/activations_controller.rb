@@ -1,4 +1,6 @@
 class ActivationsController < ApplicationController
+  before_filter :logout
+  
   def new
     @user = User.new
   end
