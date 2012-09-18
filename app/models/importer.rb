@@ -52,6 +52,7 @@ private
     @organization = Organization.to_generic_model.create! do |org|
       org.name = organization_name
       org.state = 'active'
+      org.organization_kind_id = OrganizationKind.first.id
     end
   end
   
@@ -66,6 +67,7 @@ private
   def create_surety
     @surety = Surety.to_generic_model.create! do |surety|
       surety.user_id = user.id
+      surety.organization_id = organization.id
       surety.state = 'active'
     end
   end
@@ -74,7 +76,9 @@ private
     return if @project = Project.find_by_name(project_name)
     
     @project = Project.to_generic_model.create! do |project|
+      project.user_id = user.id
       project.name = project_name
+      project.description = project_name
       project.state = 'active'
       project.organization_id = organization.id
       project.username = group
@@ -88,6 +92,7 @@ private
       account.project_id = project.id
       account.user_id = user.id
       account.state = 'active'
+      account.username = login
     end
   end
   
@@ -114,10 +119,26 @@ private
   end
   
   def create_credentials
-    
+    @credentials = pub_keys.map do |public_key|
+      next if Credential.where(user_id: user.id, public_key: public_key).first
+      
+      Credential.to_generic_model.create! do |credential|
+        credential.user_id = user.id
+        credential.state = 'active'
+        credential.public_key = public_key
+      end
+    end
   end
   
   def create_accesses
-    
+    @credentials.each do |credential|
+      next if Access.where(credential_id: credential.id, cluster_user_id: cluster_user.id).first
+      
+      Access.to_generic_model.create! do |access|
+        access.cluster_user_id = cluster_user.id
+        access.state = 'active'
+        access.credential_id = credential.id
+      end
+    end
   end
 end

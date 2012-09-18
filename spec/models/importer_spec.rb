@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'Importer' do
   let!(:cluster) { create(:cluster) }
+  let!(:organization_kind) { create(:organization_kind) }
   let!(:file) do
     %(Mr. White;mrwhite@example.com;Ubmrella;Art;art_group;art_user;#{cluster.id};["public_key1", "public_key2"])
   end
@@ -34,7 +35,7 @@ describe 'Importer' do
     ).first
   end
   
-  def created_cluster_account
+  def created_cluster_user
     ClusterUser.where(
       cluster_project_id: created_cluster_project.id,
       account_id: created_account.id
@@ -46,13 +47,13 @@ describe 'Importer' do
   end
   
   def created_access
-    Access.where(credentail_id: created_credential.id).first
+    Access.where(credential_id: created_credential.id).first
   end
   
   describe 'created user' do
     subject { created_user }
     
-    it { should be }
+    it { should be_valid }
     its(:email) { should == "mrwhite@example.com" }
     it { should be_sured }
   end
@@ -60,14 +61,14 @@ describe 'Importer' do
   describe 'Organization' do
     subject { created_organization }
     
-    it { should be }
+    it { should be_valid }
     it { should be_active }
   end
   
   describe 'Project' do
     subject { created_project }
     
-    it { should be }
+    it { should be_valid }
     it { should be_active }
     its(:username) { should == 'art_group' }
   end
@@ -80,28 +81,28 @@ describe 'Importer' do
       ).first
     end
     
-    it { should be }
+    it { should be_valid }
     it { should be_active }
   end
   
   describe 'Surety' do
     subject { Surety.where(user_id: created_user.id).first }
     
-    it { should be }
+    it { should be_valid }
     it { should be_active }
   end
   
   describe 'Account' do
     subject { created_account }
     
-    it { should be }
+    it { should be_valid }
     it { should be_active }
   end
   
   describe 'Cluster Project' do
     subject { created_cluster_project }
     
-    it { should be }
+    it { should be_valid }
     it { should be_active }
     its(:username) { should == 'art_group' }
     it { should have(0).tasks }
@@ -110,7 +111,7 @@ describe 'Importer' do
   describe 'Cluster User' do
     subject { created_cluster_user }
     
-    it { should be }
+    it { should be_valid }
     it { should be_active }
     its(:username) { should == 'art_user' }
     it { should have(0).tasks }
@@ -119,7 +120,7 @@ describe 'Importer' do
   describe 'Access' do
     subject { created_access }
     
-    it { should be }
+    it { should be_valid }
     it { should be_active }
     it { should have(0).tasks }
   end
