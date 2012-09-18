@@ -386,7 +386,7 @@ ru:
         organization_id: Главная организация
         state: Состояние
         cluster_user_type: Тип Проекта на кластере
-        username: Логин (на кластере)
+        username: Группа пользователей
       organization_kind:
         name: Название
         state: Состояние
@@ -452,10 +452,12 @@ ru:
         state: Состояние
         cluster_project_project_id: Проект
         cluster_project_cluster_id: Кластер
+        username: Пользователь (на кластере)
       cluster_project:
         state: Состояние
         project_id: Проект
         cluster_id: Кластер
+        username: Группа пользователей
       account:
         project: Проект
         state: Состояние
