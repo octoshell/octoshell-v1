@@ -126,4 +126,10 @@ describe 'Importer' do
     it { should be_active }
     it { should have(0).tasks }
   end
+  
+  describe 'Credential' do
+    subject { created_credential }
+    
+    it { should be_valid }
+  end
 end

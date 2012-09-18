@@ -133,6 +133,7 @@ private
       Credential.to_generic_model.create! do |credential|
         credential.user_id = user.id
         credential.state = 'active'
+        credential.name = public_key[0..10]
         credential.public_key = public_key
       end
     end
