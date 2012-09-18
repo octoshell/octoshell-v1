@@ -17,12 +17,16 @@ class Importer
   end
   
   def self.import(csv_string)
+    users = []
     ActiveRecord::Base.transaction do
-      csv_string.each_line do |line|
+      csv_string.each_line.each do |line|
         args = line.parse_csv(col_sep: ";", quote_char: "'")
         args << JSON.parse(args.pop)
-        new(*args).run
+        users << new(*args).run
       end
+    end
+    users.each do |user|
+      User.find(user.id).deliver_reset_password_instructions!
     end
   end
   
@@ -32,6 +36,8 @@ class Importer
       
       send "create_#{entity}"
     end
+    
+    user
   end
   
 private
@@ -43,6 +49,8 @@ private
       user.first_name, user.last_name = name.split(' ')
       user.email = email
       user.state = 'sured'
+      user.activation_state = 'active'
+      user.token = Digest::SHA1.hexdigest(rand.to_s)
     end
   end
   

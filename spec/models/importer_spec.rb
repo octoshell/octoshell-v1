@@ -54,8 +54,10 @@ describe 'Importer' do
     subject { created_user }
     
     it { should be_valid }
-    its(:email) { should == "mrwhite@example.com" }
     it { should be_sured }
+    its(:email) { should == "mrwhite@example.com" }
+    its(:activation_state) { should == 'active' }
+    its(:token) { should be }
   end
   
   describe 'Organization' do
