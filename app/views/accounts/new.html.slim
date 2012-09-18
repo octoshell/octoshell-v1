@@ -3,7 +3,7 @@
 h3 Запросить доступ в проект
 
 = simple_form_for @account, url: application_accounts_path, html: { class: 'form-horizontal', id: 'new_account_request' } do |f|
-  = f.association :user, label_method: :full_name, collection: User.non_closed if admin?
+  = f.association :user, label_method: :full_name, collection: User.sured if admin?
   = f.association :project, collection: Project.active
   
   div class="form-actions"
@@ -12,7 +12,7 @@ h3 Запросить доступ в проект
 h3 Пригласить в проект
 
 = simple_form_for @invite, url: invite_accounts_path, html: { class: 'form-horizontal', id: 'new_account_invitation' } do |f|
-  = f.association :user, label_method: :full_name, collection: User.where('id != ?', f.object.user_id).non_closed
+  = f.association :user, label_method: :full_name, collection: User.where('id != ?', f.object.user_id).sured
   = f.association :project, collection: @projects
   div class="form-actions"
     = f.button :submit, 'Invite'

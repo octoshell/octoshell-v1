@@ -6,14 +6,14 @@ class Importer
     :cluster_project, :cluster_user, :credentials, :accesses, :login
   
   def initialize(name, email, organization, project, group, login, cluster_id, pub_keys)
-    @name = name
-    @email = email
-    @organization_name = organization
-    @project_name = project
-    @group = group
-    @login = login
-    @cluster_id = cluster_id
-    @pub_keys = pub_keys
+    @name = name.strip
+    @email = email.strip
+    @organization_name = organization.strip
+    @project_name = project.strip
+    @group = group.strip
+    @login = login.strip
+    @cluster_id = cluster_id.strip
+    @pub_keys = pub_keys.map &:strip
   end
   
   def self.import(csv_string)
