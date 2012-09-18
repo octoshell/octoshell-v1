@@ -22,12 +22,13 @@ class Importer
       csv_string.each_line.each do |line|
         args = line.parse_csv(col_sep: ";", quote_char: "'")
         args << JSON.parse(args.pop)
-        users << new(*args).run
+        created_user = new(*args).run
+        user = User.find(created_user.id)
+        raise "Invalid record" if user.invalid?
+        users << user
       end
     end
-    users.each do |user|
-      User.find(user.id).deliver_reset_password_instructions!
-    end
+    users.each &:deliver_reset_password_instructions!
   end
   
   def run
