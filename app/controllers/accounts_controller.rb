@@ -28,6 +28,7 @@ class AccountsController < ApplicationController
     authorize! :application, @account
     authorize! :request, @account
     if (@account.requested? || @account.request)
+      UserMailer.account_requested(@account).deliver!
       redirect_to @account
     else
       @invite = current_user.accounts.build
@@ -52,6 +53,7 @@ class AccountsController < ApplicationController
     authorize! :invite, @account
     authorize! :activate, @account
     if (@account.active? || @account.activate)
+      UserMailer.account_activated(@account).deliver!
       redirect_to @account
     else
       @account = current_user.accounts.build
@@ -78,6 +80,7 @@ class AccountsController < ApplicationController
     @account = find_account(params[:account_id])
     authorize! :activate, @account
     if @account.activate
+      UserMailer.account_activated(@account).deliver!
       redirect_to @account
     else
       redirect_to_account_with_alert(@account)

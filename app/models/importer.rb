@@ -12,7 +12,7 @@ class Importer
     @project_name = project.strip
     @group = group.strip
     @login = login.strip
-    @cluster_id = cluster_id.strip
+    @cluster_id = cluster_id.strip.to_i
     @pub_keys = pub_keys.map &:strip
   end
   
@@ -33,7 +33,7 @@ class Importer
   
   def run
     %w(user organization membership surety project account cluster_project 
-      cluster_user credentials accesses).each do |entity|
+      cluster_user credentials accesses relations).each do |entity|
       
       send "create_#{entity}"
     end
@@ -148,6 +148,63 @@ private
         access.cluster_user_id = cluster_user.id
         access.state = 'active'
         access.credential_id = credential.id
+      end
+    end
+  end
+  
+  def create_relations
+    Project.active.each do |project|
+      next if project.id == self.project.id
+      
+      conditions = {
+        state: 'closed',
+        user_id: user.id,
+        project_id: project.id,
+        username: account.username
+      }
+      Account.to_generic_model.where(conditions).first_or_create!
+    end
+    
+    Cluster.active.each do |cluster|
+      next if cluster.id == self.cluster_id
+      
+      conditions = {
+        state: 'closed',
+        project_id: project.id,
+        cluster_id: cluster.id,
+        username: project.username
+      }
+      ClusterProject.to_generic_model.where(conditions).first_or_create!
+    end
+    
+    Account.where(user_id: user.id).each do |account|
+      next if account.id == self.account.id
+      
+      ClusterProject.where(project_id: project.id).each do |cluster_project|
+        next if cluster_project.id == self.cluster_project.id
+        
+        conditions = {
+          state: 'closed',
+          cluster_project_id: cluster_project.id,
+          account_id: account.id,
+          username: cluster_user.username
+        }
+        
+        ClusterUser.to_generic_model.where(conditions).first_or_create! 
+      end
+    end
+    
+    ClusterUser.where(account_id: Account.where(user_id: user.id).pluck(:id)).each do |cluster_user|
+      next if cluster_user.id == self.cluster_user.id
+      
+      Credential.where(user_id: user.id).each do |credential|
+        conditions = {
+          state: 'closed',
+          cluster_user_id: cluster_user.id,
+          credential_id: credential.id
+        }
+        
+        Access.to_generic_model.where(conditions).first_or_create!
       end
     end
   end
