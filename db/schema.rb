@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120919115602) do
+ActiveRecord::Schema.define(:version => 20120919150837) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -98,6 +98,16 @@ ActiveRecord::Schema.define(:version => 20120919115602) do
   add_index "credentials", ["public_key"], :name => "index_credentials_on_public_key"
   add_index "credentials", ["user_id", "state"], :name => "index_credentials_on_user_id_and_state"
   add_index "credentials", ["user_id"], :name => "index_credentials_on_user_id"
+
+  create_table "expands", :force => true do |t|
+    t.string "url"
+    t.string "script"
+  end
+
+  create_table "extends", :force => true do |t|
+    t.string "url"
+    t.string "script"
+  end
 
   create_table "fields", :force => true do |t|
     t.string   "name"

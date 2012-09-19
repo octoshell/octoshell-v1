@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   prepend_before_filter :authenticate_by_token, unless: :skip_authentication_by_token
   
   before_filter :block_closed_users
+  before_filter :get_extends
   
   protect_from_forgery
   enable_authorization unless: :skip_action?
@@ -81,5 +82,11 @@ private
   
   def record_in_process
     redirect_to :back, alert: 'Не возможно изменить пока связанные записи выполняются на кластере или выполнены с ошибками.'
+  end
+  
+  def get_extends
+    @extends = Extend.all.find_all do |extend|
+      request.path =~ %r{#{extend.url}}
+    end
   end
 end

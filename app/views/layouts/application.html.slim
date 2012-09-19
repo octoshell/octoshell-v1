@@ -44,6 +44,11 @@ html
               ul class="unstyled"
                 - wikis.each do |wiki_url|
                   li = link_to wiki_url.page.name, wiki_url.page
+      javascript:
+        $(document).ready(function(){
+          #{@extends.map { |extend| "$.getScript('/run/#{extend.script}')" }.join(';').html_safe}
+        })
+          
       = yield
       footer class="noprint"
         p &copy; #{link_to('Evrone', 'http://evrone.ru')} 2012

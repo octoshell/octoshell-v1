@@ -124,6 +124,8 @@ class Ability
         can [:create, :update, :destroy], :cluster_fields
         
         can [:index, :show], :cluster_projects
+        
+        can [:index, :new, :create, :edit, :update, :destroy], :extends
       end
     end
   end

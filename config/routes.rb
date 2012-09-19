@@ -194,6 +194,9 @@ MSU::Application.routes.draw do
   
   # cluster fields
   resources :cluster_fields, only: [:create, :update, :destroy]
+  
+  # extends
+  resources :extends, only: [:index, :new, :create, :edit, :update, :destroy]
 
   root to: 'application#dashboard'
   

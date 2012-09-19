@@ -187,5 +187,12 @@ describe Ability do
     
     it { should be_able_to(:show,  :cluster_projects) }
     it { should be_able_to(:index, :cluster_projects) }
+    
+    it { should be_able_to(:index,   :extends) }
+    it { should be_able_to(:new,     :extends) }
+    it { should be_able_to(:create,  :extends) }
+    it { should be_able_to(:edit,    :extends) }
+    it { should be_able_to(:update,  :extends) }
+    it { should be_able_to(:destroy, :extends) }
   end
 end

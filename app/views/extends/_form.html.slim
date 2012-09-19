@@ -1,0 +1,5 @@
+= simple_form_for @extend, html: { class: 'form-horizontal' } do |f|
+  = f.input :url, hint: 'Регулярное выражение, например "/accounts/[\d]*/edit".'
+  = f.input :script, hint: 'Вызывается /run/<strong>script_name</strong>.'
+  div class="form-actions"
+    = f.button :submit

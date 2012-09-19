@@ -458,6 +458,9 @@ ru:
         project_id: Проект
         cluster_id: Кластер
         username: Группа пользователей
+      extend:
+        url: URL
+        script: Скрипт
       account:
         project: Проект
         state: Состояние
