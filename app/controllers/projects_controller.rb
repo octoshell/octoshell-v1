@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
       @search = Project.search(params[:search])
       @projects = @search.page(params[:page])
     else
-      @search = current_user.projects.search(params[:search])
+      @search = current_user.projects.where(accounts: { state: 'active' }).search(params[:search])
       @projects = @search.page(params[:page])
     end
   end
