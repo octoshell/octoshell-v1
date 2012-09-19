@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Dashboard', js: true do
   context 'authorized user' do
     let!(:user) { create(:user) }
-    let!(:ticket) { create(:ticket, user: user) }
+    let!(:ticket) { create(:ticket, user: user, state: 'answered') }
     let!(:request) { create(:request, user: user) }
     
     before do
