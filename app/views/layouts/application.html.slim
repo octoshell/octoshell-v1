@@ -48,7 +48,7 @@ html
         $(document).ready(function(){
           #{@extends.map { |extend| "$.getScript('/run/#{extend.script}')" }.join(';').html_safe}
         })
-          
+      div id="extend"  
       = yield
       footer class="noprint"
         p &copy; #{link_to('Evrone', 'http://evrone.ru')} 2012
