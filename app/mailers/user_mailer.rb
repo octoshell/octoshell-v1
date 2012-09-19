@@ -1,6 +1,6 @@
 # coding: utf-8
 class UserMailer < ActionMailer::Base
-  default from: 'Octoshell Notifier <noreply@octoshell.ru>'
+  default from: 'Octoshell Notifier <noreply@v1.parallel.ru>'
   
   def activation_needed_email(user)
     @user = user
