@@ -183,6 +183,9 @@ MSU::Application.routes.draw do
     resources :versions, only: [:index, :show], resource: 'ClusterProject'
   end
   
+  # additional emails
+  resources :additional_emails, only: [:new, :create, :destroy]
+  
   # pages
   resources :pages
   

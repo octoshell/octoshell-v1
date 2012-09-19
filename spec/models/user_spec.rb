@@ -21,6 +21,7 @@ describe User do
   it { should have_many(:sureties) }
   it { should have_many(:organizations).through(:sureties) }
   it { should have_many(:tickets) }
+  it { should have_many(:additional_emails) }
   
   it { should validate_presence_of(:email) }
   it { should validate_uniqueness_of(:email) }
@@ -36,6 +37,10 @@ describe User do
   it { should allow_mass_assignment_of(:password_confirmation) }
   it { should allow_mass_assignment_of(:remember_me) }
   it { should allow_mass_assignment_of(:new_organization) }
+  
+  it 'should create additional email' do
+    user.additional_emails.pluck(:email).should include(user.email)
+  end
   
   describe '#full_name' do
     let(:user) { create(:user, first_name: 'Bruce', last_name: 'Wayne') }

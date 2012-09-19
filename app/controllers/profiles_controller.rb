@@ -7,6 +7,7 @@ class ProfilesController < ApplicationController
   
   def edit
     @user = find_user
+    @user.additional_emails.build
   end
   
   def update

@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   has_many :organizations, through: :sureties
   has_many :accesses, through: :credentials
   has_many :tickets
+  has_many :additional_emails
   
   validates :first_name, :last_name, :email, presence: true
   validates :password, confirmation: true, length: { minimum: 6 }, on: :create
@@ -29,13 +30,16 @@ class User < ActiveRecord::Base
   
   before_create :assign_token
   after_create :create_relations
+  after_create :create_additional_email
   
   attr_accessible :first_name, :last_name, :middle_name, :email, :password,
     :password_confirmation, :remember_me, :new_organization, :organization_id,
-    :avatar
+    :avatar, :additional_emails_attributes
   attr_accessible :first_name, :last_name, :middle_name, :email, :password,
     :password_confirmation, :remember_me, :new_organization, :organization_id,
-    :admin, :avatar, as: :admin
+    :admin, :avatar, :additional_emails_attributes, as: :admin
+  
+  accepts_nested_attributes_for :additional_emails, allow_destroy: true, reject_if: :all_blank
   
   scope :admins, where(admin: true)
   
@@ -192,6 +196,12 @@ class User < ActiveRecord::Base
     count
   end
   
+  def emails
+    emails = [email]
+    emails << additional_emails.pluck(:email)
+    emails.flatten.compact.uniq
+  end
+  
 private
   
   def step_name(name)
@@ -205,6 +215,12 @@ private
   def create_relations
     Project.all.each do |project|
       accounts.where(project_id: project.id).first_or_create!
+    end
+  end
+  
+  def create_additional_email
+    additional_emails.create! do |additional_email|
+      additional_email.email = email
     end
   end
 end

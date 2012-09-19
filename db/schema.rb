@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120910122728) do
+ActiveRecord::Schema.define(:version => 20120919115602) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -38,6 +38,11 @@ ActiveRecord::Schema.define(:version => 20120910122728) do
   add_index "accounts", ["state"], :name => "index_accounts_on_state"
   add_index "accounts", ["user_id", "project_id"], :name => "index_accounts_on_user_id_and_project_id", :unique => true
   add_index "accounts", ["user_id"], :name => "index_accounts_on_user_id"
+
+  create_table "additional_emails", :force => true do |t|
+    t.string  "email"
+    t.integer "user_id"
+  end
 
   create_table "cluster_fields", :force => true do |t|
     t.integer "cluster_id"
