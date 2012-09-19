@@ -64,7 +64,7 @@ private
   def authenticate_by_token
     if token = params[:token]
       user = User.find_by_token!(token)
-      if user.activation_active?
+      if user.activation_active? && !user.admin?
         auto_login user
         redirect_to uri_without_token
       end
