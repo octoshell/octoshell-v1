@@ -174,6 +174,24 @@ class User < ActiveRecord::Base
     activation_state == 'active'
   end
   
+  def notifications_count
+    count = 0
+    
+    if admin?
+      count += Task.failed.count
+      count += Ticket.active.count
+      count += Surety.pending.count
+      count += Request.pending.count
+    else
+      count += sureties.pending.count
+      count += requests.pending.count
+      count += tickets.answered.count
+      count += Account.where(id: owned_project_ids).requested.count
+    end
+    
+    count
+  end
+  
 private
   
   def step_name(name)

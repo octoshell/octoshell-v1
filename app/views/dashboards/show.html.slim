@@ -7,22 +7,24 @@
   p
     | Вы можете #{link_to 'создать проект', new_project_path} или #{link_to 'запросить доступ', new_account_path} к существующему
 
-h3 Доступы к проектам
+- if @sureties.any?
+  h3 Поручительства
+  = render partial: 'sureties/table', locals: { sureties: @sureties }
+
+- if @requests.any?
+  h3 Заявки
+  = render partial: 'requests/table', locals: { requests: @requests }
+  
+- if @accounts.any?
+  h3 Доступы к проектам
+  = render partial: 'accounts/table', locals: { accounts: @accounts }
+
+h3 Доступы к кластерам
 
 = render partial: 'accesses/table', locals: { accesses: @user.accesses.non_closed, current: true }
-
-h3 Проекты
-
-- if @user.projects.empty?
-  p Нет заявок
-
-- @user.projects.each do |project|
-  h4 = link_to_project(project)
-  
-  h5 Заявки
-  = render partial: 'requests/table', locals: { requests: project.requests }
 
 h3 Поддержка
 
 p = link_to 'Создать заявку', new_ticket_path
-= render partial: 'tickets/table', locals: { tickets: @user.tickets.non_closed }
+- if @tickets.any?
+  = render partial: 'tickets/table', locals: { tickets: @tickets }
