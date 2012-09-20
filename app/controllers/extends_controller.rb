@@ -32,6 +32,7 @@ class ExtendsController < ApplicationController
   def destroy
     @extend = Extend.find(params[:id])
     @extend.destroy
+    redirect_to extends_path
   end
   
 private
