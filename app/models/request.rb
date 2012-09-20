@@ -61,6 +61,7 @@ class Request < ActiveRecord::Base
       cluster_project.pause! if cluster_project.active?
       cluster_project.close! if cluster_project.paused?
     end
+    true
   end
   
   def activate
@@ -74,6 +75,7 @@ class Request < ActiveRecord::Base
       _activate!
       cluster_project.activate!
     end
+    true
   end
   
   def allowed_projects
