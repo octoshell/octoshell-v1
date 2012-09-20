@@ -85,7 +85,7 @@ private
   end
   
   def get_extends
-    @extends = Extend.all.find_all do |extend|
+    @page_extends = Extend.all.find_all do |extend|
       request.path =~ %r{#{extend.url}}
     end
   end

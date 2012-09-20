@@ -4,6 +4,9 @@ en:
       logout: Logout
       login: Login
       sign_up: Sign Up
+    accounts:
+      request: 'Request'
+      invite: 'Invite'
 ru:
   pages:
     links: &links
@@ -36,3 +39,6 @@ ru:
         activate: Активировать
         decline: Отзакать
         finish: Завершить
+    accounts:
+      request: 'Запросить'
+      invite: 'Пригласить'

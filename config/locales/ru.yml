@@ -391,6 +391,8 @@ ru:
         name: Название
         state: Состояние
       request:
+        cluster_project_project_id: Проект
+        cluster_project_cluster_id: Кластер
         cluster: Кластер
         cluster_id: Кластер
         project: Проект

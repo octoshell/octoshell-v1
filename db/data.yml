@@ -29,6 +29,9 @@ wiki_urls:
   - - '1'
     - '2'
     - /admin
+  - - '2'
+    - '1'
+    - /profile
 
 ---
 cluster_fields:
@@ -174,9 +177,9 @@ cluster_users:
     - '27'
     - account_47
   - - '131'
-    - closed
+    - activing
     - '2012-09-12 15:10:29.177425'
-    - '2012-09-12 15:10:29.177425'
+    - '2012-09-19 10:37:25.619603'
     - '46'
     - '27'
     - account_46
@@ -33618,6 +33621,760 @@ versions:
     - 
     - '2012-09-18 13:51:48.127106'
     - 
+  - - '2134'
+    - User
+    - '12'
+    - update
+    - 
+    - ! "---\nemail: a.releu@gmail.com\ncrypted_password: $2a$10$brQMpMr8kdyXAmi5MtBdzukNCizxqQnYhrWvz8GiOg0QwSZP4i7.y\nsalt:
+      SrF8u8srBWSjqKdS4ERY\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      idv8zJpEacdv1ALTNka5\nreset_password_token_expires_at: \nreset_password_email_sent_at:
+      2012-09-18 09:45:07.803044000 Z\nactivation_state: active\nactivation_token:
+      \nactivation_token_expires_at: \nfirst_name: Fisrt\nlast_name: Last\nmiddle_name:
+      ''\ndeleted_at: \ncreated_at: 2012-09-18 09:45:07.172481000 Z\nupdated_at: 2012-09-18
+      10:39:56.721026000 Z\nadmin: false\nstate: sured\ntoken: 60bc3367e572cda99ad65c9dcfffe59419f2560b\navatar_file_name:
+      \navatar_content_type: \navatar_file_size: \navatar_updated_at: \nid: 12\n"
+    - '2012-09-19 05:46:20.718202'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      reset_password_token:
+
+      - idv8zJpEacdv1ALTNka5
+
+      - v3x2yU67qDy2iNTC9K66
+
+      reset_password_email_sent_at:
+
+      - 2012-09-18 09:45:07.803044000 Z
+
+      - 2012-09-19 05:46:20.712311182 Z
+
+'
+  - - '2136'
+    - User
+    - '1'
+    - update
+    - 
+    - ! "---\nemail: releu@me.com\ncrypted_password: $2a$10$GpiGlwjdNV5nF5B2TEGHP.J8VVWPpxRDgm3hrpLpfpYs5rey6Upkm\nsalt:
+      b4Pz3hVYCPqH3DvYuupf\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      active\nactivation_token: \nactivation_token_expires_at: \nfirst_name: Sergey\nlast_name:
+      Tolubaev\nmiddle_name: ''\ndeleted_at: \ncreated_at: 2012-08-21 06:23:18.692945000
+      Z\nupdated_at: 2012-08-21 14:16:22.989033000 Z\nadmin: false\nstate: sured\ntoken:
+      78e4c941d0c7982855626ed0caecdd92c0a9ad90\navatar_file_name: \navatar_content_type:
+      \navatar_file_size: \navatar_updated_at: \nid: 1\n"
+    - '2012-09-19 05:49:58.081577'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nreset_password_token:\n-
+      \n- Z96R6oZmfpv4vxM1yjEa\nreset_password_email_sent_at:\n- \n- 2012-09-19 05:49:58.075260464
+      Z\n"
+  - - '2140'
+    - User
+    - '2'
+    - update
+    - 
+    - ! "---\nemail: janbernacki@me.com\ncrypted_password: $2a$10$q3k1M2aXmkjSwpQvtF3LO.RzNqO6VzHTE4hGUn9D.GMrOPavnvDoS\nsalt:
+      4hxd6XqqGVpYpD31x4BD\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      active\nactivation_token: \nactivation_token_expires_at: \nfirst_name: Jan\nlast_name:
+      Bernacki\nmiddle_name: ''\ndeleted_at: \ncreated_at: 2012-08-21 06:23:36.350856000
+      Z\nupdated_at: 2012-08-21 14:16:22.982160000 Z\nadmin: true\nstate: active\ntoken:
+      88ebd48305ce47ba6395be072a3fe7b63691a83e\navatar_file_name: \navatar_content_type:
+      \navatar_file_size: \navatar_updated_at: \nid: 2\n"
+    - '2012-09-19 05:54:24.540909'
+    - ! "--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nreset_password_token:\n-
+      \n- wogRNQhBtWWDEkpyr6XQ\nreset_password_email_sent_at:\n- \n- 2012-09-19 05:54:24.428271967
+      Z\n"
+  - - '2144'
+    - User
+    - '2'
+    - update
+    - f
+    - ! "---\nemail: janbernacki@me.com\ncrypted_password: $2a$10$q3k1M2aXmkjSwpQvtF3LO.RzNqO6VzHTE4hGUn9D.GMrOPavnvDoS\nsalt:
+      4hxd6XqqGVpYpD31x4BD\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      wogRNQhBtWWDEkpyr6XQ\nreset_password_token_expires_at: \nreset_password_email_sent_at:
+      2012-09-19 05:54:24.428271000 Z\nactivation_state: active\nactivation_token:
+      \nactivation_token_expires_at: \nfirst_name: Jan\nlast_name: Bernacki\nmiddle_name:
+      ''\ndeleted_at: \ncreated_at: 2012-08-21 06:23:36.350856000 Z\nupdated_at: 2012-09-19
+      05:54:24.536191000 Z\nadmin: true\nstate: active\ntoken: 88ebd48305ce47ba6395be072a3fe7b63691a83e\navatar_file_name:
+      \navatar_content_type: \navatar_file_size: \navatar_updated_at: \nid: 2\n"
+    - '2012-09-19 06:12:36.265706'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      reset_password_token:
+
+      - wogRNQhBtWWDEkpyr6XQ
+
+      - jE7ZP1M65PUA5qFsvSXs
+
+      reset_password_email_sent_at:
+
+      - 2012-09-19 05:54:24.428271000 Z
+
+      - 2012-09-19 06:12:36.092661442 Z
+
+'
+  - - '2145'
+    - Surety
+    - '7'
+    - update
+    - '4'
+    - ! "---\nuser_id: 10\norganization_id: 6\nstate: pending\ncreated_at: 2012-09-18
+      13:50:23.547730000 Z\nupdated_at: 2012-09-18 13:50:23.547730000 Z\ncomment:
+      \nid: 7\n"
+    - '2012-09-19 06:22:32.623732'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - pending
+
+      - active
+
+'
+  - - '2146'
+    - User
+    - '10'
+    - update
+    - '4'
+    - ! "---\nemail: adinetz@gmail.com\ncrypted_password: $2a$10$9ABdI8jd08nbT9iSpNdEBeekk/ZN1MY2DjWVMtKR7BRnSIEp7d8dK\nsalt:
+      u468YSh4wyR85Xsfrn97\nremember_me_token: \nremember_me_token_expires_at: \nreset_password_token:
+      \nreset_password_token_expires_at: \nreset_password_email_sent_at: \nactivation_state:
+      active\nactivation_token: \nactivation_token_expires_at: \nfirst_name: Андрей\nlast_name:
+      Адинец\nmiddle_name: ''\ndeleted_at: \ncreated_at: 2012-09-17 14:21:02.130803000
+      Z\nupdated_at: 2012-09-17 14:21:17.900686000 Z\nadmin: false\nstate: active\ntoken:
+      d3d565cc53975fe229c6ff384e29ff4ab175cdc4\navatar_file_name: \navatar_content_type:
+      \navatar_file_size: \navatar_updated_at: \nid: 10\n"
+    - '2012-09-19 06:22:32.703617'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - sured
+
+'
+  - - '2147'
+    - TicketField
+    - '3'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:47:52.015672'
+    - 
+  - - '2148'
+    - TicketFieldRelation
+    - '15'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:47:52.05308'
+    - 
+  - - '2149'
+    - TicketFieldRelation
+    - '16'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:47:52.057581'
+    - 
+  - - '2150'
+    - TicketFieldRelation
+    - '17'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:47:52.061682'
+    - 
+  - - '2151'
+    - TicketFieldRelation
+    - '18'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:47:52.065766'
+    - 
+  - - '2152'
+    - TicketFieldRelation
+    - '19'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:47:52.070057'
+    - 
+  - - '2153'
+    - TicketFieldRelation
+    - '20'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:47:52.074274'
+    - 
+  - - '2154'
+    - TicketFieldRelation
+    - '21'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:47:52.078403'
+    - 
+  - - '2155'
+    - TicketField
+    - '3'
+    - update
+    - '4'
+    - ! '---
+
+      name: номер задачи
+
+      hint: ID задачи от системы управления очередю
+
+      created_at: 2012-09-19 06:47:51.977158000 Z
+
+      updated_at: 2012-09-19 06:47:51.977158000 Z
+
+      state: active
+
+      id: 3
+
+'
+    - '2012-09-19 06:48:05.928687'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      name:
+
+      - номер задачи
+
+      - Номер задачи
+
+'
+  - - '2156'
+    - TicketField
+    - '4'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:48:51.519298'
+    - 
+  - - '2157'
+    - TicketFieldRelation
+    - '22'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:48:51.524603'
+    - 
+  - - '2158'
+    - TicketFieldRelation
+    - '23'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:48:51.528172'
+    - 
+  - - '2159'
+    - TicketFieldRelation
+    - '24'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:48:51.531663'
+    - 
+  - - '2160'
+    - TicketFieldRelation
+    - '25'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:48:51.535045'
+    - 
+  - - '2161'
+    - TicketFieldRelation
+    - '26'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:48:51.538406'
+    - 
+  - - '2162'
+    - TicketFieldRelation
+    - '27'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:48:51.541795'
+    - 
+  - - '2163'
+    - TicketFieldRelation
+    - '28'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:48:51.545162'
+    - 
+  - - '2164'
+    - TicketField
+    - '5'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:49:40.155117'
+    - 
+  - - '2165'
+    - TicketFieldRelation
+    - '29'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:49:40.160038'
+    - 
+  - - '2166'
+    - TicketFieldRelation
+    - '30'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:49:40.163392'
+    - 
+  - - '2167'
+    - TicketFieldRelation
+    - '31'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:49:40.166741'
+    - 
+  - - '2168'
+    - TicketFieldRelation
+    - '32'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:49:40.170064'
+    - 
+  - - '2169'
+    - TicketFieldRelation
+    - '33'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:49:40.173435'
+    - 
+  - - '2170'
+    - TicketFieldRelation
+    - '34'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:49:40.176944'
+    - 
+  - - '2171'
+    - TicketFieldRelation
+    - '35'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:49:40.180259'
+    - 
+  - - '2172'
+    - TicketQuestion
+    - '8'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:49:59.905068'
+    - 
+  - - '2173'
+    - TicketFieldRelation
+    - '36'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:49:59.913455'
+    - 
+  - - '2174'
+    - TicketFieldRelation
+    - '37'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:49:59.917465'
+    - 
+  - - '2175'
+    - TicketFieldRelation
+    - '38'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:49:59.921057'
+    - 
+  - - '2176'
+    - TicketFieldRelation
+    - '39'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:49:59.924692'
+    - 
+  - - '2177'
+    - TicketFieldRelation
+    - '40'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:49:59.928276'
+    - 
+  - - '2178'
+    - TicketFieldRelation
+    - '36'
+    - update
+    - '4'
+    - ! '---
+
+      ticket_question_id: 8
+
+      ticket_field_id: 5
+
+      required: false
+
+      created_at: 2012-09-19 06:49:59.910825000 Z
+
+      updated_at: 2012-09-19 06:49:59.910825000 Z
+
+      use: false
+
+      id: 36
+
+'
+    - '2012-09-19 06:50:29.421665'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      use:
+
+      - false
+
+      - true
+
+      required:
+
+      - false
+
+      - true
+
+'
+  - - '2179'
+    - TicketFieldRelation
+    - '37'
+    - update
+    - '4'
+    - ! '---
+
+      ticket_question_id: 8
+
+      ticket_field_id: 4
+
+      required: false
+
+      created_at: 2012-09-19 06:49:59.916092000 Z
+
+      updated_at: 2012-09-19 06:49:59.916092000 Z
+
+      use: false
+
+      id: 37
+
+'
+    - '2012-09-19 06:50:29.425318'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      use:
+
+      - false
+
+      - true
+
+'
+  - - '2180'
+    - TicketFieldRelation
+    - '38'
+    - update
+    - '4'
+    - ! '---
+
+      ticket_question_id: 8
+
+      ticket_field_id: 1
+
+      required: false
+
+      created_at: 2012-09-19 06:49:59.919689000 Z
+
+      updated_at: 2012-09-19 06:49:59.919689000 Z
+
+      use: false
+
+      id: 38
+
+'
+    - '2012-09-19 06:50:29.428777'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      use:
+
+      - false
+
+      - true
+
+      required:
+
+      - false
+
+      - true
+
+'
+  - - '2181'
+    - TicketFieldRelation
+    - '39'
+    - update
+    - '4'
+    - ! '---
+
+      ticket_question_id: 8
+
+      ticket_field_id: 3
+
+      required: false
+
+      created_at: 2012-09-19 06:49:59.923338000 Z
+
+      updated_at: 2012-09-19 06:49:59.923338000 Z
+
+      use: false
+
+      id: 39
+
+'
+    - '2012-09-19 06:50:29.432087'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      use:
+
+      - false
+
+      - true
+
+'
+  - - '2182'
+    - TicketFieldRelation
+    - '40'
+    - update
+    - '4'
+    - ! '---
+
+      ticket_question_id: 8
+
+      ticket_field_id: 2
+
+      required: false
+
+      created_at: 2012-09-19 06:49:59.926925000 Z
+
+      updated_at: 2012-09-19 06:49:59.926925000 Z
+
+      use: false
+
+      id: 40
+
+'
+    - '2012-09-19 06:50:29.435445'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      use:
+
+      - false
+
+      - true
+
+      required:
+
+      - false
+
+      - true
+
+'
+  - - '2183'
+    - TicketTemplate
+    - '2'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 06:51:11.704324'
+    - 
+  - - '2184'
+    - Surety
+    - '8'
+    - create
+    - '2'
+    - 
+    - '2012-09-19 10:26:58.493706'
+    - 
+  - - '2185'
+    - Request
+    - '18'
+    - create
+    - '2'
+    - 
+    - '2012-09-19 10:27:32.660367'
+    - 
+  - - '2186'
+    - Ticket
+    - '4'
+    - create
+    - '2'
+    - 
+    - '2012-09-19 10:28:13.587267'
+    - 
+  - - '2187'
+    - Request
+    - '18'
+    - update
+    - '4'
+    - ! "---\nhours: 2\ncreated_at: 2012-09-19 10:27:32.657178000 Z\nupdated_at: 2012-09-19
+      10:27:32.657178000 Z\nuser_id: 1\nstate: pending\nsize: 2\ncomment: \ncluster_project_id:
+      27\nid: 18\n"
+    - '2012-09-19 10:37:21.18672'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - pending
+
+      - active
+
+'
+  - - '2188'
+    - ClusterProject
+    - '27'
+    - update
+    - '4'
+    - ! '---
+
+      state: closed
+
+      project_id: 10
+
+      cluster_id: 3
+
+      username: project_10
+
+      id: 27
+
+'
+    - '2012-09-19 10:37:21.196139'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '2189'
+    - Task
+    - '157'
+    - create
+    - '4'
+    - 
+    - '2012-09-19 10:37:21.218252'
+    - 
+  - - '2190'
+    - ClusterProject
+    - '27'
+    - update
+    - 
+    - ! '---
+
+      state: activing
+
+      project_id: 10
+
+      cluster_id: 3
+
+      username: project_10
+
+      id: 27
+
+'
+    - '2012-09-19 10:37:25.54143'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '2191'
+    - ClusterUser
+    - '131'
+    - update
+    - 
+    - ! '---
+
+      state: closed
+
+      created_at: 2012-09-12 15:10:29.177425000 Z
+
+      updated_at: 2012-09-12 15:10:29.177425000 Z
+
+      account_id: 46
+
+      cluster_project_id: 27
+
+      username: account_46
+
+      id: 131
+
+'
+    - '2012-09-19 10:37:25.620847'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '2192'
+    - Task
+    - '158'
+    - create
+    - 
+    - 
+    - '2012-09-19 10:37:25.628736'
+    - 
+  - - '2193'
+    - Task
+    - '157'
+    - update
+    - 
+    - ! "---\nresource_type: ClusterProject\nresource_id: 27\ncreated_at: 2012-09-19
+      10:37:21.215281000 Z\nupdated_at: 2012-09-19 14:37:23.178105000 Z\nprocedure:
+      add_project\ncomment: ! \"Add group: project_10 on v2.parallel.ru with \\n\"\ncallbacks_performed:
+      false\ntask_id: \nstate: successed\nid: 157\n"
+    - '2012-09-19 10:37:25.634542'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
 
 ---
 credentials:
@@ -33784,7 +34541,7 @@ cluster_projects:
     - '4'
     - project_10
   - - '27'
-    - closed
+    - active
     - '10'
     - '3'
     - project_10
@@ -34253,6 +35010,17 @@ accounts:
     - '2012-09-18 09:51:31.881179'
     - closed
     - account_99
+
+---
+additional_emails:
+  columns:
+  - id
+  - email
+  - user_id
+  records: 
+  - - '1'
+    - janbernacki@me.com
+    - '1'
 
 ---
 position_names:
@@ -34910,6 +35678,26 @@ tasks:
     - true
     - 
     - successed
+  - - '157'
+    - ClusterProject
+    - '27'
+    - '2012-09-19 10:37:21.215281'
+    - '2012-09-19 10:37:25.633475'
+    - add_project
+    - ! "Add group: project_10 on v2.parallel.ru with \n"
+    - true
+    - 
+    - successed
+  - - '158'
+    - ClusterUser
+    - '131'
+    - '2012-09-19 10:37:25.626051'
+    - '2012-09-19 14:37:28.601863'
+    - add_user
+    - ! "Add user: account_46 project_10 on v2.parallel.ru with \n"
+    - false
+    - 
+    - successed
 
 ---
 requests:
@@ -34978,6 +35766,26 @@ requests:
     - '1000000'
     - 
     - '40'
+  - - '18'
+    - '2'
+    - '2012-09-19 10:27:32.657178'
+    - '2012-09-19 10:37:21.18502'
+    - '1'
+    - active
+    - '2'
+    - 
+    - '27'
+
+---
+extends:
+  columns:
+  - id
+  - url
+  - script
+  records: 
+  - - '1'
+    - /admin
+    - example
 
 ---
 sureties:
@@ -35035,9 +35843,16 @@ sureties:
   - - '7'
     - '10'
     - '6'
+    - active
+    - '2012-09-18 13:50:23.54773'
+    - '2012-09-19 06:22:32.615819'
+    - 
+  - - '8'
+    - '1'
+    - '7'
     - pending
-    - '2012-09-18 13:50:23.54773'
-    - '2012-09-18 13:50:23.54773'
+    - '2012-09-19 10:26:58.476846'
+    - '2012-09-19 10:26:58.476846'
     - 
 
 ---
@@ -35075,9 +35890,9 @@ users:
     - b4Pz3hVYCPqH3DvYuupf
     - 
     - 
+    - Z96R6oZmfpv4vxM1yjEa
     - 
-    - 
-    - 
+    - '2012-09-19 05:49:58.07526'
     - active
     - 
     - 
@@ -35086,7 +35901,7 @@ users:
     - ''
     - 
     - '2012-08-21 06:23:18.692945'
-    - '2012-08-21 14:16:22.989033'
+    - '2012-09-19 05:49:58.079757'
     - false
     - sured
     - 78e4c941d0c7982855626ed0caecdd92c0a9ad90
@@ -35100,9 +35915,9 @@ users:
     - 4hxd6XqqGVpYpD31x4BD
     - 
     - 
+    - jE7ZP1M65PUA5qFsvSXs
     - 
-    - 
-    - 
+    - '2012-09-19 06:12:36.092661'
     - active
     - 
     - 
@@ -35111,7 +35926,7 @@ users:
     - ''
     - 
     - '2012-08-21 06:23:36.350856'
-    - '2012-08-21 14:16:22.98216'
+    - '2012-09-19 06:12:36.213021'
     - true
     - active
     - 88ebd48305ce47ba6395be072a3fe7b63691a83e
@@ -35311,9 +36126,9 @@ users:
     - ''
     - 
     - '2012-09-17 14:21:02.130803'
-    - '2012-09-17 14:21:17.900686'
+    - '2012-09-19 06:22:32.702294'
     - false
-    - active
+    - sured
     - d3d565cc53975fe229c6ff384e29ff4ab175cdc4
     - 
     - 
@@ -35350,9 +36165,9 @@ users:
     - SrF8u8srBWSjqKdS4ERY
     - 
     - 
-    - idv8zJpEacdv1ALTNka5
+    - v3x2yU67qDy2iNTC9K66
     - 
-    - '2012-09-18 09:45:07.803044'
+    - '2012-09-19 05:46:20.712311'
     - active
     - 
     - 
@@ -35361,7 +36176,7 @@ users:
     - ''
     - 
     - '2012-09-18 09:45:07.172481'
-    - '2012-09-18 10:39:56.721026'
+    - '2012-09-19 05:46:20.716737'
     - false
     - sured
     - 60bc3367e572cda99ad65c9dcfffe59419f2560b
@@ -35604,6 +36419,12 @@ ticket_templates:
     - '2012-08-21 07:12:40.242762'
     - '2012-08-28 14:19:43.984395'
     - active
+  - - '2'
+    - try again
+    - Попробуйте ещё раз.
+    - '2012-09-19 06:51:11.673226'
+    - '2012-09-19 06:51:11.673226'
+    - active
 
 ---
 tickets:
@@ -35662,6 +36483,21 @@ tickets:
     - ''
     - '2012-09-18 09:47:46.935206'
     - '2012-09-18 09:49:44.770883'
+    - 
+    - 
+    - 
+    - 
+    - '1'
+    - 
+    - 
+  - - '4'
+    - Тест
+    - проблема
+    - '1'
+    - active
+    - ''
+    - '2012-09-19 10:28:13.570933'
+    - '2012-09-19 10:28:13.570933'
     - 
     - 
     - 
@@ -35779,6 +36615,188 @@ ticket_field_relations:
     - '2012-08-21 12:35:25.397188'
     - '2012-08-21 13:13:07.298816'
     - true
+  - - '15'
+    - '1'
+    - '3'
+    - false
+    - '2012-09-19 06:47:52.022245'
+    - '2012-09-19 06:47:52.022245'
+    - false
+  - - '16'
+    - '2'
+    - '3'
+    - false
+    - '2012-09-19 06:47:52.055969'
+    - '2012-09-19 06:47:52.055969'
+    - false
+  - - '17'
+    - '3'
+    - '3'
+    - false
+    - '2012-09-19 06:47:52.060136'
+    - '2012-09-19 06:47:52.060136'
+    - false
+  - - '18'
+    - '6'
+    - '3'
+    - false
+    - '2012-09-19 06:47:52.064225'
+    - '2012-09-19 06:47:52.064225'
+    - false
+  - - '19'
+    - '7'
+    - '3'
+    - false
+    - '2012-09-19 06:47:52.06851'
+    - '2012-09-19 06:47:52.06851'
+    - false
+  - - '20'
+    - '4'
+    - '3'
+    - false
+    - '2012-09-19 06:47:52.072697'
+    - '2012-09-19 06:47:52.072697'
+    - false
+  - - '21'
+    - '5'
+    - '3'
+    - false
+    - '2012-09-19 06:47:52.076842'
+    - '2012-09-19 06:47:52.076842'
+    - false
+  - - '22'
+    - '1'
+    - '4'
+    - false
+    - '2012-09-19 06:48:51.523104'
+    - '2012-09-19 06:48:51.523104'
+    - false
+  - - '23'
+    - '2'
+    - '4'
+    - false
+    - '2012-09-19 06:48:51.526849'
+    - '2012-09-19 06:48:51.526849'
+    - false
+  - - '24'
+    - '3'
+    - '4'
+    - false
+    - '2012-09-19 06:48:51.53032'
+    - '2012-09-19 06:48:51.53032'
+    - false
+  - - '25'
+    - '6'
+    - '4'
+    - false
+    - '2012-09-19 06:48:51.533761'
+    - '2012-09-19 06:48:51.533761'
+    - false
+  - - '26'
+    - '7'
+    - '4'
+    - false
+    - '2012-09-19 06:48:51.537133'
+    - '2012-09-19 06:48:51.537133'
+    - false
+  - - '27'
+    - '4'
+    - '4'
+    - false
+    - '2012-09-19 06:48:51.540526'
+    - '2012-09-19 06:48:51.540526'
+    - false
+  - - '28'
+    - '5'
+    - '4'
+    - false
+    - '2012-09-19 06:48:51.543881'
+    - '2012-09-19 06:48:51.543881'
+    - false
+  - - '29'
+    - '1'
+    - '5'
+    - false
+    - '2012-09-19 06:49:40.158664'
+    - '2012-09-19 06:49:40.158664'
+    - false
+  - - '30'
+    - '2'
+    - '5'
+    - false
+    - '2012-09-19 06:49:40.162142'
+    - '2012-09-19 06:49:40.162142'
+    - false
+  - - '31'
+    - '3'
+    - '5'
+    - false
+    - '2012-09-19 06:49:40.165489'
+    - '2012-09-19 06:49:40.165489'
+    - false
+  - - '32'
+    - '6'
+    - '5'
+    - false
+    - '2012-09-19 06:49:40.168819'
+    - '2012-09-19 06:49:40.168819'
+    - false
+  - - '33'
+    - '7'
+    - '5'
+    - false
+    - '2012-09-19 06:49:40.172113'
+    - '2012-09-19 06:49:40.172113'
+    - false
+  - - '34'
+    - '4'
+    - '5'
+    - false
+    - '2012-09-19 06:49:40.175638'
+    - '2012-09-19 06:49:40.175638'
+    - false
+  - - '35'
+    - '5'
+    - '5'
+    - false
+    - '2012-09-19 06:49:40.179004'
+    - '2012-09-19 06:49:40.179004'
+    - false
+  - - '36'
+    - '8'
+    - '5'
+    - true
+    - '2012-09-19 06:49:59.910825'
+    - '2012-09-19 06:50:29.420444'
+    - true
+  - - '37'
+    - '8'
+    - '4'
+    - false
+    - '2012-09-19 06:49:59.916092'
+    - '2012-09-19 06:50:29.424452'
+    - true
+  - - '38'
+    - '8'
+    - '1'
+    - true
+    - '2012-09-19 06:49:59.919689'
+    - '2012-09-19 06:50:29.427886'
+    - true
+  - - '39'
+    - '8'
+    - '3'
+    - false
+    - '2012-09-19 06:49:59.923338'
+    - '2012-09-19 06:50:29.431292'
+    - true
+  - - '40'
+    - '8'
+    - '2'
+    - true
+    - '2012-09-19 06:49:59.926925'
+    - '2012-09-19 06:50:29.434574'
+    - true
 
 ---
 ticket_fields:
@@ -35801,6 +36819,24 @@ ticket_fields:
     - pwd
     - '2012-08-21 12:31:29.065315'
     - '2012-08-21 12:31:29.065315'
+    - active
+  - - '3'
+    - Номер задачи
+    - ID задачи от системы управления очередю
+    - '2012-09-19 06:47:51.977158'
+    - '2012-09-19 06:48:05.927252'
+    - active
+  - - '4'
+    - Команда компиляции задачи
+    - ''
+    - '2012-09-19 06:48:51.517317'
+    - '2012-09-19 06:48:51.517317'
+    - active
+  - - '5'
+    - Вывод задачи
+    - путь к файлу или его содержимое
+    - '2012-09-19 06:49:40.15323'
+    - '2012-09-19 06:49:40.15323'
     - active
 
 ---
@@ -35863,6 +36899,13 @@ ticket_questions:
     - active
     - '2012-08-21 12:35:25.388201'
     - '2012-08-21 12:35:25.388201'
+  - - '8'
+    - 
+    - Проблемы с запуском
+    - true
+    - active
+    - '2012-09-19 06:49:59.89413'
+    - '2012-09-19 06:49:59.89413'
 
 ---
 ticket_tag_relations:
@@ -35910,6 +36953,18 @@ ticket_tag_relations:
     - false
     - '2012-09-18 09:47:47.004218'
     - '2012-09-18 09:47:47.004218'
+  - - '7'
+    - '4'
+    - '1'
+    - false
+    - '2012-09-19 10:28:13.667093'
+    - '2012-09-19 10:28:13.667093'
+  - - '8'
+    - '4'
+    - '2'
+    - false
+    - '2012-09-19 10:28:13.670758'
+    - '2012-09-19 10:28:13.670758'
 
 ---
 ticket_tags:

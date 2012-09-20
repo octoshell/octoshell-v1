@@ -7,7 +7,7 @@ h3 Запросить доступ в проект
   = f.association :project, collection: Project.active
   
   div class="form-actions"
-    = f.button :submit, 'Request'
+    = f.button :submit, t('pages.accounts.request')
 
 h3 Пригласить в проект
 
@@ -15,7 +15,7 @@ h3 Пригласить в проект
   = f.association :user, label_method: :full_name, collection: User.where('id != ?', f.object.user_id).sured
   = f.association :project, collection: @projects
   div class="form-actions"
-    = f.button :submit, 'Invite'
+    = f.button :submit, t('pages.accounts.invite')
 
 h3 Пригласить в проект еще не зарегистрированных людей
 
@@ -23,4 +23,4 @@ h3 Пригласить в проект еще не зарегистрирова
   = f.association :project, collection: @projects, prompt: false
   = f.input :raw_emails, as: :text, input_html: { rows: 5 }, hint: 'Через запятую, например: email@example.com, example@mail.com'
   div class="form-actions"
-    = f.button :submit, 'Invite'
+    = f.button :submit, t('pages.accounts.invite')
