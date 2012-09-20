@@ -14,9 +14,12 @@
 //= require jquery_ujs
 //= require underscore
 //= require bootstrap
+//= require raphael
+//= require morris
 //= require_tree .
 
 $(document).ready(function(){
+  
 	$('#ticket_template').on('change', function(){
 		var reply_message = $('#reply_message')
 		if (_(reply_message.val()).isEmpty()) {
