@@ -104,7 +104,7 @@ class Ability
         
         can :show, :dashboard
         
-        can [:admin, :edit, :update, :close], :users
+        can [:admin, :edit, :update, :close, :show], :users
         
         can [:index, :new, :create, :show, :activate, :decline, :close, :edit, :update, :application], :requests
         
