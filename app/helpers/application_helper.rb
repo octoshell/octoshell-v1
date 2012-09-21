@@ -1,6 +1,5 @@
 # coding: utf-8
 module ApplicationHelper
-  
   def link_to_attribute(record, attribute, value)
     if attribute.to_s =~ /_id$/
       record.send("#{attribute}=", value)

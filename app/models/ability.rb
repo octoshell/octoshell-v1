@@ -33,7 +33,11 @@ class Ability
       
       can :show, :dashboards
       
-      can [:index, :show], :projects
+      can :index, :projects
+      can :show, :projects do |project|
+        user.projects.where(accounts: { state: 'active' }).include?(project) || 
+          user.owned_projects.include?(project)
+      end
       can :close, :projects, user_id: user.id
       
       can [:index], :users
