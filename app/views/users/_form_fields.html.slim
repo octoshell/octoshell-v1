@@ -7,6 +7,7 @@
 = f.input :avatar
 - if can?(:admin, :users) && f.object.persisted?
   = f.input :admin
+= f.input :publicized, collection: [['Доступна всем пользователям', true], ['Доступна администраторам', false]], prompt: false
 - if f.object.persisted?
   h4 Дополнительные email для нотификаций
   = f.fields_for :additional_emails do |f|

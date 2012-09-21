@@ -36,7 +36,10 @@ class Ability
       can [:index, :show], :projects
       can :close, :projects, user_id: user.id
       
-      can [:index, :show], :users
+      can [:index], :users
+      can :show, :users do |showed_user|
+        showed_user.publicized? || showed_user.id == user.id
+      end
       
       can [:index, :show, :new, :create, :closed], :organizations
       

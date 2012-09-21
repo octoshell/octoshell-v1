@@ -37,6 +37,7 @@ describe User do
   it { should allow_mass_assignment_of(:password_confirmation) }
   it { should allow_mass_assignment_of(:remember_me) }
   it { should allow_mass_assignment_of(:new_organization) }
+  it { should allow_mass_assignment_of(:publicized) }
   
   it 'should create additional email' do
     user.additional_emails.pluck(:email).should include(user.email)

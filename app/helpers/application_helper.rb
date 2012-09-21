@@ -44,7 +44,7 @@ module ApplicationHelper
   
   def link_to_user(user)
     return unless user
-    link_to user.full_name, user
+    link_to_if (can? :show, user), user.full_name, user
   end
   
   def link_to_project(project)

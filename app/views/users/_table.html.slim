@@ -11,4 +11,4 @@ table class="table table-bordered"
       td = link_to_user user
       td = user.email
       td = user.human_state_name
-      td = link_to 'открыть', user
+      td = link_to 'открыть', user if can? :show, user
