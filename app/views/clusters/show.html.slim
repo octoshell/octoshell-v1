@@ -36,7 +36,7 @@ table class="table table-bordered"
 h3 Активные заявки
 
 = render partial: 'requests/table', locals: { requests: @cluster.requests.active }
-p = link_to "Все заявки (#{@cluster.requests.count})", requests_path(search: { state_in: Request.state_names, cluster_id_eq: @cluster.id })
+p = link_to "Все заявки (#{@cluster.requests.count})", requests_path(search: { state_in: Request.state_names, cluster_project_cluster_id_eq: @cluster.id })
 
 h3 Поддержка
 
