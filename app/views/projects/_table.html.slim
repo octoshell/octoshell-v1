@@ -1,19 +1,47 @@
 - if projects.any?
   table class="table table-bordered"
     tr
-      th class="span1" #
+      - if admin?
+        th #
       th = Project.human_attribute_name(:name)
-      th = Project.human_attribute_name(:user)
-      th = Project.human_attribute_name(:description)
-      th = Project.human_attribute_name(:state)
+      th Участники
+      - if admin?
+        th = Project.human_attribute_name(:state)
+      - else
+        th Подключение
       th
     - projects.each do |project|
       tr
-        td = project.id
+        - if admin?
+          td = project.id
         td = link_to project.name, project_path(project)
-        td = link_to_user project.user
-        td = project.description
-        td = project.human_state_name
+        td
+          ul class="unstyled"
+            - project.accounts.active.each do |a|
+              li
+              - if project.user == a.user
+                strong = link_to_user a.user
+              - else
+                = link_to_user a.user
+                - if can? :cancel, a
+                  |  
+                  small = link_to 'удалить', [a, :cancel], method: :put, confirm: 'Вы уверены?', class: 'danger'
+            - if current_user.id == project.user_id
+              li
+                small = link_to 'Пригласить в проект', new_account_path(type: 'invite')
+        - if admin?
+          td = project.human_state_name
+        - else
+          td
+            - accesses = Access.non_closed.where(credential_id: current_user.credential_ids, cluster_user_id: ClusterUser.where(account_id: current_user.account_ids, cluster_project_id: project.cluster_project_ids))
+            - if accesses.any?
+              ul class="unstyled"
+                - accesses.each do |access|
+                  li
+                    code = "#{access.cluster_user.username}@#{access.cluster_user.cluster_project.cluster.host}"
+                    small class="state-#{access.state}" = " (#{access.human_state_name})"
+            - else
+              p Нет доступов
         td = link_to 'открыть', project_path(project)
 - else
   p Нет проектов

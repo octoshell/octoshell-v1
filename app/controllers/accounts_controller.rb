@@ -16,7 +16,7 @@ class AccountsController < ApplicationController
   def new
     authorize! :new, :accounts
     @account = current_user.accounts.build
-    @invite = current_user.accounts.build
+    @invite = AccountFinder.new
     @mailer = current_user.accounts.build
     @projects = get_projects
   end
@@ -44,17 +44,20 @@ class AccountsController < ApplicationController
   end
   
   def invite
-    scope = admin? ? Account : Account.where(project_id: current_user.owned_project_ids)
-    conditions = {
-      project_id: params[:account][:project_id],
-      user_id: params[:account][:user_id]
-    }
-    @account = Account.where(conditions).first
-    authorize! :invite, @account
-    authorize! :activate, @account
-    if (@account.active? || @account.activate)
-      UserMailer.account_activated(@account).deliver!
-      redirect_to @account
+    @invite = AccountFinder.new(params[:account_finder])
+    if @invite.valid?
+      @account = @invite.find
+      authorize! :invite, @account
+      authorize! :activate, @account
+      if (@account.active? || @account.activate)
+        UserMailer.account_activated(@account).deliver!
+        redirect_to :back
+      else
+        @account = current_user.accounts.build
+        @mailer = current_user.accounts.build
+        @projects = get_projects
+        render :new
+      end
     else
       @account = current_user.accounts.build
       @mailer = current_user.accounts.build
@@ -101,7 +104,7 @@ class AccountsController < ApplicationController
     @account = find_account(params[:account_id])
     authorize! :cancel, @account
     if @account.cancel
-      redirect_to @account
+      redirect_to :back
     else
       redirect_to_account_with_alert(@account)
     end
@@ -146,5 +149,9 @@ private
   
   def setup_default_filter
     params[:search] ||= { state_in: ['requested', 'active'] }
+  end
+  
+  def skip_action?
+    params[:action] == 'invite'
   end
 end

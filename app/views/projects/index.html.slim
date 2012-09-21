@@ -1,6 +1,12 @@
 - title 'Проекты'
 
-= render 'new_project_link'
+div class="link-actions"
+  = link_to 'Новый проект', new_project_path, class: "btn #{disabled(can? :create, :projects)}"
+  |  
+  = link_to 'Запросить доступ к проекту', new_account_path(type: 'request'), class: 'btn'
+
+- if cannot? :create, :projects
+  = render partial: 'shared/steps', locals: { steps: current_user.project_steps, title: 'У вас нет доступа для создания проекта. Чтобы его получить вам нужно:' }
 
 = simple_form_for @search, url: projects_path, method: :get, html: { class: 'form-horizontal' } do |f|
   = f.input :name_contains
