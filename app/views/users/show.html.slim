@@ -45,10 +45,10 @@ h3 Места работы
 = render partial: 'memberships/table', locals: { memberships: @user.memberships }
 
 h3 Проекты
-= render partial: 'projects/table', locals: { projects: @user.projects }
+= render partial: 'projects/table', locals: { projects: @user.projects.where(accounts: { state: 'active' }) }
 
 h3 Доступы к проектам
-= render partial: 'accounts/table', locals: { accounts: @user.accounts }
+= render partial: 'accounts/table', locals: { accounts: @user.accounts.non_closed }
 
 h3 Заявки
 = render partial: 'requests/table', locals: { requests: @user.requests }
