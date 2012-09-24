@@ -10,7 +10,7 @@ describe 'Importer' do
   before { Importer.import(file) }
   
   def created_user
-    User.find_by_first_name("Mr.")
+    User.find_by_first_name("White")
   end
   
   def created_organization

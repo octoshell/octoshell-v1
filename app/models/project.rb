@@ -91,9 +91,7 @@ private
   end
   
   def create_relations
-    User.all.each do |user|
-      accounts.where(user_id: user.id).first_or_create!
-    end
+    accounts.where(user_id: user_id).first_or_create!
     Cluster.all.each do |cluster|
       cluster_projects.where(cluster_id: cluster.id).first_or_create!
     end

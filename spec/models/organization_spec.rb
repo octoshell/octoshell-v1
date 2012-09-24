@@ -35,12 +35,12 @@ describe Organization do
     
     it 'should move organizations sureties' do
       organization.should have(1).sureties
-      organization.sureties.first.user.should == surety.user
+      organization.sureties.last.user.should == surety.user
     end
     
     it 'should move organizations memberships' do
       organization.should have(2).memberships # one from project + 1
-      organization.memberships.first.user.should == membership.user
+      organization.memberships.last.user.should == membership.user
     end
     
     it 'should move organizations projects' do
