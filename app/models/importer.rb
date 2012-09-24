@@ -26,6 +26,7 @@ class Importer
         next if (start..stop).exclude?(i)
         
         args = line.parse_csv(col_sep: ";", quote_char: "'")
+        
         args << JSON.parse(args.pop)
         created_user = new(*args).run
         user = User.find(created_user.id)
@@ -182,7 +183,9 @@ private
         cluster_id: cluster.id,
         username: project.username
       }
-      ClusterProject.to_generic_model.where(conditions).first_or_create!
+      unless ClusterProject.where(project_id: project.id, cluster_id: cluster.id).exists?
+        ClusterProject.to_generic_model.where(conditions).create!
+      end
     end
     
     Account.where(user_id: user.id).each do |account|
@@ -198,7 +201,9 @@ private
           username: cluster_user.username
         }
         
-        ClusterUser.to_generic_model.where(conditions).first_or_create! 
+        unless ClusterUser.where(cluster_project_id: cluster_project.id, account_id: account.id).exists?
+          ClusterUser.to_generic_model.where(conditions).create!
+        end
       end
     end
     
@@ -211,7 +216,6 @@ private
           cluster_user_id: cluster_user.id,
           credential_id: credential.id
         }
-        
         
         unless Access.where(cluster_user_id: cluster_user.id, credential_id: credential.id).exists?
           Access.to_generic_model.where(conditions).create!
