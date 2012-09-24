@@ -54,7 +54,7 @@ private
     return if @user = User.find_by_email(email)
     
     @user = User.to_generic_model.create! do |user|
-      user.first_name, user.last_name = name.split(' ')
+      user.last_name, user.first_name = name.split(' ')
       user.email = email
       user.state = 'sured'
       user.activation_state = 'active'
