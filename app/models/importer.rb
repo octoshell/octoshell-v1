@@ -18,8 +18,8 @@ class Importer
   
   def self.import(csv_string)
     users = []
-    ActiveRecord::Base.transaction do
-      csv_string.each_line.each do |line|
+    csv_string.each_line.each do |line|
+      ActiveRecord::Base.transaction do
         args = line.parse_csv(col_sep: ";", quote_char: "'")
         args << JSON.parse(args.pop)
         created_user = new(*args).run
