@@ -169,9 +169,10 @@ private
         project_id: project.id,
         username: account.username
       }
-      unless Account.where(user_id: user.id, project_id: project.id).exists?
+      
+      # unless Account.where(user_id: user.id, project_id: project.id).exists?
         Account.to_generic_model.where(conditions).create!
-      end
+      # end
     end
     
     Cluster.active.each do |cluster|
@@ -183,9 +184,9 @@ private
         cluster_id: cluster.id,
         username: project.username
       }
-      unless ClusterProject.where(project_id: project.id, cluster_id: cluster.id).exists?
+      # unless ClusterProject.where(project_id: project.id, cluster_id: cluster.id).exists?
         ClusterProject.to_generic_model.where(conditions).create!
-      end
+      # end
     end
     
     Account.where(user_id: user.id).each do |account|
@@ -201,9 +202,9 @@ private
           username: cluster_user.username
         }
         
-        unless ClusterUser.where(cluster_project_id: cluster_project.id, account_id: account.id).exists?
+        # unless ClusterUser.where(cluster_project_id: cluster_project.id, account_id: account.id).exists?
           ClusterUser.to_generic_model.where(conditions).create!
-        end
+        # end
       end
     end
     
@@ -217,9 +218,9 @@ private
           credential_id: credential.id
         }
         
-        unless Access.where(cluster_user_id: cluster_user.id, credential_id: credential.id).exists?
+        # unless Access.where(cluster_user_id: cluster_user.id, credential_id: credential.id).exists?
           Access.to_generic_model.where(conditions).create!
-        end
+        # end
       end
     end
   end
