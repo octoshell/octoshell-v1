@@ -62,7 +62,7 @@ private
   end
   
   def create_organization
-    return if @organization = Organization.find_by_name(organization)
+    return if @organization = Organization.find_by_name(organization_name)
     
     @organization = Organization.to_generic_model.create! do |org|
       org.name = organization_name
