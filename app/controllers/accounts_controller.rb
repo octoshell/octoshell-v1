@@ -57,7 +57,7 @@ class AccountsController < ApplicationController
   end
   
   def mailer
-    @mailer = Account.find_by_params(params[:account])
+    @mailer = Account.new(params[:account], as_role)
     if @mailer.send_invites
       redirect_to @mailer.project
     else

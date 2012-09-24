@@ -27,7 +27,7 @@
 
   h3 Пригласить в проект еще не зарегистрированных людей
 
-  = simple_form_for @mailer, url: mailer_accounts_path, html: { class: 'form-horizontal', id: 'new_account_batch_invitation' } do |f|
+  = simple_form_for @mailer, url: mailer_accounts_path, method: :put, html: { class: 'form-horizontal', id: 'new_account_batch_invitation' } do |f|
     = hidden_field_tag :type, params[:type] if params[:type]
     = f.association :project, collection: @projects, prompt: false
     = f.input :raw_emails, as: :text, input_html: { rows: 5 }, hint: 'Через запятую, например: email@example.com, example@mail.com'
