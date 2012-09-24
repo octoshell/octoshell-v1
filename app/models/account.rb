@@ -54,7 +54,7 @@ class Account < ActiveRecord::Base
   
   def self.find_by_params(params)
     project_id, user_id = params.delete(:project_id), params.delete(:user_id)
-    Account.where(project_id: project_id, user_id: user_id).first
+    Account.where(project_id: project_id, user_id: user_id).first_or_create!
   end
   
   def request
