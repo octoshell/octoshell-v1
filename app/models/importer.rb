@@ -18,10 +18,12 @@ class Importer
   
   def self.import(csv_string)
     users = []
-    skip_lines = (ENV['SKIP_LINES'] && ENV['SKIP_LINES'].to_i) || -1
+    start = (ENV['IMPORT_START'] && ENV['IMPORT_START'].to_i) || 0
+    stop = (ENV['IMPORT_STOP'] && ENV['IMPORT_STOP'].to_i) || csv_string.each_line.to_a.size
+    
     ActiveRecord::Base.transaction do
       csv_string.each_line.each_with_index do |line, i|
-        next if i <= skip_lines
+        next if (start..stop).exclude?(i)
         
         args = line.parse_csv(col_sep: ";", quote_char: "'")
         args << JSON.parse(args.pop)
