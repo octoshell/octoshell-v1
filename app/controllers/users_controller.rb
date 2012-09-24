@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
   
   def index
-    @search = User.search(params[:search])
+    @search = User.order('last_name asc, first_name asc').search(params[:search])
     @users = @search.page(params[:page])
   end
   

@@ -5,6 +5,7 @@ ru:
       first: Начало
       last: Конец
       previous: Предыдущая
+      truncate: ...
   call_callbacks: 'Вызвать коллбеки'
   tasks:
     description:

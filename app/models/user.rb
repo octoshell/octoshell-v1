@@ -3,8 +3,6 @@ class User < ActiveRecord::Base
   
   has_attached_file :avatar
   
-  default_scope order("#{table_name}.id desc")
-  
   authenticates_with_sorcery!
   
   attr_reader :new_organization
