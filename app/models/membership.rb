@@ -1,7 +1,7 @@
 class Membership < ActiveRecord::Base
   has_paper_trail
   
-  default_scope order("#{table_name}.id desc")
+  # default_scope order("#{table_name}.id desc")
   
   delegate :state_name, to: :organization, prefix: true, allow_nil: true
   

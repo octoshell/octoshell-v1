@@ -2,8 +2,16 @@
   table class="table table-bordered"
     tr
       th class="span1" #
-      th = Organization.model_name.human
-      th = User.model_name.human
+      th
+        - if @search
+          = sort_link @search, :organization_name, "Организация", :default_order => :asc
+        - else
+          = Organization.model_name.human
+      th
+        - if @search
+          = sort_link @search, :user_last_name, "Пользователь", :default_order => :asc
+        - else
+          = User.model_name.human
       td = Membership.human_attribute_name(:state)
       th
     - memberships.each do |membership|
