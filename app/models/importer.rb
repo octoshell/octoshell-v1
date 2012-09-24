@@ -18,15 +18,18 @@ class Importer
   
   def self.import(csv_string)
     users = []
-    csv_string.each_line.each do |line|
-      ActiveRecord::Base.transaction do
+    skip_lines = (ENV['SKIP_LINES'] && ENV['SKIP_LINES'].to_i) || -1
+    ActiveRecord::Base.transaction do
+      csv_string.each_line.each_with_index do |line, i|
+        next if i <= skip_lines
+        
         args = line.parse_csv(col_sep: ";", quote_char: "'")
         args << JSON.parse(args.pop)
         created_user = new(*args).run
         user = User.find(created_user.id)
         raise "Invalid record" if user.invalid?
         users << user
-        puts line, "users: #{users.size}"
+        puts line, "i = #{i}"
       end
     end
     # users.each &:deliver_reset_password_instructions!
