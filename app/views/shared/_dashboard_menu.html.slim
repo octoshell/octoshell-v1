@@ -1,4 +1,4 @@
-= submenu_item :dashboards, (link_to "Кабинет (#{current_user.notifications_count})", dashboard_path)
+= submenu_item :dashboards, (link_to "Оповещения (#{current_user.notifications_count})", dashboard_path)
 - if can? :index, :projects
   = submenu_item :projects, (link_to 'Мои проекты', projects_path)
 - if can? :index, :requests

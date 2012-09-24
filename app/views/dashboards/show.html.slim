@@ -1,4 +1,4 @@
-- title 'Рабочий кабинет'
+- title 'Оповещения'
 
 - if @user.start_steps.any?
   h2 Начало работы
@@ -18,10 +18,6 @@
 - if @accounts.any?
   h3 Доступы к проектам
   = render partial: 'accounts/table', locals: { accounts: @accounts }
-
-h3 Доступы к кластерам
-
-= render partial: 'accesses/table', locals: { accesses: @user.accesses.non_closed, current: true }
 
 h3 Поддержка
 
