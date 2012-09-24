@@ -2768,7 +2768,7 @@ cluster_users:
   - - '490'
     - active
     - '2012-09-21 14:07:10.150949'
-    - '2012-09-21 14:09:16.13203'
+    - '2012-09-24 08:51:30.68962'
     - '173'
     - '55'
     - account_173
@@ -5002,7 +5002,7 @@ accesses:
     - '14'
     - active
     - '2012-09-21 14:07:10.159556'
-    - '2012-09-21 14:09:21.48404'
+    - '2012-09-24 08:51:36.026221'
     - '490'
   - - '525'
     - '17'
@@ -47338,6 +47338,370 @@ versions:
       - successed
 
 '
+  - - '3057'
+    - Account
+    - '173'
+    - update
+    - '1'
+    - ! '---
+
+      user_id: 12
+
+      project_id: 21
+
+      created_at: 2012-09-21 14:07:09.758971000 Z
+
+      updated_at: 2012-09-21 14:09:12.015477000 Z
+
+      state: active
+
+      username: account_173
+
+      id: 173
+
+'
+    - '2012-09-24 08:50:51.986976'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - closed
+
+'
+  - - '3058'
+    - ClusterUser
+    - '490'
+    - update
+    - '1'
+    - ! '---
+
+      state: active
+
+      created_at: 2012-09-21 14:07:10.150949000 Z
+
+      updated_at: 2012-09-21 14:09:16.132030000 Z
+
+      account_id: 173
+
+      cluster_project_id: 55
+
+      username: account_173
+
+      id: 490
+
+'
+    - '2012-09-24 08:50:52.00176'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - closing
+
+'
+  - - '3059'
+    - Task
+    - '194'
+    - create
+    - '1'
+    - 
+    - '2012-09-24 08:50:52.023781'
+    - 
+  - - '3060'
+    - ClusterUser
+    - '490'
+    - update
+    - 
+    - ! '---
+
+      state: closing
+
+      created_at: 2012-09-21 14:07:10.150949000 Z
+
+      updated_at: 2012-09-24 08:50:52.000572000 Z
+
+      account_id: 173
+
+      cluster_project_id: 55
+
+      username: account_173
+
+      id: 490
+
+'
+    - '2012-09-24 08:50:55.357107'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closing
+
+      - closed
+
+'
+  - - '3061'
+    - Access
+    - '524'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 14
+
+      state: active
+
+      created_at: 2012-09-21 14:07:10.159556000 Z
+
+      updated_at: 2012-09-21 14:09:21.484040000 Z
+
+      cluster_user_id: 490
+
+      id: 524
+
+'
+    - '2012-09-24 08:50:55.391613'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - active
+
+      - closed
+
+'
+  - - '3062'
+    - Task
+    - '194'
+    - update
+    - 
+    - ! "---\nresource_type: ClusterUser\nresource_id: 490\ncreated_at: 2012-09-24
+      08:50:52.020769000 Z\nupdated_at: 2012-09-24 12:50:54.649522000 Z\nprocedure:
+      del_user\ncomment: ! \"Del user: project_21 on t60.parallel.ru with \\n\"\ncallbacks_performed:
+      false\ntask_id: \nstate: successed\nid: 194\n"
+    - '2012-09-24 08:50:55.397475'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '3063'
+    - Account
+    - '173'
+    - update
+    - '1'
+    - ! '---
+
+      user_id: 12
+
+      project_id: 21
+
+      created_at: 2012-09-21 14:07:09.758971000 Z
+
+      updated_at: 2012-09-24 08:50:51.984037000 Z
+
+      state: closed
+
+      username: account_173
+
+      id: 173
+
+'
+    - '2012-09-24 08:51:20.949272'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - active
+
+'
+  - - '3064'
+    - ClusterUser
+    - '490'
+    - update
+    - '1'
+    - ! '---
+
+      state: closed
+
+      created_at: 2012-09-21 14:07:10.150949000 Z
+
+      updated_at: 2012-09-24 08:50:55.351702000 Z
+
+      account_id: 173
+
+      cluster_project_id: 55
+
+      username: account_173
+
+      id: 490
+
+'
+    - '2012-09-24 08:51:20.958719'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '3065'
+    - Task
+    - '195'
+    - create
+    - '1'
+    - 
+    - '2012-09-24 08:51:20.964094'
+    - 
+  - - '3066'
+    - ClusterUser
+    - '490'
+    - update
+    - 
+    - ! '---
+
+      state: activing
+
+      created_at: 2012-09-21 14:07:10.150949000 Z
+
+      updated_at: 2012-09-24 08:51:20.957723000 Z
+
+      account_id: 173
+
+      cluster_project_id: 55
+
+      username: account_173
+
+      id: 490
+
+'
+    - '2012-09-24 08:51:30.694387'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '3067'
+    - Access
+    - '524'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 14
+
+      state: closed
+
+      created_at: 2012-09-21 14:07:10.159556000 Z
+
+      updated_at: 2012-09-24 08:50:55.390257000 Z
+
+      cluster_user_id: 490
+
+      id: 524
+
+'
+    - '2012-09-24 08:51:30.726006'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - closed
+
+      - activing
+
+'
+  - - '3068'
+    - Task
+    - '196'
+    - create
+    - 
+    - 
+    - '2012-09-24 08:51:30.733585'
+    - 
+  - - '3069'
+    - Task
+    - '195'
+    - update
+    - 
+    - ! "---\nresource_type: ClusterUser\nresource_id: 490\ncreated_at: 2012-09-24
+      08:51:20.962192000 Z\nupdated_at: 2012-09-24 12:51:26.110113000 Z\nprocedure:
+      add_user\ncomment: ! \"Add user: account_173 project_21 on t60.parallel.ru with
+      \\n\"\ncallbacks_performed: false\ntask_id: \nstate: successed\nid: 195\n"
+    - '2012-09-24 08:51:30.739185'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
+  - - '3070'
+    - Access
+    - '524'
+    - update
+    - 
+    - ! '---
+
+      credential_id: 14
+
+      state: activing
+
+      created_at: 2012-09-21 14:07:10.159556000 Z
+
+      updated_at: 2012-09-24 08:51:30.724950000 Z
+
+      cluster_user_id: 490
+
+      id: 524
+
+'
+    - '2012-09-24 08:51:36.03103'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      state:
+
+      - activing
+
+      - active
+
+'
+  - - '3071'
+    - Task
+    - '196'
+    - update
+    - 
+    - ! "---\nresource_type: Access\nresource_id: 524\ncreated_at: 2012-09-24 08:51:30.731075000
+      Z\nupdated_at: 2012-09-24 12:51:31.622010000 Z\nprocedure: add_openkey\ncomment:
+      ! 'Add key: account_173 / project_21 on t60.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA0irsViKCtkwRS6zTCfLHFxzSGRG04FXsDLCI0J0f7QBT6JCi1cdMITQhFWxctfz4TwF5j5mFwql6mK6PkjjoCbrXk4Sz6o53idGxJgAAU8QnbEugPs0Iz7Dsjq4QH+3VZ891C+x0xfvLjBoUxErloR5LvlCHfg++YdWr8ezyNkVkMS+Ge0sMuSd/Gjp+9hG3GYWzSpnKQvrBeLqpmmLM9RBiV54vqBt2c0qrBT1ASKQkpSY4K+kUWifbRPKSIYgBkkbUVXfcgOaWYngNldqL8rWXZahrQOmt9QBgzg2doZlx6+35Xh6+DbYTggZ0QjgmduqCDCzTinl481bUWwbCaQ==\n
+      \ releu.\n\n  Adding key for account_173!\n\n  Key added\n\n'\ncallbacks_performed:
+      false\ntask_id: \nstate: successed\nid: 196\n"
+    - '2012-09-24 08:51:36.037796'
+    - ! '--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+
+      callbacks_performed:
+
+      - false
+
+      - true
+
+'
 
 ---
 credentials:
@@ -48573,7 +48937,7 @@ accounts:
     - '12'
     - '21'
     - '2012-09-21 14:07:09.758971'
-    - '2012-09-21 14:09:12.015477'
+    - '2012-09-24 08:51:20.948072'
     - active
     - account_173
   - - '174'
@@ -49836,6 +50200,43 @@ tasks:
       .
 
       Adding key for account_156!
+
+      Key added
+
+'
+    - true
+    - 
+    - successed
+  - - '194'
+    - ClusterUser
+    - '490'
+    - '2012-09-24 08:50:52.020769'
+    - '2012-09-24 08:50:55.396369'
+    - del_user
+    - ! "Del user: project_21 on t60.parallel.ru with \n"
+    - true
+    - 
+    - successed
+  - - '195'
+    - ClusterUser
+    - '490'
+    - '2012-09-24 08:51:20.962192'
+    - '2012-09-24 08:51:30.738153'
+    - add_user
+    - ! "Add user: account_173 project_21 on t60.parallel.ru with \n"
+    - true
+    - 
+    - successed
+  - - '196'
+    - Access
+    - '524'
+    - '2012-09-24 08:51:30.731075'
+    - '2012-09-24 08:51:36.036736'
+    - add_openkey
+    - ! 'Add key: account_173 / project_21 on t60.parallel.ru with ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA0irsViKCtkwRS6zTCfLHFxzSGRG04FXsDLCI0J0f7QBT6JCi1cdMITQhFWxctfz4TwF5j5mFwql6mK6PkjjoCbrXk4Sz6o53idGxJgAAU8QnbEugPs0Iz7Dsjq4QH+3VZ891C+x0xfvLjBoUxErloR5LvlCHfg++YdWr8ezyNkVkMS+Ge0sMuSd/Gjp+9hG3GYWzSpnKQvrBeLqpmmLM9RBiV54vqBt2c0qrBT1ASKQkpSY4K+kUWifbRPKSIYgBkkbUVXfcgOaWYngNldqL8rWXZahrQOmt9QBgzg2doZlx6+35Xh6+DbYTggZ0QjgmduqCDCzTinl481bUWwbCaQ==
+      releu.
+
+      Adding key for account_173!
 
       Key added
 
