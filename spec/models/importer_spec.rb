@@ -50,6 +50,10 @@ describe 'Importer' do
     Access.where(credential_id: created_credential.id).first
   end
   
+  def created_request
+    Request.where(cluster_project_id: created_cluster_project.id, user_id: created_user.id).first
+  end
+  
   describe 'created user' do
     subject { created_user }
     
@@ -129,6 +133,12 @@ describe 'Importer' do
   
   describe 'Credential' do
     subject { created_credential }
+    
+    it { should be_valid }
+  end
+  
+  describe 'Request' do
+    subject { created_request }
     
     it { should be_valid }
   end

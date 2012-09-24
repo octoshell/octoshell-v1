@@ -40,7 +40,7 @@ class Importer
   
   def run
     %w(user organization membership surety project account cluster_project 
-      cluster_user credentials accesses relations).each do |entity|
+      cluster_user credentials accesses relations request).each do |entity|
       
       send "create_#{entity}"
     end
@@ -223,5 +223,19 @@ private
         end
       end
     end
+  end
+  
+  def create_request
+    return if Request.where(cluster_project_id: @cluster_project.id, user_id: @user.id, state: 'active').first
+    
+    conditions = {
+      cluster_project_id: @cluster_project.id,
+      user_id: @user.id,
+      state: 'active',
+      hours: 1,
+      size: 1
+    }
+    
+    Request.to_generic_model.where(conditions).create!
   end
 end
