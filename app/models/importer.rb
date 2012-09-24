@@ -26,9 +26,10 @@ class Importer
         user = User.find(created_user.id)
         raise "Invalid record" if user.invalid?
         users << user
+        puts line, "users: #{users.size}"
       end
     end
-    users.each &:deliver_reset_password_instructions!
+    # users.each &:deliver_reset_password_instructions!
   end
   
   def run
@@ -137,7 +138,7 @@ private
         credential.name = public_key[0..10]
         credential.public_key = public_key
       end
-    end
+    end.compact
   end
   
   def create_accesses
@@ -162,7 +163,9 @@ private
         project_id: project.id,
         username: account.username
       }
-      Account.to_generic_model.where(conditions).first_or_create!
+      unless Account.where(user_id: user.id, project_id: project.id).exists?
+        Account.to_generic_model.where(conditions).create!
+      end
     end
     
     Cluster.active.each do |cluster|
@@ -204,7 +207,10 @@ private
           credential_id: credential.id
         }
         
-        Access.to_generic_model.where(conditions).first_or_create!
+        
+        unless Access.where(cluster_user_id: cluster_user.id, credential_id: credential.id).exists?
+          Access.to_generic_model.where(conditions).create!
+        end
       end
     end
   end
