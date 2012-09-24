@@ -1,3 +1,4 @@
+# coding: utf-8
 # Модель доступа человека к проекту
 class Account < ActiveRecord::Base
   has_paper_trail
@@ -50,6 +51,20 @@ class Account < ActiveRecord::Base
   define_defaults_events :request, :activate, :decline, :cancel
   
   define_state_machine_scopes
+  
+  def self.find_by_params(params)
+    project_id, user_id = params.delete(:project_id), params.delete(:user_id)
+    Account.where(project_id: project_id, user_id: user_id).first
+  end
+  
+  def request
+    if can__request?
+      request!
+    else
+      errors.add(:base, %{Доступ в состоянии "#{human_state_name}"})
+      false
+    end
+  end
   
   def activate
     if user.ready_to_activate_account?

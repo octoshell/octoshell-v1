@@ -15,27 +15,10 @@ class AccountsController < ApplicationController
   
   def new
     authorize! :new, :accounts
-    @account = current_user.accounts.build
-    @invite = AccountFinder.new
-    @mailer = current_user.accounts.build
+    @application = Account.new
+    @invite = Account.new
+    @mailer = Account.new
     @projects = get_projects
-  end
-  
-  def application
-    user_id = admin? ? params[:account][:user_id] : current_user.id
-    project_id = params[:account][:project_id]
-    @account = Account.where(user_id: user_id, project_id: project_id).first
-    authorize! :application, @account
-    authorize! :request, @account
-    if (@account.requested? || @account.request)
-      UserMailer.account_requested(@account).deliver!
-      redirect_to @account
-    else
-      @invite = current_user.accounts.build
-      @mailer = current_user.accounts.build
-      @projects = get_projects
-      render :new
-    end
   end
   
   def show
@@ -43,37 +26,43 @@ class AccountsController < ApplicationController
     authorize! :show, @account
   end
   
-  def invite
-    @invite = AccountFinder.new(params[:account_finder])
-    if @invite.valid?
-      @account = @invite.find
-      authorize! :invite, @account
-      authorize! :activate, @account
-      if (@account.active? || @account.activate)
-        UserMailer.account_activated(@account).deliver!
-        redirect_to :back
-      else
-        @account = current_user.accounts.build
-        @mailer = current_user.accounts.build
-        @projects = get_projects
-        render :new
-      end
+  def application
+    @application = Account.find_by_params(params[:account])
+    authorize! :application, @application
+    authorize! :request, @application
+    if @application.requested? || @application.request
+      UserMailer.account_requested(@application).deliver!
+      redirect_to @application
     else
-      @account = current_user.accounts.build
-      @mailer = current_user.accounts.build
+      flash.now[:alert] = @application.errors.full_messages.join(', ')
+      @invite = Account.new
+      @mailer = Account.new
+      @projects = get_projects
+      render :new
+    end
+  end
+  
+  def invite
+    @invite = Account.find_by_params(params[:account])
+    authorize! :invite, @invite
+    if @invite.active? || @invite.activate
+      UserMailer.account_activated(@invite).deliver!
+      redirect_to @invite
+    else
+      @application = Account.new
+      @mailer = Account.new
       @projects = get_projects
       render :new
     end
   end
   
   def mailer
-    @mailer = current_user.accounts.build(params[:account])
-    authorize! :mailer, @mailer
+    @mailer = Account.find_by_params(params[:account])
     if @mailer.send_invites
       redirect_to @mailer.project
     else
-      @account = current_user.accounts.build
-      @invite = current_user.accounts.build
+      @application = Account.new
+      @invite = Account.new
       @projects = get_projects
       render :new
     end
@@ -152,6 +141,6 @@ private
   end
   
   def skip_action?
-    params[:action] == 'invite'
+    %w(invite application mailer).include? params[:action]
   end
 end

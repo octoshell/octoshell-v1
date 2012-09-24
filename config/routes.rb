@@ -73,9 +73,9 @@ MSU::Application.routes.draw do
   # accounts
   resources :accounts, only: [:index, :new, :show, :edit, :update] do
     collection do
-      post :invite
-      post :mailer
-      post :application
+      put :invite
+      put :mailer
+      put :application
     end
     put :activate
     put :decline
