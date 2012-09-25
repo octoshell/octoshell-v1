@@ -10,7 +10,11 @@
       li
         = link_to page.name, page
         - if admin?
-          |  
-          small = link_to 'редактировать', edit_page_path(page.id)
+          span class="actions"
+            | 
+            small = link_to 'редактировать', edit_page_path(page.id)
+            |  / 
+            small = link_to 'удалить', page_path(page.id), method: :delete, confirm: 'Вы уверены?', class: 'danger'
+            | 
 - else
   p Нет страниц

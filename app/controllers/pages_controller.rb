@@ -40,6 +40,12 @@ class PagesController < ApplicationController
     end
   end
   
+  def destroy
+    @page = Page.find(params[:id])
+    @page.destroy
+    redirect_to pages_path
+  end
+  
 private
   
   def namespace
