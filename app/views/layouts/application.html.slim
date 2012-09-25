@@ -36,15 +36,14 @@ html
             div class="page-header"
               h1 = yield :title
           div class="span3"
-            - wikis = WikiUrl.where(url: request.path)
-            - if wikis.any?
+            - if @wikis.any?
               div id="help" class="group"
                 div class="alert alert-info"
                   p
                     = link_to pages_path do
                       strong Справка
                   ul class="unstyled"
-                    - wikis.each do |wiki_url|
+                    - @wikis.each do |wiki_url|
                       li = link_to wiki_url.page.name, wiki_url.page
       javascript:
         $(document).ready(function(){

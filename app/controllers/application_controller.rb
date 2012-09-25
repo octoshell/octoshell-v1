@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   prepend_before_filter :authenticate_by_token, unless: :skip_authentication_by_token
   
   before_filter :block_closed_users
-  before_filter :get_extends
+  before_filter :get_extends, :get_wikis
   
   protect_from_forgery
   enable_authorization unless: :skip_action?
@@ -87,6 +87,12 @@ private
   def get_extends
     @page_extends = Extend.all.find_all do |extend|
       request.path =~ %r{#{extend.url}}
+    end
+  end
+  
+  def get_wikis
+    @wikis = WikiUrl.all.find_all do |wiki|
+      request.path =~ %r{#{wiki.url}}
     end
   end
 end

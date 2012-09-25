@@ -19,6 +19,6 @@ h3 Привязки к страницам
 = simple_form_for @wiki_url, html: { class: 'form-inline' } do |f|
   legend Новая привязка
   = f.hidden_field :page_id, as: :hidden
-  = f.text_field :url, placeholder: 'URL'
+  = f.text_field :url, placeholder: 'URL (regexp)'
   = " "
   = button_tag 'Привязать', class: 'btn'
