@@ -4,12 +4,7 @@ div class="link-actions"
   - if admin?
     = link_to 'Редактировать', [:edit, @account], class: 'btn'
     = ' '
-  - if @account.requested?
-    - if can?(:activate, @account) && can?(:decline, @account)
-      = link_to Account.human_state_event_name(:_activate), account_activate_path(@account), class: 'btn btn-success', method: :put
-      = ' '
-      = link_to Account.human_state_event_name(:_decline), account_decline_path(@account), class: 'btn', method: :put
-  - elsif @account.active? && can?(:cancel, @account)
+  - if @account.active? && can?(:cancel, @account)
     = link_to Account.human_state_event_name(:_cancel), account_cancel_path(@account), class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
   - else
     = link_to Account.human_state_event_name(:_activate), account_activate_path(@account), class: 'btn btn-success', method: :put

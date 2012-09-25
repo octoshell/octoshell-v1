@@ -437,6 +437,11 @@ ru:
         organization_id: Организация
         user: Пользователь
         state: Состояние
+      account_code:
+        code: Секретный код
+        state: Состояние
+        email: Email
+        project: Проект
       cluster:
         name: Название
         host: Хост
@@ -612,12 +617,18 @@ ru:
             pending: Ожидает подтверждения
             closed: Закрыт
             active: Активен
-            requested: Запрошен
           events:
             _activate: Активировать
             _decline: Отказать
             _cancel: Закрыть
             _close: Закрыть
+      account_code:
+        state:
+          states:
+            pending: Не использован
+            used: Использован
+          events:
+            _use: Использовать
       ticket:
         state:
           states:

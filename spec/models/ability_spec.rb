@@ -25,8 +25,6 @@ describe Ability do
     it_behaves_like 'all users'
     it_behaves_like 'basic user'
     
-    it { should be_able_to(:new, :accounts) }
-    
     it { should be_able_to(:new,    :requests) }
     it { should be_able_to(:create, :requests) }
     it { should be_able_to(:index,  :requests) }
@@ -70,9 +68,6 @@ describe Ability do
     it { should be_able_to(:activate, :accounts) }
     it { should be_able_to(:decline,  :accounts) }
     it { should be_able_to(:cancel,   :accounts) }
-    it { should be_able_to(:invite,   :accounts) }
-    it { should be_able_to(:request,  :accounts) }
-    it { should be_able_to(:mailer,   :accounts) }
     it { should be_able_to(:show,     :accounts) }
     it { should be_able_to(:edit,     :accounts) }
     it { should be_able_to(:update,   :accounts) }
@@ -176,10 +171,6 @@ describe Ability do
     it { should be_able_to(:edit,   :ticket_tags) }
     it { should be_able_to(:update, :ticket_tags) }
     it { should be_able_to(:close,  :ticket_tags) }
-    
-    it { should be_able_to(:create,  :wiki_urls) }
-    it { should be_able_to(:update,  :wiki_urls) }
-    it { should be_able_to(:destroy, :wiki_urls) }
     
     it { should be_able_to(:create,  :cluster_fields) }
     it { should be_able_to(:update,  :cluster_fields) }

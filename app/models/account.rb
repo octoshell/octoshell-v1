@@ -8,8 +8,6 @@ class Account < ActiveRecord::Base
   delegate :state_name, to: :user, prefix: true, allow_nil: true
   delegate :state_name, to: :project, prefix: true, allow_nil: true
   
-  attr_accessor :raw_emails
-  
   belongs_to :user, inverse_of: :accounts
   belongs_to :project, inverse_of: :accounts
   has_many :cluster_users, autosave: true, dependent: :destroy
@@ -19,28 +17,20 @@ class Account < ActiveRecord::Base
   validates :user_state_name, inclusion: { in: [:sured] }, if: :active?
   validates :user_state_name, exclusion: { in: [:closed] }, if: :active?
   validates :username, presence: true, on: :update
-  validate :emails_validator, if: :raw_emails
   
-  attr_accessible :project_id, :raw_emails
-  attr_accessible :project_id, :raw_emails, :user_id, :username, as: :admin
+  attr_accessible :project_id
+  attr_accessible :project_id, :user_id, :username, as: :admin
+  
+  scope :by_params, proc { |p| where(project_id: p[:project_id], user_id: p[:user_id]) }
   
   after_create :assign_username, :create_relations
   
   state_machine initial: :closed do
     state :closed
-    state :requested
     state :active
     
-    event :_request do
-      transition closed: :requested
-    end
-    
     event :_activate do
-      transition [:closed, :requested] => :active
-    end
-    
-    event :_decline do
-      transition requested: :closed
+      transition closed: :active
     end
     
     event :_cancel do
@@ -48,23 +38,9 @@ class Account < ActiveRecord::Base
     end
   end
   
-  define_defaults_events :request, :activate, :decline, :cancel
+  define_defaults_events :activate, :cancel
   
   define_state_machine_scopes
-  
-  def self.find_by_params(params)
-    project_id, user_id = params.delete(:project_id), params.delete(:user_id)
-    Account.where(project_id: project_id, user_id: user_id).first_or_create!
-  end
-  
-  def request
-    if can__request?
-      request!
-    else
-      errors.add(:base, %{Доступ в состоянии "#{human_state_name}"})
-      false
-    end
-  end
   
   def activate
     if user.ready_to_activate_account?
@@ -91,30 +67,6 @@ class Account < ActiveRecord::Base
     end
   end
   
-  # test it
-  def send_invites
-    emails_validator
-    return if errors.any?
-    
-    UserMailer.invitation(self).deliver
-  end
-  
-  # test it
-  def invite
-    return if invalid?
-    
-    transaction do
-      save!
-      activate
-      true
-    end
-  end
-  
-  # test it
-  def emails
-    raw_emails.to_s.split(',').map &:strip
-  end
-  
   def accesses
     Access.where(
       credential_id:   user.credential_ids,
@@ -128,14 +80,6 @@ class Account < ActiveRecord::Base
   end
   
 private
-  
-  def emails_validator
-    emails.each do |email|
-      unless email =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-        errors.add(:raw_emails, :invalid_email, email: email)
-      end
-    end
-  end
   
   def assign_username
     username = 

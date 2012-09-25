@@ -3,16 +3,6 @@
 - if cannot?(:new, :accounts)
   = render partial: 'shared/steps', locals: { steps: current_user.project_steps, title: "Для того чтобы создать новый проект вам нужно:" }
 
-- unless admin?
-  h3 Мои доступы
-
-  div class="link-actions"
-    = link_to 'Новый доступ', new_account_path, class: "btn #{disabled(can? :new, :accounts)}"
-
-  = render partial: 'table', locals: { accounts: current_user.accounts.where(state: ['active', 'requested']) }
-
-  h3 Доступы к моим проектам
-
 div class="link-actions"
   = link_to 'Новый доступ', new_account_path, class: "btn #{disabled(can? :new, :accounts)}"
 

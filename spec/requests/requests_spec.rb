@@ -112,9 +112,7 @@ describe 'Requests', js: true do
       end
       
       it 'should close cluster project' do
-        within "#cluster-project-#{request.cluster_project_id}" do
-          page.should have_content('pausing')
-        end
+        request.cluster_project.reload.should be_pausing
       end
     end
     

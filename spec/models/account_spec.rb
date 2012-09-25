@@ -15,7 +15,6 @@ describe Account do
   it { should validate_presence_of(:project) }
   
   it { should allow_mass_assignment_of(:project_id) }
-  it { should allow_mass_assignment_of(:raw_emails) }
   
   it 'should create account only for sured users' do
     account = build(:account, user: create(:closed_user))

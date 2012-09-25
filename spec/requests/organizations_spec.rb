@@ -20,7 +20,7 @@ describe 'Organizations', js: true do
     end
     
     it 'should show new surety page' do
-      current_path.should == organization_path(new_organization)
+      current_path.should == dashboard_path
     end
     
     it 'should create new organization' do

@@ -40,12 +40,11 @@ class Ability
       end
       can :close, :projects, user_id: user.id
       
-      can [:index], :users
       can :show, :users do |showed_user|
         showed_user.publicized? || showed_user.id == user.id
       end
       
-      can [:index, :show, :new, :create, :closed], :organizations
+      can [:new, :create], :organizations
       
       can [:show, :index, :close], :memberships
       
@@ -57,17 +56,17 @@ class Ability
       can [:edit, :update], :memberships, user_id: user.id
       
       can :index, :accounts
-      can [:show, :activate, :decline, :cancel], :accounts, project_id: user.owned_project_ids
+      can [:activate, :decline, :cancel], :accounts, project_id: user.owned_project_ids
       can :show, :cluster_users do |cluster_user|
         cluster_user.account.user == user
       end
       
       # sured user
       if user.sured?
-        can [:new, :show], :accounts
-        can :invite, :accounts, project_id: user.owned_project_ids
-        can [:application, :request], :accounts, user_id: user.id
-        can :mailer, :accounts, project_id: user.owned_project_ids
+        can [:index, :create, :use, :new_use], :account_codes
+        can :destroy, :account_codes do |code|
+          code.pending? && user.owned_project_ids.include?(code.project_id)
+        end
         
         can :show, :requests, user_id: user.id
         
@@ -98,7 +97,7 @@ class Ability
         
         can [:show, :close], :credentials
         
-        can [:new, :application, :show, :activate, :decline, :cancel, :invite, :request, :mailer, :edit, :update], :accounts
+        can [:new, :create, :show, :activate, :decline, :cancel, :edit, :update], :accounts
         
         can [:show, :edit, :update, :new, :create, :close], :projects
         

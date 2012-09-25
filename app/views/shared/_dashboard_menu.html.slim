@@ -1,6 +1,8 @@
 = submenu_item :dashboards, (link_to "Оповещения (#{current_user.notifications_count})", dashboard_path)
 - if can? :index, :projects
   = submenu_item :projects, (link_to 'Мои проекты', projects_path)
+- if can? :index, :account_codes
+  = submenu_item :account_codes, (link_to 'Приглашения', account_codes_path)
 - if can? :index, :requests
   = submenu_item :requests, (link_to 'Мои заявки', requests_path)
 - if can? :index, :clusters

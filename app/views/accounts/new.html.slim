@@ -1,35 +1,8 @@
 - title 'Новый аккаунт'
 
-- if !params[:type] || params[:type] == 'request'
-  h3 Запросить доступ в проект
-
-  = simple_form_for @application, url: application_accounts_path, method: :put, html: { class: 'form-horizontal', id: 'new_account_request' } do |f|
-    = hidden_field_tag :type, params[:type] if params[:type]
-    - if admin?
-      = f.association :user, label_method: :full_name, collection: User.sured, prompt: false
-    - else
-      - f.object.user_id = current_user.id
-      = f.hidden_field :user_id
-    = f.association :project, collection: Project.active, prompt: false
+= simple_form_for @account, url: accounts_path, method: :post do |f|
+  = f.association :user, label_method: :full_name, collection: User.sured.order(:last_name)
+  = f.association :project
   
-    div class="form-actions"
-      = f.button :submit, t('pages.accounts.request')
-
-- if !params[:type] || params[:type] == 'invite'
-  h3 Пригласить в проект
-
-  = simple_form_for @invite, url: invite_accounts_path, method: :put, html: { class: 'form-horizontal', id: 'new_account_invitation' } do |f|
-    = hidden_field_tag :type, params[:type] if params[:type]
-    = f.association :user, label_method: :full_name, collection: (admin? ? User : User.where('id != ?', current_user.id)).sured, prompt: false
-    = f.association :project, collection: @projects, prompt: false
-    div class="form-actions"
-      = f.button :submit, t('pages.accounts.invite')
-
-  h3 Пригласить в проект еще не зарегистрированных людей
-
-  = simple_form_for @mailer, url: mailer_accounts_path, method: :put, html: { class: 'form-horizontal', id: 'new_account_batch_invitation' } do |f|
-    = hidden_field_tag :type, params[:type] if params[:type]
-    = f.association :project, collection: @projects, prompt: false
-    = f.input :raw_emails, as: :text, input_html: { rows: 5 }, hint: 'Через запятую, например: email@example.com, example@mail.com'
-    div class="form-actions"
-      = f.button :submit, t('pages.accounts.invite')
+  div class="form-actions"
+    = f.button :submit

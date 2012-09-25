@@ -46,20 +46,6 @@ class UserMailer < ActionMailer::Base
     mail to: @user.emails, subject: %{Получен доступ к проекту #{@project.name}}
   end
   
-  def account_requested(account)
-    @user = account.project.user
-    @requester = account.user
-    @project = account.project
-    mail to: @user.emails, subject: %{#{@requester.full_name} запрашивает доступ к проекту #{@project.name}}
-  end
-  
-  def account_declined(account)
-    @user = account.project.user
-    @requester = account.user
-    @project = account.project
-    mail to: @user.emails, subject: %{Отказ в доступе к проекту #{@project.name}}
-  end
-  
   def account_canceled(account)
     @user = account.project.user
     @requester = account.user

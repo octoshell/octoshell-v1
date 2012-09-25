@@ -8,7 +8,7 @@ describe 'Credentials', js: true do
         visit new_credential_path
         within('#new_credential') do
           fill_in 'Name', with: 'iMac'
-          fill_in 'Public key', with: '=== tratata'
+          fill_in 'credential_public_key', with: '=== tratata'
           click_button 'Create Credential'
         end
       end

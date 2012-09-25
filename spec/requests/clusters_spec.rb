@@ -104,17 +104,6 @@ describe 'Clusters', js: true do
       end
     end
     
-    context 'as user' do
-      before do
-        login
-        visit cluster_path(cluster)
-      end
-      
-      it 'should show cluster' do
-        page.should have_css("#cluster-#{cluster.id}-detail")
-      end
-    end
-    
     context 'as non authorized user' do
       before do
         visit cluster_path(cluster)

@@ -14,10 +14,6 @@
 - if @requests.any?
   h3 Заявки
   = render partial: 'requests/table', locals: { requests: @requests }
-  
-- if @accounts.any?
-  h3 Доступы к проектам
-  = render partial: 'accounts/table', locals: { accounts: @accounts }
 
 h3 Поддержка
 

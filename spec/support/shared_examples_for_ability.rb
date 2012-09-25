@@ -33,7 +33,6 @@ shared_examples 'basic user' do
   
   it { should be_able_to(:new, :organizations) }
   it { should be_able_to(:create, :organizations) }
-  it { should be_able_to(:closed, :organizations) }
   
   it { should be_able_to(:new, :sureties) }
   it { should be_able_to(:create, :sureties) }

@@ -151,9 +151,7 @@ class User < ActiveRecord::Base
   def unsure!
     transaction do
       _unsure!
-      accounts.non_closed.each do |account|
-        account.send(account.requested? ? :decline! : :cancel! )
-      end
+      accounts.non_closed.each &:decline!
     end
   end
   
@@ -188,7 +186,6 @@ class User < ActiveRecord::Base
       count += sureties.pending.count
       count += requests.pending.count
       count += tickets.answered.count
-      count += Account.where(id: owned_project_ids).requested.count
     end
     
     count
@@ -198,6 +195,10 @@ class User < ActiveRecord::Base
     emails = [email]
     emails << additional_emails.pluck(:email)
     emails.flatten.compact.uniq
+  end
+  
+  def produces_account_codes
+    AccountCode.where(project_id: owned_project_ids)
   end
   
 private

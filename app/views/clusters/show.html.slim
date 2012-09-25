@@ -8,7 +8,7 @@ table class="table table-bordered" id="cluster-#{@cluster.id}-detail"
     th = Cluster.human_attribute_name(:description)
     td = @cluster.description
 
-- if can?(:edit, @cluster) || can?(:index, :versions)
+- if admin?
   div class="link-actions"
     = link_to 'Редактировать', edit_cluster_path(@cluster), class: 'btn'
     - if @cluster.can__close?
@@ -18,44 +18,47 @@ table class="table table-bordered" id="cluster-#{@cluster.id}-detail"
       = " "
       = link_to 'Версии', [@cluster, :versions], class: 'btn'
 
-h3 Проекты на кластере
+  h3 Проекты на кластере
 
-table class="table table-bordered"
-  tr
-    th class="span4" Всего
-    td = @cluster.cluster_projects.non_closed.count
-  tr
-    th Активных
-    td = @cluster.cluster_projects.active.count
-  tr
-    th Закрытых
-    td = @cluster.cluster_projects.joins(:project).where(projects: { state: 'closed' }).count
+  table class="table table-bordered"
+    tr
+      th class="span4" Всего
+      td = @cluster.cluster_projects.non_closed.count
+    tr
+      th Активных
+      td = @cluster.cluster_projects.active.count
+    tr
+      th Закрытых
+      td = @cluster.cluster_projects.joins(:project).where(projects: { state: 'closed' }).count
 
-= render partial: 'cluster_projects/table', locals: { cluster_projects: @cluster.cluster_projects }
+  = render partial: 'cluster_projects/table', locals: { cluster_projects: @cluster.cluster_projects.non_closed.limit(5) }
 
-h3 Активные заявки
+  = link_to "Все проекты на кластере (#{@cluster.cluster_projects.non_closed.count})", cluster_projects_path(search: { cluster_id_eq: @cluster.id })
 
-= render partial: 'requests/table', locals: { requests: @cluster.requests.active }
-p = link_to "Все заявки (#{@cluster.requests.count})", requests_path(search: { state_in: Request.state_names, cluster_project_cluster_id_eq: @cluster.id })
+  h3 Активные заявки
 
-h3 Поддержка
+  = render partial: 'requests/table', locals: { requests: @cluster.requests.active.limit(5) }
 
-table class="table table-bordered"
-  tr
-    th class="span4" Всего
-    td = @cluster.tickets.count
-  tr
-    th Активных
-    td = @cluster.tickets.active.count
-  tr
-    th Проектов в поддержке
-    td = @cluster.tickets.select('distinct tickets.project_id').count
-  tr
-    th Пользователей в поддержке
-    td = @cluster.tickets.select('distinct tickets.user_id').count
+  p = link_to "Все заявки (#{@cluster.requests.count})", requests_path(search: { state_in: Request.state_names, cluster_project_cluster_id_eq: @cluster.id })
 
-h3 Активные заявки
+  h3 Поддержка
 
-= render partial: 'tickets/table', locals: { tickets: @cluster.tickets.active }
+  table class="table table-bordered"
+    tr
+      th class="span4" Всего
+      td = @cluster.tickets.count
+    tr
+      th Активных
+      td = @cluster.tickets.active.count
+    tr
+      th Проектов в поддержке
+      td = @cluster.tickets.select('distinct tickets.project_id').count
+    tr
+      th Пользователей в поддержке
+      td = @cluster.tickets.select('distinct tickets.user_id').count
 
-p = link_to "Все заявки (#{@cluster.tickets.count})", tickets_path(search: { state_in: Ticket.state_names, cluster_id_eq: @cluster.id })
+  h3 Активные заявки
+
+  = render partial: 'tickets/table', locals: { tickets: @cluster.tickets.active }
+
+  p = link_to "Все заявки (#{@cluster.tickets.count})", tickets_path(search: { state_in: Ticket.state_names, cluster_id_eq: @cluster.id })
