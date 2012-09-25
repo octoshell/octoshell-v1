@@ -91,8 +91,8 @@ private
   end
   
   def get_wikis
-    @wikis = WikiUrl.all.find_all do |wiki|
-      request.path =~ %r{#{wiki.url}}
+    @wikis = Page.all.find_all do |page|
+      request.path =~ %r{#{page.locator}} if page.locator?
     end
   end
 end

@@ -28,13 +28,11 @@ class PagesController < ApplicationController
   end
   
   def edit
-    @page = find_page(params[:id])
-    @wiki_urls = @page.wiki_urls.to_a
-    @wiki_url = @page.wiki_urls.build
+    @page = Page.find(params[:id])
   end
   
   def update
-    @page = find_page(params[:id])
+    @page = Page.find(params[:id])
     if @page.update_attributes(params[:page], as_role)
       redirect_to @page
     else

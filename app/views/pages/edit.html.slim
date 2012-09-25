@@ -1,24 +1,3 @@
 - title 'Редактирование страницы'
 
 = render 'form'
-
-h3 Привязки к страницам
-
-- if @wiki_urls.any?
-  table class="table table-bordered"
-    tr
-      th = WikiUrl.human_attribute_name(:url)
-      th
-    - @wiki_urls.each do |wiki_url|
-      tr
-        td = link_to wiki_url.url, wiki_url.url
-        td = link_to "Удалить", wiki_url, class: 'btn btn-small btn-danger', method: :delete, data: { confirm: "Вы уверены?" }
-- else
-  p Нет привязок
-
-= simple_form_for @wiki_url, html: { class: 'form-inline' } do |f|
-  legend Новая привязка
-  = f.hidden_field :page_id, as: :hidden
-  = f.text_field :url, placeholder: 'URL (regexp)'
-  = " "
-  = button_tag 'Привязать', class: 'btn'

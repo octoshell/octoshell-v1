@@ -189,9 +189,6 @@ MSU::Application.routes.draw do
   # pages
   resources :pages
   
-  # wiki urls
-  resources :wiki_urls, only: [:create, :update, :destroy]
-  
   # cluster fields
   resources :cluster_fields, only: [:create, :update, :destroy]
   

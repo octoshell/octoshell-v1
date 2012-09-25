@@ -3,8 +3,6 @@ class Page < ActiveRecord::Base
   WIKI   = Rails.root.join("db", "wiki.git")
   COMMIT = { message: 'commit', name: 'Admin' }
   
-  has_many :wiki_urls
-  
   attr_accessor :body
   
   before_create  :create_page
@@ -14,7 +12,7 @@ class Page < ActiveRecord::Base
   validates :body, :name, :url, presence: true
   validates :url, uniqueness: true
   
-  attr_accessible :name, :body, :url, as: :admin
+  attr_accessible :name, :body, :url, :locator, as: :admin
   
   def to_param
     url

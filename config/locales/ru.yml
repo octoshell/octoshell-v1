@@ -430,9 +430,8 @@ ru:
       page:
         name: Название
         url: url
+        locator: Страницы для показа
         body: Текст
-      wiki_url:
-        url: URL
       membership:
         organization: Организация
         organization_id: Организация
