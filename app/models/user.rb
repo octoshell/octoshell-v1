@@ -144,14 +144,14 @@ class User < ActiveRecord::Base
   def sure!
     transaction do
       _sure!
-      accounts.where(project_id: owned_project_ids).each &:activate!
+      accounts.where(project_id: owned_projects.active.map(&:id)).each &:activate!
     end
   end
   
   def unsure!
     transaction do
       _unsure!
-      accounts.non_closed.each &:decline!
+      accounts.non_closed.each &:cancel!
     end
   end
   
