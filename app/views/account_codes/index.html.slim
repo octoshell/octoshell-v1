@@ -5,10 +5,9 @@ div class="link-actions"
   |  
   = link_to 'Использовать код', use_account_codes_path, class: 'btn'
 
-
-h4 Отправленные
-
 - if @account_codes.any?
+  h4 Отправленные
+  
   table class="table table-bordered"
     tr
       th = Project.model_name.human
