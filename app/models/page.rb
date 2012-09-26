@@ -5,9 +5,9 @@ class Page < ActiveRecord::Base
   
   attr_accessor :body
   
-  before_create  :create_page
-  before_update  :update_page
-  before_destroy :delete_page 
+  after_create  :create_page
+  after_update  :update_page
+  after_destroy :delete_page 
   
   validates :body, :name, :url, presence: true
   validates :url, uniqueness: true
@@ -50,18 +50,22 @@ private
   end
   
   def page
-    wiki.page(self.name)
+    wiki.page(wiki_page_name)
   end
   
   def create_page
-    wiki.write_page(name, FORMAT, body, COMMIT)
+    wiki.write_page(wiki_page_name, FORMAT, body, COMMIT)
   end
   
   def update_page
-    wiki.update_page(page, name, FORMAT, body, COMMIT)
+    wiki.update_page(page, wiki_page_name, FORMAT, body, COMMIT)
   end
   
   def delete_page
     wiki.delete_page(page, COMMIT)
+  end
+  
+  def wiki_page_name
+    "page_#{id}"
   end
 end
