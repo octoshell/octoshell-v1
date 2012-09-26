@@ -44,7 +44,7 @@ html
                       strong Справка
                   ul class="unstyled"
                     - @wikis.each do |wiki|
-                      li = link_to wiki.name, wiki.url
+                      li = link_to wiki.name, page_path(wiki.url)
       javascript:
         $(document).ready(function(){
           #{@page_extends.map { |extend| "$.getScript('/run/#{extend.script}')" }.join(';').html_safe}
