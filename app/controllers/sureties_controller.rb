@@ -31,9 +31,8 @@ class SuretiesController < ApplicationController
     authorize! :show, @surety
     respond_to do |format|
       format.html
-      format.pdf do
-        render pdf: "surety#{@surety.id}}",
-               layout: 'pdf.html'
+      format.rtf do
+        send_data @surety.to_rtf
       end
     end
   end
