@@ -1,5 +1,5 @@
 # coding: utf-8
-class UserMailer < ActionMailer::Base
+class Mailer < ActionMailer::Base
   default from: 'Octoshell Notifier <noreply@v1.parallel.ru>'
   
   def activation_needed_email(user)
@@ -23,9 +23,11 @@ class UserMailer < ActionMailer::Base
     mail to: User.admins.pluck(:email), subject: 'Создана новая организация'
   end
   
-  def invitation(account)
-    @project = account.project
-    mail to: account.emails, subject: %{Вас приглашают в работать над проектом "#{@project.name}"}
+  def invite(account_code)
+    @account_code = account_code
+    @project = @account_code.project
+    @user = User.find_by_email(@account_code.email)
+    mail to: @account_code.email, subject: %{Вас приглашают в работать над проектом "#{@project.name}"}
   end
   
   def new_ticket_answer(ticket)

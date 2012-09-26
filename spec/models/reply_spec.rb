@@ -31,7 +31,7 @@ describe Reply do
       
       it 'should send email about new answer' do
         mailer = mock; mailer.should_receive(:deliver)
-        UserMailer.should_receive(:new_ticket_answer).with(reply.ticket).and_return(mailer)
+        Mailer.should_receive(:new_ticket_answer).with(reply.ticket).and_return(mailer)
         reply.save
       end
     end

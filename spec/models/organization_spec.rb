@@ -92,7 +92,7 @@ describe Organization do
     
     it 'should notify admins about it' do
       mailer = mock; mailer.should_receive(:deliver)
-      UserMailer.should_receive(:notify_new_organization).
+      Mailer.should_receive(:notify_new_organization).
         with(organization).and_return(mailer)
       organization.save
     end

@@ -30,6 +30,6 @@ class Reply < ActiveRecord::Base
 private
   
   def notify_user
-    UserMailer.new_ticket_answer(ticket).deliver
+    Mailer.new_ticket_answer(ticket).deliver
   end
 end

@@ -25507,26 +25507,6 @@ request_properties:
     - '23'
 
 ---
-wiki_urls:
-  columns:
-  - id
-  - page_id
-  - url
-  records: 
-  - - '1'
-    - '2'
-    - /admin
-  - - '2'
-    - '1'
-    - /profile
-  - - '3'
-    - '5'
-    - /profile
-  - - '4'
-    - '5'
-    - /dashboard
-
----
 accesses:
   columns:
   - id

@@ -25,7 +25,7 @@ class AccountsController < ApplicationController
     @account = find_account(params[:account_id])
     authorize! :activate, @account
     if @account.activate
-      UserMailer.account_activated(@account).deliver!
+      Mailer.account_activated(@account).deliver!
       redirect_to @account
     else
       redirect_to_account_with_alert(@account)

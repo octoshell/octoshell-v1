@@ -66,7 +66,7 @@ class Organization < ActiveRecord::Base
 private
   
   def notify_admins
-    UserMailer.notify_new_organization(self).deliver if User.admins.exists?
+    Mailer.notify_new_organization(self).deliver if User.admins.exists?
     true
   end
 end

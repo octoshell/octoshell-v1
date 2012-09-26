@@ -34,6 +34,14 @@ class AccountCode < ActiveRecord::Base
     end
   end
   
+  def use!
+    transaction do
+      _use!
+      account = Account.where(project_id: project_id, user_id: user_id).first_or_create!
+      account.active? or account.activate!
+    end
+  end
+  
 private
   
   def assign_code
@@ -42,6 +50,6 @@ private
   end
   
   def send_invite
-    UserMailer.invite(self).deliver
+    Mailer.invite(self).deliver
   end
 end
