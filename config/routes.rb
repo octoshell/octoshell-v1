@@ -23,6 +23,8 @@ MSU::Application.routes.draw do
     put :activate
     put :decline
     put :close
+    put :confirm
+    put :unconfirm
     resources :versions, only: [:index, :show], resource: 'Surety'
   end
   

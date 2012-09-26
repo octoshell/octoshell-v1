@@ -107,7 +107,7 @@ class Ability
         
         can [:index, :new, :create, :show, :activate, :decline, :close, :edit, :update, :application], :requests
         
-        can [:index, :show, :activate, :decline, :close, :find], :sureties
+        can [:index, :show, :activate, :decline, :close, :find, :confirm, :unconfirm, :surety], :sureties
         
         can [:index, :show, :edit, :update, :merge, :close], :organizations
         

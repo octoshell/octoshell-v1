@@ -19,24 +19,33 @@ class Surety < ActiveRecord::Base
   
   state_machine initial: :pending do
     state :pending
+    state :confirmed
     state :active
     state :declined
     state :closed
     
+    event :_confirm do
+      transition pending: :confirmed
+    end
+    
+    event :_unconfirm do
+      transition confirmed: :pending
+    end
+    
     event :_activate do
-      transition pending: :active
+      transition [:confirmed, :pending] => :active
     end
     
     event :_decline do
-      transition pending: :declined
+      transition [:confirmed, :pending] => :declined
     end
     
     event :_close do
-      transition any => :closed
+      transition [:pending, :confirmed, :active, :declined] => :closed
     end
   end
   
-  define_defaults_events :activate, :decline, :close
+  define_defaults_events :activate, :decline, :close, :confirm, :unconfirm
   
   define_state_machine_scopes
   
@@ -57,22 +66,22 @@ class Surety < ActiveRecord::Base
   
   def to_rtf
     font = RTF::Font.new(RTF::Font::ROMAN, 'Arial')
-    
+
     header = RTF::ParagraphStyle.new
     header.justification = :qr
     header.space_before = 1200
     header.space_after = 300
-    
+
     title = RTF::ParagraphStyle.new
     title.space_before = 1000
     title.space_after = 1000
     title.justification = :qc
-    
+
     body = RTF::ParagraphStyle.new
     body.space_after = 300
-    
+
     document = RTF::Document.new(font)
-    
+
     document.paragraph(header) do |p|
       8.times { p.line_break }
       p << "Ректору"

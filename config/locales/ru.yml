@@ -533,10 +533,13 @@ ru:
             closed: Удалено
             declined: Отказано
             active: Активно
+            confirmed: Предварительно одобрена
           events:
             _activate: Активировать
             _decline: Отказать
             _close: Удалить
+            _confirm: Предварительно одобрить
+            _unconfirm: Отменить предварительное одобрение
       user:
         state:
           states:

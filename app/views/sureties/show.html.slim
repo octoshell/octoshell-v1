@@ -22,14 +22,24 @@ div class="link-actions noprint"
   - if can? :index, :versions
     = " "
     = link_to 'Версии', [@surety, :versions], class: 'btn'
-  - if can? :activate, :sureties
-    - if @surety.pending?
+  - if admin?
+    - if @surety.can__activate?
       = " "
       = link_to Surety.human_state_event_name(:_activate), surety_activate_path(@surety), class: 'btn btn-success', method: :put
+    
+    - if @surety.can__decline?
       = " "
       = link_to Surety.human_state_event_name(:_decline), surety_decline_path(@surety), class: 'btn', method: :put
+      
+    - if @surety.can__confirm?
       = " "
-    - if @surety.active? || @surety.declined?
+      = link_to Surety.human_state_event_name(:_confirm), surety_confirm_path(@surety), class: 'btn', method: :put
+    
+    - if @surety.can__unconfirm?
+      = " "
+      = link_to Surety.human_state_event_name(:_unconfirm), surety_unconfirm_path(@surety), class: 'btn', method: :put
+    
+    - if @surety.can__close?
       = " "
       = link_to Surety.human_state_event_name(:_close), surety_close_path(@surety), class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
 
