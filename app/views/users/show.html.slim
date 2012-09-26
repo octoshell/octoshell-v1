@@ -1,8 +1,10 @@
 / - title @user.full_name
 
-- if can? :index, :versions
+- if admin?
   div class="link-actions"
     = link_to 'Версии', [@user, :versions], class: 'btn'
+    = " "
+    = link_to 'Редактировать', [:edit, @user], class: 'btn'
     - if @user.can__close?
       = " "
       = link_to User.human_state_event_name(:_close), user_close_path(@user), class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены что хотите закрыть пользователя? Это закроет все его проекты (созданные им), поручительства, места работы, тикеты и ключи доступа.' }

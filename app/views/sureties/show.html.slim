@@ -6,7 +6,9 @@ table class="table table-bordered noprint"
     td = link_to_organization @surety.organization
   tr
     th = User.model_name.human
-    td = link_to_user @surety.user
+    td
+      = link_to_user @surety.user
+      = render partial: 'memberships/summary', locals: { memberships: @surety.user.memberships.active }
   tr
     th = Surety.human_attribute_name(:state)
     td id="surety-#{@surety.id}-status" = @surety.human_state_name
