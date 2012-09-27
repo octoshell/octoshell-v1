@@ -19,6 +19,9 @@ MSU::Application.routes.draw do
     collection do
       get :closed
       post :find
+      get :template, action: :edit_template
+      put :template, action: :update_template
+      put :default, action: :default_template
     end
     put :activate
     put :decline
@@ -185,8 +188,6 @@ MSU::Application.routes.draw do
   
   # pages
   resources :pages
-  
-  
   
   # account codes
   resources :account_codes, only: [:index, :new, :create, :destroy] do

@@ -1,0 +1,21 @@
+- title 'Шаблон поручительства'
+
+= form_tag template_sureties_path, method: :put, class: 'form-horizontal' do
+  div class="control-group integer required"
+    = label_tag :template, 'Шаблон', class: 'select required control-label'
+    div class="controls"
+      = text_area_tag :template, @template, class: 'span8', rows: '30'
+  div class="form-actions"
+    = button_tag 'Сохранить', class: 'btn'
+
+markdown:
+  ### Переменные:
+  
+  `{{ surety.id }}` - Номер поручительства
+  
+  `{{ surety.organization.surety_name }}` - Название организации
+  
+  `{{ surety.user.full_name }}` - Имя пользователя
+  
+h4 Если все сломалось:
+p = link_to 'Вернуть шаблон по умолчанию', default_sureties_path, method: :put, confirm: 'Вы уверены?'

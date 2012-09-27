@@ -55,6 +55,9 @@ namespace :deploy do
     # Ставим симлинк на конфиги и загрузки
     run "rm -f #{latest_release}/config/database.yml"
     run "ln -s #{deploy_to}/shared/configs/database.yml #{latest_release}/config/database.yml"
+    
+    run "rm -f #{latest_release}/config/surety.liquid"
+    run "ln -s #{deploy_to}/shared/configs/surety.liquid #{latest_release}/config/surety.liquid"
 
     run "rm -rf #{latest_release}/public/uploads"
     run "ln -s #{deploy_to}/shared/uploads #{latest_release}/public/uploads"
