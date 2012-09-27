@@ -40,6 +40,7 @@ group :test, :development do
   gem 'launchy'
   gem 'guard-rspec'
   gem 'database_cleaner'
+  gem 'ci_reporter'
 end
 
 group :assets do

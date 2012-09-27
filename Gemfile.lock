@@ -77,6 +77,8 @@ GEM
     childprocess (0.3.2)
       ffi (~> 1.0.6)
     chronic (0.6.7)
+    ci_reporter (1.7.2)
+      builder (>= 2.1.2)
     cocaine (0.2.1)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -316,6 +318,7 @@ DEPENDENCIES
   capistrano-resque
   capistrano-unicorn
   capybara
+  ci_reporter
   cocaine
   coffee-rails (~> 3.2.1)
   database_cleaner
