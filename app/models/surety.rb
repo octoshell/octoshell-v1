@@ -63,10 +63,16 @@ class Surety < ActiveRecord::Base
   end
   
   def to_rtf
+    f = lambda { |n| n < 128 ? n.chr : "\\u#{n} " }
+    e = lambda { |t| t.encode("UTF-16LE", undef: :replace).each_codepoint.map(&f).join }    
+    
     template = File.read("#{Rails.root}/config/surety.rtf")
+    # template.gsub!("{", "\\{")
+    # template.gsub!("}", "\\}")
+    # template.gsub!("\\", "\\\\")
     template.gsub! /\\\{\\\{ id \\\}\\\}/, id.to_s
-    template.gsub! /\\\{\\\{ organization_name \\\}\\\}/, organization.surety_name
-    template.gsub! /\\\{\\\{ user_name \\\}\\\}/, user.full_name
+    template.gsub! /\\\{\\\{ organization_name \\\}\\\}/, e.call(organization.surety_name)
+    template.gsub! /\\\{\\\{ user_name \\\}\\\}/, e.call(user.full_name)
     template
   end
 end
