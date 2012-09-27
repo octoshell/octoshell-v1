@@ -22,6 +22,8 @@ class Ability
         (ticket.user_id == user.id) && ticket.can__resolve?
       end
       
+      can :index, :notifications
+      
       can :create, :replies, ticket_id: user.ticket_ids
       
       can [:show, :edit, :update], :profiles

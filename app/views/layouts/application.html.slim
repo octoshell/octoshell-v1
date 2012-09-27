@@ -26,8 +26,9 @@ html
               li = link_to t('pages.shared.login'), new_session_path
       div class="noprint"
         - if logged_in?
-          ul class="nav nav-tabs"
-            = render "shared/#{namespace}_menu"
+          - if (menu = render "shared/#{namespace}_menu").present?
+            ul class="nav nav-tabs"
+              = menu
         - flash.each do |type, message|
           - context = type == :alert ? 'alert-error' : 'alert-info'
           = content_tag :div, message, class: "alert #{context}"

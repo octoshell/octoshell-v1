@@ -3,10 +3,6 @@ class DashboardsController < ApplicationController
   before_filter :handle_admin
   
   def show
-    @user = current_user
-    @sureties = @user.sureties.pending
-    @requests = @user.requests.pending
-    @tickets = @user.tickets.answered
   end
   
 private

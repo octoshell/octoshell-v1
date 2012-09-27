@@ -1,4 +1,3 @@
-= submenu_item :admins, (link_to "Оповещения (#{current_user.notifications_count})", admin_path)
 = submenu_item :sureties, (link_to "Поручительства (#{Surety.pending.count})", sureties_path)
 = submenu_item :requests, (link_to "Заявки (#{Request.pending.count})", requests_path)
 = submenu_item :tasks, (link_to "Процедуры (#{Task.failed.count})", tasks_path)

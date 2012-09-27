@@ -1,0 +1,41 @@
+- title 'Оповещения'
+- if admin?
+  - if @requests.any?
+    h3 Заявки
+    = render partial: 'requests/table', locals: { requests: @requests }
+
+  - if @tasks.any?
+    h3 Процедуры
+    = render partial: 'tasks/table', locals: { tasks: @tasks }
+
+  - if @sureties.any?
+    h3 Поручительства
+    = render partial: 'sureties/table', locals: { sureties: @sureties }
+
+  - if @tickets.any?
+    h3 Заявки в саппорт
+    = render partial: 'tickets/table', locals: { tickets: @tickets }
+
+  - if current_user.notifications_count.zero?
+    p Нет задач. Все хорошо.
+- else
+  - if @user.start_steps.any?
+    h2 Начало работы
+    = render partial: 'shared/steps', locals: { steps: @user.start_steps, title: "Для начала работы с системой вам нужно:" }
+  - elsif !@user.projects.any?
+    p
+      | Вы можете #{link_to 'создать проект', new_project_path} или #{link_to 'запросить доступ', new_account_path} к существующему
+
+  - if @sureties.any?
+    h3 Поручительства
+    = render partial: 'sureties/table', locals: { sureties: @sureties }
+
+  - if @requests.any?
+    h3 Заявки
+    = render partial: 'requests/table', locals: { requests: @requests }
+
+  h3 Поддержка
+
+  p = link_to 'Создать заявку', new_ticket_path
+  - if @tickets.any?
+    = render partial: 'tickets/table', locals: { tickets: @tickets }

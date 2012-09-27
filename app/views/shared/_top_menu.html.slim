@@ -5,3 +5,4 @@
 - unless admin?
   li class="#{active_menu?(:profile)}" = link_to 'Личный кабинет', profile_path
 li class="#{active_menu?(:support)}" = link_to 'Поддержка', support_path
+li class="#{active_menu?(:notifications)}" = link_to "Оповещения (#{current_user.notifications_count})", notifications_path
