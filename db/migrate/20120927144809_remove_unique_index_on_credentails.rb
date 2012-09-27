@@ -1,5 +1,5 @@
 class RemoveUniqueIndexOnCredentails < ActiveRecord::Migration
   def change
-    remove_index :credentials, [:user_id, :public_key]
+    remove_index :credentials, column: [:public_key, :user_id]
   end
 end
