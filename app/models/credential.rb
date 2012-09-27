@@ -31,6 +31,11 @@ class Credential < ActiveRecord::Base
   
   define_state_machine_scopes
   
+  def assign_attributes(attributes, options = {})
+    attributes[:public_key_file].present? and attributes.delete(:public_key)
+    super(attributes, options)
+  end
+  
   def public_key_file=(file)
     self[:public_key] = file.read
   end
