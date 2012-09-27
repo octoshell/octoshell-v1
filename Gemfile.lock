@@ -135,6 +135,7 @@ GEM
     libv8 (3.3.10.4)
     libwebsocket (0.1.3)
       addressable
+    liquid (2.4.1)
     listen (0.4.6)
       rb-fchange (~> 0.0.5)
       rb-fsevent (~> 0.9.1)
@@ -326,6 +327,7 @@ DEPENDENCIES
   kaminari
   launchy
   less-rails
+  liquid
   mailgun-rails
   meta_search
   paper_trail

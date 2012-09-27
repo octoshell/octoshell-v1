@@ -2,6 +2,9 @@
 
 div class="link-actions"
   = link_to 'Новое поручительство', new_surety_path, class: 'btn'
+  - if admin?
+    = " "
+    = link_to 'Шаблон', template_sureties_path, class: 'btn'
 
 = simple_form_for @search, url: sureties_path, method: :get, html: { class: 'form-horizontal' } do |f|
   = f.input :id_eq if admin?

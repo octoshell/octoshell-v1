@@ -1,3 +1,4 @@
+# coding: utf-8
 class SuretiesController < ApplicationController
   before_filter :require_login
   before_filter :setup_default_filter, only: :index
@@ -70,6 +71,17 @@ class SuretiesController < ApplicationController
     else
       redirect_to_surety_with_alert(@surety)
     end
+  end
+  
+  def edit_template
+    @template = File.read("#{Rails.root}/config/surety.liquid")
+  end
+  
+  def update_template
+    File.open("#{Rails.root}/config/surety.liquid", 'w+') do |f|
+      f.write params[:template]
+    end
+    redirect_to template_sureties_path, notice: 'Шаблон сохранен'
   end
   
 private

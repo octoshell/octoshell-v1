@@ -1,0 +1,9 @@
+- title 'Шаблон поручительства'
+
+= form_tag template_sureties_path, method: :put, class: 'form-horizontal' do
+  div class="control-group integer required"
+    = label_tag :template, 'Шаблон', class: 'select required control-label'
+    div class="controls"
+      = text_area_tag :template, @template, class: 'span8', rows: '30'
+  div class="form-actions"
+    = button_tag 'Сохранить', class: 'btn'
