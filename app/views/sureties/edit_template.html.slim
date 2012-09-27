@@ -14,7 +14,7 @@ h2 RTF шаблон
 
 p = link_to 'Скачать текущий шаблон', rtf_template_sureties_path
 
-= form_tag rtf_template_sureties_path, method: :put, class: 'form-horizontal' do
+= form_tag rtf_template_sureties_path, method: :put, class: 'form-horizontal', multipart: true do
   div class="control-group"
     = label_tag :template, 'RTF шаблон', class: 'control-label'
     div class="controls"
@@ -25,11 +25,11 @@ p = link_to 'Скачать текущий шаблон', rtf_template_sureties_
 markdown:
   ### Переменные:
   
-  `{{ surety.id }}` - Номер поручительства
+  `{{ id }}` - Номер поручительства
   
-  `{{ surety.organization.surety_name }}` - Название организации
+  `{{ organization_name }}` - Название организации
   
-  `{{ surety.user.full_name }}` - Имя пользователя
+  `{{ user_name }}` - Имя пользователя
   
   ### Стили
   

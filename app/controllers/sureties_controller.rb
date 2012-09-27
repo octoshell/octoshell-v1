@@ -111,7 +111,7 @@ class SuretiesController < ApplicationController
   
   def rtf_template
     File.open("#{Rails.root}/config/surety.rtf", 'w+') do |f|
-      f.write params[:template]
+      f.write params[:template].read
     end
     redirect_to template_sureties_path, notice: 'Шаблон загружен'
   end
@@ -124,7 +124,7 @@ class SuretiesController < ApplicationController
   end
   
   def download_rtf_template
-    send_file "#{Rails.root}/config/surety.rtf", type: "application/msword"
+    send_data File.read("#{Rails.root}/config/surety.rtf"), type: "application/msword"
   end
   
 private

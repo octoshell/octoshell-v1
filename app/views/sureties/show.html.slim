@@ -52,4 +52,6 @@ blockquote class="noprint"
     | После этого отослать по адресу: 
     strong 119991 Москва, Ленинские горы, 1, стр.4
 
-= render partial: 'template', locals: { surety: @surety }
+div id="surety"
+  - t = Liquid::Template.parse(@template)
+  == t.render 'id' => @surety.id, 'organization_name' => @surety.organization.surety_name, 'user_name' => @surety.user.full_name

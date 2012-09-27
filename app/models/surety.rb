@@ -64,9 +64,9 @@ class Surety < ActiveRecord::Base
   
   def to_rtf
     template = File.read("#{Rails.root}/config/surety.rtf")
-    template.gsub! /\\\{\\\{ surety.id \\\}\\\}/, id.to_s
-    template.gsub! /\\\{\\\{ surety.organization.surety_name \\\}\\\}/, organization.surety_name
-    template.gsub! /\\\{\\\{ surety.user.full_name \\\}\\\}/, user.full_name
+    template.gsub! /\\\{\\\{ id \\\}\\\}/, id.to_s
+    template.gsub! /\\\{\\\{ organization_name \\\}\\\}/, organization.surety_name
+    template.gsub! /\\\{\\\{ user_name \\\}\\\}/, user.full_name
     template
   end
 end
