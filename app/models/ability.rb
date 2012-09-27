@@ -77,7 +77,7 @@ class Ability
       end
       
       if user.admin?
-        can [:edit_template, :update_template, :default_template], :sureties
+        can [:edit_template, :update_template, :default_template, :rtf_template, :default_rtf], :sureties
         
         can :access, :admins
         

@@ -65,45 +65,10 @@ class Surety < ActiveRecord::Base
   end
   
   def to_rtf
-    font = RTF::Font.new(RTF::Font::ROMAN, 'Arial')
-
-    header = RTF::ParagraphStyle.new
-    header.justification = :qr
-    header.space_before = 1200
-    header.space_after = 300
-
-    title = RTF::ParagraphStyle.new
-    title.space_before = 1000
-    title.space_after = 1000
-    title.justification = :qc
-
-    body = RTF::ParagraphStyle.new
-    body.space_after = 300
-
-    document = RTF::Document.new(font)
-
-    document.paragraph(header) do |p|
-      8.times { p.line_break }
-      p << "Ректору"
-      p.line_break
-      p << "Московского государственного университета"
-      p.line_break
-      p << "имени М.В. Ломоносова"
-      p.line_break
-      p << "академику В.А. Садовничему"
-    end
-    document.paragraph(title) do |p|
-      p << "Глубокоуважаемый Виктор Антонович!"
-    end
-    document.paragraph(body) do |p|
-      p << "Просим Вас рассмотреть вопрос о предоставлении доступа на суперкомпьютерный комплекс НИВЦ МГУ номер #{id} на сотрудника #{organization.name} #{user.full_name}"
-    end
-    document.paragraph(body) do |p|
-      p << "Гарантируем использование предоставленных ресурсов только для указанных задач и полное соблюдение правил работы на суперкомпьютерном комплексе НИВЦ МГУ, опубликованных по адресу http://parallel.ru/cluster/rules/."
-    end
-    document.paragraph(body) do |p|
-      p << "Выделенные ресурсы будут использованы исключительно для проведения расчетов в рамках нашей основной деятельности."
-    end
-    document.to_rtf
+    template = File.read("#{Rails.root}/config/surety.rtf")
+    template.gsub! /\\\{\\\{ surety.id \\\}\\\}/, id.to_s
+    template.gsub! /\\\{\\\{ surety.organization.surety_name \\\}\\\}/, organization.surety_name
+    template.gsub! /\\\{\\\{ surety.user.full_name \\\}\\\}/, user.full_name
+    template
   end
 end

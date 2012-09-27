@@ -58,7 +58,10 @@ namespace :deploy do
     
     run "rm -f #{latest_release}/config/surety.liquid"
     run "ln -s #{deploy_to}/shared/configs/surety.liquid #{latest_release}/config/surety.liquid"
-
+    
+    run "rm -f #{latest_release}/config/surety.rtf"
+    run "ln -s #{deploy_to}/shared/configs/surety.rtf #{latest_release}/config/surety.rtf"
+    
     run "rm -rf #{latest_release}/public/uploads"
     run "ln -s #{deploy_to}/shared/uploads #{latest_release}/public/uploads"
     

@@ -109,6 +109,20 @@ class SuretiesController < ApplicationController
     redirect_to template_sureties_path, notice: 'Шаблон сохранен'
   end
   
+  def rtf_template
+    File.open("#{Rails.root}/config/surety.rtf", 'w+') do |f|
+      f.write params[:template]
+    end
+    redirect_to template_sureties_path, notice: 'Шаблон загружен'
+  end
+  
+  def default_rtf
+    File.open("#{Rails.root}/config/surety.rtf", 'w+') do |f|
+      f.write File.read("#{Rails.root}/config/surety.rtf.default")
+    end
+    redirect_to template_sureties_path, notice: 'Шаблон восстановлен'
+  end
+  
 private
   
   def find_surety(id)
