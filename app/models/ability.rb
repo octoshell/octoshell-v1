@@ -48,7 +48,7 @@ class Ability
       
       can [:show, :index, :close], :memberships
       
-      can [:index, :new, :create, :edit_template, :update_template, :default_template], :sureties
+      can [:index, :new, :create], :sureties
       can :show, :sureties, user_id: user.id
       
       can [:new, :create], :memberships
@@ -77,6 +77,8 @@ class Ability
       end
       
       if user.admin?
+        can [:edit_template, :update_template, :default_template], :sureties
+        
         can :access, :admins
         
         can [:new, :create, :edit, :update, :destroy], :pages
