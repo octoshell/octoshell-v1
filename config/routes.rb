@@ -24,6 +24,7 @@ MSU::Application.routes.draw do
       put :default,      action: :default_template
       put :rtf_template
       put :default_rtf
+      get :rtf_template, action: :download_rtf_template
     end
     put :activate
     put :decline

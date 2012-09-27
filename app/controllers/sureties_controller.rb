@@ -123,6 +123,10 @@ class SuretiesController < ApplicationController
     redirect_to template_sureties_path, notice: 'Шаблон восстановлен'
   end
   
+  def download_rtf_template
+    send_file "#{Rails.root}/config/surety.rtf", type: "application/msword"
+  end
+  
 private
   
   def find_surety(id)
