@@ -1,6 +1,4 @@
 # coding: utf-8
-require 'rtf'
-
 class Surety < ActiveRecord::Base
   has_paper_trail
   
