@@ -6,7 +6,7 @@ h2 HTML шаблон
   div class="control-group"
     = label_tag :template, 'Шаблон', class: 'control-label'
     div class="controls"
-      = text_area_tag :template, @html, class: 'span8', rows: '30'
+      = text_area_tag :template, @html, class: 'span8 code', rows: '30'
   div class="form-actions"
     = button_tag 'Сохранить', class: 'btn'
 
@@ -18,7 +18,7 @@ p = link_to 'Скачать текущий шаблон', rtf_template_sureties_
   div class="control-group"
     = label_tag :template, 'RTF шаблон', class: 'control-label'
     div class="controls"
-      = text_area_tag :template, @rtf, class: 'span8', rows: '20'
+      = text_area_tag :template, @rtf, class: 'span8 code', rows: '20'
   div class="form-actions"
     = button_tag 'Загрузить', class: 'btn'
 
