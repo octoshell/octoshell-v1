@@ -62,6 +62,9 @@ namespace :deploy do
     run "rm -f #{latest_release}/config/surety.rtf"
     run "ln -s #{deploy_to}/shared/configs/surety.rtf #{latest_release}/config/surety.rtf"
     
+    run "rm -f #{latest_release}/config/settings.yml"
+    run "ln -s #{deploy_to}/shared/configs/settings.yml #{latest_release}/config/settings.yml"
+    
     run "rm -rf #{latest_release}/public/uploads"
     run "ln -s #{deploy_to}/shared/uploads #{latest_release}/public/uploads"
     

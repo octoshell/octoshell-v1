@@ -1,3 +1,3 @@
 ActiveSupport::Inflector.inflections do |inflect|
-  inflect.uncountable %w(support)
+  inflect.uncountable %w(support settings)
 end

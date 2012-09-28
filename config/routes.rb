@@ -210,6 +210,9 @@ MSU::Application.routes.draw do
   
   # extends
   resources :extends, only: [:index, :new, :create, :edit, :update, :destroy]
+  
+  # settings
+  resource :settings, only: [:edit, :update]
 
   root to: 'application#dashboard'
   
