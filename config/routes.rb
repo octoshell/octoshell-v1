@@ -34,6 +34,8 @@ MSU::Application.routes.draw do
     put :close
     put :confirm
     put :unconfirm
+    get :scan, action: :new_scan
+    post :scan, action: :load_scan
     resources :versions, only: [:index, :show], resource: 'Surety'
   end
   

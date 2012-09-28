@@ -9,6 +9,7 @@ class Surety < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :organization
+  has_many :tickets
   
   validates :user, :organization, presence: true
   validates :organization_state_name, exclusion: { in: [:closed] }, on: :create
@@ -115,5 +116,21 @@ class Surety < ActiveRecord::Base
     end
      	
     document.to_rtf
+  end
+  
+  def load_scan(file)
+    if file.blank?
+      errors.add(:base, "Не приложен файл")
+      return false
+    end
+    
+    self.tickets.create! do |ticket|
+      ticket.user = user
+      ticket.subject = "Скан к поручительству ##{id}"
+      ticket.url = "/sureties/#{id}"
+      ticket.ticket_question_id = Settings.surety_ticket_question_id
+      ticket.message = "Скан в приложении"
+      ticket.attachment = file
+    end
   end
 end

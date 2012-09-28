@@ -128,6 +128,19 @@ class SuretiesController < ApplicationController
     send_data File.read("#{Rails.root}/config/surety.rtf"), type: "application/msword"
   end
   
+  def load_scan
+    @surety = Surety.find(params[:surety_id])
+    if @surety.load_scan(params[:file])
+      redirect_to @surety, notice: "Файл загружен"
+    else
+      redirect_to [@surety, :scan], alert: @surety.errors.full_messages.join(', ')
+    end
+  end
+  
+  def new_scan
+    @surety = Surety.find(params[:surety_id])
+  end
+  
 private
   
   def find_surety(id)

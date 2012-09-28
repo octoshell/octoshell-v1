@@ -9,6 +9,7 @@ class Ticket < ActiveRecord::Base
   belongs_to :ticket_question
   belongs_to :project
   belongs_to :cluster
+  belongs_to :surety
   has_many :replies
   has_many :ticket_field_values, inverse_of: :ticket
   has_many :ticket_tag_relations

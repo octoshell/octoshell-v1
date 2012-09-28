@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120927144808) do
+ActiveRecord::Schema.define(:version => 20120928123435) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20120927144808) do
   end
 
   add_index "credentials", ["public_key"], :name => "index_credentials_on_public_key"
+  add_index "credentials", ["user_id", "state"], :name => "index_credentials_on_user_id_and_state"
   add_index "credentials", ["user_id"], :name => "index_credentials_on_user_id"
 
   create_table "expands", :force => true do |t|
@@ -358,11 +359,13 @@ ActiveRecord::Schema.define(:version => 20120927144808) do
     t.integer  "ticket_question_id"
     t.integer  "project_id"
     t.integer  "cluster_id"
+    t.integer  "surety_id"
   end
 
   add_index "tickets", ["cluster_id"], :name => "index_tickets_on_cluster_id"
   add_index "tickets", ["project_id"], :name => "index_tickets_on_project_id"
   add_index "tickets", ["state"], :name => "index_tickets_on_state"
+  add_index "tickets", ["surety_id"], :name => "index_tickets_on_surety_id"
   add_index "tickets", ["user_id"], :name => "index_tickets_on_user_id"
 
   create_table "users", :force => true do |t|

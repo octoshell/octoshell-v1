@@ -18,7 +18,7 @@ div class="link-actions noprint"
   = " "
   = link_to 'Скачать RTF', surety_path(@surety, format: :rtf), class: 'btn'
   = " "
-  = link_to 'Загрузить скан', new_ticket_path, class: 'btn'
+  = link_to 'Загрузить скан', [@surety, :scan], class: 'btn'
   - if can? :index, :versions
     = " "
     = link_to 'Версии', [@surety, :versions], class: 'btn'
@@ -43,7 +43,6 @@ div class="link-actions noprint"
       = " "
       = link_to Surety.human_state_event_name(:_close), surety_close_path(@surety), class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
 
-
 blockquote class="noprint"
   p
     | Вы должны 
@@ -55,3 +54,15 @@ blockquote class="noprint"
 div id="surety"
   - t = Liquid::Template.parse(@template)
   == t.render 'id' => @surety.id, 'organization_name' => @surety.organization.surety_name, 'user_name' => @surety.user.full_name
+
+- if @surety.tickets.any?
+  div class="noprint"
+    h3 Сканы
+    - @surety.tickets.each do |ticket|
+      div class="row group scan"
+        div class="span5"
+          = link_to ticket.attachment.url, target: '_blank' do
+            = image_tag ticket.attachment.url, class: 'img-polaroid span4'
+        div class="span6"
+          p
+            strong = link_to 'Перейти к заявке', ticket
