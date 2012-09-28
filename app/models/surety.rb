@@ -1,4 +1,5 @@
 # coding: utf-8
+require 'rtf'
 class Surety < ActiveRecord::Base
   has_paper_trail
   
@@ -63,16 +64,56 @@ class Surety < ActiveRecord::Base
   end
   
   def to_rtf
-    f = lambda { |n| n < 128 ? n.chr : "\\u#{n} " }
-    e = lambda { |t| t.encode("UTF-16LE", undef: :replace).each_codepoint.map(&f).join }    
+    font = RTF::Font.new(RTF::Font::ROMAN, 'Arial')
+     	
+    styles = {}
+     	
+    header = RTF::ParagraphStyle.new
+    header.justification = :qr
+    header.space_before = 1200
+    header.space_after = 300
+    styles['header'] = header
     
-    template = File.read("#{Rails.root}/config/surety.rtf")
-    # template.gsub!("{", "\\{")
-    # template.gsub!("}", "\\}")
-    # template.gsub!("\\", "\\\\")
-    template.gsub! /\\\{\\\{ id \\\}\\\}/, id.to_s
-    template.gsub! /\\\{\\\{ organization_name \\\}\\\}/, e.call(organization.surety_name)
-    template.gsub! /\\\{\\\{ user_name \\\}\\\}/, e.call(user.full_name)
-    template
+    title = RTF::ParagraphStyle.new
+    title.space_before = 1000
+    title.space_after = 1000
+    title.justification = :qc
+    styles['title'] = title
+    
+    body = RTF::ParagraphStyle.new
+    body.space_after = 300
+    styles['body'] = body
+    
+    footer = RTF::ParagraphStyle.new
+    footer.space_before = 300
+    footer.justification = :qr
+    styles['footer'] = footer
+    
+    document = RTF::Document.new(font)
+    
+    template = YAML.load_file("#{Rails.root}/config/surety.rtf")
+    
+    replacer = lambda do |text|
+      text.gsub! %r{\{\{ id \}\}}, id.to_s
+      text.gsub! %r{\{\{ organization_name \}\}}, organization.name
+      text.gsub! %r{\{\{ user_name \}\}}, user.full_name
+      text
+    end
+    
+    template.each do |node|
+      style, content = node['style'], node['content']
+      document.paragraph(styles[style]) do |p|
+        if content.is_a?(Array)
+          content.each do |n|
+            p << replacer.call(n)
+            p.line_break
+          end
+        else
+          p << replacer.call(content)
+        end
+      end
+    end
+     	
+    document.to_rtf
   end
 end

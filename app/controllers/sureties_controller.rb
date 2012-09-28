@@ -92,7 +92,8 @@ class SuretiesController < ApplicationController
   end
 
   def edit_template
-    @template = File.read("#{Rails.root}/config/surety.liquid")
+    @html = File.read("#{Rails.root}/config/surety.liquid")
+    @rtf = File.read("#{Rails.root}/config/surety.rtf")
   end
   
   def update_template
@@ -111,7 +112,7 @@ class SuretiesController < ApplicationController
   
   def rtf_template
     File.open("#{Rails.root}/config/surety.rtf", 'w+') do |f|
-      f.write params[:template].read
+      f.write params[:template]
     end
     redirect_to template_sureties_path, notice: 'Шаблон загружен'
   end
