@@ -36,6 +36,6 @@
 
   h3 Поддержка
 
-  p = link_to 'Создать заявку', new_ticket_path
+  p = link_to 'Задать вопрос в техподдержку', new_ticket_path
   - if @tickets.any?
     = render partial: 'tickets/table', locals: { tickets: @tickets }
