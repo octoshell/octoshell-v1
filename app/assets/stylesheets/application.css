@@ -11,6 +11,7 @@
  *= require_self
  *= require bootstrap
  *= require surety
+ *= require chosen
  */
 
 textarea.public-key {

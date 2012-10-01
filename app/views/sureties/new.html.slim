@@ -1,8 +1,8 @@
 - title 'Поручительство'
 
 = simple_form_for @surety, html: { class: 'form-horizontal' } do |f|
-  = f.association :user, collection: User.non_closed, label_method: :full_name if admin?
-  = f.association :organization, hint: link_to('Добавить организацию', new_organization_path), collection: Organization.active
+  = f.association :user, collection: User.non_closed, label_method: :full_name, input_html: { class: 'chosen' } if admin?
+  = f.association :organization, hint: link_to('Добавить организацию', new_organization_path), collection: Organization.active, input_html: { class: 'chosen' }
   
   div class="form-actions"
     = f.button :submit, class: 'btn-primary'

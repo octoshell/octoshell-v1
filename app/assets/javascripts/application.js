@@ -16,9 +16,19 @@
 //= require bootstrap
 //= require raphael
 //= require morris
+//= require chosen.jquery
 //= require_tree .
 
 $(document).ready(function(){
+  
+  $('select.chosen').each(function(i, e){
+    var options = $(e).find('option')
+    console.log(options)
+    if (options.size == 1) {
+      options.first.select()
+    }
+    $(e).chosen({ placeholder_text_single: 'Выберите вариант' });
+  })
   
 	$('#ticket_template').on('change', function(){
 		var reply_message = $('#reply_message')

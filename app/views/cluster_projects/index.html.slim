@@ -1,8 +1,8 @@
 - title 'Проекты на кластере'
 
 = simple_form_for @search, url: cluster_projects_path, method: :get, html: { class: 'form-horizontal' } do |f|
-  = f.input :project_id_eq, collection: Project.all if admin?
-  = f.input :cluster_id_eq, collection: Cluster.all if admin?
+  = f.input :project_id_eq, collection: Project.all, input_html: { class: 'chosen' } if admin?
+  = f.input :cluster_id_eq, collection: Cluster.all, input_html: { class: 'chosen' } if admin?
   = f.input :state_in, collection: ClusterProject.human_state_names, input_html: { multiple: true }
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'

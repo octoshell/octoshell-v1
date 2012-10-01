@@ -1,7 +1,7 @@
 = simple_form_for @request, html: { class: 'form-horizontal' } do |f|
-  = f.association :user, label_method: :full_name, collection: User.sured, disabled: f.object.persisted? if admin?
-  = f.input :project_id, collection: @projects, hint: link_to('Новый проект', new_project_path), disabled: f.object.persisted?, required: true
-  = f.input :cluster_id, collection: Cluster.active, disabled: f.object.persisted?, required: true
+  = f.association :user, label_method: :full_name, collection: User.sured, disabled: f.object.persisted?, input_html: { class: 'chosen' } if admin?
+  = f.input :project_id, collection: @projects, hint: link_to('Новый проект', new_project_path), disabled: f.object.persisted?, required: true, input_html: { class: 'chosen' }
+  = f.input :cluster_id, collection: Cluster.active, disabled: f.object.persisted?, required: true, input_html: { class: 'chosen' }
   = f.input :hours
   = f.input :size, hint: 'Более 50ти обговаривается отдельно'
   - if f.object.persisted?
