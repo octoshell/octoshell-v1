@@ -51,7 +51,7 @@ class Ability
       can [:show, :index, :close], :memberships
       
       can [:index, :new, :create, :new_scan, :load_scan], :sureties
-      can :show, :sureties, user_id: user.id
+      can [:close, :show], :sureties, user_id: user.id
       
       can [:new, :create], :memberships
       

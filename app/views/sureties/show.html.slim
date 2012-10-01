@@ -39,9 +39,9 @@ div class="link-actions noprint"
       = " "
       = link_to Surety.human_state_event_name(:_unconfirm), surety_unconfirm_path(@surety), class: 'btn', method: :put
     
-    - if @surety.can__close?
-      = " "
-      = link_to Surety.human_state_event_name(:_close), surety_close_path(@surety), class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
+  - if @surety.can__close?
+    = " "
+    = link_to Surety.human_state_event_name(:_close), surety_close_path(@surety), class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
 
 blockquote class="noprint"
   p

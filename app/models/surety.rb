@@ -62,6 +62,7 @@ class Surety < ActiveRecord::Base
       _close!
       user.revalidate!
     end
+    true
   end
   
   def to_rtf

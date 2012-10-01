@@ -66,6 +66,7 @@ class SuretiesController < ApplicationController
   
   def close
     @surety = find_surety(params[:surety_id])
+    authorize! :close, @surety
     if @surety.close
       redirect_to_surety(@surety)
     else
