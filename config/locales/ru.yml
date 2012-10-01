@@ -488,6 +488,8 @@ ru:
         stdout: StdOut
         stderr: StdErr
         callbacks_performed: Вызваны коллбеки?
+        created_at: Создан
+        runned_at: Запущен
       access:
         credential: Публичный ключ
         state: Состояние

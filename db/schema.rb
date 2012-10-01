@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120928123435) do
+ActiveRecord::Schema.define(:version => 20121001134401) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -264,6 +264,7 @@ ActiveRecord::Schema.define(:version => 20120928123435) do
     t.boolean  "callbacks_performed", :default => false
     t.integer  "task_id"
     t.string   "state"
+    t.datetime "runned_at"
   end
 
   add_index "tasks", ["resource_id", "resource_type"], :name => "index_tasks_on_resource_id_and_resource_type"

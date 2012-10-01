@@ -28,7 +28,6 @@ div class="link-actions"
         td = link_to_task task
         td = task.human_state_name
         td = task.callbacks_performed ? 'Да' : 'Нет'
-      
 
 table class="table table-bordered"
   tr
@@ -51,4 +50,9 @@ table class="table table-bordered"
   tr
     th = Task.human_attribute_name(:callbacks_performed)
     td = @task.callbacks_performed ? 'Да' : 'Нет'
-
+  tr
+    th = Task.human_attribute_name(:created_at)
+    td = @task.created_at.to_formatted_s(:long)
+  tr
+    th = Task.human_attribute_name(:runned_at)
+    td = @task.runned_at.to_formatted_s(:long) rescue nil
