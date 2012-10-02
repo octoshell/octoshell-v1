@@ -214,6 +214,9 @@ MSU::Application.routes.draw do
   # extends
   resources :extends, only: [:index, :new, :create, :edit, :update, :destroy]
   
+  # images
+  resources :images, only: [:index, :new, :create, :destroy]
+  
   # settings
   resource :settings, only: [:edit, :update]
 

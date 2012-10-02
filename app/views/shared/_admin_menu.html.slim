@@ -20,3 +20,4 @@ li class="dropdown #{submenu_items.any? { |c| c.to_s == params[:controller] } ? 
     = submenu_item :cluster_projects, (link_to 'Проекты на кластерах', cluster_projects_path)
     = submenu_item :cluster_users, (link_to 'Пользователи на кластерах', cluster_users_path)
     = submenu_item :extends, (link_to 'Расширения', extends_path)
+    = submenu_item :images, (link_to 'Изображения', images_path)

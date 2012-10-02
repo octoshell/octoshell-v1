@@ -1,0 +1,9 @@
+- title 'Новое изображение'
+
+= form_tag images_path, class: 'form-horizontal', multipart: true do
+  div class="control-group"
+    = label_tag :image, 'Файл', class: 'control-label'
+    div class="controls"
+      = file_field_tag :image
+  div class="form-actions"
+    = button_tag 'Загрузить', class: 'btn'

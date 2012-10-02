@@ -140,6 +140,8 @@ class Ability
         can [:index, :new, :create, :edit, :update, :destroy], :extends
         
         can [:edit, :update], :settings
+        
+        can [:index, :new, :create, :destroy], :images
       end
     end
   end
