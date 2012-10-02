@@ -18,13 +18,12 @@ describe Credential do
   it { should allow_mass_assignment_of(:public_key) }
   it { should allow_mass_assignment_of(:public_key_file) }
   
-  describe '#create' do
-    let(:credential) { build(:credential, user: create(:sured_user)) }
+  describe '#create', focus: true do
+    let!(:request)      { create(:active_request) }
+    let!(:credential)   { build(:credential, user: request.user) }
     
     context 'with posible to activation accesses' do
       before do
-        create(:active_account, user: credential.user)
-        create(:cluster)
         credential.save
       end
       
@@ -36,8 +35,7 @@ describe Credential do
     
     context 'with impossible to activation accesses' do
       before do
-        create(:account, user: credential.user)
-        create(:cluster)
+        request.project.accounts.each &:cancel!
         credential.save
       end
       

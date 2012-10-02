@@ -8,6 +8,8 @@ html
     = stylesheet_link_tag "application", :media => 'screen'
     = stylesheet_link_tag "print", :media => 'print'
     = javascript_include_tag "application"
+    javascript:
+      window.env = '#{Rails.env}'
   body
     div class="container"
       - if session[:soul_id]

@@ -11,8 +11,6 @@ class Cluster < ActiveRecord::Base
   
   attr_accessible :name, :host, :description, as: :admin
   
-  after_create :create_relations
-  
   state_machine initial: :active do
     state :closed
     
@@ -38,13 +36,5 @@ class Cluster < ActiveRecord::Base
   
   def requests
     Request.where(cluster_project_id: cluster_project_ids)
-  end
-  
-private
-  
-  def create_relations
-    Project.all.each do |project|
-      cluster_projects.where(project_id: project.id).first_or_create!
-    end
   end
 end

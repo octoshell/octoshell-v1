@@ -2,20 +2,12 @@ require 'spec_helper'
 
 describe 'Dashboard', js: true do
   context 'authorized user' do
-    let!(:user) { create(:user) }
-    let!(:ticket) { create(:ticket, user: user, state: 'answered') }
-    let!(:request) { create(:request, user: user) }
-    
     before do
-      login user
+      login
     end
     
-    it 'should show tickets' do
-      page.should have_css("#ticket-#{ticket.id}")
-    end
-    
-    it 'should show requests' do
-      page.should have_css("#request-#{request.id}")
+    it 'should show page' do
+      page.should be
     end
   end
   

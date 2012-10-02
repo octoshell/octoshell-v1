@@ -17,7 +17,6 @@ class ClusterUser < ActiveRecord::Base
   validates :account, :cluster_project, presence: true
   validates :account_state_name, inclusion: { in: [:active] }, if: proc { |c| c.active? || c.activing? }
   
-  after_create :create_relations
   before_create :assign_username
   
   state_machine initial: :closed do
@@ -82,6 +81,11 @@ class ClusterUser < ActiveRecord::Base
   def complete_activation!
     transaction do
       _complete_activation!
+      
+      account.user.credentials.active.each do |credential|
+        Access.where(credential_id: credential.id).first_or_create!
+      end
+      
       accesses.each &:activate!
     end
   end
@@ -110,13 +114,6 @@ protected
   end
 
 private
-  
-  def create_relations
-    account.user.credentials.active.each do |credential|
-      conditions = { credential_id: credential.id }
-      accesses.where(conditions).first_or_create!
-    end
-  end
   
   def assign_username
     self.username ||= account.reload.username

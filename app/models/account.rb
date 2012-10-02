@@ -23,7 +23,7 @@ class Account < ActiveRecord::Base
   
   scope :by_params, proc { |p| where(project_id: p[:project_id], user_id: p[:user_id]) }
   
-  after_create :assign_username, :create_relations
+  after_create :assign_username
   
   state_machine initial: :closed do
     state :closed
@@ -89,13 +89,5 @@ private
         project.username
       end
     update_attribute :username, username
-  end
-  
-  def create_relations
-    project.cluster_projects(true).each do |cluster_project|
-      conditions = { cluster_project_id: cluster_project.id }
-      cluster_users.where(conditions).first_or_create!
-    end
-    true
   end
 end

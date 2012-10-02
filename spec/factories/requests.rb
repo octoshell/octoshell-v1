@@ -1,7 +1,8 @@
 FactoryGirl.define do
   factory :request do
-    user
-    cluster_project
+    association :user, factory: :sured_user
+    cluster_id { create(:cluster).id }
+    project_id { create(:project, user: user).id }
     hours 1
     size 1
     
@@ -9,6 +10,10 @@ FactoryGirl.define do
       after(:create) do |request|
         request.activate!
         request.cluster_project.reload.complete_activation!
+        request.cluster_project.cluster_users.activing.each &:complete_activation!
+        request.cluster_project.cluster_users.active.map do |cu|
+          cu.accesses.activing.each &:activate!
+        end
       end
     end
     

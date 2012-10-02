@@ -12,7 +12,6 @@ class ClusterProject < ActiveRecord::Base
   
   validates :project, :cluster, presence: true
   
-  after_create :create_relations
   before_create :assign_username
   
   state_machine initial: :closed do
@@ -85,6 +84,11 @@ class ClusterProject < ActiveRecord::Base
   def complete_activation!
     transaction do
       _complete_activation!
+      
+      project.accounts.each do |account|
+        cluster_users.where(account_id: account.id).first_or_create!
+      end
+      
       cluster_users.non_active.joins(:account).where(
         accounts: { state: 'active' }
       ).includes(:account).each &:activate!
@@ -126,12 +130,6 @@ protected
   end
   
 private
-  
-  def create_relations
-    project.accounts.each do |account|
-      cluster_users.where(account_id: account.id).first_or_create!
-    end
-  end
   
   def assign_username
     self.username ||= project.username

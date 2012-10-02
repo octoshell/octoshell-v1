@@ -100,7 +100,7 @@ private
   
   def assign_cluster_project
     conditions = { cluster_id: cluster_id, project_id: project_id }
-    self.cluster_project ||= ClusterProject.where(conditions).first
+    self.cluster_project = ClusterProject.where(conditions).first_or_create!
   end
   
   def create_request_properties

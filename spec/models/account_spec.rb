@@ -22,10 +22,13 @@ describe Account do
     account.errors[:user_state_name].should be
   end
   
-  describe '#activate', focus: true do
-    before do
-      create(:cluster)
-    end
+  describe '#activate' do
+    let!(:cluster) { create(:cluster) }
+    let!(:project) { create(:project) }
+    let!(:account) { create(:account, project_id: project.id) }
+    let!(:request) { create(:request, project_id: project.id, cluster_id: cluster.id) }
+    
+    before { request.activate! }
     
     it 'should activate account' do
       account.activate!
@@ -34,8 +37,7 @@ describe Account do
     
     context 'with possible to activate cluster user' do
       before do
-        cp = account.cluster_users(true).first.cluster_project
-        cp.activate!
+        cp = request.cluster_project
         cp.complete_activation!
         account.activate!
       end
@@ -54,15 +56,19 @@ describe Account do
     end
   end
   
-  describe '#cancel' do
+  describe '#cancel', focus: true do
     let!(:cluster) { create(:cluster) }
-    let(:account) { create(:active_account) }
+    let!(:project) { create(:project) }
+    let!(:account) { create(:account, project_id: project.id) }
+    let!(:request) { create(:request, project_id: project.id, cluster_id: cluster.id) }
     
     before do
-      account.cluster_users(true).each do |cu|
-        cu.cluster_project.tap { |cp| cp.activate!; cp.complete_activation! }
-        cu.reload.complete_activation!
-      end
+      account.activate!
+      request.activate!
+      cp = request.cluster_project
+      cp.complete_activation!
+      cu = cp.cluster_users.where(account_id: account.id).first!
+      cu.complete_activation!
       account.cancel!
     end
     

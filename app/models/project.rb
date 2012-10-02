@@ -81,6 +81,7 @@ class Project < ActiveRecord::Base
 private
   
   def activate_accounts
+    accounts.where(user_id: user_id).first_or_create!
     accounts.where(user_id: user_id).each(&:activate)
     true
   end
