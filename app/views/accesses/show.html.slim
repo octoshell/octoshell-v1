@@ -14,3 +14,8 @@ table class="table table-bordered" id="access-#{@access.id}-detail"
   tr
     th = Access.human_attribute_name(:state)
     td = @access.human_state_name
+
+
+h3 Задания
+
+= render partial: 'tasks/table', locals: { tasks: @access.tasks }
