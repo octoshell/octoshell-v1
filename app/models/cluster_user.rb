@@ -83,7 +83,7 @@ class ClusterUser < ActiveRecord::Base
       _complete_activation!
       
       account.user.credentials.active.each do |credential|
-        Access.where(credential_id: credential.id).first_or_create!
+        accesses.where(credential_id: credential.id).first_or_create!
       end
       
       accesses.each &:activate!
