@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121001134401) do
+ActiveRecord::Schema.define(:version => 20121002105214) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -398,6 +398,7 @@ ActiveRecord::Schema.define(:version => 20121001134401) do
   end
 
   add_index "users", ["activation_token"], :name => "index_users_on_activation_token"
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"
   add_index "users", ["state"], :name => "index_users_on_state"
