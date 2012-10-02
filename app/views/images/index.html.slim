@@ -5,9 +5,9 @@ div class="link-actions"
 
 - if @images.any?
   - @images.each do |image|
-    div class="row"
+    div class="row scan"
       div class="span4"
-        = image_tag "/images/#{image}"
+        = image_tag "/images/#{image}", class: 'img-polaroid'
       div class="span8"
         p
           | Код для вставки: 

@@ -10,8 +10,11 @@ class ImagesController < ApplicationController
   def create
     if params[:image]
       image = Image.new(params[:image])
-      image.save
-      redirect_to images_path
+      if image.save
+        redirect_to images_path
+      else
+        redirect_to new_image_path, alert: image.errors.full_messages.join(', ')
+      end
     else
       redirect_to new_image_path, alert: 'Вы не выбрали файл'
     end
