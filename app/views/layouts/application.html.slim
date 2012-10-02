@@ -10,6 +10,9 @@ html
     = javascript_include_tag "application"
   body
     div class="container"
+      - if session[:soul_id]
+        div class="soul-box"
+          = link_to 'Вернуться в свою сессию', revert_session_path, method: :put
       div class="navbar noprint"
         div class="navbar-inner"
           = link_to root_path, class: "brand" do

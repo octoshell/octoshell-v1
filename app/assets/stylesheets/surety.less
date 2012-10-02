@@ -162,3 +162,16 @@ li {
 div.scan {
   margin-bottom: 20px;
 }
+
+div.soul-box {
+  padding: 10px 0;
+  text-align: center;
+  a {
+    &:before {
+      content: "> ";
+    }
+    &:after {
+      content: " <";
+    }
+  }
+}

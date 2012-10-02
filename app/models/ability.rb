@@ -42,8 +42,10 @@ class Ability
       end
       can :close, :projects, user_id: user.id
       
+      can :revert, :sessions
+      
       can :show, :users do |showed_user|
-        showed_user.publicized? || showed_user.id == user.id
+        showed_user.id == user.id
       end
       
       can [:new, :create], :organizations
@@ -79,6 +81,8 @@ class Ability
       end
       
       if user.admin?
+        can :become, :sessions
+        
         can [:edit_template, :update_template, :default_template, :rtf_template, :default_rtf, :download_rtf_template], :sureties
         
         can :access, :admins

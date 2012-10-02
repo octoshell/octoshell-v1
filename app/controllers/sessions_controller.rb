@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_filter :handle_authorized, if: :logged_in?, except: :destroy
+  before_filter :handle_authorized, if: :logged_in?, except: [:destroy, :become, :revert]
   
   def new
     @user = User.new
@@ -18,6 +18,18 @@ class SessionsController < ApplicationController
   
   def destroy
     logout
+    redirect_to root_path
+  end
+  
+  def become
+    user = User.find(params[:user_id])
+    session[:soul_id] = current_user.id
+    auto_login(user)
+    redirect_to root_path
+  end
+  
+  def revert
+    auto_login(User.find(session.delete(:soul_id)))
     redirect_to root_path
   end
   

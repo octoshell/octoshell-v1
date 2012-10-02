@@ -46,7 +46,10 @@ MSU::Application.routes.draw do
   end
   
   # sessions
-  resource :session, only: [:new, :create, :destroy]
+  resource :session, only: [:new, :create, :destroy] do
+    put :become
+    put :revert
+  end
   get '/session' => 'session#destroy'
   
   # profile
