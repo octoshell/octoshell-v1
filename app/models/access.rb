@@ -74,6 +74,12 @@ class Access < ActiveRecord::Base
     true
   end
   
+  def force_close!
+    check_process!
+    
+    _force_close!
+  end
+  
   def available?
     cluster_user.active? && cluster_user.cluster_project.active?
   end
