@@ -14,4 +14,4 @@ div class="link-actions"
           code ![#{image[/(.*)\./, 1]}](/images/#{image})
         p = link_to 'удалить', image_path(id: Digest::SHA1.hexdigest(image)), method: :delete, class: 'btn btn-mini btn-danger', confirm: 'Вы уверены?'
 - else
-  p Нет изорбражений
+  p Нет изображений
