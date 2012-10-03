@@ -28,7 +28,7 @@
                   small = link_to 'удалить', [a, :cancel], method: :put, confirm: 'Вы уверены?', class: 'danger'
             - if current_user.id == project.user_id
               li
-                small = link_to 'Пригласить в проект', new_account_path(type: 'invite')
+                small = link_to 'Пригласить в проект', new_account_code_path
         - if admin?
           td = project.human_state_name
         - else
