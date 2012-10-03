@@ -17,6 +17,7 @@
 //= require raphael
 //= require morris
 //= require chosen.jquery
+//= require tablesorter
 //= require_tree .
 
 $(document).ready(function(){
