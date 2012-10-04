@@ -1,3 +1,4 @@
+# coding: utf-8
 class TicketsController < ApplicationController
   before_filter :require_login
   before_filter :setup_default_filter, only: :index
@@ -46,7 +47,7 @@ class TicketsController < ApplicationController
     @ticket.user = current_user unless admin?
     authorize! :create, @ticket
     if @ticket.save
-      redirect_to @ticket
+      redirect_to @ticket, notice: "Заявка создана"
     else
       render :new
     end
