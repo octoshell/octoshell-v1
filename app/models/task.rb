@@ -16,8 +16,6 @@ class Task < ActiveRecord::Base
   )
   
   belongs_to :resource, polymorphic: true
-  belongs_to :task
-  has_many :tasks
   
   validates :resource, :procedure, presence: true
   validates :procedure_string, inclusion: { in: PROCEDURES }
@@ -36,9 +34,11 @@ class Task < ActiveRecord::Base
     state :successed
     state :failed
     state :pending
-    
+    event :_retry do
+      transition [:successed, :failed] => :pending
+    end
     event :_resolve do
-      transition failed: :successed
+      transition [:pending, :failed] => :successed
     end
   end
   
@@ -51,7 +51,6 @@ class Task < ActiveRecord::Base
         task = scoped.create! do |task|
           task.procedure = procedure
         end
-        # do it after commit !!!
         Resque.enqueue TasksRequestsWorker, task.id
         task
       end
@@ -65,15 +64,12 @@ class Task < ActiveRecord::Base
     end
   end
   
-  def family
-    task ? task.tasks + [task] - [self] : (tasks.any? ? tasks : nil)
-  end
-  
-  def retry(attributes, options = {})
-    task = tasks.build(attributes, options)
-    if task.save
-      Resque.enqueue(TasksRequestsWorker, task.id)
-      task
+  def retry
+    if can__retry?
+      _retry!
+      Resque.enqueue(TasksRequestsWorker, id)
+    else
+      false
     end
   end
   

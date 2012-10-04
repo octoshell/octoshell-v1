@@ -49,3 +49,8 @@ p = link_to 'Новая заявка', new_request_path
 h3 Поддержка
 
 = render partial: 'tickets/table', locals: { tickets: @project.tickets }
+
+- if admin?
+  h3 Задачи
+  
+  = render partial: 'tasks/table', locals: { tasks: @project.tasks }

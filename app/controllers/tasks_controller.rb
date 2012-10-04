@@ -21,12 +21,9 @@ class TasksController < ApplicationController
   end
   
   def retry
-    task = Task.find(params[:task_id])
-    if @task = task.retry(params[:task], as_role)
-      redirect_to @task
-    else
-      render :new
-    end
+    @task = Task.find(params[:task_id])
+    @task.retry
+    redirect_to @task
   end
   
   def resolve
