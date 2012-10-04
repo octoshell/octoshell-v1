@@ -24,21 +24,23 @@ table class="table table-bordered"
       th = Project.human_attribute_name(:username)
       td = @project.username
 
-h3 Доступы
+- if admin?
 
-= render partial: 'accounts/table', locals: { accounts: @project.accounts.non_closed }
+  h3 Доступы
 
-h3 Проекты на кластере
+  = render partial: 'accounts/table', locals: { accounts: @project.accounts.non_closed }
 
-= render partial: 'cluster_projects/table', locals: { cluster_projects: @project.cluster_projects.non_closed }
+  h3 Проекты на кластере
 
-h3 Пользователи на кластере
+  = render partial: 'cluster_projects/table', locals: { cluster_projects: @project.cluster_projects.non_closed }
 
-= render partial: 'cluster_users/table', locals: { cluster_users: @project.cluster_users.non_closed }
+  h3 Пользователи на кластере
 
-h3 Ключи на кластере
+  = render partial: 'cluster_users/table', locals: { cluster_users: @project.cluster_users.non_closed }
 
-= render partial: 'accesses/table', locals: { accesses: @project.accesses.non_closed, current: false }
+  h3 Ключи на кластере
+
+  = render partial: 'accesses/table', locals: { accesses: @project.accesses.non_closed, current: false }
 
 h3 Заявки
 
@@ -51,6 +53,6 @@ h3 Поддержка
 = render partial: 'tickets/table', locals: { tickets: @project.tickets }
 
 - if admin?
-  h3 Задачи
+  h3 Процедуры
   
   = render partial: 'tasks/table', locals: { tasks: @project.tasks }
