@@ -5,7 +5,7 @@ p class="lead" = @project.description
 - if can?(:edit, @project) || @project.can__close? || can?(:index, :versions)
   div class="link-actions"
     = link_to 'Редактировать', edit_project_path(@project), class: 'btn'
-    - if @project.can__close?
+    - if @project.can__close? && can?(:close, @project)
       = " "
       = link_to Project.human_state_event_name(:_close), project_close_path(@project), method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены? Закрытие проекта закроет все доступы и заявки' }
     - if can? :index, :versions
