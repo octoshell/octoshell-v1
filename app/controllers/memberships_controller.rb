@@ -64,11 +64,7 @@ private
   end
   
   def namespace
-    if admin?
-      :admin
-    else
-      (@membership && @membership.user_id != current_user.id) ? :dashboard : :profile
-    end
+    admin? ? :admin : :dashboard
   end
   
   def setup_default_filter

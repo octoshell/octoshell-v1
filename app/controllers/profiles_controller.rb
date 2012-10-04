@@ -26,6 +26,6 @@ private
   end
   
   def namespace
-    :profile
+    :dashboard
   end
 end

@@ -10,3 +10,9 @@
   = submenu_item :organizations, (link_to 'Организации', organizations_path)
 - if can? :index, :users
   = submenu_item :users, (link_to 'Пользователи', users_path)
+- if can? :index, :credentials
+  = submenu_item :credentials, (link_to 'Мои публичные ключи', credentials_path)
+- if can? :index, :memberships
+  = submenu_item :memberships, (link_to 'Мои места работы', memberships_path)
+- if can? :index, :sureties
+  = submenu_item :sureties, (link_to 'Мои поручительства', sureties_path)

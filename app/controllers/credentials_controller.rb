@@ -50,7 +50,7 @@ private
   end
   
   def namespace
-    admin? ? :admin : :profile
+    admin? ? :admin : :dashboard
   end
   
   def setup_default_filter
