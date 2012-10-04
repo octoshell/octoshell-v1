@@ -1,3 +1,4 @@
+# coding: utf-8
 class Access < ActiveRecord::Base
   delegate :cluster, to: :cluster_user
   delegate :state_name, to: :credential, prefix: true, allow_nil: true
@@ -87,6 +88,14 @@ class Access < ActiveRecord::Base
   def check_process!
     if [:activing, :closing].include?(state_name)
       raise ActiveRecord::RecordInProcess
+    end
+  end
+  
+  def human_active_state
+    if cluster_user.cluster_project.project.requests.where(state: 'active').any?
+      human_state_name
+    else
+      "Нет активной заявки"
     end
   end
   

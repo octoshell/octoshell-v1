@@ -42,7 +42,7 @@
                       = link_to_credential(access.credential)
                       |  
                     code = "#{access.cluster_user.username}@#{access.cluster_user.cluster_project.cluster.host}"
-                    small class="state-#{access.state}" = " (#{access.human_state_name})"
+                    small class="state-#{access.state}" = " (#{access.human_active_state})"
             - else
               p Нет доступов
         td = link_to 'открыть', project_path(project)
