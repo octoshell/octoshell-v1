@@ -54,6 +54,11 @@ class Account < ActiveRecord::Base
   def activate!
     transaction do
       _activate!
+      
+      project.cluster_projects.each do |cp|
+        cluster_users.where(cluster_project_id: cp.id).first_or_create!
+      end
+      
       cluster_users.joins(:cluster_project).where(
         cluster_projects: { state: 'active' }
       ).includes(:cluster_project).each &:activate!
