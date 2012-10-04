@@ -1,3 +1,4 @@
+# coding: utf-8
 class Credential < ActiveRecord::Base
   has_paper_trail
   
@@ -14,6 +15,7 @@ class Credential < ActiveRecord::Base
   
   validates :user, :public_key, :name, presence: true
   validates :public_key, uniqueness: { scope: [:state, :user_id] }, if: :active?
+  validate :public_key_validator
   
   after_create :activate_accesses
   
@@ -54,5 +56,11 @@ private
     end
     
     accesses.each &:try_to_activate
+  end
+  
+  def public_key_validator
+    if public_key =~ /private/i
+      errors.add(:public_key, "Указан приватный ключ!")
+    end
   end
 end
