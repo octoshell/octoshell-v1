@@ -55,7 +55,10 @@ private
       accesses.where(cluster_user_id: cluster_user.id).first_or_create!
     end
     
-    accesses.each &:try_to_activate
+    accesses.each { |a| a.cluster_user.check_process! }
+    
+    accesses.joins(:cluster_user).includes(:cluster_user).
+      where(cluster_users: { state: 'active' }).each &:activate!
   end
   
   def public_key_validator

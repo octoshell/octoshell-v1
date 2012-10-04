@@ -29,13 +29,18 @@ describe Credential do
       
       it 'should try activate accesses', focus: true do
         credential.should have(1).accesses
-        credential.accesses.all?(&:activing?).should be_true
+        credential.accesses.joins(:cluster_user).
+          where(cluster_users: { state: 'active' }).
+          all?(&:activing?).should be_true
       end
     end
     
     context 'with impossible to activation accesses' do
       before do
-        request.project.accounts.each &:cancel!
+        request.project.accounts.each do |a|
+          a.cancel!
+          a.cluster_users(true).each &:complete_closure
+        end
         credential.save
       end
       
