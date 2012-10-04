@@ -36,7 +36,7 @@ class CredentialsController < ApplicationController
     @credential = Credential.find(params[:credential_id])
     authorize! :close, @credential
     if @credential.close
-      redirect_to @credential
+      redirect_to credentials_path
     else
       flash.now[:alert] = @credential.errors.full_messages.join(', ')
       render :show
