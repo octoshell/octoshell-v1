@@ -6,13 +6,14 @@ div class="link-actions"
 - if cannot? :create, :projects
   = render partial: 'shared/steps', locals: { steps: current_user.project_steps, title: 'У вас нет доступа для создания проекта. Чтобы его получить вам нужно:' }
 
-= simple_form_for @search, url: projects_path, method: :get, html: { class: 'form-horizontal' } do |f|
-  = f.input :name_contains
-  = f.input :user_id_eq, collection: User.all, label_method: :full_name, input_html: { class: 'chosen' } if admin?
-  = f.input :organization_id_eq, collection: Organization.all, input_html: { class: 'chosen' } if admin?
-  = f.input :state_in, collection: Project.human_state_names, input_html: { multiple: true }
-  div class="form-actions"
-    = f.button :submit, 'Найти', class: 'btn-primary'
+- if admin?
+  = simple_form_for @search, url: projects_path, method: :get, html: { class: 'form-horizontal' } do |f|
+    = f.input :name_contains
+    = f.input :user_id_eq, collection: User.all, label_method: :full_name, input_html: { class: 'chosen' } if admin?
+    = f.input :organization_id_eq, collection: Organization.all, input_html: { class: 'chosen' } if admin?
+    = f.input :state_in, collection: Project.human_state_names, input_html: { multiple: true }
+    div class="form-actions"
+      = f.button :submit, 'Найти', class: 'btn-primary'
 
 = paginate @projects
 
