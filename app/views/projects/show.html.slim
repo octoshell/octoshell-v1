@@ -32,17 +32,17 @@ table class="table table-bordered"
   
   h3 На кластере:
   - @project.cluster_projects.each do |cluster_project|
-    - unless cluster_project.closed?
-    h4
-      | Группа пользователей 
-      = link_to cluster_project.username, cluster_project
-      |  на 
-      = link_to_cluster cluster_project.cluster
-    p
-      small Статус: #{cluster_project.human_state_name}
+    - if cluster_project.has_active_entities?
+      h4
+        | Группа пользователей 
+        = link_to cluster_project.username, cluster_project
+        |  на 
+        = link_to_cluster cluster_project.cluster
+      p
+        small Статус: #{cluster_project.human_state_name}
     
     - cluster_project.cluster_users.each do |cluster_user|
-      - unless cluster_user.closed?
+      - if cluster_user.has_active_entities?
         div class="row-fluid"
           div class="offset1"
             h5
@@ -54,7 +54,7 @@ table class="table table-bordered"
               small Статус: #{cluster_user.human_state_name}
       
       - cluster_user.accesses.each do |access|
-        - unless access.closed?
+        - if access.has_active_entities?
           div class="row-fluid"
             div class="offset2"
               h6

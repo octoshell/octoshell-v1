@@ -103,6 +103,10 @@ class ClusterUser < ActiveRecord::Base
     end
   end
   
+  def has_active_entities?
+    !closed? || accesses.any?(&:has_active_entities?)
+  end
+  
 protected
   
   def continue_add_user(task)

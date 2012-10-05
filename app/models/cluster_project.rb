@@ -111,6 +111,10 @@ class ClusterProject < ActiveRecord::Base
     Access.where(cluster_user_id: cluster_user_ids)
   end
   
+  def has_active_entities?
+    !closed? || cluster_users.any?(&:has_active_entities?)
+  end
+  
 protected
   
   def continue_add_project(task)

@@ -99,6 +99,10 @@ class Access < ActiveRecord::Base
     end
   end
   
+  def has_active_entities?
+    !closed?
+  end
+  
 protected
   
   def continue_add_openkey(task)
