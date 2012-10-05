@@ -35,9 +35,8 @@ div class="row"
       h1 = @user.full_name
 
     - if @user == current_user
-      p Это вы. #{link_to 'Перейти в профиль', profile_path}
-    - if can? :edit, @user
-      p = link_to 'редактировать', edit_user_path(@user)
+      p
+        strong = link_to 'редактировать', edit_profile_path
 
 h3 Поручительства
 = render partial: 'sureties/table', locals: { sureties: @user.sureties }

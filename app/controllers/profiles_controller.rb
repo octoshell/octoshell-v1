@@ -3,6 +3,7 @@ class ProfilesController < ApplicationController
   
   def show
     @user = find_user
+    render 'users/show'
   end
   
   def edit
@@ -26,6 +27,6 @@ private
   end
   
   def namespace
-    :dashboard
+    admin? ? :admin : :dashboard
   end
 end
