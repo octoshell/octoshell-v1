@@ -1,4 +1,6 @@
 class Cluster < ActiveRecord::Base
+  include Models::Limitable
+  
   has_paper_trail
   
   default_scope order("#{table_name}.name asc")

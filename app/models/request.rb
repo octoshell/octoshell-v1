@@ -1,5 +1,7 @@
 # coding: utf-8
 class Request < ActiveRecord::Base
+  include Models::Limitable
+  
   attr_accessor :cluster_id, :project_id
   
   delegate :cluster_users, :cluster, :project,

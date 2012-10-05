@@ -1,4 +1,6 @@
 class RequestProperty < ActiveRecord::Base
+  include Models::Limitable
+  
   belongs_to :request
   
   validates :request, presence: true

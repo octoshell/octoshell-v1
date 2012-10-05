@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  include Models::Limitable
+  
   CLUSTER_USER_TYPES = %w(account project)
   has_paper_trail
   

@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include Models::Limitable
+  
   has_paper_trail
   
   has_attached_file :avatar

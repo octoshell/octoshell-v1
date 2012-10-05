@@ -1,4 +1,6 @@
 class TicketTag < ActiveRecord::Base
+  include Models::Limitable
+  
   attr_accessor :merge_id
   has_paper_trail
   
