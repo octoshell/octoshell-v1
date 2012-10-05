@@ -38,7 +38,7 @@ module ApplicationHelper
   
   def link_to_cluster(cluster)
     return unless cluster
-    link_to cluster.name, cluster
+    link_to_if can?(:show, cluster), cluster.name, cluster
   end
   
   def link_to_user(user)
@@ -48,72 +48,72 @@ module ApplicationHelper
   
   def link_to_project(project)
     return unless project
-    link_to project.name, project
+    link_to_if can?(:show, project), project.name, project
   end
   
   def link_to_surety(surety)
     return unless surety
-    link_to 'открыть', surety
+    link_to_if can?(:show, surety), 'открыть', surety
   end
   
   def link_to_organization(organization)
     return unless organization
-    link_to organization.name, organization
+    link_to_if can?(:show, organization), organization.name, organization
   end
   
   def link_to_organization_kind(organization_kind)
     return unless organization_kind
-    link_to organization_kind.name, organization_kind
+    link_to_if can?(:show, organization_kind), organization_kind.name, organization_kind
   end
   
   def link_to_membership(membership)
     return unless membership
-    link_to 'открыть', membership
+    link_to_if can?(:show, membership), 'открыть', membership
   end
   
   def link_to_credential(credential)
     return unless credential
-    link_to credential.name, credential
+    link_to_if can?(:show, credential), credential.name, credential
   end
   
   def link_to_ticket_template(ticket_template)
     return unless ticket_template
-    link_to ticket_template.subject, ticket_template
+    link_to_if can?(:show, ticket_template), ticket_template.subject, ticket_template
   end
   
   def link_to_ticket_question(ticket_question)
     return unless ticket_question
-    link_to ticket_question.question, ticket_question
+    link_to_if can?(:show, ticket_question), ticket_question.question, ticket_question
   end
   
   def link_to_ticket_field(ticket_field)
     return unless ticket_field
-    link_to ticket_field.name, ticket_field
+    link_to_if can?(:show, ticket_field), ticket_field.name, ticket_field
   end
   
   def link_to_task(task)
     return unless task
-    link_to "Задание ##{task.id}", task
+    link_to_if can?(:show, task), "Задание ##{task.id}", task
   end
   
   def link_to_cluster_user(cluster_user)
     return unless cluster_user
-    link_to cluster_user.username, cluster_user
+    link_to_if can?(:show, cluster_user), cluster_user.username, cluster_user
   end
   
   def link_to_task_resource(task)
     return unless task
-    link_to task.resource.class.model_name.human, task.resource
+    link_to_if can?(:show, task), task.resource.class.model_name.human, task.resource
   end
   
   def link_to_ticket(ticket)
     return unless ticket
-    link_to ticket.subject, ticket
+    link_to_if can?(:show, ticket), ticket.subject, ticket
   end
   
   def link_to_ticket_tag(ticket_tag)
     return unless ticket_tag
-    link_to ticket_tag.name, ticket_tag
+    link_to_if can?(:show, ticket_tag), ticket_tag.name, ticket_tag
   end
   
   def link_to_function(name, *args, &block)
