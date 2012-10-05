@@ -30,6 +30,7 @@ gem 'liquid'
 gem 'rtf'
 gem 'zeus'
 gem 'airbrake'
+gem 'gravatar-ultimate'
 
 group :test, :development do
   gem 'quiet_assets'

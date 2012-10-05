@@ -203,6 +203,18 @@ class User < ActiveRecord::Base
     AccountCode.where(project_id: owned_project_ids)
   end
   
+  def avatar_url
+    if avatar?
+      avatar.url
+    else
+      host = Rails.application.config.action_mailer.default_url_options[:host]
+      Gravatar.new(email).image_url + '?' + {
+        s: '116',
+        d: "http://#{host}/assets/default_avatar.png"
+      }.to_param
+    end
+  end
+  
 private
   
   def step_name(name)
