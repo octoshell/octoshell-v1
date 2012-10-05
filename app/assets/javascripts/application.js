@@ -24,11 +24,13 @@ $(document).ready(function(){
   
   if (window.env != 'test') {
     $('select.chosen').each(function(i, e){
-      var options = $(e).find('option')
-      if (options.size == 1) {
+      var select = $(e)
+      var options = select.find('option')
+      if (options.size() == 1) {
         options.first.select()
       }
-      $(e).chosen({ placeholder_text_single: 'Выберите вариант' });
+      
+      select.chosen({ placeholder_text_single: 'Выберите вариант' });
     })
   }
   
