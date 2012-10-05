@@ -21,9 +21,7 @@ describe 'Accesses', js: true do
         visit accesses_path
       end
 
-      it 'should redirect to dashboard path' do
-        current_path.should == dashboard_path
-      end
+      it_behaves_like 'user without access'
     end
 
     context 'as non authorized user' do
@@ -54,10 +52,8 @@ describe 'Accesses', js: true do
         login
         visit access_path(access)
       end
-
-      it 'should redirect to dashboard path' do
-        current_path.should == dashboard_path
-      end
+      
+      it_behaves_like 'user without access'
     end
 
     context 'as non authorized user' do

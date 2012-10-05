@@ -29,6 +29,7 @@ gem 'cocaine'
 gem 'liquid'
 gem 'rtf'
 gem 'zeus'
+gem 'airbrake'
 
 group :test, :development do
   gem 'quiet_assets'

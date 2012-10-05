@@ -51,3 +51,9 @@ end
 shared_examples 'non authorized user' do
   it { current_path.should == new_session_path }
 end
+
+shared_examples 'user without access' do
+  it 'should redirect to dashboard path' do
+    current_path.should == projects_path
+  end
+end

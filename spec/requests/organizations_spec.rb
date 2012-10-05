@@ -19,8 +19,8 @@ describe 'Organizations', js: true do
       Organization.find_by_name(organization.name)
     end
     
-    it 'should show new surety page' do
-      current_path.should == dashboard_path
+    it 'should show projects page' do
+      current_path.should == projects_path
     end
     
     it 'should create new organization' do

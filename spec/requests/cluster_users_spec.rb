@@ -21,9 +21,7 @@ describe 'Cluster Users', js: true do
         visit cluster_users_path
       end
       
-      it 'should redirect to dashboard' do
-        current_path.should == dashboard_path
-      end
+      it_behaves_like 'user without access'
     end
 
     context 'as non authorized user' do
@@ -55,9 +53,7 @@ describe 'Cluster Users', js: true do
         visit cluster_user_path(cluster_user)
       end
       
-      it 'should show dashboard page' do
-        current_path.should == dashboard_path
-      end
+      it_behaves_like 'user without access'
     end
 
     context 'as non authorized user' do

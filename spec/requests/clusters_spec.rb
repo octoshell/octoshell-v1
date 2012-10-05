@@ -76,9 +76,7 @@ describe 'Clusters', js: true do
         visit edit_cluster_path(cluster)
       end
       
-      it 'should show dashboard page' do
-        current_path.should == dashboard_path
-      end
+      it_behaves_like 'user without access'
     end
     
     context 'as non authorized user' do

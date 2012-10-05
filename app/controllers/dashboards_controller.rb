@@ -3,6 +3,7 @@ class DashboardsController < ApplicationController
   before_filter :handle_admin
   
   def show
+    redirect_to projects_path
   end
   
 private

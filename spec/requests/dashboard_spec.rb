@@ -17,7 +17,7 @@ describe 'Dashboard', js: true do
       visit dashboard_path
     end
     
-    it { current_path.should == admin_path }
+    it { current_path.should == sureties_path }
   end
   
   context 'non authorized user' do

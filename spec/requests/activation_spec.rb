@@ -17,7 +17,7 @@ describe 'Activation', js: true do
     end
     
     it 'should redirect to after login page' do
-      current_path.should == dashboard_path
+      current_path.should == projects_path
     end
   end
   

@@ -16,7 +16,7 @@ describe 'Root' do
     end
     
     it 'should redirect to dashboard page' do
-      current_path.should == dashboard_path
+      current_path.should == projects_path
     end
   end
 end

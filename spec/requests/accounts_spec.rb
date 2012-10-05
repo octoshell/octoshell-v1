@@ -75,9 +75,7 @@ describe 'Accounts', js: true do
         visit edit_account_path(account)
       end
       
-      it 'should show dashboard' do
-        current_path.should == dashboard_path
-      end
+      it_behaves_like 'user without access'
     end
   end
 end
