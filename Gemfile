@@ -28,6 +28,7 @@ gem 'gollum', github: 'github/gollum'
 gem 'cocaine'
 gem 'liquid'
 gem 'rtf'
+gem 'zeus'
 
 group :test, :development do
   gem 'quiet_assets'
