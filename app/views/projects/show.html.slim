@@ -34,7 +34,7 @@ table class="table table-bordered"
   - @project.cluster_projects.each do |cluster_project|
     - unless cluster_project.closed?
       h4
-        | Проект 
+        | Группа 
         = link_to cluster_project.username, cluster_project
       p
         small Статус: #{cluster_project.human_state_name}
