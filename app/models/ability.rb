@@ -11,11 +11,11 @@ class Ability
     
     can [:new, :create], :activations
     
+    can [:show, :index], :pages
+    
     # basic user
     if user
       can :show, :support
-      
-      can [:show, :index], :pages
       
       can [:index, :new, :create, :show, :closed, :continue], :tickets
       can :resolve, :tickets do |ticket|
