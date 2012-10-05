@@ -33,22 +33,23 @@ table class="table table-bordered"
   h3 На кластере:
   - @project.cluster_projects.each do |cluster_project|
     - unless cluster_project.closed?
-      h4
-        | Группа 
-        = link_to cluster_project.username, cluster_project
-      p
-        small Статус: #{cluster_project.human_state_name}
+    h4
+      | Группа пользователей 
+      = link_to cluster_project.username, cluster_project
+      |  на 
+      = link_to_cluster cluster_project.cluster
+    p
+      small Статус: #{cluster_project.human_state_name}
     
     - cluster_project.cluster_users.each do |cluster_user|
       - unless cluster_user.closed?
         div class="row-fluid"
           div class="offset1"
             h5
-              | Пользователь 
+              | Пользователь на кластере 
               = link_to cluster_user.username, cluster_user
-              |  
-              small
-                = link_to_user cluster_user.account.user
+              |  для 
+              = link_to_user cluster_user.account.user
             p
               small Статус: #{cluster_user.human_state_name}
       
