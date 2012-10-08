@@ -471,6 +471,8 @@ ru:
       extend:
         url: URL
         script: Скрипт
+        header: DIV элемент над страницей
+        footer: DIV элемент под страницей
       account:
         project: Проект
         state: Состояние

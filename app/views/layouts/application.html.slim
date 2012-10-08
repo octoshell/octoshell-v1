@@ -53,10 +53,14 @@ html
                       li = link_to wiki.name, page_path(wiki.url)
       javascript:
         $(document).ready(function(){
-          #{@page_extends.map { |extend| "$.getScript('/run/#{extend.script}')" }.join(';').html_safe}
+          #{@page_extends.map { |extend| "$.getScript('/run/#{extend.script}?page=#{URI.escape(request.path)}')" }.join(';').html_safe}
         })
-      div id="extend"  
+      div id="extend"
+        - @page_extends.each do |extend|
+          = load_bar(extend, :header)
       = yield
       div id="extend-footer"
+        - @page_extends.each do |extend|
+          = load_bar(extend, :footer)
       footer class="noprint"
         p &copy; #{link_to('Evrone', 'http://evrone.ru')} 2012
