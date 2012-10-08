@@ -7,6 +7,6 @@
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
 
-= paginate @cluster_users
+= safe_paginate @cluster_users
 = render partial: 'table', locals: { cluster_users: @cluster_users }
-= paginate @cluster_users
+= safe_paginate @cluster_users

@@ -8,6 +8,6 @@
     = f.button :submit, 'Найти', class: 'btn-primary'
 
 
-= paginate @tasks
+= safe_paginate @tasks
 = render partial: 'tasks/table', locals: { tasks: @tasks }
-= paginate @tasks
+= safe_paginate @tasks

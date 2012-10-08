@@ -6,7 +6,7 @@ class SuretiesController < ApplicationController
   def index
     if admin?
       @search = Surety.search(params[:search])
-      @sureties = @search.page(params[:page])
+      @sureties = show_all? ? @search.all : @search.page(params[:page])
     else
       @search = current_user.sureties.search(params[:search])
       @sureties = @search.page(params[:page])

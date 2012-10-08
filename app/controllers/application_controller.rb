@@ -95,4 +95,8 @@ private
       request.path =~ %r{#{page.locator}} if page.locator?
     end
   end
+  
+  def show_all?
+    params[:show_all] == '1' && admin?
+  end
 end

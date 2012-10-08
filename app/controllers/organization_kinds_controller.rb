@@ -3,7 +3,7 @@ class OrganizationKindsController < ApplicationController
   
   def index
     @search = OrganizationKind.search(params[:search])
-    @organization_kinds = @search.page(params[:page])
+    @organization_kinds = show_all? ? @search.all : @search.page(params[:page])
   end
   
   def show

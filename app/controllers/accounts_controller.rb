@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
   
   def index
     @search = Account.search(params[:search])
-    @accounts = @search.page(params[:page])
+    @accounts = show_all? ? @search.all : @search.page(params[:page])
   end
   
   def new

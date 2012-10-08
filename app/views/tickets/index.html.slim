@@ -10,8 +10,8 @@ div class="link-actions"
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
 
-= paginate @tickets
+= safe_paginate @tickets
 
 = render partial: 'table', locals: { tickets: @tickets }
 
-= paginate @tickets
+= safe_paginate @tickets

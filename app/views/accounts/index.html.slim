@@ -11,9 +11,9 @@ div class="link-actions"
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
 
-= paginate @accounts
+= safe_paginate @accounts
 
 = render partial: 'table', locals: { accounts: @accounts }
 
-= paginate @accounts
+= safe_paginate @accounts
 

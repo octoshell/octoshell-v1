@@ -1,3 +1,6 @@
+- admin = admin?
+- r = request
+- p = params
 = paginator.render do
   div class="pagination"
     ul
@@ -10,3 +13,7 @@
           == gap_tag
       == next_page_tag unless current_page.last?
       == last_page_tag unless current_page.last?
+      - if admin
+        - p[:show_all] = 1
+        li
+          a href="#{r.path + '?' + p.to_param}" Показать все

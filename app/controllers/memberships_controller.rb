@@ -5,7 +5,7 @@ class MembershipsController < ApplicationController
   def index
     if admin?
       @search = Membership.search(params[:search])
-      @memberships = @search.page(params[:page])
+      @memberships = show_all? ? @search.all : @search.page(params[:page])
     else
       @search = current_user.memberships.search(params[:search])
       @memberships = @search.page(params[:page])

@@ -5,7 +5,7 @@ class RequestsController < ApplicationController
   def index
     if admin?
       @search = Request.search(params[:search])
-      @requests = @search.page(params[:page])
+      @requests = show_all? ? @search.all : @search.page(params[:page])
     else
       @search = current_user.requests.search(params[:search])
       @requests = @search.page(params[:page])

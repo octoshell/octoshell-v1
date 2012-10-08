@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   
   def index
     @search = User.order('last_name asc, first_name asc').search(params[:search])
-    @users = @search.page(params[:page])
+    @users = show_all? ? @search.all : @search.page(params[:page])
   end
   
   def show

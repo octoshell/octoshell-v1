@@ -151,4 +151,8 @@ module ApplicationHelper
       end
     end
   end
+  
+  def safe_paginate(records)
+    paginate records if records.respond_to? :current_page
+  end
 end

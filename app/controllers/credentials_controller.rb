@@ -5,7 +5,7 @@ class CredentialsController < ApplicationController
   def index
     if current_user.admin?
       @search = Credential.search(params[:search])
-      @credentials = @search.page(params[:page])
+      @credentials = show_all? ? @search.all : @search.page(params[:page])
     else
       @search = current_user.credentials.search(params[:search])
       @credentials = @search.page(params[:page])

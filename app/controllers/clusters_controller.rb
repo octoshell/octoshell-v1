@@ -4,7 +4,7 @@ class ClustersController < ApplicationController
   
   def index
     @search = Cluster.search(params[:search])
-    @clusters = @search.page(params[:page])
+    @clusters = show_all? ? @search.all : @search.page(params[:page])
   end
   
   def show

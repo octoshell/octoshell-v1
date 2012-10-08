@@ -4,7 +4,7 @@ class AccessesController < ApplicationController
   
   def index
     @search = Access.search(params[:search])
-    @accesses = @search.page(params[:page])
+    @accesses = show_all? ? @search.all : @search.page(params[:page])
   end
   
   def show

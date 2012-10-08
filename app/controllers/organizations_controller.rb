@@ -8,7 +8,7 @@ class OrganizationsController < ApplicationController
   
   def index
     @search = Organization.search(params[:search])
-    @organizations = @search.page(params[:page])
+    @organizations = show_all? ? @search.all : @search.page(params[:page])
   end
   
   def create

@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   def index
     if admin?
       @search = Project.search(params[:search])
-      @projects = @search.page(params[:page])
+      @projects = show_all? ? @search.all : @search.page(params[:page])
     else
       @search = current_user.projects.where(accounts: { state: 'active' }).search(params[:search])
       @projects = @search.page(params[:page])

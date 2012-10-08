@@ -6,7 +6,7 @@ class TicketsController < ApplicationController
   def index
     if admin?
       @search = Ticket.search(params[:search])
-      @tickets = @search.page(params[:page])
+      @tickets = show_all? ? @search.all : @search.page(params[:page])
     else
       @search = current_user.tickets.search(params[:search])
       @tickets = @search.page(params[:page])

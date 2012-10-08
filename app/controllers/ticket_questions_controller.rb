@@ -3,7 +3,7 @@ class TicketQuestionsController < ApplicationController
   
   def index
     @search = TicketQuestion.search(params[:search])
-    @ticket_questions = @search.page(params[:page])
+    @ticket_questions = show_all? ? @search.all : @search.page(params[:page])
   end
   
   def show

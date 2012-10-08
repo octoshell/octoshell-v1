@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   
   def index
     @search = Task.search(params[:search])
-    @tasks = @search.page(params[:page])
+    @tasks = show_all? ? @search.all : @search.page(params[:page])
   end
   
   def show
