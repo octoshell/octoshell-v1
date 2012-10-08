@@ -145,7 +145,7 @@ module ApplicationHelper
   
   def load_bar(extend, type)
     return unless extend.send("#{type}?")
-    content_tag :div, id: extend.header do
+    content_tag :div, id: extend.send(type) do
       content_tag :div, class: 'progress progress-striped active' do
         content_tag :div, nil, class: 'bar', style: 'width: 100%'
       end
