@@ -1,6 +1,6 @@
 class ExtendsController < ApplicationController
   def index
-    @extends = Extend.all
+    @extends = Extend.order('id')
   end
   
   def new
