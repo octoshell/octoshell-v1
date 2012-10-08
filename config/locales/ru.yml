@@ -473,6 +473,7 @@ ru:
         script: Скрипт
         header: DIV элемент над страницей
         footer: DIV элемент под страницей
+        weight: Вес
       account:
         project: Проект
         state: Состояние

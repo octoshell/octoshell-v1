@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121008114455) do
+ActiveRecord::Schema.define(:version => 20121008121553) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -116,10 +116,11 @@ ActiveRecord::Schema.define(:version => 20121008114455) do
   end
 
   create_table "extends", :force => true do |t|
-    t.string "url"
-    t.string "script"
-    t.string "header"
-    t.string "footer"
+    t.string  "url"
+    t.string  "script"
+    t.string  "header"
+    t.string  "footer"
+    t.integer "weight", :default => 1
   end
 
   create_table "fields", :force => true do |t|
