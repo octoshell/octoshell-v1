@@ -11,6 +11,32 @@ class AccessesController < ApplicationController
     @access = Access.find(params[:id])
   end
   
+  def new
+    @access = Access.new
+  end
+  
+  def create
+    @access = Access.new(params[:access], as_role)
+    if @access.save
+      redirect_to @access
+    else
+      render :new
+    end
+  end
+  
+  def edit
+    @access = Access.find(params[:id])
+  end
+  
+  def update
+    @access = Access.find(params[:id])
+    if @access.update_attributes(params[:access], as_role)
+      redirect_to @access
+    else
+      render :edit
+    end
+  end
+  
 private
   
   def namespace

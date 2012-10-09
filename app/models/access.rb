@@ -17,6 +17,8 @@ class Access < ActiveRecord::Base
   validates :credential, :cluster_user, presence: true
   validates :credential_state_name, inclusion: { in: [:active] }, if: proc { |a| a.active? || a.activing? }
   
+  attr_accessible :cluster_user_id, :credential_id, :state, as: :admin
+  
   state_machine initial: :closed do
     state :closed
     state :activing

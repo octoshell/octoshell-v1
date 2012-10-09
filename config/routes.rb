@@ -119,7 +119,7 @@ MSU::Application.routes.draw do
   end
   
   # accesses
-  resources :accesses, only: [:index, :show] do
+  resources :accesses, only: [:index, :show, :new, :create, :edit, :update] do
     resources :versions, only: [:index, :show], resource: 'Access'
   end
   

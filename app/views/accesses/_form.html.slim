@@ -1,0 +1,7 @@
+= simple_form_for @access, html: { class: 'form-horizontal alert alert-error' } do |f|
+  legend Редактирование связей может нарушить работу сайта.
+  = f.input :cluster_user_id
+  = f.input :credential_id
+  = f.input :state, collection: Access.state_names
+  div class="form-actions"
+    = f.button :submit, class: 'btn-danger'

@@ -1,8 +1,9 @@
-- title "Доступ #{@access.id}"
+- title "Доступ ##{@access.id}"
 
-- if can? :index, :versions
-  div class="link-actions"
-    = link_to 'Версии', [@access, :versions], class: 'btn'
+div class="link-actions"
+  = link_to 'Редактировать', [:edit, @access], class: 'btn btn-danger'
+  |  
+  = link_to 'Версии', [@access, :versions], class: 'btn'
 
 table class="table table-bordered" id="access-#{@access.id}-detail"
   tr

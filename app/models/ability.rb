@@ -90,7 +90,7 @@ class Ability
         
         can :create, :replies
         
-        can [:show, :index], :accesses
+        can [:show, :index, :new, :create, :edit, :update], :accesses
         
         can [:show, :index, :edit, :update, :new, :create], :cluster_users
         
