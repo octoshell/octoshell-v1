@@ -101,7 +101,7 @@ MSU::Application.routes.draw do
   resource :admin, only: :show
   
   # cluster_users
-  resources :cluster_users, only: [:index, :show] do
+  resources :cluster_users, only: [:index, :show, :new, :create, :edit, :update] do
     resources :versions, only: [:index, :show], resource: 'ClusterUser'
   end
   

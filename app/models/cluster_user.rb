@@ -17,6 +17,8 @@ class ClusterUser < ActiveRecord::Base
   validates :account, :cluster_project, presence: true
   validates :account_state_name, inclusion: { in: [:active] }, if: proc { |c| c.active? || c.activing? }
   
+  attr_accessible :account_id, :cluster_project_id, :username, :state, as: :admin
+  
   before_create :assign_username
   
   state_machine initial: :closed do

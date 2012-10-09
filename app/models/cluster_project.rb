@@ -117,6 +117,10 @@ class ClusterProject < ActiveRecord::Base
     !closed? || cluster_users.any?(&:has_active_entities?)
   end
   
+  def to_s
+    username
+  end
+  
 protected
   
   def continue_add_project(task)

@@ -84,6 +84,10 @@ class Account < ActiveRecord::Base
     cluster_users.each { |cu| cu.username = username }
   end
   
+  def to_s
+    username
+  end
+  
 private
   
   def assign_username

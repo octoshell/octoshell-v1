@@ -61,9 +61,6 @@ class Ability
       
       can :index, :accounts
       can [:activate, :decline, :cancel], :accounts, project_id: user.owned_project_ids
-      can :show, :cluster_users do |cluster_user|
-        cluster_user.account.user == user
-      end
       
       # sured user
       if user.sured?
@@ -95,7 +92,7 @@ class Ability
         
         can [:show, :index], :accesses
         
-        can [:show, :index], :cluster_users
+        can [:show, :index, :edit, :update, :new, :create], :cluster_users
         
         can [:index, :show, :perform_callbacks, :create, :retry, :resolve], :tasks
         

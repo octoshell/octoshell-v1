@@ -1,5 +1,8 @@
 - title 'Пользователи на кластере'
 
+div class="link-actions"
+  = link_to 'Новый пользователь на кластере', new_cluster_user_path, class: 'btn btn-danger'
+
 = simple_form_for @search, url: cluster_users_path, method: :get, html: { class: 'form-horizontal' } do |f|
   = f.input :cluster_project_project_id_eq, collection: Project.all if admin?
   = f.input :cluster_project_cluster_id_eq, collection: Cluster.all if admin?

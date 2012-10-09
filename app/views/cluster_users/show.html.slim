@@ -2,6 +2,8 @@
 
 - if can? :index, :versions
   div class="link-actions"
+    = link_to 'Редактировать', [:edit, @cluster_user], class: 'btn btn-danger'
+    |  
     = link_to 'Версии', [@cluster_user, :versions], class: 'btn'
 
 table class="table table-bordered" id="cluster-user-#{@cluster_user.id}-detail"
