@@ -16,21 +16,39 @@
 //= require bootstrap
 //= require raphael
 //= require morris
-//= require chosen.jquery
+//= require select2
 //= require tablesorter
 //= require_tree .
 
 $(document).ready(function(){
   
   if (window.env != 'test') {
-    $('select.chosen').each(function(i, e){
+    $('.chosen').each(function(i, e){
       var select = $(e)
       var options = select.find('option')
       if (options.size() == 1) {
         options.first.select()
       }
+      options = { placeholder: "Выберите значение" }
       
-      select.chosen({ placeholder_text_single: 'Выберите вариант' });
+      if (select.hasClass('ajax')) {
+        options.ajax = {
+          url: select.data('source'),
+          dataType: 'json',
+          data: function(term, page) {
+            return {
+              q: term,
+              page: page,
+              per: 10
+            }
+          },
+          results: function(data, page) {
+            return { results: data }
+          }
+        }
+        options.dropdownCssClass = "bigdrop"
+      }
+      select.select2(options)
     })
   }
   

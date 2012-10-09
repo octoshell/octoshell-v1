@@ -42,6 +42,9 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :additional_emails, allow_destroy: true, reject_if: :all_blank
   
   scope :admins, where(admin: true)
+  scope :finder, (lambda do |q|
+    where "last_name like :q or first_name like :q or email like :q", q: "%#{q}%"
+  end)
   
   state_machine initial: :active do
     state :active
@@ -213,6 +216,10 @@ class User < ActiveRecord::Base
         d: "http://#{host}/assets/default_avatar.png"
       }.to_param
     end
+  end
+  
+  def as_json(options)
+    { id: id, text: "#{full_name} #{email}" }
   end
   
 private

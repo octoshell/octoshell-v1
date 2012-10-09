@@ -4,8 +4,11 @@ div class="link-actions"
   = link_to 'Новый ключ на кластере', new_access_path, class: 'btn btn-danger'
 
 = simple_form_for @search, url: accesses_path, method: :get, html: { class: 'form-horizontal' } do |f|
-  = f.input :cluster_user_id_eq, hint: 'ID пользователя на кластере'
-  = f.input :cluster_user_username_contains, label: 'Имя пользователя на кластере содержит'
+  = f.input :cluster_user_id_eq, label: 'ID пользователя на кластере'
+  = f.input :credential_id_eq, label: 'ID публичного ключа'
+  = f.input :cluster_user_username_contains, label: 'Имя пользователя содержит'
+  = f.input :credential_user_last_name_contains, label: 'Фамилия содержит'
+  = f.input :credential_user_email_contains, label: 'Email содержит'
   = f.input :state_in, collection: Access.human_state_names, input_html: { multiple: true, size: Access.human_state_names.size }
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'

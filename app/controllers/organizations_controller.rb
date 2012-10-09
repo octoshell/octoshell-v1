@@ -7,8 +7,18 @@ class OrganizationsController < ApplicationController
   end
   
   def index
-    @search = Organization.search(params[:search])
-    @organizations = show_all? ? @search.all : @search.page(params[:page])
+    respond_to do |format|
+      format.html do
+        @search = Organization.search(params[:search])
+        @organizations = show_all? ? @search.all : @search.page(params[:page])
+      end
+      format.json do
+        @organizations = Organization.order('name').
+          finder(params[:q]).page(params[:page]).per(params[:per])
+          
+        render json: @organizations
+      end
+    end
   end
   
   def create

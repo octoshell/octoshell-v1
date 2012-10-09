@@ -8,8 +8,18 @@ class UsersController < ApplicationController
   end
   
   def index
-    @search = User.order('last_name asc, first_name asc').search(params[:search])
-    @users = show_all? ? @search.all : @search.page(params[:page])
+    respond_to do |format|
+      format.html do
+        @search = User.order('last_name asc, first_name asc').search(params[:search])
+        @users = show_all? ? @search.all : @search.page(params[:page])
+      end
+      format.json do
+        @users = User.order('last_name asc, first_name asc').
+          finder(params[:q]).page(params[:page]).per(params[:per])
+        
+        render json: @users
+      end
+    end
   end
   
   def show

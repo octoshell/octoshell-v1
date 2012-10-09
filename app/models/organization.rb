@@ -22,6 +22,8 @@ class Organization < ActiveRecord::Base
   
   after_create :notify_admins
   
+  scope :finder, lambda { |q| where("name like :q", q: "%#{q}%") }
+  
   state_machine initial: :active do
     state :active
     state :closed
@@ -61,6 +63,10 @@ class Organization < ActiveRecord::Base
   
   def kind
     organization_kind.name
+  end
+  
+  def as_json(options)
+    { id: id, text: name }
   end
   
 private

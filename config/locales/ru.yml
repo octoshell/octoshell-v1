@@ -436,6 +436,7 @@ ru:
         organization: Организация
         organization_id: Организация
         user: Пользователь
+        user_id: Пользователь
         state: Состояние
       account_code:
         code: Секретный код
@@ -476,6 +477,7 @@ ru:
         weight: Вес
       account:
         project: Проект
+        project_id: Проект
         state: Состояние
         user: Пользователь
         raw_emails: Emails
