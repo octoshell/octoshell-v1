@@ -189,7 +189,7 @@ MSU::Application.routes.draw do
   end
   
   # cluster projects
-  resources :cluster_projects, only: [:index, :show] do
+  resources :cluster_projects, only: [:index, :show, :new, :create, :edit, :update] do
     resources :versions, only: [:index, :show], resource: 'ClusterProject'
   end
   

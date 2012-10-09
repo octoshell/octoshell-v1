@@ -12,6 +12,8 @@ class ClusterProject < ActiveRecord::Base
   
   validates :project, :cluster, presence: true
   
+  attr_accessible :project_id, :cluster_id, :username, :state, as: :admin
+  
   before_create :assign_username
   
   state_machine initial: :closed do

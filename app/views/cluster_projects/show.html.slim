@@ -1,7 +1,9 @@
 - title "#{ClusterProject.model_name.human} ##{@cluster_project.id}"
 
-- if can? :index, :versions
+- if admin?
   div class="link-actions"
+    = link_to 'Редактировать', [:edit, @cluster_project], class: 'btn btn-danger'
+    = " "
     = link_to 'Версии', [@cluster_project, :versions], class: 'btn'
 
 table class="table table-bordered" id="cluster-project-#{@cluster_project.id}-detail"
