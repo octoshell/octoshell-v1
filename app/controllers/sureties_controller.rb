@@ -161,6 +161,11 @@ private
   end
   
   def setup_default_filter
-    params[:search] ||= { state_in: ['pending'] }
+    params[:search] ||=
+      if admin?
+        { state_in: ['pending'] }
+      else
+        { state_in: ['pending', 'active', 'confirmed'] }
+      end
   end
 end
