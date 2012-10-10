@@ -4,9 +4,10 @@ div class="link-actions"
   = link_to 'Новая заявка', new_ticket_path, class: 'btn'
 
 = simple_form_for @search, url: tickets_path, method: :get, html: { class: 'form-horizontal' } do |f|
-  = f.input :project_id_eq, collection: Project.all if admin?
-  = f.input :cluster_id_eq, collection: Cluster.all if admin?
-  = f.input :state_in, collection: Ticket.human_state_names, input_html: { multiple: true }
+  = autocomplete :project, f
+  = autocomplete :user, f
+  = f.input :cluster_id_eq, collection: Cluster.all, required: false if admin?
+  = f.input :state_in, collection: Ticket.human_state_names, input_html: { multiple: true }, required: false
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
 
