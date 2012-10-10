@@ -4,8 +4,16 @@ div class="link-actions"
   = link_to 'Новое место работы', new_membership_path, class: 'btn'
 
 = simple_form_for @search, url: memberships_path, method: :get, html: { class: 'form-horizontal' } do |f|
-  = f.hidden_field :organization_id_eq, class: 'chosen ajax', data: { source: organizations_path } if admin?
-  = f.hidden_field :user_id_eq, class: 'chosen ajax', data: { source: users_path } if admin?
+  div class="control-group select required"
+    div class="select required control-label"
+      label Организация
+    div class="controls"
+      = f.hidden_field :organization_id_eq, class: 'chosen ajax', data: { source: organizations_path } if admin?
+  div class="control-group select required"
+    div class="select required control-label"
+      label Пользователь
+    div class="controls"
+      = f.hidden_field :user_id_eq, class: 'chosen ajax', data: { source: users_path } if admin?
   = f.input :state_in, collection: Membership.human_state_names, input_html: { multiple: true }
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'

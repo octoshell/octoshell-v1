@@ -35,6 +35,7 @@ $(document).ready(function(){
         options.ajax = {
           url: select.data('source'),
           dataType: 'json',
+          quietMillis: 100,
           data: function(term, page) {
             return {
               q: term,
@@ -43,7 +44,8 @@ $(document).ready(function(){
             }
           },
           results: function(data, page) {
-            return { results: data }
+            var more = (page * 10) < data.total
+            return { results: data.records, more: more }
           }
         }
         options.dropdownCssClass = "bigdrop"
