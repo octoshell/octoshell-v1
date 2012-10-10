@@ -155,4 +155,39 @@ module ApplicationHelper
   def safe_paginate(records)
     paginate records if records.respond_to? :current_page
   end
+  
+  def autocomplete(type, form, options = {})
+    default_options = {
+      organization: {
+        label: "Организация",
+        name: :organization_id_eq,
+        admin: true,
+        source: organizations_path
+      },
+      user: {
+        label: "Пользователь",
+        name: :user_id_eq,
+        admin: true,
+        source: users_path
+      },
+      project: {
+        label: "Проект", 
+        name: :project_id_eq,
+        admin: true,
+        source: projects_path
+      }
+    }
+    
+    options = default_options[type].merge(options)
+    return if options[:admin] && !admin?
+    
+    content_tag(:div, class: "control-group select") do
+      content_tag(:div, class: "select control-label") do
+        content_tag :label, options[:label]
+      end + 
+        content_tag(:div, class: "controls") do
+          form.hidden_field options[:name], class: 'chosen ajax', data: { source: options[:source] }
+        end
+    end
+  end
 end

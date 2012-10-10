@@ -26,6 +26,8 @@ class Project < ActiveRecord::Base
   after_create :activate_accounts
   after_create :create_relations
   
+  scope :finder, lambda { |q| where("name like :q", q: "%#{q}%") }
+  
   state_machine initial: :active do
     state :active
     state :closed
@@ -92,6 +94,10 @@ class Project < ActiveRecord::Base
       end
     end
     tasks.sort_by(&:id)
+  end
+  
+  def as_json(options)
+    { id: id, text: name }
   end
   
 private

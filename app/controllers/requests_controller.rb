@@ -1,14 +1,13 @@
 class RequestsController < ApplicationController
   before_filter :require_login
-  before_filter :setup_default_filter, only: :index
+  before_filter :setup_default_filter, only: :index, if: :admin?
   
   def index
     if admin?
       @search = Request.search(params[:search])
       @requests = show_all? ? @search.all : @search.page(params[:page])
     else
-      @search = current_user.requests.search(params[:search])
-      @requests = @search.page(params[:page])
+      @requests = current_user.requests
     end
   end
   

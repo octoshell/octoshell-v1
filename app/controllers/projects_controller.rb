@@ -3,18 +3,34 @@ class ProjectsController < ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
-    if admin?
-      @search = Project.search(params[:search])
-      @projects = show_all? ? @search.all : @search.page(params[:page])
-    else
-      @search = current_user.projects.where(accounts: { state: 'active' }).search(params[:search])
-      @projects = @search.page(params[:page])
+    respond_to do |format|
+      format.html do
+        if admin?
+          @search = Project.search(params[:search])
+          @projects = show_all? ? @search.all : @search.page(params[:page])
+        else
+          @projects = current_user.all_projects.reorder('projects.id desc')
+        end
+      end
+      format.json do
+        if admin?
+          @projects = Project.finder(params[:q])
+          render json: { records: @projects.page(params[:page]).per(params[:per]), total: @projects.count }
+        else
+          @projects = current_user.all_projects.finder(params[:q])
+          render json: { records: @projects.page(params[:page]).per(params[:per]), total: @projects.count }
+        end
+      end
     end
   end
   
   def show
     @project = Project.find(params[:id])
     authorize! :show, @project
+    respond_to do |format|
+      format.html
+      format.json { render json: @project }
+    end
   end
   
   def new
@@ -67,6 +83,6 @@ private
   end
   
   def setup_default_filter
-    params[:search] ||= { state_in: ['active'] }
+    params[:search] ||= { state_in: ['active'] } if admin?
   end
 end

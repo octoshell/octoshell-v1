@@ -8,7 +8,7 @@ div class="link-actions"
 
 = simple_form_for @search, url: sureties_path, method: :get, html: { class: 'form-horizontal' } do |f|
   = f.input :id_eq if admin?
-  = f.input :organization_id_eq, collection: Organization.all if admin?
+  = autocomplete :organization, f
   = f.input :state_in, collection: Surety.human_state_names, input_html: { multiple: true }
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'

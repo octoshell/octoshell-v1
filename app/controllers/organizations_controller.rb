@@ -13,10 +13,8 @@ class OrganizationsController < ApplicationController
         @organizations = show_all? ? @search.all : @search.page(params[:page])
       end
       format.json do
-        @organizations = Organization.order('name').
-          finder(params[:q]).page(params[:page]).per(params[:per])
-          
-        render json: @organizations
+        @organizations = Organization.order('name').finder(params[:q])
+        render json: { records: @organizations.page(params[:page]).per(params[:per]), total: @organizations.count }
       end
     end
   end
@@ -32,6 +30,11 @@ class OrganizationsController < ApplicationController
   
   def show
     @organization = find_organization(params[:id])
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @organization }
+    end
   end
 
   def edit

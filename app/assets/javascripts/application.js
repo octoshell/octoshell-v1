@@ -49,6 +49,13 @@ $(document).ready(function(){
           }
         }
         options.dropdownCssClass = "bigdrop"
+        options.initSelection = function (element, callback) {
+          if (element.val().length > 0) {
+            $.getJSON(select.data('source') + '/' + element.val(), {}, function(data) {
+              callback({ id: data.id, text: data.text })
+            })
+          }
+        }
       }
       select.select2(options)
     })

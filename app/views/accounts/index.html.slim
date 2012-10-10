@@ -7,9 +7,9 @@ div class="link-actions"
   = link_to 'Новый доступ', new_account_path, class: "btn #{disabled(can? :new, :accounts)}"
 
 = simple_form_for @search, url: accounts_path, method: :get, html: { class: 'form-horizontal' } do |f|
-  = f.input :user_id_eq, collection: User.all, label_method: :full_name, input_html: { class: 'chosen' }
-  = f.input :project_id_eq, collection: Project.all, input_html: { class: 'chosen' }
-  = f.input :state_in, collection: Account.human_state_names, input_html: { multiple: true }
+  = autocomplete :user, f
+  = autocomplete :project, f
+  = f.input :state_in, collection: Account.human_state_names, input_html: { multiple: true }, required: false
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
 
