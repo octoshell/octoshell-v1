@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        @search = User.order('last_name asc, first_name asc').search(params[:search])
+        @search = User.search(params[:search])
         @users = show_all? ? @search.all : @search.page(params[:page])
       end
       format.json do
@@ -83,6 +83,7 @@ private
   
   def setup_default_filter
     params[:search] ||= { state_in: ['sured'] }
+    params[:search][:meta_sort] ||= 'last_name.asc'
   end
   
   def skip_authentication_by_token

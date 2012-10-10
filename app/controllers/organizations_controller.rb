@@ -13,7 +13,7 @@ class OrganizationsController < ApplicationController
         @organizations = show_all? ? @search.all : @search.page(params[:page])
       end
       format.json do
-        @organizations = Organization.order('name').finder(params[:q])
+        @organizations = Organization.finder(params[:q])
         render json: { records: @organizations.page(params[:page]).per(params[:per]), total: @organizations.count }
       end
     end
@@ -78,5 +78,6 @@ private
   
   def setup_default_filter
     params[:search] ||= { state_in: ['active'] }
+    params[:search][:meta_sort] ||= 'name.asc'
   end
 end

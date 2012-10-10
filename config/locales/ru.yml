@@ -420,6 +420,7 @@ ru:
       organization:
         name: Название
         organization_kind: Тип организации
+        organization_kind_id: Тип организации
         abbreviation: Аббревиатура
         merge_id: Объединить с
         state: Статус
