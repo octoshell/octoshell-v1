@@ -61,6 +61,15 @@ $(document).ready(function(){
     })
   }
   
+  $("select[multiple]=multiple").each(function(i, e){
+    var select_all = $("<a href='#' class='select-all'>Выделить все</a>")
+    $(e).before(select_all)
+    select_all.click(function(){
+      $(e).find("option").each(function(i, e){ e.selected = true })
+      return false
+    })
+  })
+  
 	$('#ticket_template').on('change', function(){
 		var reply_message = $('#reply_message')
 		if (_(reply_message.val()).isEmpty()) {
