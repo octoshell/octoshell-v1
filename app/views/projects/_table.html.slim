@@ -3,13 +3,21 @@
     tr
       - if admin?
         th #
-      th = Project.human_attribute_name(:name)
+      th
+        - if @search
+          = sort_link @search, :name, Project.human_attribute_name(:name), default_order: :asc
+        - else
+          = Project.human_attribute_name(:name)
       th Участники
       - if admin?
         th = Project.human_attribute_name(:state)
       - else
         th Подключение
-      th = Project.human_attribute_name(:created_at)
+      th
+        - if @search
+          = sort_link @search, :id, Project.human_attribute_name(:created_at), default_order: :asc
+        - else
+          = Project.human_attribute_name(:created_at)
     - projects.each do |project|
       tr
         - if admin?

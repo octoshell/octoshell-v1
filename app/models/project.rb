@@ -4,8 +4,6 @@ class Project < ActiveRecord::Base
   CLUSTER_USER_TYPES = %w(account project)
   has_paper_trail
   
-  default_scope order("#{table_name}.name asc")
-  
   belongs_to :user
   belongs_to :organization
   has_many :accounts, inverse_of: :project

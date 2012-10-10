@@ -84,5 +84,6 @@ private
   
   def setup_default_filter
     params[:search] ||= { state_in: ['active'] } if admin?
+    params[:search][:meta_sort] ||= 'name.asc'
   end
 end
