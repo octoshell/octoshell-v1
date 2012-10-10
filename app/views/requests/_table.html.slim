@@ -15,7 +15,7 @@
         td = link_to_user request.user
         td = link_to_cluster request.cluster
         td = request.human_state_name
-        td = request.created_at.to_formatted_s(:short)
+        td = request.created_at.strftime("%Y-%m-%d")
         td = link_to 'открыть', request
 - else
   p Нет заявок

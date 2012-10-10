@@ -38,7 +38,7 @@ $(document).ready(function(){
           quietMillis: 100,
           data: function(term, page) {
             return {
-              q: term,
+              q: $.trim(term),
               page: page,
               per: 10
             }
