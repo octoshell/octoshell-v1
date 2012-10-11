@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_filter :require_login
-  before_filter :setup_default_filter, only: :index
+  before_filter :setup_default_filter, only: :index, if: :admin?
   
   def index
     respond_to do |format|
@@ -83,7 +83,7 @@ private
   end
   
   def setup_default_filter
-    params[:search] ||= { state_in: ['active'] } if admin?
+    params[:search] ||= { state_in: ['active'] }
     params[:search][:meta_sort] ||= 'name.asc'
   end
 end
