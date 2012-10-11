@@ -8,6 +8,10 @@
       th = Ticket.human_attribute_name(:project)
       th = Ticket.human_attribute_name(:cluster)
       th
+        - if @search
+          = sort_link @search, :id, Ticket.human_attribute_name(:created_at), default_order: :asc
+        - else
+          = Ticket.human_attribute_name(:created_at)
     - tickets.each do |ticket|
       tr id="ticket-#{ticket.id}"
         td = ticket.id
@@ -16,6 +20,6 @@
         td = ticket.human_state_name
         td = link_to_project ticket.project if ticket.project
         td = link_to_cluster ticket.cluster if ticket.cluster
-        td = link_to 'открыть', ticket
+        td = ticket.created_at.strftime("%Y-%m-%d")
 - else
   p Нет заявок

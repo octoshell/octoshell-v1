@@ -504,6 +504,7 @@ ru:
         state: Состояние
         cluster_user_id: Пользователь на кластере
       ticket:
+        created_at: Создан
         subject: Тема
         message: Сообщение
         state: Состояние

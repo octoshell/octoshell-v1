@@ -161,7 +161,6 @@ ActiveRecord::Schema.define(:version => 20121010131612) do
     t.string   "state"
     t.string   "abbreviation"
     t.integer  "organization_kind_id"
-    t.integer  "active_order_count",    :default => 0
     t.integer  "active_projects_count", :default => 0
   end
 
