@@ -380,7 +380,6 @@ ru:
         admin: Права администратора
         state: Состояние
         avatar: Фото
-        publicized: Детальная информация
         created_at: Создан
       project:
         organization: Главная организация

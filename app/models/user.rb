@@ -34,10 +34,10 @@ class User < ActiveRecord::Base
   
   attr_accessible :first_name, :last_name, :middle_name, :email, :password,
     :password_confirmation, :remember_me, :new_organization, :organization_id,
-    :avatar, :additional_emails_attributes, :publicized
+    :avatar, :additional_emails_attributes
   attr_accessible :first_name, :last_name, :middle_name, :email, :password,
     :password_confirmation, :remember_me, :new_organization, :organization_id,
-    :admin, :avatar, :additional_emails_attributes, :publicized, as: :admin
+    :admin, :avatar, :additional_emails_attributes, as: :admin
   
   accepts_nested_attributes_for :additional_emails, allow_destroy: true, reject_if: :all_blank
   
