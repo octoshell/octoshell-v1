@@ -2,7 +2,7 @@
 
 = simple_form_for @account, url: accounts_path, method: :post do |f|
   = f.association :user, label_method: :full_name, collection: User.sured.order(:last_name), input_html: { class: 'chosen' }
-  = f.association :project
+  = autocomplete :project, f, name: :project_id
   
   div class="form-actions"
     = f.button :submit

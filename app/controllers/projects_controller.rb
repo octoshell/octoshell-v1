@@ -14,10 +14,10 @@ class ProjectsController < ApplicationController
       end
       format.json do
         if admin?
-          @projects = Project.finder(params[:q])
+          @projects = Project.finder(params[:q]).order('projects.name asc')
           render json: { records: @projects.page(params[:page]).per(params[:per]), total: @projects.count }
         else
-          @projects = current_user.all_projects.finder(params[:q])
+          @projects = current_user.all_projects.finder(params[:q]).order('projects.name asc')
           render json: { records: @projects.page(params[:page]).per(params[:per]), total: @projects.count }
         end
       end
