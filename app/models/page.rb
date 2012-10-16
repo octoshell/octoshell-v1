@@ -12,7 +12,7 @@ class Page < ActiveRecord::Base
   validates :body, :name, :url, presence: true
   validates :url, uniqueness: true
   
-  attr_accessible :name, :body, :url, :locator, as: :admin
+  attr_accessible :name, :body, :url, :locator, :publicized, as: :admin
   
   def to_param
     url

@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def index
-    @pages = Page.all
+    @pages = Page.all.find_all { |p| can?(:show, p) }
   end
   
   def new
@@ -9,6 +9,7 @@ class PagesController < ApplicationController
   
   def show
     @page = find_page(params[:id])
+    authorize! :show, @page
   rescue ActiveRecord::RecordNotFound
     if admin?
       @page = Page.new({ url: params[:id], name: params[:id].capitalize }, as_role)

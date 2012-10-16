@@ -11,10 +11,12 @@ class Ability
     
     can [:new, :create], :activations
     
-    can [:show, :index], :pages
+    can :index, :pages
+    can :show, :pages, publicized: true
     
     # basic user
     if user
+      can :show, :pages
       can :show, :support
       
       can [:index, :new, :create, :show, :closed, :continue], :tickets

@@ -92,7 +92,7 @@ private
   
   def get_wikis
     @wikis = Page.all.find_all do |page|
-      request.path =~ %r{#{page.locator}} if page.locator?
+      request.path =~ %r{#{page.locator}} if page.locator? && can?(:show, page)
     end
   end
   
