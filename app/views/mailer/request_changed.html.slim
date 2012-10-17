@@ -1,6 +1,6 @@
 = render 'header'
 
-p = Статус вашей заявки изменился
+p Статус вашей заявки изменился.
 p = link_to 'перейти к заявке', request_url(@request, token: @user.token)
 
 = render 'signature'
