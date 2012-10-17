@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   has_many :tickets
   has_many :additional_emails
   
-  validates :first_name, :last_name, :email, presence: true
+  validates :first_name, :last_name, :middle_name, :email, presence: true
   validates :password, confirmation: true, length: { minimum: 6 }, on: :create
   validates :password, confirmation: true, length: { minimum: 6 }, on: :update, if: :password?
   validates :email, uniqueness: true
