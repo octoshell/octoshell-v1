@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        @search = User.search(params[:search])
+        @search = User.includes(:membershiped_organizations).search(params[:search])
         @users = show_all? ? @search.all : @search.page(params[:page])
       end
       format.json do

@@ -11,6 +11,7 @@ table class="table table-bordered"
         = sort_link @search, :email, User.human_attribute_name(:email), :default_order => :asc
       - else
         = User.human_attribute_name(:email)
+    th = Organization.model_name.human
     th = User.human_attribute_name(:state)
     th
       - if @search
@@ -22,5 +23,9 @@ table class="table table-bordered"
       td = user.id
       td = link_to_user user
       td = user.email
+      td
+        ul class="unstyled"
+          - user.membershiped_organizations.to_a.uniq.each do |organization|
+            li = link_to_organization(organization)
       td = user.human_state_name
       td = user.created_at.strftime("%Y-%m-%d")

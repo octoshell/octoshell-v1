@@ -2,7 +2,7 @@ class AdminsController < ApplicationController
   before_filter :require_login
   
   def show
-    redirect_to sureties_path
+    redirect_to users_path
   end
   
 private

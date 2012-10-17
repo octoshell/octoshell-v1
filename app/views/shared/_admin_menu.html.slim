@@ -1,9 +1,9 @@
+= submenu_item :users, (link_to 'Пользователи', users_path)
 = submenu_item :sureties, (link_to "Поручительства (#{Surety.pending.count})", sureties_path)
 = submenu_item :requests, (link_to "Заявки (#{Request.pending.count})", requests_path)
 = submenu_item :tasks, (link_to "Процедуры (#{Task.failed.count})", tasks_path)
 = submenu_item :projects, (link_to 'Проекты', projects_path)
 = submenu_item :clusters, (link_to 'Кластеры', clusters_path)
-= submenu_item :users, (link_to 'Пользователи', users_path)
 - submenu_items = [:memberships, :credentials, :organization_kinds, :position_names, :accesses, :accounts, :cluster_users]
 li class="dropdown #{submenu_items.any? { |c| c.to_s == params[:controller] } ? 'active' : ''}"
   = link_to '#', 'data-toggle' => 'dropdown' do
