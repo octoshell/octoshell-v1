@@ -487,6 +487,7 @@ ru:
         username: Логин (на кластере)
       position_name:
         name: Название
+        autocomplete: Варианты ответов
       task:
         resource: Создатель
         resource_type: Тип создателя
