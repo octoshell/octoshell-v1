@@ -7,7 +7,7 @@
       th = Cluster.model_name.human
       th = Request.human_attribute_name(:state)
       th = Request.human_attribute_name(:created_at)
-      th 
+      th
     - requests.each do |request|
       tr id="request-#{request.id}"
         td = request.id
@@ -15,7 +15,7 @@
         td = link_to_user request.user
         td = link_to_cluster request.cluster
         td = request.human_state_name
-        td = request.created_at.strftime("%Y-%m-%d")
+        td class="date" = request.created_at.strftime("%Y-%m-%d")
         td = link_to 'открыть', request
 - else
   p Нет заявок
