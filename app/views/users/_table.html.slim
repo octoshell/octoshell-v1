@@ -12,6 +12,7 @@ table class="table table-bordered"
       - else
         = User.human_attribute_name(:email)
     th = Organization.model_name.human
+    th = Cluster.model_name.human
     th = User.human_attribute_name(:state)
     th class="date"
       - if @search
@@ -27,5 +28,9 @@ table class="table table-bordered"
         ul class="unstyled"
           - user.membershiped_organizations.to_a.uniq.each do |organization|
             li = link_to_organization(organization)
+      td
+        ul class="unstyled"
+          - user.active_clusters.each do |cluster|
+            li = link_to_cluster(cluster)
       td = user.human_state_name
       td class="date" = user.created_at.strftime("%Y-%m-%d")

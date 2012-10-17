@@ -229,6 +229,12 @@ class User < ActiveRecord::Base
     { id: id, text: "#{full_name} #{email}" }
   end
   
+  def active_clusters
+    all_projects.active.map do |p|
+      p.requests.map(&:cluster)
+    end.flatten.uniq
+  end
+  
 private
   
   def step_name(name)
