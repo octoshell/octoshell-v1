@@ -3,7 +3,10 @@
   = f.association :organization, hint: link_to('Добавить организацию', new_organization_path), collection: Organization.active, input_html: { class: 'chosen' }
   = f.simple_fields_for :positions do |f|
     = f.input :name, as: :hidden
-    = f.input :value, label: f.object.name, required: false
+    - if f.object.available_values.any?
+      = f.input :value, label: f.object.name, collection: f.object.available_values, input_html: { class: 'chosen' }, required: false
+    - else
+      = f.input :value, label: f.object.name, required: false
   
   div class="form-actions"
     = f.button :submit, class: 'btn-primary'

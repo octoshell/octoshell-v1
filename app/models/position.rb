@@ -16,4 +16,10 @@ class Position < ActiveRecord::Base
   def try_save
     valid? ? save : errors.clear
   end
+  
+  delegate :values, :available_values, to: :position_name
+  
+  def position_name
+    PositionName.find_by_name(name) || PositionName.new
+  end
 end

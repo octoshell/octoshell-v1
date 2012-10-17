@@ -52,12 +52,10 @@ class Ability
       
       can [:new, :create], :organizations
       
-      can [:show, :index, :close], :memberships
+      can [:show, :index, :close, :new, :create], :memberships
       
       can [:index, :new, :create, :new_scan, :load_scan], :sureties
       can [:close, :show], :sureties, user_id: user.id
-      
-      can [:new, :create], :memberships
       
       can [:edit, :update], :memberships, user_id: user.id
       
@@ -80,6 +78,8 @@ class Ability
       end
       
       if user.admin?
+        can [:edit, :update, :close], :memberships
+        
         can :become, :sessions
         
         can [:edit_template, :update_template, :default_template, :rtf_template, :default_rtf, :download_rtf_template], :sureties
