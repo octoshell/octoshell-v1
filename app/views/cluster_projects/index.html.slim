@@ -6,6 +6,7 @@ div class="link-actions"
 = simple_form_for @search, url: cluster_projects_path, method: :get, html: { class: 'form-horizontal' } do |f|
   = autocomplete :project, f
   = f.input :cluster_id_eq, collection: Cluster.all, input_html: { class: 'chosen' }, required: false
+  = f.input :username_eq, label: 'Group (на кластере)', required: false
   = f.input :state_in, collection: ClusterProject.human_state_names, input_html: { multiple: true }, required: false
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
