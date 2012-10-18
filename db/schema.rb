@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121017070528) do
+ActiveRecord::Schema.define(:version => 20121018122953) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -133,6 +133,17 @@ ActiveRecord::Schema.define(:version => 20121017070528) do
     t.datetime "updated_at",                :null => false
   end
 
+  create_table "history_items", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "data"
+    t.string   "kind"
+    t.datetime "created_at"
+    t.integer  "author_id"
+  end
+
+  add_index "history_items", ["kind"], :name => "index_history_items_on_kind"
+  add_index "history_items", ["user_id"], :name => "index_history_items_on_user_id"
+
   create_table "memberships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "organization_id"
@@ -161,7 +172,6 @@ ActiveRecord::Schema.define(:version => 20121017070528) do
     t.string   "state"
     t.string   "abbreviation"
     t.integer  "organization_kind_id"
-    t.integer  "active_order_count",    :default => 0
     t.integer  "active_projects_count", :default => 0
   end
 

@@ -21,6 +21,7 @@ class SuretiesController < ApplicationController
     @surety = Surety.new(params[:surety], as_role)
     @surety.user = current_user unless admin?
     if @surety.save
+      @surety.user.track! :create_surety, @surety, current_user
       redirect_to @surety
     else
       render :new
@@ -49,6 +50,7 @@ class SuretiesController < ApplicationController
   def activate
     @surety = find_surety(params[:surety_id])
     if @surety.activate
+      @surety.user.track! :activate_surety, @surety, current_user
       redirect_to_surety(@surety)
     else
       redirect_to_surety_with_alert(@surety)
@@ -58,6 +60,7 @@ class SuretiesController < ApplicationController
   def decline
     @surety = find_surety(params[:surety_id])
     if @surety.decline
+      @surety.user.track! :decline_surety, @surety, current_user
       redirect_to_surety(@surety)
     else
       redirect_to_surety_with_alert(@surety)
@@ -68,6 +71,7 @@ class SuretiesController < ApplicationController
     @surety = find_surety(params[:surety_id])
     authorize! :close, @surety
     if @surety.close
+      @surety.user.track! :close_surety, @surety, current_user
       redirect_to_surety(@surety)
     else
       redirect_to_surety_with_alert(@surety)
@@ -77,6 +81,7 @@ class SuretiesController < ApplicationController
   def confirm
     @surety = find_surety(params[:surety_id])
     if @surety.confirm
+      @surety.user.track! :confirm_surety, @surety, current_user
       redirect_to_surety(@surety)
     else
       redirect_to_surety_with_alert(@surety)
@@ -86,6 +91,7 @@ class SuretiesController < ApplicationController
   def unconfirm
     @surety = find_surety(params[:surety_id])
     if @surety.unconfirm
+      @surety.user.track! :unconfirm_surety, @surety, current_user
       redirect_to_surety(@surety)
     else
       redirect_to_surety_with_alert(@surety)
@@ -132,6 +138,7 @@ class SuretiesController < ApplicationController
   def load_scan
     @surety = Surety.find(params[:surety_id])
     if @surety.load_scan(params[:file])
+      @surety.user.track! :create_scan, @surety, current_user
       redirect_to @surety, notice: "Файл загружен"
     else
       redirect_to [@surety, :scan], alert: @surety.errors.full_messages.join(', ')

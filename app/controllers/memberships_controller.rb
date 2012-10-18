@@ -22,6 +22,7 @@ class MembershipsController < ApplicationController
     @membership = Membership.new(params[:membership], as_role)
     @membership.user = current_user unless admin?
     if @membership.save
+      @membership.user.track! :create_membership, @membership, current_user
       redirect_to @membership
     else
       @membership.build_default_positions
@@ -43,6 +44,7 @@ class MembershipsController < ApplicationController
     @membership = find_membership(params[:id])
     authorize! :update, @membership
     if @membership.update_attributes(params[:membership], as_role)
+      @membership.user.track! :update_membership, @membership, current_user
       redirect_to @membership
     else
       @membership.build_default_positions
@@ -54,6 +56,7 @@ class MembershipsController < ApplicationController
     @membership = find_membership(params[:membership_id])
     authorize! :close, @membership
     @membership.close
+    @membership.user.track! :close_membership, @membership, current_user
     redirect_to @membership
   end
   

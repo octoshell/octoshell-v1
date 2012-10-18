@@ -1,0 +1,15 @@
+- title 'История пользователя'
+
+- if @history_items.any?
+  ul class="unstyled"
+    - @history_items.each do |item|
+      li
+        = item.created_at.strftime("%Y-%m-%d %M:%S")
+        |  
+        = item.author
+        |  
+        == item.title.mb_chars.downcase
+        |  
+        
+- else
+  p Нет записанный в историю событий

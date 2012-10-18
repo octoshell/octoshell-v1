@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
   def create
     email, password, remember = fetch_user(params[:user])
     if @user = login(email, password, remember)
+      @user.track! :create_session, @user, current_user
       redirect_to root_url
     else
       @user = User.initialize_with_auth_errors(email)

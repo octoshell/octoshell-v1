@@ -47,6 +47,7 @@ class TicketsController < ApplicationController
     @ticket.user = current_user unless admin?
     authorize! :create, @ticket
     if @ticket.save
+      @ticket.user.track! :create_ticket, @ticket, current_user
       redirect_to @ticket, notice: "Заявка создана"
     else
       render :new
@@ -67,6 +68,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:ticket_id])
     authorize! :close, @ticket
     if @ticket.close
+      @ticket.user.track! :close_ticket, @ticket, current_user
       redirect_to @ticket
     else
       redirect_to @ticket, alert: @ticket.errors.full_messages.join(', ')
@@ -77,6 +79,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:ticket_id])
     authorize! :resolve, @ticket
     if @ticket.resolve
+      @ticket.user.track! :resolve_ticket, @ticket, current_user
       redirect_to @ticket
     else
       redirect_to @ticket, alert: @ticket.errors.full_messages.join(', ')
@@ -90,6 +93,7 @@ class TicketsController < ApplicationController
   def update
     @ticket = Ticket.find(params[:id])
     if @ticket.update_attributes(params[:ticket], as_role)
+      @ticket.user.track! :update_ticket, @ticket, current_user
       redirect_to @ticket
     else
       render :edit

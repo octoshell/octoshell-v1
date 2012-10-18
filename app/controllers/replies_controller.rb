@@ -4,6 +4,7 @@ class RepliesController < ApplicationController
     @reply.user = current_user
     authorize! :create, @reply
     if @reply.save
+      @reply.user.track! :create_reply, @reply, current_user
       redirect_to @reply.ticket
     else
       @ticket = @reply.ticket

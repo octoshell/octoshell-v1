@@ -26,6 +26,7 @@ class CredentialsController < ApplicationController
     @credential = Credential.new(params[:credential], as_role)
     @credential.user = current_user unless admin?
     if @credential.save
+      @credential.user.track! :create_credential, @credential, current_user
       redirect_to @credential
     else
       render :new
@@ -36,6 +37,7 @@ class CredentialsController < ApplicationController
     @credential = Credential.find(params[:credential_id])
     authorize! :close, @credential
     if @credential.close
+      @credential.user.track! :close_credential, @credential, current_user
       redirect_to credentials_path
     else
       flash.now[:alert] = @credential.errors.full_messages.join(', ')

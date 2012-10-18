@@ -12,6 +12,7 @@ class AccountCodesController < ApplicationController
     @account_code = AccountCode.new(params[:account_code], as_role)
     authorize! :create, @account_code
     if @account_code.save
+      @account_code.project.user.track! :create_account_code, @account_code, current_user
       redirect_to account_codes_path
     else
       render :new
@@ -25,6 +26,7 @@ class AccountCodesController < ApplicationController
     @account_code = AccountCode.find_by_code(params[:code])
     if @account_code
       if @account_code.use(current_user)
+        @account_code.project.user.track! :use_account_code, @account_code, current_user
         redirect_to projects_path, notice: 'Вы активировали код'
       else
         flash.now[:alert] = @account_code.errors.full_messages.join(', ')
@@ -40,6 +42,7 @@ class AccountCodesController < ApplicationController
     @account_code = AccountCode.find(params[:id])
     authorize! :destroy, @account_code
     @account_code.destroy
+    @account_code.project.user.track! :destroy_account_code, @account_code, current_user
     redirect_to account_codes_path
   end
   

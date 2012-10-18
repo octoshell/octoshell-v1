@@ -45,6 +45,7 @@ class ProjectsController < ApplicationController
     @project.user = current_user unless admin?
     @project.accounts.build { |a| a.user = @project.user }
     if @project.save
+      @project.user.track! :create_project, @project, current_user
       redirect_to new_request_path(project_id: @project.id)
     else
       render :new
@@ -60,6 +61,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     authorize! :update, @project
     if @project.update_attributes(params[:project], as_role)
+      @project.user.track! :update_project, @project, current_user
       redirect_to @project
     else
       render :edit
@@ -70,6 +72,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:project_id])
     authorize! :close, @project
     if @project.close
+      @project.user.track! :close_project, @project, current_user
       redirect_to @project
     else
       redirect_to @project, alert: @full_messages.join(', ')

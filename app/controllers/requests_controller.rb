@@ -25,6 +25,7 @@ class RequestsController < ApplicationController
     @request = Request.new(params[:request], as_role)
     @request.user = current_user unless admin?
     if @request.save
+      @request.user.track! :create_request, @request, current_user
       redirect_to @request
     else
       if admin?
@@ -45,6 +46,7 @@ class RequestsController < ApplicationController
     @request = find_request(params[:id])
     @projects = @request.allowed_projects
     if @request.update_attributes(params[:request], as_role)
+      @request.user.track! :update_request, @request, current_user
       redirect_to @request
     else
       @projects = @request.allowed_projects
@@ -60,6 +62,7 @@ class RequestsController < ApplicationController
   def activate
     @request = find_request(params[:request_id])
     if @request.activate
+      @request.user.track! :activate_request, @request, current_user
       redirect_to_request(@request)
     else
       redirect_to_request_with_alert(@request)
@@ -69,6 +72,7 @@ class RequestsController < ApplicationController
   def decline
     @request = find_request(params[:request_id])
     if @request.decline
+      @request.user.track! :decline_request, @request, current_user
       redirect_to_request(@request)
     else
       redirect_to_request_with_alert(@request)
@@ -78,6 +82,7 @@ class RequestsController < ApplicationController
   def close
     @request = find_request(params[:request_id])
     if @request.close
+      @request.user.track! :close_request, @request, current_user
       redirect_to_request(@request)
     else
       redirect_to_request_with_alert(@request)

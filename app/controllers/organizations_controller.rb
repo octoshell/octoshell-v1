@@ -22,6 +22,7 @@ class OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(params[:organization], as_role)
     if @organization.save
+      current_user.track! :create_organization, @organization, current_user
       redirect_to admin? ? @organization : dashboard_path
     else
       render :new

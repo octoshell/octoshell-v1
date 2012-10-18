@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :require_login, only: [:show, :index, :edit, :update, :close]
-  before_filter :logout, except: [:show, :index, :edit, :update, :close]
+  before_filter :logout, except: [:show, :index, :edit, :update, :close, :history]
   before_filter :setup_default_filter, only: :index
   
   def new
@@ -33,6 +33,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
+      @user.track! :registration, @user, current_user
       redirect_to confirmation_users_path(email: @user.email)
     else
       render :new
@@ -73,6 +74,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:user_id])
     @user.close
     redirect_to @user
+  end
+  
+  def history
+    @user = User.find(params[:user_id])
+    @history_items = @user.history_items.order(:id)
   end
   
 private

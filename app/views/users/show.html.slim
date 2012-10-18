@@ -6,6 +6,8 @@
     = " "
     = link_to 'Редактировать', [:edit, @user], class: 'btn'
     = " "
+    = link_to 'История', [@user, :history], class: 'btn'
+    = " "
     = link_to 'Версии', [@user, :versions], class: 'btn'
     - if @user.can__close?
       = " "

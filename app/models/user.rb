@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :accesses, through: :credentials
   has_many :tickets
   has_many :additional_emails
+  has_many :history_items
   
   validates :first_name, :last_name, :middle_name, :email, presence: true
   validates :password, confirmation: true, length: { minimum: 6 }, on: :create
@@ -236,6 +237,14 @@ class User < ActiveRecord::Base
     all_projects.active.map do |p|
       p.requests.map(&:cluster)
     end.flatten.uniq
+  end
+  
+  def track!(kind, record, user)
+    history_items.create! do |item|
+      item.kind = kind
+      item.data = record.attributes
+      item.author_id = user ? user.id : nil
+    end
   end
   
 private

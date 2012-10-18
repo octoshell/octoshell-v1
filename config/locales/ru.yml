@@ -721,4 +721,39 @@ ru:
             pending: В ожидании
             closing: Закрывается
             closed: Закрыт
-      
+  history_item:
+    registration: "Совершена регистрация"
+    create_session: "Осуществлен вход в систему"
+    create_surety: "Создано <a href='/sureties/%{id}'>поручительство #%{id}</a>"
+    activate_surety: "Создано <a href='/sureties/%{id}'>поручительство #%{id}</a>"
+    decline_surety: "Создано <a href='/sureties/%{id}'>поручительство #%{id}</a>"
+    close_surety: "Закрыто <a href='/sureties/%{id}'>поручительство #%{id}</a>"
+    confirm_surety: "Предварительно одобрено <a href='/sureties/%{id}'>поручительство #%{id}</a>"
+    unconfirm_surety: "Снято предворительное одобрение <a href='/sureties/%{id}'>поручительства #%{id}</a>"
+    create_scan: "Загружен скан к <a href='/sureties/%{id}'>поручительству #%{id}</a>"
+    create_account_code: "Создан код приглашения #%{id}"
+    use_account_code: "Использован код приглашения #%{id}"
+    destroy_account_code: "Удален код приглашения #%{id}"
+    create_organization: "Создана <a href='/organizations/%{id}'>организация #%{id}</a>"
+    create_membership: "Создано <a href='/memberships/%{id}'>место работы #%{id}</a>"
+    close_membership: "Удалено <a href='/memberships/%{id}'>место работы #%{id}</a>"
+    create_credential: "Создано <a href='/credentials/%{id}'>публичный ключ #%{id}</a>"
+    update_credential: "Изменен <a href='/credentials/%{id}'>публичный ключ #%{id}</a>"
+    close_credential: "Удален <a href='/credentials/%{id}'>публичный ключ #%{id}</a>"
+    create_ticket: "Создана <a href='/tickets/%{id}'>заявка #%{id}</a> в техподдержку"
+    create_ticket: "Обновлена <a href='/tickets/%{id}'>заявка #%{id}</a> в техподдержку"
+    resolve_ticket: "Помечена <a href='/tickets/%{id}'>заявка #%{id}</a> в техподдержку разрешенной"
+    close_ticket: "Закрыта <a href='/tickets/%{id}'>заявка #%{id}</a> в техподдержку"
+    create_project: "Создан <a href='/projects/%{id}'>проект #%{id}</a>"
+    update_project: "Обновлен <a href='/projects/%{id}'>проект #%{id}</a>"
+    close_project: "Закрыт <a href='/projects/%{id}'>проект #%{id}</a>"
+    create_request: "Создана <a href='/requests/%{id}'>заявка #%{id}</a>"
+    update_request: "Обновлена <a href='/requests/%{id}'>заявка #%{id}</a>"
+    activate_request: "Активирована <a href='/requests/%{id}'>заявка #%{id}</a>"
+    decline_request: "Отклонена <a href='/requests/%{id}'>заявка #%{id}</a>"
+    close_request: "Закрыта <a href='/requests/%{id}'>заявка #%{id}</a>"
+    author:
+      self: Пользователем
+      admin: Администратором
+      system: Системой
+    
