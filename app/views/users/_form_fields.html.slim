@@ -5,6 +5,7 @@
 = f.input :last_name
 = f.input :middle_name
 = f.input :avatar
+= f.input :phone
 - if can?(:admin, :users) && f.object.persisted?
   = f.input :admin
 - if f.object.persisted?

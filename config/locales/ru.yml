@@ -369,6 +369,7 @@ ru:
               wrong_password: Не верный пароль.
     attributes:
       user:
+        phone: Номер телефона
         email: Email
         password: Пароль
         password_confirmation: Подтверждение
