@@ -3,9 +3,6 @@
 div class="link-actions"
   = link_to 'Новый проект', new_project_path, class: "btn #{disabled(can? :create, :projects)}"
 
-- if cannot? :create, :projects
-  = render partial: 'shared/steps', locals: { steps: current_user.project_steps, title: 'У вас нет доступа для создания проекта. Чтобы его получить вам нужно:' }
-
 - if admin?
   = simple_form_for @search, url: projects_path, method: :get, html: { class: 'form-horizontal' } do |f|
     = autocomplete :project, f, label: "Название", name: :id_eq

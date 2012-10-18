@@ -309,7 +309,7 @@ ru:
     membership:
       html: <a href="/memberships/new">Добавить место работы</a>
     credential:
-      html: <a href="/credentials/new">Добавить публичный ключ (для доступа к кластерам)</a>
+      html: <a href="/credentials/new">Добавить публичный ключ</a>
   meta_search:
     or: 'or-diddly'
     predicates:

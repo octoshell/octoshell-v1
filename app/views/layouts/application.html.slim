@@ -37,6 +37,8 @@ html
         - flash.each do |type, message|
           - context = type == :alert ? 'alert-error' : 'alert-info'
           = content_tag :div, message, class: "alert #{context}"
+        - if logged_in? && current_user.project_steps.any?
+          = render partial: 'shared/steps', locals: { steps: current_user.project_steps, title: 'Для начала работы с суперкомпьютером вам нужно:' }
         div class="row"
           div class="span9"
             div class="page-header"
