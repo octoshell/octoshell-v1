@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   has_many :additional_emails
   has_many :history_items
   
-  validates :first_name, :last_name, :middle_name, :email, presence: true
+  validates :first_name, :last_name, :middle_name, :email, :phone, presence: true
   validates :password, confirmation: true, length: { minimum: 6 }, on: :create
   validates :password, confirmation: true, length: { minimum: 6 }, on: :update, if: :password?
   validates :email, uniqueness: true
