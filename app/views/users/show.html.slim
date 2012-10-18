@@ -27,6 +27,9 @@
     tr
       th = User.human_attribute_name(:state)
       td = @user.human_state_name
+    tr
+      th = User.human_attribute_name(:phone)
+      td = @user.phone
 
 div class="row"
   div class="span2"
