@@ -1,15 +1,19 @@
 - title 'История пользователя'
 
+p = link_to 'Вернуться к пользователю', @user
+
 - if @history_items.any?
   ul class="unstyled"
     - @history_items.each do |item|
       li
-        = item.created_at.strftime("%Y-%m-%d %M:%S")
+        = item.created_at.strftime("%Y-%m-%d %H:%M")
         |  
         = item.author
         |  
         == item.title.mb_chars.downcase
         |  
-        
+  
+  p = link_to 'Вернуться к пользователю', @user
 - else
   p Нет записанный в историю событий
+

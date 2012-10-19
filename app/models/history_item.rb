@@ -7,10 +7,9 @@ class HistoryItem < ActiveRecord::Base
   
   def author
     person = 
-      if user_id == author_id
-        :self
-      elsif author_id?
-        :admin
+      if author_id?
+        user = User.find(author_id)
+        user.admin? ? :admin : :self
       else
         :system
       end

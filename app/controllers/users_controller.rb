@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      @user.track! :registration, @user, current_user
+      @user.track! :registration, @user, @user
       redirect_to confirmation_users_path(email: @user.email)
     else
       render :new

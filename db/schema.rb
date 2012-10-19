@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121018122953) do
+ActiveRecord::Schema.define(:version => 20121018142542) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -409,6 +409,7 @@ ActiveRecord::Schema.define(:version => 20121018122953) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "phone"
   end
 
   add_index "users", ["activation_token"], :name => "index_users_on_activation_token"
