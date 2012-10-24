@@ -1,7 +1,6 @@
 - title 'Загрузка файла'
 
 = simple_form_for @import, html: { class: 'form-horizontal' } do |f|
-  = f.association :cluster
   = f.input :file, as: :file
   div class="form-actions"
     = f.button :submit

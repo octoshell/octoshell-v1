@@ -1,5 +1,7 @@
 require 'csv'
 class ImportItem < ActiveRecord::Base
+  CSV_ATTRIBUTES = [:fio, :email, :organization_name, :project_name, :group, :login, :jsoned_keys, :cluster_id]
+  
   belongs_to :cluster
   
   validates :first_name, :last_name, :middle_name, :email, :organization_name,
@@ -26,6 +28,21 @@ class ImportItem < ActiveRecord::Base
       end
       true
     end
+  end
+  
+  def fio=(fio)
+    first, middle, last = fio.split(' ')
+    if last.blank?
+      last = middle
+      middle = '-'
+    end
+    self.first_name = first
+    self.middle_name = middle_name
+    self.last_name = last
+  end
+  
+  def jsoned_keys=(json)
+    self.keys = JSON.parse(json)
   end
   
   def user_in_json(options)
@@ -55,29 +72,14 @@ class ImportItem < ActiveRecord::Base
   end
   
   def self.create_by_file_and_cluster(attributes)
-    file, cluster_id = attributes[:file], attributes[:cluster_id]
-    return false if file.blank? or cluster_id.blank?
-    
     transaction do
       file.read.each_line do |line|
         data = line.parse_csv(col_sep: ";", quote_char: "'")
-        data[6] = JSON.parse(data[6])
-        first, middle, last = data[0].split(' ')
-        if last.blank?
-          last = middle
-          middle = '-'
-        end
-        create! do |item|
-          item.cluster_id        = cluster_id
-          item.first_name        = first
-          item.middle_name       = middle
-          item.last_name         = last
-          item.email             = data[1]
-          item.organization_name = data[2]
-          item.project_name      = data[3]
-          item.group             = data[4]
-          item.login             = data[5]
-          item.keys              = data[6]
+        
+        CSV_ATTRIBUTES.each_with_index do |attribute, index|
+          create! do |item|
+            item.send "#{attribute}=" data[index]
+          end
         end
       end
     end

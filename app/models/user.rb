@@ -145,7 +145,8 @@ class User < ActiveRecord::Base
   def sure!
     transaction do
       _sure!
-      accounts.where(project_id: owned_projects.active.map(&:id)).each &:activate!
+      accounts.where(project_id: owned_projects.active.map(&:id)).
+        each &:activate!
     end
   end
   
@@ -158,11 +159,11 @@ class User < ActiveRecord::Base
   
   def close!
     transaction do
-      owned_projects.non_closed.each &:close!
-      sureties.non_closed.each &:close!
-      memberships.non_closed.each &:close!
-      tickets.non_closed.each &:close!
-      credentials.non_closed.each &:close!
+      [ owned_projects,
+        sureties,
+        memberships,
+        tickets,
+        credentials ].each { |relation| relation.non_closed.each &:close! }
       _close!
     end
   end
