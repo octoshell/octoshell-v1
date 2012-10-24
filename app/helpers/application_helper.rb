@@ -2,16 +2,20 @@
 module ApplicationHelper
   def link_to_attribute(record, attribute, value)
     if attribute.to_s =~ /_id$/
-      record.send("#{attribute}=", value)
-      relation = attribute.to_s[/(.*)_id$/, 1]
-      link_method = "link_to_#{relation}"
-      if respond_to?(link_method) && record.respond_to?(relation)
-        link = send link_method, record.send(relation)
-      end
-      record.send("#{attribute}=", record.send("#{attribute}_was"))
-      link
+      link_to_relation(record, attribute, value)
     else
       value
+    end
+  end
+  
+  def link_to_relation(record, attribute, value)
+    record.send("#{attribute}=", value)
+    relation = attribute.to_s[/(.*)_id$/, 1]
+    link_method = "link_to_#{relation}"
+    if respond_to?(link_method) && record.respond_to?(relation)
+      link = send link_method, record.send(relation)
+      record.send("#{attribute}=", record.send("#{attribute}_was"))
+      link
     end
   end
   
