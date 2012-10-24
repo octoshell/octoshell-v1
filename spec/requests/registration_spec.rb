@@ -12,7 +12,9 @@ describe 'Registration', js: true do
         fill_in 'Password',              with: user.password
         fill_in 'Password confirmation', with: user.password
         fill_in 'First name',            with: user.first_name
+        fill_in 'Middle name',           with: user.middle_name
         fill_in 'Last name',             with: user.last_name
+        fill_in 'Phone',                 with: user.phone
         click_button 'Create User'
       end
     end
