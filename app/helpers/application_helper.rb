@@ -190,7 +190,8 @@ module ApplicationHelper
         content_tag :label, options[:label]
       end + 
         content_tag(:div, class: "controls") do
-          form.hidden_field options[:name], class: 'chosen ajax', data: { source: options[:source] }
+          field_type = Rails.env.test? ? :text_field : :hidden_field
+          form.send field_type, options[:name], class: 'chosen ajax', data: { source: options[:source] }
         end
     end
   end

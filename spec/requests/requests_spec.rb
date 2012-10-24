@@ -10,9 +10,9 @@ describe 'Requests', js: true do
       before do
         login user
         visit new_request_path
-      
+        
         within('#new_request') do
-          select project.name, from: 'Project'
+          fill_in 'request_project_id', with: project.id
           select cluster.name, from: 'Cluster'
           fill_in 'Hours', with: 10
           fill_in 'Size', with: 10
@@ -51,7 +51,7 @@ describe 'Requests', js: true do
         
         within('#new_request') do
           select user.full_name, from: 'User'
-          select project.name,   from: 'Project'
+          fill_in 'request_project_id', with: project.id
           select cluster.name,   from: 'Cluster'
           fill_in 'Hours', with: 10
           fill_in 'Size', with: 10
