@@ -230,7 +230,7 @@ class User < ActiveRecord::Base
   end
   
   def as_json(options)
-    { id: id, text: "#{full_name} #{email}" }
+    options ? super(options) : { id: id, text: "#{full_name} #{email}" }
   end
   
   def active_clusters

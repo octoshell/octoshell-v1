@@ -31,6 +31,7 @@ gem 'rtf'
 gem 'zeus'
 gem 'airbrake'
 gem 'gravatar-ultimate'
+gem 'levenshtein-ffi', require: 'levenshtein'
 
 group :test, :development do
   gem 'quiet_assets'

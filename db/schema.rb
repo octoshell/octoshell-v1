@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121018142542) do
+ActiveRecord::Schema.define(:version => 20121019125016) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -143,6 +143,21 @@ ActiveRecord::Schema.define(:version => 20121018142542) do
 
   add_index "history_items", ["kind"], :name => "index_history_items_on_kind"
   add_index "history_items", ["user_id"], :name => "index_history_items_on_user_id"
+
+  create_table "import_items", :force => true do |t|
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "organization_name"
+    t.string   "project_name"
+    t.string   "group"
+    t.string   "login"
+    t.text     "keys"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "cluster_id"
+  end
 
   create_table "memberships", :force => true do |t|
     t.integer  "user_id"

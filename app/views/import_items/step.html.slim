@@ -1,0 +1,68 @@
+- title "Импорт ##{@import.id}"
+
+= form_for @import, url: [@import, :import] do |f|
+  
+  h3 Пользователь
+  
+  = f.text_field :first_name
+  |  
+  = f.text_field :middle_name
+  |  
+  = f.text_field :last_name
+  |  
+  = f.text_field :email
+  
+  div class="row"
+    div class="offset1"
+      h4 Похожие
+      
+      - simular = @import.simular_users
+      - if simular.any?
+        ul class="unstyled"
+          - simular.each do |user|
+            li
+              = user.full_name
+              |  
+              = user.email
+              |  
+              = link_to 'выбрать', '#', { :'data-record' => Hash[[:first_name, :middle_name, :last_name, :email].map { |e| [e, user.send(e)] }].to_json, :class => 'choser' }
+        p = link_to 'Отменить изменения', '#', { :'data-record' => Hash[[:first_name, :middle_name, :last_name, :email].map { |e| [e, @import.send(e)] }].to_json, :class => 'choser' }
+      - else
+        p Нет похожих пользователей
+  
+  h3 Организация
+  
+  = f.text_field :organization_name
+  
+  div class="row"
+    div class="offset1"
+      h4 Похожие
+      
+      - simular = @import.simular_organizations
+      - if simular.any?
+        ul class="unstyled"
+          - simular.each do |org|
+            li
+              = org.name
+              |  
+              = link_to 'выбрать', '#', { :'data-record' => { organization_name: org.name }.to_json, :class => 'choser' }
+        p = link_to 'Отменить изменения', '#', { :'data-record' => { organization_name: @import.organization_name }.to_json, :class => 'choser' }
+      - else
+        p Нет похожих организаций
+  
+  h3 Проект
+  
+  = f.text_field :project_name
+  
+  h3 Группа
+  
+  = f.text_field :group
+  
+  h3 Логин
+  
+  = f.text_field :login
+  
+  div class="form-actions"
+    = f.submit 'Импортировать', class: 'btn btn-success'
+    |  
+    = link_to 'Удалить', @import, method: :delete, class: 'btn btn-danger', confirm: 'Вы уверены?'

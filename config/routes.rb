@@ -219,6 +219,12 @@ MSU::Application.routes.draw do
   
   # settings
   resource :settings, only: [:edit, :update]
+  
+  # import
+  resources :import_items, only: [:new, :create, :index, :update, :destroy], path: 'import' do
+    get :step, on: :collection
+    put :import
+  end
 
   root to: 'application#dashboard'
   

@@ -34,6 +34,12 @@ class Organization < ActiveRecord::Base
   define_defaults_events :close
   define_state_machine_scopes
   
+  def self.find_similar(name)
+    where("name != ?", name).find_all do |org|
+      Levenshtein.distance(name, org.name) < [name.size / 3.0, 3].max
+    end
+  end
+  
   def close!
     transaction do
       _close!

@@ -151,6 +151,9 @@ GEM
     less-rails (2.2.3)
       actionpack (>= 3.1)
       less (~> 2.2.0)
+    levenshtein-ffi (1.0.2)
+      ffi
+      ffi
     libv8 (3.3.10.4)
     libwebsocket (0.1.3)
       addressable
@@ -350,6 +353,7 @@ DEPENDENCIES
   kaminari
   launchy
   less-rails
+  levenshtein-ffi
   liquid
   mailgun-rails
   meta_search

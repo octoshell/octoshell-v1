@@ -78,6 +78,7 @@ class Ability
       end
       
       if user.admin?
+        can [:index, :new, :create, :step, :import, :destroy], :import_items
         can [:edit, :update, :close], :memberships
         
         can :become, :sessions

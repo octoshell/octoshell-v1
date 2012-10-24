@@ -117,4 +117,15 @@ $(document).ready(function(){
   })
   
   $('a.disabled').on('click', function(){ return false })
+  
+  var import_item_form = $('form.edit_import_item')
+  if (import_item_form.length > 0) {
+    $("a.choser", import_item_form).click(function(){
+      var record = $(this).data('record')
+      _(record).each(function(value, key){
+        $('#import_item_' + key).val(value)
+      })
+      return false
+    })
+  }
 });
