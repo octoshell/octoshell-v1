@@ -114,21 +114,6 @@ class User < ActiveRecord::Base
     end.join(' ')
   end
   
-  def start_steps
-    steps = []
-    steps << step_name(:project) if !projects.non_closed.any? && sured?
-    if !sureties.active.exists?
-      if sureties.pending.exists?
-        steps << step_name(:send_and_wait_approve)
-      else
-        steps << step_name(:surety)
-      end
-    end
-    steps << step_name(:membership) unless memberships.active.any?
-    steps << step_name(:credential) unless credentials.active.any?
-    steps
-  end
-  
   def project_steps
     steps = []
     return steps if admin?
@@ -191,20 +176,16 @@ class User < ActiveRecord::Base
   end
   
   def notifications_count
-    count = 0
-    
-    if admin?
-      count += Task.failed.count
-      count += Ticket.active.count
-      count += Surety.pending.count
-      count += Request.pending.count
-    else
-      count += sureties.pending.count
-      count += requests.pending.count
-      count += tickets.answered.count
-    end
-    
-    count
+    admin? ? admin_notifications_count : user_notifications_count
+  end
+  
+  def admin_notifications_count
+    [Task.failed, Ticket.active, Surety.pending, Request.pending].
+      sum_of_count
+  end
+  
+  def user_notifications_count
+    [sureties.pending, requests.pending, tickets.answered].sum_of_count
   end
   
   def emails
