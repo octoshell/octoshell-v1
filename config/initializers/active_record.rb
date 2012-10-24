@@ -10,14 +10,21 @@ module ActiveRecord
 
       def define_defaults_events *events
         events.each do |event|
-          define_method event do
-            return false unless send("can__#{event}?")
-            send "#{event}!"
-          end
-
-          define_method "#{event}!" do
-            send "_#{event}!"
-          end
+          define_safe_state_event_method(event)
+          define_state_event_method(event)
+        end
+      end
+      
+      def define_safe_state_event_method(event)
+        define_method event do
+          return false unless send("can__#{event}?")
+          send "#{event}!"
+        end
+      end
+      
+      def define_state_event_method(event)
+        define_method "#{event}!" do
+          send "_#{event}!"
         end
       end
 

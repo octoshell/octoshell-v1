@@ -86,14 +86,8 @@ class ClusterProject < ActiveRecord::Base
   def complete_activation!
     transaction do
       _complete_activation!
-      
-      project.accounts.each do |account|
-        cluster_users.where(account_id: account.id).first_or_create!
-      end
-      
-      cluster_users.non_active.joins(:account).where(
-        accounts: { state: 'active' }
-      ).includes(:account).each &:activate!
+      create_possible_accounts!
+      activate_non_active_cluster_users!
     end
   end
   
@@ -140,6 +134,18 @@ protected
   end
   
 private
+  
+  def create_possible_accounts!
+    project.accounts.each do |account|
+      cluster_users.where(account_id: account.id).first_or_create!
+    end
+  end
+  
+  def activate_non_active_cluster_users!
+    cluster_users.non_active.joins(:account).where(
+      accounts: { state: 'active' }
+    ).includes(:account).each &:activate!
+  end
   
   def assign_username
     self.username ||= project.username
