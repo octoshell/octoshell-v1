@@ -1,6 +1,8 @@
 FactoryGirl.define do
   factory :inactive_user, class: 'User' do
     first_name 'Richard'
+    middle_name '-'
+    phone '12345'
     sequence(:last_name) { |n| "Nixon #{n}" }
     sequence(:email) { |n| "user_#{n}@example.com" }
     password '123456'

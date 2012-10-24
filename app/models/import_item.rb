@@ -78,7 +78,7 @@ class ImportItem < ActiveRecord::Base
         
         CSV_ATTRIBUTES.each_with_index do |attribute, index|
           create! do |item|
-            item.send "#{attribute}=" data[index]
+            item.send "#{attribute}=", data[index]
           end
         end
       end
