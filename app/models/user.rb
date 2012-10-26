@@ -212,7 +212,11 @@ class User < ActiveRecord::Base
   end
   
   def as_json(options)
-    options ? super(options) : { id: id, text: "#{full_name} #{email}" }
+    if options[:for] == :ajax
+      { id: id, text: "#{full_name} #{email}" }
+    else
+      super(options)
+    end
   end
   
   def active_clusters
