@@ -14,6 +14,6 @@
       == next_page_tag unless current_page.last?
       == last_page_tag unless current_page.last?
       - if admin
-        - p[:show_all] = 1
+        - show_all = p.merge(show_all: 1).to_param
         li
-          a href="#{r.path + '?' + p.to_param}" Показать все
+          a href="#{r.path + '?' + show_all}" Показать все
