@@ -10,7 +10,7 @@
     = f.input :boss_full_name
     = f.input :boss_position
     = f.association :direction_of_science
-    = f.association :critical_technologies
+    = f.association :critical_technologies, required: true
     legend Участники
     div class="members"
       = f.simple_fields_for :surety_members do |f|
