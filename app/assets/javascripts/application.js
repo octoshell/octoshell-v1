@@ -143,7 +143,7 @@ $(document).ready(function(){
       $('div.members-form', members).each(function(i, e){
         $(':input', $(e)).each(function(j, e){
           var name = $(this).attr('name')
-          name = name.replace(/\[[\d+]\]/g, "[" + i + "]")
+          name = name.replace(/\[surety_members_attributes\]\[[\d+]\]/, "[surety_members_attributes][" + i + "]")
           $(this).attr('name', name)
         })
       })

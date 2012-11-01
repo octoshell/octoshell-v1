@@ -319,6 +319,7 @@ GEM
       rack
       raindrops (~> 0.7)
     useragent (0.4.10)
+    validates_email_format_of (1.5.3)
     vegas (0.1.11)
       rack (>= 1.0.0)
     whenever (0.7.3)
@@ -377,6 +378,7 @@ DEPENDENCIES
   therubyracer
   uglifier (>= 1.0.3)
   unicorn
+  validates_email_format_of
   whenever
   yaml_db
   zeus

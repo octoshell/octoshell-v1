@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121101072031) do
+ActiveRecord::Schema.define(:version => 20121101132249) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -109,6 +109,25 @@ ActiveRecord::Schema.define(:version => 20121101072031) do
   add_index "credentials", ["public_key"], :name => "index_credentials_on_public_key"
   add_index "credentials", ["user_id", "state"], :name => "index_credentials_on_user_id_and_state"
   add_index "credentials", ["user_id"], :name => "index_credentials_on_user_id"
+
+  create_table "critical_technologies", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "critical_technologies_sureties", :force => true do |t|
+    t.integer "critical_technology_id"
+    t.integer "surety_id"
+  end
+
+  add_index "critical_technologies_sureties", ["critical_technology_id", "surety_id"], :name => "uniq", :unique => true
+
+  create_table "direction_of_sciences", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "expands", :force => true do |t|
     t.string "url"
@@ -302,10 +321,15 @@ ActiveRecord::Schema.define(:version => 20121101072031) do
     t.integer  "user_id"
     t.integer  "organization_id"
     t.string   "state"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
     t.string   "comment"
     t.integer  "project_id"
+    t.string   "boss_full_name"
+    t.string   "boss_position"
+    t.string   "project_description"
+    t.string   "project_name"
+    t.integer  "direction_of_science_id"
   end
 
   add_index "sureties", ["organization_id"], :name => "index_sureties_on_organization_id"
@@ -316,6 +340,8 @@ ActiveRecord::Schema.define(:version => 20121101072031) do
   create_table "surety_members", :force => true do |t|
     t.integer "surety_id"
     t.integer "user_id"
+    t.string  "email"
+    t.string  "full_name"
   end
 
   add_index "surety_members", ["surety_id", "user_id"], :name => "index_surety_members_on_surety_id_and_user_id", :unique => true

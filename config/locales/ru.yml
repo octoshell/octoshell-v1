@@ -382,6 +382,9 @@ ru:
         state: Состояние
         avatar: Фото
         created_at: Создан
+      surety_member:
+        full_name: ФИО
+        email: Email
       project:
         organization: Главная организация
         name: Название
@@ -430,6 +433,10 @@ ru:
         organization_id: Организация
         description: Описание проекта
         user: Пользователь
+        boss_full_name: ФИО руководителя организации
+        boss_position: Должность руководителя организации
+        direction_of_science: Направление науки
+        critical_technologies: Критические технологии
       page:
         name: Название
         url: url
