@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121019125016) do
+ActiveRecord::Schema.define(:version => 20121101072031) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -273,6 +273,31 @@ ActiveRecord::Schema.define(:version => 20121019125016) do
   add_index "requests", ["state"], :name => "index_requests_on_state"
   add_index "requests", ["user_id"], :name => "index_requests_on_user_id"
 
+  create_table "role_accesses", :force => true do |t|
+    t.string  "action"
+    t.string  "controller"
+    t.text    "condition"
+    t.boolean "all",        :default => false
+  end
+
+  create_table "role_name_relations", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_name_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "role_names", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "role_relations", :force => true do |t|
+    t.integer "role_access_id"
+    t.integer "role_name_id"
+  end
+
   create_table "sureties", :force => true do |t|
     t.integer  "user_id"
     t.integer  "organization_id"
@@ -280,11 +305,22 @@ ActiveRecord::Schema.define(:version => 20121019125016) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "comment"
+    t.integer  "project_id"
   end
 
   add_index "sureties", ["organization_id"], :name => "index_sureties_on_organization_id"
+  add_index "sureties", ["project_id"], :name => "index_sureties_on_project_id"
   add_index "sureties", ["state"], :name => "index_sureties_on_state"
   add_index "sureties", ["user_id"], :name => "index_sureties_on_user_id"
+
+  create_table "surety_members", :force => true do |t|
+    t.integer "surety_id"
+    t.integer "user_id"
+  end
+
+  add_index "surety_members", ["surety_id", "user_id"], :name => "index_surety_members_on_surety_id_and_user_id", :unique => true
+  add_index "surety_members", ["surety_id"], :name => "index_surety_members_on_surety_id"
+  add_index "surety_members", ["user_id"], :name => "index_surety_members_on_user_id"
 
   create_table "tasks", :force => true do |t|
     t.string   "resource_type"

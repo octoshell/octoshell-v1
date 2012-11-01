@@ -8,14 +8,16 @@ class Surety < ActiveRecord::Base
   delegate :state_name, to: :organization, prefix: true, allow_nil: true
   
   belongs_to :user
-  belongs_to :organization
   has_many :tickets
+  has_many :surety_members
   
-  validates :user, :organization, presence: true
+  validates :user, presence: true
   validates :organization_state_name, exclusion: { in: [:closed] }, on: :create
   
   attr_accessible :organization_id
   attr_accessible :organization_id, :user_id, as: :admin
+  
+  accepts_nested_attributes_for :surety_members
   
   state_machine initial: :pending do
     state :pending

@@ -36,7 +36,9 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @project.user = current_user unless admin?
-    @project.requests.build
+    @project.sureties.build do |surety|
+      surety.surety_members.build
+    end
     @organizations
   end
   

@@ -128,4 +128,45 @@ $(document).ready(function(){
       return false
     })
   }
+  
+  var project = $('#new_project')
+  if (project.length > 0) {
+    var members = $('div.members', project)
+    $('a.add-member-row', project).click(function(){
+      var row = $('div.members-form:first', project).clone()
+      row.find(':input').each(function(i,e){
+        e.value = ''
+        e.disabled = false
+      })
+      row.appendTo(members)
+      
+      $('div.members-form', members).each(function(i, e){
+        $(':input', $(e)).each(function(j, e){
+          var name = $(this).attr('name')
+          name = name.replace(/\[[\d+]\]/g, "[" + i + "]")
+          $(this).attr('name', name)
+        })
+      })
+      return false
+    })
+    
+    project.on('click', 'a.remove-member', function(){
+      $(this).parents('div.members-form:first').remove()
+      return false
+    })
+    
+    project.on('blur', 'input.email', function(e){
+      var full_name = $(this).parents('div.members-form:first').
+        find('input.full-name:first')[0]
+      var email = encodeURIComponent($(this).val())
+      full_name.disabled = true
+      $.getJSON('/users/email?email=' + email, function(data){
+        if (data.full_name) {
+          full_name.value = data.full_name
+        } else {
+          full_name.disabled = false
+        }
+      })
+    })
+  }
 });

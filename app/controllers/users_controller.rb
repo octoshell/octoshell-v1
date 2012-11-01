@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :require_login, only: [:show, :index, :edit, :update, :close]
-  before_filter :logout, except: [:show, :index, :edit, :update, :close, :history]
+  before_filter :logout, except: [:show, :index, :edit, :update, :close, :history, :email]
   before_filter :setup_default_filter, only: :index
   
   def new
@@ -79,6 +79,14 @@ class UsersController < ApplicationController
   def history
     @user = User.find(params[:user_id])
     @history_items = @user.history_items.order(:id)
+  end
+  
+  def email
+    if user = User.find_by_email(params[:email].strip.downcase)
+      render json: { full_name: user.full_name }
+    else
+      render json: {}
+    end
   end
   
 private

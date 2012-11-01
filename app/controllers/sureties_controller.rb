@@ -13,21 +13,6 @@ class SuretiesController < ApplicationController
     end
   end
   
-  def new
-    @surety = Surety.new
-  end
-  
-  def create
-    @surety = Surety.new(params[:surety], as_role)
-    @surety.user = current_user unless admin?
-    if @surety.save
-      @surety.user.track! :create_surety, @surety, current_user
-      redirect_to @surety
-    else
-      render :new
-    end
-  end
-  
   def show
     @surety = find_surety(params[:id])
     @template = File.read("#{Rails.root}/config/surety.liquid")

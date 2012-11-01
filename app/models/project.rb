@@ -9,6 +9,7 @@ class Project < ActiveRecord::Base
   has_many :accounts, inverse_of: :project
   has_many :tickets
   has_many :cluster_projects, autosave: true
+  has_many :sureties
   
   validates :name, uniqueness: true
   validates :user, :name, :description, :organization, presence: true
@@ -23,6 +24,8 @@ class Project < ActiveRecord::Base
   after_create :assign_username
   after_create :activate_accounts
   after_create :create_relations
+  
+  accepts_nested_attributes_for :sureties
   
   scope :finder, lambda { |q| where("name like :q", q: "%#{q}%") }
   

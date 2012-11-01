@@ -1,6 +1,7 @@
 MSU::Application.routes.draw do  
   # users
   get 'users/activate/:token' => 'users#activate', as: :activate_user
+  get 'users/email' => 'users#email'
   resources :users, only: [:new, :create, :show] do
     get :confirmation, on: :collection
     get :history
@@ -19,7 +20,7 @@ MSU::Application.routes.draw do
   end
   
   # sureties
-  resources :sureties, only: [:new, :create, :index, :show] do
+  resources :sureties, only: [:index, :show] do
     collection do
       get :closed
       post :find

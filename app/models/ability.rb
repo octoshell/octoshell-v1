@@ -46,6 +46,7 @@ class Ability
       
       can :revert, :sessions
       
+      can :email, :users
       can :show, :users do |showed_user|
         showed_user.id == user.id
       end

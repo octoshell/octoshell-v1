@@ -1,23 +1,6 @@
 require 'spec_helper'
 
 describe 'Sureties', js: true do
-  context 'as authotized user' do
-    let!(:org) { create(:organization) }
-    let(:surety) { build(:surety, organization: org) }
-    before do
-      login
-      visit new_surety_path
-      within('#new_surety') do
-        select surety.organization.name, from: 'Organization'
-        click_button 'Create Surety'
-      end
-    end
-    
-    it 'should show profile page' do
-      current_path.should == surety_path(Surety.last)
-    end
-  end
-  
   context 'as admin user' do
     context 'listing' do
       let!(:sureties) { 3.times.map { create(:surety) } }
@@ -30,26 +13,6 @@ describe 'Sureties', js: true do
         sureties.each do |surety|
           page.should have_css "#surety-#{surety.id}"
         end
-      end
-    end
-    
-    context 'creating surety' do
-      let!(:org) { create(:organization) }
-      let!(:user) { create(:user) }
-      let(:surety) { build(:surety, organization: org, user: user) }
-      
-      before do
-        login create(:admin_user)
-        visit new_surety_path
-        within('#new_surety') do
-          select user.full_name, from: 'User'
-          select surety.organization.name, from: 'Organization'
-          click_button 'Create Surety'
-        end
-      end
-      
-      it 'should create surety for selected user' do
-        surety.user.should have(1).sureties
       end
     end
     
