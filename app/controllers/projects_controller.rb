@@ -35,11 +35,13 @@ class ProjectsController < ApplicationController
   
   def new
     @project = Project.new
-    @project.user = current_user unless admin?
+    @project.user = current_user
     @project.sureties.build do |surety|
-      surety.surety_members.build
+      surety.surety_members.build do |member|
+        member.email = current_user.email
+        member.full_name = current_user.full_name
+      end
     end
-    @organizations
   end
   
   def create

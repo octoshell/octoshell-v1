@@ -8,13 +8,6 @@ describe Access do
     should be
   end
   
-  it { should belong_to(:cluster_user) }
-  it { should belong_to(:credential) }
-  it { should have_many(:tasks) }
-  
-  it { should validate_presence_of(:credential) }
-  it { should validate_presence_of(:cluster_user) }
-  
   describe '#activate' do
     before { access.activate }
     

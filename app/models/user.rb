@@ -17,7 +17,8 @@ class User < ActiveRecord::Base
   has_many :projects, through: :accounts
   has_many :memberships
   has_many :membershiped_organizations, through: :memberships, source: :organization
-  has_many :sureties
+  has_many :surety_members
+  has_many :sureties, through: :surety_members
   has_many :organizations, through: :sureties
   has_many :accesses, through: :credentials
   has_many :tickets

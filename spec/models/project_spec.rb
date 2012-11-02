@@ -8,20 +8,6 @@ describe Project do
     should be
   end
   
-  it { should have_many(:accounts) }
-  it { should have_many(:tickets) }
-  it { should have_many(:cluster_projects) }
-  it { should belong_to(:user) }
-  it { should belong_to(:organization) }
-  
-  it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:user) }
-  it { should validate_presence_of(:organization) }
-  it { should validate_uniqueness_of(:name) }
-  
-  it { should allow_mass_assignment_of(:name) }
-  it { should allow_mass_assignment_of(:organization_id) }
-  
   describe 'organization validation' do
     let!(:user) { create(:sured_user) }
     let!(:project) { build(:project, user: user) }

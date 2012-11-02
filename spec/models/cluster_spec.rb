@@ -8,13 +8,6 @@ describe Cluster do
     should be
   end
   
-  it { should have_many(:tickets) }
-  it { should have_many(:cluster_fields) }
-  it { should have_many(:cluster_projects) }
-  
-  it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:host) }
-  
   describe '#close' do
     let!(:cluster) { create(:cluster) }
     let!(:project) { create(:project) }

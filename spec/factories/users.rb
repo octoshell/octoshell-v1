@@ -14,7 +14,14 @@ FactoryGirl.define do
       
       factory :sured_user do
         after(:create) do |user|
-          FactoryGirl.create(:active_surety, user: user)
+          surety = FactoryGirl.create(:active_surety)
+          FactoryGirl.create(:surety_member, user: user, surety: surety)
+          FactoryGirl.create(:membership, user: user)
+        end
+      end
+      
+      factory :user_with_membership do
+        after(:create) do |user|
           FactoryGirl.create(:membership, user: user)
         end
       end

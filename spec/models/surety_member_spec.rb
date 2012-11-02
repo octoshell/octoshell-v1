@@ -1,5 +1,12 @@
 require 'spec_helper'
 
 describe SuretyMember do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:surety_member) { create(:surety_member) }
+  subject { surety_member }
+  
+  it 'should create account code on create' do
+    ac = build(:surety_member, account_code: nil)
+    ac.save
+    ac.account_code.should be
+  end
 end

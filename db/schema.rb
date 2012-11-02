@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121101132249) do
+ActiveRecord::Schema.define(:version => 20121101134037) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -342,6 +342,7 @@ ActiveRecord::Schema.define(:version => 20121101132249) do
     t.integer "user_id"
     t.string  "email"
     t.string  "full_name"
+    t.integer "account_code_id"
   end
 
   add_index "surety_members", ["surety_id", "user_id"], :name => "index_surety_members_on_surety_id_and_user_id", :unique => true

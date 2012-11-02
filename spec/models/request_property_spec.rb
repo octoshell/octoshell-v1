@@ -7,7 +7,4 @@ describe RequestProperty do
   it 'should have a factory', factory: true do
     should be
   end
-  
-  it { should belong_to(:request) }
-  it { should validate_presence_of(:request) }
 end

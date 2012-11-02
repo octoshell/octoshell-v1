@@ -8,16 +8,6 @@ describe Credential do
     should be
   end
   
-  it { should belong_to(:user) }
-  
-  it { should validate_presence_of(:public_key) }
-  it { should validate_presence_of(:name) }
-  it { should validate_uniqueness_of(:public_key).scoped_to(:user_id) }
-  
-  it { should allow_mass_assignment_of(:name) }
-  it { should allow_mass_assignment_of(:public_key) }
-  it { should allow_mass_assignment_of(:public_key_file) }
-  
   describe '#create', focus: true do
     let!(:request)      { create(:active_request) }
     let!(:credential)   { build(:credential, user: request.user) }

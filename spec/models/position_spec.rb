@@ -7,11 +7,4 @@ describe Position do
   it 'should have a factory', factory: true do
     should be
   end
-  
-  it { should belong_to(:membership) }
-  
-  it { should validate_presence_of(:membership) }
-  it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:value) }
-  it { should validate_uniqueness_of(:name).scoped_to(:membership_id) }
 end

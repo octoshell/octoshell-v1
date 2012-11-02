@@ -9,7 +9,7 @@ class Project < ActiveRecord::Base
   has_many :accounts, inverse_of: :project
   has_many :tickets
   has_many :cluster_projects, autosave: true
-  has_many :sureties
+  has_many :sureties, inverse_of: :project
   
   validates :name, uniqueness: true
   validates :user, :name, :description, :organization, presence: true

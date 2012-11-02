@@ -5,6 +5,4 @@ describe TicketTemplate do
   subject { ticket_template }
   
   it { should be }
-  
-  it { should validate_presence_of(:subject) }
 end

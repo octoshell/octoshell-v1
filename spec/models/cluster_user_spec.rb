@@ -8,14 +8,6 @@ describe ClusterUser do
     should be
   end
   
-  it { should belong_to(:account) }
-  it { should belong_to(:cluster_project) }
-  it { should have_many(:tasks) }
-  it { should have_many(:accesses) }
-  
-  it { should validate_presence_of(:account) }
-  it { should validate_presence_of(:cluster_project) }
-  
   it { should be_closed }
   its(:username) { should be }
   

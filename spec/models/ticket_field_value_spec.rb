@@ -4,12 +4,6 @@ describe TicketFieldValue do
   let(:ticket_field_value) { create(:ticket_field_value) }
   subject { ticket_field_value }
   
-  it { should belong_to(:ticket_field_relation) }
-  it { should belong_to(:ticket) }
-  
-  it { should validate_presence_of(:ticket_field_relation) }
-  it { should validate_presence_of(:ticket) }
-  
   context 'with required additional ticket field' do
     let(:ticket_field_value) do
       field = create(:required_ticket_field_relation)

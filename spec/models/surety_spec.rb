@@ -8,14 +8,6 @@ describe Surety do
     should be
   end
   
-  it { should belong_to(:user) }
-  it { should belong_to(:organization) }
-  
-  it { should validate_presence_of(:user) }
-  it { should validate_presence_of(:organization) }
-  
-  it { should allow_mass_assignment_of(:organization_id) }
-  
   it 'should create surety only for non closed organization' do
     organization = build(:surety, organization: create(:closed_organization))
     organization.should have(1).errors_on(:organization_state_name)

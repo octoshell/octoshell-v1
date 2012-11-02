@@ -7,23 +7,22 @@ class Surety < ActiveRecord::Base
   
   delegate :organization, to: :project, allow_nil: true
   delegate :state_name, to: :organization, prefix: true, allow_nil: true
+  delegate :user, to: :project, allow_nil: true
   
-  belongs_to :project
-  belongs_to :user
+  belongs_to :project, inverse_of: :sureties
+  belongs_to :organization
   has_many :tickets
   has_many :surety_members, inverse_of: :surety
   belongs_to :direction_of_science
   has_and_belongs_to_many :critical_technologies
   
-  validates :user, :direction_of_science, :boss_full_name, :boss_position,
-    presence: true
+  validates :direction_of_science, :boss_full_name, :boss_position,
+    :project, presence: true
   validates :organization_state_name, exclusion: { in: [:closed] }, on: :create
   validates :critical_technology_ids, length: { minimum: 1, message: 'выберите не менее %{count}' }
   
   attr_accessible :boss_full_name, :boss_position, :direction_of_science_id,
     :critical_technology_ids, :surety_members_attributes
-  attr_accessible :boss_full_name, :boss_position, :direction_of_science_id,
-    :critical_technology_ids, :surety_members_attributes, :user_id, as: :admin
   
   accepts_nested_attributes_for :surety_members
   

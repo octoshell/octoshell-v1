@@ -12,32 +12,6 @@ describe User do
   it { should_not be_external }
   its(:activation_state) { should == 'active' }
   
-  it { should have_many(:accounts) }
-  it { should have_many(:credentials) }
-  it { should have_many(:owned_projects) }
-  it { should have_many(:projects).through(:accounts) }
-  it { should have_many(:requests) }
-  it { should have_many(:memberships) }
-  it { should have_many(:sureties) }
-  it { should have_many(:organizations).through(:sureties) }
-  it { should have_many(:tickets) }
-  it { should have_many(:additional_emails) }
-  
-  it { should validate_presence_of(:email) }
-  it { should validate_uniqueness_of(:email) }
-  it { should validate_presence_of(:first_name) }
-  it { should validate_presence_of(:last_name) }
-  it { should ensure_length_of(:password).is_at_least(6) }
-  
-  it { should allow_mass_assignment_of(:first_name) }
-  it { should allow_mass_assignment_of(:last_name) }
-  it { should allow_mass_assignment_of(:middle_name) }
-  it { should allow_mass_assignment_of(:email) }
-  it { should allow_mass_assignment_of(:password) }
-  it { should allow_mass_assignment_of(:password_confirmation) }
-  it { should allow_mass_assignment_of(:remember_me) }
-  it { should allow_mass_assignment_of(:new_organization) }
-  
   it 'should create additional email' do
     user.additional_emails.pluck(:email).should include(user.email)
   end
@@ -88,7 +62,8 @@ describe User do
       let!(:user) { create(:user) }
       
       before do
-        create(:active_surety, user: user)
+        s = create(:active_surety)
+        create(:surety_member, surety: s, user: user)
         create(:membership, user: user)
         user.revalidate!
       end
@@ -134,10 +109,11 @@ describe User do
   end
   
   describe '#sure' do
-    let!(:user) { create(:project).user }
+    let!(:user) do
+      create(:surety_member, user: create(:user_with_membership)).user
+    end
     
     before do
-      user.unsure!
       user.sure!
     end
     
@@ -148,9 +124,11 @@ describe User do
   end
   
   describe '#unsure' do
-    let(:user) { create(:project).user }
+    let!(:user) do
+      create(:surety_member, user: create(:user_with_membership)).user
+    end
     
-    before { user.unsure! }
+    before { user.sure!; user.unsure! }
     
     it 'should close all accounts' do
       user.accounts.all?(&:closed?).should be_true

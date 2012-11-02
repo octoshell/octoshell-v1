@@ -132,12 +132,10 @@ $(document).ready(function(){
   var project = $('#new_project')
   if (project.length > 0) {
     var members = $('div.members', project)
+    var template = $('<div class="control-group members-form "><label class="control-label">Пользователь</label><div class="controls"><input class="email" name="project[sureties_attributes][0][surety_members_attributes][0][email]" placeholder="user@example.com" size="30" type="text"> <input class="full-name" name="project[sureties_attributes][0][surety_members_attributes][0][full_name]" placeholder="Иванов Иван Иванович" size="30" type="text"> <a href="#" class="remove-member danger">✗</a></div></div>')
+    
     $('a.add-member-row', project).click(function(){
-      var row = $('div.members-form:first', project).clone()
-      row.find(':input').each(function(i,e){
-        e.value = ''
-        e.disabled = false
-      })
+      var row = template
       row.appendTo(members)
       
       $('div.members-form', members).each(function(i, e){

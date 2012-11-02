@@ -6,11 +6,6 @@ describe TicketQuestion do
   
   it { should be }
   
-  it { should belong_to(:ticket_question) }
-  it { should have_many(:ticket_questions) }
-  
-  it { should validate_presence_of(:question) }
-  
   describe '#leaf' do
     context 'creating record with childs' do
       let!(:branch) { create(:ticket_question) }

@@ -8,21 +8,6 @@ describe Request do
     should be
   end
   
-  it { should belong_to(:user) }
-  it { should belong_to(:cluster_project) }
-  it { should have_many(:request_properties) }
-  
-  it { should validate_presence_of(:cluster_project) }
-  it { should validate_presence_of(:user) }
-  it { should validate_presence_of(:hours) }
-  it { should validate_presence_of(:size) }
-  it { should validate_numericality_of(:size) }
-  
-  it { should allow_mass_assignment_of(:hours) }
-  it { should allow_mass_assignment_of(:size) }
-  it { should allow_mass_assignment_of(:cluster_id) }
-  it { should allow_mass_assignment_of(:project_id) }
-  
   describe '#task_attributes' do
     before do
       create(:request_property, request: request, name: 'foo', value: 'bar')

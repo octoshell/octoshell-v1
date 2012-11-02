@@ -435,7 +435,7 @@ ru:
         user: Пользователь
         boss_full_name: ФИО руководителя организации
         boss_position: Должность руководителя организации
-        direction_of_science: Направление науки
+        direction_of_science: Направление исследований
         critical_technologies: Критические технологии
       page:
         name: Название
