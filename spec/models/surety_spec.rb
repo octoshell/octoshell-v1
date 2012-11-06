@@ -8,11 +8,6 @@ describe Surety do
     should be
   end
   
-  it 'should create surety only for non closed organization' do
-    organization = build(:surety, organization: create(:closed_organization))
-    organization.should have(1).errors_on(:organization_state_name)
-  end
-  
   describe '#activate' do
     it 'should revalidate user' do
       surety.user.should_receive(:revalidate!).once

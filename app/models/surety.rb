@@ -5,12 +5,9 @@ class Surety < ActiveRecord::Base
   
   default_scope order("#{table_name}.id desc")
   
-  delegate :organization, to: :project, allow_nil: true
-  delegate :state_name, to: :organization, prefix: true, allow_nil: true
   delegate :user, to: :project, allow_nil: true
   
   belongs_to :project, inverse_of: :sureties
-  belongs_to :organization
   has_many :tickets
   has_many :surety_members, inverse_of: :surety
   belongs_to :direction_of_science
@@ -18,7 +15,6 @@ class Surety < ActiveRecord::Base
   
   validates :direction_of_science, :boss_full_name, :boss_position,
     :project, presence: true
-  validates :organization_state_name, exclusion: { in: [:closed] }, on: :create
   validates :critical_technology_ids, length: { minimum: 1, message: 'выберите не менее %{count}' }
   
   attr_accessible :boss_full_name, :boss_position, :direction_of_science_id,
