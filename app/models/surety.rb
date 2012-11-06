@@ -95,9 +95,9 @@ class Surety < ActiveRecord::Base
   
   def to_rtf
     font = RTF::Font.new(RTF::Font::ROMAN, 'Arial')
-     	
+    
     styles = {}
-     	
+    
     header = RTF::ParagraphStyle.new
     header.justification = :qr
     header.space_before = 1200
