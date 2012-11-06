@@ -77,7 +77,6 @@ class Surety < ActiveRecord::Base
     t.render({
       'id'                    => id,
       'organization_name'     => organization.surety_name,
-      'user_name'             => user.full_name,
       'boss_full_name'        => boss_full_name,
       'boss_position'         => boss_position,
       'members'               => surety_members.map(&:full_name),
@@ -100,7 +99,7 @@ class Surety < ActiveRecord::Base
     
     header = RTF::ParagraphStyle.new
     header.justification = :qr
-    header.space_before = 1200
+    header.space_before = 300
     header.space_after = 300
     styles['header'] = header
     
@@ -114,9 +113,13 @@ class Surety < ActiveRecord::Base
     body.space_after = 300
     styles['body'] = body
     
+    dl = RTF::ParagraphStyle.new
+    dl.space_after = 300
+    dl.left_indent = 100
+    styles['dl'] = dl
+    
     footer = RTF::ParagraphStyle.new
     footer.space_before = 300
-    footer.justification = :qr
     styles['footer'] = footer
     
     document = RTF::Document.new(font)
@@ -126,8 +129,29 @@ class Surety < ActiveRecord::Base
     replacer = lambda do |text|
       text.gsub! %r{\{\{ id \}\}}, id.to_s
       text.gsub! %r{\{\{ organization_name \}\}}, organization.name
-      text.gsub! %r{\{\{ user_name \}\}}, user.full_name
+      text.gsub! %r{\{\{ boss_full_name \}\}},    boss_full_name
+      text.gsub! %r{\{\{ boss_position \}\}},     boss_position
+      text.gsub! %r{\{\{ members \}\}}, begin
+        surety_members.map(&:full_name).join(', ')
+      end
+      text.gsub! %r{\{\{ project_name \}\}},      project.name
+      text.gsub! %r{\{\{ direction_of_science \}\}}, direction_of_science.name
+      text.gsub! %r{\{\{ critical_technologies \}\}}, begin
+        critical_technologies.map(&:name).join(', ')
+      end
+      text.gsub! %r{\{\{ project_description \}\}}, project.description
+      text.gsub! %r{\{\{ cpu_hours \}\}}, cpu_hours.to_s
+      text.gsub! %r{\{\{ gpu_hours \}\}}, gpu_hours.to_s
+      text.gsub! %r{\{\{ size \}\}}, size.to_s
+      text.gsub! %r{\{\{ date \}\}}, Date.today.to_s
+      text.gsub! %r{\{\{ other_organizations \}\}}, begin
+        project.organizations.map(&:name).join(', ')
+      end
       text
+    end
+    
+    document.paragraph(styles['body']) do |p|
+      5.times { p.line_break }
     end
     
     template.each do |node|
@@ -143,7 +167,7 @@ class Surety < ActiveRecord::Base
         end
       end
     end
-     	
+    
     document.to_rtf
   end
   
