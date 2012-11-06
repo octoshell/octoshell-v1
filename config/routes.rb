@@ -20,7 +20,7 @@ MSU::Application.routes.draw do
   end
   
   # sureties
-  resources :sureties, only: [:index, :show] do
+  resources :sureties, only: [:new, :create, :index, :show] do
     collection do
       get :closed
       post :find

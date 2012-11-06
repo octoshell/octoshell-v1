@@ -53,7 +53,7 @@ blockquote class="noprint"
 
 div id="surety"
   - t = Liquid::Template.parse(@template)
-  == t.render 'id' => @surety.id, 'organization_name' => @surety.organization.surety_name, 'user_name' => @surety.user.full_name
+  == t.render 'id' => @surety.id, 'organization_name' => @surety.organization.surety_name, 'user_name' => @surety.user.full_name, 'boss_full_name' => @surety.boss_full_name, 'boss_position' => @surety.boss_position, 'members' => @surety.surety_members.map(&:full_name), 'project_name' => @surety.project.name, 'direction_of_science' => @surety.direction_of_science.name, 'critical_technologies' => @surety.critical_technologies.map(&:name), 'project_description' => @surety.project.description, 'cpu_hours' => @surety.cpu_hours, 'gpu_hours' => @surety.gpu_hours, 'size' => @surety.size, 'date' => Date.today.to_s, 'other_organizations' => @surety.project.organizations.map(&:name)
 
 - if @surety.tickets.any?
   div class="noprint"

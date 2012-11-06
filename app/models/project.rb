@@ -6,6 +6,7 @@ class Project < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :organization
+  has_and_belongs_to_many :organizations
   has_many :accounts, inverse_of: :project
   has_many :tickets
   has_many :cluster_projects, autosave: true

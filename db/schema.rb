@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121101134037) do
+ActiveRecord::Schema.define(:version => 20121106095114) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -211,6 +211,15 @@ ActiveRecord::Schema.define(:version => 20121101134037) do
 
   add_index "organizations", ["state"], :name => "index_organizations_on_state"
 
+  create_table "organizations_projects", :id => false, :force => true do |t|
+    t.integer "organization_id"
+    t.integer "project_id"
+  end
+
+  add_index "organizations_projects", ["organization_id"], :name => "index_organizations_projects_on_organization_id"
+  add_index "organizations_projects", ["project_id", "organization_id"], :name => "index_organizations_projects_on_project_id_and_organization_id", :unique => true
+  add_index "organizations_projects", ["project_id"], :name => "index_organizations_projects_on_project_id"
+
   create_table "pages", :force => true do |t|
     t.string   "name"
     t.string   "url"
@@ -279,14 +288,15 @@ ActiveRecord::Schema.define(:version => 20121101134037) do
   add_index "request_properties", ["request_id"], :name => "index_request_properties_on_request_id"
 
   create_table "requests", :force => true do |t|
-    t.integer  "hours"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.integer  "cpu_hours"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "user_id"
     t.string   "state"
     t.integer  "size"
     t.string   "comment"
     t.integer  "cluster_project_id"
+    t.integer  "gpu_hours",          :default => 0
   end
 
   add_index "requests", ["state"], :name => "index_requests_on_state"
@@ -321,8 +331,8 @@ ActiveRecord::Schema.define(:version => 20121101134037) do
     t.integer  "user_id"
     t.integer  "organization_id"
     t.string   "state"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "comment"
     t.integer  "project_id"
     t.string   "boss_full_name"
@@ -330,6 +340,9 @@ ActiveRecord::Schema.define(:version => 20121101134037) do
     t.string   "project_description"
     t.string   "project_name"
     t.integer  "direction_of_science_id"
+    t.integer  "cpu_hours",               :default => 0
+    t.integer  "size",                    :default => 0
+    t.integer  "gpu_hours",               :default => 0
   end
 
   add_index "sureties", ["organization_id"], :name => "index_sureties_on_organization_id"

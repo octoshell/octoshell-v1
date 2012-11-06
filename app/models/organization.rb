@@ -9,6 +9,7 @@ class Organization < ActiveRecord::Base
   has_many :projects
   has_many :users, through: :sureties
   has_many :memberships
+  has_and_belongs_to_many :projects
   belongs_to :organization_kind
   
   validates :name, presence: true, uniqueness: { scope: :organization_kind_id }
