@@ -15,7 +15,6 @@ class SuretiesController < ApplicationController
   
   def show
     @surety = find_surety(params[:id])
-    @template = File.read("#{Rails.root}/config/surety.liquid")
     authorize! :show, @surety
     respond_to do |format|
       format.html

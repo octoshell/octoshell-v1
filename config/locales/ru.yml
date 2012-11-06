@@ -387,6 +387,7 @@ ru:
         email: Email
       project:
         organization: Главная организация
+        organizations: Другие организации-участники
         name: Название
         description: Описание
         user: Руководитель

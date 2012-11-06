@@ -72,6 +72,27 @@ class Surety < ActiveRecord::Base
     true
   end
   
+  def html_template
+    t = Liquid::Template.parse(File.read("#{Rails.root}/config/surety.liquid"))
+    t.render({
+      'id'                    => id,
+      'organization_name'     => organization.surety_name,
+      'user_name'             => user.full_name,
+      'boss_full_name'        => boss_full_name,
+      'boss_position'         => boss_position,
+      'members'               => surety_members.map(&:full_name),
+      'project_name'          => project.name,
+      'direction_of_science'  => direction_of_science.name,
+      'critical_technologies' => critical_technologies.map(&:name),
+      'project_description'   => project.description,
+      'cpu_hours'             => cpu_hours,
+      'gpu_hours'             => gpu_hours,
+      'size'                  => size,
+      'date'                  => Date.today.to_s,
+      'other_organizations'   => project.organizations.map(&:name)
+    })
+  end
+  
   def to_rtf
     font = RTF::Font.new(RTF::Font::ROMAN, 'Arial')
      	

@@ -18,9 +18,8 @@ class Project < ActiveRecord::Base
   validates :username, presence: true, on: :update
   validates :cluster_user_type, inclusion: { in: CLUSTER_USER_TYPES }
   
-  attr_accessible :name, :description, :organization_id, :sureties_attributes
   attr_accessible :name, :description, :organization_id, :sureties_attributes,
-    :user_id, :cluster_user_type, :username, as: :admin
+    :organization_ids
   
   after_create :assign_username
   after_create :activate_accounts
