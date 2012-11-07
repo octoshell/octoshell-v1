@@ -3,7 +3,8 @@ FactoryGirl.define do
     association :user, factory: :sured_user
     cluster_id { create(:cluster).id }
     project_id { create(:project, user: user).id }
-    hours 1
+    cpu_hours 1
+    gpu_hours 1
     size 1
     
     factory :active_request do

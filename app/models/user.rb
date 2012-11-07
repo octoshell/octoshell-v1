@@ -118,14 +118,6 @@ class User < ActiveRecord::Base
   def project_steps
     steps = []
     return steps if admin?
-    
-    if !sureties.active.exists?
-      if sureties.pending.exists?
-        steps << step_name(:send_and_wait_approve)
-      else
-        steps << step_name(:surety)
-      end
-    end
     steps << step_name(:membership) unless memberships.active.exists?
     steps << step_name(:credential) unless credentials.active.exists?
     steps

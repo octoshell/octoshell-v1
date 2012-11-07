@@ -22,7 +22,6 @@ class Project < ActiveRecord::Base
     :organization_ids
   
   after_create :assign_username
-  after_create :activate_accounts
   after_create :create_relations
   
   accepts_nested_attributes_for :sureties
@@ -59,15 +58,7 @@ class Project < ActiveRecord::Base
   end
   
   def allowed_organizations
-    return Organization.active unless user
-    
-    memberships = user.memberships
-    
-    if new_record?
-      memberships = memberships.active
-    end
-    
-    memberships.uniq.map &:organization
+    memberships = user.memberships.active.map(&:organization).uniq
   end
   
   def cluster_users
@@ -102,12 +93,6 @@ class Project < ActiveRecord::Base
   end
   
 private
-  
-  def activate_accounts
-    accounts.where(user_id: user_id).first_or_create!
-    accounts.where(user_id: user_id).each(&:activate)
-    true
-  end
   
   def assign_username
     update_attribute :username, "project_#{id}" unless username?

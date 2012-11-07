@@ -15,13 +15,12 @@ class Request < ActiveRecord::Base
   belongs_to :user
   belongs_to :cluster_project
   
-  validates :cluster_project, :hours, :user, :size, presence: true
+  validates :cluster_project, :cpu_hours, :gpu_hours, :user, :size, presence: true
   validates :cluster_id, :project_id, presence: true, unless: :cluster_project
-  validates :size, :hours, numericality: { greater_than: 0 }
+  validates :size, :cpu_hours, :gpu_hours, numericality: { greater_than: 0 }
   validates :state, uniqueness: { scope: [:cluster_project_id], message: 'не уникален. Активная заявка уже существует' }, if: :active?
   
-  attr_accessible :hours, :cluster_id, :project_id, :size
-  attr_accessible :hours, :cluster_id, :project_id, :user_id, :size, :request_properties_attributes, as: :admin
+  attr_accessible :cpu_hours, :gpu_hours, :cluster_id, :project_id, :size
   
   accepts_nested_attributes_for :request_properties
   
@@ -83,21 +82,7 @@ class Request < ActiveRecord::Base
   def allowed_projects
     user ? user.owned_projects.active : []
   end
-  
-  def task_attributes
-    attributes = { hours: hours, size: size }
     
-    if request_properties.any?
-      properties =
-        Hash[request_properties.map do |property|
-          [property.name.to_sym, property.value]
-        end]
-      attributes.merge! properties
-    end
-    
-    attributes
-  end
-  
 private
   
   def assign_cluster_project

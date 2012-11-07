@@ -5,11 +5,10 @@ class Organization < ActiveRecord::Base
   
   attr_accessor :merge_id
   
-  has_many :sureties
   has_many :projects
   has_many :users, through: :sureties
   has_many :memberships
-  has_and_belongs_to_many :projects
+  has_and_belongs_to_many :coprojects, class_name: :Project
   belongs_to :organization_kind
   
   validates :name, presence: true, uniqueness: { scope: :organization_kind_id }
@@ -44,9 +43,6 @@ class Organization < ActiveRecord::Base
   def close!
     transaction do
       _close!
-      sureties.non_closed.each do |surety|
-        surety.close!(I18n.t 'surety.comments.organization_deleted')
-      end
       memberships.non_closed.each &:close!
       projects.non_closed.each &:close!
     end
@@ -59,9 +55,11 @@ class Organization < ActiveRecord::Base
   def merge(organization)
     return if self == organization
     transaction do
-      organization.sureties.update_all(organization_id: id)
       organization.memberships.update_all(organization_id: id)
       organization.projects.update_all(organization_id: id)
+      organization.coprojects.each do |project|
+        coprojects << projects
+      end
       organization.destroy
     end
   end

@@ -8,18 +8,6 @@ describe Request do
     should be
   end
   
-  describe '#task_attributes' do
-    before do
-      create(:request_property, request: request, name: 'foo', value: 'bar')
-    end
-    
-    subject { request.task_attributes }
-    
-    it { should be_a_kind_of(Hash) }
-    
-    it { should == { foo: 'bar', hours: request.hours, size: request.size } }
-  end
-  
   describe '#close' do
     before do
       request.activate

@@ -13,9 +13,6 @@ class Account < ActiveRecord::Base
   has_many :cluster_users, autosave: true, dependent: :destroy
   
   validates :user, :project, presence: true
-  validates :project_state_name, inclusion: { in: [:active] }, if: :active?
-  validates :user_state_name, inclusion: { in: [:sured] }, if: :active?
-  validates :user_state_name, exclusion: { in: [:closed] }, if: :active?
   validates :username, presence: true, on: :update
   
   attr_accessible :project_id

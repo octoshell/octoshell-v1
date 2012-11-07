@@ -36,26 +36,6 @@ describe User do
       it { should be_sured }
     end
   end
-  
-  describe '#project_steps' do
-    def step(name)
-      I18n.t("steps.#{name}.html")
-    end
-    
-    subject { user.project_steps }
-    
-    context 'user with surety' do
-      let(:user) { create(:sured_user) }
-      
-      it { should_not include(step :surety) }
-    end
-    
-    context 'user without surety' do
-      let(:user) { create(:user) }
-      
-      it { should include(step :surety) }
-    end
-  end
     
   describe '#revalidate!' do
     context 'potentially sured user' do

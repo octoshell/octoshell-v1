@@ -28,7 +28,7 @@ describe Credential do
     context 'with impossible to activation accesses' do
       before do
         request.project.accounts.each do |a|
-          a.cancel!
+          a.cancel! if a.active?
           a.cluster_users(true).each &:complete_closure
         end
         credential.save

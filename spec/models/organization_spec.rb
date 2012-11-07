@@ -17,16 +17,14 @@ describe Organization do
   it { should allow_mass_assignment_of(:organization_kind_id) }
   
   describe '#merge' do
+    let!(:organization) { create(:organization) }
     let!(:project) { create(:project) }
     let!(:duplication) { project.organization }
     let!(:membership) { create(:membership, organization: duplication) }
-    let!(:surety) { create(:surety, organization: duplication) }
     
-    before { organization.merge(duplication) }
-    
-    it 'should move organizations sureties' do
-      organization.should have(1).sureties
-      organization.sureties.last.user.should == surety.user
+    before do
+      organization.coprojects << project
+      organization.merge(duplication)
     end
     
     it 'should move organizations memberships' do
@@ -48,33 +46,14 @@ describe Organization do
   end
   
   describe '#close' do
-    context 'with pending surety' do
-      let!(:surety) { create(:surety, organization: organization) }
-      
-      before { organization.close }
-
-      subject { surety.reload }
-      
-      it { should be_closed }
-      its(:comment) { should == I18n.t('surety.comments.organization_deleted') }
-    end
-    
-    context 'with active surety' do
-      let!(:surety) { create(:active_surety, organization: organization) }
-      
-      before { organization.close }
-
-      subject { surety.reload }
-      
-      it { should be_closed }
-      its(:comment) { should == I18n.t('surety.comments.organization_deleted') }
-    end
-    
     context 'organization' do
       before { organization.close }
       
       it { should be_closed }
     end
+    
+    it 'should close projects'
+    it 'should close memberships'
   end
   
   describe 'creating' do

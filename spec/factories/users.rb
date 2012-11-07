@@ -17,6 +17,7 @@ FactoryGirl.define do
           surety = FactoryGirl.create(:active_surety)
           FactoryGirl.create(:surety_member, user: user, surety: surety)
           FactoryGirl.create(:membership, user: user)
+          user.revalidate!
         end
       end
       
