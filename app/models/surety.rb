@@ -125,6 +125,27 @@ class Surety < ActiveRecord::Base
     document = RTF::Document.new(font)
     
     template = YAML.load_file("#{Rails.root}/config/surety.rtf")
+    unless project.organizations.any?
+      template.delete_if do |row|
+        content = row['content']
+        res = 
+          if content.is_a?(Array)
+            content.delete_if do |content|
+              content.include?("{{ other_organizations }}")
+            end
+            false
+          else
+            content.include?("{{ other_organizations }}")
+          end
+        if content.is_a?(Array)
+          content.any? do |content|
+            content.include?("{{ other_organizations }}")
+          end
+        else
+          content.include?("{{ other_organizations }}")
+        end
+      end
+    end
     
     replacer = lambda do |text|
       text.gsub! %r{\{\{ id \}\}}, id.to_s
