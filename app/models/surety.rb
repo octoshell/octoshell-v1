@@ -128,19 +128,11 @@ class Surety < ActiveRecord::Base
     unless project.organizations.any?
       template.delete_if do |row|
         content = row['content']
-        res = 
-          if content.is_a?(Array)
-            content.delete_if do |content|
-              content.include?("{{ other_organizations }}")
-            end
-            false
-          else
-            content.include?("{{ other_organizations }}")
-          end
         if content.is_a?(Array)
-          content.any? do |content|
+          content.delete_if do |content|
             content.include?("{{ other_organizations }}")
           end
+          false
         else
           content.include?("{{ other_organizations }}")
         end
