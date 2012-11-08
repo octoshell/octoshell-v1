@@ -19,6 +19,8 @@ class Ability
       can :show, :pages
       can :show, :support
       
+      can :index, :users
+      
       can [:index, :new, :create, :show, :closed, :continue], :tickets
       can :resolve, :tickets do |ticket|
         (ticket.user_id == user.id) && ticket.can__resolve?

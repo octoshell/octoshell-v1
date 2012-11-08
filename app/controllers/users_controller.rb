@@ -14,7 +14,7 @@ class UsersController < ApplicationController
         @users = show_all? ? @search.all : @search.page(params[:page])
       end
       format.json do
-        @users = User.order('last_name asc, first_name asc').finder(params[:q])
+        @users = User.use_scope(params[:scope]).order('last_name asc, first_name asc').finder(params[:q])
         render json: { records: @users.page(params[:page]).per(params[:per]).as_json(for: :ajax), total: @users.count }
       end
     end

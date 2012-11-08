@@ -3,7 +3,7 @@
 h2 У пользователя уже есть поручительство
 
 = simple_form_for [@project, @account], html: { class: 'form-horizontal' } do |f|
-  = f.association :user, label_method: :full_name, collection: User.sured.order(:last_name), input_html: { class: 'chosen' }
+  = autocomplete :user, f, name: :user_id, source: users_path(scope: 'sured'), admin: false
   
   div class="form-actions"
     = f.button :submit

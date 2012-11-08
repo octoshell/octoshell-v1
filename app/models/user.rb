@@ -87,6 +87,15 @@ class User < ActiveRecord::Base
       end
       auth
     end
+    
+    def use_scope(scope)
+      s = scoped
+      case scope
+      when 'sured' then
+        s = s.sured
+      end
+      s
+    end
   end
   
   def all_projects
