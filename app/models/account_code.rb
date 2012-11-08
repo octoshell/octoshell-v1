@@ -2,10 +2,12 @@
 class AccountCode < ActiveRecord::Base
   has_paper_trail
   
+  attr_accessor :full_name
+  
   belongs_to :project
   belongs_to :user
   
-  validates :project, presence: true
+  validates :user, :project, presence: true
   
   attr_accessible :email, :project_id
   

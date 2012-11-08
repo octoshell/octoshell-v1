@@ -20,7 +20,7 @@ class Surety < ActiveRecord::Base
   
   attr_accessible :boss_full_name, :boss_position, :direction_of_science_id,
     :critical_technology_ids, :surety_members_attributes, :cpu_hours, :gpu_hours,
-    :size
+    :size, :project_id
   
   accepts_nested_attributes_for :surety_members
   

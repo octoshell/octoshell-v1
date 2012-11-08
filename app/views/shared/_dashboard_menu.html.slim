@@ -1,18 +1,10 @@
 - if can? :index, :projects
-  = submenu_item :projects, (link_to 'Мои проекты', projects_path)
-- if can? :index, :account_codes
-  = submenu_item :account_codes, (link_to 'Приглашения', account_codes_path)
+  = submenu_item :projects, (link_to 'Проекты', projects_path)
 - if can? :index, :requests
   = submenu_item :requests, (link_to 'Заявки', requests_path)
-- if can? :index, :organizations
-  = submenu_item :organizations, (link_to 'Организации', organizations_path)
-- if can? :index, :users
-  = submenu_item :users, (link_to 'Пользователи', users_path)
+- if can? :index, :clusters
+  = submenu_item :clusters, (link_to 'Кластеры', clusters_path)
 - if can? :index, :credentials
   = submenu_item :credentials, (link_to 'Публичные ключи', credentials_path)
 - if can? :index, :memberships
   = submenu_item :memberships, (link_to 'Места работы', memberships_path)
-- if can? :index, :sureties
-  = submenu_item :sureties, (link_to 'Поручительства', sureties_path)
-- if can? :index, :clusters
-  = submenu_item :clusters, (link_to 'Кластеры', clusters_path)

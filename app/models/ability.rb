@@ -42,7 +42,7 @@ class Ability
         user.projects.where(accounts: { state: 'active' }).include?(project) || 
           user.owned_projects.include?(project)
       end
-      can :close, :projects, user_id: user.id
+      can [:invite, :sureties, :accounts, :close], :projects, user_id: user.id
       
       can :revert, :sessions
       

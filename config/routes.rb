@@ -65,6 +65,9 @@ MSU::Application.routes.draw do
   
   # projects
   resources :projects, only: [:index, :new, :create, :show, :edit, :update] do
+    get :invite
+    post :sureties
+    post :accounts
     put :close
     resources :versions, only: [:index, :show], resource: 'Project'
   end

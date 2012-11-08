@@ -15,6 +15,7 @@ class SuretyMember < ActiveRecord::Base
   
   def email=(email)
     self[:email] = email.to_s.downcase
+    self.full_name ||= User.find_by_email(email).try(:full_name)
   end
   
 private

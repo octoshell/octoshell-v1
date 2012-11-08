@@ -14,8 +14,9 @@ class Account < ActiveRecord::Base
   
   validates :user, :project, presence: true
   validates :username, presence: true, on: :update
+  validates :user_state_name, inclusion: { in: [:sured] }
   
-  attr_accessible :project_id
+  attr_accessible :user_id
   attr_accessible :project_id, :user_id, :username, as: :admin
   
   scope :by_params, proc { |p| where(project_id: p[:project_id], user_id: p[:user_id]) }

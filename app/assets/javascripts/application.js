@@ -131,13 +131,18 @@ $(document).ready(function(){
     })
   }
   
-  var project = $('#new_project')
+  var project = $('form.surety-form')
   if (project.length > 0) {
     var members = $('div.members', project)
-    var template = $('<div class="control-group members-form "><label class="control-label">Пользователь</label><div class="controls"><input class="email" name="project[sureties_attributes][0][surety_members_attributes][0][email]" placeholder="user@example.com" size="30" type="text"> <input class="full-name" name="project[sureties_attributes][0][surety_members_attributes][0][full_name]" placeholder="Иванов Иван Иванович" size="30" type="text"> <a href="#" class="remove-member danger">✗</a></div></div>')
+    
+    if (project.hasClass('project')) {
+      var template = $('<div class="control-group members-form "><label class="control-label">Пользователь</label><div class="controls"><input class="email" name="project[sureties_attributes][0][surety_members_attributes][0][email]" placeholder="user@example.com" size="30" type="text"> <input class="full-name" name="project[sureties_attributes][0][surety_members_attributes][0][full_name]" placeholder="Иванов Иван Иванович" size="30" type="text"> <a href="#" class="remove-member danger">✗</a></div></div>')
+    } else {
+      var template  = $('<div class="control-group members-form "><label class="control-label">Пользователь</label><div class="controls"><input class="email" name="surety[surety_members_attributes][0][email]" placeholder="user@example.com" size="30" type="text"> <input class="full-name" name="surety[surety_members_attributes][0][full_name]" placeholder="Иванов Иван Иванович" size="30" type="text"> <a href="#" class="remove-member danger">✗</a></div></div>')
+    }
     
     $('a.add-member-row', project).click(function(){
-      var row = template
+      var row = template.clone()
       row.appendTo(members)
       
       $('div.members-form', members).each(function(i, e){

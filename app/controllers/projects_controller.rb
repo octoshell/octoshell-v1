@@ -83,6 +83,43 @@ class ProjectsController < ApplicationController
     end
   end
   
+  def invite
+    @project = Project.find(params[:project_id])
+    authorize! :invite, @project
+    
+    @account = @project.accounts.build
+    @surety = @project.build_additional_surety
+    @surety.surety_members.build
+  end
+  
+  def sureties
+    @project = Project.find(params[:project_id])
+    authorize! :sureties, @project
+    
+    @surety = @project.sureties.build(params[:surety])
+    if @surety.save
+      redirect_to @project
+    else
+      @account_code = @project.account_codes.build
+      render :invite
+    end
+  end
+  
+  def accounts
+    @project = Project.find(params[:project_id])
+    authorize! :accounts, @project
+    
+    if params[:account][:user_id].present?
+      conditions = { user_id: params[:account][:user_id] }
+      @account = @project.accounts.where(conditions).first_or_create!
+      redirect_to(@project) and return if @account.active? || @account.activate!
+    end
+    
+    @account = @project.accounts.build
+    @surety = @project.build_additional_surety
+    render :invite
+  end
+  
 private
   
   def namespace

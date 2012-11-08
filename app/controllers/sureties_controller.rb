@@ -31,6 +31,20 @@ class SuretiesController < ApplicationController
     redirect_to sureties_path, alert: t('flash.alerts.surety_not_found')
   end
   
+  def new
+    @surety = Surety.new(project_id: params[:project_id])
+    @surety.surety_members.build
+  end
+  
+  def create
+    @surety = Surety.new(params[:surety])
+    if @surety.save
+      redirect_to @surety
+    else
+      render :new
+    end
+  end
+  
   def activate
     @surety = find_surety(params[:surety_id])
     if @surety.activate

@@ -8,6 +8,7 @@ class Project < ActiveRecord::Base
   belongs_to :organization
   has_and_belongs_to_many :organizations
   has_many :accounts, inverse_of: :project
+  has_many :account_codes
   has_many :tickets
   has_many :cluster_projects, autosave: true
   has_many :sureties, inverse_of: :project
@@ -90,6 +91,17 @@ class Project < ActiveRecord::Base
   
   def as_json(options)
     { id: id, text: name }
+  end
+  
+  def build_additional_surety
+    last_surety = sureties.last
+    sureties.build do |surety|
+      %w(cpu_hours gpu_hours size direction_of_science_id 
+        critical_technology_ids boss_full_name boss_position).each do |attr|
+        
+        surety.send "#{attr}=", last_surety.send(attr)
+      end
+    end
   end
   
 private

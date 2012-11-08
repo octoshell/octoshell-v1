@@ -8,6 +8,8 @@ p class="lead" = @project.description
     - if @project.can__close? && can?(:close, @project)
       = " "
       = link_to Project.human_state_event_name(:_close), project_close_path(@project), method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены? Закрытие проекта закроет все доступы и заявки' }
+    = " "
+    = link_to 'Пригласить в проект', [@project, :invite], class: 'btn'
     - if can? :index, :versions
       = " "
       = link_to 'Версии', [@project, :versions], class: 'btn'
