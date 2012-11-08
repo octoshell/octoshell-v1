@@ -26,7 +26,7 @@ private
   end
   
   def create_account_code_for_user
-    if user == surety.project.user
+    if user
       conditions = { user_id: user_id, project_id: surety.project_id }
       account = Account.where(conditions).first_or_create!
       account.activate! if account.closed? && user.sured?
