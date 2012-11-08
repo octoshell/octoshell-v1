@@ -14,7 +14,7 @@ class Account < ActiveRecord::Base
   
   validates :user, :project, presence: true
   validates :username, presence: true, on: :update
-  validates :user_state_name, inclusion: { in: [:sured] }
+  validates :user_state_name, inclusion: { in: [:sured] }, if: :active?
   
   attr_accessible :user_id
   attr_accessible :project_id, :user_id, :username, as: :admin

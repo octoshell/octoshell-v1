@@ -7,7 +7,7 @@ class AccountCode < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
   
-  validates :user, :project, presence: true
+  validates :project, presence: true
   
   attr_accessible :email, :project_id
   

@@ -1,7 +1,7 @@
 # coding: utf-8
 class SuretyMember < ActiveRecord::Base
   belongs_to :surety, inverse_of: :surety_members
-  belongs_to :user
+  belongs_to :user, inverse_of: :surety_members
   belongs_to :account_code
   
   validates :surety, :email, :full_name, presence: true
@@ -29,7 +29,7 @@ private
     if user == surety.project.user
       conditions = { user_id: user_id, project_id: surety.project_id }
       account = Account.where(conditions).first_or_create!
-      account.activate! unless account.active?
+      account.activate! if account.closed? && user.sured?
     else
       create_account_code! do |code|
         code.email = email
