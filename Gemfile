@@ -48,6 +48,10 @@ group :test, :development do
   gem 'ci_reporter'
 end
 
+group :test do
+  gem 'cucumber-rails'
+end
+
 group :assets do
   gem 'less-rails'
   gem 'coffee-rails', '~> 3.2.1'
