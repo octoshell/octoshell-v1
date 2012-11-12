@@ -27,7 +27,7 @@ class Project < ActiveRecord::Base
   
   accepts_nested_attributes_for :sureties
   
-  scope :finder, lambda { |q| where("name like :q", q: "%#{q}%") }
+  scope :finder, lambda { |q| where("lower(name) like :q", q: "%#{q}%") }
   
   state_machine initial: :active do
     state :active
