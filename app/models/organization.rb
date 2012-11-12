@@ -20,7 +20,7 @@ class Organization < ActiveRecord::Base
   
   after_create :notify_admins
   
-  scope :finder, lambda { |q| where("lower(name) like :q", q: "%#{q}%") }
+  scope :finder, lambda { |q| where("lower(name) like :q", q: "%#{q.mb_chars.downcase}%") }
   
   state_machine initial: :active do
     state :active

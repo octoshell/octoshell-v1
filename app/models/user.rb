@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
   
   scope :admins, where(admin: true)
   scope :finder, (lambda do |q|
-    where "lower(last_name) like :q or lower(first_name) like :q or lower(email) like :q", q: "%#{q}%"
+    where "lower(last_name) like :q or lower(first_name) like :q or lower(email) like :q", q: "%#{q.mb_chars.downcase}%"
   end)
   
   state_machine initial: :active do
