@@ -58,7 +58,9 @@ class Ability
       can [:show, :index, :close, :new, :create], :memberships
       
       can [:index, :new, :create, :new_scan, :load_scan], :sureties
-      can [:close, :show], :sureties, user_id: user.id
+      can [:close, :show], :sureties do |surety|
+        surety.project.user_id == user.id
+      end
       
       can [:edit, :update], :memberships, user_id: user.id
       

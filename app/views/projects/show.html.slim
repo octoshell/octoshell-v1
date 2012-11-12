@@ -26,6 +26,10 @@ table class="table table-bordered"
       th = Project.human_attribute_name(:username)
       td = @project.username
 
+- if @project.sureties.any?
+  h3 Поручительства
+  = render partial: 'sureties/table', locals: { sureties: @project.sureties }
+
 - if admin?
 
   h3 Доступы

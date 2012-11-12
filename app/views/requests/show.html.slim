@@ -43,7 +43,7 @@ div class="request"
           tr
             th Общий объем квот
             td
-              = "#{@request.user.requests.sum(:hours)} часов | "
+              = "#{@request.user.requests.sum(:cpu_hours)} часов | "
               = "#{@request.user.requests.sum(:size)} Gb"
     tr
       th = Organization.model_name.human
@@ -63,7 +63,10 @@ div class="request"
       td = link_to_cluster @request.cluster
     tr
       th = Request.human_attribute_name(:hours)
-      td = @request.hours
+      td = @request.cpu_hours
+    tr
+      th = Request.human_attribute_name(:gpu_hours)
+      td = @request.gpu_hours
     tr
       th = Request.human_attribute_name(:state)
       td id="request-#{@request.id}-status" = @request.human_state_name
