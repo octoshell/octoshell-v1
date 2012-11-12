@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   scope :admins, where(admin: true)
   scope :finder, (lambda do |q|
     condition = q.split(/\s/).map do |word|
-      %w(last_name first_name email).map do |col|
+      %w(last_name first_name middle_name email).map do |col|
           sanitize_sql(["lower(#{col}) like '%s'", "%#{word.mb_chars.downcase}%"])
       end.join(' or ')
     end.join (') or (')
