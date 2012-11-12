@@ -7,31 +7,32 @@
   = f.input :username if admin?
   = f.input :description, input_html: { rows: 5 }
   = f.input :cluster_user_type, collection: Project::CLUSTER_USER_TYPES, hint: "<b>account</b> - У каждого пользователя свой логин (account_12) <br /> <b>project</b> - У всей команды проекта один логин (project_34)" if admin?
-  legend Поручительство
-  = f.simple_fields_for :sureties do |f|
-    = f.input :boss_full_name
-    = f.input :boss_position
-    = f.association :direction_of_science
-    = f.association :critical_technologies, required: true, input_html: { class: 'chosen' }
-    = f.input :cpu_hours
-    = f.input :gpu_hours
-    = f.input :size
-    legend Участники
-    div class="members"
-      = f.simple_fields_for :surety_members do |f|
-        div class="control-group members-form #{'error' if f.object.errors.any?}"
-          label class="control-label"
-            | Пользователь
-          div class="controls"
-            = f.text_field :email, placeholder: 'user@example.com', class: 'email', id: nil
-            |  
-            = f.text_field :full_name, placeholder: 'Иванов Иван Иванович', class: 'full-name', id: nil
-            |  
-            = link_to '✗', '#', class: 'remove-member danger'
-            - if f.object.errors.any?
-              p class="help-inline" = f.object.errors.full_messages.join(', ')
-    div class="controls"
-      p = link_to "Добавить", "#", class: 'add-member-row'
-  div class="form-actions"
-    = f.button :submit, class: 'btn-primary'
+  - if f.object.new_record?
+    legend Поручительство
+    = f.simple_fields_for :sureties do |f|
+      = f.input :boss_full_name
+      = f.input :boss_position
+      = f.association :direction_of_science
+      = f.association :critical_technologies, required: true, input_html: { class: 'chosen' }
+      = f.input :cpu_hours
+      = f.input :gpu_hours
+      = f.input :size
+      legend Участники
+      div class="members"
+        = f.simple_fields_for :surety_members do |f|
+          div class="control-group members-form #{'error' if f.object.errors.any?}"
+            label class="control-label"
+              | Пользователь
+            div class="controls"
+              = f.text_field :email, placeholder: 'user@example.com', class: 'email', id: nil
+              |  
+              = f.text_field :full_name, placeholder: 'Иванов Иван Иванович', class: 'full-name', id: nil
+              |  
+              = link_to '✗', '#', class: 'remove-member danger'
+              - if f.object.errors.any?
+                p class="help-inline" = f.object.errors.full_messages.join(', ')
+      div class="controls"
+        p = link_to "Добавить", "#", class: 'add-member-row'
+    div class="form-actions"
+      = f.button :submit, class: 'btn-primary'
   
