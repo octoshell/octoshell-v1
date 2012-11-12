@@ -12,7 +12,7 @@
     = f.input :boss_full_name
     = f.input :boss_position
     = f.association :direction_of_science
-    = f.association :critical_technologies, required: true
+    = f.association :critical_technologies, required: true, input_html: { class: 'chosen' }
     = f.input :cpu_hours
     = f.input :gpu_hours
     = f.input :size
