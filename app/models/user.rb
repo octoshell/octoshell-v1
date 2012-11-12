@@ -46,6 +46,7 @@ class User < ActiveRecord::Base
   
   scope :admins, where(admin: true)
   scope :finder, (lambda do |q|
+    return scoped if q.blank?
     condition = q.split(/\s/).map do |word|
       %w(last_name first_name middle_name email).map do |col|
           sanitize_sql(["lower(#{col}) like '%s'", "%#{word.mb_chars.downcase}%"])
