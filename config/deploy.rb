@@ -1,10 +1,13 @@
-require 'bundler/capistrano'
-require "rvm/capistrano"
-require "capistrano-resque"
-require "cocaine"
+set :rbenv_ruby_version, "1.9.3-p286"
+set :default_environment, {
+  'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH",
+  'RBENV_VERSION' => rbenv_ruby_version
+}
+set :bundle_flags, "--deployment --quiet --binstubs --shebang ruby-local-exec"
+set :rake, "bin/rake"
 
-set :rvm_type, :system
-set :rvm_ruby_string, '1.9.3@msu'
+require 'bundler/capistrano'
+require "cocaine"
 
 set :application, "msu"
 set :rails_env, "production"
@@ -16,19 +19,13 @@ set :deploy_to, "/var/www/#{application}"
 set :keep_releases, 3
 set :normalize_asset_timestamps, false
 set :scm, :git
-set :workers, { "task_callbacks" => 1 }
 
 role :app, domain
 role :web, domain
 role :db,  domain, :primary => true
-role :resque_worker, domain
 
 set :whenever_command, "bundle exec whenever"
 require "whenever/capistrano"
-
-require 'capistrano-unicorn'
-
-after "deploy:restart", "resque:restart"
 
 namespace :db do
   task :copy do
@@ -47,7 +44,10 @@ namespace :app do
 end
 
 namespace :deploy do
+  desc "Restart Unicorn and Resque"
   task :restart do
+    run "sv restart ~/services/octoshell_unicorn"
+    run "sv restart ~/services/octoshell_resque"
   end
   
   desc "Make symlinks"

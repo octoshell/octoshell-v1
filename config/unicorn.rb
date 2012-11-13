@@ -1,14 +1,13 @@
 # Set environment to development unless something else is specified
-env = ENV["RAILS_ENV"] || "production"
-app_path = '/var/www/msu/current'
-rails_env = env
+env = "production"
+
 # See http://unicorn.bogomips.org/Unicorn/Configurator.html for complete
 # documentation.
 worker_processes 2
 
 # listen on both a Unix domain socket and a TCP port,
 # we use a shorter backlog for quicker failover when busy
-listen "/tmp/msu.socket", :backlog => 64
+listen "/tmp/octoshell.socket", backlog: 64
 
 # Preload our app for more speed
 preload_app true
@@ -16,21 +15,19 @@ preload_app true
 # nuke workers after 30 seconds instead of 60 seconds (the default)
 timeout 30
 
-pid "#{app_path}/tmp/pids/unicorn.pid"
+pid "/tmp/unicorn.octoshell.pid"
 
-# Production specific settings
-#if env == "production"
-  # Help ensure your application will always spawn in the symlinked
-  # "current" directory that Capistrano sets up.
-  working_directory "/var/www/msu/current"
 
-  # feel free to point this anywhere accessible on the filesystem
-  #user 'evrone', 'staff'
-  shared_path = "/var/www/msu/shared"
+# Help ensure your application will always spawn in the symlinked
+# "current" directory that Capistrano sets up.
+working_directory "/var/www/msu/current"
 
-  stderr_path "#{shared_path}/log/unicorn.error.log"
-  stdout_path "#{shared_path}/log/unicorn.access.log"
-#end
+# feel free to point this anywhere accessible on the filesystem
+user 'evrone'
+shared_path = "/var/www/msu/shared"
+
+stderr_path "#{shared_path}/log/unicorn.stderr.log"
+stdout_path "#{shared_path}/log/unicorn.stdout.log"
 
 before_fork do |server, worker|
   # the following is highly recomended for Rails + "preload_app true"
@@ -41,7 +38,7 @@ before_fork do |server, worker|
 
   # Before forking, kill the master process that belongs to the .oldbin PID.
   # This enables 0 downtime deploys.
-  old_pid = "#{app_path}/tmp/pids/unicorn.pid.oldbin"
+  old_pid = "/tmp/unicorn.octoshell.pid.oldbin"
   if File.exists?(old_pid) && server.pid != old_pid
     begin
       Process.kill("QUIT", File.read(old_pid).to_i)
