@@ -13,8 +13,6 @@ h2 Новое поручительство
 = simple_form_for [@project, @surety], html: { class: 'form-horizontal surety-form' } do |f|
   = f.input :boss_full_name
   = f.input :boss_position
-  = f.association :direction_of_science
-  = f.association :critical_technologies, required: true
   = f.input :cpu_hours
   = f.input :gpu_hours
   = f.input :size
