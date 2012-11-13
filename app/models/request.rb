@@ -17,7 +17,7 @@ class Request < ActiveRecord::Base
   
   validates :cluster_project, :cpu_hours, :gpu_hours, :user, :size, presence: true
   validates :cluster_id, :project_id, presence: true, unless: :cluster_project
-  validates :size, :cpu_hours, :gpu_hours, numericality: { greater_than: 0 }
+  validates :size, :cpu_hours, :gpu_hours, numericality: { greater_than_or_equal_to: 0 }
   validates :state, uniqueness: { scope: [:cluster_project_id], message: 'не уникален. Активная заявка уже существует' }, if: :active?
   
   attr_accessible :cpu_hours, :gpu_hours, :cluster_id, :project_id, :size
