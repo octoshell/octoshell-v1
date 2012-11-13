@@ -6,6 +6,7 @@ class AccountCode < ActiveRecord::Base
   
   belongs_to :project
   belongs_to :user
+  has_one :surety_member
   
   validates :project, presence: true
   
@@ -28,8 +29,13 @@ class AccountCode < ActiveRecord::Base
   
   def use(user)
     if can__use?
-      self.user = user
-      use!
+      transaction do
+        self.user = user
+        surety_member.user = user
+        surety_member.save!
+        user.revalidate!
+        use!
+      end
     else
       self.errors.add(:code, "уже использован")
       false

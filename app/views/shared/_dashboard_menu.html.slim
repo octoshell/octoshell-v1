@@ -8,3 +8,5 @@
   = submenu_item :credentials, (link_to 'Публичные ключи', credentials_path)
 - if can? :index, :memberships
   = submenu_item :memberships, (link_to 'Места работы', memberships_path)
+- if can? :index, :sureties
+  = submenu_item :sureties, (link_to 'Поручительства', sureties_path)

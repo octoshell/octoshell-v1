@@ -9,7 +9,7 @@
   = f.association :direction_of_science
   = f.association :critical_technologies, required: true, input_html: { class: 'chosen' }
   = f.input :cluster_user_type, collection: Project::CLUSTER_USER_TYPES, hint: "<b>account</b> - У каждого пользователя свой логин (account_12) <br /> <b>project</b> - У всей команды проекта один логин (project_34)" if admin?
-  - if f.object.new_record?
+  - if f.object.new_record? && !f.object.user.sured?
     legend Поручительство
     = f.simple_fields_for :sureties do |f|
       = f.input :boss_full_name
@@ -33,6 +33,6 @@
                 p class="help-inline" = f.object.errors.full_messages.join(', ')
       div class="controls"
         p = link_to "Добавить", "#", class: 'add-member-row'
-    div class="form-actions"
-      = f.button :submit, class: 'btn-primary'
+  div class="form-actions"
+    = f.button :submit, class: 'btn-primary'
   

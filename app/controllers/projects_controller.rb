@@ -41,7 +41,7 @@ class ProjectsController < ApplicationController
         member.email = current_user.email
         member.full_name = current_user.full_name
       end
-    end
+    end unless @project.user.sured?
   end
   
   def create
@@ -50,11 +50,7 @@ class ProjectsController < ApplicationController
     @project.accounts.build { |a| a.user = @project.user }
     if @project.save
       @project.user.track! :create_project, @project, current_user
-      if can? :create, :requests
-        redirect_to new_request_path(project_id: @project.id)
-      else
-        redirect_to root_path
-      end
+      redirect_to @project
     else
       render :new
     end

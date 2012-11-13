@@ -45,6 +45,7 @@ class Ability
           user.owned_projects.include?(project)
       end
       can [:invite, :sureties, :accounts, :close], :projects, user_id: user.id
+      can :create, :projects
       
       can :revert, :sessions
       
@@ -59,7 +60,7 @@ class Ability
       
       can [:index, :new, :create, :new_scan, :load_scan], :sureties
       can [:close, :show], :sureties do |surety|
-        surety.project.user_id == user.id
+        surety.project && surety.project.user_id == user.id
       end
       
       can [:edit, :update], :memberships, user_id: user.id
@@ -67,9 +68,11 @@ class Ability
       can :index, :accounts
       can [:activate, :decline, :cancel], :accounts, project_id: user.owned_project_ids
       
+      can [:use, :new_use], :account_codes
+      
       # sured user
       if user.sured?
-        can [:index, :create, :use, :new_use], :account_codes
+        can [:index, :create], :account_codes
         can :destroy, :account_codes do |code|
           code.pending? && user.owned_project_ids.include?(code.project_id)
         end
