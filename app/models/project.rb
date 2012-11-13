@@ -1,3 +1,4 @@
+# coding: utf-8
 class Project < ActiveRecord::Base
   include Models::Limitable
   
@@ -12,15 +13,18 @@ class Project < ActiveRecord::Base
   has_many :tickets
   has_many :cluster_projects, autosave: true
   has_many :sureties, inverse_of: :project
+  has_and_belongs_to_many :critical_technologies
+  belongs_to :direction_of_science
   
   validates :name, uniqueness: true
-  validates :user, :name, :description, :organization, presence: true
+  validates :user, :name, :description, :organization, :direction_of_science, presence: true
   validates :organization, inclusion: { in: proc(&:allowed_organizations) }
   validates :username, presence: true, on: :update
   validates :cluster_user_type, inclusion: { in: CLUSTER_USER_TYPES }
+  validates :critical_technology_ids, length: { minimum: 1, message: 'выберите не менее %{count}' }
   
   attr_accessible :name, :description, :organization_id, :sureties_attributes,
-    :organization_ids
+    :organization_ids, :direction_of_science_id, :critical_technology_ids
   
   after_create :assign_username
   after_create :create_relations

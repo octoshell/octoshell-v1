@@ -397,6 +397,8 @@ ru:
         cluster_user_type: Тип Проекта на кластере
         username: Группа пользователей
         created_at: Создан
+        direction_of_science: Направление исследований
+        critical_technologies: Критические технологии
       organization_kind:
         name: Название
         state: Состояние
@@ -436,8 +438,6 @@ ru:
         user: Пользователь
         boss_full_name: ФИО руководителя организации
         boss_position: Должность руководителя организации
-        direction_of_science: Направление исследований
-        critical_technologies: Критические технологии
         cpu_hours: Предполагаемое количество процессоро-часов
         gpu_hours: Предполагаемое количество часов GPU
         size: Предполагаемое количество ГБ на диске

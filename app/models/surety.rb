@@ -5,22 +5,18 @@ class Surety < ActiveRecord::Base
   
   default_scope order("#{table_name}.id desc")
   
-  delegate :user, :organization, to: :project, allow_nil: true
+  delegate :user, :organization, :direction_of_science, :critical_technologies,
+    to: :project, allow_nil: true
   
   belongs_to :project, inverse_of: :sureties
   has_many :tickets
   has_many :surety_members, inverse_of: :surety
-  belongs_to :direction_of_science
-  has_and_belongs_to_many :critical_technologies
   
-  validates :direction_of_science, :boss_full_name, :boss_position,
-    :project, presence: true
-  validates :critical_technology_ids, length: { minimum: 1, message: 'выберите не менее %{count}' }
+  validates :boss_full_name, :boss_position, :project, presence: true
   validates :cpu_hours, :gpu_hours, :size, numericality: { greater_than_or_equal_to: 0 }
   
-  attr_accessible :boss_full_name, :boss_position, :direction_of_science_id,
-    :critical_technology_ids, :surety_members_attributes, :cpu_hours, :gpu_hours,
-    :size, :project_id
+  attr_accessible :boss_full_name, :boss_position, :surety_members_attributes,
+    :cpu_hours, :gpu_hours, :size, :project_id
   
   accepts_nested_attributes_for :surety_members
   
