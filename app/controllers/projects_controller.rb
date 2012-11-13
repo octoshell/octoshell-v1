@@ -50,7 +50,11 @@ class ProjectsController < ApplicationController
     @project.accounts.build { |a| a.user = @project.user }
     if @project.save
       @project.user.track! :create_project, @project, current_user
-      redirect_to new_request_path(project_id: @project.id)
+      if can? :create, :requests
+        redirect_to new_request_path(project_id: @project.id)
+      else
+        redirect_to root_path
+      end
     else
       render :new
     end
