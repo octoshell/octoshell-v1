@@ -1,7 +1,0 @@
-- title 'Новое приглашение'
-
-= simple_form_for @account_code, html: { class: 'form-horizontal' } do |f|
-  = f.association :project, collection: (admin? ? Project : current_user.owned_projects).active, input_html: { class: 'chosen' }
-  = f.input :email, hint: '"Если адрес указан, то по нему будет отправлено письмо с приглашением'
-  div class="form-actions"
-    = f.button :submit
