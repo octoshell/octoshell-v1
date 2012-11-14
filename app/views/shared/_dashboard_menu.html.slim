@@ -4,9 +4,5 @@
   = submenu_item :requests, (link_to 'Заявки', requests_path)
 - if can? :index, :clusters
   = submenu_item :clusters, (link_to 'Кластеры', clusters_path)
-- if can? :index, :credentials
-  = submenu_item :credentials, (link_to 'Публичные ключи', credentials_path)
-- if can? :index, :memberships
-  = submenu_item :memberships, (link_to 'Места работы', memberships_path)
-- if can? :index, :sureties
-  = submenu_item :sureties, (link_to 'Поручительства', sureties_path)
+- if can? :show, :profiles
+  = submenu_item :profiles, (link_to 'Профиль', profile_path)

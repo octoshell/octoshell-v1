@@ -3,7 +3,6 @@ class ProfilesController < ApplicationController
   
   def show
     @user = find_user
-    render 'users/show'
   end
   
   def edit
