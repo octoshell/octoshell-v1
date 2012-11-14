@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121113104211) do
+ActiveRecord::Schema.define(:version => 20121114102617) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -176,6 +176,9 @@ ActiveRecord::Schema.define(:version => 20121113104211) do
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.integer  "cluster_id"
+    t.text     "technologies"
+    t.text     "directions"
+    t.string   "phone"
   end
 
   create_table "memberships", :force => true do |t|

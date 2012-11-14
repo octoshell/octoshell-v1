@@ -1,15 +1,37 @@
 require 'csv'
 class ImportItem < ActiveRecord::Base
-  CSV_ATTRIBUTES = [:fio, :email, :organization_name, :project_name, :group, :login, :jsoned_keys, :cluster_id]
+  CSV_ATTRIBUTES = [ :fio, :email, :organization_name, :project_name, :group,
+    :login, :something, :directions, :technologies, :phone,
+    :jsoned_keys ]
   
   belongs_to :cluster
   
   validates :first_name, :last_name, :middle_name, :email, :organization_name,
     :project_name, :group, :login, :keys, presence: true
   
+  attr_accessor :something
+
   attr_accessible :file, :first_name, :middle_name, :last_name,
     :organization_name, :project_name, :group, :login, :email, as: :admin
   serialize :keys
+  serialize :directions
+  serialize :technologies
+
+  def self.create_by_file_and_cluster(attributes)
+    cluster = Cluster.find(attributes[:cluster_id])
+    transaction do
+      attributes[:file].read.each_line do |line|
+        data = line.parse_csv(col_sep: ";", quote_char: "'")
+        
+        i = create do |item|
+          CSV_ATTRIBUTES.each_with_index do |attribute, index|
+            item.send "#{attribute}=", data[index].strip
+          end
+          item.cluster = cluster
+        end
+      end
+    end
+  end
   
   def import(attributes, role)
     if update_attributes(attributes, role)
@@ -37,7 +59,7 @@ class ImportItem < ActiveRecord::Base
       middle = '-'
     end
     self.first_name = first
-    self.middle_name = middle_name
+    self.middle_name = middle
     self.last_name = last
   end
   
@@ -69,20 +91,6 @@ class ImportItem < ActiveRecord::Base
     Organization.new do |org|
       org.name = organization_name
     end.to_json(options)
-  end
-  
-  def self.create_by_file_and_cluster(attributes)
-    transaction do
-      file.read.each_line do |line|
-        data = line.parse_csv(col_sep: ";", quote_char: "'")
-        
-        CSV_ATTRIBUTES.each_with_index do |attribute, index|
-          create! do |item|
-            item.send "#{attribute}=", data[index]
-          end
-        end
-      end
-    end
   end
   
 private

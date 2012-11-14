@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   has_paper_trail
   
   has_attached_file :avatar
-  
   authenticates_with_sorcery!
   
   attr_reader :new_organization
