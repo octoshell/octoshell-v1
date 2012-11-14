@@ -6,6 +6,6 @@ namespace :db do
   
   task :backup => :environment do
     time = Time.current
-    system "pg_dump -f /var/www/msu/shared/backups/#{time.to_i} -F tar msu"
+    system "pg_dump -f /var/www/msu/shared/backups/#{time.to_i} -F tar octoshell"
   end
 end
