@@ -6,17 +6,7 @@ class AccountsController < ApplicationController
     @search = Account.search(params[:search])
     @accounts = show_all? ? @search.all : @search.page(params[:page])
   end
-  
-  def new
-    @account = Account.new
-  end
-  
-  def create
-    @account = Account.by_params(params[:account]).first_or_create!
-    @account.active? or @account.activate!
-    redirect_to @account
-  end
-  
+
   def show
     @account = find_account(params[:id])
   end

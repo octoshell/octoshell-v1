@@ -1,3 +1,4 @@
+# coding: utf-8
 class ProjectsController < ApplicationController
   before_filter :require_login
   before_filter :setup_default_filter, only: :index, if: :admin?
@@ -100,7 +101,7 @@ class ProjectsController < ApplicationController
     if @surety.save
       redirect_to @project
     else
-      @account_code = @project.account_codes.build
+      @account = @project.accounts.build
       render :invite
     end
   end
@@ -118,6 +119,29 @@ class ProjectsController < ApplicationController
     @account = @project.accounts.build
     @surety = @project.build_additional_surety
     render :invite
+  end
+
+  def join
+    authorize! :accounts, :projects
+    @project = Project.find(params[:project_id])
+  end
+
+  def create_account
+    @project = Project.find(params[:project_id])
+    authorize! :create_account, @project
+    @account_code = @project.account_codes.find_by_code(params[:code])
+    if @account_code
+      if @account_code.use(current_user)
+        @account_code.project.user.track! :use_account_code, @account_code, current_user
+        redirect_to projects_path, notice: 'Вы активировали код'
+      else
+        flash.now[:alert] = @account_code.errors.full_messages.join(', ')
+        render :join
+      end
+    else
+      flash.now[:alert] = 'Код не найден'
+      render :join
+    end
   end
   
 private

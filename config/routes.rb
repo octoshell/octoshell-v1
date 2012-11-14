@@ -20,7 +20,7 @@ MSU::Application.routes.draw do
   end
   
   # sureties
-  resources :sureties, only: [:new, :create, :index, :show] do
+  resources :sureties, only: [:index, :show] do
     collection do
       get :closed
       post :find
@@ -65,6 +65,8 @@ MSU::Application.routes.draw do
   
   # projects
   resources :projects, only: [:index, :new, :create, :show, :edit, :update] do
+    get :join, action: :join
+    post :join, action: :create_account
     get :invite
     post :sureties
     post :accounts
@@ -92,7 +94,7 @@ MSU::Application.routes.draw do
   resources :invitations, only: [:new, :create]
   
   # accounts
-  resources :accounts, only: [:index, :new, :create, :show, :edit, :update] do
+  resources :accounts, only: [:index, :show, :edit, :update] do
     put :activate
     put :decline
     put :cancel
@@ -203,14 +205,6 @@ MSU::Application.routes.draw do
   
   # pages
   resources :pages
-  
-  # account codes
-  resources :account_codes, only: [:index, :new, :create, :destroy] do
-    collection do
-      get 'use', action: 'new_use'
-      put 'use', action: 'use'
-    end
-  end
   
   # cluster fields
   resources :cluster_fields, only: [:create, :update, :destroy]

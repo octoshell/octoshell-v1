@@ -102,7 +102,7 @@ class Project < ActiveRecord::Base
     sureties.build do |surety|
       %w(cpu_hours gpu_hours size boss_full_name boss_position).each do |attr|
         surety.send "#{attr}=", last_surety.send(attr)
-      end
+      end if last_surety
     end
   end
   
@@ -114,7 +114,8 @@ private
   end
   
   def create_relations
-    accounts.where(user_id: user_id).first_or_create!
+    a = accounts.where(user_id: user_id).first_or_create!
+    a.activate!
     Cluster.active.each do |cluster|
       cluster_projects.where(cluster_id: cluster.id).first_or_create!
     end

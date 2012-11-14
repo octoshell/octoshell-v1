@@ -2,18 +2,26 @@
   table class="table table-bordered"
     tr
       th class="span1" #
-      th = User.model_name.human
-      th = Project.model_name.human
+      th class="span5" = User.model_name.human
+      - if admin?
+        th = Project.model_name.human
       th = Account.human_attribute_name(:state)
-      th
+      - if admin?
+        th
     - accounts.each do |account|
       tr id="account-#{account.id}"
         td = account.id
         td = link_to_user account.user
-        td = link_to_project account.project
-        td = account.human_state_name
+        - if admin?
+          td = link_to_project account.project
         td
-          - if can? :show, account
-            = link_to 'открыть', account
+          = account.human_state_name
+          - if account.active?
+            |  |  
+            = link_to 'Закрыть', [account, :cancel], class: 'btn btn-danger btn-mini', confirm: 'Вы уверены?', method: :put
+        - if admin?
+          td
+            - if can? :show, account
+              = link_to 'открыть', account
 - else
   p Нет аккаунтов

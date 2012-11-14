@@ -19,7 +19,7 @@ p class="lead" = @project.description
 
 table class="table table-bordered"
   tr
-    th = Project.human_attribute_name(:user)
+    th class="span4" = Project.human_attribute_name(:user)
     td = link_to_user @project.user
   tr
     th = Project.human_attribute_name(:state)
@@ -29,15 +29,35 @@ table class="table table-bordered"
       th = Project.human_attribute_name(:username)
       td = @project.username
 
+- if can? :show_invites, @project
+  - if @project.account_codes.any?
+    h3 Приглашения
+    table class="table table-bordered"
+      tr
+        th = AccountCode.human_attribute_name(:code)
+        th = AccountCode.human_attribute_name(:state)
+        th = AccountCode.human_attribute_name(:email)
+        th = User.model_name.human
+      - @project.account_codes.each do |account_code|
+        tr
+          td = account_code.code
+          td = account_code.human_state_name
+          td = mail_to account_code.email
+          td
+            - if account_code.user
+              = link_to_user account_code.user
+            - else
+              | Нет
+
+h3 Доступы
+
+= render partial: 'accounts/table', locals: { accounts: @project.accounts.active }
+
 - if @project.sureties.any?
   h3 Поручительства
   = render partial: 'sureties/table', locals: { sureties: @project.sureties }
 
 - if admin?
-
-  h3 Доступы
-
-  = render partial: 'accounts/table', locals: { accounts: @project.accounts.non_closed }
   
   h3 На кластере:
   - @project.cluster_projects.each do |cluster_project|

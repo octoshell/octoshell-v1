@@ -34,18 +34,17 @@ class Ability
       
       can [:index, :show], :clusters
       
-      can [:index, :new, :create], :credentials
-      can [:show, :close], :credentials, user_id: user.id
+      can [:new, :create], :credentials
+      can :close, :credentials, user_id: user.id
       
       can :show, :dashboards
       
-      can :index, :projects
+      can [:new, :create, :index, :join, :create_account], :projects
       can :show, :projects do |project|
         user.projects.where(accounts: { state: 'active' }).include?(project) || 
           user.owned_projects.include?(project)
       end
-      can [:invite, :sureties, :accounts, :close], :projects, user_id: user.id
-      can :create, :projects
+      can [:invite, :sureties, :accounts, :close, :show_invites], :projects, user_id: user.id
       
       can :revert, :sessions
       
@@ -81,7 +80,6 @@ class Ability
         
         can [:new, :create, :index], :requests
         
-        can [:new, :create], :projects
         can [:edit, :update], :projects, user_id: user.id
       end
       
@@ -111,7 +109,7 @@ class Ability
         
         can [:index, :show, :new, :create, :edit, :update, :close], :ticket_fields
         
-        can [:show, :close], :credentials
+        can [:show, :index, :close], :credentials
         
         can [:new, :create, :show, :activate, :decline, :cancel, :edit, :update], :accounts
         

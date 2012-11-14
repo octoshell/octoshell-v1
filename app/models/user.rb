@@ -202,10 +202,6 @@ class User < ActiveRecord::Base
     emails.flatten.compact.uniq
   end
   
-  def produces_account_codes
-    AccountCode.where(project_id: owned_project_ids)
-  end
-  
   def avatar_url
     if avatar?
       avatar.url
