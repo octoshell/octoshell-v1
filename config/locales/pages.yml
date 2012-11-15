@@ -2,7 +2,7 @@ en:
   pages:
     shared:
       logout: Logout
-      login: Login
+      login: Sign in
       sign_up: Sign Up
     accounts:
       request: 'Request'
