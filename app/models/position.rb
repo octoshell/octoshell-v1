@@ -8,7 +8,7 @@ class Position < ActiveRecord::Base
   belongs_to :membership, inverse_of: :positions
   
   validates :membership, :name, :value, presence: true
-  validates :name, uniqueness: { scope: :membership_id }
+  validates :name, uniqueness: { scope: :membership_id }, if: :membership_id?
   
   attr_accessible :name, :value
   attr_accessible :name, :value, as: :admin
