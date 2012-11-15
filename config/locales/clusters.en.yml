@@ -1,3 +1,7 @@
 en:
   clusters:
-    new_cluster: New Cluster
+    new:
+      title: New Cluster
+    index:
+      title: Clusters
+      new_cluster: New Cluster
