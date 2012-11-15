@@ -1,0 +1,27 @@
+en:
+  shared:
+    admin_menu:
+      users: Users
+      sureties: Sureties
+      requests: Requests
+      tasks: Tasks
+      projects: Projects
+      clusters: Clusters
+      memberships: Memberships
+      credentials: Credentials
+      organizations: Organizations
+      organization_kinds: Organization Kinds
+      position_names: Position Names
+      accounts: Accounts
+      accesses: Accesses
+      cluster_projects: Cluster Projects
+      cluster_users: Cluster Users
+      extends: Extends
+      images: Images
+      import: Import
+    dashboard_menu:
+      projects: Projects
+      requests: Request
+      clusters: Clusters
+      profile: Profile
+

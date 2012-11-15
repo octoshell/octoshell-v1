@@ -1,0 +1,7 @@
+ru:
+  shared:
+    dashboard_menu:
+      projects: Проекты
+      requests: Заявки
+      clusters: Кластеры
+      profile: Профиль

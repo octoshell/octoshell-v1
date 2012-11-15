@@ -1,8 +1,8 @@
 - if can? :index, :projects
-  = submenu_item :projects, (link_to 'Проекты', projects_path)
+  = submenu_item :projects, (link_to t('.projects'), projects_path)
 - if can? :index, :requests
-  = submenu_item :requests, (link_to 'Заявки', requests_path)
+  = submenu_item :requests, (link_to t('.requests'), requests_path)
 - if can? :index, :clusters
-  = submenu_item :clusters, (link_to 'Кластеры', clusters_path)
+  = submenu_item :clusters, (link_to t('.clusters'), clusters_path)
 - if can? :show, :profiles
-  = submenu_item :profiles, (link_to 'Профиль', profile_path)
+  = submenu_item :profiles, (link_to t('.profile'), profile_path)

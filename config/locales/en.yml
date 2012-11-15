@@ -1,2 +1,6 @@
 en:
   call_callbacks: Call Callbacks
+  helpers:
+    submit:
+      create: Create
+      update: Update

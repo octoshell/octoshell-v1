@@ -57,6 +57,7 @@ MSU::Application.configure do
   #   api_host: 'releu.mailgun.org'
   # }
   config.action_mailer.raise_delivery_errors = true
+  config.i18n.default_locale = :ru
 
   # Enable threaded mode
   # config.threadsafe!
