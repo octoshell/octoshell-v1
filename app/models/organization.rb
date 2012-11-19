@@ -39,6 +39,10 @@ class Organization < ActiveRecord::Base
       Levenshtein.distance(name, org.name) < 5
     end
   end
+
+  def sureties
+    Surety.joins(:project).where(project_id: project_ids)
+  end
   
   def close!
     transaction do
