@@ -11,10 +11,10 @@ div class="link-actions"
   = f.input :ticket_tag_relations_ticket_tag_name_in, collection: TicketTag.active.pluck(:name), required: false, input_html: { multiple: true } if admin?
 
   - options = { required: false, include_blank: true, start_year: 2012, end_year: Date.current.year, input_html: { class: 'datepicker' } }
-  = f.input :created_at_greater_than, options
-  = f.input :created_at_less_than, options
-  = f.input :updated_at_greater_than, options
-  = f.input :updated_at_less_than, options
+  = f.input :created_at_greater_than, options if admin?
+  = f.input :created_at_less_than, options if admin?
+  = f.input :updated_at_greater_than, options if admin?
+  = f.input :updated_at_less_than, options if admin?
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
 
