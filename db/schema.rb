@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121114102617) do
+ActiveRecord::Schema.define(:version => 20121119085225) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -128,6 +128,15 @@ ActiveRecord::Schema.define(:version => 20121114102617) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "direction_of_sciences_projects", :id => false, :force => true do |t|
+    t.integer "direction_of_science_id"
+    t.integer "project_id"
+  end
+
+  add_index "direction_of_sciences_projects", ["direction_of_science_id", "project_id"], :name => "uniq_dir_proj", :unique => true
+  add_index "direction_of_sciences_projects", ["direction_of_science_id"], :name => "index_direction_of_sciences_projects_on_direction_of_science_id"
+  add_index "direction_of_sciences_projects", ["project_id"], :name => "index_direction_of_sciences_projects_on_project_id"
 
   create_table "expands", :force => true do |t|
     t.string "url"
@@ -253,18 +262,16 @@ ActiveRecord::Schema.define(:version => 20121114102617) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                                     :null => false
-    t.datetime "updated_at",                                     :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.integer  "user_id"
     t.string   "state"
     t.text     "description"
     t.integer  "organization_id"
-    t.string   "cluster_user_type",       :default => "account"
+    t.string   "cluster_user_type", :default => "account"
     t.string   "username"
-    t.integer  "direction_of_science_id"
   end
 
-  add_index "projects", ["direction_of_science_id"], :name => "index_projects_on_direction_of_science_id"
   add_index "projects", ["organization_id"], :name => "index_projects_on_organization_id"
   add_index "projects", ["state"], :name => "index_projects_on_state"
   add_index "projects", ["user_id"], :name => "index_projects_on_user_id"
