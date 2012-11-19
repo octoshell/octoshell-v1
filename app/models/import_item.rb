@@ -87,7 +87,7 @@ class ImportItem < ActiveRecord::Base
   
   def simular_users
     users = []
-    users.push *User.where(last_name: last_name)
+    users.push *User.where("last_name = :name or first_name = :name", name: last_name)
     users.push *User.where("email like ?", "%#{email[/^(.*)@/, 1]}%@%")
     users.uniq
   end
