@@ -1,7 +1,27 @@
 ru:
   shared:
+    admin_menu:
+      users: Пользователи
+      sureties: Поручительства
+      requests: Заявки
+      tasks: Процедуры
+      projects: Проекты
+      clusters: Кластеры
+      memberships: Места работы
+      credentials: Публичные ключи
+      organizations: Организации
+      organization_kinds: Типы организаций
+      position_names: Должности
+      accounts: Доступы к проектам
+      accesses: Публичные ключи на кластере
+      cluster_projects: Проекты на кластере
+      cluster_users: Пользователи на кластере
+      extends: Расширения
+      images: Изображения
+      import: Импорт
     dashboard_menu:
       projects: Проекты
       requests: Заявки
       clusters: Кластеры
       profile: Профиль
+
