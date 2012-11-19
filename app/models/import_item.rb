@@ -1,8 +1,8 @@
+# coding: utf-8
 require 'csv'
 class ImportItem < ActiveRecord::Base
   CSV_ATTRIBUTES = [ :fio, :email, :organization_name, :project_name, :group,
-    :login, :something, :directions, :technologies, :phone,
-    :jsoned_keys ]
+    :login, :phone, :jsoned_directions, :jsoned_technologies, :jsoned_keys ]
   
   belongs_to :cluster
   
@@ -23,7 +23,7 @@ class ImportItem < ActiveRecord::Base
       attributes[:file].read.each_line do |line|
         data = line.parse_csv(col_sep: ";", quote_char: "'")
         
-        i = create do |item|
+        create! do |item|
           CSV_ATTRIBUTES.each_with_index do |attribute, index|
             item.send "#{attribute}=", data[index].strip
           end
@@ -36,16 +36,17 @@ class ImportItem < ActiveRecord::Base
   def import(attributes, role)
     if update_attributes(attributes, role)
       transaction do
-        @user       = create_user!
-        @org        = create_organization!
-        @membership = create_membership!
-        @surety     = create_surety!
-        @project    = create_project!
-        @account    = create_account!
-        @group      = create_cluster_project!
-        @login      = create_cluster_user!
-        @keys       = create_credentials!
-        @accesses   = create_accesses!
+        @user          = create_user!
+        @org           = create_organization!
+        @membership    = create_membership!
+        @project       = create_project!
+        @surety        = create_surety!
+        @surety_member = create_surety_member!
+        @account       = create_account!
+        @group         = create_cluster_project!
+        @login         = create_cluster_user!
+        @keys          = create_credentials!
+        @accesses      = create_accesses!
         destroy
       end
       true
@@ -64,7 +65,15 @@ class ImportItem < ActiveRecord::Base
   end
   
   def jsoned_keys=(json)
-    self.keys = JSON.parse(json)
+    self.keys = JSON.parse(json).map(&:strip).uniq
+  end
+
+  def jsoned_directions=(json)
+    self.directions = JSON.parse(json).map(&:strip).uniq
+  end
+
+  def jsoned_technologies=(json)
+    self.technologies = JSON.parse(json).map(&:strip).uniq
   end
   
   def user_in_json(options)
@@ -109,6 +118,11 @@ private
       end
       User.find(u.id)
     end
+    user.tap do |user|
+      user.first_name       = first_name
+      user.middle_name      = middle_name
+      user.last_name        = last_name
+    end.save!
     user.valid? or raise user.errors.inspect # ActiveRecord::RecordInvalid.new(user)
     user
   end
@@ -141,13 +155,26 @@ private
   
   def create_surety!
     s = Surety.to_generic_model.create! do |surety|
-      surety.user_id = @user.id
-      surety.organization_id = @org.id
+      surety.boss_full_name = "Руководитель. И. О."
+      surety.boss_position = "Должность"
+      surety.project_id = @project.id
       surety.state = 'active'
     end
     surety = Surety.find(s.id)
     surety.valid? or raise surety.errors.inspect
     surety
+  end
+
+  def create_surety_member!
+    s = SuretyMember.to_generic_model.create! do |member|
+      member.surety_id = @surety.id
+      member.email = email
+      member.full_name = @user.full_name
+      member.user_id = @user.id
+    end
+    sm = SuretyMember.find(s.id)
+    sm.valid? or raise sm.errors.inspect
+    sm
   end
   
   def create_project!
@@ -160,7 +187,10 @@ private
         project.organization_id = @org.id
         project.username = group
       end
-      Project.find(p.id)
+      project = Project.find(p.id)
+      project.direction_of_sciences = directions.map { |d| DirectionOfScience.find_or_create_by_name!(d) }
+      project.critical_technologies = technologies.map { |t| CriticalTechnology.find_or_create_by_name!(t) }
+      project
     end
     project.valid? or raise project.errors.inspect
     project

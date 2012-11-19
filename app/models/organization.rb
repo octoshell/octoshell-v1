@@ -36,7 +36,7 @@ class Organization < ActiveRecord::Base
   
   def self.find_similar(name)
     where("name != ?", name).find_all do |org|
-      Levenshtein.distance(name, org.name) < [name.size / 3.0, 3].max
+      Levenshtein.distance(name, org.name) < 5
     end
   end
   
