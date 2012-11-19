@@ -5,7 +5,7 @@ class Surety < ActiveRecord::Base
   
   default_scope order("#{table_name}.id desc")
   
-  delegate :user, :organization, :direction_of_science, :critical_technologies,
+  delegate :user, :organization, :direction_of_sciences, :critical_technologies,
     to: :project, allow_nil: true
   
   belongs_to :project, inverse_of: :sureties
@@ -71,20 +71,20 @@ class Surety < ActiveRecord::Base
   def html_template
     t = Liquid::Template.parse(File.read("#{Rails.root}/config/surety.liquid"))
     t.render({
-      'id'                    => id,
-      'organization_name'     => organization.surety_name,
-      'boss_full_name'        => boss_full_name,
-      'boss_position'         => boss_position,
-      'members'               => surety_members.map(&:full_name),
-      'project_name'          => project.name,
-      'direction_of_science'  => direction_of_science.name,
-      'critical_technologies' => critical_technologies.map(&:name),
-      'project_description'   => project.description,
-      'cpu_hours'             => cpu_hours,
-      'gpu_hours'             => gpu_hours,
-      'size'                  => size,
-      'date'                  => Date.today.to_s,
-      'other_organizations'   => project.organizations.map(&:name)
+      'id'                     => id,
+      'organization_name'      => organization.surety_name,
+      'boss_full_name'         => boss_full_name,
+      'boss_position'          => boss_position,
+      'members'                => surety_members.map(&:full_name),
+      'project_name'           => project.name,
+      'direction_of_sciences'  => direction_of_sciences.map(&:name),
+      'critical_technologies'  => critical_technologies.map(&:name),
+      'project_description'    => project.description,
+      'cpu_hours'              => cpu_hours,
+      'gpu_hours'              => gpu_hours,
+      'size'                   => size,
+      'date'                   => Date.today.to_s,
+      'other_organizations'    => project.organizations.map(&:name)
     })
   end
   
@@ -144,7 +144,9 @@ class Surety < ActiveRecord::Base
         surety_members.map(&:full_name).join(', ')
       end
       text.gsub! %r{\{\{ project_name \}\}},      project.name
-      text.gsub! %r{\{\{ direction_of_science \}\}}, direction_of_science.name
+      text.gsub! %r{\{\{ direction_of_sciences \}\}}, begin
+        direction_of_sciences.map(&:name).join(', ')
+      end
       text.gsub! %r{\{\{ critical_technologies \}\}}, begin
         critical_technologies.map(&:name).join(', ')
       end

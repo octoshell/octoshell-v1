@@ -36,7 +36,13 @@
     </dd>
   {% endif %}
   <dt>Приоритетное направление исследований:</dt>
-  <dd>{{ direction_of_science }}</dd>
+  <dd>
+    <ul>
+      {% for direction in direction_of_sciences %}
+        <li>{{ direction }}</li>
+      {% endfor %}
+    </ul>
+  </dd>
   <dt>Критические технологии:</dt>
   <dd>
     <ul>
