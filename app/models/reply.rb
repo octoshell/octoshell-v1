@@ -12,7 +12,7 @@ class Reply < ActiveRecord::Base
   default_scope order(:id)
   
   belongs_to :user
-  belongs_to :ticket
+  belongs_to :ticket, touch: true
   
   validates :user, :ticket, :message, presence: true
   validates :ticket_state_name, exclusion: { in: [:closed] }, if: :ticket

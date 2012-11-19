@@ -13,6 +13,7 @@ class Ticket < ActiveRecord::Base
   has_many :replies
   has_many :ticket_field_values, inverse_of: :ticket
   has_many :ticket_tag_relations
+  has_many :ticket_tags, through: :ticket_tag_relations
   
   validates :user, :subject, :message, :ticket_question, presence: true
   

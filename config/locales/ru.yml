@@ -317,6 +317,8 @@ ru:
       equals: '<em>%{attribute}</em>'
       in: '<em>%{attribute}</em>'
       is_true: '<em>%{attribute}</em>'
+      greater_than: '%{attribute} Больше чем'
+      less_than: '%{attribute} Меньше чем'
     attributes:
       company:
         reverse_name: "Company reverse name-diddly"
@@ -517,7 +519,8 @@ ru:
         state: Состояние
         cluster_user_id: Пользователь на кластере
       ticket:
-        created_at: Создан
+        created_at: Дата создания
+        updated_at: Дата изменения
         subject: Тема
         message: Сообщение
         state: Состояние
@@ -529,6 +532,7 @@ ru:
         project_id: Проект
         cluster: Кластер
         cluster_id: Кластер
+        ticket_tag_relations_ticket_tag_id: Теги
       cluster_field:
         name: Название
       reply:

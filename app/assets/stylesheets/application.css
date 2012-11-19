@@ -12,6 +12,7 @@
  *= require bootstrap
  *= require surety
  *= require select2
+ *= require datepicker
  */
 
 textarea.public-key {
