@@ -9,10 +9,11 @@ class ImportItem < ActiveRecord::Base
   validates :first_name, :last_name, :middle_name, :email, :organization_name,
     :project_name, :group, :login, :keys, presence: true
   
-  attr_accessor :something
+  attr_accessor :additional_email
 
   attr_accessible :file, :first_name, :middle_name, :last_name,
-    :organization_name, :project_name, :group, :login, :email, as: :admin
+    :organization_name, :project_name, :group, :login, :email, :additional_email,
+    as: :admin
   serialize :keys
   serialize :directions
   serialize :technologies
@@ -52,7 +53,7 @@ class ImportItem < ActiveRecord::Base
       true
     end
   end
-  
+
   def fio=(fio)
     first, middle, last = fio.split(' ')
     if last.blank?
@@ -62,6 +63,10 @@ class ImportItem < ActiveRecord::Base
     self.first_name = first
     self.middle_name = middle
     self.last_name = last
+  end
+
+  def email=(email)
+    self[:email] = email.downcase.strip 
   end
   
   def jsoned_keys=(json)
@@ -85,14 +90,16 @@ class ImportItem < ActiveRecord::Base
     end.to_json(options)
   end
   
-  def simular_users
+  def similar_users
     users = []
-    users.push *User.where("last_name = :name or first_name = :name", name: last_name)
+    users.push *User.where("last_name = :name or first_name = :name or middle_name = :name", name: last_name)
     users.push *User.where("email like ?", "%#{email[/^(.*)@/, 1]}%@%")
-    users.uniq
+    users.uniq!
+    users.delete_if { |u| u.email.downcase == email.downcase }
+    users
   end
   
-  def simular_organizations
+  def similar_organizations
     Organization.find_similar(organization_name)
   end
   
@@ -114,16 +121,19 @@ private
         user.state            = 'sured'
         user.activation_state = 'active'
         user.token            = Digest::SHA1.hexdigest(rand.to_s)
-        user.phone            = '-'
+        user.phone            = phone
       end
       User.find(u.id)
     end
+    user.valid? or raise user.errors.inspect # ActiveRecord::RecordInvalid.new(user)
     user.tap do |user|
       user.first_name       = first_name
       user.middle_name      = middle_name
       user.last_name        = last_name
+      if additional_email.present?
+        user.additional_emails.build { |e| e.email = additional_email }
+      end
     end.save!
-    user.valid? or raise user.errors.inspect # ActiveRecord::RecordInvalid.new(user)
     user
   end
   

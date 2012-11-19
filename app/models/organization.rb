@@ -35,7 +35,7 @@ class Organization < ActiveRecord::Base
   define_state_machine_scopes
   
   def self.find_similar(name)
-    where("name != ?", name).find_all do |org|
+    active.where("lower(name) != ?", name.downcase).find_all do |org|
       Levenshtein.distance(name, org.name) < 5
     end
   end

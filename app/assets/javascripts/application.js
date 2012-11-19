@@ -123,10 +123,31 @@ $(document).ready(function(){
   
   var import_item_form = $('form.edit_import_item')
   if (import_item_form.length > 0) {
+    $("a.user-choser", import_item_form).click(function(){
+      var record = $(this).data('record')
+      var default_email = $('#import_item_email').data('default-email')
+      $('#import_item_email').val(record.email)
+      $('#import_item_additional_email').val(default_email)
+      return false
+    })
+
+    $("a.user-clear", import_item_form).click(function(){
+      var record = $(this).data('record')
+      _(record).each(function(value, key){
+        if (value != "-") {
+          $('#import_item_' + key).val(value)
+        }
+      })
+      $('#import_item_additional_email').val("")
+      return false
+    })
+
     $("a.choser", import_item_form).click(function(){
       var record = $(this).data('record')
       _(record).each(function(value, key){
-        $('#import_item_' + key).val(value)
+        if (value != "-") {
+          $('#import_item_' + key).val(value)
+        }
       })
       return false
     })
