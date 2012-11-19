@@ -8,7 +8,7 @@ div class="link-actions"
   = autocomplete :user, f
   = f.input :cluster_id_eq, collection: Cluster.all, required: false if admin?
   = f.input :state_in, collection: Ticket.human_state_names, input_html: { multiple: true }, required: false
-  = f.input :ticket_tag_relations_ticket_tag_id_eq, collection: TicketTag.all, required: false, input_html: { class: 'chosen', multiple: true } if admin?
+  = f.input :ticket_tag_relations_ticket_tag_name_in, collection: TicketTag.active.pluck(:name), required: false, input_html: { multiple: true } if admin?
 
   - options = { required: false, include_blank: true, start_year: 2012, end_year: Date.current.year, input_html: { class: 'datepicker' } }
   = f.input :created_at_greater_than, options

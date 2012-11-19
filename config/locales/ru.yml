@@ -532,7 +532,7 @@ ru:
         project_id: Проект
         cluster: Кластер
         cluster_id: Кластер
-        ticket_tag_relations_ticket_tag_id: Теги
+        ticket_tag_relations_ticket_tag_name: Теги
       cluster_field:
         name: Название
       reply:
