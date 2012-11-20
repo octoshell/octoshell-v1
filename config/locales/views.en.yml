@@ -36,3 +36,8 @@ en:
       edit: Edit
       new_membership: New Membership
       new_credential: New Public Key
+  projects:
+    index:
+      title: Projects
+      new_project: New Project
+

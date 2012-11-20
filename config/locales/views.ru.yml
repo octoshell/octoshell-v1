@@ -35,3 +35,7 @@ ru:
       edit: Редактировать
       new_membership: Добавить место работы
       new_credential: Добавить публичный ключ
+  projects:
+    index:
+      title: Проекты
+      new_project: Новый проект

@@ -16,7 +16,7 @@ Given /^I am on root page$/ do
   visit root_path
 end
 
-Given /^I click (.*)$/ do |name|
+Given /^I click on (.*)$/ do |name|
   click_on name
 end
 

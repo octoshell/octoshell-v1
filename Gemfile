@@ -41,6 +41,7 @@ group :test, :development do
   gem 'shoulda-matchers'
   gem 'launchy'
   gem 'guard-rspec'
+  gem 'guard-cucumber'
   gem 'database_cleaner'
   gem 'ci_reporter'
 end
