@@ -9,6 +9,11 @@ Given /^I am signed in as (.*)$/ do |user|
     fill_in 'Password', with: '123456'
     click_on 'Sign in'
   end
+  @current_user = user
+end
+
+Given /^I am on root page$/ do
+  visit root_path
 end
 
 Given /^I click (.*)$/ do |name|

@@ -4,6 +4,9 @@ Feature: Tracking
   As system
   I want to save key points
 
+  Background:
+    Given I am signed in as user
+
   Scenario: Successfully creation
-    Given I create a Public Key MyKey
-    Then the History Item of Publick Key MyKey should be created
+    Given I have created Public Key MyKey
+    Then the History Item create_credential should be created
