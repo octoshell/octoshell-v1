@@ -7,7 +7,7 @@ Feature: Add cluster
     And I click New Cluster
 
   Scenario: Successfully creating new cluster
-    When I fill Name with Home
-    And I fill Host with 0.0.0.0
+    When I fill in Name with Home
+    And I fill in Host with 0.0.0.0
     And I click Create
     Then the cluster Home should be created

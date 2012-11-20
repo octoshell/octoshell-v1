@@ -1,4 +1,4 @@
-- title 'Профиль'
+- title t('.profile')
 
 div class="row"
   div class="span2"
@@ -9,15 +9,15 @@ div class="row"
       h1 = @user.full_name
 
     p
-      strong = link_to 'редактировать', edit_profile_path
+      strong = link_to t('.edit'), edit_profile_path
 
 h3 Места работы
-p = link_to 'Добавить место работы', new_membership_path
+p = link_to t('.new_membership'), new_membership_path
 = render partial: 'memberships/table', locals: { memberships: @user.memberships }
 
 h3 Поручительства
 = render partial: 'sureties/table', locals: { sureties: @user.sureties }
 
 h3 Публичные ключи
-p = link_to 'Добавить публичный ключ', new_credential_path
+p = link_to t('.new_credential'), new_credential_path
 = render partial: 'credentials/table', locals: { credentials: @user.credentials.active }

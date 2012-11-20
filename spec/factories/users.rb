@@ -11,7 +11,7 @@ FactoryGirl.define do
     
     factory :user do
       after(:create) { |user| user.activate! }
-      
+
       factory :sured_user do
         after(:create) do |user|
           surety = FactoryGirl.create(:active_surety)
@@ -33,6 +33,9 @@ FactoryGirl.define do
         end
       end
       
+      factory :user_user do
+      end
+
       factory :admin_user do
         admin true
       end

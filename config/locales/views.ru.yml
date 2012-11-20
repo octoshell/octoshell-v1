@@ -24,4 +24,14 @@ ru:
       requests: Заявки
       clusters: Кластеры
       profile: Профиль
-
+  credentials:
+    new:
+      title: Новый публичный ключ
+      choose_pub_file: Выберите .pub файл
+      or_enter_as_text: Или введите текстом
+  profiles:
+    show:
+      title: Профиль
+      edit: Редактировать
+      new_membership: Добавить место работы
+      new_credential: Добавить публичный ключ

@@ -24,4 +24,15 @@ en:
       requests: Request
       clusters: Clusters
       profile: Profile
-
+  credentials:
+    new:
+      title: New Public Key
+      public_key: Public Key
+      choose_pub_file: Choose .pub file
+      or_enter_as_text: Or enter as text
+  profiles:
+    show:
+      title: Profile
+      edit: Edit
+      new_membership: New Membership
+      new_credential: New Public Key
