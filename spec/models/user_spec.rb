@@ -66,6 +66,7 @@ describe User do
   
   describe '#close' do
     let!(:user) { create(:sured_user) }
+    let!(:project) { create(:project, user: user) }
     let!(:credential) { create(:credential, user: user) }
     let!(:ticket) { create(:ticket, user: user) }
     
@@ -76,7 +77,7 @@ describe User do
     end
     
     it 'should close all projects' do
-      user.projects.all?(&:closed?).should be_true
+      user.owned_projects.all?(&:closed?).should be_true
     end
     
     it 'should close all tickets' do

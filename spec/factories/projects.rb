@@ -3,6 +3,8 @@ FactoryGirl.define do
     sequence(:name) { |n| "Project #{n}" }
     association :user, factory: :user_with_membership
     organization { user.memberships.first.organization }
+    direction_of_sciences { [create(:direction_of_science)] }
+    critical_technologies { [create(:critical_technology)] }
     description 'Description'
   end
 end

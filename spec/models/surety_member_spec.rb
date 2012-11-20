@@ -11,6 +11,7 @@ describe SuretyMember do
   end
   
   context 'creating with member of project' do
+    pending
     it 'should create account code on create' do
       ac = build(:surety_member, account_code: nil)
       ac.save
