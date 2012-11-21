@@ -10,6 +10,10 @@ Then /^History Item (.*) should be created$/ do |kind|
   @current_user.history_items.where(kind: kind).should be_exists
 end
 
+Then /^project (.*) should be created$/ do |name|
+  @current_user.owned_projects.where(name: name).should be_exists
+end
+
 Given /^There is an organization (.*)$/ do |name|
   FactoryGirl.create(:organization, name: name)
 end
