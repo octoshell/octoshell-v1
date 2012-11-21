@@ -16,7 +16,7 @@ class ImportItemsController < ApplicationController
   end
   
   def step
-    @import = ImportItem.first
+    @import = ImportItem.order(:id).first
     redirect_to import_items_path, notice: 'Нечего импортировать' unless @import
   end
   
