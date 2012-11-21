@@ -4,3 +4,7 @@ en:
     submit:
       create: Create
       update: Update
+  activerecord:
+    attributes:
+      project:
+        organization: Main Organization

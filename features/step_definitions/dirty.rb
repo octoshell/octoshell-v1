@@ -21,3 +21,8 @@ end
 Given /^There is a critical technology (.*)$/ do |name|
   FactoryGirl.create(:critical_technology, name: name)
 end
+
+Given /^There is a membership for (.*) for current user$/ do |name|
+  org = Organization.find_by_name!(name)
+  FactoryGirl.create(:membership, user: @current_user, organization: org)
+end
