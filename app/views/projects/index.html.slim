@@ -3,7 +3,7 @@
 div class="link-actions"
   = link_to t('.new_project'), new_project_path, class: "btn #{disabled(can? :create, :projects)}"
   |  
-  = link_to t('.use_code'), join_projects_path, class: 'btn'
+  = link_to t('.use_code'), new_project_joiner_path, class: 'btn'
 
 - if admin?
   = simple_form_for @search, url: projects_path, method: :get, html: { class: 'form-horizontal' } do |f|

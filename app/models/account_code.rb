@@ -1,12 +1,12 @@
 # coding: utf-8
 class AccountCode < ActiveRecord::Base
-  has_paper_trail
+  # has_paper_trail
   
   attr_accessor :full_name
   
   belongs_to :project
   belongs_to :user
-  has_one :surety_member
+  has_one :surety_member, inverse_of: :account_code
   
   validates :project, :surety_member, presence: true
   

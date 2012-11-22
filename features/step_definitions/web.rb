@@ -1,3 +1,7 @@
+When /debug/ do
+  sleep 10
+end
+
 Given /^I am signed in as "(.*)"$/ do |user|
   user = FactoryGirl.create(:"#{user}_user")
   visit root_path
@@ -28,8 +32,9 @@ When /^I select "(.*)" from "(.*)"$/ do |value, field|
   select value, from: field
 end
 
-When /^I fill in "(.*)" with "(.*)" in last membership form$/ do |field, value|
+When /^I fill in input with class "(.*)" with "(.*)" in last membership form$/ do |klass, value|
   within(".members-form:last-child") do
-    fill_in field, with: value
+    find("input.#{klass}").set(value)
+    page.execute_script("$('input.#{klass}').blur()")
   end
 end

@@ -68,6 +68,8 @@ class Ability
       can [:activate, :decline, :cancel], :accounts, project_id: user.owned_project_ids
       
       can [:use, :new_use], :account_codes
+
+      can [:new, :create], :project_joiners
       
       # sured user
       if user.sured?

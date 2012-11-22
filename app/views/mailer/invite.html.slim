@@ -3,7 +3,7 @@
 p Вас пригласили в #{link_to 'Octoshell', root_url} в проект #{@project.name}.
 
 - if @user
-  - join_path = project_join_url(project_id: @project.id, code: @account_code.code, token: @user.token)
+  - join_path = new_project_joiner_url(code: @account_code.code, token: @user.token)
   - if @user.sured?
     p
       | Для активации аккаунта пройдите по ссылке 
@@ -17,7 +17,7 @@ p Вас пригласили в #{link_to 'Octoshell', root_url} в проек�
       | на странице #{(link_to "активации приглашения", join_path).html_safe}.
   
 - else
-  - join_path = join_projects_path(code: @account_code.code)
+  - join_path = new_project_joiner_url(code: @account_code.code)
   p Для начала работы вам необходимо:
   p = link_to 'Зарегистроваться', new_user_url
   p = link_to 'Заполнить информацию о месте работы', root_url

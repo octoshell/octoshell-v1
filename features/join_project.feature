@@ -19,16 +19,15 @@ Feature: Join Project
     And I fill in "Boss full name" with "OctoBoss"
     And I fill in "Boss position" with "OctoCEO"
     And I click on "Add Member"
-    And I fill in "Email" with "user@octoshell.com" in last membership form
-    And I fill in "Full Name" with "Mr. Shell" in last membership form
+    And I fill in input with class "email" with "user@octoshell.com" in last membership form
+    And I fill in input with class "full-name" with "Mr. Shell" in last membership form
     And I click on "Create"
     And I click on "Projects"
-    And I click on "Use code"
+    And I click on "Use Code"
 
   Scenario: Using valid code
     When I fill in "Code" with "SECRET CODE"
-    And I select "OctoProj" from "Project"
     And I click on "Use"
-    Then I should get access to project
+    Then I should get access to project "OctoProj"
 
   Scenario: Using invalid code

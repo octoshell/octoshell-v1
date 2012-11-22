@@ -4,6 +4,8 @@ en:
     submit:
       create: Create
       update: Update
+      project_joiner:
+        create: Use
   activerecord:
     attributes:
       project:

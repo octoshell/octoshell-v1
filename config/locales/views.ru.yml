@@ -39,5 +39,6 @@ ru:
     index:
       title: Проекты
       new_project: Новый проект
+      use_code: Использовать код приглашения
     form:
       add_member: Добавить

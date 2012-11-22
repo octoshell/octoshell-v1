@@ -40,6 +40,7 @@ en:
     index:
       title: Projects
       new_project: New Project
+      use_code: Use Code
     form:
       add_member: Add Member
 

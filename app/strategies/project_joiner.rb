@@ -27,4 +27,8 @@ class ProjectJoiner
       false
     end
   end
+
+  def persisted?
+    false
+  end
 end

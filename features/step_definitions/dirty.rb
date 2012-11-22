@@ -30,3 +30,8 @@ Given /^There is a membership for "(.*)" for current user$/ do |name|
   org = Organization.find_by_name!(name)
   FactoryGirl.create(:membership, user: @current_user, organization: org)
 end
+
+Then /^I should get access to project "(.*)"$/ do |name|
+  project = Project.find_by_name!(name)
+  @current_user.accounts.where(project_id: project.id).first.should be_active
+end

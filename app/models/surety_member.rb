@@ -2,7 +2,7 @@
 class SuretyMember < ActiveRecord::Base
   belongs_to :surety, inverse_of: :surety_members
   belongs_to :user, inverse_of: :surety_members
-  belongs_to :account_code
+  belongs_to :account_code, inverse_of: :surety_member
   
   validates :surety, :email, :full_name, presence: true
   validates :email, email_format: { message: 'имеет не верный формат' }
@@ -11,7 +11,7 @@ class SuretyMember < ActiveRecord::Base
   attr_accessible :full_name, :email, as: :admin
   
   before_create :assign_user
-  before_create :create_account_code_for_user
+  after_create :create_account_code_for_user
   
   def email=(email)
     self[:email] = email.to_s.downcase
@@ -34,6 +34,7 @@ private
       create_account_code! do |code|
         code.email = email
         code.project = surety.project
+        code.surety_member = self
       end
     end
     true
