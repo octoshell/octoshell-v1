@@ -152,7 +152,7 @@ class User < ActiveRecord::Base
   def sure!
     transaction do
       _sure!
-      accounts.where(project_id: owned_projects.active.map(&:id)).
+      accounts.closed.where(project_id: owned_projects.active.map(&:id)).
         each &:activate!
     end
   end
