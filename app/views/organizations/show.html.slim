@@ -27,12 +27,12 @@ table class="table table-bordered"
 
 h3 Активные проекты
 p = link_to 'Новый проект', new_project_path
-= render partial: 'projects/table', locals: { projects: @organization.projects.active }
+= render partial: 'projects/table', locals: { projects: @organization.projects.active.limit(10) }
 p = link_to "Все проекты (#{@organization.projects.count})", projects_path(search: { state_in: Project.state_names, organization_id_eq: @organization.id })
 
 h3 Активные поручительства
 p = link_to 'Новое поручительство', new_project_path
-= render partial: 'sureties/table', locals: { sureties: @organization.sureties.active }
+= render partial: 'sureties/table', locals: { sureties: @organization.sureties.active.limit(10) }
 p = link_to "Все поручительства (#{@organization.sureties.count})", sureties_path(search: { state_in: Surety.state_names, organization_id_eq: @organization.id })
 
 h3 Активные сотрудники
@@ -40,7 +40,7 @@ h3 Активные сотрудники
 p
   | Активных сотрудников: 
   strong #{@organization.memberships.active.count}
-= render partial: 'memberships/table', locals: { memberships: @organization.memberships }
+= render partial: 'memberships/table', locals: { memberships: @organization.memberships.limit(10) }
 p = link_to "Все сотрудники (#{@organization.memberships.count})", memberships_path(search: { state_in: Membership.state_names, organization_id_eq: @organization.id })
 
 - if can? :merge, :organizations
