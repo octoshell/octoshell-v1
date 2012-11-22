@@ -30,6 +30,7 @@ gem 'airbrake'
 gem 'gravatar-ultimate'
 gem 'levenshtein-ffi', require: 'levenshtein'
 gem 'validates_email_format_of'
+gem 'virtus'
 
 group :test, :development do
   gem 'quiet_assets'

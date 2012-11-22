@@ -40,4 +40,6 @@ en:
     index:
       title: Projects
       new_project: New Project
+    form:
+      add_member: Add Member
 

@@ -66,6 +66,7 @@ GEM
       builder
       girl_friday
     arel (3.0.2)
+    backports (2.6.5)
     bcrypt-ruby (3.0.1)
     blankslate (2.1.2.4)
     builder (3.0.0)
@@ -330,6 +331,8 @@ GEM
     validates_email_format_of (1.5.3)
     vegas (0.1.11)
       rack (>= 1.0.0)
+    virtus (0.5.2)
+      backports (~> 2.6.1)
     whenever (0.7.3)
       activesupport (>= 2.3.4)
       chronic (~> 0.6.3)
@@ -386,6 +389,7 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   unicorn
   validates_email_format_of
+  virtus
   whenever
   yaml_db
   zeus

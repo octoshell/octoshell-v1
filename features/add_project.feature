@@ -1,7 +1,7 @@
 @javascript
 Feature: Add project
   Background:
-    And There is an organization OctoCorp
+    Given There is an organization OctoCorp
     And There is a direction of science OctoRobots
     And There is a critical technology OctoMath
 

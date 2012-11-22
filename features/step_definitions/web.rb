@@ -1,4 +1,4 @@
-Given /^I am signed in as (.*)$/ do |user|
+Given /^I am signed in as "(.*)"$/ do |user|
   user = FactoryGirl.create(:"#{user}_user")
   visit root_path
   within('.navbar') do
@@ -16,14 +16,20 @@ Given /^I am on root page$/ do
   visit root_path
 end
 
-Given /^I click on (.*)$/ do |name|
+Given /^I click on "(.*)"$/ do |name|
   click_on name
 end
 
-When /^I fill in (.*) with (.*)$/ do |field, value|
+When /^I fill in "(.*)" with "(.*)"$/ do |field, value|
   fill_in field, with: value
 end
 
-When /^I select (.*) from (.*)$/ do |value, field|
+When /^I select "(.*)" from "(.*)"$/ do |value, field|
   select value, from: field
+end
+
+When /^I fill in "(.*)" with "(.*)" in last membership form$/ do |field, value|
+  within(".members-form:last-child") do
+    fill_in field, with: value
+  end
 end

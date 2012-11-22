@@ -32,7 +32,7 @@
               - if f.object.errors.any?
                 p class="help-inline" = f.object.errors.full_messages.join(', ')
       div class="controls"
-        p = link_to "Добавить", "#", class: 'add-member-row'
+        p = link_to t('.add_membership'), "#", class: 'add-member-row'
   div class="form-actions"
     = f.button :submit, class: 'btn-primary'
   

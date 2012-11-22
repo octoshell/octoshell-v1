@@ -39,3 +39,5 @@ ru:
     index:
       title: Проекты
       new_project: Новый проект
+    form:
+      add_member: Добавить
