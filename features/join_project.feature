@@ -22,6 +22,9 @@ Feature: Join Project
     And I fill in input with class "email" with "user@octoshell.com" in last membership form
     And I fill in input with class "full-name" with "Mr. Shell" in last membership form
     And I click on "Create"
+    And I signed out
+    And I register as "user@octoshell.com"
+    And I signed in as "user@ocoshell.com"
     And I click on "Projects"
     And I click on "Use Code"
 
@@ -31,3 +34,6 @@ Feature: Join Project
     Then I should get access to project "OctoProj"
 
   Scenario: Using invalid code
+    When I fill in "Code" with "WRONG CODE"
+    And I click on "Use"
+    Then I should see "Code not found"

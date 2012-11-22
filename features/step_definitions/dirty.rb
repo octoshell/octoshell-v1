@@ -35,3 +35,17 @@ Then /^I should get access to project "(.*)"$/ do |name|
   project = Project.find_by_name!(name)
   @current_user.accounts.where(project_id: project.id).first.should be_active
 end
+
+And /^I register and sign in as "(.*)"$/ do |email|
+  step %(I click on Sign Up)
+  step %(I fill in "Email" with "#{email}")
+  step %(I fill in "Password" with "123456")
+  step %(I fill in "Password Confirmation" with "123456")
+  step %(I fill in "First name" with "Bruce")
+  step %(I fill in "Last name" with "Wayne")
+  step %(I fill in "Middle name" with "-")
+  step %(I fill in "Phone" with "000")
+  step %(I click on "Sign Up")
+  user = User.find_by_email(email)
+  visit activate_user_path(token: user.authentication_token)
+end

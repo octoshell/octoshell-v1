@@ -14,7 +14,7 @@ class ProjectJoiner
   end
 
   def join
-    account_code = AccountUser.find_by_code(code)
+    account_code = AccountCode.find_by_code(code)
     if account_code
       if account_code.use(user)
         account_code.project.user.track! :use_account_code, account_code, current_user

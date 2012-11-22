@@ -38,3 +38,7 @@ When /^I fill in input with class "(.*)" with "(.*)" in last membership form$/ d
     page.execute_script("$('input.#{klass}').blur()")
   end
 end
+
+When /^I should see "(.*)"$/ do |text|
+  page.should have_content(text)
+end

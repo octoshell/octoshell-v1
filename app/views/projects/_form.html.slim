@@ -13,9 +13,7 @@
   = f.association :direction_of_sciences, required: true, input_html: { class: 'chosen' } 
   = f.association :critical_technologies, required: true, input_html: { class: 'chosen' }
   = f.input :cluster_user_type, collection: Project::CLUSTER_USER_TYPES, hint: "<b>account</b> - У каждого пользователя свой логин (account_12) <br /> <b>project</b> - У всей команды проекта один логин (project_34)" if admin?
-  = f.object.new_record?.inspect
-  = !f.object.user.sured?.inspect
-  - if true # if f.object.new_record? && !f.object.user.sured?
+  - if f.object.new_record? && !f.object.user.sured?
     legend Поручительство
     = f.simple_fields_for :sureties do |f|
       = f.input :boss_full_name
@@ -26,7 +24,6 @@
       legend Участники
       div class="members"
         = f.simple_fields_for :surety_members do |f|
-          = f.object.errors.inspect
           div class="control-group members-form #{'error' if f.object.errors.any?}"
             label class="control-label"
               | Пользователь
