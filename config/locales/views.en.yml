@@ -1,4 +1,12 @@
 en:
+  layouts:
+    application:
+      sign_in: Sign In
+      sign_up: Sign Up
+      sign_out: Sign Out
+  sessions:
+    new:
+      sign_in: Sign In
   shared:
     admin_menu:
       users: Users

@@ -1,6 +1,6 @@
 = f.input :email
-= f.input :password, required: true, hint: 'минимум 6 символов'
-= f.input :password_confirmation, required: true
+= f.input :password, required: true, hint: 'минимум 6 символов', input_html: { class: 'js-password' }
+= f.input :password_confirmation, required: true, input_html: { class: 'js-password-confirmation' }
 = f.input :first_name
 = f.input :last_name
 = f.input :middle_name

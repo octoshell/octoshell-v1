@@ -24,7 +24,6 @@ Feature: Join Project
     And I click on "Create"
     And I signed out
     And I register as "user@octoshell.com"
-    And I signed in as "user@ocoshell.com"
     And I click on "Projects"
     And I click on "Use Code"
 

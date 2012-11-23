@@ -6,7 +6,10 @@ en:
       update: Update
       project_joiner:
         create: Use
+      user:
+        create: Sign Up
   activerecord:
     attributes:
       project:
         organization: Main Organization
+

@@ -6,12 +6,12 @@ Given /^I am signed in as "(.*)"$/ do |user|
   user = FactoryGirl.create(:"#{user}_user")
   visit root_path
   within('.navbar') do
-    click_on 'Sign in'
+    click_on 'Sign In'
   end
   within('#new_user') do
     fill_in 'Email', with: user.email
     fill_in 'Password', with: '123456'
-    click_on 'Sign in'
+    click_on 'Sign In'
   end
   @current_user = user
 end
@@ -21,11 +21,19 @@ Given /^I am on root page$/ do
 end
 
 Given /^I click on "(.*)"$/ do |name|
-  click_on name
+  if name =~ /^\.js-/
+    find(name).click
+  else
+    click_on name
+  end
 end
 
 When /^I fill in "(.*)" with "(.*)"$/ do |field, value|
-  fill_in field, with: value
+  if field =~ /^\.js-/
+    find(field).set value
+  else
+    fill_in field, with: value
+  end
 end
 
 When /^I select "(.*)" from "(.*)"$/ do |value, field|
@@ -41,4 +49,8 @@ end
 
 When /^I should see "(.*)"$/ do |text|
   page.should have_content(text)
+end
+
+When /^I signed out$/ do
+  step %(I click on "Sign Out")
 end
