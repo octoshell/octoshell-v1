@@ -28,7 +28,7 @@ Feature: Join Project
     And I click on "Use Code"
 
   Scenario: Using valid code
-    When I fill in "Code" with "SECRET CODE"
+    When I fill in Code with right secret code
     And I click on "Use"
     Then I should get access to project "OctoProj"
 

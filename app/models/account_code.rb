@@ -16,6 +16,7 @@ class AccountCode < ActiveRecord::Base
   after_create :send_invite, if: :email?
   
   state_machine initial: :pending do
+    state :pending
     state :used do
       validates :user, presence: true
     end
@@ -26,6 +27,7 @@ class AccountCode < ActiveRecord::Base
   end
   
   define_defaults_events :use
+  define_state_machine_scopes
   
   def use(user)
     if can__use?

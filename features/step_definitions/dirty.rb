@@ -49,9 +49,14 @@ And /^I register as "(.*)"$/ do |email|
   step %(I click on ".js-sign-up-form")
   user = User.find_by_email(email)
   visit activate_user_path(token: user.activation_token)
+  @current_user = user
 end
 
 Then /^user "(.*)" should be exists$/ do |email|
   User.where(email: 'user@octoshell.com').should be_exists
 end
 
+When  /^I fill in Code with right secret code$/ do
+  code = AccountCode.pending.first.code
+  step %(I fill in "Code" with "#{code}")
+end
