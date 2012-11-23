@@ -278,7 +278,11 @@ ru:
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   activemodel:
     errors:
-      <<: *errors
+      models:
+        project_joiner:
+          attributes:
+            code:
+              not_found: не найден
   activerecord:
     errors:
       <<: *errors

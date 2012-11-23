@@ -1,4 +1,12 @@
 ru:
+  layouts:
+    application:
+      sign_in: Вход
+      sign_up: Регистрация
+      sign_out: Выход
+  sessions:
+    new:
+      sign_in: Зарегистрироваться
   shared:
     admin_menu:
       users: Пользователи
