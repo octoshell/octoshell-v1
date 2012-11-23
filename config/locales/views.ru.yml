@@ -6,7 +6,7 @@ ru:
       sign_out: Выход
   sessions:
     new:
-      sign_in: Зарегистрироваться
+      sign_in: Войти
   shared:
     admin_menu:
       users: Пользователи
