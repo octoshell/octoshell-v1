@@ -11,7 +11,7 @@ class ProjectJoinersController < ApplicationController
     if @project_joiner.join
       redirect_to projects_path, notice: 'Вы активировали код'
     else
-      flash.now[:alert] = @project_joiner.errors
+      flash.now[:alert] = @project_joiner.errors.to_sentence
       render :new
     end
   end

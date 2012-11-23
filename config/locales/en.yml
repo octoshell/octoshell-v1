@@ -12,4 +12,10 @@ en:
     attributes:
       project:
         organization: Main Organization
-
+  activemodel:
+    errors:
+      models:
+        project_joiner:
+          attributes:
+            code:
+              not_found: not found

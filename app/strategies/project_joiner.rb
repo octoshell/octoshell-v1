@@ -19,7 +19,7 @@ class ProjectJoiner
       if account_code.use(user)
         account_code.project.user.track! :use_account_code, account_code, current_user
       else
-        errors.add :base, account_code.errors
+        errors.add :base, account_code.errors.to_sentence
         render :join
       end
     else
