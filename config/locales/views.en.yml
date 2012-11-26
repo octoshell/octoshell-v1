@@ -51,4 +51,7 @@ en:
       use_code: Use Code
     form:
       add_member: Add Member
+  requests:
+    table:
+      open: open
 

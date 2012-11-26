@@ -28,6 +28,15 @@ Given /^I click on "(.*)"$/ do |name|
   end
 end
 
+Given /^I click on "(.*)" the "(.*)"$/ do |element, place|
+  case place.to_sym
+  when :request then
+    within(".js-request-#{@request.id}") do
+      click_on element
+    end
+  end
+end
+
 When /^I fill in "(.*)" with "(.*)"$/ do |field, value|
   if field =~ /^\.js-/
     find(field).set value

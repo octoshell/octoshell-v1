@@ -50,3 +50,7 @@ ru:
       use_code: Использовать код приглашения
     form:
       add_member: Добавить
+  requests:
+    table:
+      open: открыть
+
