@@ -10,15 +10,6 @@ Given /^I have created Membership$/ do
   step 'I click on "Create"'
 end
 
-When /^I filled in Public Key form right$/ do
-  step 'I fill in "Name" with "MyKey"'
-  step 'I fill in "Public key" with "AAAAA===="'
-end
-
-When /^I filled in Membership form right$/ do
-  step 'I select "OctoCorp" from "Organization"'
-end
-
 When /^I navigated to New Public Key$/ do
   step 'I am on root page'
   step 'I click on "Profile"'

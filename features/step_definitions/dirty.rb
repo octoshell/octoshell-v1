@@ -10,6 +10,11 @@ Then /^History Item "(.*)" should be created$/ do |kind|
   @current_user.history_items.where(kind: kind).should be_exists
 end
 
+Then /^membership for organization "(.*)" should be created$/ do |name|
+  org = Organization.find_by_name!(name)
+  @current_user.memberships.where(organization_id: org.id).should be_exists
+end
+
 Then /^project "(.*)" should be created$/ do |name|
   @current_user.owned_projects.where(name: name).should be_exists
 end

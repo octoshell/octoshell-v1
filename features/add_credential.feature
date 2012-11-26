@@ -2,10 +2,12 @@
 Feature: Add credential
   
   Background:
-    Given I am signed in as user
-    And I have navigated to New Public Key
+    Given I am signed in as "user"
+    And I click on "Profile"
+    And I click on "New Public Key"
+    And I fill in "Name" with "MyKey"
+    And I fill in ".js-credential-public-key" with "====="
 
   Scenario: Successfully creation
-    When I filled in Public key form right
-    And I click on Create
-    Then the public key MyKey should be created
+    When I click on "Create"
+    Then public key "MyKey" should be created
