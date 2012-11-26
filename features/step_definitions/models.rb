@@ -1,12 +1,13 @@
 Given /^I have created Public Key$/ do
   step 'I navigated to New Public Key'
-  step 'I filled in Public Key form right'
+  step 'I fill in "Name" with "MyKey"'
+  step 'I fill in ".js-credential-public-key" with "====="'
   step 'I click on "Create"'
 end
 
 Given /^I have created Membership$/ do
   step 'I navigated to New Membership'
-  step 'I filled in Membership form right'
+  step 'I select "OctoCorp" from "Organization"'
   step 'I click on "Create"'
 end
 
