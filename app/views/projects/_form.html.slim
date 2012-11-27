@@ -1,7 +1,3 @@
-= @project.errors
-
-| NEW
-
 = simple_form_for @project, html: { class: 'form-horizontal surety-form project' } do |f|
   = f.association :user, label_method: :full_name, input_html: { class: 'chosen' } if admin?
   = f.association :organization, collection: f.object.allowed_organizations, input_html: { class: 'chosen' }

@@ -106,11 +106,16 @@ class Project < ActiveRecord::Base
       end if last_surety
     end
   end
+
+  def login
+    "#{prefix}#{username}"
+  end
   
 private
   
   def assign_username
-    update_attribute :username, "project_#{id}" unless username?
+    name = username? ? username : "project_#{id}"
+    update_attribute :username, name
     true
   end
   

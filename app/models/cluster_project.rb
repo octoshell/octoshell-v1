@@ -148,7 +148,7 @@ private
   end
   
   def assign_username
-    self.username ||= project.username
+    self.username ||= project.login
     true
   end
 end

@@ -54,4 +54,13 @@ class Mailer < ActionMailer::Base
     @project = account.project
     mail to: @user.emails, subject: %{Доступ к проекту #{@project.name} закрыт}
   end
+
+  def admin_notifications
+    emails = User.admins.pluck(:email)
+    @requests = Request.pending
+    @tasks = Task.failed
+    @sureties = Surety.pending
+    @tickets = Ticket.active
+    mail to: emails, subject: %{В Octoshell есть не обработанные оповещения}
+  end
 end

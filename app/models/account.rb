@@ -92,7 +92,7 @@ private
       if project.cluster_user_type == 'account'
         "account_#{id}"
       else
-        project.username
+        project.login
       end
     update_attribute :username, username
   end

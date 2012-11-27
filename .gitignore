@@ -17,3 +17,5 @@
 /db/wiki.git
 
 /public/system
+
+.DS_Store

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121119085225) do
+ActiveRecord::Schema.define(:version => 20121127081438) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -270,6 +270,7 @@ ActiveRecord::Schema.define(:version => 20121119085225) do
     t.integer  "organization_id"
     t.string   "cluster_user_type", :default => "account"
     t.string   "username"
+    t.string   "prefix"
   end
 
   add_index "projects", ["organization_id"], :name => "index_projects_on_organization_id"
