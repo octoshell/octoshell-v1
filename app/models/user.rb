@@ -112,6 +112,10 @@ class User < ActiveRecord::Base
       @new_organization = organizations.build(attributes)
     end
   end
+
+  def username
+    email.delete(".+_-")[/^(.+)@/, 1]
+  end
   
   def organization_id=(id)
     return if id.blank?

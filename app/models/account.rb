@@ -90,7 +90,7 @@ private
   def assign_username
     username = 
       if project.cluster_user_type == 'account'
-        "account_#{id}"
+        "#{user.username}_#{id}"
       else
         project.login
       end

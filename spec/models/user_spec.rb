@@ -22,6 +22,23 @@ describe User do
     
     it { should == 'Bruce Wayne' }
   end
+
+  describe '#username' do
+    let(:user) { nil }
+    subject { user.username }
+    
+    context 'base case' do
+      let(:user) { User.new { |u| u.email = 'releu@me.com' } }
+
+      it { should == 'releu' }
+    end
+    
+    context 'with spec symbols' do
+      let(:user) { User.new { |u| u.email = 'r.e-l_e+u@me.com' } }
+      
+      it { should == 'releu' }
+    end
+  end
   
   describe '#sured?' do
     context 'basic user' do
