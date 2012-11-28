@@ -26,7 +26,8 @@ class Project < ActiveRecord::Base
     length: { minimum: 1, message: 'выберите не менее %{count}' }
   
   attr_accessible :name, :description, :organization_id, :sureties_attributes,
-    :organization_ids, :direction_of_science_ids, :critical_technology_ids
+    :organization_ids, :direction_of_science_ids, :critical_technology_ids,
+    :project_prefix_id
   
   after_create :assign_username
   after_create :create_relations
