@@ -27,6 +27,8 @@ en:
       extends: Extends
       images: Images
       import: Import
+      project_prefixes: Project Prefixes
+      more: More
     dashboard_menu:
       projects: Projects
       requests: Request
@@ -54,4 +56,14 @@ en:
   requests:
     table:
       open: open
-
+  project_prefixes:
+    index:
+      project_prefixes: Project Prefixes
+      edit: Edit
+      destroy: Destroy
+    edit:
+      edit_project_prefix: Edit Project Prefix
+    new:
+      new_project_prefix: New Project Prefix
+    table:
+      there_are_no_project_prefixes: There are no Project Prefixes

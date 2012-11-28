@@ -87,7 +87,10 @@ class Ability
       
       if user.admin?
         can [:index, :new, :create, :step, :import, :destroy], :import_items
+       
         can [:edit, :update, :close], :memberships
+
+        can [:new, :index, :create, :update, :destroy], :project_prefixes
         
         can :become, :sessions
         

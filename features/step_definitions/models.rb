@@ -46,3 +46,11 @@ When /^I navigated to New Membership$/ do
   step 'I click on "Profile"'
   step 'I click on "New Membership"'
 end
+
+Then /^project prefix with name "(.*)" should be exists$/ do |prefix|
+  ProjectPrefix.where(name: prefix).should be_exists
+end
+
+Then /^project prefix with name "(.*)" should not be exists$/ do |prefix|
+  ProjectPrefix.where(name: prefix).should_not be_exists
+end

@@ -63,3 +63,7 @@ end
 When /^I signed out$/ do
   step %(I click on "Sign Out")
 end
+
+When /^I confirm dialog$/ do
+  page.driver.browser.switch_to.alert.accept
+end

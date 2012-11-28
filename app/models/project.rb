@@ -7,6 +7,7 @@ class Project < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :organization
+  belongs_to :project_prefix
   has_and_belongs_to_many :organizations
   has_many :accounts, inverse_of: :project
   has_many :account_codes
@@ -108,7 +109,7 @@ class Project < ActiveRecord::Base
   end
 
   def login
-    "#{prefix}#{username}"
+    "#{project_prefix}#{username}"
   end
   
 private

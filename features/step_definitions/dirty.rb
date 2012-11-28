@@ -65,3 +65,11 @@ When  /^I fill in Code with right secret code$/ do
   code = AccountCode.pending.first.code
   step %(I fill in "Code" with "#{code}")
 end
+
+Then /^there is a Project Prefix "(.*)"$/ do |prefix|
+  FactoryGirl.create(:project_prefix, name: prefix)
+end
+
+Then /^I should see "(.*)" Project Prefix$/ do |prefix|
+  page.should have_content("edu-")
+end

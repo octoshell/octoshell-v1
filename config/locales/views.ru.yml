@@ -27,6 +27,8 @@ ru:
       extends: Расширения
       images: Изображения
       import: Импорт
+      project_prefixes: Префиксы проектов
+      more: Еще
     dashboard_menu:
       projects: Проекты
       requests: Заявки
@@ -53,4 +55,10 @@ ru:
   requests:
     table:
       open: открыть
-
+  project_prefixes:
+    index:
+      project_prefixes: Префиксы проектов
+    new:
+      new_project_prefix: Новый префиксы проектов
+    table:
+      there_are_no_project_prefixes: Нет префиксов проектов

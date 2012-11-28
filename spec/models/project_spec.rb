@@ -33,6 +33,12 @@ describe Project do
       it { should have(1).errors_on(:organization) }
     end
   end
+
+  describe '#login' do
+    it 'does equal concated prefix and username' do
+      subject.login.should == "#{subject.project_prefix}#{subject.username}"
+    end
+  end
   
   describe '#close', focus: true do
     let!(:project) { create(:project) }

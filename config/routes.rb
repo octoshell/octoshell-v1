@@ -225,6 +225,8 @@ MSU::Application.routes.draw do
     put :import
   end
 
+  resources :project_prefixes, only: [:new, :create, :index, :edit, :update, :destroy]
+
   root to: 'application#dashboard'
   
   mount Resque::Server.new, :at => '/resque'

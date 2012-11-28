@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :project do
     sequence(:name) { |n| "Project #{n}" }
+    project_prefix
     association :user, factory: :user_with_membership
     organization { user.memberships.first.organization }
     direction_of_sciences { [create(:direction_of_science)] }
