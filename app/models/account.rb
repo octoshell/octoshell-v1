@@ -84,6 +84,10 @@ class Account < ActiveRecord::Base
   def to_s
     username
   end
+
+  def login
+    "#{project.project_prefix}#{username}"
+  end
   
 private
   
