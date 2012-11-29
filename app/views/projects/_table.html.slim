@@ -11,8 +11,7 @@
       th Участники
       - if admin?
         th = Project.human_attribute_name(:state)
-      - else
-        th Подключение
+      th Подключение
       th
         - if @search
           = sort_link @search, :id, Project.human_attribute_name(:created_at), default_order: :asc
@@ -39,20 +38,22 @@
                 small = link_to 'Пригласить в проект', [project, :invite]
         - if admin?
           td = project.human_state_name
-        - else
-          td
+        td
+          - if admin?
+            - accesses = Access.non_closed.where(cluster_user_id: ClusterUser.where( cluster_project_id: project.cluster_project_ids))
+          - else
             - accesses = Access.non_closed.where(credential_id: current_user.credential_ids, cluster_user_id: ClusterUser.where(account_id: current_user.account_ids, cluster_project_id: project.cluster_project_ids))
-            - if accesses.any?
-              ul class="unstyled"
-                - accesses.each do |access|
-                  li
-                    small
-                      = link_to_credential(access.credential)
-                      |  
-                    code = "#{access.cluster_user.username}@#{access.cluster_user.cluster_project.cluster.host}"
-                    small class="state-#{access.state}" = " (#{access.human_active_state})"
-            - else
-              p Нет доступов
+          - if accesses.any?
+            ul class="unstyled"
+              - accesses.each do |access|
+                li
+                  small
+                    = link_to_credential(access.credential)
+                    |  
+                  code = "#{access.cluster_user.username}@#{access.cluster_user.cluster_project.cluster.host}"
+                  small class="state-#{access.state}" = " (#{access.human_active_state})"
+          - else
+            p Нет доступов
         td class="date" = project.created_at.strftime("%Y-%m-%d")
 - else
   p Нет проектов
