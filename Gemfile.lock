@@ -16,12 +16,6 @@ GIT
       useragent (~> 0.4.9)
 
 GIT
-  remote: git://github.com/redstonelabs/maymay.git
-  revision: ef477ea491aec6ba06c39d457df7c7ad3bbf2cfe
-  specs:
-    maymay (0.0.1)
-
-GIT
   remote: git://github.com/releu/sorcery.git
   revision: 9b9309e08bf0f4de66944a4b78c817972bdcb8e3
   specs:
@@ -374,7 +368,6 @@ DEPENDENCIES
   levenshtein-ffi
   liquid
   mailgun-rails
-  maymay!
   meta_search
   paper_trail
   paperclip
