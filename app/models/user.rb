@@ -101,6 +101,11 @@ class User < ActiveRecord::Base
       end
       s
     end
+
+    def admin_notifications_count
+      [Task.failed, Ticket.active, Surety.pending, Request.pending].
+        sum_of_count
+    end
   end
   
   def all_projects
@@ -192,8 +197,7 @@ class User < ActiveRecord::Base
   end
   
   def admin_notifications_count
-    [Task.failed, Ticket.active, Surety.pending, Request.pending].
-      sum_of_count
+    self.class.admin_notifications_count
   end
   
   def user_notifications_count
