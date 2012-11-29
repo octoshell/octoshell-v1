@@ -31,6 +31,7 @@ gem 'gravatar-ultimate'
 gem 'levenshtein-ffi', require: 'levenshtein'
 gem 'validates_email_format_of'
 gem 'virtus'
+gem 'maymay', github: 'redstonelabs/maymay'
 
 group :test, :development do
   gem 'quiet_assets'

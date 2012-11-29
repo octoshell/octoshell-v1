@@ -122,7 +122,7 @@ protected
 private
   
   def assign_username
-    self.username ||= account.reload.username
+    self.username ||= account.reload.login
     true
   end
 end
