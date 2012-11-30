@@ -1,4 +1,8 @@
 ru:
+  abilities:
+    pages:
+      show_all: Просмотр всех страниц
+      show_publicized: Просмотр всех публичных страниц
   views:
     pagination:
       next: Следующая

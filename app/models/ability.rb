@@ -1,12 +1,57 @@
 class Ability < ActiveRecord::Base
-  has_many :group_abilities, dependent: :destroy
+  Definition = Struct.new(:action, :subject)
 
-  validates :action, :subject, presence: true
+  belongs_to :group
+
+  validates :action, :subject, :group, presence: true
   validates :action, uniqueness: { scope: [:subject] }
 
   attr_accessible :action, :subject
 
-  after_create :create_group_abilities
+  scope :by_definition, (lambda do |d|
+    where(action: d.action, subject: d.subject)
+  end)
+
+  class << self
+    def definitions
+      raw_definitions.map do |subject, actions|
+        actions.map { |a| Definition.new(a.to_sym, subject.to_sym) }
+      end.flatten
+    end
+
+    def raw_definitions
+      YAML.load_file("#{Rails.root}/config/abilities.yml")
+    end
+
+    def redefine!
+      transaction do
+        delete_old
+        create_new
+      end
+    end
+
+    def delete_old
+      cases = definitions.map { |d| "#{d.action}#{d.subject}" }
+      where("concat(action, subject) not in (?)", cases).delete_all
+    end
+
+    def create_new
+      Group.all.each do |group|
+        definitions.each do |d|
+          group.abilities.by_definition(d).first_or_create!
+        end
+      end
+    end
+  end
+
+  def definition=(definition)
+    self.action = definition.action
+    self.subject = definition.subject
+  end
+
+  def description
+    I18n.t("abilities.#{subject}.#{action}")
+  end
 
   def action_name
     action.to_sym
@@ -16,13 +61,7 @@ class Ability < ActiveRecord::Base
     subject.to_sym
   end
 
-private
-
-  def create_group_abilities
-    Group.all.each do |group|
-      group_abilities.create! do |ga|
-        ga.group = group
-      end
-    end
+  def to_definition
+    Definition.new(action_name, subject_name)
   end
 end

@@ -7,7 +7,8 @@ Given /^there is a cluster "(.*)"$/ do |name|
 end
 
 Given /^there is an Ability "(.*)" "(.*)"$/ do |action, subject|
-  FactoryGirl.create(:ability, action: action, subject: subject)
+  Ability.stub(:raw_definitions) { { subject => [action] } }
+  Ability.redefine!
 end
 
 Given /^there is a Group "(.*)"$/ do |name|

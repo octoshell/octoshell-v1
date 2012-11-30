@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :group do
-    name "MyString"
+    sequence(:name) { |n| "group_#{n}" }
     system false
   end
 end

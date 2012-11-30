@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   def index
-    @groups = Group.includes(group_abilities: :ability)
+    @groups = Group.includes(:abilities)
   end
 
   def update

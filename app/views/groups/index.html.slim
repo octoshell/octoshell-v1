@@ -11,9 +11,11 @@
             th class="span2" = Ability.human_attribute_name(:available)
             th = Ability.human_attribute_name(:action)
             th = Ability.human_attribute_name(:subject)
-          = f.fields_for :group_abilities do |f|
+            th = Ability.human_attribute_name(:description)
+          = f.fields_for :abilities do |f|
             tr
-              td = f.check_box :available, class: "js-ability-#{f.object.ability.action}-#{f.object.ability.subject}"
-              td = f.object.ability.action
-              td = f.object.ability.subject
+              td = f.check_box :available, class: "js-ability-#{f.object.action}-#{f.object.subject}"
+              td = f.object.action
+              td = f.object.subject
+              td = f.object.description
     = f.submit class: 'btn'

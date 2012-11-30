@@ -11,14 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121129134443) do
+ActiveRecord::Schema.define(:version => 20121130120442) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
     t.string   "subject"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.integer  "group_id"
+    t.boolean  "available",  :default => false
   end
+
+  add_index "abilities", ["group_id", "subject", "action"], :name => "index_abilities_on_group_id_and_subject_and_action", :unique => true
+  add_index "abilities", ["group_id"], :name => "index_abilities_on_group_id"
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
