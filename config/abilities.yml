@@ -1,3 +1,17 @@
+cluster_users:
+  - full_access
+credentials:
+  - show_own
+  - close_own
+membership:
+  - show_own
+  - show_all
+  - update_own
+  - update_all
+  - destroy_own
+  - destroy_all
+accounts:
+  - cancel_accounts_for_owned_projects
 pages:
   - show_all
   - show_publicized

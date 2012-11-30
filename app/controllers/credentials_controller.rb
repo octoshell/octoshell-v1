@@ -19,7 +19,7 @@ class CredentialsController < ApplicationController
   
   def show
     @credential = Credential.find(params[:id])
-    authorize! :show, @credential
+    authorize! :show_own, @credential
   end
   
   def create
@@ -35,7 +35,7 @@ class CredentialsController < ApplicationController
   
   def close
     @credential = Credential.find(params[:credential_id])
-    authorize! :close, @credential
+    authorize! :close_own, @credential
     if @credential.close
       @credential.user.track! :close_credential, @credential, current_user
       redirect_to credentials_path

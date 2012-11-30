@@ -1,14 +1,13 @@
 class ClusterUsersController < ApplicationController
   before_filter :setup_default_filter, only: :index
+  before_filter :authorize_access_to_controller
   
   def index
     @search = ClusterUser.search(params[:search])
-    @cluster_users = show_all? ? @search.all : @search.page(params[:page])
   end
   
   def show
     @cluster_user = ClusterUser.find(params[:id])
-    authorize! :show, @cluster_user
   end
   
   def new
@@ -40,7 +39,7 @@ class ClusterUsersController < ApplicationController
 private
   
   def namespace
-    admin? ? :admin : :dashboard
+    :admin
   end
   
   def setup_default_filter

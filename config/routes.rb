@@ -98,9 +98,7 @@ MSU::Application.routes.draw do
   resources :invitations, only: [:new, :create]
   
   # accounts
-  resources :accounts, only: [:index, :show, :edit, :update] do
-    put :activate
-    put :decline
+  resources :accounts, only: [] do
     put :cancel
     resources :versions, only: [:index, :show], resource: 'Account'
   end

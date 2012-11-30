@@ -111,10 +111,7 @@ class User < ActiveRecord::Base
   end
 
   def abilities
-    ability_ids = GroupAbility.
-      where(group_possibilities: { group_id: group_ids, available: true }).
-      uniq.pluck(:possibility_id)
-    Ability.where(id: ability_ids)
+    Ability.where(group_id: group_ids, available: true)
   end
   
   def all_projects

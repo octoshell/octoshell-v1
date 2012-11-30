@@ -36,13 +36,13 @@ class MembershipsController < ApplicationController
   
   def edit
     @membership = find_membership(params[:id])
-    authorize! :edit, @membership
+    authorize! :update_own, @membership
     @membership.build_default_positions
   end
   
   def update
     @membership = find_membership(params[:id])
-    authorize! :update, @membership
+    authorize! :update_own, @membership
     if @membership.update_attributes(params[:membership], as_role)
       @membership.user.track! :update_membership, @membership, current_user
       redirect_to @membership

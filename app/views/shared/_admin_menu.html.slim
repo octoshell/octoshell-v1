@@ -15,7 +15,6 @@ li class="dropdown #{submenu_items.any? { |c| c.to_s == params[:controller] } ? 
     = submenu_item :organizations, (link_to t('.organizations'), organizations_path)
     = submenu_item :organization_kinds, (link_to t('.organization_kinds'), organization_kinds_path)
     = submenu_item :position_names, (link_to t('.position_names'), position_names_path)
-    = submenu_item :accounts, (link_to t('.accounts'), accounts_path)
     = submenu_item :accesses, (link_to t('.accesses'), accesses_path)
     = submenu_item :cluster_projects, (link_to t('.cluster_projects'), cluster_projects_path)
     = submenu_item :cluster_users, (link_to t('.cluster_users'), cluster_users_path)
