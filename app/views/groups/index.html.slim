@@ -1,0 +1,19 @@
+- title t('.groups')
+
+- @groups.each do |group|
+  h2 = group.name
+
+  = form_for group do |f|
+    div class="row"
+      div class="span6"
+        table class="table table-bordered"
+          tr
+            th class="span2" = Ability.human_attribute_name(:available)
+            th = Ability.human_attribute_name(:action)
+            th = Ability.human_attribute_name(:subject)
+          = f.fields_for :group_abilities do |f|
+            tr
+              td = f.check_box :available, class: "js-ability-#{f.object.ability.action}-#{f.object.ability.subject}"
+              td = f.object.ability.action
+              td = f.object.ability.subject
+    = f.submit class: 'btn'

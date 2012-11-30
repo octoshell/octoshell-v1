@@ -1,158 +1,27 @@
-class Ability
-  include CanCan::Ability
+class Ability < ActiveRecord::Base
+  has_many :group_abilities, dependent: :destroy
 
-  def initialize(user)
-    can :dashboard, :application
-    
-    can [:new, :create, :destroy], :sessions
-    can [:new, :create, :confirmation, :change], :passwords
-    
-    can [:new, :create, :activate, :confirmation], :users
-    
-    can [:new, :create], :activations
-    
-    can :index, :pages
-    can :show, :pages, publicized: true
-    
-    # basic user
-    if user
-      can :show, :pages
-      can :show, :support
-      
-      can :index, :users
-      
-      can [:index, :new, :create, :show, :closed, :continue], :tickets
-      can :resolve, :tickets do |ticket|
-        (ticket.user_id == user.id) && ticket.can__resolve?
-      end
-      
-      can :index, :notifications
-      
-      can :create, :replies, ticket_id: user.ticket_ids
-      
-      can [:show, :edit, :update], :profiles
-      
-      can [:index, :show], :clusters
-      
-      can [:new, :create], :credentials
-      can :close, :credentials, user_id: user.id
-      
-      can :show, :dashboards
-      
-      can [:new, :create, :index, :join, :create_account], :projects
-      can :show, :projects do |project|
-        user.projects.where(accounts: { state: 'active' }).include?(project) || 
-          user.owned_projects.include?(project)
-      end
-      can [:invite, :sureties, :accounts, :close, :show_invites], :projects, user_id: user.id
-      
-      can :revert, :sessions
-      
-      can :email, :users
-      can :show, :users do |showed_user|
-        showed_user.id == user.id
-      end
-      
-      can [:new, :create], :organizations
-      
-      can [:show, :index, :close, :new, :create], :memberships
-      
-      can [:index, :new, :create, :new_scan, :load_scan], :sureties
-      can [:close, :show], :sureties do |surety|
-        surety.project && surety.project.user_id == user.id
-      end
-      
-      can [:edit, :update], :memberships, user_id: user.id
-      
-      can :index, :accounts
-      can [:activate, :decline, :cancel], :accounts, project_id: user.owned_project_ids
-      
-      can [:use, :new_use], :account_codes
+  validates :action, :subject, presence: true
+  validates :action, uniqueness: { scope: [:subject] }
 
-      can [:new, :create], :project_joiners
-      
-      # sured user
-      if user.sured?
-        can [:index, :create], :account_codes
-        can :destroy, :account_codes do |code|
-          code.pending? && user.owned_project_ids.include?(code.project_id)
-        end
-        
-        can :show, :requests, user_id: user.id
-        
-        can [:new, :create, :index], :requests
-        
-        can [:edit, :update], :projects, user_id: user.id
-      end
-      
-      if user.admin?
-        can [:index, :new, :create, :step, :import, :destroy], :import_items
-       
-        can [:edit, :update, :close], :memberships
+  attr_accessible :action, :subject
 
-        can [:new, :index, :create, :update, :destroy], :project_prefixes
-        
-        can :become, :sessions
-        
-        can [:edit_template, :update_template, :default_template, :rtf_template, :default_rtf, :download_rtf_template], :sureties
-        
-        can :access, :admins
-        
-        can [:new, :create, :edit, :update, :destroy], :pages
-        
-        can :close, :tickets, can__close?: true
-        
-        can :create, :replies
-        
-        can [:show, :index, :new, :create, :edit, :update], :accesses
-        
-        can [:show, :index, :edit, :update, :new, :create], :cluster_users
-        
-        can [:index, :show, :perform_callbacks, :create, :retry, :resolve], :tasks
-        
-        can [:new, :create, :edit, :update, :show, :index, :close], :ticket_questions
-        
-        can [:index, :show, :new, :create, :edit, :update, :close], :ticket_fields
-        
-        can [:show, :index, :close], :credentials
-        
-        can [:new, :create, :show, :activate, :decline, :cancel, :edit, :update], :accounts
-        
-        can [:show, :edit, :update, :new, :create, :close], :projects
-        
-        can :show, :dashboard
-        
-        can [:index, :admin, :edit, :update, :close, :show, :history], :users
-        
-        can [:index, :new, :create, :show, :activate, :decline, :close, :edit, :update, :application], :requests
-        
-        can [:index, :show, :activate, :decline, :close, :find, :confirm, :unconfirm, :surety], :sureties
-        
-        can [:index, :show, :edit, :update, :merge, :close], :organizations
-        
-        can [:index, :new, :create, :edit, :update, :destroy], :position_names
-        
-        can [:index, :new, :create, :show, :edit, :update, :close, :closed], :clusters
-        
-        can [:index, :show, :new, :create, :edit, :update, :close], :organization_kinds
-        
-        can [:index, :show, :new, :create, :edit, :update, :close], :ticket_templates
-        
-        can [:index, :show, :new, :create, :edit, :update, :close, :merge], :ticket_tags
-        
-        can [:index, :show], :versions
-        
-        can [:edit, :update, :tag_relations_form], :tickets
-        
-        can [:create, :update, :destroy], :cluster_fields
-        
-        can [:index, :show, :new, :create, :edit, :update], :cluster_projects
-        
-        can [:index, :new, :create, :edit, :update, :destroy], :extends
-        
-        can [:edit, :update], :settings
-        
-        can [:index, :new, :create, :destroy], :images
+  after_create :create_group_abilities
+
+  def action_name
+    action.to_sym
+  end
+
+  def subject_name
+    subject.to_sym
+  end
+
+private
+
+  def create_group_abilities
+    Group.all.each do |group|
+      group_abilities.create! do |ga|
+        ga.group = group
       end
     end
   end

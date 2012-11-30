@@ -23,3 +23,4 @@ li class="dropdown #{submenu_items.any? { |c| c.to_s == params[:controller] } ? 
     = submenu_item :images, (link_to t('.images'), images_path)
     = submenu_item :import, (link_to t('.import'), import_items_path)
     = submenu_item :project_prefixes, (link_to t('.project_prefixes'), project_prefixes_path)
+    = submenu_item :groups, (link_to t('.groups'), groups_path)

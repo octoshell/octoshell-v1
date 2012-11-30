@@ -28,6 +28,7 @@ en:
       images: Images
       import: Import
       project_prefixes: Project Prefixes
+      groups: Groups
       more: More
     dashboard_menu:
       projects: Projects
@@ -56,6 +57,9 @@ en:
   requests:
     table:
       open: open
+  groups:
+    index:
+      groups: Groups
   project_prefixes:
     index:
       project_prefixes: Project Prefixes

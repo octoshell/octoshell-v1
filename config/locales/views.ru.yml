@@ -28,6 +28,7 @@ ru:
       images: Изображения
       import: Импорт
       project_prefixes: Префиксы проектов
+      groups: Группы
       more: Еще
     dashboard_menu:
       projects: Проекты
@@ -55,6 +56,9 @@ ru:
   requests:
     table:
       open: открыть
+  groups:
+    index:
+      groups: Группы
   project_prefixes:
     index:
       project_prefixes: Префиксы проектов

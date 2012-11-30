@@ -67,3 +67,7 @@ end
 When /^I confirm dialog$/ do
   page.driver.browser.switch_to.alert.accept
 end
+
+When /^I check ability for "(\w+)" "(\w+)"$/ do |action, subject|
+  page.find(".js-ability-#{action}-#{subject}").set(true)
+end

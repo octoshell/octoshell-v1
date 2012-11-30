@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   has_many :tickets
   has_many :additional_emails
   has_many :history_items
+  has_many :user_groups
+  has_many :groups, through: :user_groups
   
   validates :first_name, :last_name, :middle_name, :email, :phone, presence: true
   validates :password, confirmation: true, length: { minimum: 6 }, on: :create
@@ -106,6 +108,13 @@ class User < ActiveRecord::Base
       [Task.failed, Ticket.active, Surety.pending, Request.pending].
         sum_of_count
     end
+  end
+
+  def abilities
+    ability_ids = GroupAbility.
+      where(group_possibilities: { group_id: group_ids, available: true }).
+      uniq.pluck(:possibility_id)
+    Ability.where(id: ability_ids)
   end
   
   def all_projects

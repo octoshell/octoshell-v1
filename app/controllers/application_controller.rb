@@ -7,10 +7,9 @@ class ApplicationController < ActionController::Base
   before_filter :get_extends, :get_wikis
   
   protect_from_forgery
-  enable_authorization unless: :skip_action?
   
-  rescue_from CanCan::Unauthorized, with: :not_authorized
-  rescue_from ActiveRecord::RecordInProcess, with: :record_in_process
+  # rescue_from CanCan::Unauthorized, with: :not_authorized
+  # rescue_from ActiveRecord::RecordInProcess, with: :record_in_process
   
   def dashboard
     if admin?
@@ -19,6 +18,21 @@ class ApplicationController < ActionController::Base
       redirect_to dashboard_path
     else
       redirect_to new_session_path
+    end
+  end
+
+  def can?(*args)
+    Rails.logger.warn "REMOVE ME"
+  end
+  helper_method :can?
+
+  def ability
+    @ability ||= begin
+      a = MayMay::Ability.new(current_user)
+      current_user.abilities.each do |ability|
+        a.may ability.action_name, ability.subject_name
+      end
+      a
     end
   end
   

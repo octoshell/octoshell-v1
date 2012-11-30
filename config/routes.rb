@@ -18,6 +18,9 @@ MSU::Application.routes.draw do
     put :close
     resources :versions, only: [:index, :show], resource: 'Credential'
   end
+
+  # groups
+  resources :groups, only: [:index, :new, :create, :edit, :update, :show, :destroy]
   
   # sureties
   resources :sureties, only: [:index, :show] do
