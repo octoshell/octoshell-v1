@@ -1,6 +1,10 @@
 class GroupsController < ApplicationController
   def index
-    @groups = Group.includes(:abilities)
+    @groups = Group.all
+  end
+
+  def edit
+    @group = Group.find(params[:id])
   end
 
   def update

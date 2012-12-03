@@ -39,20 +39,17 @@ html
           = content_tag :div, message, class: "alert #{context}"
         - if logged_in? && current_user.project_steps.any?
           = render partial: 'shared/steps', locals: { steps: current_user.project_steps, title: 'Для начала работы с суперкомпьютером вам нужно:' }
-        div class="row"
-          div class="span9"
-            div class="page-header"
-              h1 = yield :title
-          div class="span3"
-            - if @wikis.any?
-              div id="help" class="group"
-                div class="alert alert-info"
-                  p
-                    = link_to pages_path do
-                      strong Справка
-                  ul class="unstyled"
-                    - @wikis.each do |wiki|
-                      li = link_to wiki.name, page_path(wiki.url)
+        div class="relative"
+          div class="page-header group"
+            h1 class="span6" = yield :title
+          - if @wikis.any?
+            div id="help" class="group"
+              div class="alert alert-info"
+                p data-toggle="collapse" data-target="#help-list" class="collapse-header"
+                  strong Справка
+                ul class="unstyled collapse" id="help-list"
+                  - @wikis.each do |wiki|
+                    li = link_to wiki.name, page_path(wiki.url)
       - if admin?
         javascript:
           $(document).ready(function(){

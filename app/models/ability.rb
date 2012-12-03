@@ -4,9 +4,9 @@ class Ability < ActiveRecord::Base
   belongs_to :group
 
   validates :action, :subject, :group, presence: true
-  validates :action, uniqueness: { scope: [:subject] }
+  validates :action, uniqueness: { scope: [:subject, :group_id] }
 
-  attr_accessible :action, :subject
+  attr_accessible :available
 
   scope :by_definition, (lambda do |d|
     where(action: d.action, subject: d.subject)

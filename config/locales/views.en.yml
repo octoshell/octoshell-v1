@@ -60,6 +60,13 @@ en:
   groups:
     index:
       groups: Groups
+      new_group: New Group
+      edit: Edit
+      confirm_destroy: Are you sure?
+    edit:
+      edit_group: Edit Group
+    form:
+      abilities: Abilities
   project_prefixes:
     index:
       project_prefixes: Project Prefixes

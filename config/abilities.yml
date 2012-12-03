@@ -1,17 +1,89 @@
+accesses:
+  - manage
+accounts:
+  - manage
+  - cancel_accounts_for_owned_projects
+clusters:
+  - access
+  - manage
+cluster_fields:
+  - manage
+cluster_projects:
+  - manage
 cluster_users:
-  - full_access
+  - manage
 credentials:
+  - manage
   - show_own
   - close_own
+critical_technologies:
+  - manage
+direction_of_sciences:
+  - manage
+extends:
+  - manage
+groups:
+  - manage
+history_items:
+  - manage
+images:
+  - manage
+import_items:
+  - manage
 membership:
+  - manage
   - show_own
-  - show_all
   - update_own
-  - update_all
   - destroy_own
-  - destroy_all
-accounts:
-  - cancel_accounts_for_owned_projects
+organizations:
+  - manage
+organization_kinds:
+  - manage
 pages:
+  - manage
+positions:
+  - manage
+position_names:
+  - manage
+projects:
+  - manage
+project_prefixes:
+  - manage
+replies:
+  - manage
+requests:
+  - manage
+request_properties:
+  - manage
+settings:
+  - manage
+sureties:
+  - manage
+surety_members:
+  - manage
+tasks:
+  - manage
+tickets:
+  - manage
+ticket_fields:
+  - manage
+ticket_field_relations:
+  - manage
+ticket_field_values:
+  - manage
+ticket_questions:
+  - manage
+ticket_tags:
+  - manage
+ticket_tag_relations:
+  - manage
+ticket_templates:
+  - manage
+users:
+  - manage
+user_groups:
+  - manage
+pages:
+  - manage
   - show_all
   - show_publicized

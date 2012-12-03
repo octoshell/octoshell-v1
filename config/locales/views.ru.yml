@@ -59,6 +59,14 @@ ru:
   groups:
     index:
       groups: Группы
+      new_group: Новая группа
+      edit: Редактировать
+      destroy: Удалить
+      confirm_destroy: Вы уверены?
+    edit:
+      edit_group: Редактирование Группы
+    form:
+      abilities: Доступы
   project_prefixes:
     index:
       project_prefixes: Префиксы проектов
