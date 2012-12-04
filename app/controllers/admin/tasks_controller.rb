@@ -12,14 +12,6 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
   
-  def new
-    @base_task = Task.find(params[:task_id])
-    @task = Task.new do |task|
-      task.resource = @base_task.resource
-      task.procedure = @base_task.procedure
-    end
-  end
-  
   def retry
     @task = Task.find(params[:task_id])
     @task.retry

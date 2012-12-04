@@ -1,30 +1,12 @@
 class CredentialsController < ApplicationController
   before_filter :require_login
-  before_filter :setup_default_filter, only: :index
-  
-  def index
-    if current_user.admin?
-      @search = Credential.search(params[:search])
-      @credentials = show_all? ? @search.all : @search.page(params[:page])
-    else
-      @search = current_user.credentials.search(params[:search])
-      @credentials = @search.page(params[:page])
-    end
-  end
   
   def new
-    @credential = Credential.new
-    @credential.user = current_user unless admin?
+    @credential = current_user.credentials.build
   end
-  
-  def show
-    @credential = Credential.find(params[:id])
-    authorize! :show_own, @credential
-  end
-  
+    
   def create
-    @credential = Credential.new(params[:credential], as_role)
-    @credential.user = current_user unless admin?
+    @credential = current_user.credentials.build(params[:credential])
     if @credential.save
       @credential.user.track! :create_credential, @credential, current_user
       redirect_to @credential
@@ -46,10 +28,6 @@ class CredentialsController < ApplicationController
   end
   
 private
-  
-  def find_user
-    current_user
-  end
   
   def namespace
     admin? ? :admin : :dashboard

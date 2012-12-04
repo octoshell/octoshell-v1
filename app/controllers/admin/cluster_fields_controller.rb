@@ -1,20 +1,22 @@
-class ClusterFieldsController < ApplicationController
+class Admin::ClusterFieldsController < ApplicationController
+  before_filter { authorize! :manage, :cluster_fields }
+  
   def create
-    @cluster_field = ClusterField.new(params[:cluster_field], as_role)
+    @cluster_field = ClusterField.new(params[:cluster_field])
     @cluster_field.save
     redirect_to_edit_page @cluster_field
   end
   
   def update
     @cluster_field = ClusterField.find(params[:id])
-    @cluster_field.update_attributes params[:cluster_field], as_role
-    redirect_to_edit_page @cluster_field
+    @cluster_field.update_attributes(params[:cluster_field])
+    redirect_to_edit_page(@cluster_field)
   end
   
   def destroy
     @cluster_field = ClusterField.find(params[:id])
     @cluster_field.destroy
-    redirect_to_edit_page @cluster_field
+    redirect_to_edit_page(@cluster_field)
   end
 
 private

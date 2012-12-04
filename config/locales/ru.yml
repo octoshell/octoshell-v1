@@ -1,5 +1,9 @@
 ru:
   abilities:
+    accesses:
+      manage: Полный доступ к Ключам на Кластере
+    accounts:
+      manage: Полный доступ к Доступам к Проектам
     pages:
       show_all: Просмотр всех страниц
       show_publicized: Просмотр всех публичных страниц

@@ -2,9 +2,7 @@ accesses:
   - manage
 accounts:
   - manage
-  - cancel_accounts_for_owned_projects
 clusters:
-  - access
   - manage
 cluster_fields:
   - manage
@@ -14,8 +12,6 @@ cluster_users:
   - manage
 credentials:
   - manage
-  - show_own
-  - close_own
 critical_technologies:
   - manage
 direction_of_sciences:
@@ -25,16 +21,13 @@ extends:
 groups:
   - manage
 history_items:
-  - manage
+  - access
 images:
   - manage
 import_items:
   - manage
 membership:
   - manage
-  - show_own
-  - update_own
-  - destroy_own
 organizations:
   - manage
 organization_kinds:
@@ -59,6 +52,12 @@ settings:
   - manage
 sureties:
   - manage
+  - confirm
+  - unconfirm
+  - activate
+  - close_own
+  - close
+  - decline
 surety_members:
   - manage
 tasks:

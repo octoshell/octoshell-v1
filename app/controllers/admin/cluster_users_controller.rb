@@ -1,6 +1,6 @@
-class ClusterUsersController < ApplicationController
+class Admin::ClusterUsersController < ApplicationController
   before_filter :setup_default_filter, only: :index
-  before_filter :authorize_access_to_controller
+  before_filter { authorize! :manage, :cluster_projects }
   
   def index
     @search = ClusterUser.search(params[:search])
@@ -15,7 +15,7 @@ class ClusterUsersController < ApplicationController
   end
   
   def create
-    @cluster_user = ClusterUser.new(params[:cluster_user], as_role)
+    @cluster_user = ClusterUser.new(params[:cluster_user])
     if @cluster_user.save
       redirect_to @cluster_user
     else
@@ -29,7 +29,7 @@ class ClusterUsersController < ApplicationController
   
   def update
     @cluster_user = ClusterUser.find(params[:id])
-    if @cluster_user.update_attributes(params[:cluster_user], as_role)
+    if @cluster_user.update_attributes(params[:cluster_user])
       redirect_to @cluster_user
     else
       render :edit
