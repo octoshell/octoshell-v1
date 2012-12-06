@@ -3,8 +3,6 @@
     tr
       th class="span1" #
       th = Project.model_name.human
-      - if admin?
-        th = User.model_name.human
       th = Cluster.model_name.human
       th = Request.human_attribute_name(:state)
       th = Request.human_attribute_name(:created_at)
@@ -13,9 +11,7 @@
       tr id="request-#{request.id}" class="js-request-#{request.id}"
         td = request.id
         td = link_to_project request.project
-        - if admin?
-          td = link_to_user request.user
-        td = link_to_cluster request.cluster
+        td = request.cluster.name
         td = request.human_state_name
         td class="date" = request.created_at.strftime("%Y-%m-%d")
         td = link_to t('.open'), request

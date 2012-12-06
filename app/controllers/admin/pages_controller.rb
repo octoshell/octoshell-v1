@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class Admin::PagesController < Admin::ApplicationController
   def index
     @pages = Page.all.find_all { |p| can?(:show, p) }
   end
@@ -48,10 +48,6 @@ class PagesController < ApplicationController
   end
   
 private
-  
-  def namespace
-    :support
-  end
   
   def find_page(id)
     Page.find_by_url!(id)

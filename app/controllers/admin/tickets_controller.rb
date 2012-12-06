@@ -1,5 +1,5 @@
 # coding: utf-8
-class TicketsController < ApplicationController
+class Admin::TicketsController < Admin::ApplicationController
   before_filter :require_login
   before_filter :setup_default_filter, only: :index
   
@@ -73,11 +73,7 @@ class TicketsController < ApplicationController
   end
   
 private
-  
-  def namespace
-    :support
-  end  
-  
+
   def setup_default_filter
     states = admin? ? ['active'] : ['active', 'answered', 'resolved']
     params[:search] ||= { state_in: states }

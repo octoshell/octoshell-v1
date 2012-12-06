@@ -1,4 +1,4 @@
-class OrganizationsController < ApplicationController
+class Admin::OrganizationsController < Admin::ApplicationController
   before_filter :require_login
   before_filter :setup_default_filter, only: :index
   
@@ -71,10 +71,6 @@ private
   
   def find_organization(id)
     Organization.find(id)
-  end
-  
-  def namespace
-    admin? ? :admin : :dashboard
   end
   
   def setup_default_filter

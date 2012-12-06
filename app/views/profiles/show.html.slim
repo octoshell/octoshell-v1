@@ -13,11 +13,65 @@ div class="row"
 
 h3 Места работы
 p = link_to t('.new_membership'), new_membership_path
-= render partial: 'memberships/table', locals: { memberships: @user.memberships }
+- memberships = @user.memberships
+- if memberships.any?
+  table class="table table-bordered"
+    tr
+      th = Organization.model_name.human
+      th
+    - memberships.each do |membership|
+      tr id="membership-#{membership.id}"
+        td = membership.organization.name
+        td = link_to_membership membership
+- else
+  p Нет сотрудников
 
 h3 Поручительства
-= render partial: 'sureties/table', locals: { sureties: @user.sureties }
+- sureties = @user.sureties
+- if sureties.any?
+  table class="table table-bordered"
+    tr
+      th class="span1" #
+      th = Organization.model_name.human
+      th = Project.model_name.human
+      th = Surety.human_attribute_name(:state)
+      th
+    - sureties.each do |surety|
+      tr id="surety-#{surety.id}"
+        td = surety.id
+        td = surety.organization.name
+        td = link_to_project surety.project
+        td = surety.human_state_name
+        td = link_to_surety surety
+- else
+  p Нет поручительств
 
 h3 Публичные ключи
 p = link_to t('.new_credential'), new_credential_path
-= render partial: 'credentials/table', locals: { credentials: @user.credentials.active }
+- credentials = @user.credentials.active
+- if credentials.any?
+  table class="table table-bordered"
+    tr
+      th class="span1" #
+      th = Credential.human_attribute_name(:name)
+      th = Credential.human_attribute_name(:public_key)
+      th = Credential.human_attribute_name(:state)
+      th = Credential.human_attribute_name(:created_at)
+      - show_actions = credentials.any? { |c| c.active? && can?(:close, c) }
+      - if show_actions
+        th
+    - credentials.each do |credential|
+      tr
+        td = credential.id
+        td = credential.name
+        td
+          textarea disabled="disabled" class="public-key" rows="10"
+            = credential.public_key
+        td = credential.human_state_name
+        td = credential.created_at.to_formatted_s(:short)
+        td 
+          - if credential.can__close?
+            = link_to Credential.human_state_event_name(:_close), credential_close_path(credential), method: :put, confirm: 'Вы действительно хотите закрыть ключ?', class: 'btn btn-danger'
+- else
+  p Нет публичных ключей
+

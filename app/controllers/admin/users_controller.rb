@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Admin::UsersController < Admin::ApplicationController
   before_filter :require_login
   before_filter :setup_default_filter, only: :index
   
@@ -49,10 +49,6 @@ class UsersController < ApplicationController
   end
   
 private
-  
-  def namespace
-    :admin
-  end
   
   def setup_default_filter
     params[:search] ||= { state_in: ['sured'] }

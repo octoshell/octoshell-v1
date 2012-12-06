@@ -1,5 +1,5 @@
 # coding: utf-8
-class ImagesController < ApplicationController
+class Admin::ImagesController < Admin::ApplicationController
   def index
     @images = Image.all
   end
@@ -23,11 +23,5 @@ class ImagesController < ApplicationController
   def destroy
     Image.delete(params[:id])
     redirect_to images_path
-  end
-  
-private
-  
-  def namespace
-    :admin
   end
 end

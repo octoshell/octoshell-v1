@@ -1,0 +1,44 @@
+- title 'Новая заявка'
+
+ul class="breadcrumb"
+  - if @ticket.ticket_question && @ticket.ticket_question.breadcrumbs.any?
+    li 
+      = link_to 'Начало', new_ticket_path
+      span class="divider" = "/"
+      
+    - breadcrumbs = @ticket.ticket_question.breadcrumbs
+    - breadcrumbs.each_with_index do |ticket_question, i|
+      li
+        - if i.next < breadcrumbs.size
+          = link_to ticket_question.question, new_ticket_path(ticket: { ticket_question_id: ticket_question.id })
+          span class="divider" = "/"
+        - else
+          = ticket_question.question
+  - else
+    li = link_to 'Начало', new_ticket_path
+
+- url = @ticket.show_questions? ? continue_tickets_path : tickets_path
+= simple_form_for @ticket, url: url, html: { class: 'form-horizontal' } do |f|
+  - if @ticket.show_questions?
+    = f.association :ticket_question, collection: @ticket.ticket_questions, label_method: :question, prompt: 'Выберите вариант'
+  - else
+    = f.hidden_field :ticket_question_id
+    
+  = f.association :user, label_method: :full_name if admin?
+  
+  - if f.object.show_form?
+    = f.input :subject
+    = f.input :url
+    = f.input :message, input_html: { rows: 5 }
+    = f.input :attachment
+    = f.association :project, collection: @projects, label_method: :name_with_state, input_html: { class: 'chosen' }
+    = f.association :cluster, input_html: { class: 'chosen' }
+    = f.simple_fields_for :ticket_field_values do |f|
+      = f.hidden_field :ticket_field_relation_id
+      = f.input :value, label: f.object.ticket_field_relation.ticket_field.name, required: f.object.ticket_field_relation.required, hint: f.object.ticket_field_relation.ticket_field.hint
+  
+  div class="form-actions"
+    - if f.object.show_form?
+      = f.button :submit, class: 'btn-primary'
+    - else
+      = f.button :submit, 'Продолжить', class: 'btn-primary'

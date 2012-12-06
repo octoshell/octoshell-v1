@@ -1,4 +1,4 @@
-class TicketQuestionsController < ApplicationController
+class Admin::TicketQuestionsController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
@@ -53,10 +53,6 @@ private
   
   def redirect_to_index
     redirect_to ticket_questions_path
-  end
-  
-  def namespace
-    :support
   end
   
   def setup_default_filter

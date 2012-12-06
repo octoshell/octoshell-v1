@@ -1,0 +1,25 @@
+= submenu_item :users, (link_to t('.users'), users_path)
+= submenu_item :sureties, (link_to "#{t('.sureties')} (#{Surety.pending.count})", sureties_path)
+= submenu_item :requests, (link_to "#{t('.requests')} (#{Request.pending.count})", requests_path)
+= submenu_item :tasks, (link_to "#{t('.tasks')} (#{Task.failed.count})", tasks_path)
+= submenu_item :projects, (link_to t('.projects'), projects_path)
+= submenu_item :clusters, (link_to t('.clusters'), clusters_path)
+- submenu_items = [:memberships, :credentials, :organization_kinds, :position_names, :accesses, :accounts, :cluster_users]
+li class="dropdown #{submenu_items.any? { |c| c.to_s == params[:controller] } ? 'active' : ''}"
+  = link_to '#', 'data-toggle' => 'dropdown' do
+    = t('.more')
+    b class="caret"
+  ul class="dropdown-menu"
+    = submenu_item :memberships, (link_to t('.memberships'), memberships_path)
+    = submenu_item :credentials, (link_to t('.credentials'), credentials_path)
+    = submenu_item :organizations, (link_to t('.organizations'), organizations_path)
+    = submenu_item :organization_kinds, (link_to t('.organization_kinds'), organization_kinds_path)
+    = submenu_item :position_names, (link_to t('.position_names'), position_names_path)
+    = submenu_item :accesses, (link_to t('.accesses'), accesses_path)
+    = submenu_item :cluster_projects, (link_to t('.cluster_projects'), cluster_projects_path)
+    = submenu_item :cluster_users, (link_to t('.cluster_users'), cluster_users_path)
+    = submenu_item :extends, (link_to t('.extends'), extends_path)
+    = submenu_item :images, (link_to t('.images'), images_path)
+    = submenu_item :import, (link_to t('.import'), import_items_path)
+    = submenu_item :project_prefixes, (link_to t('.project_prefixes'), project_prefixes_path)
+    = submenu_item :groups, (link_to t('.groups'), groups_path)

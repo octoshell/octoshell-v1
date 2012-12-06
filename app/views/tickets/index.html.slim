@@ -19,7 +19,5 @@ div class="link-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
 
 = safe_paginate @tickets
-
 = render partial: 'table', locals: { tickets: @tickets }
-
 = safe_paginate @tickets

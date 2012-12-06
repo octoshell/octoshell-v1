@@ -1,4 +1,4 @@
-class RequestsController < ApplicationController
+class Admin::RequestsController < Admin::ApplicationController
   before_filter :require_login
   before_filter :setup_default_filter, only: :index, if: :admin?
   
@@ -72,11 +72,7 @@ private
   def find_request(id)
     Request.find(id)
   end
-  
-  def namespace
-    admin? ? :admin : :dashboard
-  end
-  
+
   def setup_default_filter
     params[:search] ||= { state_in: ['pending', 'active'] }
   end

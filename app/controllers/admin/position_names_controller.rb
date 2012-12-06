@@ -1,4 +1,4 @@
-class PositionNamesController < ApplicationController
+class Admin::PositionNamesController < Admin::ApplicationController
   before_filter :require_login
   
   def index
@@ -53,9 +53,5 @@ private
   
   def redirect_to_index
     redirect_to position_names_path
-  end
-  
-  def namespace
-    :admin
   end
 end

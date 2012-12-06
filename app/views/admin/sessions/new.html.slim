@@ -1,0 +1,13 @@
+- title 'Авторизация'
+
+= simple_form_for @user, url: session_path, html: { class: 'form-horizontal' } do |f|
+  = f.input :email
+  = f.input :password, required: true
+  
+  div class="form-actions"
+    = f.button :submit, t('.sign_in'), class: 'btn btn-primary'
+
+p
+  = link_to 'Забыли пароль?', new_password_path
+  = " или "
+  = link_to 'Не получили инструкции по активации?', new_activation_path

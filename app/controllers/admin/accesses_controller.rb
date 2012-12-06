@@ -1,4 +1,4 @@
-class Admin::AccessesController < ApplicationController
+class Admin::AccessesController < Admin::ApplicationController
   before_filter :require_login, :setup_default_filter
   before_filter { authorize! :manage, :accesses }
 
@@ -12,7 +12,7 @@ class Admin::AccessesController < ApplicationController
   end
   
   def create
-    @access = Access.new(params[:access])
+    @access = Access.new(params[:access], as: :admin)
     if @access.save
       redirect_to @access
     else
@@ -26,7 +26,7 @@ class Admin::AccessesController < ApplicationController
   
   def update
     @access = Access.find(params[:id])
-    if @access.update_attributes(params[:access])
+    if @access.update_attributes(params[:access], as: :admin)
       redirect_to @access
     else
       render :edit
@@ -35,10 +35,6 @@ class Admin::AccessesController < ApplicationController
   
 private
   
-  def namespace
-    :admin
-  end
- 
   def setup_default_filter
     params[:search] ||= { state_in: ['active'] }
   end

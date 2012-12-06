@@ -1,4 +1,4 @@
-class Admin::ClusterUsersController < ApplicationController
+class Admin::ClusterUsersController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
   before_filter { authorize! :manage, :cluster_projects }
   
@@ -37,10 +37,6 @@ class Admin::ClusterUsersController < ApplicationController
   end
   
 private
-  
-  def namespace
-    :admin
-  end
   
   def setup_default_filter
     params[:search] ||= { state_in: ['active'] }

@@ -1,5 +1,5 @@
 # coding: utf-8
-class SuretiesController < ApplicationController
+class Admin::SuretiesController < Admin::ApplicationController
   before_filter :require_login
   before_filter :setup_default_filter, only: :index
   
@@ -145,10 +145,6 @@ private
   
   def redirect_to_surety(surety)
     redirect_to surety
-  end
-  
-  def namespace
-    admin? ? :admin : :dashboard
   end
   
   def setup_default_filter

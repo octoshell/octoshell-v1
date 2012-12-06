@@ -1,4 +1,4 @@
-class Admin::ClustersController < ApplicationController
+class Admin::ClustersController < Admin::ApplicationController
   before_filter :require_login
   before_filter :setup_default_filter, only: :index
   before_filter { authorize! :manage, :clusters }
@@ -65,10 +65,6 @@ private
   
   def find_cluster(id)
     Cluster.find(id)
-  end
-  
-  def namespace
-    admin? ? :admin : :dashboard
   end
   
   def setup_default_filter

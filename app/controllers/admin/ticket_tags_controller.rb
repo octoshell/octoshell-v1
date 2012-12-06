@@ -1,4 +1,4 @@
-class TicketTagsController < ApplicationController
+class Admin::TicketTagsController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
@@ -56,10 +56,6 @@ private
   
   def find_ticket_tag(id)
     TicketTag.find(id)
-  end
-  
-  def namespace
-    :support
   end
   
   def setup_default_filter

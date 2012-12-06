@@ -1,0 +1,23 @@
+- title t('.profile')
+
+div class="row"
+  div class="span2"
+    div class="avatar"
+      = image_tag @user.avatar_url
+  div class="span10"
+    div class="page-header" style="margin-bottom: 10px"
+      h1 = @user.full_name
+
+    p
+      strong = link_to t('.edit'), edit_profile_path
+
+h3 Места работы
+p = link_to t('.new_membership'), new_membership_path
+= render partial: 'memberships/table', locals: { memberships: @user.memberships }
+
+h3 Поручительства
+= render partial: 'sureties/table', locals: { sureties: @user.sureties }
+
+h3 Публичные ключи
+p = link_to t('.new_credential'), new_credential_path
+= render partial: 'credentials/table', locals: { credentials: @user.credentials.active }

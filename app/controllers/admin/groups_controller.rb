@@ -1,4 +1,4 @@
-class GroupsController < ApplicationController
+class Admin::GroupsController < Admin::ApplicationController
   def index
     @groups = Group.all
   end
@@ -11,11 +11,5 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @group.update_attributes(params[:group])
     redirect_to groups_path
-  end
-
-private
-  
-  def namespace
-    :admin
   end
 end

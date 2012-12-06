@@ -1,0 +1,36 @@
+table class="table table-bordered"
+  tr
+    th class="span1" #
+    th
+      - if @search
+        = sort_link @search, :last_name, User.human_attribute_name(:full_name), :default_order => :asc
+      - else
+        = User.human_attribute_name(:full_name)
+    th
+      - if @search
+        = sort_link @search, :email, User.human_attribute_name(:email), :default_order => :asc
+      - else
+        = User.human_attribute_name(:email)
+    th = Organization.model_name.human
+    th = Cluster.model_name.human
+    th = User.human_attribute_name(:state)
+    th class="date"
+      - if @search
+        = sort_link @search, :id, User.human_attribute_name(:created_at), :default_order => :asc
+      - else
+        = User.human_attribute_name(:created_at)
+  - users.each do |user|
+    tr
+      td = user.id
+      td = link_to_admin_user user
+      td = user.email
+      td
+        ul class="unstyled"
+          - user.membershiped_organizations.to_a.uniq.each do |organization|
+            li = link_to_admin_organization(organization)
+      td
+        ul class="unstyled"
+          - user.active_clusters.each do |cluster|
+            li = link_to_admin_cluster(cluster)
+      td = user.human_state_name
+      td class="date" = user.created_at.strftime("%Y-%m-%d")

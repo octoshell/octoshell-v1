@@ -1,0 +1,33 @@
+- title 'Место работы'
+
+- if can?(:edit, @membership) || can?(:index, :versions)
+  div class="link-actions"
+    - if can? :edit, @membership
+      = link_to 'Редактировать', edit_membership_path(@membership), class: 'btn'
+      = " "
+    - if can?(:close, @membership) && @membership.can__close?
+      = link_to Membership.human_state_event_name(:_close), membership_close_path(@membership), class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
+      = " "
+    - if can? :index, :versions
+      = link_to 'Версии', [@membership, :versions], class: 'btn'
+
+table class="table table-bordered" id="membership-#{@membership.id}-detail"
+  tr
+    th = Organization.model_name.human
+    td = link_to_organization @membership.organization
+  tr
+    th = User.model_name.human
+    td = link_to_user @membership.user
+  tr
+    th = Membership.human_attribute_name(:state)
+    td = @membership.human_state_name
+
+h2 Позиции
+
+div class="row"
+  div class="span6"
+    table class="table table-bordered"
+      - @membership.positions.each do |position|
+        tr
+          th = position.name
+          td = position.value

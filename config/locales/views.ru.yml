@@ -67,6 +67,14 @@ ru:
       edit_group: Редактирование Группы
     form:
       abilities: Доступы
+  project_joiners:
+    new:
+      use_code: Использовать код
+      use: Использовать
+      code: Код приглашения
+  clusters:
+    index:
+      title: Кластеры
   project_prefixes:
     index:
       project_prefixes: Префиксы проектов

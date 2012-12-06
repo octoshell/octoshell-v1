@@ -1,4 +1,4 @@
-class ExtendsController < ApplicationController
+class Admin::ExtendsController < Admin::ApplicationController
   def index
     @extends = Extend.order('id')
   end
@@ -34,10 +34,4 @@ class ExtendsController < ApplicationController
     @extend.destroy
     redirect_to extends_path
   end
-  
-private
-  def namespace
-    :admin
-  end
-  
 end

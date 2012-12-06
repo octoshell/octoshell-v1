@@ -1,5 +1,5 @@
 # coding: utf-8
-class ProjectsController < ApplicationController
+class Admin::ProjectsController < Admin::ApplicationController
   before_filter :require_login
   before_filter :setup_default_filter, only: :index, if: :admin?
   
@@ -89,11 +89,7 @@ class ProjectsController < ApplicationController
   end
   
 private
-  
-  def namespace
-    :admin
-  end
-  
+
   def setup_default_filter
     params[:search] ||= { state_in: ['active'] }
     params[:search][:meta_sort] ||= 'name.asc'

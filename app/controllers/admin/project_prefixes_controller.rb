@@ -1,4 +1,4 @@
-class ProjectPrefixesController < ApplicationController
+class Admin::ProjectPrefixesController < Admin::ApplicationController
   def index
     @project_prefixes = ProjectPrefix.all
   end
@@ -33,11 +33,5 @@ class ProjectPrefixesController < ApplicationController
     @project_prefix = ProjectPrefix.find(params[:id])
     @project_prefix.destroy
     redirect_to project_prefixes_path
-  end
-
-private
-  
-  def namespace
-    :admin
   end
 end

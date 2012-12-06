@@ -1,7 +1,7 @@
-- title t('.title')
+- title t('.use_code')
 
 = form_for @project_joiner, html: { class: 'form-inline' } do |f|
   = f.label :code, class: 'hidden'
-  = f.text_field :code
+  = f.text_field :code, placeholder: t('.code')
   |  
-  = f.submit class: 'btn'
+  = f.submit t('.use'), class: 'btn'

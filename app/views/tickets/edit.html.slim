@@ -1,6 +1,4 @@
 = simple_form_for @ticket, html: { class: 'form-horizontal' } do |f|
-  = f.association :ticket_question, label_method: :question
-  = f.association :user, label_method: :full_name
   = f.input :subject
   = f.input :url
   = f.input :message, input_html: { rows: 5 }

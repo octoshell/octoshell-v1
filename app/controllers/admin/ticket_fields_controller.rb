@@ -1,4 +1,4 @@
-class TicketFieldsController < ApplicationController
+class TicketFieldsController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
@@ -46,10 +46,6 @@ private
   
   def find_ticket_field(id)
     TicketField.find(id)
-  end
-  
-  def namespace
-    :support
   end
   
   def redirect_to_index

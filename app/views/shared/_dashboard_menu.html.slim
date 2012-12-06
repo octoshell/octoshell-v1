@@ -6,3 +6,5 @@
   = submenu_item :clusters, (link_to t('.clusters'), clusters_path)
 - if can? :show, :profiles
   = submenu_item :profiles, (link_to t('.profile'), profile_path)
+- if can? :show, :tickets
+  = submenu_item :ticketsm, (link_to t('.tickets'), tickets_path)

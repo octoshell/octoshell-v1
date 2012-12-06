@@ -40,14 +40,14 @@ module ApplicationHelper
     controller_name == params[:controller].to_sym
   end
   
-  def link_to_cluster(cluster)
+  def link_to_admin_cluster(cluster)
     return unless cluster
-    link_to_if can?(:show, cluster), cluster.name, cluster
+    link_to_if can?(:show, cluster), cluster.name, [:admin, cluster]
   end
   
-  def link_to_user(user)
+  def link_to_admin_user(user)
     return unless user
-    link_to_if (can? :show, user), user.full_name, user
+    link_to_if (can? :show, user), user.full_name, [:admin, user]
   end
   
   def link_to_project(project)
@@ -60,9 +60,9 @@ module ApplicationHelper
     link_to_if can?(:show, surety), 'открыть', surety
   end
   
-  def link_to_organization(organization)
+  def link_to_admin_organization(organization)
     return unless organization
-    link_to_if can?(:show, organization), organization.name, organization
+    link_to_if can?(:show, organization), organization.name, [:admin, organization]
   end
   
   def link_to_organization_kind(organization_kind)

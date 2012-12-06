@@ -1,5 +1,5 @@
 # encoding: utf-8
-class ImportItemsController < ApplicationController
+class Admin::ImportItemsController < Admin::ApplicationController
   def index
   end
   
@@ -33,11 +33,5 @@ class ImportItemsController < ApplicationController
     @import = ImportItem.find(params[:id])
     @import.destroy
     redirect_to step_import_items_path
-  end
-  
-private
-  
-  def namespace
-    :admin
   end
 end

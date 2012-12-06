@@ -117,6 +117,10 @@ class User < ActiveRecord::Base
   def all_projects
     projects.where("accounts.state = 'active' or projects.user_id = ?", id)
   end
+
+  def managed_accounts
+    Account.where(project_id: owned_project_ids)
+  end
   
   def new_organization=(attributes)
     if attributes.values.any?(&:present?)

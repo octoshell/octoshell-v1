@@ -3,7 +3,7 @@
     div class="row"
       div class="span8"
         p
-          strong = link_to_user reply.user
+          strong = reply.user.full_name
           small  #{time_tag(reply.created_at)}
     div class="row"
       div class="span8"

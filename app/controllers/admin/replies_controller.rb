@@ -1,4 +1,4 @@
-class RepliesController < ApplicationController
+class Admin::RepliesController < Admin::ApplicationController
   def create
     @reply = Reply.new(params[:reply])
     @reply.user = current_user
@@ -10,11 +10,5 @@ class RepliesController < ApplicationController
       @replies = @ticket.replies
       render 'tickets/show'
     end
-  end
-
-private
-
-  def namespace
-    :support
   end
 end

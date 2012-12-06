@@ -1,4 +1,4 @@
-class TicketTemplatesController < ApplicationController
+class Admin::TicketTemplatesController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
@@ -46,10 +46,6 @@ private
   
   def find_ticket_template(id)
     TicketTemplate.find(id)
-  end
-  
-  def namespace
-    :support
   end
   
   def setup_default_filter

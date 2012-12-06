@@ -1,4 +1,4 @@
-class OrganizationKindsController < ApplicationController
+class Admin::OrganizationKindsController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
@@ -47,11 +47,7 @@ private
   def find_organization_kind(id)
     OrganizationKind.find(id)
   end
-  
-  def namespace
-    :admin
-  end
-  
+
   def setup_default_filter
     params[:search] ||= { state_in: ['active'] }
   end

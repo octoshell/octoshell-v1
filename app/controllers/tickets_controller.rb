@@ -79,10 +79,6 @@ class TicketsController < ApplicationController
   end
   
 private
-  
-  def namespace
-    :support
-  end
 
   def find_ticket(id)
     current_user.tickets.find(id)

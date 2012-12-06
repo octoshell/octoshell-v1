@@ -30,7 +30,7 @@ class CredentialsController < ApplicationController
 private
   
   def namespace
-    admin? ? :admin : :dashboard
+    :dashboard
   end
   
   def setup_default_filter

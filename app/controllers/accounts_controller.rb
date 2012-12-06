@@ -11,10 +11,9 @@ class AccountsController < ApplicationController
     end
   end
   
-  
 private
 
   def find_account(id)
-    Account.find(id)
+    current_user.managed_accounts.find(id)
   end
 end

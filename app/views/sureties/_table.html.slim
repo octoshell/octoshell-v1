@@ -9,7 +9,7 @@
     - sureties.each do |surety|
       tr id="surety-#{surety.id}"
         td = surety.id
-        td = link_to_organization surety.organization
+        td = surety.organization.name
         td = link_to_project surety.project
         td = surety.human_state_name
         td

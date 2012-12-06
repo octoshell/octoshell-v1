@@ -1,66 +1,24 @@
 - title "Заявка ##{@request.id}"
 
-- if admin?
-  div class="link-actions"
-    = link_to 'Редактировать', [:edit, @request], class: 'btn'
-    = " "
-    - if @request.pending?
-      = link_to Request.human_state_event_name(:_activate), request_activate_path(@request), class: 'btn btn-success', method: :put
-      = " "
-      = link_to Request.human_state_event_name(:_decline), request_decline_path(@request), class: 'btn', method: :put
-    - if @request.active? || @request.declined?
-      = " "
-      = link_to Request.human_state_event_name(:_close), request_close_path(@request), class: 'btn btn-danger', method: :put
-    - if can? :index, :versions
-      = " "
-      = link_to 'Версии', [@request, :versions], class: 'btn'
-
+div class="link-actions"
+  - if @request.can__close?
+    = link_to Request.human_state_event_name(:_close), request_close_path(@request), class: 'btn btn-danger', method: :put
 
 div class="request"
   table class="table table-bordered"
     tr
-      th = Project.model_name.human
+      th class="span4" = Project.model_name.human
       td
         strong = link_to_project @request.project
     tr
       th = Project.human_attribute_name(:description)
       td = @request.project.description
     tr
-      th = Request.human_attribute_name(:user)
-      td
-        table class="table table-bordered"
-          tr
-            th class="span3" = Request.human_attribute_name(:user)
-            td = link_to_user @request.user
-          tr
-            th Проектов
-            td = @request.user.projects.count
-          tr
-            th Дата регистрации
-            td
-              = @request.user.created_at.to_date
-              |  (#{(Date.current - @request.user.created_at.to_date).to_i} дн.)
-          tr
-            th Общий объем квот
-            td
-              = "#{@request.user.requests.sum(:cpu_hours)} часов | "
-              = "#{@request.user.requests.sum(:size)} Gb"
-    tr
       th = Organization.model_name.human
-      td
-        table class="table table-bordered"
-          tr
-            th class="span3" = Organization.model_name.human
-            td = link_to_organization @request.project.organization
-          tr
-            th Пользователей
-            td = @request.project.organization.memberships.active.count
-          tr
-            th Проектов
-            td = @request.project.organization.projects.count
+      td = @request.project.organization.name
     tr
       th = Cluster.model_name.human
-      td = link_to_cluster @request.cluster
+      td = @request.cluster.name
     tr
       th = Request.human_attribute_name(:hours)
       td = @request.cpu_hours
@@ -70,10 +28,3 @@ div class="request"
     tr
       th = Request.human_attribute_name(:state)
       td id="request-#{@request.id}-status" = @request.human_state_name
-    - if @request.request_properties.any?
-      tr
-        th colspan="2" class="lead" Дополнительные параметры
-    - @request.request_properties.each do |request_property|
-      tr
-        th = request_property.name
-        td = request_property.value

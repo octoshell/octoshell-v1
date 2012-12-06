@@ -1,4 +1,4 @@
-class VersionsController < ApplicationController
+class Admin::VersionsController < Admin::ApplicationController
   def index
     @versions = resource.versions
   end
@@ -16,9 +16,5 @@ private
   
   def resource
     model.find(params["#{model.model_name.underscore}_id"])
-  end
-  
-  def namespace
-    :admin
   end
 end

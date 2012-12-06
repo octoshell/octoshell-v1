@@ -1,4 +1,4 @@
-class Admin::ClusterFieldsController < ApplicationController
+class Admin::ClusterFieldsController < Admin::ApplicationController
   before_filter { authorize! :manage, :cluster_fields }
   
   def create

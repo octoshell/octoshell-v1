@@ -13,9 +13,9 @@ class ApplicationController < ActionController::Base
   
   def dashboard
     if admin?
-      redirect_to admin_path
+      redirect_to admin_users_path
     elsif logged_in?
-      redirect_to dashboard_path
+      redirect_to projects_path
     else
       redirect_to new_session_path
     end
@@ -37,11 +37,6 @@ class ApplicationController < ActionController::Base
   end
   
 private
-
-  def namespace
-    raise 'namespace method should be implemented in controller'
-  end
-  helper_method :namespace
   
   def admin?
     current_user.admin? if logged_in?
@@ -117,4 +112,9 @@ private
   def authorize_access_to_controller
     authorize! :full_access, params[:controller].to_sym
   end
+
+  def namespace
+    :dashboard
+  end
+  helper_method :namespace
 end

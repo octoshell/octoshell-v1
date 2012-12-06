@@ -1,4 +1,4 @@
-class NotificationsController < ApplicationController
+class Admin::NotificationsController < Admin::ApplicationController
   def index
     @requests = Request.pending
     @tasks = Task.failed

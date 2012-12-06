@@ -1,6 +1,4 @@
-- if can? :access, :admins
-  li class="#{active_menu?(:admin)}" = link_to 'Кабинет Администратора', admin_path
-- else
-  li class="#{active_menu?(:dashboard)}" = link_to 'Рабочий кабинет', dashboard_path
-li class="#{active_menu?(:support)}" = link_to 'Поддержка', support_path
+li class="#{active_menu?(:dashboard)}" = link_to 'Рабочий кабинет', projects_path
+- if admin?
+  li class="#{active_menu?(:admin)}" = link_to 'Кабинет Администратора', admin_users_path
 li class="#{active_menu?(:notifications)}" = link_to "Оповещения (#{current_user.notifications_count})", notifications_path
