@@ -1,7 +1,0 @@
-- if can? :create, :requests
-  p = link_to 'Новая заявка', new_request_path
-- else
-  p У вас нет доступа для создания проекта. Чтобы его получить вам нужно:
-  ul
-    - current_user.request_steps.each do |step|
-      li = step

@@ -6,7 +6,7 @@ class RequestsController < ApplicationController
   end
   
   def new
-    current_user.requests.build(project_id: params[:project_id])
+    @request = current_user.requests.build(project_id: params[:project_id])
     @projects = @request.allowed_projects
   end
   
