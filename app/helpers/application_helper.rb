@@ -51,13 +51,20 @@ module ApplicationHelper
   end
   
   def link_to_project(project)
+    link_to project.name, project
+  end
+
+  def link_to_admin_project(project)
     return unless project
-    link_to_if can?(:show, project), project.name, project
+    link_to_if may?(:manage, :projects), project.name
   end
   
   def link_to_surety(surety)
-    return unless surety
-    link_to_if can?(:show, surety), 'открыть', surety
+    link_to 'открыть', surety
+  end
+
+  def link_to_admin_surety(surety)
+    link_to 'открыть', [:admin, surety]
   end
   
   def link_to_admin_organization(organization)
@@ -65,7 +72,7 @@ module ApplicationHelper
     link_to_if can?(:show, organization), organization.name, [:admin, organization]
   end
   
-  def link_to_organization_kind(organization_kind)
+  def link_to_admin_organization_kind(organization_kind)
     return unless organization_kind
     link_to_if can?(:show, organization_kind), organization_kind.name, organization_kind
   end
@@ -100,7 +107,7 @@ module ApplicationHelper
     link_to_if can?(:show, task), "Задание ##{task.id}", task
   end
   
-  def link_to_cluster_user(cluster_user)
+  def link_to_admin_cluster_user(cluster_user)
     return unless cluster_user
     link_to_if can?(:show, cluster_user), cluster_user.username, cluster_user
   end

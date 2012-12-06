@@ -1,12 +1,10 @@
 - title 'Поручительства'
 
 div class="link-actions"
-  - if admin?
-    = " "
-    = link_to 'Шаблон', template_sureties_path, class: 'btn'
+    = link_to 'Шаблон', template_admin_sureties_path, class: 'btn'
 
 = simple_form_for @search, url: sureties_path, method: :get, html: { class: 'form-horizontal' } do |f|
-  = f.input :id_eq if admin?
+  = f.input :id_eq
   = autocomplete :organization, f
   = f.input :state_in, collection: Surety.human_state_names, input_html: { multiple: true }
   div class="form-actions"
@@ -14,6 +12,6 @@ div class="link-actions"
 
 = safe_paginate @sureties
 
-= render partial: 'sureties/table', locals: { sureties: @sureties }
+= render partial: 'admin/sureties/table', locals: { sureties: @sureties }
 
 = safe_paginate @sureties

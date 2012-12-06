@@ -14,10 +14,10 @@
 table class="table table-bordered" id="membership-#{@membership.id}-detail"
   tr
     th = Organization.model_name.human
-    td = link_to_organization @membership.organization
+    td = link_to_admin_organization @membership.organization
   tr
     th = User.model_name.human
-    td = link_to_user @membership.user
+    td = link_to_admin_user @membership.user
   tr
     th = Membership.human_attribute_name(:state)
     td = @membership.human_state_name

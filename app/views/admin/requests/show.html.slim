@@ -31,7 +31,7 @@ div class="request"
         table class="table table-bordered"
           tr
             th class="span3" = Request.human_attribute_name(:user)
-            td = link_to_user @request.user
+            td = link_to_admin_user @request.user
           tr
             th Проектов
             td = @request.user.projects.count
@@ -51,7 +51,7 @@ div class="request"
         table class="table table-bordered"
           tr
             th class="span3" = Organization.model_name.human
-            td = link_to_organization @request.project.organization
+            td = link_to_admin_organization @request.project.organization
           tr
             th Пользователей
             td = @request.project.organization.memberships.active.count
@@ -60,7 +60,7 @@ div class="request"
             td = @request.project.organization.projects.count
     tr
       th = Cluster.model_name.human
-      td = link_to_cluster @request.cluster
+      td = link_to_admin_cluster @request.cluster
     tr
       th = Request.human_attribute_name(:hours)
       td = @request.cpu_hours

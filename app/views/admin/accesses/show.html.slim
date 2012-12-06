@@ -11,7 +11,7 @@ table class="table table-bordered" id="access-#{@access.id}-detail"
     td = link_to_credential @access.credential
   tr
     th = ClusterUser.model_name.human
-    td = link_to_cluster_user @access.cluster_user
+    td = link_to_admin_cluster_user @access.cluster_user
   tr
     th = Access.human_attribute_name(:state)
     td = @access.human_state_name
@@ -19,4 +19,4 @@ table class="table table-bordered" id="access-#{@access.id}-detail"
 
 h3 Задания
 
-= render partial: 'tasks/table', locals: { tasks: @access.tasks }
+= render partial: 'admin/tasks/table', locals: { tasks: @access.tasks }

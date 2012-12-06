@@ -8,7 +8,7 @@
       th
     - cluster_projects.each do |cluster_project|
       tr id="cluster-project-#{cluster_project.id}"
-        td = link_to_cluster cluster_project.cluster
+        td = link_to_admin_cluster cluster_project.cluster
         td = link_to_project cluster_project.project
         td = cluster_project.username
         td = cluster_project.human_state_name

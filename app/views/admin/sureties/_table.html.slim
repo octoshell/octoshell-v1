@@ -9,11 +9,9 @@
     - sureties.each do |surety|
       tr id="surety-#{surety.id}"
         td = surety.id
-        td = link_to_organization surety.organization
-        td = link_to_project surety.project
+        td = link_to_admin_organization surety.organization
+        td = link_to_admin_project surety.project
         td = surety.human_state_name
-        td
-          - if can? :show, surety
-            = link_to_surety surety
+        td = link_to_admin_surety surety
 - else
   p Нет поручительств

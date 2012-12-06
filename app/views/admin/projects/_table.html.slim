@@ -27,9 +27,9 @@
             - project.accounts.active.each do |a|
               li
               - if project.user == a.user
-                strong = link_to_user a.user
+                strong = link_to_admin_user a.user
               - else
-                = link_to_user a.user
+                = link_to_admin_user a.user
                 - if can? :cancel, a
                   |  
                   small = link_to 'удалить', [a, :cancel], method: :put, confirm: 'Вы уверены?', class: 'danger'

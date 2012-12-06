@@ -3,11 +3,11 @@
 table class="table table-bordered noprint"
   tr
     th = Organization.model_name.human
-    td = link_to_organization @surety.organization
+    td = link_to_admin_organization @surety.organization
   tr
     th = User.model_name.human
     td
-      = link_to_user @surety.user
+      = link_to_admin_user @surety.user
       = render partial: 'memberships/summary', locals: { memberships: @surety.user.memberships.active }
   tr
     th = Surety.human_attribute_name(:state)

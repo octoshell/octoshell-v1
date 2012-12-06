@@ -1,4 +1,4 @@
-= simple_form_for @cluster_user, html: { class: 'form-horizontal alert alert-error' } do |f|
+= simple_form_for [:admin, @cluster_user], html: { class: 'form-horizontal alert alert-error' } do |f|
   legend Редактирование связей может нарушить работу сайта.
   = f.input :account_id
   = f.input :cluster_project_id

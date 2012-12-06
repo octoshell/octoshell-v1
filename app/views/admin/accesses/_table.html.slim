@@ -2,31 +2,22 @@
   table class="table table-bordered"
     tr
       th class="span1" #
-      - unless current
-        th = User.model_name.human
+      th = User.model_name.human
       th = Credential.model_name.human
       th = Cluster.model_name.human
       th Подключение
-      - if may? :manage, :accesses
-        th = Access.human_attribute_name(:state)
-      - else
-        th Доступность
+      th = Access.human_attribute_name(:state)
       th = ClusterUser.model_name.human
       th = ClusterProject.model_name.human
-      - if can? :show, :accesses
-        th
+      th
     - accesses.each do |access|
       tr id="access-#{access.id}"
         td = access.id
-        - unless current
-          td = link_to_user access.credential.user
+        td = link_to_admin_user access.credential.user
         td = link_to_credential access.credential
-        td = link_to_cluster access.cluster
+        td = link_to_admin_cluster access.cluster
         td = "#{access.cluster_user.username}@#{access.cluster_user.cluster_project.cluster.host}"
-        - if may? :manage, :accesses
-          td = access.human_state_name
-        - else
-          td = access.available? ? "Доступен" : "Не доступен"
+        td = access.human_state_name
         td = access.cluster_user.human_state_name
         td = access.cluster_user.cluster_project.human_state_name
         - if may? :manage, :accesses

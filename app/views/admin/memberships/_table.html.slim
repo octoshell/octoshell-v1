@@ -17,8 +17,8 @@
     - memberships.each do |membership|
       tr id="membership-#{membership.id}"
         td = membership.id
-        td = link_to_organization membership.organization
-        td = link_to_user membership.user
+        td = link_to_admin_organization membership.organization
+        td = link_to_admin_user membership.user
         td = membership.human_state_name
         td = link_to_membership membership
 - else

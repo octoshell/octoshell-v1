@@ -3,7 +3,7 @@
 div class="link-actions"
   = link_to 'Новый проект на кластере', new_cluster_project_path, class: 'btn btn-danger'
 
-= simple_form_for @search, url: cluster_projects_path, method: :get, html: { class: 'form-horizontal' } do |f|
+= simple_form_for [:admin, @search], url: cluster_projects_path, method: :get, html: { class: 'form-horizontal' } do |f|
   = autocomplete :project, f
   = f.input :cluster_id_eq, collection: Cluster.all, input_html: { class: 'chosen' }, required: false
   = f.input :username_eq, label: 'Group (на кластере)', required: false
@@ -12,5 +12,5 @@ div class="link-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
 
 = safe_paginate @cluster_projects
-= render partial: 'table', locals: { cluster_projects: @cluster_projects }
+= render partial: 'admin/cluster_projects/table', locals: { cluster_projects: @cluster_projects }
 = safe_paginate @cluster_projects
