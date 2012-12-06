@@ -3,12 +3,7 @@
 table class="table table-bordered noprint"
   tr
     th = Organization.model_name.human
-    td = link_to_organization @surety.organization
-  tr
-    th = User.model_name.human
-    td
-      = link_to_user @surety.user
-      = render partial: 'memberships/summary', locals: { memberships: @surety.user.memberships.active }
+    td = @surety.organization.name
   tr
     th = Surety.human_attribute_name(:state)
     td id="surety-#{@surety.id}-status" = @surety.human_state_name
@@ -19,26 +14,6 @@ div class="link-actions noprint"
   = link_to 'Скачать RTF', surety_path(@surety, format: :rtf), class: 'btn'
   = " "
   = link_to 'Загрузить скан', [@surety, :scan], class: 'btn'
-  - if can? :index, :versions
-    = " "
-    = link_to 'Версии', [@surety, :versions], class: 'btn'
-  - if admin?
-    - if @surety.can__activate?
-      = " "
-      = link_to Surety.human_state_event_name(:_activate), surety_activate_path(@surety), class: 'btn btn-success', method: :put
-    
-    - if @surety.can__decline?
-      = " "
-      = link_to Surety.human_state_event_name(:_decline), surety_decline_path(@surety), class: 'btn', method: :put
-      
-    - if @surety.can__confirm?
-      = " "
-      = link_to Surety.human_state_event_name(:_confirm), surety_confirm_path(@surety), class: 'btn', method: :put
-    
-    - if @surety.can__unconfirm?
-      = " "
-      = link_to Surety.human_state_event_name(:_unconfirm), surety_unconfirm_path(@surety), class: 'btn', method: :put
-    
   - if @surety.can__close?
     = " "
     = link_to Surety.human_state_event_name(:_close), surety_close_path(@surety), class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }

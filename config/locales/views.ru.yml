@@ -35,6 +35,8 @@ ru:
       requests: Заявки
       clusters: Кластеры
       profile: Профиль
+      tickets: Поддержка
+      pages: Справка
   credentials:
     new:
       title: Новый публичный ключ
