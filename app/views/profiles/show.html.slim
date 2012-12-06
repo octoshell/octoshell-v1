@@ -27,24 +27,7 @@ p = link_to t('.new_membership'), new_membership_path
   p Нет сотрудников
 
 h3 Поручительства
-- sureties = @user.sureties
-- if sureties.any?
-  table class="table table-bordered"
-    tr
-      th class="span1" #
-      th = Organization.model_name.human
-      th = Project.model_name.human
-      th = Surety.human_attribute_name(:state)
-      th
-    - sureties.each do |surety|
-      tr id="surety-#{surety.id}"
-        td = surety.id
-        td = surety.organization.name
-        td = link_to_project surety.project
-        td = surety.human_state_name
-        td = link_to_surety surety
-- else
-  p Нет поручительств
+= render partial: 'sureties/full_table', locals: { sureties: @user.sureties }
 
 h3 Публичные ключи
 p = link_to t('.new_credential'), new_credential_path
