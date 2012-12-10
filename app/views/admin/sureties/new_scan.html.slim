@@ -1,9 +1,0 @@
-- title 'Загрузка скана'
-
-= form_tag [@surety, :scan], class: 'form-horizontal', multipart: true do
-  div class="control-group"
-    = label_tag :file, 'Файл', class: 'control-label'
-    div class="controls"
-      = file_field_tag :file
-  div class="form-actions"
-    = button_tag 'Загрузить', class: 'btn'

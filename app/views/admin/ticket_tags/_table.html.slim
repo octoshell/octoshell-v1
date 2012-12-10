@@ -8,8 +8,8 @@
     - ticket_tags.each do |ticket_tag|
       tr
         td = ticket_tag.id
-        td = link_to_ticket_tag ticket_tag
+        td = link_to_admin_ticket_tag ticket_tag
         td = ticket_tag.human_state_name
-        td = link_to 'редактировать', [:edit, ticket_tag]
+        td = link_to 'редактировать', [:edit, :admin, ticket_tag]
 - else
   p Нет тегов

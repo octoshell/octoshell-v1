@@ -6,8 +6,6 @@
 = f.input :middle_name
 = f.input :avatar
 = f.input :phone
-- if can?(:admin, :users) && f.object.persisted?
-  = f.input :admin
 - if f.object.persisted?
   h4 Дополнительные email для нотификаций
   = f.fields_for :additional_emails do |f|

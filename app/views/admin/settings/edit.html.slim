@@ -1,6 +1,6 @@
 - title 'Редактирование настроек'
 
-= simple_form_for @settings, url: settings_path do |f|
+= simple_form_for [:admin, @settings], url: settings_path do |f|
   = f.input :surety_ticket_question_id, collection: TicketQuestion.active, label: 'Вопрос тикета "Загрузка скана поручительства"', label_method: :question
   div class="form-actions"
     = f.button :submit

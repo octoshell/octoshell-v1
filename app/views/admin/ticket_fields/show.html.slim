@@ -1,10 +1,10 @@
 - title "Дополнительное поле #{@ticket_field.name}"
 
 div class="link-actions"
-  = link_to 'Редактировать', edit_ticket_field_path(@ticket_field), class: 'btn'
+  = link_to 'Редактировать', edit_admin_ticket_field_path(@ticket_field), class: 'btn'
   - if @ticket_field.can__close?
     = " "
-    = link_to TicketField.human_state_event_name(:_close), ticket_field_close_path(@ticket_field), method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
+    = link_to TicketField.human_state_event_name(:_close), admin_ticket_field_close_path(@ticket_field), method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
   = " "
   = link_to 'Версии', [@ticket_field, :versions], class: 'btn'
 

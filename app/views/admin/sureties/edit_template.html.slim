@@ -2,7 +2,7 @@
 
 h2 HTML шаблон
 
-= form_tag template_sureties_path, method: :put, class: 'form-horizontal' do
+= form_tag template_admin_sureties_path, method: :put, class: 'form-horizontal' do
   div class="control-group"
     = label_tag :template, 'Шаблон', class: 'control-label'
     div class="controls"
@@ -14,7 +14,7 @@ h2 RTF шаблон
 
 p = link_to 'Скачать текущий шаблон', rtf_template_sureties_path
 
-= form_tag rtf_template_sureties_path, method: :put, class: 'form-horizontal' do
+= form_tag rtf_template_admin_sureties_path, method: :put, class: 'form-horizontal' do
   div class="control-group"
     = label_tag :template, 'RTF шаблон', class: 'control-label'
     div class="controls"
@@ -40,5 +40,5 @@ markdown:
   `.noprint` - скрытие элемента при печати
 
 h2 Если все сломалось:
-p = link_to 'Вернуть html шаблон по умолчанию', default_sureties_path, method: :put, confirm: 'Вы уверены?'
-p = link_to 'Вернуть rtf шаблон по умолчанию', default_rtf_sureties_path, method: :put, confirm: 'Вы уверены?'
+p = link_to 'Вернуть html шаблон по умолчанию', default_admin_sureties_path, method: :put, confirm: 'Вы уверены?'
+p = link_to 'Вернуть rtf шаблон по умолчанию', default_rtf_admin_sureties_path, method: :put, confirm: 'Вы уверены?'

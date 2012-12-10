@@ -10,23 +10,22 @@ div class="link-actions"
     = " "
     = link_to User.human_state_event_name(:_close), [:admin, @user, :close], class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены что хотите закрыть пользователя? Это закроет все его проекты (созданные им), поручительства, места работы, тикеты и ключи доступа.' }
 
-- if admin?
-  table class="table table-bordered"
-    tr
-      th class="span4" = User.human_attribute_name(:first_name)
-      td = @user.first_name
-    tr
-      th = User.human_attribute_name(:last_name)
-      td = @user.last_name
-    tr
-      th = User.human_attribute_name(:email)
-      td = @user.email
-    tr
-      th = User.human_attribute_name(:state)
-      td = @user.human_state_name
-    tr
-      th = User.human_attribute_name(:phone)
-      td = @user.phone
+table class="table table-bordered"
+  tr
+    th class="span4" = User.human_attribute_name(:first_name)
+    td = @user.first_name
+  tr
+    th = User.human_attribute_name(:last_name)
+    td = @user.last_name
+  tr
+    th = User.human_attribute_name(:email)
+    td = @user.email
+  tr
+    th = User.human_attribute_name(:state)
+    td = @user.human_state_name
+  tr
+    th = User.human_attribute_name(:phone)
+    td = @user.phone
 
 div class="row"
   div class="span2"

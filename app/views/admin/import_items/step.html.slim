@@ -1,6 +1,6 @@
 - title "Импорт #{@import.id} / #{ImportItem.maximum(:id)}"
 
-= form_for @import, url: [@import, :import] do |f|
+= form_for @import, url: [:admin, @import, :import] do |f|
   
   h3 Пользователь
   

@@ -1,7 +1,7 @@
 - title 'Расширения'
 
 div class="link-actions"
-  = link_to 'Новое расширение', new_extend_path, class: "btn"
+  = link_to 'Новое расширение', new_admin_extend_path, class: "btn"
 
 - if @extends.any?
   table class="table table-bordered"
@@ -14,8 +14,8 @@ div class="link-actions"
         td = extend.url
         td = extend.script
         td
-          = link_to 'редактировать', [:edit, extend]
+          = link_to 'редактировать', [:edit, :admin, extend]
           = " / "
-          = link_to 'удалить', extend, method: :delete, confirm: 'Вы уверены?'
+          = link_to 'удалить', [:admin, extend], method: :delete, confirm: 'Вы уверены?'
 - else
   p Нет расширений

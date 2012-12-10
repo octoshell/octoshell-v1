@@ -13,7 +13,7 @@ p = link_to 'Вернуться к пользователю', @user
         == item.title.mb_chars.downcase
         |  
   
-  p = link_to 'Вернуться к пользователю', @user
+  p = link_to 'Вернуться к пользователю', [:admin, @user]
 - else
   p Нет записанный в историю событий
 

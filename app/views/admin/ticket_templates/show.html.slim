@@ -1,10 +1,10 @@
 - title 'Шаблон ответа'
 
 div class="link-actions"
-  = link_to 'Редактировать', [:edit, @ticket_template], class: 'btn'
+  = link_to 'Редактировать', [:admin, :edit, @ticket_template], class: 'btn'
   - if @ticket_template.can__close?
     = " "
-    = link_to TicketTemplate.human_state_event_name(:_close), [@ticket_template, :close], method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
+    = link_to TicketTemplate.human_state_event_name(:_close), [:admin, @ticket_template, :close], method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
   = " "
   = link_to 'Версии', [@ticket_template, :versions], class: 'btn'
 

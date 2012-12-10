@@ -8,7 +8,7 @@ table class="table table-bordered"
     th = Version.human_attribute_name(:created_at)
   - @versions.each do |version|
     tr
-      td = link_to model.model_name.human, version.item
+      td = link_to model.model_name.human, [:admin, version.item]
       td = version.event
       td
         - if (changes = version.changeset) && changes.any? && (record = version.reify)

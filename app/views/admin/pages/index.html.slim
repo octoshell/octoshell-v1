@@ -1,8 +1,7 @@
 - title 'Справка'
 
-- if admin?
-  div class="link-actions"
-    = link_to 'Новая страница', new_page_path, class: 'btn'
+div class="link-actions"
+  = link_to 'Новая страница', new_page_path, class: 'btn'
 
 - if @pages.any?
   ul

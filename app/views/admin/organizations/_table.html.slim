@@ -23,4 +23,4 @@ table class="table table-bordered"
       td = organization.kind
       td = organization.human_state_name
       td = organization.active_projects_count
-      td = link_to 'открыть', organization
+      td = link_to 'открыть', [:admin, organization]

@@ -4,14 +4,14 @@
   = render partial: 'list', locals: { ticket_questions: TicketQuestion.root.active, highlight: @ticket_question.id }
 
 div class="link-actions"
-  = link_to 'Редактировать', edit_ticket_question_path(@ticket_question), class: 'btn'
+  = link_to 'Редактировать', edit_admin_ticket_question_path(@ticket_question), class: 'btn'
   = " "
-  = link_to 'Новый вопрос', new_ticket_question_path(ticket_question: { ticket_question_id: @ticket_question.id }), class: 'btn'
+  = link_to 'Новый вопрос', new_admin_ticket_question_path(ticket_question: { ticket_question_id: @ticket_question.id }), class: 'btn'
   - if @ticket_question.can__close?
     = " "
     = link_to TicketQuestion.human_state_event_name(:_close), [@ticket_question, :close], method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
   = " "
-  = link_to 'Версии', [@ticket_question, :versions], class: 'btn'
+  = link_to 'Версии', [:admin, @ticket_question, :versions], class: 'btn'
 
 table class="table table-bordered"
   tr
@@ -23,12 +23,11 @@ table class="table table-bordered"
 
 h2 Дополнительные поля
 
-
 div class="link-actions"
-  = link_to 'Новое поле', new_ticket_field_path, class: 'btn'
+  = link_to 'Новое поле', new_admin_ticket_field_path, class: 'btn'
 
 - if @ticket_question.ticket_field_relations.any?
-  = form_for @ticket_question do |f|
+  = form_for [:admin, @ticket_question] do |f|
     table class="table table-bordered"
       tr
         th = TicketFieldRelation.human_attribute_name(:ticket_field)

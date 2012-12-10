@@ -1,4 +1,4 @@
-= simple_form_for ticket_tag, remote: true, html: { class: 'form-inline' } do |f|
+= simple_form_for [:admin, ticket_tag], remote: true, html: { class: 'form-inline' } do |f|
   legend Новый тег
   = f.text_field :name, class: 'input-small'
   = " "

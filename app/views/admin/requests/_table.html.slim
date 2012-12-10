@@ -3,8 +3,7 @@
     tr
       th class="span1" #
       th = Project.model_name.human
-      - if admin?
-        th = User.model_name.human
+      th = User.model_name.human
       th = Cluster.model_name.human
       th = Request.human_attribute_name(:state)
       th = Request.human_attribute_name(:created_at)
@@ -12,9 +11,8 @@
     - requests.each do |request|
       tr id="request-#{request.id}" class="js-request-#{request.id}"
         td = request.id
-        td = link_to_project request.project
-        - if admin?
-          td = link_to_admin_user request.user
+        td = link_to_admin_project request.project
+        td = link_to_admin_user request.user
         td = link_to_admin_cluster request.cluster
         td = request.human_state_name
         td class="date" = request.created_at.strftime("%Y-%m-%d")

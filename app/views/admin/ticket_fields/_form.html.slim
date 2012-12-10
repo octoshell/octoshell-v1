@@ -1,4 +1,4 @@
-= simple_form_for @ticket_field, html: { class: 'form-horizontal' } do |f|
+= simple_form_for [:admin, @ticket_field], html: { class: 'form-horizontal' } do |f|
   = f.input :name
   = f.input :hint
   

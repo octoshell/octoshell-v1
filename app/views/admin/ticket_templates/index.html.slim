@@ -1,10 +1,9 @@
 - title 'Шаблоны ответов'
 
 div class="link-actions"
-  = link_to 'Новый шаблон ответа', new_ticket_template_path, class: 'btn'
+  = link_to 'Новый шаблон ответа', new_admin_ticket_template_path, class: 'btn'
 
-
-= simple_form_for @search, url: ticket_templates_path, method: :get, html: { class: 'form-horizontal' } do |f|
+= simple_form_for [:admin, @search], method: :get, html: { class: 'form-horizontal' } do |f|
   = f.input :state_in, collection: TicketTemplate.human_state_names, input_html: { multiple: true }
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'

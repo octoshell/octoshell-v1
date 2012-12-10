@@ -1,9 +1,9 @@
 - title 'Организации'
 
 div class="link-actions"
-  = link_to 'Новая организация', new_organization_path, class: 'btn'
+  = link_to 'Новая организация', new_admin_organization_path, class: 'btn'
 
-= simple_form_for @search, url: organizations_path, method: :get, html: { class: 'form-horizontal' } do |f|
+= simple_form_for [:admin, @search], method: :get, html: { class: 'form-horizontal' } do |f|
   = autocomplete :organization, f, name: :id_eq, label: "Название"
   = f.input :abbreviation_contains, required: false
   = f.input :organization_kind_id_eq, collection: OrganizationKind.all, required: false

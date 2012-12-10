@@ -1,4 +1,4 @@
-= simple_form_for @organization_kind, html: { class: 'form-horizontal' } do |f|
+= simple_form_for [:admin, @organization_kind], html: { class: 'form-horizontal' } do |f|
   = f.input :name
   
   div class="form-actions"

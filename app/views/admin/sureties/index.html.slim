@@ -3,7 +3,7 @@
 div class="link-actions"
     = link_to 'Шаблон', template_admin_sureties_path, class: 'btn'
 
-= simple_form_for @search, url: sureties_path, method: :get, html: { class: 'form-horizontal' } do |f|
+= simple_form_for [:admin, @search], method: :get, html: { class: 'form-horizontal' } do |f|
   = f.input :id_eq
   = autocomplete :organization, f
   = f.input :state_in, collection: Surety.human_state_names, input_html: { multiple: true }
@@ -11,7 +11,5 @@ div class="link-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
 
 = safe_paginate @sureties
-
 = render partial: 'admin/sureties/table', locals: { sureties: @sureties }
-
 = safe_paginate @sureties

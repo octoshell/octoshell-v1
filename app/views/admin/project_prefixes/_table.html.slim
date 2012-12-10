@@ -7,8 +7,8 @@
       tr
         td = project_prefix.name
         td
-          = link_to t('.edit'), [:edit, project_prefix]
+          = link_to t('.edit'), [:edit, :admin, project_prefix]
           |  
-          = link_to t('.destroy'), project_prefix, method: :delete, class: 'danger', data: { confirm: 'Вы уверены?' }
+          = link_to t('.destroy'), [:admin, project_prefix], method: :delete, class: 'danger', data: { confirm: 'Вы уверены?' }
 - else
   p = t('.there_are_no_project_prefixes')

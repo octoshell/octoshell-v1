@@ -1,7 +1,7 @@
 - title t('.groups')
 
 div class="link-actions"
-  = link_to t('.new_group'), new_group_path, class: 'btn'
+  = link_to t('.new_group'), new_admin_group_path, class: 'btn'
 
 table class="table table-bordered"
   tr
@@ -11,6 +11,6 @@ table class="table table-bordered"
     tr class="js-group-#{group.id}"
       td = group.name
       td
-        = link_to t('.edit'), [:edit, group]
+        = link_to t('.edit'), [:edit, :admin, group]
         |  / 
-        = link_to t('.destroy'), group, method: :delete, data: { confirm: t('.confirm_destroy') }, class: 'danger'
+        = link_to t('.destroy'), [:admin, group], method: :delete, data: { confirm: t('.confirm_destroy') }, class: 'danger'

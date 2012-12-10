@@ -1,6 +1,6 @@
 - title 'Пользователи'
 
-= simple_form_for @search, url: users_path, method: :get, html: { class: 'form-horizontal' } do |f|
+= simple_form_for [:admin, @search], method: :get, html: { class: 'form-horizontal' } do |f|
   = autocomplete :user, f, label: "ФИО или email", name: :id_eq
   = autocomplete :organization, f, name: :memberships_organization_id_eq
   = f.input :accounts_cluster_users_username_eq, label: 'Login (на кластере)', required: false
