@@ -50,17 +50,17 @@ html
                 ul class="unstyled collapse" id="help-list"
                   - @wikis.each do |wiki|
                     li = link_to wiki.name, page_path(wiki.url)
-      - if admin?
+      - if may? :use, :extends
         javascript:
           $(document).ready(function(){
             #{@page_extends.map { |extend| "$.getScript('/run/#{extend.script}?page=#{URI.escape(request.path)}')" }.join(';').html_safe}
           })
-      - if admin?
+      - if may? :use, :extends
         div id="extend"
           - @page_extends.each do |extend|
             = load_bar(extend, :header)
       = yield
-      - if admin?
+      - if may? :use, :extends
         div id="extend-footer"
           - @page_extends.each do |extend|
             = load_bar(extend, :footer)

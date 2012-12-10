@@ -50,7 +50,7 @@ h2 Переписка
   = select_tag :ticket_template, options_from_collection_for_select(TicketTemplate.active, :message, :subject), prompt: 'Шаблоны ответа'
   = simple_form_for @reply, html: { class: 'form-horizontal' } do |f|
     = f.input :ticket_id, as: :hidden
-    = f.input :message, input_html: { rows: 5, class: 'span6' }, hint: (admin? ? link_to('Создать шаблон из текущего сообщения', new_ticket_template_path, id: 'ticket-template-maker', target: '_blank') : nil)
+    = f.input :message, input_html: { rows: 5, class: 'span6' }, hint: link_to('Создать шаблон из текущего сообщения', new_ticket_template_path, id: 'ticket-template-maker', target: '_blank')
     = f.input :attachment
     div class="form-actions"
       = f.button :submit, class: 'btn-primary'

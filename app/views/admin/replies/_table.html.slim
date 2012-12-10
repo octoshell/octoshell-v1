@@ -7,7 +7,7 @@
           small  #{time_tag(reply.created_at)}
     div class="row"
       div class="span8"
-        blockquote class="#{reply.user.admin? ? 'admin' : 'user'}"
+        blockquote class="#{reply.user_id == reply.ticket.user_id ? 'admin' : 'user'}"
           p = reply.message
           small class="reply"
             = smart_link_to reply

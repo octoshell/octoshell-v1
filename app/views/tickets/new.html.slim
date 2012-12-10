@@ -23,8 +23,6 @@ ul class="breadcrumb"
     = f.association :ticket_question, collection: @ticket.ticket_questions, label_method: :question, prompt: 'Выберите вариант'
   - else
     = f.hidden_field :ticket_question_id
-    
-  = f.association :user, label_method: :full_name if admin?
   
   - if f.object.show_form?
     = f.input :subject

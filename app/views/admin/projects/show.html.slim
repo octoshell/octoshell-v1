@@ -54,8 +54,6 @@ h3 Доступы
   h3 Поручительства
   = render partial: 'sureties/table', locals: { sureties: @project.sureties }
 
-- if admin?
-  
 - @project.cluster_projects.each do |cluster_project|
   - if cluster_project.has_active_entities?
     h4
