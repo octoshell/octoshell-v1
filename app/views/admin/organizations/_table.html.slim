@@ -18,7 +18,7 @@ table class="table table-bordered"
   - organizations.each do |organization|
     tr
       td = organization.id
-      td = link_to_admin_organization organization
+      td = smart_link_to organization
       td = organization.abbreviation
       td = organization.kind
       td = organization.human_state_name

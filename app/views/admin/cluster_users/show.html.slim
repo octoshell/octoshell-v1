@@ -8,13 +8,13 @@ div class="link-actions"
 table class="table table-bordered" id="cluster-user-#{@cluster_user.id}-detail"
   tr
     th class="span4" = Project.model_name.human
-    td = link_to_admin_project @cluster_user.project
+    td = smart_link_to @cluster_user.project
   tr
     th = Cluster.model_name.human
-    td = link_to_admin_cluster @cluster_user.cluster
+    td = smart_link_to @cluster_user.cluster
   tr
     th = ClusterProject.model_name.human
-    td = link_to_admin_cluster_project @cluster_user.cluster_project, 'Проект на кластере'
+    td = smart_link_to кластере'
   tr
     th = ClusterUser.human_attribute_name(:state)
     td = @cluster_user.human_state_name

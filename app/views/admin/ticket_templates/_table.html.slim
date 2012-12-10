@@ -8,7 +8,7 @@
     - ticket_templates.each do |ticket_template|
       tr
         td = ticket_template.id
-        td = link_to_admin_ticket_template ticket_template
+        td = smart_link_to ticket_template
         td = ticket_template.human_state_name
         td = link_to 'редактировать', [:edit, ticket_template]
 - else

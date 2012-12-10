@@ -2,7 +2,7 @@
   ul class="unstyled"
     - memberships.each do |membership|
       li
-        = link_to_admin_organization membership.organization
+        = smart_link_to membership.organization
         |  - 
         small = membership.positions.map { |p| "#{p.name}: #{p.value}" }.join(', ')
 - else

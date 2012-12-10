@@ -16,10 +16,10 @@
       tr id="ticket-#{ticket.id}"
         td = ticket.id
         td = link_to_ticket(ticket)
-        td = link_to_admin_user(ticket.user)
+        td = smart_link_to(ticket.user)
         td = ticket.human_state_name
-        td = link_to_project ticket.project if ticket.project
-        td = link_to_admin_cluster ticket.cluster if ticket.cluster
+        td = smart_link_to ticket.project
+        td = smart_link_to ticket.cluster
         td = ticket.created_at.strftime("%Y-%m-%d")
 - else
   p Нет заявок

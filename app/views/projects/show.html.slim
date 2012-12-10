@@ -82,7 +82,7 @@ h3 Доступы
           td = surety.human_state_name
           td
             - if can? :show, surety
-              = link_to_surety surety
+              = smart_link_to surety
   - else
     p Нет поручительств
   

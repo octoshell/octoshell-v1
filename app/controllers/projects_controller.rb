@@ -97,10 +97,6 @@ class ProjectsController < ApplicationController
   end
   
 private
-  
-  def namespace
-    admin? ? :admin : :dashboard
-  end
 
   def find_project(id)
     current_user.all_projects.find(id)

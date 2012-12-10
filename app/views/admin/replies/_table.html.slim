@@ -3,13 +3,13 @@
     div class="row"
       div class="span8"
         p
-          strong = link_to_admin_user reply.user
+          strong = smart_link_to reply.user
           small  #{time_tag(reply.created_at)}
     div class="row"
       div class="span8"
         blockquote class="#{reply.user.admin? ? 'admin' : 'user'}"
           p = reply.message
           small class="reply"
-            = link_to_attachment reply
+            = smart_link_to reply
 - else
   p Нет сообщений

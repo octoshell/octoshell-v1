@@ -22,15 +22,15 @@ table class="table table-bordered"
   - users.each do |user|
     tr
       td = user.id
-      td = link_to_admin_user user
+      td = smart_link_to user
       td = user.email
       td
         ul class="unstyled"
           - user.membershiped_organizations.to_a.uniq.each do |organization|
-            li = link_to_admin_organization(organization)
+            li = smart_link_to organization
       td
         ul class="unstyled"
           - user.active_clusters.each do |cluster|
-            li = link_to_admin_cluster(cluster)
+            li = smart_link_to(cluster)
       td = user.human_state_name
       td class="date" = user.created_at.strftime("%Y-%m-%d")

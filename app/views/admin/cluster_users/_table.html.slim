@@ -11,11 +11,11 @@
     - cluster_users.each do |cluster_user|
       tr id="cluster-user-#{cluster_user.id}"
         td = cluster_user.id
-        td = link_to_project cluster_user.project
-        td = link_to_admin_cluster cluster_user.cluster
-        td = link_to_admin_user cluster_user.account.user
+        td = smart_link_to cluster_user.project
+        td = smart_link_to cluster_user.cluster
+        td = smart_link_to cluster_user.account.user
         td = cluster_user.username
         td = cluster_user.human_state_name
-        td = link_to_admin_cluster_user(cluster_user)
+        td = smart_link_to(cluster_user)
 - else
   p Нет пользователей на кластере

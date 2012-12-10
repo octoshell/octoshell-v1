@@ -9,7 +9,7 @@ div class="request"
     tr
       th class="span4" = Project.model_name.human
       td
-        strong = link_to_project @request.project
+        strong = smart_link_to @request.project
     tr
       th = Project.human_attribute_name(:description)
       td = @request.project.description

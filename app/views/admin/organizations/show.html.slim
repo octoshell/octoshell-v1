@@ -20,7 +20,7 @@ table class="table table-bordered"
     td = @organization.human_state_name
   tr
     th = Organization.human_attribute_name(:organization_kind_id)
-    td = link_to_admin_organization_kind @organization.organization_kind
+    td = smart_link_to @organization.organization_kind
 
 h3 Активные проекты
 = render partial: 'admin/projects/table', locals: { projects: @organization.projects.active.limit(10) }

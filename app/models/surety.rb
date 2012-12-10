@@ -197,4 +197,8 @@ class Surety < ActiveRecord::Base
       ticket.attachment = file
     end
   end
+
+  def link_name
+    "Surety #{id}"
+  end
 end

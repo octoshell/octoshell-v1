@@ -19,7 +19,7 @@ div class="link-actions"
 table class="table table-bordered"
   tr
     th class="span4" = Project.human_attribute_name(:user)
-    td = link_to_admin_user @project.user
+    td = smart_link_to @project.user
   tr
     th = Project.human_attribute_name(:state)
     td = @project.human_state_name
@@ -42,7 +42,7 @@ table class="table table-bordered"
         td = mail_to account_code.email
         td
           - if account_code.user
-            = link_to_admin_user account_code.user
+            = smart_link_to account_code.user
           - else
             | Нет
 
@@ -62,7 +62,7 @@ h3 Доступы
       | Группа пользователей 
       = link_to cluster_project.username, cluster_project
       |  на 
-      = link_to_admin_cluster cluster_project.cluster
+      = smart_link_to cluster_project.cluster
     p
       small Статус: #{cluster_project.human_state_name}
   
@@ -74,7 +74,7 @@ h3 Доступы
             | Пользователь на кластере 
             = link_to cluster_user.username, cluster_user
             |  для 
-            = link_to_admin_user cluster_user.account.user
+            = smart_link_to cluster_user.account.user
           p
             small Статус: #{cluster_user.human_state_name}
     

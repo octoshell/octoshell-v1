@@ -39,4 +39,8 @@ class Cluster < ActiveRecord::Base
   def requests
     Request.where(cluster_project_id: cluster_project_ids)
   end
+
+  def link_name
+    name
+  end
 end

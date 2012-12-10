@@ -10,10 +10,10 @@
     - clusters.each do |cluster|
       tr id="cluster-#{cluster.id}"
         td = cluster.id
-        td = link_to_admin_cluster cluster
+        td = smart_link_to cluster
         td = cluster.host
         td = cluster.description
         td = cluster.human_state_name
-        td = link_to_admin_cluster cluster, 'открыть'
+        td = smart_link_to cluster, 'открыть'
 - else
   p Нет кластеров

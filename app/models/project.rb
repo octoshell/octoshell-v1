@@ -112,6 +112,10 @@ class Project < ActiveRecord::Base
   def login
     "#{project_prefix}#{username}"
   end
+
+  def link_name
+    name
+  end
   
 private
   

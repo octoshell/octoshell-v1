@@ -8,10 +8,10 @@ div class="link-actions"
 table class="table table-bordered" id="cluster-project-#{@cluster_project.id}-detail"
   tr
     th class="span4" = Project.model_name.human
-    td = link_to_project @cluster_project.project
+    td = smart_link_to @cluster_project.project
   tr
     th = Cluster.model_name.human
-    td = link_to_admin_cluster @cluster_project.cluster
+    td = smart_link_to @cluster_project.cluster
   tr
     th = ClusterProject.human_attribute_name(:state)
     td = @cluster_project.human_state_name

@@ -8,10 +8,10 @@ div class="link-actions"
 table class="table table-bordered" id="access-#{@access.id}-detail"
   tr
     th class="span4" = User.model_name.human
-    td = link_to_credential @access.credential
+    td = smart_link_to @access.credential
   tr
     th = ClusterUser.model_name.human
-    td = link_to_admin_cluster_user @access.cluster_user
+    td = smart_link_to @access.cluster_user
   tr
     th = Access.human_attribute_name(:state)
     td = @access.human_state_name

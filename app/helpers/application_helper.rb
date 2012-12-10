@@ -1,24 +1,5 @@
 # coding: utf-8
 module ApplicationHelper
-  def link_to_attribute(record, attribute, value)
-    if attribute.to_s =~ /_id$/
-      link_to_relation(record, attribute, value)
-    else
-      value
-    end
-  end
-  
-  def link_to_relation(record, attribute, value)
-    record.send("#{attribute}=", value)
-    relation = attribute.to_s[/(.*)_id$/, 1]
-    link_method = "link_to_#{relation}"
-    if respond_to?(link_method) && record.respond_to?(relation)
-      link = send link_method, record.send(relation)
-      record.send("#{attribute}=", record.send("#{attribute}_was"))
-      link
-    end
-  end
-  
   def title title
     content_for :title, title
   end
@@ -40,41 +21,12 @@ module ApplicationHelper
     controller_name == params[:controller].to_sym
   end
   
-  def link_to_admin_cluster(cluster)
-    return unless cluster
-    link_to_if can?(:show, cluster), cluster.name, [:admin, cluster]
-  end
-  
-  def link_to_admin_user(user)
-    return unless user
-    link_to_if (can? :show, user), user.full_name, [:admin, user]
-  end
-  
   def link_to_project(project)
     link_to project.name, project
-  end
-
-  def link_to_admin_project(project)
-    return unless project
-    link_to_if may?(:manage, :projects), project.name
   end
   
   def link_to_surety(surety)
     link_to 'открыть', surety
-  end
-
-  def link_to_admin_surety(surety)
-    link_to 'открыть', [:admin, surety]
-  end
-  
-  def link_to_admin_organization(organization)
-    return unless organization
-    link_to_if can?(:show, organization), organization.name, [:admin, organization]
-  end
-  
-  def link_to_admin_organization_kind(organization_kind)
-    return unless organization_kind
-    link_to_if can?(:show, organization_kind), organization_kind.name, organization_kind
   end
   
   def link_to_membership(membership)
@@ -87,44 +39,9 @@ module ApplicationHelper
     link_to_if can?(:show, credential), credential.name, credential
   end
   
-  def link_to_ticket_template(ticket_template)
-    return unless ticket_template
-    link_to_if can?(:show, ticket_template), ticket_template.subject, ticket_template
-  end
-  
-  def link_to_ticket_question(ticket_question)
-    return unless ticket_question
-    link_to_if can?(:show, ticket_question), ticket_question.question, ticket_question
-  end
-  
-  def link_to_ticket_field(ticket_field)
-    return unless ticket_field
-    link_to_if can?(:show, ticket_field), ticket_field.name, ticket_field
-  end
-  
-  def link_to_task(task)
-    return unless task
-    link_to_if can?(:show, task), "Задание ##{task.id}", task
-  end
-  
-  def link_to_admin_cluster_user(cluster_user)
-    return unless cluster_user
-    link_to_if can?(:show, cluster_user), cluster_user.username, cluster_user
-  end
-  
-  def link_to_task_resource(task)
-    return unless task
-    link_to_if can?(:show, task), task.resource.class.model_name.human, task.resource
-  end
-  
   def link_to_ticket(ticket)
     return unless ticket
     link_to_if can?(:show, ticket), ticket.subject, ticket
-  end
-  
-  def link_to_ticket_tag(ticket_tag)
-    return unless ticket_tag
-    link_to_if can?(:show, ticket_tag), ticket_tag.name, ticket_tag
   end
   
   def link_to_function(name, *args, &block)

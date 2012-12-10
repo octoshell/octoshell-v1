@@ -35,7 +35,7 @@ div class="link-actions"
         th = TicketFieldRelation.human_attribute_name(:required)
       = f.fields_for :ticket_field_relations do |f|
         tr
-          td = link_to_ticket_field f.object.ticket_field
+          td = smart_link_to f.object.ticket_field
           td = f.check_box :use
           td = f.check_box :required
     div class="form-actions"

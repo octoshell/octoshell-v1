@@ -8,7 +8,7 @@
     - ticket_fields.each do |field|
       tr
         td = field.id
-        td = link_to_admin_ticket_field field
+        td = smart_link_to field
         td = field.hint
         td
           = link_to 'редактировать', [:edit, field]

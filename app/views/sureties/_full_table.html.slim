@@ -10,8 +10,8 @@
       tr id="surety-#{surety.id}"
         td = surety.id
         td = surety.organization.name
-        td = link_to_project surety.project
+        td = smart_link_to surety.project
         td = surety.human_state_name
-        td = link_to_surety surety
+        td = smart_link_to surety
 - else
   p Нет поручительств

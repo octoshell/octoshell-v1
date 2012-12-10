@@ -12,7 +12,7 @@ div class="link-actions"
 table class="table table-bordered"
   tr
     th class="span4" = User.model_name.human
-    td = link_to_admin_user(@ticket.user)
+    td = smart_link_to(@ticket.user)
   tr
     th = Ticket.human_attribute_name(:subject)
     td = @ticket.subject
@@ -24,13 +24,13 @@ table class="table table-bordered"
     td = link_to @ticket.url, @ticket.url if @ticket.url?
   tr
     th = Ticket.human_attribute_name(:attachment)
-    td = link_to_attachment @ticket
+    td = smart_link_to @ticket
   tr
     th = Ticket.human_attribute_name(:project)
-    td = link_to_project(@ticket.project) if @ticket.project
+    td = smart_link_to @ticket.project
   tr
     th = Ticket.human_attribute_name(:cluster)
-    td = link_to_admin_cluster(@ticket.cluster) if @ticket.cluster
+    td = smart_link_to @ticket.cluster
   - @ticket.ticket_field_values.each do |value|
     tr
       th = value.ticket_field_relation.ticket_field.name

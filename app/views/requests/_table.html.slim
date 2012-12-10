@@ -10,7 +10,7 @@
     - requests.each do |request|
       tr id="request-#{request.id}" class="js-request-#{request.id}"
         td = request.id
-        td = link_to_project request.project
+        td = smart_link_to request.project
         td = request.cluster.name
         td = request.human_state_name
         td class="date" = request.created_at.strftime("%Y-%m-%d")

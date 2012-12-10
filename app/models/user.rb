@@ -253,6 +253,10 @@ class User < ActiveRecord::Base
       item.author_id = user ? user.id : nil
     end
   end
+
+  def link_name
+    full_name
+  end
   
 private
   
