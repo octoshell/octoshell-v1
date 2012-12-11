@@ -42,6 +42,12 @@ class Ability < ActiveRecord::Base
         end
       end
     end
+
+    def default
+      definitions.map do |definition|
+        new { |a| a.definition = definition }
+      end
+    end
   end
 
   def definition=(definition)

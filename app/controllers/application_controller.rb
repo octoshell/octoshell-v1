@@ -28,11 +28,11 @@ class ApplicationController < ActionController::Base
 
   def ability
     @ability ||= begin
-      a = MayMay::Ability.new(current_user)
-      current_user.abilities.each do |ability|
-        a.may ability.action_name, ability.subject_name
+      mm = MayMay::Ability.new(current_user)
+      (logged_in? ? current_user.abilities : Ability.default).each do |ability|
+        mm.may ability.action_name, ability.subject_name
       end
-      a
+      mm
     end
   end
   

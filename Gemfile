@@ -30,7 +30,7 @@ gem 'gravatar-ultimate'
 gem 'levenshtein-ffi', require: 'levenshtein'
 gem 'validates_email_format_of'
 gem 'virtus'
-gem 'maymay'
+gem 'maymay', '0.0.2'
 
 group :test, :development do
   gem 'quiet_assets'
