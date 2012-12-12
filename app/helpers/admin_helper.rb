@@ -21,6 +21,6 @@ module AdminHelper
   def smart_link_to(record, name = nil)
     return unless record
     name ||= record.link_name if record
-    link_to_if may?(:manage, record.models_name), name
+    link_to_if may?(:manage, record.models_name), name, [:admin, record]
   end
 end

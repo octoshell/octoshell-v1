@@ -1,7 +1,5 @@
 accesses:
   - manage
-accounts:
-  - manage
 clusters:
   - manage
 cluster_fields:
@@ -9,8 +7,6 @@ cluster_fields:
 cluster_projects:
   - manage
 cluster_users:
-  - manage
-credentials:
   - manage
 critical_technologies:
   - manage
@@ -26,15 +22,9 @@ images:
   - manage
 import_items:
   - manage
-membership:
-  - manage
 organizations:
   - manage
 organization_kinds:
-  - manage
-pages:
-  - manage
-positions:
   - manage
 position_names:
   - manage
@@ -42,11 +32,7 @@ projects:
   - manage
 project_prefixes:
   - manage
-replies:
-  - manage
 requests:
-  - manage
-request_properties:
   - manage
 settings:
   - manage
@@ -55,34 +41,26 @@ sureties:
   - confirm
   - unconfirm
   - activate
-  - close_own
   - close
   - decline
-surety_members:
-  - manage
 tasks:
   - manage
 tickets:
   - manage
 ticket_fields:
   - manage
-ticket_field_relations:
-  - manage
-ticket_field_values:
-  - manage
 ticket_questions:
   - manage
 ticket_tags:
-  - manage
-ticket_tag_relations:
   - manage
 ticket_templates:
   - manage
 users:
   - manage
-user_groups:
-  - manage
 pages:
   - manage
   - show_all
-  - show_publicized
+all:
+  - show_all
+admin:
+  - access

@@ -111,7 +111,10 @@ class User < ActiveRecord::Base
   end
 
   def abilities
-    Ability.where(group_id: group_ids, available: true)
+    sort = %{
+      (case when available then 1 when available is null then 2 else 3 end) asc
+    }
+    Ability.where(group_id: group_ids).order(sort).uniq_by(&:to_definition)
   end
   
   def all_projects

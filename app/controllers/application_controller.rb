@@ -30,7 +30,9 @@ class ApplicationController < ActionController::Base
     @ability ||= begin
       mm = MayMay::Ability.new(current_user)
       (logged_in? ? current_user.abilities : Ability.default).each do |ability|
-        mm.may ability.action_name, ability.subject_name
+        method = ability.available ? :may : :maynot
+        Rails.logger.info [method, ability.action_name, ability.subject_name].inspect
+        mm.send method, ability.action_name, ability.subject_name
       end
       mm
     end

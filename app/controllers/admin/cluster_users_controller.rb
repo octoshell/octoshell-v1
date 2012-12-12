@@ -1,6 +1,6 @@
 class Admin::ClusterUsersController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
-  before_filter { authorize! :manage, :cluster_projects }
+  before_filter { authorize! :manage, :cluster_users }
   
   def index
     @search = ClusterUser.search(params[:search])

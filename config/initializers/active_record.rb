@@ -40,7 +40,7 @@ module ActiveRecord
     end
 
     def models_name
-      self.class.model_name.underscore.to_sym
+      self.class.model_name.pluralize.underscore.to_sym
     end
   end
   

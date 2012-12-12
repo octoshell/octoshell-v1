@@ -58,17 +58,28 @@ ru:
   requests:
     table:
       open: открыть
-  groups:
-    index:
-      groups: Группы
-      new_group: Новая группа
-      edit: Редактировать
-      destroy: Удалить
-      confirm_destroy: Вы уверены?
-    edit:
-      edit_group: Редактирование Группы
-    form:
-      abilities: Доступы
+  admin:
+    groups:
+      index:
+        groups: Группы
+        new_group: Новая группа
+        edit: Редактировать
+        destroy: Удалить
+        confirm_destroy: Вы уверены?
+      edit:
+        edit_group: Редактирование Группы
+      form:
+        abilities: Доступы
+    project_prefixes:
+      index:
+        project_prefixes: Префиксы проектов
+      new:
+        new_project_prefix: Новый префиксы проектов
+      table:
+        there_are_no_project_prefixes: Нет префиксов проектов
+    clusters:
+      index:
+        title: Кластеры
   project_joiners:
     new:
       use_code: Использовать код
@@ -77,10 +88,3 @@ ru:
   clusters:
     index:
       title: Кластеры
-  project_prefixes:
-    index:
-      project_prefixes: Префиксы проектов
-    new:
-      new_project_prefix: Новый префиксы проектов
-    table:
-      there_are_no_project_prefixes: Нет префиксов проектов

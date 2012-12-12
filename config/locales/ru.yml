@@ -4,9 +4,70 @@ ru:
       manage: Полный доступ к Ключам на Кластере
     accounts:
       manage: Полный доступ к Доступам к Проектам
+    clusters:
+      manage: Полный доступ к Кластерам
+    cluster_fields:
+      manage: Полный доступ к Дополнительным Полям Кластера
+    cluster_projects:
+      manage: Польный доступ к Проектам на Кластере
+    cluster_users:
+      manage: Полный доступ к Пользователям на Кластере
+    critical_technologies:
+      manage: Полный доступ к Критическим Технологиям
+    direction_of_sciences:
+      manage: Полный доступ к Направлениям Науки
+    extends:
+      manage: Полный доступ к Расширениям
+    groups:
+      manage: Полный доступ к Группам
+    images:
+      manage: Полный доступ к Изображениям
+    import_items:
+      manage: Полный доступ к Импорту
+    history_items:
+      access: Просмотр Истории Пользователей
+    organizations:
+      manage: Полный доступ к Организациям
+    organization_kinds:
+      manage: Полный доступ к Типам Организации
+    position_names:
+      manage: Полный доступ к Названиям Позиций в Организациях
+    projects:
+      manage: Полный доступ к Проектам
     pages:
-      show_all: Просмотр всех страниц
-      show_publicized: Просмотр всех публичных страниц
+      manage: Полный доступ к Страницам Справке
+      show_all: Просмотр всех Страниц Справки
+    requests:
+      manage: Полный доступ к Заявкам на ресурсы
+    settings:
+      manage: Полный доступ к Настройкам
+    sureties:
+      manage: Полный доступ к Поручительствам
+      confirm: Предварительное одобрение поручительств
+      unconfirm: Снятие предварительного одобрение поручительств
+      activate: Активация поручительства
+      close: Закрытие поручительства
+      decline: Отказ в поручительстве
+    project_prefixes:
+      manage: Полный доступ к Префиксам Проектов
+    tasks:
+      manage: Полный доступ к Процедурам
+    tickets:
+      manage: Полный доступ к Заявкам в Поддержку
+    ticket_fields:
+      manage: Полный доступ к Дополнительным Полям к Заявкам в Поддержку
+    ticket_questions:
+      manage: Полный доступ к Вопросом к Заявкам в Поддержку
+    ticket_tags:
+      manage: Полный доступ к Тегам
+    ticket_templates:
+      manage: Полный доступ к Шаблонам ответов
+    users:
+      manage: Полный доступ к Пользователям
+    all:
+      show_all: Возможность просматривать все записи без пагинации
+    admin:
+      access: Доступ в Кабинет Администратора
   views:
     pagination:
       next: Следующая

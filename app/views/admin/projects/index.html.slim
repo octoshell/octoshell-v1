@@ -1,4 +1,4 @@
-- title t('.title')
+- title t('.title', default: 'Projects')
 
 = simple_form_for @search, url: projects_path, method: :get, html: { class: 'form-horizontal' } do |f|
   = autocomplete :project, f, label: "Название", name: :id_eq
