@@ -205,6 +205,9 @@ MSU::Application.routes.draw do
     resources :cluster_projects, only: [:index, :show, :new, :create, :edit, :update] do
       resources :versions, only: [:index, :show], resource: 'ClusterProject'
     end
+
+    # critical technologies
+    resources :critical_technologies, only: [:index, :new, :create, :edit, :update, :destroy]
   end
   
   # tickets

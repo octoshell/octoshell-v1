@@ -1,0 +1,16 @@
+- title t('.critical_technologies', default: 'Critical Technologies')
+
+- if @critical_technologies.any?
+  table class="table table-bordered"
+    tr
+      th = CriticalTechnology.human_attribute_name(:name)
+      th
+    - @critical_technologies.each do |critical_technology|
+      tr
+        td = critical_technology.name
+        td
+          = link_to t('.edit', default: 'Edit'), [:edit, :admin, critical_technology]
+          |  / 
+          = link_to t('.destroy', default: 'Destroy'), [:admin, critical_technology], method: :delete, data: { confirm: t('.confirm_destroy', default: 'Are you sure?') }, class: 'danger'
+- else
+  p = t('.no_critical_technologies', default: 'There is no critical technology yet')

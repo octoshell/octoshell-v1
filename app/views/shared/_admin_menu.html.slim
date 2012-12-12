@@ -11,6 +11,7 @@ li class="dropdown"
   ul class="dropdown-menu"
     = submenu_item :'admin/organizations', (link_to t('.organizations'), admin_organizations_path)
     = submenu_item :'admin/organization_kinds', (link_to t('.organization_kinds'), admin_organization_kinds_path)
+    = submenu_item :'admin/critical_technologies', (link_to t('.critical_technologies', default: 'Critical Technologies'), admin_critical_technologies_path)
     = submenu_item :'admin/position_names', (link_to t('.position_names'), admin_position_names_path)
     = submenu_item :'admin/accesses', (link_to t('.accesses'), admin_accesses_path)
     = submenu_item :'admin/cluster_projects', (link_to t('.cluster_projects'), admin_cluster_projects_path)
