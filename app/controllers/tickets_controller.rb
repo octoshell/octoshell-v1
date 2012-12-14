@@ -85,8 +85,7 @@ private
   end
   
   def setup_default_filter
-    states = admin? ? ['active'] : ['active', 'answered', 'resolved']
-    params[:search] ||= { state_in: states }
+    params[:search] ||= { state_in: ['active', 'answered', 'resolved'] }
     params[:meta_sort] ||= 'id.asc'
   end
 end

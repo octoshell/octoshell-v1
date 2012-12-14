@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def index
-    @pages = Page.all.find_all { |p| may?(:show, p) }
+    @pages = Page.all.find_all { |p| p.publicized or may?(:show_all, :pages) }
   end
   
   def show

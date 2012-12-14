@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   # rescue_from ActiveRecord::RecordInProcess, with: :record_in_process
   
   def dashboard
-    if admin?
+    if may? :access, :admin
       redirect_to admin_users_path
     elsif logged_in?
       redirect_to projects_path

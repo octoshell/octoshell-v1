@@ -29,7 +29,7 @@
               - accesses.each do |access|
                 li
                   small
-                    = link_to_credential(access.credential)
+                    = access.credential.name
                     |  
                   code = "#{access.cluster_user.username}@#{access.cluster_user.cluster_project.cluster.host}"
                   small class="state-#{access.state}" = " (#{access.human_active_state})"

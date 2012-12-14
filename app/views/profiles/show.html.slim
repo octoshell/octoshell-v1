@@ -22,7 +22,7 @@ p = link_to t('.new_membership'), new_membership_path
     - memberships.each do |membership|
       tr id="membership-#{membership.id}"
         td = membership.organization.name
-        td = smart_link_to membership
+        td = link_to_membership membership
 - else
   p Нет сотрудников
 
