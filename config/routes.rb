@@ -208,6 +208,9 @@ MSU::Application.routes.draw do
 
     # critical technologies
     resources :critical_technologies, only: [:index, :new, :create, :edit, :update, :destroy]
+    
+    # direction of sciences
+    resources :direction_of_sciences, only: [:index, :new, :create, :edit, :update, :destroy], path: 'directions_of_science'
   end
   
   # tickets

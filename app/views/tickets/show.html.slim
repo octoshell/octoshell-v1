@@ -1,16 +1,13 @@
 - title "Заявка ##{@ticket.id}"
 
-- if can?(:close, @ticket) || can?(:resolve, @ticket) || can?(:index, :versions)
-  div class="link-actions"
-    - if can? :edit, @ticket
-      = link_to 'Редактировать', [:edit, @ticket], class: 'btn'
-      = " "
-    = link_to Ticket.human_state_event_name(:_resolve), ticket_resolve_path(@ticket), method: :put, class: 'btn btn-success' if can?(:resolve, @ticket)
-    = " "
-    = link_to Ticket.human_state_event_name(:_close), ticket_close_path(@ticket), method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' } if can?(:close, @ticket)
-    - if can? :index, :versions
-      = " "
-      = link_to 'Версии', [@ticket, :versions], class: 'btn'
+div class="link-actions"
+  = link_to 'Редактировать', [:edit, @ticket], class: 'btn'
+  = " "
+  - if @ticket.can__resolve?
+    = link_to Ticket.human_state_event_name(:_resolve), ticket_resolve_path(@ticket), method: :put, class: 'btn btn-success'
+  = " "
+  - if @ticket.can__close?
+    = link_to Ticket.human_state_event_name(:_close), ticket_close_path(@ticket), method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
 
 table class="table table-bordered"
   tr
@@ -58,7 +55,7 @@ h2 Переписка
 - else
   p Нет сообщений
 
-- if can?(:create, @reply) && @ticket.actual?
+- if @ticket.actual?
   = simple_form_for @reply, html: { class: 'form-horizontal' } do |f|
     = f.input :ticket_id, as: :hidden
     = f.input :message, input_html: { rows: 5, class: 'span6' }

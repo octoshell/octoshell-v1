@@ -1,11 +1,11 @@
 class PagesController < ApplicationController
   def index
-    @pages = Page.all.find_all { |p| can?(:show, p) }
+    @pages = Page.all.find_all { |p| may?(:show, p) }
   end
   
   def show
     @page = find_page(params[:id])
-    authorize! :show, @page
+    authorize! :show_all, :pages unless @page.publicized
   end
   
 private

@@ -1,0 +1,20 @@
+- title t('.title', default: 'Directions of Science')
+
+div class="link-actions"
+  = link_to t('.new', default: 'New'), [:new, :admin, :direction_of_science], class: 'btn'
+
+- if @direction_of_sciences.any?
+  table class="table table-bordered"
+    tr
+      th = DirectionOfScience.human_attribute_name(:name)
+      th
+    - @direction_of_sciences.each do |direction|
+      tr
+        td = direction.name
+        td
+          = link_to t('.edit', default: 'Edit'), [:edit, :admin, direction]
+          |  / 
+          = link_to t('.destroy', default: 'Destroy'), [:admin, direction], method: :delete, data: { confirm: t('.confirm_destroy', default: 'Are you sure?') }, class: 'danger'
+- else
+  p = t('.no_directions_of_science')
+

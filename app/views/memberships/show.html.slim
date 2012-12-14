@@ -1,15 +1,11 @@
 - title 'Место работы'
 
-- if can?(:edit, @membership) || can?(:index, :versions)
   div class="link-actions"
-    - if can? :edit, @membership
-      = link_to 'Редактировать', edit_membership_path(@membership), class: 'btn'
-      = " "
-    - if can?(:close, @membership) && @membership.can__close?
+    = link_to 'Редактировать', edit_membership_path(@membership), class: 'btn'
+    = " "
+    - if @membership.can__close?
       = link_to Membership.human_state_event_name(:_close), membership_close_path(@membership), class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
       = " "
-    - if can? :index, :versions
-      = link_to 'Версии', [@membership, :versions], class: 'btn'
 
 table class="table table-bordered" id="membership-#{@membership.id}-detail"
   tr

@@ -16,7 +16,7 @@
                 strong = a.user.full_name
               - else
                 = a.user.full_name
-                - if can? :cancel, a
+                - if current_user.can_cancel_account? a
                   |  
                   small = link_to 'удалить', [a, :cancel], method: :put, confirm: 'Вы уверены?', class: 'danger'
             - if current_user.id == project.user_id

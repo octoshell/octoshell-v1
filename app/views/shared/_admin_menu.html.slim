@@ -12,6 +12,7 @@ li class="dropdown"
     = submenu_item :'admin/organizations', (link_to t('.organizations'), admin_organizations_path)
     = submenu_item :'admin/organization_kinds', (link_to t('.organization_kinds'), admin_organization_kinds_path)
     = submenu_item :'admin/critical_technologies', (link_to t('.critical_technologies', default: 'Critical Technologies'), admin_critical_technologies_path)
+    = submenu_item :'admin/direction_of_sciences', (link_to t('.direction_of_sciences', default: 'Direction of Science'), admin_direction_of_sciences_path)
     = submenu_item :'admin/position_names', (link_to t('.position_names'), admin_position_names_path)
     = submenu_item :'admin/accesses', (link_to t('.accesses'), admin_accesses_path)
     = submenu_item :'admin/cluster_projects', (link_to t('.cluster_projects'), admin_cluster_projects_path)
@@ -21,3 +22,4 @@ li class="dropdown"
     = submenu_item :'admin/import', (link_to t('.import'), admin_import_items_path)
     = submenu_item :'admin/project_prefixes', (link_to t('.project_prefixes'), admin_project_prefixes_path)
     = submenu_item :'admin/groups', (link_to t('.groups'), admin_groups_path)
+    

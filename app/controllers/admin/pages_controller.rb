@@ -1,6 +1,8 @@
 class Admin::PagesController < Admin::ApplicationController
   def index
-    @pages = Page.all.find_all { |p| can?(:show, p) }
+    @pages = Page.all.find_all do |p|
+      may? :show_all, :pages unless p.publicized
+    end
   end
   
   def new
@@ -9,10 +11,10 @@ class Admin::PagesController < Admin::ApplicationController
   
   def show
     @page = find_page(params[:id])
-    authorize! :show, @page
+    authorize! :show_all, :pages unless @page.publicized
   rescue ActiveRecord::RecordNotFound
-    if admin?
-      @page = Page.new({ url: params[:id], name: params[:id].capitalize }, as_role)
+    if may? :manage, :pages
+      @page = Page.new({ url: params[:id], name: params[:id].capitalize }, as: :admin)
       render :new
     else
       raise ActiveRecord::RecordNotFound
@@ -20,7 +22,7 @@ class Admin::PagesController < Admin::ApplicationController
   end
   
   def create
-    @page = Page.new(params[:page], as_role)
+    @page = Page.new(params[:page], as: :admin)
     if @page.save
       redirect_to @page
     else
@@ -34,7 +36,7 @@ class Admin::PagesController < Admin::ApplicationController
   
   def update
     @page = Page.find(params[:id])
-    if @page.update_attributes(params[:page], as_role)
+    if @page.update_attributes(params[:page], as: :admin)
       redirect_to @page
     else
       render :edit

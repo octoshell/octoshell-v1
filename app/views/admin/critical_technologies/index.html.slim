@@ -1,5 +1,8 @@
 - title t('.critical_technologies', default: 'Critical Technologies')
 
+div class="link-actions"
+  = link_to t('.new', default: 'New Critical Technology'), new_admin_critical_technology_path, class: 'btn'
+
 - if @critical_technologies.any?
   table class="table table-bordered"
     tr

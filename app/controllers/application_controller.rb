@@ -50,8 +50,7 @@ private
   end
   
   def not_authorized
-    path = can?(:show, :dashboards) ? dashboard_path : new_session_path
-    redirect_to path, alert: "У вас недостаточно прав для доступа в #{"http://#{request.host}#{request.fullpath}"}"
+    redirect_to root_path, alert: "У вас недостаточно прав для доступа в #{"http://#{request.host}#{request.fullpath}"}"
   end
   
   def after_login_path

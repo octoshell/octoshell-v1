@@ -40,9 +40,7 @@ p = link_to t('.new_credential'), new_credential_path
       th = Credential.human_attribute_name(:public_key)
       th = Credential.human_attribute_name(:state)
       th = Credential.human_attribute_name(:created_at)
-      - show_actions = credentials.any? { |c| c.active? && can?(:close, c) }
-      - if show_actions
-        th
+      th
     - credentials.each do |credential|
       tr
         td = credential.id
@@ -53,8 +51,7 @@ p = link_to t('.new_credential'), new_credential_path
         td = credential.human_state_name
         td = credential.created_at.to_formatted_s(:short)
         td 
-          - if credential.can__close?
-            = link_to Credential.human_state_event_name(:_close), credential_close_path(credential), method: :put, confirm: 'Вы действительно хотите закрыть ключ?', class: 'btn btn-danger'
+          = link_to Credential.human_state_event_name(:_close), credential_close_path(credential), method: :put, confirm: 'Вы действительно хотите закрыть ключ?', class: 'btn btn-danger'
 - else
   p Нет публичных ключей
 

@@ -260,6 +260,10 @@ class User < ActiveRecord::Base
   def link_name
     full_name
   end
+
+  def can_cancel_account?
+    
+  end
   
 private
   
