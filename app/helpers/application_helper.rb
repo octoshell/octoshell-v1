@@ -30,18 +30,15 @@ module ApplicationHelper
   end
   
   def link_to_membership(membership)
-    return unless membership
-    link_to_if can?(:show, membership), 'открыть', membership
+    link_to 'открыть', membership
   end
   
   def link_to_credential(credential)
-    return unless credential
-    link_to_if can?(:show, credential), credential.name, credential
+    link_to credential.name, credential
   end
   
   def link_to_ticket(ticket)
-    return unless ticket
-    link_to_if can?(:show, ticket), ticket.subject, ticket
+    link_to ticket.subject, ticket
   end
   
   def link_to_function(name, *args, &block)

@@ -21,11 +21,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def can?(*args)
-    Rails.logger.warn "REMOVE ME"
-  end
-  helper_method :can?
-
   def ability
     @ability ||= begin
       mm = MayMay::Ability.new(current_user)
@@ -39,11 +34,6 @@ class ApplicationController < ActionController::Base
   end
   
 private
-  
-  def admin?
-    current_user.admin? if logged_in?
-  end
-  helper_method :admin?
   
   def not_authenticated
     redirect_to new_session_path
@@ -102,7 +92,7 @@ private
   
   def get_wikis
     @wikis = Page.all.find_all do |page|
-      request.path =~ %r{#{page.locator}} if page.locator? && can?(:show, page)
+      request.path =~ %r{#{page.locator}} if page.locator? && (page.publicized or may?(:show_all, :pages))
     end
   end
   

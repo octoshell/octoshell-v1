@@ -114,7 +114,8 @@ class User < ActiveRecord::Base
     sort = %{
       (case when available then 1 when available is null then 2 else 3 end) asc
     }
-    Ability.where(group_id: group_ids).order(sort).uniq_by(&:to_definition)
+    abilities = Ability.where(group_id: group_ids).order(sort).uniq_by(&:to_definition)
+    abilities.any? ? abilities : Ability.default
   end
   
   def all_projects
@@ -261,8 +262,8 @@ class User < ActiveRecord::Base
     full_name
   end
 
-  def can_cancel_account?
-    
+  def can_cancel_account?(account)
+    owned_projects.map(&:account_ids).flatten.include?(account.id)
   end
   
 private
