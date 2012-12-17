@@ -114,6 +114,10 @@ class ClusterProject < ActiveRecord::Base
   def to_s
     username
   end
+
+  def link_name
+    username
+  end
   
 protected
   

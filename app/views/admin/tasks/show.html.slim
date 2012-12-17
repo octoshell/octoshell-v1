@@ -5,23 +5,23 @@ blockquote
 
 div class="link-actions"
   - if @task.can_perform_callbacks?
-    = link_to t('call_callbacks'), task_perform_callbacks_path(@task), class: 'btn', method: :put
+    = link_to t('call_callbacks'), [:admin, @task, :perform_callbacks], class: 'btn', method: :put
     = " "
   - if @task.can__retry?
-    = link_to 'Повторить задание', task_retry_path(@task), class: 'btn btn-warning', method: :put
+    = link_to 'Повторить задание', [:admin, @task, :retry], class: 'btn btn-warning', method: :put
   - if @task.can__resolve?
     = " "
-    = link_to Task.human_state_event_name(:_resolve), task_resolve_path(@task), class: 'btn btn-success', method: :put
+    = link_to Task.human_state_event_name(:_resolve), [:admin, @task, :resolve], class: 'btn btn-success', method: :put
   = " "
-  = link_to 'Версии', [@task, :versions], class: 'btn'
+  = link_to 'Версии', [:admin, @task, :versions], class: 'btn'
 
 table class="table table-bordered"
   tr
     th class="span3" = Task.human_attribute_name(:resource)
     td
-      p = link_to_task_resource(@task)
+      p = smart_link_to @task.resource
       - resource = @task.resource_type.underscore
-      = render partial: "#{resource.pluralize}/summary", locals: { resource.to_sym => @task.resource }
+      = render partial: "admin/#{resource.pluralize}/summary", locals: { resource.to_sym => @task.resource }
   tr
     th = Task.human_attribute_name(:procedure)
     td = @task.procedure

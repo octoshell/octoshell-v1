@@ -108,6 +108,10 @@ class ClusterUser < ActiveRecord::Base
   def has_active_entities?
     !closed? || accesses.any?(&:has_active_entities?)
   end
+
+  def link_name
+    username
+  end
   
 protected
   
