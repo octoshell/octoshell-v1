@@ -27,4 +27,8 @@ class OrganizationKind < ActiveRecord::Base
       organizations.non_closed.each &:close!
     end
   end
+
+  def link_name
+    name
+  end
 end

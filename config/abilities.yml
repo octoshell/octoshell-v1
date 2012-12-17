@@ -1,5 +1,7 @@
 accesses:
   - manage
+accounts:
+  - manage
 clusters:
   - manage
 cluster_fields:

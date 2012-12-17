@@ -21,13 +21,13 @@ table class="table table-bordered"
     td = link_to @ticket.url, @ticket.url if @ticket.url?
   tr
     th = Ticket.human_attribute_name(:attachment)
-    td = smart_link_to @ticket
+    td = link_to_ticket @ticket
   tr
     th = Ticket.human_attribute_name(:project)
-    td = smart_link_to @ticket.project
+    td = link_to_project @ticket.project if @ticket.project
   tr
     th = Ticket.human_attribute_name(:cluster)
-    td = smart_link_to @ticket.cluster
+    td = link_to_cluster @ticket.cluster if @ticket.project
   - @ticket.ticket_field_values.each do |value|
     tr
       th = value.ticket_field_relation.ticket_field.name

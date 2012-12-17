@@ -12,7 +12,7 @@ div class="link-actions"
   = link_to 'Редактировать', edit_admin_cluster_path(@cluster), class: 'btn'
   - if @cluster.can__close?
     = " "
-    = link_to Cluster.human_state_event_name(:_close), cluster_close_path(@cluster), method: :put, data: { confirm: 'Вы действительно хотите закрыть кластер? Все заявки автоматически отменятся.' }, class: 'btn btn-danger'
+    = link_to Cluster.human_state_event_name(:_close), [:admin, @cluster], method: :put, data: { confirm: 'Вы действительно хотите закрыть кластер? Все заявки автоматически отменятся.' }, class: 'btn btn-danger'
   = " "
   = link_to 'Версии', [:admin, @cluster, :versions], class: 'btn'
 
@@ -29,9 +29,9 @@ table class="table table-bordered"
     th Закрытых
     td = @cluster.cluster_projects.joins(:project).where(projects: { state: 'closed' }).count
 
-= render partial: 'cluster_projects/table', locals: { cluster_projects: @cluster.cluster_projects.non_closed.limit(5) }
+= render partial: 'admin/cluster_projects/table', locals: { cluster_projects: @cluster.cluster_projects.non_closed.limit(5) }
 
-= link_to "Все проекты на кластере (#{@cluster.cluster_projects.non_closed.count})", cluster_projects_path(search: { cluster_id_eq: @cluster.id })
+= link_to "Все проекты на кластере (#{@cluster.cluster_projects.non_closed.count})", admin_cluster_projects_path(search: { cluster_id_eq: @cluster.id })
 
 h3 Активные заявки
 

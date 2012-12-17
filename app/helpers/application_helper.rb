@@ -104,7 +104,7 @@ module ApplicationHelper
     }
     
     options = default_options[type].merge(options)
-    return if options[:admin] && !admin?
+    return if options[:admin] && maynot?(:access, :admin)
     
     content_tag(:div, class: "control-group select") do
       content_tag(:div, class: "select control-label") do

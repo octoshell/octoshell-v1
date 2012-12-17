@@ -82,6 +82,9 @@ MSU::Application.routes.draw do
   resources :organizations, only: :index
 
   namespace :admin do
+    # credentials
+    resources :credentials, only: :destroy
+    
     # users
     resources :users, only: [:index, :show, :edit, :update] do
       get :history

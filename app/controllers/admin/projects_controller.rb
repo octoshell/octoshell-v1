@@ -1,7 +1,7 @@
 # coding: utf-8
 class Admin::ProjectsController < Admin::ApplicationController
   before_filter :require_login
-  before_filter :setup_default_filter, only: :index, if: :admin?
+  before_filter :setup_default_filter, only: :index
   
   def index
     respond_to do |format|
@@ -26,12 +26,10 @@ class Admin::ProjectsController < Admin::ApplicationController
   
   def edit
     @project = Project.find(params[:id])
-    authorize! :edit, @project
   end
   
   def update
     @project = Project.find(params[:id])
-    authorize! :update, @project
     if @project.update_attributes(params[:project], as_role)
       @project.user.track! :update_project, @project, current_user
       redirect_to @project
@@ -42,22 +40,12 @@ class Admin::ProjectsController < Admin::ApplicationController
   
   def close
     @project = Project.find(params[:project_id])
-    authorize! :close, @project
     if @project.close
       @project.user.track! :close_project, @project, current_user
       redirect_to @project
     else
       redirect_to @project, alert: @full_messages.join(', ')
     end
-  end
-  
-  def invite
-    @project = Project.find(params[:project_id])
-    authorize! :invite, @project
-    
-    @account = @project.accounts.build
-    @surety = @project.build_additional_surety
-    @surety.surety_members.build
   end
   
   def sureties
@@ -75,7 +63,6 @@ class Admin::ProjectsController < Admin::ApplicationController
   
   def accounts
     @project = Project.find(params[:project_id])
-    authorize! :accounts, @project
     
     if params[:account][:user_id].present?
       conditions = { user_id: params[:account][:user_id] }

@@ -4,18 +4,12 @@ class Admin::SuretiesController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
-    if admin?
-      @search = Surety.search(params[:search])
-      @sureties = show_all? ? @search.all : @search.page(params[:page])
-    else
-      @search = current_user.sureties.search(params[:search])
-      @sureties = @search.page(params[:page])
-    end
+    @search = Surety.search(params[:search])
+    @sureties = show_all? ? @search.all : @search.page(params[:page])
   end
   
   def show
     @surety = find_surety(params[:id])
-    authorize! :show, @surety
     respond_to do |format|
       format.html
       format.rtf do
@@ -148,11 +142,6 @@ private
   end
   
   def setup_default_filter
-    params[:search] ||=
-      if admin?
-        { state_in: ['pending'] }
-      else
-        { state_in: ['pending', 'active', 'confirmed'] }
-      end
+    params[:search] ||= { state_in: ['pending', 'active', 'confirmed'] }
   end
 end
