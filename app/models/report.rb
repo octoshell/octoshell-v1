@@ -9,12 +9,12 @@ class Report < ActiveRecord::Base
   end
   serialize :personal_data, Report::PersonalData
 
-  #def personal_data
-  #self[:personal_data]
-  #end
-
-  def personal_data=(personal_data)
-    self[:personal_data] = personal_data
+  def personal_data
+    pd = self[:personal_data]
+    unless pd.filled
+      pd.last_name = user.last_name
+    end
+    pd
   end
 
   def personal_data_attributes=(attributes)
