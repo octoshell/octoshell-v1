@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/engageis/activerecord-postgres-hstore.git
+  revision: c27b375ac0b38519e463d03ae269003c9116e264
+  specs:
+    activerecord-postgres-hstore (0.4.1)
+      pg
+      rails
+      rake
+
+GIT
   remote: git://github.com/github/gollum.git
   revision: 881590ab37750305f49c1e8c9a905eb5acb367fd
   specs:
@@ -14,6 +23,12 @@ GIT
       sinatra (~> 1.0)
       stringex (~> 1.4.0)
       useragent (~> 0.4.9)
+
+GIT
+  remote: git://github.com/redstonelabs/entity.git
+  revision: c8637660c4899e3e5bde1d229324aab954062f64
+  specs:
+    entity (0.0.2)
 
 GIT
   remote: git://github.com/redstonelabs/maymay.git
@@ -346,6 +361,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-postgres-hstore!
   airbrake
   capistrano
   capybara
@@ -354,6 +370,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   cucumber-rails
   database_cleaner
+  entity!
   factory_girl_rails
   fivemat
   gollum!

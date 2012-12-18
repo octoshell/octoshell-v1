@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.9'
 gem 'pg'
+gem 'activerecord-postgres-hstore', github: 'engageis/activerecord-postgres-hstore'
 gem 'jquery-rails'
 gem 'unicorn'
 gem 'capistrano'
@@ -31,6 +32,7 @@ gem 'levenshtein-ffi', require: 'levenshtein'
 gem 'validates_email_format_of'
 gem 'virtus'
 gem 'maymay', github: 'redstonelabs/maymay'
+gem 'entity', github: 'redstonelabs/entity'
 
 group :test, :development do
   gem 'quiet_assets'
