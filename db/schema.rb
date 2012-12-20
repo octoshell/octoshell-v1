@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121218072956) do
+ActiveRecord::Schema.define(:version => 20121220115927) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -327,17 +327,101 @@ ActiveRecord::Schema.define(:version => 20121218072956) do
   add_index "replies", ["ticket_id"], :name => "index_replies_on_ticket_id"
   add_index "replies", ["user_id"], :name => "index_replies_on_user_id"
 
+  create_table "report_organizations", :force => true do |t|
+    t.integer "report_id"
+    t.string  "name"
+    t.string  "subdivision"
+    t.string  "position"
+  end
+
+  create_table "report_personal_data", :force => true do |t|
+    t.integer "report_id"
+    t.string  "last_name"
+    t.string  "first_name"
+    t.string  "middle_name"
+    t.string  "email"
+    t.string  "phone"
+    t.string  "confirm_data"
+  end
+
+  create_table "report_personal_surveys", :force => true do |t|
+    t.integer "report_id"
+    t.string  "software"
+    t.string  "technologies"
+    t.string  "compilators"
+    t.string  "learning"
+    t.string  "wanna_be_speaker"
+    t.string  "request_technology"
+    t.string  "other_technology"
+    t.string  "precision"
+    t.string  "other_compilator"
+    t.string  "other_software"
+    t.string  "other_learning"
+  end
+
+  create_table "report_projects", :force => true do |t|
+    t.integer "report_id"
+    t.string  "ru_title"
+    t.string  "ru_author"
+    t.string  "ru_email"
+    t.string  "ru_area"
+    t.string  "ru_driver"
+    t.string  "ru_strategy"
+    t.string  "ru_objective"
+    t.string  "ru_impact"
+    t.string  "ru_usage"
+    t.string  "ru_lang"
+    t.string  "en_title"
+    t.string  "en_author"
+    t.string  "en_email"
+    t.string  "en_area"
+    t.string  "en_driver"
+    t.string  "en_strategy"
+    t.string  "en_objective"
+    t.string  "en_impact"
+    t.string  "en_usage"
+    t.string  "en_lang"
+    t.integer "publications_count"
+    t.integer "books_count"
+    t.integer "vacs_count"
+    t.integer "lectures_count"
+    t.integer "international_conferences_count"
+    t.integer "russian_conferences_count"
+    t.integer "doctors_dissertations_count"
+    t.integer "candidates_dissertations_count"
+    t.integer "students_count"
+    t.integer "rffi_grants_count"
+    t.integer "ministry_of_defence_grants_count"
+    t.integer "ros_nano_tech_grants_count"
+    t.integer "ministry_of_communications_grants_count"
+    t.integer "ran_grants_count"
+    t.integer "other_russian_grants_count"
+    t.integer "other_intenational_grants_count"
+    t.integer "awards_count"
+    t.string  "award_names"
+    t.string  "additional"
+    t.string  "hours"
+    t.string  "size"
+    t.string  "full_power"
+    t.string  "strict_schedule"
+    t.string  "comment"
+  end
+
+  create_table "report_requests", :force => true do |t|
+    t.integer "report_id"
+    t.string  "hours"
+    t.string  "size"
+    t.string  "full_power"
+    t.string  "strict_schedule"
+    t.string  "comment"
+  end
+
   create_table "reports", :force => true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
-    t.text     "personal_data"
-    t.text     "organizations"
-    t.text     "personal_survey"
-    t.text     "projects"
-    t.text     "request"
-    t.text     "points"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.hstore   "points"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "request_properties", :force => true do |t|

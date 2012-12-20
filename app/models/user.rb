@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   has_many :history_items
   has_many :user_groups
   has_many :groups, through: :user_groups
+  has_many :reports
   
   validates :first_name, :last_name, :middle_name, :email, :phone, presence: true
   validates :password, confirmation: true, length: { minimum: 6 }, on: :create

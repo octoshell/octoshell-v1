@@ -1,0 +1,86 @@
+- title t('.title', default: 'Reports')
+
+= simple_form_for @report, html: { class: 'form-horizontal report-form' } do |f|
+  
+  legend = t('.personal_data')
+  = f.simple_fields_for :personal_data do |f|
+    = f.input :first_name
+    = f.input :last_name
+    = f.input :middle_name
+
+  legend = t('.organizations')
+  = f.simple_fields_for :organizations do |f|
+    = f.input :name
+    = f.input :subdivision
+    = f.input :position
+  
+  legend = t('.personal_survey')
+  = f.simple_fields_for :personal_survey do |f|
+    legend
+      h4 = t('.software')
+    div class="control-group string optional"
+      = f.label 'Какие прикладные пакеты, библиотеки и средства Вы используете в работе на суперкомпьютерном комплексе МГУ?'
+      div class='nocontrol'
+        - Report::PersonalSurvey::SOFTWARE.in_groups(3, false) do |group|
+          = f.input :software, as: :check_boxes, collection: group, label: false, wrapper_html: { class: 'span3' }
+    legend
+      h4 = t('.technologies')
+    = f.input :technologies, as: :check_boxes, collection: Report::PersonalSurvey::TECHNOLOGIES
+    = f.input :other_technology
+    legend
+      h4 = t('.compilators')
+    = f.input :compilators, as: :check_boxes, collection: Report::PersonalSurvey::COMPILATORS
+    = f.input :other_compilator
+    legend
+      h4 = t('.learning')
+    = f.input :learning, as: :check_boxes, collection: Report::PersonalSurvey::LEARNINGS
+    = f.input :other_learning
+
+  = f.simple_fields_for :projects do |f|
+    div class="row"
+      div class="span6"
+        legend = t(".ru_project_cards")
+        = f.input :ru_title
+        = f.input :ru_author
+        = f.input :ru_email
+        = f.input :ru_area
+        = f.input :ru_driver
+        = f.input :ru_strategy
+        = f.input :ru_objective
+        = f.input :ru_impact
+        = f.input :ru_usage
+      div class="span6"
+        legend = t(".en_project_cards")
+        = f.input :en_title
+        = f.input :en_author
+        = f.input :en_email
+        = f.input :en_area
+        = f.input :en_driver
+        = f.input :en_strategy
+        = f.input :en_objective
+        = f.input :en_impact
+        = f.input :en_usage
+    legend = t(".project_survey")
+    = f.input :publications_count
+    = f.input :books_count
+    = f.input :vacs_count
+    = f.input :lectures_count
+    = f.input :international_conferences_count
+    = f.input :russian_conferences_count
+    = f.input :doctors_dissertations_count
+    = f.input :candidates_dissertations_count
+    = f.input :students_count
+    = f.input :rffi_grants_count
+    = f.input :ministry_of_communications_grants_count
+    = f.input :ran_grants_count
+    = f.input :other_russian_grants_count
+    = f.input :other_intenational_grants_count
+    legend = t(".request")
+    = f.input :hours
+    = f.input :size
+    = f.input :full_power
+    = f.input :strict_schedule
+    = f.input :comment
+
+  div class="form-actions"
+    = f.button :submit

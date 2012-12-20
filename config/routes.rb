@@ -81,6 +81,9 @@ MSU::Application.routes.draw do
   # organizations
   resources :organizations, only: :index
 
+  # reports
+  resources :reports, only: [:edit, :update]
+
   namespace :admin do
     # credentials
     resources :credentials, only: :destroy
