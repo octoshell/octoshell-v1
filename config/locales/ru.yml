@@ -443,6 +443,33 @@ ru:
               user_is_closed: Пользователь заблокирован.
               wrong_password: Не верный пароль.
     attributes:
+      report/personal_data:
+        first_name: Имя
+        last_name: Фамилия
+        middle_name: Отчество
+      report/project:
+        ru_title: Название проекта
+        ru_author: 'Авторы'
+        ru_email: 'Emails'
+        ru_area: Область
+        ru_driver: 'Задача'
+        ru_strategy: 'Стратегия'
+        ru_objective: 'Цель'
+        ru_impact: 'Эффект'
+        ru_usage: 'Использование'
+        en_title: Title
+        en_author: Authors
+        en_email: Emails
+        en_area: Area
+        en_driver: Driver
+        en_strategy: Strategy
+        en_objective: Objective
+        en_impact: Impact
+        en_usage: Usage
+      report/organization:
+        name: Название
+        subdivision: Подразделение
+        position: Должность
       report/personal_survey:
         software: 'Какие прикладные пакеты, библиотеки и средства Вы используете в работе на суперкомпьютерном комплексе МГУ?'
         technologies: 'Какие языки и технологии параллельного программирования Вы используете или планируете использовать в ближайшем будущем?'

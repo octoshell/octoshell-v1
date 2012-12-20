@@ -17,49 +17,49 @@
   legend = t('.personal_survey')
   = f.simple_fields_for :personal_survey do |f|
     legend
-      h4 = t('.software')
+      h5 = t('.software')
     div class="control-group string optional"
       = f.label 'Какие прикладные пакеты, библиотеки и средства Вы используете в работе на суперкомпьютерном комплексе МГУ?'
       div class='nocontrol'
         - Report::PersonalSurvey::SOFTWARE.in_groups(3, false) do |group|
           = f.input :software, as: :check_boxes, collection: group, label: false, wrapper_html: { class: 'span3' }
     legend
-      h4 = t('.technologies')
+      h5 = t('.technologies')
     = f.input :technologies, as: :check_boxes, collection: Report::PersonalSurvey::TECHNOLOGIES
     = f.input :other_technology
     legend
-      h4 = t('.compilators')
+      h5 = t('.compilators')
     = f.input :compilators, as: :check_boxes, collection: Report::PersonalSurvey::COMPILATORS
     = f.input :other_compilator
     legend
-      h4 = t('.learning')
+      h5 = t('.learning')
     = f.input :learning, as: :check_boxes, collection: Report::PersonalSurvey::LEARNINGS
     = f.input :other_learning
 
   = f.simple_fields_for :projects do |f|
     div class="row"
       div class="span6"
-        legend = t(".ru_project_cards")
+        legend = t(".ru_project_card")
         = f.input :ru_title
-        = f.input :ru_author
-        = f.input :ru_email
+        = f.input :ru_author,    hint: t('.ru_author_hint')
+        = f.input :ru_email,     hint: t('.ru_email_hint')
         = f.input :ru_area
-        = f.input :ru_driver
-        = f.input :ru_strategy
-        = f.input :ru_objective
-        = f.input :ru_impact
-        = f.input :ru_usage
+        = f.input :ru_driver,    hint: t('.ru_driver_hint')
+        = f.input :ru_strategy,  hint: t('.ru_strategy_hint')
+        = f.input :ru_objective, hint: t('.ru_objective_hint')
+        = f.input :ru_impact,    hint: t('.ru_impact_hint')
+        = f.input :ru_usage,     hint: t('.ru_usage_hint')
       div class="span6"
-        legend = t(".en_project_cards")
+        legend = t(".en_project_card")
         = f.input :en_title
-        = f.input :en_author
-        = f.input :en_email
+        = f.input :en_author,    hint: t('.en_author_hint')
+        = f.input :en_email,     hint: t('.en_email_hint')
         = f.input :en_area
-        = f.input :en_driver
-        = f.input :en_strategy
-        = f.input :en_objective
-        = f.input :en_impact
-        = f.input :en_usage
+        = f.input :en_driver,    hint: t('.en_driver_hint')
+        = f.input :en_strategy,  hint: t('.en_strategy_hint')
+        = f.input :en_objective, hint: t('.en_objective_hint')
+        = f.input :en_impact,    hint: t('.en_impact_hint')
+        = f.input :en_usage,     hint: t('.en_usage_hint')
     legend = t(".project_survey")
     = f.input :publications_count
     = f.input :books_count

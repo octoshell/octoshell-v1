@@ -58,6 +58,33 @@ ru:
   requests:
     table:
       open: открыть
+  reports:
+    edit:
+      title: Отчет
+      personal_data: Личные данные
+      organizations: Организации
+      personal_survey: Индивидуальный опрос
+      software: Программное обеспечение
+      technologies: Технологии
+      compilators: Компиляторы
+      learning: Обучение
+      ru_project_card: Карточка  Проекта
+      en_project_card: Project Card
+      request: Заявка на следующий год
+      ru_email_hint: 'Контактные адреса'
+      ru_author_hint: 'Список авторов и организаций, первым указывается руководитель проекта'
+      ru_usage_hint: 'Отрасли промышленности, сектора экономики, области науки, где могут быть использованы результаты проекта'
+      ru_impact_hint: 'Ожидаемый эффект от успешного решения задачи (научный / коммерческий / социальный)'
+      ru_strategy_hint: 'Описание идеи подхода к решению задачи'
+      ru_objective_hint: 'Описание цели на которую нацелено решение конкретной задачи'
+      ru_driver_hint: 'Описание решаемой задач, на решение которой направлен проект'
+      en_email_hint: 'Contact addresses'
+      en_author_hint: 'List of authors and organizations. The project manager is first'
+      en_usage_hint: 'Industry, economy, science, which can be used by the project results.'
+      en_impact_hint: 'The expected effect on the successful resolution of the problem (scientific / commercial / social)'
+      en_strategy_hint: 'Description of the idea approach to the problem'
+      en_objective_hint: 'Description of the purpose for which targeted solution to a specific problem'
+      en_driver_hint: 'Description of the problem'
   admin:
     groups:
       index:
