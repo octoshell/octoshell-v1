@@ -37,10 +37,12 @@
     = f.input :other_learning
 
   = f.simple_fields_for :projects do |f|
+    div class="title"
+      h2 = t('.project.html', name: f.object.ru_title)
     div class="row"
       div class="span6"
         legend = t(".ru_project_card")
-        = f.input :ru_title
+        = f.input :ru_title, input_html: { role: 'project-name-autocompleter' }
         = f.input :ru_author,    hint: t('.ru_author_hint')
         = f.input :ru_email,     hint: t('.ru_email_hint')
         = f.input :ru_area

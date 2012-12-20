@@ -85,6 +85,8 @@ ru:
       en_strategy_hint: 'Description of the idea approach to the problem'
       en_objective_hint: 'Description of the purpose for which targeted solution to a specific problem'
       en_driver_hint: 'Description of the problem'
+      project:
+        html: 'Проект: <span>%{name}</span>'
   admin:
     groups:
       index:
