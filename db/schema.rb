@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121220115927) do
+ActiveRecord::Schema.define(:version => 20121224110433) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -332,6 +332,7 @@ ActiveRecord::Schema.define(:version => 20121220115927) do
     t.string  "name"
     t.string  "subdivision"
     t.string  "position"
+    t.string  "organization_type"
   end
 
   create_table "report_personal_data", :force => true do |t|
@@ -357,6 +358,8 @@ ActiveRecord::Schema.define(:version => 20121220115927) do
     t.string  "other_compilator"
     t.string  "other_software"
     t.string  "other_learning"
+    t.text    "computing"
+    t.text    "comment"
   end
 
   create_table "report_projects", :force => true do |t|
@@ -364,7 +367,6 @@ ActiveRecord::Schema.define(:version => 20121220115927) do
     t.string  "ru_title"
     t.string  "ru_author"
     t.string  "ru_email"
-    t.string  "ru_area"
     t.string  "ru_driver"
     t.string  "ru_strategy"
     t.string  "ru_objective"
@@ -374,7 +376,6 @@ ActiveRecord::Schema.define(:version => 20121220115927) do
     t.string  "en_title"
     t.string  "en_author"
     t.string  "en_email"
-    t.string  "en_area"
     t.string  "en_driver"
     t.string  "en_strategy"
     t.string  "en_objective"
@@ -405,6 +406,9 @@ ActiveRecord::Schema.define(:version => 20121220115927) do
     t.string  "full_power"
     t.string  "strict_schedule"
     t.string  "comment"
+    t.text    "areas"
+    t.text    "directions_of_science"
+    t.text    "critical_technologies"
   end
 
   create_table "report_requests", :force => true do |t|

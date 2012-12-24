@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+  before_filter :require_login
+
   def edit
     @report = current_user.reports.find(params[:id])
     @report.setup_defaults!

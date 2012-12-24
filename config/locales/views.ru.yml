@@ -62,7 +62,7 @@ ru:
     edit:
       title: Отчет
       personal_data: Личные данные
-      organizations: Организации
+      organizations: Организация
       personal_survey: Индивидуальный опрос
       software: Программное обеспечение
       technologies: Технологии
@@ -85,6 +85,9 @@ ru:
       en_strategy_hint: 'Description of the idea approach to the problem'
       en_objective_hint: 'Description of the purpose for which targeted solution to a specific problem'
       en_driver_hint: 'Description of the problem'
+      request_technology_hint: 'Названия, через запятую'
+      precision: Точность вычислений
+      computing: Вычисления
       project:
         html: 'Проект: <span>%{name}</span>'
   admin:
