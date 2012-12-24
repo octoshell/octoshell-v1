@@ -474,6 +474,9 @@ ru:
         international_conferences_count: Международные (за рубежом)
         russian_conferences_count: Международные (в России)
         doctors_dissertations_count: Международные (в России)
+        computing_systems: Задействованные в ходе работ вычислительные системы СКЦ МГУ
+        lomonosov_logins:  '"Ломоносов"'
+        chebyshev_logins: '"Чебышев"'
         candidates_dissertations_count: 
         students_count: 
         rffi_grants_count: 

@@ -1,5 +1,29 @@
 # coding: utf-8
+
+require 'zip/zip'
+
 class Report::Project < ActiveRecord::Base
+  has_attached_file :materials,
+    content_type: ['application/zip', 'application/x-zip-compressed'],
+    max_size: 50.megabytes
+
+  validate :materials_validator
+
+  def materials_validator
+    if materials?
+      path = materials.queued_for_write.first[1].path
+      z = Zip::ZipFile.open(path)
+      entries = z.entries.find_all { |e| !(e.to_s =~ /\/$/) }
+      if entries.size < 2
+        errors.add(:materials, :min_files_is_two)
+      end
+      unless entries.find { |e| e =~ /(jpg|jpeg|png|tiff|bmp)$/i }
+        errors.add(:materials, :no_image)
+      end
+      z.close
+    end
+  end
+
   DIRECTIONS_OF_SCIENCE = [
     'Безопасность и противодействие терроризму',
     'Индустрия наносистем',
@@ -9,6 +33,12 @@ class Report::Project < ActiveRecord::Base
     'Рациональное природопользование',
     'Транспортные и космические системы',
     'Энергоэффективность, энергосбережение, ядерная энергетика'
+  ]
+
+  COMPUTING_SYSTEMS = [
+    '"Ломоносов", узлы с процессорами Intel',
+    '"Ломоносов", узлы с процессорами NVIDIA',
+    '"Чебышев"'
   ]
 
   CRITICAL_TECHNOLOGIES = [
@@ -90,5 +120,7 @@ class Report::Project < ActiveRecord::Base
     :doctors_dissertations_count, :candidates_dissertations_count,
     :students_count, :rffi_grants_count, :ministry_of_communications_grants_count,
     :ran_grants_count, :other_russian_grants_count, :other_intenational_grants_count,
-    :hours, :size, :full_power, :strict_schedule, :comment
+    :hours, :size, :full_power, :strict_schedule, :comment,
+    :directions_of_science, :critical_technologies, :areas, :computing_systems,
+    :lomonosov_logins, :chebyshev_logins, :materials
 end

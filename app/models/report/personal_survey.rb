@@ -39,5 +39,6 @@ class Report::PersonalSurvey < ActiveRecord::Base
     'Используются (или планируется использование) суперкомпьютеров на основе FPGA'
   ]
   attr_accessible :software, :technologies, :compilators, :learning,
-    :other_technology, :other_compilator, :other_learning
+    :other_technology, :other_compilator, :other_learning, :request_technology,
+    :computing, :comment
 end

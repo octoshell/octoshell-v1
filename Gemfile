@@ -33,6 +33,7 @@ gem 'validates_email_format_of'
 gem 'virtus'
 gem 'maymay', github: 'redstonelabs/maymay'
 gem 'entity', github: 'redstonelabs/entity'
+gem 'rubyzip'
 
 group :test, :development do
   gem 'quiet_assets'

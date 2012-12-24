@@ -80,7 +80,18 @@
       h5 = Report::Project.human_attribute_name(:critical_technologies)
     = f.input :critical_technologies, as: :check_boxes, collection: Report::Project::CRITICAL_TECHNOLOGIES, label: false
 
-    = f.input :areas, collection: Report::Project::AREAS
+    legend
+      h5 = Report::Project.human_attribute_name(:areas)
+    = f.input :areas, collection: Report::Project::AREAS, label: false
+    legend
+      h5 = Report::Project.human_attribute_name(:computing_systems)
+    = f.input :computing_systems, as: :check_boxes, collection: Report::Project::COMPUTING_SYSTEMS, label: false
+    legend
+      h5 = t('.logins')
+    = f.input :lomonosov_logins, as: :string, input_html: { class: 'span6' }
+    = f.input :chebyshev_logins, as: :string, input_html: { class: 'span6' }
+    legend = t('.materials')
+    = f.input :materials
     legend = t(".project_survey")
     = f.input :publications_count
     = f.input :books_count

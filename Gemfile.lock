@@ -396,6 +396,7 @@ DEPENDENCIES
   rspec-nc
   rspec-rails
   rtf
+  rubyzip
   shoulda-matchers
   simple_form
   slim

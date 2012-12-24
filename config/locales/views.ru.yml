@@ -88,6 +88,7 @@ ru:
       request_technology_hint: 'Названия, через запятую'
       precision: Точность вычислений
       computing: Вычисления
+      logins: 'Список логинов, работавших над проектом'
       project:
         html: 'Проект: <span>%{name}</span>'
   admin:
