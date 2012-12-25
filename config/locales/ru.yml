@@ -496,7 +496,9 @@ ru:
         comment: Комментарии
         lomonosov_intel_hours: 'Ломоносов (Intel)'
         lomonosov_nvidia_hours: 'Ломоносов (NVIDIA)'
-        chebyshev_hours: 'Чебышёв'
+        lomonosov_size: 'Ломоносов, Гб'
+        chebyshev_size: 'Чебышев, ГБ'
+        chebyshev_hours: 'Чебышев'
         request_comment: 'В этом поле следует описать имеющие место актуальные потребности, связанные с работой на системах СКЦ МГУ и любый другие необходимые пояснения'
         wanna_speak: Да
       report/organization:

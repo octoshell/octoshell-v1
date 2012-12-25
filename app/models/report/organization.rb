@@ -7,5 +7,5 @@ class Report::Organization < ActiveRecord::Base
     'Зарубежная организация',
     'Другое'
   ]
-  attr_accessible :name, :subdivision, :position
+  attr_accessible :name, :subdivision, :position, :organization_type
 end

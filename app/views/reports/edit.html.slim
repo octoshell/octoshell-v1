@@ -91,7 +91,7 @@
     = f.input :lomonosov_logins, as: :string, input_html: { class: 'span6' }
     = f.input :chebyshev_logins, as: :string, input_html: { class: 'span6' }
     legend = t('.materials')
-    = f.input :materials
+    = f.input :materials, label: false, hint: t('.materials_hint')
     legend = t(".project_survey")
     legend
       h5 = t('.publications')

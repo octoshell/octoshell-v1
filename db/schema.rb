@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121225120551) do
+ActiveRecord::Schema.define(:version => 20121225131405) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -347,17 +347,17 @@ ActiveRecord::Schema.define(:version => 20121225120551) do
 
   create_table "report_personal_surveys", :force => true do |t|
     t.integer "report_id"
-    t.string  "software"
-    t.string  "technologies"
-    t.string  "compilators"
-    t.string  "learning"
-    t.string  "wanna_be_speaker"
-    t.string  "request_technology"
-    t.string  "other_technology"
-    t.string  "precision"
-    t.string  "other_compilator"
-    t.string  "other_software"
-    t.string  "other_learning"
+    t.text    "software"
+    t.text    "technologies"
+    t.text    "compilators"
+    t.text    "learning"
+    t.text    "wanna_be_speaker"
+    t.text    "request_technology"
+    t.text    "other_technology"
+    t.text    "precision"
+    t.text    "other_compilator"
+    t.text    "other_software"
+    t.text    "other_learning"
     t.text    "computing"
     t.text    "comment"
   end
