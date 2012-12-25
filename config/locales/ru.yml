@@ -417,6 +417,10 @@ ru:
       task: Задание
     errors:
       models:
+        report/project:
+          attributes:
+            materials:
+              no_image: В архиве нет изображений
         account:
           attributes:
             raw_emails:
@@ -467,23 +471,34 @@ ru:
         en_usage: Usage
         directions_of_science: 'Приоритетные направления развития науки, технологий и техники в Российской Федерации (утв. Указом Президента РФ от 7 июля 2011 г. N 899)'
         critical_technologies: 'Перечень критических технологий Российской Федерации (утв. Указом Президента РФ от 7 июля 2011 г. N 899)'
-        publications_count: 'Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ'
         books_count: 'Число опубликованных статей по проекту за год'
         vacs_count: 'Число учебников и монографий'
         lectures_count: 'Число тезисов докладов'
         international_conferences_count: Международные (за рубежом)
         russian_conferences_count: Международные (в России)
-        doctors_dissertations_count: Международные (в России)
+        doctors_dissertations_count: Докторских
+        candidates_dissertations_count: Кандидатских
         computing_systems: Задействованные в ходе работ вычислительные системы СКЦ МГУ
         lomonosov_logins:  '"Ломоносов"'
         chebyshev_logins: '"Чебышев"'
-        candidates_dissertations_count: 
-        students_count: 
-        rffi_grants_count: 
-        ministry_of_communications_grants_count: 
-        ran_grants_count: 
-        other_russian_grants_count: 
-        other_intenational_grants_count: 
+        students_count: Студентов
+        graduates_count: Аспирантов
+        your_students_count: Число студентов
+        rffi_grants_count: РФФИ
+        ministry_of_education_grants_count: Минобрнауки РФ
+        rosnano_grants_count: Роснано
+        ministry_of_communications_grants_count: Минкомсвязи РФ
+        ministry_of_defence_grants_count: Минобороны РФ
+        ran_grants_count: Программы фундаментальных исследований РАН
+        other_russian_grants_count: Другие (российские)
+        other_intenational_grants_count: Международные
+        award_names: Названия
+        comment: Комментарии
+        lomonosov_intel_hours: 'Ломоносов (Intel)'
+        lomonosov_nvidia_hours: 'Ломоносов (NVIDIA)'
+        chebyshev_hours: 'Чебышёв'
+        request_comment: 'В этом поле следует описать имеющие место актуальные потребности, связанные с работой на системах СКЦ МГУ и любый другие необходимые пояснения'
+        wanna_speak: Да
       report/organization:
         name: Название
         subdivision: Подразделение

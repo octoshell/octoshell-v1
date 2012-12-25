@@ -112,15 +112,26 @@ class Report::Project < ActiveRecord::Base
     'Технические системы и процессы управления',
     'Другое'
   ]
+
+  STRICT_SCHEDULE = [
+    '"Ломоносов", узлы с процессорами Intel',
+    '"Ломоносов", узлы с процессорами NVIDIA',
+    '"Чебышёв"'
+  ]
+
   attr_accessible :ru_title, :ru_author, :ru_email, :ru_area, :ru_driver,
     :ru_strategy, :ru_objective, :ru_impact, :ru_usage, :en_title, :en_author,
     :en_email, :en_area, :en_driver, :en_strategy, :en_objective, :en_impact,
-    :en_usage, :publications_count, :books_count, :vacs_count, :lectures_count,
+    :en_usage, :graduates_count, :your_students_count,
+    :ministry_of_education_grants_count, :rosnano_grants_count,
+    :ministry_of_defence_grants_count, :award_names, :lomonosov_intel_hours,
+    :lomonosov_nvidia_hours, :chebyshev_hours, :lomonosov_size, :chebyshev_size,
+    :wanna_speak, :request_comment, :directions_of_science,
+    :critical_technologies, :areas, :computing_systems, :lomonosov_logins,
+    :chebyshev_logins, :books_count, :vacs_count, :lectures_count,
     :international_conferences_count, :russian_conferences_count,
     :doctors_dissertations_count, :candidates_dissertations_count,
     :students_count, :rffi_grants_count, :ministry_of_communications_grants_count,
     :ran_grants_count, :other_russian_grants_count, :other_intenational_grants_count,
-    :hours, :size, :full_power, :strict_schedule, :comment,
-    :directions_of_science, :critical_technologies, :areas, :computing_systems,
-    :lomonosov_logins, :chebyshev_logins, :materials
+    :strict_schedule
 end

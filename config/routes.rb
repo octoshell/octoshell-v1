@@ -83,6 +83,8 @@ MSU::Application.routes.draw do
 
   # reports
   resources :reports, only: [:edit, :update]
+  # fix for bugged zip uploading
+  # post '/reports/:id' => 'reports#update'
 
   namespace :admin do
     # credentials

@@ -1,6 +1,6 @@
 - title t('.title', default: 'Reports')
 
-= simple_form_for @report, html: { class: 'form-horizontal report-form' } do |f|
+= simple_form_for @report, html: { class: 'form-horizontal report-form', multipart: true } do |f|
   
   legend = t('.personal_data')
   = f.simple_fields_for :personal_data do |f|
@@ -13,7 +13,7 @@
     = f.input :name
     = f.input :subdivision
     = f.input :position
-    = f.input :organization_type, as: :radio, collection: Report::Organization::TYPES
+    = f.input :organization_type, as: :radio_buttons, collection: Report::Organization::TYPES
   
   legend = t('.personal_survey')
   = f.simple_fields_for :personal_survey do |f|
@@ -36,7 +36,7 @@
     = f.input :other_compilator
     legend
       h5 = Report::PersonalSurvey.human_attribute_name(:precision)
-    = f.input :precision, as: :radio, collection: Report::PersonalSurvey::PRECISIONS, label: false
+    = f.input :precision, as: :radio_buttons, collection: Report::PersonalSurvey::PRECISIONS, label: false
     legend
       h5 = Report::PersonalSurvey.human_attribute_name(:computing)
     = f.input :computing, as: :check_boxes, collection: Report::PersonalSurvey::COMPUTING, label: false
@@ -53,26 +53,26 @@
     div class="title"
       h2 = t('.project.html', name: f.object.ru_title)
     div class="row"
-      div class="span6"
+      div class="span6 no-extra-margin"
         legend = t(".ru_project_card")
-        = f.input :ru_title, input_html: { role: 'project-name-autocompleter' }
-        = f.input :ru_author,    hint: t('.ru_author_hint')
-        = f.input :ru_email,     hint: t('.ru_email_hint')
-        = f.input :ru_driver,    hint: t('.ru_driver_hint')
-        = f.input :ru_strategy,  hint: t('.ru_strategy_hint')
-        = f.input :ru_objective, hint: t('.ru_objective_hint')
-        = f.input :ru_impact,    hint: t('.ru_impact_hint')
-        = f.input :ru_usage,     hint: t('.ru_usage_hint')
-      div class="span6"
+        = f.input :ru_title,     as: :string, input_html: { role: 'project-name-autocompleter' }
+        = f.input :ru_author,    as: :string, hint: t('.ru_author_hint')
+        = f.input :ru_email,     as: :string, hint: t('.ru_email_hint')
+        = f.input :ru_driver,    as: :string, hint: t('.ru_driver_hint')
+        = f.input :ru_strategy,  as: :string, hint: t('.ru_strategy_hint')
+        = f.input :ru_objective, as: :string, hint: t('.ru_objective_hint')
+        = f.input :ru_impact,    as: :string, hint: t('.ru_impact_hint')
+        = f.input :ru_usage,     as: :string, hint: t('.ru_usage_hint')
+      div class="span6 no-extra-margin"
         legend = t(".en_project_card")
-        = f.input :en_title
-        = f.input :en_author,    hint: t('.en_author_hint')
-        = f.input :en_email,     hint: t('.en_email_hint')
-        = f.input :en_driver,    hint: t('.en_driver_hint')
-        = f.input :en_strategy,  hint: t('.en_strategy_hint')
-        = f.input :en_objective, hint: t('.en_objective_hint')
-        = f.input :en_impact,    hint: t('.en_impact_hint')
-        = f.input :en_usage,     hint: t('.en_usage_hint')
+        = f.input :en_title,     as: :string
+        = f.input :en_author,    as: :string, hint: t('.en_author_hint')
+        = f.input :en_email,     as: :string, hint: t('.en_email_hint')
+        = f.input :en_driver,    as: :string, hint: t('.en_driver_hint')
+        = f.input :en_strategy,  as: :string, hint: t('.en_strategy_hint')
+        = f.input :en_objective, as: :string, hint: t('.en_objective_hint')
+        = f.input :en_impact,    as: :string, hint: t('.en_impact_hint')
+        = f.input :en_usage,     as: :string, hint: t('.en_usage_hint')
     legend
       h5 = Report::Project.human_attribute_name(:directions_of_science)
     = f.input :directions_of_science, as: :check_boxes, collection: Report::Project::DIRECTIONS_OF_SCIENCE, label: false
@@ -93,26 +93,58 @@
     legend = t('.materials')
     = f.input :materials
     legend = t(".project_survey")
-    = f.input :publications_count
+    legend
+      h5 = t('.publications')
     = f.input :books_count
     = f.input :vacs_count
     = f.input :lectures_count
+    legend
+      h5 = t('.conferences')
     = f.input :international_conferences_count
     = f.input :russian_conferences_count
+    legend
+      h5 = t('.dissertations')
     = f.input :doctors_dissertations_count
     = f.input :candidates_dissertations_count
+    legend
+      h5 = t('.students')
     = f.input :students_count
+    = f.input :graduates_count
+    legend
+      h5 = t('.your_students')
+    = f.input :your_students_count
+    legend
+      h5 = t('.grants')
     = f.input :rffi_grants_count
+    = f.input :ministry_of_education_grants_count
+    = f.input :rosnano_grants_count
     = f.input :ministry_of_communications_grants_count
+    = f.input :ministry_of_defence_grants_count
     = f.input :ran_grants_count
     = f.input :other_russian_grants_count
     = f.input :other_intenational_grants_count
+    legend
+      h5 = t('.awards')
+    = f.input :award_names, as: :text, input_html: { rows: 3, class: 'span5' }
     legend = t(".request")
-    = f.input :hours
-    = f.input :size
-    = f.input :full_power
-    = f.input :strict_schedule
-    = f.input :comment
+    legend
+      h5 = t('.hours')
+    = f.input :lomonosov_intel_hours
+    = f.input :lomonosov_nvidia_hours
+    = f.input :chebyshev_hours
+    legend
+      h5 = t('.size')
+    = f.input :lomonosov_size
+    = f.input :chebyshev_size
+    legend
+      h5 = t('.schedule')
+    = f.input :strict_schedule, as: :check_boxes, collection: Report::Project::STRICT_SCHEDULE, label: false
+    legend
+      h5 = t('.speak.html')
+    = f.input :wanna_speak
+    legend
+      h5 = t('.request_comment')
+    = f.input :request_comment, input_html: { rows: 3, class: 'span5' }
 
   div class="form-actions"
     = f.button :submit
