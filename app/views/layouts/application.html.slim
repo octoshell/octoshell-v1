@@ -14,7 +14,7 @@ html
     div class="container"
       - if session[:soul_id]
         div class="soul-box"
-          = link_to 'Вернуться в свою сессию', revert_session_path, method: :put
+          = link_to t('.get_back_to_your_session', default: 'Get back to your session'), revert_session_path, method: :put
       div class="navbar noprint"
         div class="navbar-inner"
           = link_to root_path, class: "brand" do
@@ -38,7 +38,7 @@ html
           - context = type == :alert ? 'alert-error' : 'alert-info'
           = content_tag :div, message, class: "alert #{context}"
         - if logged_in? && current_user.project_steps.any?
-          = render partial: 'shared/steps', locals: { steps: current_user.project_steps, title: 'Для начала работы с суперкомпьютером вам нужно:' }
+          = render partial: 'shared/steps', locals: { steps: current_user.project_steps, title: t('.start_steps_title', default: 'In order to get started you need to:') }
         div class="relative"
           div class="page-header group"
             h1 class="span6" = yield :title
@@ -46,7 +46,7 @@ html
             div id="help" class="group"
               div class="alert alert-info"
                 p data-toggle="collapse" data-target="#help-list" class="collapse-header"
-                  strong Справка
+                  strong = t('.help')
                 ul class="unstyled collapse" id="help-list"
                   - @wikis.each do |wiki|
                     li = link_to wiki.name, page_path(wiki.url)

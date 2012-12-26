@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121225131405) do
+ActiveRecord::Schema.define(:version => 20121225134636) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -390,34 +390,35 @@ ActiveRecord::Schema.define(:version => 20121225131405) do
     t.string   "materials_content_type"
     t.integer  "materials_file_size"
     t.datetime "materials_updated_at"
-    t.integer  "books_count"
-    t.integer  "vacs_count"
-    t.integer  "lectures_count"
-    t.integer  "international_conferences_count"
-    t.integer  "russian_conferences_count"
-    t.integer  "doctors_dissertations_count"
-    t.integer  "candidates_dissertations_count"
-    t.integer  "students_count"
-    t.integer  "graduates_count"
-    t.integer  "your_students_count"
-    t.integer  "rffi_grants_count"
-    t.integer  "ministry_of_education_grants_count"
-    t.integer  "rosnano_grants_count"
-    t.integer  "ministry_of_communications_grants_count"
-    t.integer  "ministry_of_defence_grants_count"
-    t.integer  "ran_grants_count"
-    t.integer  "other_russian_grants_count"
-    t.integer  "other_intenational_grants_count"
+    t.integer  "books_count",                               :default => 0
+    t.integer  "vacs_count",                                :default => 0
+    t.integer  "lectures_count",                            :default => 0
+    t.integer  "international_conferences_count",           :default => 0
+    t.integer  "russian_conferences_count",                 :default => 0
+    t.integer  "doctors_dissertations_count",               :default => 0
+    t.integer  "candidates_dissertations_count",            :default => 0
+    t.integer  "students_count",                            :default => 0
+    t.integer  "graduates_count",                           :default => 0
+    t.integer  "your_students_count",                       :default => 0
+    t.integer  "rffi_grants_count",                         :default => 0
+    t.integer  "ministry_of_education_grants_count",        :default => 0
+    t.integer  "rosnano_grants_count",                      :default => 0
+    t.integer  "ministry_of_communications_grants_count",   :default => 0
+    t.integer  "ministry_of_defence_grants_count",          :default => 0
+    t.integer  "ran_grants_count",                          :default => 0
+    t.integer  "other_russian_grants_count",                :default => 0
+    t.integer  "other_intenational_grants_count",           :default => 0
     t.text     "award_names"
-    t.integer  "lomonosov_intel_hours"
-    t.integer  "lomonosov_nvidia_hours"
-    t.integer  "chebyshev_hours"
-    t.integer  "lomonosov_size"
-    t.integer  "chebyshev_size"
+    t.integer  "lomonosov_intel_hours",                     :default => 0
+    t.integer  "lomonosov_nvidia_hours",                    :default => 0
+    t.integer  "chebyshev_hours",                           :default => 0
+    t.integer  "lomonosov_size",                            :default => 0
+    t.integer  "chebyshev_size",                            :default => 0
     t.text     "exclusive_usage"
     t.text     "strict_schedule"
     t.boolean  "wanna_speak"
     t.text     "request_comment"
+    t.integer  "international_conferences_in_russia_count", :default => 0
   end
 
   create_table "reports", :force => true do |t|

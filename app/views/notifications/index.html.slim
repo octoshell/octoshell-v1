@@ -1,18 +1,18 @@
-- title 'Оповещения'
+- title t('.title', default: 'Notifications')
 
 - if @sureties.any?
-  h3 Поручительства
+  h3 = t('.sureties', default: 'Sureties')
   = render partial: 'sureties/full_table', locals: { sureties: @sureties }
 
 - if @requests.any?
-  h3 Заявки
+  h3 = t('.requests', default: 'Requests')
   = render partial: 'requests/table', locals: { requests: @requests }
 
 - if current_user.notifications_count.zero?
-  p Нет оповещений.
+  p = t('.no_notifications', default: 'There are no notifications')
 
-h3 Поддержка
+h3 = t('.support', default: 'Support')
 
-p = link_to 'Задать вопрос в техподдержку', new_ticket_path
+p = link_to t('.new_ticket', default: 'Ask support'), new_ticket_path
 - if @tickets.any?
   = render partial: 'tickets/table', locals: { tickets: @tickets }

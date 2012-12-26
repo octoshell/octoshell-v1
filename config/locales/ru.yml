@@ -475,7 +475,7 @@ ru:
         vacs_count: 'Число учебников и монографий'
         lectures_count: 'Число тезисов докладов'
         international_conferences_count: Международные (за рубежом)
-        russian_conferences_count: Международные (в России)
+        russian_conferences_count: Российские
         doctors_dissertations_count: Докторских
         candidates_dissertations_count: Кандидатских
         computing_systems: Задействованные в ходе работ вычислительные системы СКЦ МГУ
@@ -490,8 +490,9 @@ ru:
         ministry_of_communications_grants_count: Минкомсвязи РФ
         ministry_of_defence_grants_count: Минобороны РФ
         ran_grants_count: Программы фундаментальных исследований РАН
-        other_russian_grants_count: Другие (российские)
-        other_intenational_grants_count: Международные
+        other_russian_grants_count: Российские
+        international_conferences_in_russia_count: Международные (в России)
+        other_intenational_grants_count: Международные (за рубежом)
         award_names: Названия
         comment: Комментарии
         lomonosov_intel_hours: 'Ломоносов (Intel)'

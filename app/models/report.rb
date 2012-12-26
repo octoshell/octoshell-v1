@@ -42,13 +42,12 @@ class Report < ActiveRecord::Base
   end
 
   def build_default_projects
-    projects.build and return if user.all_projects.empty?
+    projects.build and return if user.all_projects.empty? || projects.any?
     user.all_projects.each do |project|
       projects.build do |p|
         p.ru_title     = project.name 
         p.ru_author    = project.accounts.active.map { |a| a.user.full_name }.join(', ')
         p.ru_email     = project.accounts.active.map { |a| a.user.email }.join(', ')
-        p.ru_area      = ""
         p.ru_driver    = project.description
         p.ru_strategy  = ""
         p.ru_objective = ""

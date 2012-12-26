@@ -1,7 +1,7 @@
-- title 'Заявки'
+- title t('.title', default: 'Request'
 
 div class="link-actions"
-  = link_to 'Новая заявка', new_request_path, class: 'btn'
+  = link_to t('.new', default: 'Request'), new_request_path, class: 'btn'
 
 = safe_paginate @requests
 = render partial: 'requests/table', locals: { requests: @requests }

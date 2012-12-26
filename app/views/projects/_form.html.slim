@@ -10,19 +10,19 @@
   = f.association :direction_of_sciences, required: true, input_html: { class: 'chosen' } 
   = f.association :critical_technologies, required: true, input_html: { class: 'chosen' }
   - if f.object.new_record? && !f.object.user.sured?
-    legend Поручительство
+    legend = t('.surety', default: 'Surety')
     = f.simple_fields_for :sureties do |f|
       = f.input :boss_full_name
       = f.input :boss_position
       = f.input :cpu_hours
       = f.input :gpu_hours
       = f.input :size
-      legend Участники
+      legend = t('.members', default: 'Members')
       div class="members"
         = f.simple_fields_for :surety_members do |f|
           div class="control-group members-form #{'error' if f.object.errors.any?}"
             label class="control-label"
-              | Пользователь
+              = t('.user', default: 'User')
             div class="controls"
               = f.text_field :email, placeholder: 'user@example.com', class: 'email', id: nil
               |  

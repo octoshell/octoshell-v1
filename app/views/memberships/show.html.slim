@@ -1,10 +1,10 @@
-- title 'Место работы'
+- title t('.title', default: 'Membership')
 
   div class="link-actions"
-    = link_to 'Редактировать', edit_membership_path(@membership), class: 'btn'
+    = link_to t('.edit', default: 'Edit', edit_membership_path(@membership), class: 'btn'
     = " "
     - if @membership.can__close?
-      = link_to Membership.human_state_event_name(:_close), membership_close_path(@membership), class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
+      = link_to Membership.human_state_event_name(:_close), membership_close_path(@membership), class: 'btn btn-danger', method: :put, data: { confirm: t('.confirm_destroy', default: 'Are you sure?' }
       = " "
 
 table class="table table-bordered" id="membership-#{@membership.id}-detail"

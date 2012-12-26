@@ -1,4 +1,4 @@
-- title t('.profile')
+- title t('.profile', default: 'Profile')
 
 div class="row"
   div class="span2"
@@ -9,9 +9,9 @@ div class="row"
       h1 = @user.full_name
 
     p
-      strong = link_to t('.edit'), edit_profile_path
+      strong = link_to t('.edit', default: 'Edit'), edit_profile_path
 
-h3 Места работы
+h3 = t('.memberships', default: 'Memberships')
 p = link_to t('.new_membership'), new_membership_path
 - memberships = @user.memberships
 - if memberships.any?
@@ -24,13 +24,13 @@ p = link_to t('.new_membership'), new_membership_path
         td = membership.organization.name
         td = link_to_membership membership
 - else
-  p Нет сотрудников
+  p = t('.no_memberships', default: 'There are no memberships')
 
-h3 Поручительства
+h3 = t('.sureties', default: 'Sureties')
 = render partial: 'sureties/full_table', locals: { sureties: @user.sureties }
 
-h3 Публичные ключи
-p = link_to t('.new_credential'), new_credential_path
+h3 = t('.credentials', default: 'Public Keys')
+p = link_to t('.new_credential', default: 'New Public Key'), new_credential_path
 - credentials = @user.credentials.active
 - if credentials.any?
   table class="table table-bordered"
@@ -51,7 +51,6 @@ p = link_to t('.new_credential'), new_credential_path
         td = credential.human_state_name
         td = credential.created_at.to_formatted_s(:short)
         td 
-          = link_to Credential.human_state_event_name(:_close), credential_close_path(credential), method: :put, confirm: 'Вы действительно хотите закрыть ключ?', class: 'btn btn-danger'
+          = link_to Credential.human_state_event_name(:_close), credential_close_path(credential), method: :put, confirm: t('.confirm_destroy', default: 'Confirm Destroy'), class: 'btn btn-danger'
 - else
-  p Нет публичных ключей
-
+  p = t('.no_credentials', default: 'There are no credentials')

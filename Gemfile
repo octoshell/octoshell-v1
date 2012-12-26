@@ -34,6 +34,7 @@ gem 'virtus'
 gem 'maymay', github: 'redstonelabs/maymay'
 gem 'entity', github: 'redstonelabs/entity'
 gem 'rubyzip'
+gem 'poltergeist', github: 'brutuscat/poltergeist'
 
 group :test, :development do
   gem 'quiet_assets'

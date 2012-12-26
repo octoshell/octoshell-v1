@@ -1,4 +1,4 @@
-- title "Заявка ##{@request.id}"
+- title t('.title', default: "Request ##{@request.id}")
 
 div class="link-actions"
   - if @request.can__close?

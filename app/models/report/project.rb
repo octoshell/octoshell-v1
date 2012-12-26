@@ -3,27 +3,6 @@
 require 'zip/zip'
 
 class Report::Project < ActiveRecord::Base
-  has_attached_file :materials,
-    content_type: ['application/zip', 'application/x-zip-compressed'],
-    max_size: 50.megabytes
-
-  validate :materials_validator
-
-  def materials_validator
-    if materials?
-      path = materials.queued_for_write.first[1].path
-      z = Zip::ZipFile.open(path)
-      entries = z.entries.find_all { |e| !(e.to_s =~ /\/$/) }
-      if entries.size < 2
-        errors.add(:materials, :min_files_is_two)
-      end
-      unless entries.find { |e| e =~ /(jpg|jpeg|png|tiff|bmp)$/i }
-        errors.add(:materials, :no_image)
-      end
-      z.close
-    end
-  end
-
   DIRECTIONS_OF_SCIENCE = [
     'Безопасность и противодействие терроризму',
     'Индустрия наносистем',
@@ -118,6 +97,30 @@ class Report::Project < ActiveRecord::Base
     '"Ломоносов", узлы с процессорами NVIDIA',
     '"Чебышёв"'
   ]
+  
+  has_attached_file :materials,
+    content_type: ['application/zip', 'application/x-zip-compressed'],
+    max_size: 50.megabytes
+
+  validates :directions_of_science, length: { minimum: 1, maximum: 2 }
+  validates :directions_of_science, inclusion: { in: DIRECTIONS_OF_SCIENCE }
+
+  validate :materials_validator
+
+  def materials_validator
+    if materials?
+      path = materials.queued_for_write.first[1].path
+      z = Zip::ZipFile.open(path)
+      entries = z.entries.find_all { |e| !(e.to_s =~ /\/$/) }
+      if entries.size < 2
+        errors.add(:materials, :min_files_is_two)
+      end
+      unless entries.find { |e| e =~ /(jpg|jpeg|png|tiff|bmp)$/i }
+        errors.add(:materials, :no_image)
+      end
+      z.close
+    end
+  end
 
   attr_accessible :ru_title, :ru_author, :ru_email, :ru_area, :ru_driver,
     :ru_strategy, :ru_objective, :ru_impact, :ru_usage, :en_title, :en_author,
@@ -133,9 +136,13 @@ class Report::Project < ActiveRecord::Base
     :doctors_dissertations_count, :candidates_dissertations_count,
     :students_count, :rffi_grants_count, :ministry_of_communications_grants_count,
     :ran_grants_count, :other_russian_grants_count, :other_intenational_grants_count,
-    :strict_schedule
+    :strict_schedule, :international_conferences_in_russia_count
   
   serialize :directions_of_science, Array
   serialize :critical_technologies, Array
   serialize :computing_systems, Array
+
+  def directions_of_science=(directions)
+    self[:directions_of_science] = directions.find_all(&:present?)
+  end
 end

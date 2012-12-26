@@ -1,4 +1,4 @@
-- title 'Справка'
+- title t('.title', default: 'help')
 
 - if @pages.any?
   ul
@@ -6,4 +6,4 @@
       li
         = link_to page.name, page
 - else
-  p Нет страниц
+  p = t('.no_pages', default: 'There are no pages')

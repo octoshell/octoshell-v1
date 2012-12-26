@@ -2,8 +2,8 @@
   table class="table table-bordered"
     tr
       th = Project.human_attribute_name(:name)
-      th Участники
-      th Подключение
+      th = t('.members', default: 'Members')
+      th = t('.connection', default: 'Connection')
       th = Project.human_attribute_name(:created_at)
     - projects.each do |project|
       tr
@@ -18,10 +18,10 @@
                 = a.user.full_name
                 - if current_user.can_cancel_account? a
                   |  
-                  small = link_to 'удалить', [a, :cancel], method: :put, confirm: 'Вы уверены?', class: 'danger'
+                  small = link_to t('.remove', default: 'Remove'), [a, :cancel], method: :put, confirm: t('.confirm_remove', default: 'Are you sure?', class: 'danger'
             - if current_user.id == project.user_id
               li
-                small = link_to 'Пригласить в проект', [project, :invite]
+                small = link_to t('.invite', default: 'Invite'), [project, :invite]
         td
           - accesses = Access.non_closed.where(credential_id: current_user.credential_ids, cluster_user_id: ClusterUser.where(account_id: current_user.account_ids, cluster_project_id: project.cluster_project_ids))
           - if accesses.any?
@@ -34,7 +34,7 @@
                   code = "#{access.cluster_user.username}@#{access.cluster_user.cluster_project.cluster.host}"
                   small class="state-#{access.state}" = " (#{access.human_active_state})"
           - else
-            p Нет доступов
+            p = t('.no_accesses', default: 'There are no Accesses')
         td class="date" = project.created_at.strftime("%Y-%m-%d")
 - else
-  p Нет проектов
+  p = t('.no_projects', default: 'There are no Projects')

@@ -16,4 +16,4 @@
         td class="date" = request.created_at.strftime("%Y-%m-%d")
         td = link_to t('.open'), request
 - else
-  p Нет заявок
+  p = t('.no_requests', default: 'There are no requests')

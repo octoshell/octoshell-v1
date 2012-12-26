@@ -3,7 +3,7 @@
   = f.input :project_id, collection: @projects, disabled: f.object.persisted?, required: true, prompt: false, input_html: { class: 'chosen noprompt' }
   = f.input :cpu_hours
   = f.input :gpu_hours
-  = f.input :size, hint: 'Более 50ти обговаривается отдельно'
+  = f.input :size, hint: t('.size_hint', default: 'More than 50 must have already been discussed'
   - if f.object.persisted?
     = f.fields_for :request_properties do |f|
       = f.input :value, label: f.object.name

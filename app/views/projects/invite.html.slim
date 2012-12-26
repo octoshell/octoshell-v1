@@ -1,6 +1,6 @@
-- title 'Приглашение пользователя в проект'
+- title t('.title', default: 'Invite user to Project')
 
-h2 У пользователя уже есть поручительство
+h2 = t('.user_has_a_surety', default: 'User has a surety')
 
 = simple_form_for [@project, @account], html: { class: 'form-horizontal' } do |f|
   = autocomplete :user, f, name: :user_id, source: users_path(scope: 'sured'), admin: false
@@ -8,7 +8,7 @@ h2 У пользователя уже есть поручительство
   div class="form-actions"
     = f.button :submit
 
-h2 Новое поручительство
+h2 = t('.user_has_not_a_surety', default: 'New Surety')
 
 = simple_form_for [@project, @surety], html: { class: 'form-horizontal surety-form' } do |f|
   = f.input :boss_full_name

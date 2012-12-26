@@ -1,16 +1,16 @@
-- title "Проект: #{@project.name}"
+- title t('.title', default: "Project: #{@project.name}"
 
 p class="lead" = @project.description
 
 div class="link-actions"
-  = link_to 'Редактировать', edit_project_path(@project), class: 'btn'
+  = link_to t('.edit', default: 'Edit'), edit_project_path(@project), class: 'btn'
   |  
-  = link_to 'Создать заявку', new_request_path(project_id: @project.id), class: "btn"
+  = link_to t('.new_request', default: 'New Request'), new_request_path(project_id: @project.id), class: "btn"
   |  
-  = link_to 'Пригласить в проект', [@project, :invite], class: 'btn'
+  = link_to t('.invite', default: 'Invite'), [@project, :invite], class: 'btn'
   - if @project.can__close?
     = " "
-    = link_to Project.human_state_event_name(:_close), project_close_path(@project), method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены? Закрытие проекта закроет все доступы и заявки' }
+    = link_to Project.human_state_event_name(:_close), project_close_path(@project), method: :put, class: 'btn btn-danger', data: { confirm: t('.confirm_close', default: 'Are you sure?') }
   = " "
 
 table class="table table-bordered"
@@ -22,7 +22,7 @@ table class="table table-bordered"
     td = @project.human_state_name
 
 - if @project.account_codes.any?
-  h3 Приглашения
+  h3 = t('.invites', default: 'Invites')
   table class="table table-bordered"
     tr
       th = AccountCode.human_attribute_name(:code)
@@ -38,7 +38,7 @@ table class="table table-bordered"
           - if account_code.user
             = account_code.user.full_name
           - else
-            | Нет
+            = t('.nothing', default: 'Nil')
 
 h3 Доступы
 
@@ -57,12 +57,12 @@ h3 Доступы
           = account.human_state_name
           - if account.active?
             |  |  
-            = link_to 'Закрыть', [account, :cancel], class: 'btn btn-danger btn-mini', confirm: 'Вы уверены?', method: :put
+            = link_to t('.close', default: 'Закрыть'), [account, :cancel], class: 'btn btn-danger btn-mini', confirm: t('.confirm_close_account', default: 'Are you sure?', method: :put
 - else
-  p Нет аккаунтов
+  p = t('.no_accounts', default: 'There are no accounts')
 
 - if @project.sureties.any?
-  h3 Поручительства
+  h3 = t('.sureties', default: 'Sureties')
 
   - sureties = @project.sureties
   - if sureties.any?
@@ -77,11 +77,11 @@ h3 Доступы
           td = surety.human_state_name
           td = smart_link_to surety
   - else
-    p Нет поручительств
+    p = t('.no_sureties', default: 'There are no sureties')
   
-h3 Заявки
+h3 = t('.requests', default: 'Requests')
 
-p = link_to 'Новая заявка', new_request_path
+p = link_to t('.new_request', deafult: 'New Request', new_request_path
 
 - requests = @project.requests
 - if requests.any?
@@ -98,9 +98,9 @@ p = link_to 'Новая заявка', new_request_path
         td class="date" = request.created_at.strftime("%Y-%m-%d")
         td = link_to t('.open'), request
 - else
-  p Нет заявок
+  p = t('.no_requests', default: 'There are no requests')
 
-h3 Поддержка
+h3 = t('.support', default: 'Support')
 
 = render partial: 'tickets/table', locals: { tickets: @project.tickets }
 

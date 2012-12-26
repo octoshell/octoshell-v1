@@ -1,6 +1,6 @@
 - title @page.name
 
 div class="link-actions"
-  = link_to 'Редактировать', edit_page_path(@page.id), class: 'btn'
+  = link_to t('.edit', default: 'Редактировать', edit_page_path(@page.id), class: 'btn'
 
 == @page.content
