@@ -37,7 +37,9 @@ FactoryGirl.define do
       end
 
       factory :admin_user do
-        admin true
+        after(:create) do |user|
+          user.groups << Group.superadmin
+        end
       end
     end
   end

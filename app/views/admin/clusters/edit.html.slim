@@ -1,8 +1,8 @@
-- title 'Редактирование кластера'
+- title t('.edit', default: 'Edit')
 
 = render 'form'
 
-h3 Дополнительные поля
+h3 = t('.additional_fields')
 
 - if @cluster_fields.any?
   table class="table table-bordered"
@@ -12,13 +12,13 @@ h3 Дополнительные поля
     - @cluster_fields.each do |cluster_field|
       tr id="cluster-field-#{cluster_field.id}"
         td = cluster_field.name
-        td = link_to "Удалить", cluster_field, class: 'btn btn-small btn-danger', method: :delete, data: { confirm: "Вы уверены?" }
+        td = link_to t('.destroy', default: 'Destroy'), cluster_field, class: 'btn btn-small btn-danger', method: :delete, data: { confirm: t('.confirm_destroy', default: 'Are you sure?' }
 - else
-  p Нет дополнительных полей
+  p = t('.no_cluster_fields', default: 'There are no cluster fields')
 
 = simple_form_for @cluster_field, html: { class: 'form-inline' } do |f|
-  legend Новое поле
+  legend = t('.new_cluster_field')
   = f.hidden_field :cluster_id, as: :hidden
-  = f.text_field :name, placeholder: 'Название'
+  = f.text_field :name, placeholder: t('.name', default: 'Name')
   = " "
-  = button_tag 'Создать', class: 'btn'
+  = button_tag t('.create', default: 'Create', class: 'btn'

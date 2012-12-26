@@ -10,12 +10,17 @@ class Group < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
 
+  def self.superadmin
+    find_or_create_by_name! 'superadmins'
+  end
+
 private
   
   def create_abilities
     Ability.definitions.each do |definition|
       abilities.create! do |a|
         a.definition = definition
+        a.available = (name == 'superadmins')
       end
     end
     true

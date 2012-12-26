@@ -1,4 +1,4 @@
-- title t('.title')
+- title t('.title', default: 'Clusters')
 
 - if @clusters.any?
   table class="table table-bordered"
@@ -12,4 +12,4 @@
         td = cluster.host
         td = cluster.description
 - else
-  p Нет кластеров
+  p = t('.no_clusters', default: 'There are no clusters')

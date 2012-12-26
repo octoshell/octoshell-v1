@@ -61,4 +61,4 @@ require 'cucumber/rspec/doubles'
 
 require 'capybara/poltergeist'
 
-# Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :poltergeist

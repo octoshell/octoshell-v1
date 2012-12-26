@@ -1,13 +1,13 @@
-- title "Заявка ##{@ticket.id}"
+- title t('.title', default: "Ticket ##{@ticket.id}")
 
 div class="link-actions"
-  = link_to 'Редактировать', [:edit, @ticket], class: 'btn'
+  = link_to t('.edit', default: 'Edit'), [:edit, @ticket], class: 'btn'
   = " "
   - if @ticket.can__resolve?
     = link_to Ticket.human_state_event_name(:_resolve), ticket_resolve_path(@ticket), method: :put, class: 'btn btn-success'
   = " "
   - if @ticket.can__close?
-    = link_to Ticket.human_state_event_name(:_close), ticket_close_path(@ticket), method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
+    = link_to Ticket.human_state_event_name(:_close), ticket_close_path(@ticket), method: :put, class: 'btn btn-danger', data: { confirm: t('.confirm_close', default: 'Are you sure?') }
 
 table class="table table-bordered"
   tr
@@ -36,7 +36,7 @@ table class="table table-bordered"
     th = Ticket.human_attribute_name(:state)
     td = @ticket.human_state_name
 
-h2 Переписка
+h2 = t('.conversation', default: 'Conversation')
 
 - replies = @replies
 - if replies.any?
@@ -53,7 +53,7 @@ h2 Переписка
           small class="reply"
             = smart_link_to reply
 - else
-  p Нет сообщений
+  p = t('.no_replies', default: 'There are no replies')
 
 - if @ticket.actual?
   = simple_form_for @reply, html: { class: 'form-horizontal' } do |f|

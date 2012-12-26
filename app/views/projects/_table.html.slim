@@ -18,7 +18,7 @@
                 = a.user.full_name
                 - if current_user.can_cancel_account? a
                   |  
-                  small = link_to t('.remove', default: 'Remove'), [a, :cancel], method: :put, confirm: t('.confirm_remove', default: 'Are you sure?', class: 'danger'
+                  small = link_to t('.remove', default: 'Remove'), [a, :cancel], method: :put, confirm: t('.confirm_remove', default: 'Are you sure?'), class: 'danger'
             - if current_user.id == project.user_id
               li
                 small = link_to t('.invite', default: 'Invite'), [project, :invite]
