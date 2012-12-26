@@ -1,11 +1,10 @@
 When /debug/ do
-  sleep 10
+  save_and_open_page
 end
 
 Given /^I am signed in as "(.*)"$/ do |user|
   user = FactoryGirl.create(:"#{user}_user")
   visit root_path
-  save_and_open_page
   within('.navbar') do
     click_on 'Sign In'
   end
@@ -22,7 +21,6 @@ Given /^I am on root page$/ do
 end
 
 Given /^I click on "(.*)"$/ do |name|
-  save_and_open_page
   if name =~ /^\.js-/
     find(name).click
   else
