@@ -17,6 +17,7 @@ Feature: Add project
     And I fill in "Boss full name" with "OctoBoss"
     And I fill in "Boss position" with "OctoCEO"
     And I click on "Create"
+    And debug
     Then project "OctoProj" should be created
 
   Scenario: Creating project by sured user

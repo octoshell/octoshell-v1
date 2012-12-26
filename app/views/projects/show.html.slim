@@ -1,4 +1,4 @@
-- title t('.title', default: "Project: #{@project.name}"
+- title t('.title', default: "Project: #{@project.name}")
 
 p class="lead" = @project.description
 
@@ -57,7 +57,7 @@ h3 Доступы
           = account.human_state_name
           - if account.active?
             |  |  
-            = link_to t('.close', default: 'Закрыть'), [account, :cancel], class: 'btn btn-danger btn-mini', confirm: t('.confirm_close_account', default: 'Are you sure?', method: :put
+            = link_to t('.close', default: 'Закрыть'), [account, :cancel], class: 'btn btn-danger btn-mini', confirm: t('.confirm_close_account', default: 'Are you sure?'), method: :put
 - else
   p = t('.no_accounts', default: 'There are no accounts')
 
@@ -81,7 +81,7 @@ h3 Доступы
   
 h3 = t('.requests', default: 'Requests')
 
-p = link_to t('.new_request', deafult: 'New Request', new_request_path
+p = link_to t('.new_request', deafult: 'New Request'), new_request_path
 
 - requests = @project.requests
 - if requests.any?

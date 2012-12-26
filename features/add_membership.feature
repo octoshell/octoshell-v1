@@ -8,5 +8,7 @@ Feature: Add membership
 
   Scenario: Successfully creation
     When I select "OctoCorp" from "Organization"
+    And debug
     And I click on "Create"
+    And debug
     Then membership for organization "OctoCorp" should be created

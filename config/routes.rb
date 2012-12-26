@@ -79,7 +79,7 @@ MSU::Application.routes.draw do
   resources :pages, only: [:index, :show]
 
   # organizations
-  resources :organizations, only: :index
+  resources :organizations, only: [:new, :create, :index]
 
   # reports
   resources :reports, only: [:edit, :update]

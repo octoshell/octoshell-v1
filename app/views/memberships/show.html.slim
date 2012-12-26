@@ -1,11 +1,11 @@
 - title t('.title', default: 'Membership')
 
-  div class="link-actions"
-    = link_to t('.edit', default: 'Edit', edit_membership_path(@membership), class: 'btn'
+div class="link-actions"
+  = link_to t('.edit', default: 'Edit'), edit_membership_path(@membership), class: 'btn'
+  = " "
+  - if @membership.can__close?
+    = link_to Membership.human_state_event_name(:_close), membership_close_path(@membership), class: 'btn btn-danger', method: :put, data: { confirm: t('.confirm_destroy', default: 'Are you sure?') }
     = " "
-    - if @membership.can__close?
-      = link_to Membership.human_state_event_name(:_close), membership_close_path(@membership), class: 'btn btn-danger', method: :put, data: { confirm: t('.confirm_destroy', default: 'Are you sure?' }
-      = " "
 
 table class="table table-bordered" id="membership-#{@membership.id}-detail"
   tr
@@ -18,12 +18,15 @@ table class="table table-bordered" id="membership-#{@membership.id}-detail"
     th = Membership.human_attribute_name(:state)
     td = @membership.human_state_name
 
-h2 Позиции
+h2 = t('.positions', default: 'Positions')
 
 div class="row"
   div class="span6"
-    table class="table table-bordered"
-      - @membership.positions.each do |position|
-        tr
-          th = position.name
-          td = position.value
+    - if @membership.positions.any?
+      table class="table table-bordered"
+        - @membership.positions.each do |position|
+          tr
+            th = position.name
+            td = position.value
+    - else
+      p = t('.no_memberships', default: 'There are no memberships')

@@ -16,6 +16,10 @@ class MembershipsController < ApplicationController
       render :new
     end
   end
+
+  def show
+    @membership = current_user.memberships.find(params[:id])
+  end
     
   def edit
     @membership = find_membership(params[:id])
@@ -24,7 +28,7 @@ class MembershipsController < ApplicationController
   
   def update
     @membership = find_membership(params[:id])
-    if @membership.update_attributes(params[:membership], as_role)
+    if @membership.update_attributes(params[:membership])
       @membership.user.track! :update_membership, @membership, current_user
       redirect_to @membership
     else
@@ -44,10 +48,6 @@ private
   
   def find_membership(id)
     current_user.memberships.find(id)
-  end
-  
-  def namespace
-    admin? ? :admin : :dashboard
   end
   
   def setup_default_filter
