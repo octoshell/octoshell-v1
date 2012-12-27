@@ -5,6 +5,19 @@ class ApplicationController < ActionController::Base
   
   before_filter :block_closed_users
   before_filter :get_extends, :get_wikis
+
+  before_filter do
+    # raise $translations.inspect
+  end
+
+  after_filter do
+    $translations ||= {}
+    existed = YAML.load_file("#{Rails.root}/config/hacked.yml")
+    $translations = existed.merge($translations).sort_by_key(true)
+    File.open("#{Rails.root}/config/hacked.yml", 'wb') do |file|
+      file.write $translations.to_yaml
+    end
+  end
   
   protect_from_forgery
   

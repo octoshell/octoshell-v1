@@ -1,5 +1,5 @@
 MSU::Application.configure do
-  config.i18n.default_locale = :en
+  config.i18n.default_locale = :ru
 
   # Settings specified here will take precedence over those in config/application.rb
 
