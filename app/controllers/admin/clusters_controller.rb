@@ -56,11 +56,11 @@ class Admin::ClustersController < Admin::ApplicationController
 private
   
   def redirect_to_cluster(cluster)
-    redirect_to cluster
+    redirect_to [:admin, cluster]
   end
   
   def redirect_to_index
-    redirect_to clusters_path
+    redirect_to admin_clusters_path
   end
   
   def find_cluster(id)

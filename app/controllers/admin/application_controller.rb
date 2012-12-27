@@ -1,4 +1,5 @@
 class Admin::ApplicationController < ApplicationController
+  before_filter :require_login
   before_filter :authorize_admins!
 
 private

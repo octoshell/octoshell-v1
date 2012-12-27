@@ -7,7 +7,7 @@ Feature: Update abilities to group
     And there is a Group "All"
     And I click on "More"
     And I click on "Groups"
-    And I click on "Edit"
+    And I click on "Edit" the "group"
     When I check ability for "show" "users"
     And I click on "Update"
     Then Group "All" should have abilities to "show" "users"

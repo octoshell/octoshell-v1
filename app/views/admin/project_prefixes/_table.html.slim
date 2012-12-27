@@ -11,4 +11,4 @@
           |  
           = link_to t('.destroy'), [:admin, project_prefix], method: :delete, class: 'danger', data: { confirm: 'Вы уверены?' }
 - else
-  p = t('.there_are_no_project_prefixes')
+  p = t('.there_are_no_project_prefixes', default: 'There are no Project Prefixes')

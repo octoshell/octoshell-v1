@@ -20,7 +20,7 @@ Given /^I am on root page$/ do
   visit root_path
 end
 
-Given /^I click on "([\w\s]+)"$/ do |name|
+Given /^I click on "([^\"]+)"$/ do |name|
   if name =~ /^\.js-/
     find(name).click
   else
@@ -28,12 +28,13 @@ Given /^I click on "([\w\s]+)"$/ do |name|
   end
 end
 
-Given /^I click on "([\w\s]+)" the "([\w\s]+)"$/ do |element, place|
+Given /^I click on "([^\"]+)" the "([^\"]+)"$/ do |element, place|
+  click = proc { click_on element }
   case place.to_sym
   when :request then
-    within(".js-request-#{@request.id}") do
-      click_on element
-    end
+    within(".js-request-#{@request.id}", &click)
+  when :group then
+    within(".js-group-#{@group.id}", &click)
   end
 end
 

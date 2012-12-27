@@ -41,10 +41,6 @@ class UsersController < ApplicationController
   
 private
   
-  def namespace
-    :dashboard
-  end
-  
   def setup_default_filter
     params[:search] ||= { state_in: ['sured'] }
     params[:search][:meta_sort] ||= 'last_name.asc'

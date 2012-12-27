@@ -17,7 +17,7 @@ class Admin::RequestsController < Admin::ApplicationController
     @projects = @request.allowed_projects
     if @request.update_attributes(params[:request], as_role)
       @request.user.track! :update_request, @request, current_user
-      redirect_to @request
+      redirect_to_request(@request)
     else
       @projects = @request.allowed_projects
       render :edit
@@ -61,11 +61,11 @@ class Admin::RequestsController < Admin::ApplicationController
 private
   
   def redirect_to_request(request)
-    redirect_to request
+    redirect_to [:admin, request]
   end
   
   def redirect_to_request_with_alert(request)
-    redirect_to request, alert: request.errors.full_messages.join(', ')
+    redirect_to [:admin, request], alert: request.errors.full_messages.join(', ')
   end
   
   def find_request(id)

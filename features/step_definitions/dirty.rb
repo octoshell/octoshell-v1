@@ -42,6 +42,7 @@ Then /^I should get access to project "(.*)"$/ do |name|
 end
 
 And /^I register as "(.*)"$/ do |email|
+  visit new_user_path
   visit root_path
   step %(I click on "Sign Up")
   step %(I fill in "Email" with "#{email}")

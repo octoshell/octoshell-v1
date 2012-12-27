@@ -1,18 +1,23 @@
 Given /^there is a project "(.*)"$/ do |name|
-  FactoryGirl.create(:project, name: name)
+  @project = FactoryGirl.create(:project, name: name)
 end
 
 Given /^there is a cluster "(.*)"$/ do |name|
-  FactoryGirl.create(:cluster, name: name)
+  @cluster = FactoryGirl.create(:cluster, name: name)
 end
 
 Given /^there is an Ability "(.*)" "(.*)"$/ do |action, subject|
-  Ability.stub(:raw_definitions) { { subject => [action] } }
+  raw_definitions = Ability.raw_definitions.dup
+  Ability.stub(:raw_definitions) do
+    raw_definitions.merge(
+      subject => [action]
+    )
+  end
   Ability.redefine!
 end
 
 Given /^there is a Group "(.*)"$/ do |name|
-  FactoryGirl.create(:group, name: name)
+  @group = FactoryGirl.create(:group, name: name)
 end
 
 Given /^there is a pending request for project "(.*)" on "(.*)"$/ do |project_name, cluster_name|
@@ -66,6 +71,6 @@ end
 
 Then /^Group "(\w+)" should have abilities to "(\w+)" "(\w+)"$/ do |group_name, action, subject|
   group = Group.find_by_name! group_name
-  ability = Ability.find_by_action_and_subject! action, subject
+  ability = group.abilities.find_by_action_and_subject! action, subject
   group.abilities.should include(ability)
 end

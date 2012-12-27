@@ -26,7 +26,6 @@ class ApplicationController < ActionController::Base
       mm = MayMay::Ability.new(current_user)
       (logged_in? ? current_user.abilities : Ability.default).each do |ability|
         method = ability.available ? :may : :maynot
-        Rails.logger.info [method, ability.action_name, ability.subject_name].inspect
         mm.send method, ability.action_name, ability.subject_name
       end
       mm
@@ -44,7 +43,7 @@ private
   end
   
   def after_login_path
-    dashboard_path
+    projects_path
   end
   
   def skip_action?
