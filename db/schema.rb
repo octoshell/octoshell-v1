@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121225134636) do
+ActiveRecord::Schema.define(:version => 20121227133226) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -424,9 +424,11 @@ ActiveRecord::Schema.define(:version => 20121225134636) do
   create_table "reports", :force => true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
-    t.hstore   "points"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.integer  "illustrations_points"
+    t.integer  "statement_points"
+    t.integer  "summary_points"
   end
 
   create_table "request_properties", :force => true do |t|
