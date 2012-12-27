@@ -2,7 +2,7 @@
 
 p 
   | Создана новая организация 
-  = link_to @organization.name, organization_url(@organization)
+  = link_to @organization.name, admin_organization_url(@organization)
   |.
 
 = render 'signature'
