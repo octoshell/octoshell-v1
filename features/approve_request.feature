@@ -1,5 +1,5 @@
 @javascript
-Feature: Arroving request
+Feature: Approving request
   
   Scenario: Success
     Given I am signed in as "admin"
@@ -7,6 +7,8 @@ Feature: Arroving request
     And there is a cluster "OctoMach"
     And there is a pending request for project "OctoProj" on "OctoMach"
     When I click on "Requests"
-    And I click on "open" the "request"
+    And debug
+    And I click on "Open" the "request"
+    And debug
     And I click on "activate"
     Then the request should be "active"

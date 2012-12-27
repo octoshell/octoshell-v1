@@ -1,18 +1,18 @@
 - title "Заявка ##{@request.id}"
 
 div class="link-actions"
-  = link_to 'Редактировать', [:edit, @request], class: 'btn'
+  = link_to 'Редактировать', [:edit, :admin, @request], class: 'btn'
   = " "
   - if @request.can__activate?
-    = link_to Request.human_state_event_name(:_activate), request_activate_path(@request), class: 'btn btn-success', method: :put
+    = link_to Request.human_state_event_name(:_activate), admin_request_activate_path(@request), class: 'btn btn-success', method: :put
     = " "
   - if @request.can__decline?
-    = link_to Request.human_state_event_name(:_decline), request_decline_path(@request), class: 'btn', method: :put
+    = link_to Request.human_state_event_name(:_decline), admin_request_decline_path(@request), class: 'btn', method: :put
   - if @request.can__close?
     = " "
-    = link_to Request.human_state_event_name(:_close), request_close_path(@request), class: 'btn btn-danger', method: :put
+    = link_to Request.human_state_event_name(:_close), admin_request_close_path(@request), class: 'btn btn-danger', method: :put
   = " "
-  = link_to 'Версии', [@request, :versions], class: 'btn'
+  = link_to 'Версии', [:admin, @request, :versions], class: 'btn'
 
 
 div class="request"

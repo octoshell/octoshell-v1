@@ -26,7 +26,6 @@ class Admin::RequestsController < Admin::ApplicationController
   
   def show
     @request = find_request(params[:id])
-    authorize! :show, @request
   end
   
   def activate

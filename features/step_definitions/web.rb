@@ -20,7 +20,7 @@ Given /^I am on root page$/ do
   visit root_path
 end
 
-Given /^I click on "(.*)"$/ do |name|
+Given /^I click on "([\w\s]+)"$/ do |name|
   if name =~ /^\.js-/
     find(name).click
   else
@@ -28,7 +28,7 @@ Given /^I click on "(.*)"$/ do |name|
   end
 end
 
-Given /^I click on "(.*)" the "(.*)"$/ do |element, place|
+Given /^I click on "([\w\s]+)" the "([\w\s]+)"$/ do |element, place|
   case place.to_sym
   when :request then
     within(".js-request-#{@request.id}") do
@@ -65,7 +65,7 @@ When /^I signed out$/ do
 end
 
 When /^I confirm dialog$/ do
-  page.driver.browser.switch_to.alert.accept
+  page.evaluate_script("window.confirm()")
 end
 
 When /^I check ability for "(\w+)" "(\w+)"$/ do |action, subject|

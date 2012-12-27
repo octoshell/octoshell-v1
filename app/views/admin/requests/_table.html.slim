@@ -16,6 +16,6 @@
         td = smart_link_to request.cluster
         td = request.human_state_name
         td class="date" = request.created_at.strftime("%Y-%m-%d")
-        td = link_to t('.open'), request
+        td = link_to t('.open'), [:admin, request]
 - else
   p Нет заявок
