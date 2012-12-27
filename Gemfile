@@ -46,6 +46,7 @@ group :test, :development do
   gem 'guard-cucumber'
   gem 'database_cleaner'
   gem 'ci_reporter'
+  gem 'therubyracer'
 end
 
 group :test do
