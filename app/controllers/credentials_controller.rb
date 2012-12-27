@@ -9,7 +9,7 @@ class CredentialsController < ApplicationController
     @credential = current_user.credentials.build(params[:credential])
     if @credential.save
       @credential.user.track! :create_credential, @credential, current_user
-      redirect_to @credential
+      redirect_to profile_path
     else
       render :new
     end
@@ -17,7 +17,6 @@ class CredentialsController < ApplicationController
   
   def close
     @credential = Credential.find(params[:credential_id])
-    authorize! :close_own, @credential
     if @credential.close
       @credential.user.track! :close_credential, @credential, current_user
       redirect_to credentials_path
