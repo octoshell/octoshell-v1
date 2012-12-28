@@ -45,6 +45,13 @@ ru:
       sureties: Поручительства
       tasks: Процедуры
       users: Пользователи
+    dashboard_menu:
+      clusters: Кластеры
+      pages: Справка
+      profile: Профиль
+      projects: Проекты
+      requests: Заявки
+      tickets: Поддержка
     top_menu:
       admin: Admin
       dashboard: Dashboard
