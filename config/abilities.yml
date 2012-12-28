@@ -12,6 +12,8 @@ cluster_users:
   - manage
 critical_technologies:
   - manage
+credentials:
+  - manage
 direction_of_sciences:
   - manage
 extends:

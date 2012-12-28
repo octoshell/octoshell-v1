@@ -1,119 +1,32 @@
 ---
-admin:
-  credentials:
-    table:
-      no_credentials: There is no credentials
-  groups:
-    index:
-      confirm_destroy: Вы уверены?
-      destroy: Удалить
-      edit: Редактировать
+ru:
+  layouts:
+    application:
+      help: ! '<span class="translation_missing" title="translation missing: ru.layouts.application.help">Help</span>'
+      sign_out: Выход
+  shared:
+    admin_menu:
+      accesses: Публичные ключи на кластере
+      cluster_projects: Проекты на кластере
+      cluster_users: Пользователи на кластере
+      clusters: Кластеры
+      critical_technologies: Critical Technologies
+      direction_of_sciences: Direction of Science
+      extends: Расширения
       groups: Группы
-      new_group: Новая группа
-  projects:
-    index:
-      title: Projects
-  requests:
-    index:
-      search: Find
-      title: Requests
-    table:
-      open: ! '<span class="translation_missing" title="translation missing: ru.admin.requests.table.open">Open</span>'
-clusters:
-  index:
-    title: Кластеры
-layouts:
-  application:
-    help: ! '<span class="translation_missing" title="translation missing: ru.layouts.application.help">Help</span>'
-    sign_out: Выход
-notifications:
-  index:
-    new_ticket: Ask support
-    support: Support
-    title: Notifications
-pages:
-  index:
-    title: help
-profiles:
-  show:
-    confirm_destroy: Confirm Destroy
-    credentials: Public Keys
-    edit: Редактировать
-    memberships: Memberships
-    new_credential: Добавить публичный ключ
-    new_membership: Добавить место работы
-    profile: Profile
-    sureties: Sureties
-projects:
-  form:
-    add_membership: ! '<span class="translation_missing" title="translation missing:
-      ru.projects.form.add_membership">Add Membership</span>'
-    members: Members
-    surety: Surety
-    user: User
-  index:
-    new_project: Новый проект
-    title: Проекты
-    use_code: Использовать код приглашения
-  new:
-    title: Новый проект
-  table:
-    no_projects: There are no Projects
-requests:
-  index:
-    new: Request
-    title: Request
-  new:
-    title: New
-  table:
-    no_requests: There are no requests
-shared:
-  admin_menu:
-    accesses: Публичные ключи на кластере
-    cluster_projects: Проекты на кластере
-    cluster_users: Пользователи на кластере
-    clusters: Кластеры
-    critical_technologies: Critical Technologies
-    direction_of_sciences: Direction of Science
-    extends: Расширения
-    groups: Группы
-    images: Изображения
-    import: Импорт
-    more: Еще
-    organization_kinds: Типы организаций
-    organizations: Организации
-    position_names: Должности
-    project_prefixes: Префиксы проектов
-    projects: Проекты
-    requests: Заявки
-    sureties: Поручительства
-    tasks: Процедуры
-    users: Пользователи
-  dashboard_menu:
-    clusters: Кластеры
-    pages: Справка
-    profile: Профиль
-    projects: Проекты
-    requests: Заявки
-    tickets: Поддержка
-  top_menu:
-    admin: Admin
-    dashboard: Dashboard
-    notifications: Notifications (4)
-sureties:
-  full_table:
-    no_sureties: There are no sureties
-tickets:
-  index:
-    new_title: Новая заявка
-    title: Tickets
-  show:
-    confirm_close: Are you sure?
-    conversation: Conversation
-    edit: Edit
-    no_replies: There are no replies
-    title: ! 'Ticket #22'
-users:
-  form_fields:
-    additional_emails: Additional emails for notifications
-    minimun_password_length: 6 simbols minimum
+      images: Изображения
+      import: Импорт
+      more: Еще
+      organization_kinds: Типы организаций
+      organizations: Организации
+      position_names: Должности
+      project_prefixes: Префиксы проектов
+      projects: Проекты
+      requests: Заявки
+      sureties: Поручительства
+      tasks: Процедуры
+      users: Пользователи
+    top_menu:
+      admin: Admin
+      dashboard: Dashboard
+      notifications: Notifications (4)

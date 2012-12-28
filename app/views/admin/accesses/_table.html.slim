@@ -21,6 +21,6 @@
         td = access.cluster_user.human_state_name
         td = access.cluster_user.cluster_project.human_state_name
         - if may? :manage, :accesses
-          td = link_to 'открыть', access
+          td = smart_link_to access
 - else
   p Нет доступов

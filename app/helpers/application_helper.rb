@@ -124,7 +124,7 @@ module ApplicationHelper
     last_one = $translations
     res = super(key, options)
     if key[0] == '.'
-      template.split('/').each do |branch|
+      (['ru'] + template.split('/')).each do |branch|
         last_one[branch.force_encoding('UTF-8')] ||= {}
         last_one = last_one[branch]
       end

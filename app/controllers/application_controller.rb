@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   after_filter do
     $translations ||= {}
-    existed = YAML.load_file("#{Rails.root}/config/hacked.yml")
+    existed = {} # YAML.load_file("#{Rails.root}/config/hacked.yml")
     $translations = existed.merge($translations).sort_by_key(true)
     File.open("#{Rails.root}/config/hacked.yml", 'wb') do |file|
       file.write $translations.to_yaml

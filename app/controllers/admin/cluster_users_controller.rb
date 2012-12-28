@@ -4,6 +4,7 @@ class Admin::ClusterUsersController < Admin::ApplicationController
   
   def index
     @search = ClusterUser.search(params[:search])
+    @cluster_users = @search.page(params[:page])
   end
   
   def show

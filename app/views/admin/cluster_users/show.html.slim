@@ -14,7 +14,7 @@ table class="table table-bordered" id="cluster-user-#{@cluster_user.id}-detail"
     td = smart_link_to @cluster_user.cluster
   tr
     th = ClusterProject.model_name.human
-    td = smart_link_to кластере'
+    td = smart_link_to @cluster_user.cluster_project
   tr
     th = ClusterUser.human_attribute_name(:state)
     td = @cluster_user.human_state_name

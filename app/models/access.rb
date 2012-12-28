@@ -104,6 +104,10 @@ class Access < ActiveRecord::Base
   def has_active_entities?
     !closed?
   end
+
+  def link_name
+    'access'
+  end
   
 protected
   
