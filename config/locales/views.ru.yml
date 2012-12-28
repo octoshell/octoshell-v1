@@ -1,140 +1,75 @@
+---
 ru:
+  admin:
+    memberships:
+      table:
+        no_memberships: Нет сотрудников
+    requests:
+      table:
+        open: Открыть
   layouts:
     application:
-      sign_in: Вход
-      sign_up: Регистрация
+      help: Справка
       sign_out: Выход
-  sessions:
+  notifications:
+    index:
+      new_ticket: Создать заявку в Поддержке
+      support: Поддержка
+      title: Оповещения
+  project_joiners:
     new:
-      sign_in: Войти
+      code: Код приглашения
+      use: Использовать
+      use_code: Использовать код
+  projects:
+    index:
+      new_project: Новый проект
+      title: Проекты
+      use_code: Использовать код приглашения
+    table:
+      no_projects: Нет проектов
+  requests:
+    index:
+      new: Новая заявка
+      title: Заявки
+    table:
+      no_requests: Нет заявок
   shared:
     admin_menu:
-      users: Пользователи
-      sureties: Поручительства
-      requests: Заявки
-      tasks: Процедуры
-      projects: Проекты
-      clusters: Кластеры
-      memberships: Места работы
-      credentials: Публичные ключи
-      organizations: Организации
-      organization_kinds: Типы организаций
-      position_names: Должности
-      accounts: Доступы к проектам
       accesses: Публичные ключи на кластере
       cluster_projects: Проекты на кластере
       cluster_users: Пользователи на кластере
+      clusters: Кластеры
+      critical_technologies: Критические технологии
+      direction_of_sciences: Направления науки
       extends: Расширения
+      groups: Группы
       images: Изображения
       import: Импорт
-      project_prefixes: Префиксы проектов
-      groups: Группы
       more: Еще
-    dashboard_menu:
+      organization_kinds: Типы организаций
+      organizations: Организации
+      position_names: Должности
+      project_prefixes: Префиксы проектов
       projects: Проекты
       requests: Заявки
+      sureties: Поручительства
+      tasks: Процедуры
+      users: Пользователи
+    dashboard_menu:
       clusters: Кластеры
-      profile: Профиль
-      tickets: Поддержка
       pages: Справка
-  credentials:
+      profile: Профиль
+      projects: Проекты
+      requests: Заявки
+      tickets: Поддержка
+    top_menu:
+      admin: Кабинет Администратора
+      dashboard: Рабочий кабинет
+      notifications: "Оповещения (%{count})"
+  tickets:
     new:
-      title: Новый публичный ключ
-      choose_pub_file: Выберите .pub файл
-      or_enter_as_text: Или введите текстом
-  profiles:
-    show:
-      title: Профиль
-      edit: Редактировать
-      new_membership: Добавить место работы
-      new_credential: Добавить публичный ключ
-  projects:
-    index:
-      title: Проекты
-      new_project: Новый проект
-      use_code: Использовать код приглашения
-    form:
-      add_member: Добавить
-  requests:
-    table:
-      open: открыть
-  reports:
-    edit:
-      title: Отчет
-      personal_data: Личные данные
-      organizations: Организация
-      personal_survey: Индивидуальный опрос
-      software: Программное обеспечение
-      technologies: Технологии
-      compilators: Компиляторы
-      learning: Обучение
-      ru_project_card: Карточка  Проекта
-      en_project_card: Project Card
-      request: Заявка на следующий год
-      ru_email_hint: 'Контактные адреса'
-      ru_author_hint: 'Список авторов и организаций, первым указывается руководитель проекта'
-      ru_usage_hint: 'Отрасли промышленности, сектора экономики, области науки, где могут быть использованы результаты проекта'
-      ru_impact_hint: 'Ожидаемый эффект от успешного решения задачи (научный / коммерческий / социальный)'
-      ru_strategy_hint: 'Описание идеи подхода к решению задачи'
-      ru_objective_hint: 'Описание цели на которую нацелено решение конкретной задачи'
-      ru_driver_hint: 'Описание решаемой задач, на решение которой направлен проект'
-      en_email_hint: 'Contact addresses'
-      en_author_hint: 'List of authors and organizations. The project manager is first'
-      en_usage_hint: 'Industry, economy, science, which can be used by the project results.'
-      en_impact_hint: 'The expected effect on the successful resolution of the problem (scientific / commercial / social)'
-      en_strategy_hint: 'Description of the idea approach to the problem'
-      en_objective_hint: 'Description of the purpose for which targeted solution to a specific problem'
-      en_driver_hint: 'Description of the problem'
-      request_technology_hint: 'Названия, через запятую'
-      precision: Точность вычислений
-      computing: Вычисления
-      logins: 'Список логинов, работавших над проектом'
-      materials: Материалы
-      materials_hint: Zip архив до 50ти мб. В архиве должен быть документ и изображения хорошего качества
-      project_survey: Наукометрия
-      publications: 'Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ'
-      conferences: 'Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ'
-      dissertations: 'Число защищенных диссертаций, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ'
-      students: 'Число учащихся, ведущих научную работу с использованием суперкомпьютерного комплекса МГУ'
-      your_students: 'Число студентов, прошедших под Вашим руководством через вычислительный практикум на суперкомпьютерном комплексе МГУ'
-      grants: 'Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ в рамках данного проекта'
-      awards: 'Премии, награды, медали и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ'
-      comments: 'Дополнительная информация, комментарии'
-      hours: Ориентировочное число процессорочасов на следующий (2013) год
-      size: Ориентировочный объем дискового пространства
-      schedule: 'Необходимость привязки свободных процессоров к фиксированному времени (например, для поддержки вычислительного практикума, стоящего в сетке расписаний)'
-      request_comment: 'Дополнительная информация, пояснение, комментарий'
-      speak:
-        html: 'Хотели бы Вы выступить с докладом на семинаре <a href="http://agora.guru.ru/sct" target="_blank">Суперкомпьютерные технологии в науке, образовании и промышленности</a>?'
-      project:
-        html: 'Проект: <span>%{name}</span>'
-  admin:
-    groups:
-      index:
-        groups: Группы
-        new_group: Новая группа
-        edit: Редактировать
-        destroy: Удалить
-        confirm_destroy: Вы уверены?
-      edit:
-        edit_group: Редактирование Группы
-      form:
-        abilities: Доступы
-    project_prefixes:
-      index:
-        project_prefixes: Префиксы проектов
-      new:
-        new_project_prefix: Новый префиксы проектов
-      table:
-        there_are_no_project_prefixes: Нет префиксов проектов
-    clusters:
-      index:
-        title: Кластеры
-  project_joiners:
-    new:
-      use_code: Использовать код
-      use: Использовать
-      code: Код приглашения
-  clusters:
-    index:
-      title: Кластеры
+      begin: Начало
+      choose: Выберите
+      continue: Продолжить
+      new_request: Новая заявка

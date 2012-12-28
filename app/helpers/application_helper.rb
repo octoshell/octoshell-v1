@@ -116,20 +116,4 @@ module ApplicationHelper
         end
     end
   end
-
-  def t(key, options = {})
-    $translations ||= {}
-    template = caller.first[/app\/views\/(.+)\.html/, 1]
-    template.gsub! '/_', '/'
-    last_one = $translations
-    res = super(key, options)
-    if key[0] == '.'
-      (['ru'] + template.split('/')).each do |branch|
-        last_one[branch.force_encoding('UTF-8')] ||= {}
-        last_one = last_one[branch]
-      end
-      last_one[key[1..-1]] = res
-    end
-    res
-  end
 end
