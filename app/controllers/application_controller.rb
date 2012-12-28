@@ -109,7 +109,7 @@ private
   end
   
   def show_all?
-    params[:show_all] == '1' && admin?
+    params[:show_all] == '1' && may?(:access, :admin)
   end
 
   def authorize_access_to_controller
