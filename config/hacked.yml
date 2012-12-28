@@ -16,6 +16,11 @@ ru:
       new_ticket: Ask support
       support: Support
       title: Notifications
+  project_joiners:
+    new:
+      code: Код приглашения
+      use: Использовать
+      use_code: Использовать код
   projects:
     index:
       new_project: Новый проект
@@ -23,6 +28,12 @@ ru:
       use_code: Использовать код приглашения
     table:
       no_projects: There are no Projects
+  requests:
+    index:
+      new: Request
+      title: Request
+    table:
+      no_requests: There are no requests
   shared:
     admin_menu:
       accesses: Публичные ключи на кластере
@@ -56,3 +67,9 @@ ru:
       admin: Admin
       dashboard: Dashboard
       notifications: Notifications (4)
+  tickets:
+    new:
+      begin: Begin
+      choose: Choose
+      continue: Continue
+      new_request: New Request
