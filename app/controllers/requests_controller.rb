@@ -11,12 +11,13 @@ class RequestsController < ApplicationController
   end
   
   def create
-    current_user.requests.build(params[:request])
+    @request = current_user.requests.build(params[:request])
     if @request.save
       @request.user.track! :create_request, @request, current_user
-      redirect_to @request
+      redirect_to @request, notice: t('.request_created', default: 'Request successfuly created')
     else
       @projects = @request.allowed_projects
+      flash.now[:error] = t('.failed_create_request', default: "You can't create a new request until active one exists")
       render :new
     end
   end

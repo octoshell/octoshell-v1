@@ -54,6 +54,7 @@ end
 
 Before do
   Ability.redefine!
+  FactoryGirl.create(:cluster, name: 'OctoClust')
   visit new_session_path
   visit root_path
 end

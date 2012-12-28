@@ -74,3 +74,28 @@ end
 Then /^I should see "(.*)" Project Prefix$/ do |prefix|
   page.should have_content("edu-")
 end
+
+
+
+Given /I have a project/ do
+  @project = FactoryGirl.create(:project, user: @current_user)
+end
+
+When /I followed to new request page for the project/ do
+  visit root_path
+  click_on 'Projects'
+  click_on @project.name
+  within '.link-actions' do
+    click_on 'New Request'
+  end
+end
+
+When /I fill in the request form/ do
+  step %(I fill in "Gpu hours" with "1")
+  step %(I fill in "Cpu hours" with "1")
+  step %(I fill in "Size" with "1")
+end
+
+Given /I have an active request for the project/ do
+  FactoryGirl.create(:active_request, project_id: @project.id)
+end

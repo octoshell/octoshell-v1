@@ -5,6 +5,8 @@ ru:
       table:
         no_memberships: Нет сотрудников
     requests:
+      index:
+        title: Заявки
       table:
         open: Открыть
   layouts:
