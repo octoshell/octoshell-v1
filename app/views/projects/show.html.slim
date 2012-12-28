@@ -72,10 +72,10 @@ h3 Доступы
         th = Surety.human_attribute_name(:state)
         th
       - sureties.each do |surety|
-        tr id="surety-#{surety.id}"
+        tr id="surety-#{surety.id}" class="js-surety-#{surety.id}"
           td = surety.organization.name
           td = surety.human_state_name
-          td = smart_link_to surety
+          td = link_to surety.link_name, surety
   - else
     p = t('.no_sureties', default: 'There are no sureties')
   

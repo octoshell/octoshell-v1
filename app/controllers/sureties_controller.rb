@@ -30,10 +30,9 @@ class SuretiesController < ApplicationController
   
   def close
     @surety = find_surety(params[:surety_id])
-    authorize! :close, @surety
     if @surety.close
       @surety.user.track! :close_surety, @surety, current_user
-      redirect_to_surety(@surety)
+      redirect_to_surety(@surety, notice: t('.surety_closed', default: 'Surety successfully closed'))
     else
       redirect_to_surety_with_alert(@surety)
     end
@@ -43,7 +42,7 @@ class SuretiesController < ApplicationController
     @surety = Surety.find(params[:surety_id])
     if @surety.load_scan(params[:file])
       @surety.user.track! :create_scan, @surety, current_user
-      redirect_to @surety, notice: t('.file_loaded')
+      redirect_to @surety
     else
       redirect_to [@surety, :scan], alert: @surety.errors.full_messages.join(', ')
     end
@@ -56,15 +55,15 @@ class SuretiesController < ApplicationController
 private
   
   def find_surety(id)
-    current_user.sureties.find(id)
+    Surety.where(project_id: current_user.owned_project_ids).find(id)
   end
   
   def redirect_to_surety_with_alert(surety)
     redirect_to surety, alert: surety.errors.full_messages.join(', ')
   end
   
-  def redirect_to_surety(surety)
-    redirect_to surety
+  def redirect_to_surety(surety, options = {})
+    redirect_to surety, options
   end
   
   def namespace

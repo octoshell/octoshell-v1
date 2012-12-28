@@ -47,10 +47,9 @@ class Admin::SuretiesController < Admin::ApplicationController
   
   def close
     @surety = find_surety(params[:surety_id])
-    authorize! :close, @surety
     if @surety.close
       @surety.user.track! :close_surety, @surety, current_user
-      redirect_to_surety(@surety)
+      redirect_to_surety(@surety, notice: t('.surety_closed', default: 'Surety successfully closed'))
     else
       redirect_to_surety_with_alert(@surety)
     end

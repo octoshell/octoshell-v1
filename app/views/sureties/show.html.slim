@@ -9,8 +9,6 @@ table class="table table-bordered noprint"
     td id="surety-#{@surety.id}-status" = @surety.human_state_name
 
 div class="link-actions noprint"
-  = smart_link_to btn-primary'
-  = " "
   = link_to 'Скачать RTF', surety_path(@surety, format: :rtf), class: 'btn'
   = " "
   = link_to 'Загрузить скан', [@surety, :scan], class: 'btn'
