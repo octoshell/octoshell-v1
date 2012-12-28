@@ -99,3 +99,15 @@ end
 Given /I have an active request for the project/ do
   FactoryGirl.create(:active_request, project_id: @project.id)
 end
+
+Given /I navigated to the surety/ do
+  visit root_path
+  click_on 'Sureties'
+  within ".js-surety-#{@surety.id}" do
+    click_on 'Open'
+  end
+end
+
+Given /There is a pending surety/ do
+  @surety = FactoryGirl.create(:surety)  
+end

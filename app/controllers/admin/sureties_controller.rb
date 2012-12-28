@@ -29,7 +29,7 @@ class Admin::SuretiesController < Admin::ApplicationController
     @surety = find_surety(params[:surety_id])
     if @surety.activate
       @surety.user.track! :activate_surety, @surety, current_user
-      redirect_to_surety(@surety)
+      redirect_to_surety(@surety, notice: t('.surety_activated', default: 'Surety successfully activated'))
     else
       redirect_to_surety_with_alert(@surety)
     end
@@ -134,11 +134,11 @@ private
   end
   
   def redirect_to_surety_with_alert(surety)
-    redirect_to surety, alert: surety.errors.full_messages.join(', ')
+    redirect_to [:admin, surety], alert: surety.errors.full_messages.join(', ')
   end
   
-  def redirect_to_surety(surety)
-    redirect_to surety
+  def redirect_to_surety(surety, options = {})
+    redirect_to [:admin, surety], options
   end
   
   def setup_default_filter
