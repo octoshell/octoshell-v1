@@ -28,6 +28,10 @@ class Project < ActiveRecord::Base
   attr_accessible :name, :description, :organization_id, :sureties_attributes,
     :organization_ids, :direction_of_science_ids, :critical_technology_ids,
     :project_prefix_id
+  attr_accessible :user_id, :organization_id, :organization_ids,
+    :project_prefix_id, :name, :username, :description,
+    :direction_of_science_ids, :critical_technology_ids, :cluster_user_type,
+    as: :admin
   
   after_create :assign_username
   after_create :create_relations

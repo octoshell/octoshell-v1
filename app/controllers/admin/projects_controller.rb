@@ -30,9 +30,9 @@ class Admin::ProjectsController < Admin::ApplicationController
   
   def update
     @project = Project.find(params[:id])
-    if @project.update_attributes(params[:project], as_role)
+    if @project.update_attributes(params[:project], as: :admin)
       @project.user.track! :update_project, @project, current_user
-      redirect_to @project
+      redirect_to [:admin, @project]
     else
       render :edit
     end
@@ -42,19 +42,18 @@ class Admin::ProjectsController < Admin::ApplicationController
     @project = Project.find(params[:project_id])
     if @project.close
       @project.user.track! :close_project, @project, current_user
-      redirect_to @project
+      redirect_to [:admin, @project]
     else
-      redirect_to @project, alert: @full_messages.join(', ')
+      redirect_to [:admin, @project], alert: @full_messages.join(', ')
     end
   end
   
   def sureties
     @project = Project.find(params[:project_id])
-    authorize! :sureties, @project
     
     @surety = @project.sureties.build(params[:surety])
     if @surety.save
-      redirect_to @project
+      redirect_to [:admin, @project]
     else
       @account = @project.accounts.build
       render :invite
@@ -67,7 +66,7 @@ class Admin::ProjectsController < Admin::ApplicationController
     if params[:account][:user_id].present?
       conditions = { user_id: params[:account][:user_id] }
       @account = @project.accounts.where(conditions).first_or_create!
-      redirect_to(@project) and return if @account.active? || @account.activate!
+      redirect_to([:admin, @project]) and return if @account.active? || @account.activate!
     end
     
     @account = @project.accounts.build

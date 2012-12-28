@@ -1,5 +1,12 @@
 ---
 ru:
+  admin:
+    memberships:
+      table:
+        no_memberships: There is no memberships
+    requests:
+      table:
+        open: ! '<span class="translation_missing" title="translation missing: ru.admin.requests.table.open">Open</span>'
   layouts:
     application:
       help: ! '<span class="translation_missing" title="translation missing: ru.layouts.application.help">Help</span>'

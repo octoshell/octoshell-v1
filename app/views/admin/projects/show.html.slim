@@ -3,12 +3,8 @@
 p class="lead" = @project.description
 
 div class="link-actions"
-  = link_to 'Редактировать', edit_project_path(@project), class: 'btn'
+  = link_to 'Редактировать', [:edit, :admin, @project], class: 'btn'
   |  
-  = link_to 'Создать заявку', new_request_path(project_id: @project.id), class: "btn"
-  |  
-  = link_to 'Пригласить в проект', [@project, :invite], class: 'btn'
-  = " "
   = link_to 'Версии', [@project, :versions], class: 'btn'
   
   - if @project.can__close?
