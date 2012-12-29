@@ -126,3 +126,33 @@ end
 Given /There is a pending surety/ do
   @surety = FactoryGirl.create(:surety)  
 end
+
+Given /I navigated to Invite to the Project/ do
+  visit root_path
+  click_on 'Projects'
+  within ".js-project-#{@project.id}" do
+    click_on 'Invite'
+  end
+end
+
+And /I wait for a while/ do
+  sleep 1
+end
+
+Given /^There is a sured user "(.*?)"$/ do |name|
+  first, last = name.split(' ')
+  FactoryGirl.create(:sured_user, first_name: first, last_name: last)
+end
+
+When /^I choose "(.*?)" in select2 box$/ do |name|
+  within 'div.select2-container' do
+    find('.select2-choice > span').click
+    sleep 0.5
+  end
+
+  within '.select2-drop' do
+    find('.select2-input').set(name)
+    sleep 0.5
+    find('.select2-result-label', text: name).click
+  end
+end

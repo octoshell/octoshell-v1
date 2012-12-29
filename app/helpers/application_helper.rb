@@ -84,19 +84,19 @@ module ApplicationHelper
   def autocomplete(type, form, options = {})
     default_options = {
       organization: {
-        label: "Организация",
+        label: t('.organization', default: 'Organization'),
         name: :organization_id_eq,
         admin: true,
         source: organizations_path
       },
       user: {
-        label: "Пользователь",
+        label: t('.user', default: 'User'),
         name: :user_id_eq,
         admin: true,
         source: users_path
       },
       project: {
-        label: "Проект", 
+        label: t('.project', default: 'Project'), 
         name: :project_id_eq,
         admin: true,
         source: projects_path
@@ -111,8 +111,7 @@ module ApplicationHelper
         content_tag :label, options[:label]
       end + 
         content_tag(:div, class: "controls") do
-          field_type = Rails.env.test? ? :text_field : :hidden_field
-          form.send field_type, options[:name], class: 'chosen ajax', data: { source: options[:source] }
+          form.hidden_field options[:name], class: 'chosen ajax', data: { source: options[:source] }
         end
     end
   end

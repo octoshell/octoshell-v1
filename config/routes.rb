@@ -1,10 +1,11 @@
-MSU::Application.routes.draw do  
+MSU::Application.routes.draw do
   # users
   get 'users/activate/:token' => 'users#activate', as: :activate_user
   get 'users/email' => 'users#email'
   resources :users, only: [:new, :create] do
     get :confirmation, on: :collection
   end
+  resources :users, only: [:index], as: :json
 
   # notifications
   resources :notifications, only: :index
@@ -84,7 +85,7 @@ MSU::Application.routes.draw do
   # reports
   resources :reports, only: [:edit, :update]
   # fix for bugged zip uploading
-  # post '/reports/:id' => 'reports#update'
+  # post '/reports/:id' => 'reports#updat
 
   namespace :admin do
     # credentials

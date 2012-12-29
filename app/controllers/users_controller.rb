@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :logout, except: [:email]
+  before_filter :logout, except: [:index, :email]
   before_filter :setup_default_filter, only: :index
   
   def new
@@ -13,6 +13,15 @@ class UsersController < ApplicationController
       redirect_to confirmation_users_path(email: @user.email)
     else
       render :new
+    end
+  end
+
+  def index
+    respond_to do |format|
+      format.json do
+        @users = User.use_scope(params[:scope]).order('last_name asc, first_name asc').finder(params[:q])
+        render json: { records: @users.page(params[:page]).per(params[:per]).as_json(for: :ajax), total: @users.count }
+      end
     end
   end
   

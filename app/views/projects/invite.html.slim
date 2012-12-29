@@ -2,15 +2,15 @@
 
 h2 = t('.user_has_a_surety', default: 'User has a surety')
 
-= simple_form_for [@project, @account], html: { class: 'form-horizontal' } do |f|
+= simple_form_for [@project, @account], html: { class: 'form-horizontal js-invite-with-surety' } do |f|
   = autocomplete :user, f, name: :user_id, source: users_path(scope: 'sured'), admin: false
   
   div class="form-actions"
-    = f.button :submit
+    = f.button :submit, t('.invite', default: 'Invite')
 
 h2 = t('.user_has_not_a_surety', default: 'New Surety')
 
-= simple_form_for [@project, @surety], html: { class: 'form-horizontal surety-form' } do |f|
+= simple_form_for [@project, @surety], html: { class: 'form-horizontal surety-form js-invite-without-surety' } do |f|
   = f.input :boss_full_name
   = f.input :boss_position
   = f.input :cpu_hours

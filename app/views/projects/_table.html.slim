@@ -6,7 +6,7 @@
       th = t('.connection', default: 'Connection')
       th = Project.human_attribute_name(:created_at)
     - projects.each do |project|
-      tr
+      tr class="js-project-#{project.id}"
         td = link_to project.name, project_path(project)
         td
           ul class="unstyled"

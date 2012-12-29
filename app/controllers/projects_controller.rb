@@ -88,7 +88,7 @@ class ProjectsController < ApplicationController
     if params[:account][:user_id].present?
       conditions = { user_id: params[:account][:user_id] }
       @account = @project.accounts.where(conditions).first_or_create!
-      redirect_to(@project) and return if @account.active? || @account.activate!
+      redirect_to(@project, notice: t('.user_invited', default: "%{name} invited to the project", name: @account.user.full_name)) and return if @account.active? || @account.activate!
     end
     
     @account = @project.accounts.build

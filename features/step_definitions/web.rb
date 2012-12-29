@@ -1,4 +1,14 @@
 When /debug/ do
+  @debugger ||= Fiber.new do
+    n, path = 0, '/Users/releu/Desktop/'
+    loop do
+      n = n + 1
+      Fiber.yield
+      page.driver.render("#{path}/screenshot_#{n}.png", full: true)
+    end
+  end
+  sleep 0.5
+  @debugger.resume
   save_and_open_page
 end
 
