@@ -110,8 +110,11 @@ end
 
 Given /I navigated to the surety/ do
   visit root_path
-  click_on 'Projects'
+  step %(debug)
+  find('.js-menu-projects').click
+  step %(debug)
   click_on @surety.project.name
+  step %(debug)
   within ".js-surety-#{@surety.id}" do
     click_on 'Open'
   end

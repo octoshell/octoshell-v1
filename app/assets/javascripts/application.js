@@ -33,7 +33,7 @@ $(document).ready(function(){
     var select = $(e)
     var options = select.find('option')
     if (options.size() == 1) {
-      options.first.select()
+      $(options[0]).select()
     }
     options = { placeholder: localization[window.locale] }
     

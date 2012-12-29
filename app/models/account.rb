@@ -88,6 +88,10 @@ class Account < ActiveRecord::Base
   def login
     "#{project.project_prefix}#{username}"
   end
+
+  def link_name
+    to_s
+  end
   
 private
   

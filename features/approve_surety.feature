@@ -1,3 +1,4 @@
+@javascript
 Feature: Approve Surety
   Background:
     Given I am signed in as "admin"
