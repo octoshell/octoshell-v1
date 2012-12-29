@@ -76,7 +76,7 @@ class ProjectsController < ApplicationController
     @project = find_project(params[:project_id])
     @surety = @project.sureties.build(params[:surety])
     if @surety.save
-      redirect_to @project
+      redirect_to @project, notice: t('.surety_created', default: "Surety has been created")
     else
       @account = @project.accounts.build
       render :invite

@@ -3,8 +3,8 @@ When /debug/ do
     n, path = 0, '/Users/releu/Desktop/'
     loop do
       n = n + 1
-      Fiber.yield
       page.driver.render("#{path}/screenshot_#{n}.png", full: true)
+      Fiber.yield
     end
   end
   sleep 0.5
@@ -54,6 +54,12 @@ When /^I fill in "(.*)" with "(.*)"$/ do |field, value|
   else
     fill_in field, with: value
   end
+end
+
+When /^I fill in "(.*)" with "(.*)" in "(.*)" member$/ do |field, value, num|
+  num = num.to_i - 1
+  name = "surety[surety_members_attributes][#{num}][#{field.downcase.gsub(' ', '_')}]"
+  fill_in name, with: value
 end
 
 When /^I select "(.*)" from "(.*)"$/ do |value, field|

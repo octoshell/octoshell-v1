@@ -12,4 +12,13 @@ Feature: Invite to Project
     Then I should see "Bruce Wayne invited to the project"
   
   Scenario: Invite user without surety
-
+    When I fill in "Boss full name" with "Bruce Wayne"
+    And I fill in "Boss position" with "Batman"
+    And I fill in "Email" with "robin@acme.com" in "1" member
+    And I fill in "Full name" with "Tim Drake" in "1" member
+    And I click on "Add"
+    And I fill in "Email" with "batgirl@acme.com" in "2" member
+    And I fill in "Full name" with "Barbara Gordon" in "2" member
+    And debug
+    And I click on "Create"
+    Then I should see "Surety has been created"
