@@ -19,7 +19,8 @@ class Project < ActiveRecord::Base
   
   validates :name, uniqueness: true
   validates :user, :name, :description, :organization, presence: true
-  validates :organization, inclusion: { in: proc(&:allowed_organizations) }
+  # validates :organization, inclusion: { in: proc(&:allowed_organizations) }
+  # хз как тут делать
   validates :username, presence: true, on: :update
   validates :cluster_user_type, inclusion: { in: CLUSTER_USER_TYPES }
   validates :direction_of_science_ids, :critical_technology_ids,
