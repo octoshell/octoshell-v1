@@ -8,8 +8,10 @@ class Report::Organization < ActiveRecord::Base
     'Другое'
   ]
 
-  validates :name, :subdivision, :position, :organization_type, presence: true
-  validates :organization_type, inclusion: { in: TYPES }
+  with_options on: :update do
+    validates :name, :subdivision, :position, :organization_type, presence: true
+    validates :organization_type, inclusion: { in: TYPES }
+  end
 
   attr_accessible :name, :subdivision, :position, :organization_type
 end

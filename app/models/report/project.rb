@@ -1,8 +1,11 @@
 # coding: utf-8
-
 require 'zip/zip'
 
 class Report::Project < ActiveRecord::Base
+  LOGINS_PARSER = (lambda do |string|
+    string.split(',').find_all(&:present?).map { |l| l.downcase.strip }.uniq
+  end)
+
   DIRECTIONS_OF_SCIENCE = [
     'Безопасность и противодействие терроризму',
     'Индустрия наносистем',
@@ -102,10 +105,20 @@ class Report::Project < ActiveRecord::Base
     content_type: ['application/zip', 'application/x-zip-compressed'],
     max_size: 50.megabytes
 
-  validates :directions_of_science, length: { minimum: 1, maximum: 2 }
-  validates :directions_of_science, inclusion: { in: DIRECTIONS_OF_SCIENCE }
-
-  validate :materials_validator
+  with_options on: :update do |m|
+    m.validates :directions_of_science, length: { minimum: 1, maximum: 2 }
+    m.validate :materials_validator
+    m.validates :ru_title, :ru_author, :ru_email, :ru_driver, :ru_strategy,
+      :ru_objective, :ru_impact, :ru_usage, :en_title, :en_author, :en_email,
+      :en_driver, :en_strategy, :en_objective, :en_impact, :en_usage,
+      presence: true
+    m.validates :critical_technologies, length: { minimum: 1, maximum: 3 }
+    m.validates :areas, presence: true
+    m.validates :computing_systems, length: { minimum: 1 }
+    m.validate :logins_validator
+    m.validates :all_logins, length: { minimum: 1 }
+    m.validates :materials, presence: true
+  end
 
   def materials_validator
     if materials?
@@ -120,6 +133,30 @@ class Report::Project < ActiveRecord::Base
       end
       z.close
     end
+  end
+
+  def logins_validator
+    { chebyshev_logins: chebyshev_parsed_logins,
+      lomonosov_logins: lomonosov_parsed_logins }.each do |attribute, logins|
+
+      logins.each do |login|
+        unless ClusterUser.where(username: login).exists?
+          errors.add(attribute, :not_found, login: login)
+        end
+      end
+    end
+  end
+
+  def chebyshev_parsed_logins
+    LOGINS_PARSER.call chebyshev_logins
+  end
+
+  def lomonosov_parsed_logins
+    LOGINS_PARSER.call lomonosov_logins
+  end
+
+  def all_logins
+    (chebyshev_parsed_logins + lomonosov_parsed_logins).uniq
   end
 
   attr_accessible :ru_title, :ru_author, :ru_email, :ru_area, :ru_driver,

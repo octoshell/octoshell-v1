@@ -1,6 +1,6 @@
 # coding: utf-8
 class Report < ActiveRecord::Base
-  belongs_to :project
+  # belongs_to :project
   belongs_to :user
   has_many :projects
   has_many :organizations
@@ -13,23 +13,23 @@ class Report < ActiveRecord::Base
     :organizations_attributes, :personal_survey_attributes, :projects_attributes
 
   def setup_defaults!
-    build_default_personal_data unless personal_data
-    build_default_organizations if organizations.empty?
-    build_default_personal_survey unless personal_survey
-    build_default_projects if projects.empty?
+    create_default_personal_data unless personal_data
+    create_default_organizations if organizations.empty?
+    create_default_personal_survey unless personal_survey
+    create_default_projects if projects.empty?
   end
 
-  def build_default_personal_data
-    build_personal_data do |d|
-      d.first_name = user.first_name
-      d.last_name = user.last_name
+  def create_default_personal_data
+    create_personal_data! do |d|
+      d.first_name  = user.first_name
+      d.last_name   = user.last_name
       d.middle_name = user.middle_name
     end
   end
 
-  def build_default_organizations
+  def create_default_organizations
     user.memberships.each do |membership|
-      organizations.build do |org|
+      organizations.create! do |org|
         org.name = membership.organization.name
         org.subdivision = ""
         org.position = membership.positions.where(name: "Должность").first.try(:value)
@@ -37,14 +37,14 @@ class Report < ActiveRecord::Base
     end
   end
 
-  def build_default_personal_survey
-    build_personal_survey
+  def create_default_personal_survey
+    create_personal_survey!
   end
 
   def build_default_projects
-    projects.build and return if user.all_projects.empty? || projects.any?
+    projects.create! and return if user.all_projects.empty? || projects.any?
     user.all_projects.each do |project|
-      projects.build do |p|
+      projects.create! do |p|
         p.ru_title     = project.name 
         p.ru_author    = project.accounts.active.map { |a| a.user.full_name }.join(', ')
         p.ru_email     = project.accounts.active.map { |a| a.user.email }.join(', ')

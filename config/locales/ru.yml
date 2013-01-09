@@ -421,6 +421,10 @@ ru:
           attributes:
             materials:
               no_image: В архиве нет изображений
+            lomonosov_logins:
+              not_found: "Логин %{login} не найден"
+            chebyshev_logins:
+              not_found: "Логин %{login} не найден"
         account:
           attributes:
             raw_emails:
@@ -451,6 +455,7 @@ ru:
         first_name: Имя
         last_name: Фамилия
         middle_name: Отчество
+        phone: Номер телефона
       report/project:
         areas: Область исследований
         ru_title: Название проекта

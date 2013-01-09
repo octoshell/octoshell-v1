@@ -82,8 +82,10 @@ MSU::Application.routes.draw do
   # organizations
   resources :organizations, only: [:new, :create, :index]
 
-  # reports
-  resources :reports, only: [:edit, :update]
+  # repliesorts
+  resources :reports, only: [:edit, :update] do
+    resources :projects, module: :reports, only: [:create, :destroy]
+  end
   # fix for bugged zip uploading
   # post '/reports/:id' => 'reports#updat
 

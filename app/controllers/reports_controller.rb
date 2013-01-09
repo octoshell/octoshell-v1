@@ -3,7 +3,6 @@ class ReportsController < ApplicationController
 
   def edit
     @report = current_user.reports.find(params[:id])
-    @report.setup_defaults!
   end
 
   def update

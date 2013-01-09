@@ -31,11 +31,11 @@
     legend
       h5 = Report::PersonalSurvey.human_attribute_name(:technologies)
     = f.input :technologies, as: :check_boxes, collection: Report::PersonalSurvey::TECHNOLOGIES, label: false
-    = f.input :other_technology
+    = f.input :other_technology, input_html: { rows: 2, class: 'span5' }
     legend
       h5 = Report::PersonalSurvey.human_attribute_name(:compilators)
     = f.input :compilators, as: :check_boxes, collection: Report::PersonalSurvey::COMPILATORS, label: false
-    = f.input :other_compilator
+    = f.input :other_compilator, input_html: { rows: 2, class: 'span5' }
     legend
       h5 = Report::PersonalSurvey.human_attribute_name(:precision)
     = f.input :precision, as: :radio_buttons, collection: Report::PersonalSurvey::PRECISIONS, label: false
@@ -45,109 +45,136 @@
     legend
       h5 = Report::PersonalSurvey.human_attribute_name(:learning)
     = f.input :learning, as: :check_boxes, collection: Report::PersonalSurvey::LEARNINGS, label: false
-    = f.input :other_learning
+    = f.input :other_learning, input_html: { rows: 2, class: 'span5' }
 
     legend
       h5 = Report::PersonalSurvey.human_attribute_name(:comment)
     = f.input :comment, label: false, input_html: { rows: 4, class: 'span5' }
 
   = f.simple_fields_for :projects do |f|
-    div class="title"
-      h2 = t('.project.html', name: f.object.ru_title)
-    div class="row"
-      div class="span6 no-extra-margin"
-        legend = t(".ru_project_card")
-        = f.input :ru_title,     as: :string, input_html: { role: 'project-name-autocompleter' }
-        = f.input :ru_author,    as: :string, hint: t('.ru_author_hint')
-        = f.input :ru_email,     as: :string, hint: t('.ru_email_hint')
-        = f.input :ru_driver,    as: :string, hint: t('.ru_driver_hint')
-        = f.input :ru_strategy,  as: :string, hint: t('.ru_strategy_hint')
-        = f.input :ru_objective, as: :string, hint: t('.ru_objective_hint')
-        = f.input :ru_impact,    as: :string, hint: t('.ru_impact_hint')
-        = f.input :ru_usage,     as: :string, hint: t('.ru_usage_hint')
-      div class="span6 no-extra-margin"
-        legend = t(".en_project_card")
-        = f.input :en_title,     as: :string
-        = f.input :en_author,    as: :string, hint: t('.en_author_hint')
-        = f.input :en_email,     as: :string, hint: t('.en_email_hint')
-        = f.input :en_driver,    as: :string, hint: t('.en_driver_hint')
-        = f.input :en_strategy,  as: :string, hint: t('.en_strategy_hint')
-        = f.input :en_objective, as: :string, hint: t('.en_objective_hint')
-        = f.input :en_impact,    as: :string, hint: t('.en_impact_hint')
-        = f.input :en_usage,     as: :string, hint: t('.en_usage_hint')
-    legend
-      h5 = Report::Project.human_attribute_name(:directions_of_science)
-    = f.input :directions_of_science, as: :check_boxes, collection: Report::Project::DIRECTIONS_OF_SCIENCE, label: false
-    legend
-      h5 = Report::Project.human_attribute_name(:critical_technologies)
-    = f.input :critical_technologies, as: :check_boxes, collection: Report::Project::CRITICAL_TECHNOLOGIES, label: false
+    div role="project"
+      div class="title"
+        h2 = t('.project.html', name: f.object.ru_title)
+      div class="row"
+        div class="span6 no-extra-margin"
+          legend = t(".ru_project_card")
+          = f.input :ru_title,     as: :string, input_html: { role: 'project-name-autocompleter' }
+        div class="span6 no-extra-margin"
+          legend = t(".en_project_card")
+          = f.input :en_title,     as: :string
+      div class="row"
+        div class="span6 no-extra-margin"
+          = f.input :ru_author,    as: :string, hint: t('.ru_author_hint')
+        div class="span6 no-extra-margin"
+          = f.input :en_author,    as: :string, hint: t('.en_author_hint')
+      div class="row"
+        div class="span6 no-extra-margin"
+          = f.input :ru_email,     as: :string, hint: t('.ru_email_hint')
+        div class="span6 no-extra-margin"
+          = f.input :en_email,     as: :string, hint: t('.en_email_hint')
+      div class="row"
+        div class="span6 no-extra-margin"
+          = f.input :ru_driver,    as: :string, hint: t('.ru_driver_hint')
+        div class="span6 no-extra-margin"
+          = f.input :en_driver,    as: :string, hint: t('.en_driver_hint')
+      div class="row"
+        div class="span6 no-extra-margin"
+          = f.input :ru_strategy,  as: :string, hint: t('.ru_strategy_hint')
+        div class="span6 no-extra-margin"
+          = f.input :en_strategy,  as: :string, hint: t('.en_strategy_hint')
+      div class="row"
+        div class="span6 no-extra-margin"
+          = f.input :ru_objective, as: :string, hint: t('.ru_objective_hint')
+        div class="span6 no-extra-margin"
+          = f.input :en_objective, as: :string, hint: t('.en_objective_hint')
+      div class="row"
+        div class="span6 no-extra-margin"
+          = f.input :ru_impact,    as: :string, hint: t('.ru_impact_hint')
+        div class="span6 no-extra-margin"
+          = f.input :en_impact,    as: :string, hint: t('.en_impact_hint')
+      div class="row"
+        div class="span6 no-extra-margin"
+          = f.input :ru_usage,     as: :string, hint: t('.ru_usage_hint')
+        div class="span6 no-extra-margin"
+          = f.input :en_usage,     as: :string, hint: t('.en_usage_hint')
 
-    legend
-      h5 = Report::Project.human_attribute_name(:areas)
-    = f.input :areas, collection: Report::Project::AREAS, label: false
-    legend
-      h5 = Report::Project.human_attribute_name(:computing_systems)
-    = f.input :computing_systems, as: :check_boxes, collection: Report::Project::COMPUTING_SYSTEMS, label: false
-    legend
-      h5 = t('.logins')
-    = f.input :lomonosov_logins, as: :string, input_html: { class: 'span6' }
-    = f.input :chebyshev_logins, as: :string, input_html: { class: 'span6' }
-    legend = t('.materials')
-    = f.input :materials, label: false, hint: t('.materials_hint')
-    legend = t(".project_survey")
-    legend
-      h5 = t('.publications')
-    = f.input :books_count
-    = f.input :vacs_count
-    = f.input :lectures_count
-    legend
-      h5 = t('.conferences')
-    = f.input :international_conferences_count
-    = f.input :international_conferences_in_russia_count
-    = f.input :russian_conferences_count
-    legend
-      h5 = t('.dissertations')
-    = f.input :doctors_dissertations_count
-    = f.input :candidates_dissertations_count
-    legend
-      h5 = t('.students')
-    = f.input :students_count
-    = f.input :graduates_count
-    legend
-      h5 = t('.your_students')
-    = f.input :your_students_count
-    legend
-      h5 = t('.grants')
-    = f.input :rffi_grants_count
-    = f.input :ministry_of_education_grants_count
-    = f.input :rosnano_grants_count
-    = f.input :ministry_of_communications_grants_count
-    = f.input :ministry_of_defence_grants_count
-    = f.input :ran_grants_count
-    = f.input :other_russian_grants_count
-    = f.input :other_intenational_grants_count
-    legend
-      h5 = t('.awards')
-    = f.input :award_names, as: :text, input_html: { rows: 3, class: 'span5' }
-    legend = t(".request")
-    legend
-      h5 = t('.hours')
-    = f.input :lomonosov_intel_hours
-    = f.input :lomonosov_nvidia_hours
-    = f.input :chebyshev_hours
-    legend
-      h5 = t('.size')
-    = f.input :lomonosov_size
-    = f.input :chebyshev_size
-    legend
-      h5 = t('.schedule')
-    = f.input :strict_schedule, as: :check_boxes, collection: Report::Project::STRICT_SCHEDULE, label: false
-    legend
-      h5 = t('.speak.html')
-    = f.input :wanna_speak
-    legend
-      h5 = t('.request_comment')
-    = f.input :request_comment, input_html: { rows: 3, class: 'span5' }
+      legend
+        h5 = Report::Project.human_attribute_name(:directions_of_science)
+      = f.input :directions_of_science, as: :check_boxes, collection: Report::Project::DIRECTIONS_OF_SCIENCE, label: false, wrapper_html: { 'data-max-values' => 2 }
+      legend
+        h5 = Report::Project.human_attribute_name(:critical_technologies)
+      = f.input :critical_technologies, as: :check_boxes, collection: Report::Project::CRITICAL_TECHNOLOGIES, label: false, wrapper_html: { 'data-max-values' => 3 }
+
+      legend
+        h5 = Report::Project.human_attribute_name(:areas)
+      = f.input :areas, collection: Report::Project::AREAS, label: false
+      legend
+        h5 = Report::Project.human_attribute_name(:computing_systems)
+      = f.input :computing_systems, as: :check_boxes, collection: Report::Project::COMPUTING_SYSTEMS, label: false
+      legend
+        h5 = t('.logins')
+      = f.input :lomonosov_logins, as: :string, input_html: { class: 'span6' }, hint: t('.logins_hint')
+      = f.input :chebyshev_logins, as: :string, input_html: { class: 'span6' }, hint: t('.logins_hint')
+      legend = t('.materials')
+      = f.input :materials, label: false, hint: t('.materials_hint')
+      legend = t(".project_survey")
+      legend
+        h5 = t('.publications')
+      = f.input :books_count
+      = f.input :vacs_count
+      = f.input :lectures_count
+      legend
+        h5 = t('.conferences')
+      = f.input :international_conferences_count
+      = f.input :international_conferences_in_russia_count
+      = f.input :russian_conferences_count
+      legend
+        h5 = t('.dissertations')
+      = f.input :doctors_dissertations_count
+      = f.input :candidates_dissertations_count
+      legend
+        h5 = t('.students')
+      = f.input :students_count
+      = f.input :graduates_count
+      legend
+        h5 = t('.your_students')
+      = f.input :your_students_count
+      legend
+        h5 = t('.grants')
+      = f.input :rffi_grants_count
+      = f.input :ministry_of_education_grants_count
+      = f.input :rosnano_grants_count
+      = f.input :ministry_of_communications_grants_count
+      = f.input :ministry_of_defence_grants_count
+      = f.input :ran_grants_count
+      = f.input :other_russian_grants_count
+      = f.input :other_intenational_grants_count
+      legend
+        h5 = t('.awards')
+      = f.input :award_names, as: :text, input_html: { rows: 3, class: 'span5' }
+      legend = t(".request")
+      legend
+        h5 = t('.hours')
+      = f.input :lomonosov_intel_hours
+      = f.input :lomonosov_nvidia_hours
+      = f.input :chebyshev_hours
+      legend
+        h5 = t('.size')
+      = f.input :lomonosov_size
+      = f.input :chebyshev_size
+      legend
+        h5 = t('.schedule')
+      = f.input :strict_schedule, as: :check_boxes, collection: Report::Project::STRICT_SCHEDULE, label: false
+      legend
+        h5 = t('.speak.html')
+      = f.input :wanna_speak
+      legend
+        h5 = t('.request_comment')
+      = f.input :request_comment, input_html: { rows: 3, class: 'span5' }
+
+      p = link_to 'Удалить проект', report_project_path(@report, f.object), role: 'remove-project'
+
+  p = link_to 'Добавить проект', report_projects_path(@report), role: 'add-project'
 
   div class="form-actions"
     = f.button :submit
