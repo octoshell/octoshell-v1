@@ -196,4 +196,4 @@
     div class="form-actions"
       = f.button :submit, 'Сохранить черновик'
       |  
-      = link_to "Отправить на рассмотрение", [@report, :submit], role: 'report-button', class: 'btn btn-primary', data: { method: 'put', confirm: 'Это действие нельзя отменить. Вы уверены?' }
+      = link_to "Отправить на рассмотрение", [@report, :submit], role: 'report-button', class: 'btn btn-primary', data: { method: 'put' }

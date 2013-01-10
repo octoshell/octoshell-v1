@@ -2,7 +2,7 @@
 class Report < ActiveRecord::Base
   # belongs_to :project
   belongs_to :user
-  has_many :projects, dependent: :destroy
+  has_many :projects, dependent: :destroy, validate: true
   has_many :organizations, dependent: :destroy
   has_one :personal_data, dependent: :destroy
   has_one :personal_survey, dependent: :destroy

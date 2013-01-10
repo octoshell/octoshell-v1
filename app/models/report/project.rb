@@ -138,7 +138,8 @@ class Report::Project < ActiveRecord::Base
       :your_students_count, :rffi_grants_count, :ministry_of_education_grants_count,
       :rosnano_grants_count, :ministry_of_communications_grants_count,
       :ministry_of_defence_grants_count, :ran_grants_count, :other_russian_grants_count,
-      :other_intenational_grants_count, :awards_count,
+      :other_intenational_grants_count, :awards_count, :lomonosov_intel_hours,
+      :lomonosov_nvidia_hours, :chebyshev_hours, :lomonosov_size, :chebyshev_size,
       numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   end
 

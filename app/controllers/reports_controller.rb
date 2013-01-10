@@ -3,12 +3,14 @@ class ReportsController < ApplicationController
 
   def edit
     @report = get_report(params[:id])
+    @report.projects.each { |p| p.valid?(:update) }#  if request.referer
   end
 
   def update
     @report = get_report(params[:id])
-    if @report.update_attributes(params[:report])
-      redirect_to [:edit, @report]
+    @report.attributes = params[:report]
+    if @report.save(validate: false)
+      redirect_to [:edit, @report], notice: t('.reports_draft_saved')
     else
       render :edit
     end
