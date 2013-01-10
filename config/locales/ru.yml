@@ -499,6 +499,7 @@ ru:
         international_conferences_in_russia_count: Международные (в России)
         other_intenational_grants_count: Международные (за рубежом)
         award_names: Названия
+        awards_count: Количество наград
         comment: Комментарии
         lomonosov_intel_hours: 'Ломоносов (Intel)'
         lomonosov_nvidia_hours: 'Ломоносов (NVIDIA)'

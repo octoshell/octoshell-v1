@@ -118,6 +118,23 @@ class Report::Project < ActiveRecord::Base
     m.validate :logins_validator
     m.validates :all_logins, length: { minimum: 1 }
     m.validates :materials, presence: true
+
+    m.validates :ru_title, :ru_author, :ru_email, :ru_driver, :ru_strategy,
+      :ru_objective, :ru_impact, :ru_usage,
+      format: { with: /\A[а-яё\s\d,]+\z/i, message: "Должно быть на русском" }
+    m.validates :en_title, :en_author, :en_email, :en_driver, :en_strategy,
+      :en_objective, :en_impact, :en_usage,
+      format: { with: /\A[a-z\s\d,]+\z/i, message: "Должно быть на английском" }
+
+    m.validates :books_count, :vacs_count, :lectures_count,
+      :international_conferences_count, :international_conferences_in_russia_count,
+      :russian_conferences_count, :doctors_dissertations_count,
+      :candidates_dissertations_count, :students_count, :graduates_count,
+      :your_students_count, :rffi_grants_count, :ministry_of_education_grants_count,
+      :rosnano_grants_count, :ministry_of_communications_grants_count,
+      :ministry_of_defence_grants_count, :ran_grants_count, :other_russian_grants_count,
+      :other_intenational_grants_count, :awards_count,
+      numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   end
 
   def materials_validator
@@ -173,7 +190,7 @@ class Report::Project < ActiveRecord::Base
     :doctors_dissertations_count, :candidates_dissertations_count,
     :students_count, :rffi_grants_count, :ministry_of_communications_grants_count,
     :ran_grants_count, :other_russian_grants_count, :other_intenational_grants_count,
-    :strict_schedule, :international_conferences_in_russia_count
+    :strict_schedule, :international_conferences_in_russia_count, :awards_count
   
   serialize :directions_of_science, Array
   serialize :critical_technologies, Array

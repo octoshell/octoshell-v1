@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121227133226) do
+ActiveRecord::Schema.define(:version => 20130110064011) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -419,6 +419,7 @@ ActiveRecord::Schema.define(:version => 20121227133226) do
     t.boolean  "wanna_speak"
     t.text     "request_comment"
     t.integer  "international_conferences_in_russia_count", :default => 0
+    t.integer  "awards_count",                              :default => 0
   end
 
   create_table "reports", :force => true do |t|
