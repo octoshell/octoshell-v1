@@ -41,6 +41,7 @@ ru:
     table:
       no_projects: Нет проектов
       invite: Пригласить
+      remove: Удалить
       no_accesses: Нет доступов
       members: Участники
       connection: Подключение
