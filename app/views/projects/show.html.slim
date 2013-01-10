@@ -1,4 +1,4 @@
-- title t('.title', default: "Project: #{@project.name}")
+- title t('.title', default: "Project: %{name}", name: @project.name)
 
 p class="lead" = @project.description
 

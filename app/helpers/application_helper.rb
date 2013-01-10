@@ -84,19 +84,19 @@ module ApplicationHelper
   def autocomplete(type, form, options = {})
     default_options = {
       organization: {
-        label: t('.organization', default: 'Organization'),
+        label: Organization.model_name.human,
         name: :organization_id_eq,
         admin: true,
         source: organizations_path
       },
       user: {
-        label: t('.user', default: 'User'),
+        label: User.model_name.human,
         name: :user_id_eq,
         admin: true,
         source: users_path
       },
       project: {
-        label: t('.project', default: 'Project'), 
+        label: Project.model_name.human, 
         name: :project_id_eq,
         admin: true,
         source: projects_path

@@ -23,6 +23,13 @@ ru:
       code: Код приглашения
       use: Использовать
       use_code: Использовать код
+  clusters:
+    index:
+      title: Кластеры
+  pages:
+    index:
+      title: Справка
+      no_pages: Нет доступных страниц справки
   projects:
     index:
       new_project: Новый проект
@@ -33,6 +40,27 @@ ru:
         html: "До конца приема отчетов осталось дней: <strong>%{days}</strong>."
     table:
       no_projects: Нет проектов
+      invite: Пригласить
+      no_accesses: Нет доступов
+      members: Участники
+      connection: Подключение
+    show:
+      title: "Проект: %{name}"
+      edit: Редактировать
+      new_request: Новая заявка
+      invite: Пригласить
+      no_accounts: Нет доступов к проекту
+      requests: Заявки
+      open: открыть
+      support: Поддержка
+      no_sureties: Нет поручительств
+      sureties: Поручительства
+    invite:
+      title: Пригласить в проект
+      user_has_a_surety: У пользователя есть поручительство
+      user_has_not_a_surety: Новое поручительство для пользователя
+      add: Добавить
+      invite: Пригласить
   reports:
     edit:
       title: Отчет по проектам
@@ -84,6 +112,16 @@ ru:
       title: Заявки
     table:
       no_requests: Нет заявок
+      open: открыть
+  profiles:
+    show:
+      title: Профиль
+      edit: Редактировать
+      memberships: Места работы
+      new_membership: Добавить место работы
+      sureties: Поручительства
+      credentials: Публичные ключи
+      new_credential: Добавить публичный ключ
   shared:
     admin_menu:
       accesses: Публичные ключи на кластере
@@ -118,8 +156,13 @@ ru:
       dashboard: Рабочий кабинет
       notifications: "Оповещения (%{count})"
   tickets:
+    index:
+      title: Поддержка
+      new_ticket: Новая заявка
     new:
       begin: Начало
       choose: Выберите
       continue: Продолжить
       new_request: Новая заявка
+    table:
+      no_tickets: Нет заявок

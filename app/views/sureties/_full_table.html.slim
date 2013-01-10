@@ -12,6 +12,6 @@
         td = surety.organization.name
         td = smart_link_to surety.project
         td = surety.human_state_name
-        td = smart_link_to surety
+        td = link_to_surety(surety)
 - else
   p = t('.no_sureties', default: 'There are no sureties')

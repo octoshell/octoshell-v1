@@ -3,7 +3,9 @@ class ReportsController < ApplicationController
 
   def edit
     @report = get_report(params[:id])
-    @report.projects.each { |p| p.valid?(:update) }#  if request.referer
+    @report.personal_data.valid?(:update)
+    @report.personal_survey.valid?(:update)
+    @report.projects.each { |p| p.valid?(:update) }
   end
 
   def update
