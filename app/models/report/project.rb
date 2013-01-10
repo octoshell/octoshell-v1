@@ -107,22 +107,27 @@ class Report::Project < ActiveRecord::Base
 
   with_options on: :update do |m|
     m.validates :directions_of_science, length: { minimum: 1, maximum: 2 }
+
     m.validate :materials_validator
     m.validates :ru_title, :ru_author, :ru_email, :ru_driver, :ru_strategy,
       :ru_objective, :ru_impact, :ru_usage, :en_title, :en_author, :en_email,
       :en_driver, :en_strategy, :en_objective, :en_impact, :en_usage,
       presence: true
+    
     m.validates :critical_technologies, length: { minimum: 1, maximum: 3 }
-    m.validates :areas, presence: true
-    m.validates :computing_systems, length: { minimum: 1 }
-    m.validate :logins_validator
-    m.validates :all_logins, length: { minimum: 1 }
-    m.validates :materials, presence: true
 
-    m.validates :ru_title, :ru_author, :ru_email, :ru_driver, :ru_strategy,
+    m.validates :areas, presence: true
+    
+    m.validates :computing_systems, length: { minimum: 1 }
+    
+    m.validate :logins_validator
+    m.validates :all_logins, length: { minimum: 1, message: 'Хотя бы один логин должен быть указан' }
+    m.validates :materials, attachment_presence: true
+
+    m.validates :ru_title, :ru_author, :ru_driver, :ru_strategy,
       :ru_objective, :ru_impact, :ru_usage,
       format: { with: /\A[а-яё\s\d,]+\z/i, message: "Должно быть на русском" }
-    m.validates :en_title, :en_author, :en_email, :en_driver, :en_strategy,
+    m.validates :en_title, :en_author, :en_driver, :en_strategy,
       :en_objective, :en_impact, :en_usage,
       format: { with: /\A[a-z\s\d,]+\z/i, message: "Должно быть на английском" }
 
@@ -138,14 +143,14 @@ class Report::Project < ActiveRecord::Base
   end
 
   def materials_validator
-    if materials?
+    if materials? && materials.queued_for_write.any?
       path = materials.queued_for_write.first[1].path
       z = Zip::ZipFile.open(path)
       entries = z.entries.find_all { |e| !(e.to_s =~ /\/$/) }
       if entries.size < 2
         errors.add(:materials, :min_files_is_two)
       end
-      unless entries.find { |e| e =~ /(jpg|jpeg|png|tiff|bmp)$/i }
+      unless entries.find { |e| e.to_s =~ /(jpg|jpeg|png|tiff|bmp)\z/i }
         errors.add(:materials, :no_image)
       end
       z.close
@@ -161,6 +166,12 @@ class Report::Project < ActiveRecord::Base
           errors.add(attribute, :not_found, login: login)
         end
       end
+    end
+  end
+
+  %w(critical_technologies directions_of_science computing_systems strict_schedule).each do |attr|
+    define_method "#{attr}=" do |values|
+      self[attr] = values.find_all(&:present?)
     end
   end
 
@@ -190,13 +201,10 @@ class Report::Project < ActiveRecord::Base
     :doctors_dissertations_count, :candidates_dissertations_count,
     :students_count, :rffi_grants_count, :ministry_of_communications_grants_count,
     :ran_grants_count, :other_russian_grants_count, :other_intenational_grants_count,
-    :strict_schedule, :international_conferences_in_russia_count, :awards_count
+    :strict_schedule, :international_conferences_in_russia_count, :awards_count,
+    :materials
   
   serialize :directions_of_science, Array
   serialize :critical_technologies, Array
   serialize :computing_systems, Array
-
-  def directions_of_science=(directions)
-    self[:directions_of_science] = directions.find_all(&:present?)
-  end
 end

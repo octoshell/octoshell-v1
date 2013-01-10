@@ -2,15 +2,32 @@ class ReportsController < ApplicationController
   before_filter :require_login
 
   def edit
-    @report = current_user.reports.find(params[:id])
+    @report = get_report(params[:id])
   end
 
   def update
-    @report = current_user.reports.find(params[:id])
+    @report = get_report(params[:id])
     if @report.update_attributes(params[:report])
       redirect_to [:edit, @report]
     else
       render :edit
     end
+  end
+
+  def submit
+    @report = get_report(params[:report_id])
+    @report.attributes = params[:report]
+    if @report.valid? && (@report.submitted? || @report.submit!)
+      redirect_to root_path, notice: t('.report_submitted')
+    else
+      flash.now[:alert] = t('.cant_submit_report_because_of_errors')
+      render :edit
+    end
+  end
+
+private
+  
+  def get_report(id)
+    current_user.reports.find(id)
   end
 end

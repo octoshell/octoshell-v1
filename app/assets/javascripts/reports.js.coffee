@@ -4,22 +4,18 @@ $ ->
     title = input.parents('.row:first').prev().find('h2 span:first')
     title.html input.val()
   
-  $('@remove-project').on 'click', (e) ->
-    form = $(@).parents('form:first')[0]
-    form.action = $(@).attr('href')
-    $('input[name="_method"]', form).val('delete')
-    $(@).parents('project:first').remove()
-    form.submit()
-    false
-
-  $('@add-project').on 'click', (e) ->
-    form = $(@).parents('form:first')[0]
-    form.action = $(@).attr('href')
-    $('input[name="_method"]', form).val('post')
-    form.submit()
-    false
+  $('form.report-form').on 'click @report-button]', (e) ->
+    link = $(e.target)
+    if link.is('@report-button')
+      $('input[name="_method"]', @).val link.data('method')
+      if link.hasClass('remove-project')
+        link.parents('project:first').remove()
+      @.action = link.attr('href')
+      @.submit()
+      false
   
   $('div[data-max-values]').on 'change :checkbox', ->
     condition = $(':checked', @).length >= Number($(@).data('max-values'))
     $(':not(:checked)', @).prop 'disabled', condition
-  
+  $('div[data-max-values]').each (i, e) ->
+    $(':checkbox:first', e).trigger('change')

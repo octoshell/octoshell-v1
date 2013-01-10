@@ -929,4 +929,5 @@ ru:
       admin: Администратором
       system: Системой
 
-  
+  cant_submit_report_because_of_errors: Отчет содержит ошибки. Невозможно отправить на рассмотрение
+  report_submitted: Отчет отправлен на рассмотрение

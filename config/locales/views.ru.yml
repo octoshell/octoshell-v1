@@ -28,6 +28,9 @@ ru:
       new_project: Новый проект
       title: Проекты
       use_code: Использовать код приглашения
+      report: Отчет по проектам
+      you_have_x_days_for_submitting_report:
+        html: "До конца приема отчетов осталось дней: <strong>%{days}</strong>."
     table:
       no_projects: Нет проектов
   reports:
@@ -74,6 +77,7 @@ ru:
       project:
         html: "Проект <span>%{name}</span>"
       request_comment: Комментарий
+      report_submitted: Отчет на рассмотрении
   requests:
     index:
       new: Новая заявка

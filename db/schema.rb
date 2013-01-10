@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130110064011) do
+ActiveRecord::Schema.define(:version => 20130110091724) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -430,6 +430,7 @@ ActiveRecord::Schema.define(:version => 20130110064011) do
     t.integer  "illustrations_points"
     t.integer  "statement_points"
     t.integer  "summary_points"
+    t.string   "state"
   end
 
   create_table "request_properties", :force => true do |t|

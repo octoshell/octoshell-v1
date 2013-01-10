@@ -111,6 +111,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def report
+    reports.first
+  end
+
   def abilities
     sort = %{
       (case when available then 1 when available is null then 2 else 3 end) asc

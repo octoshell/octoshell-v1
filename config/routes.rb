@@ -85,6 +85,7 @@ MSU::Application.routes.draw do
   # repliesorts
   resources :reports, only: [:edit, :update] do
     resources :projects, module: :reports, only: [:create, :destroy]
+    put :submit
   end
   # fix for bugged zip uploading
   # post '/reports/:id' => 'reports#updat
