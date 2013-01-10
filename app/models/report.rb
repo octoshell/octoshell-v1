@@ -12,7 +12,7 @@ class Report < ActiveRecord::Base
   attr_accessible :personal_data_attributes,
     :organizations_attributes, :personal_survey_attributes, :projects_attributes
 
-  state_machine initial: :active do
+  state_machine initial: :editing do
     state :editing
     state :submitted
     event :submit do
@@ -21,10 +21,10 @@ class Report < ActiveRecord::Base
   end
 
   def setup_defaults!
-    create_default_personal_data unless personal_data
-    create_default_organizations if organizations.empty?
-    create_default_personal_survey unless personal_survey
-    create_default_projects if projects.empty?
+    create_default_personal_data
+    create_default_organizations
+    create_default_personal_survey
+    create_default_projects
   end
 
   def create_default_personal_data
@@ -43,13 +43,14 @@ class Report < ActiveRecord::Base
         org.position = membership.positions.where(name: "Должность").first.try(:value)
       end
     end
+    organizations.create! if organizations.empty?
   end
 
   def create_default_personal_survey
     create_personal_survey!
   end
 
-  def build_default_projects
+  def create_default_projects
     projects.create! and return if user.all_projects.empty? || projects.any?
     user.all_projects.each do |project|
       projects.create! do |p|
@@ -63,5 +64,6 @@ class Report < ActiveRecord::Base
         p.ru_usage     = ""
       end
     end
+    projects.create! if projects.empty?
   end
 end

@@ -3,7 +3,7 @@ require 'zip/zip'
 
 class Report::Project < ActiveRecord::Base
   LOGINS_PARSER = (lambda do |string|
-    string.split(',').find_all(&:present?).map { |l| l.downcase.strip }.uniq
+    string.to_s.split(',').find_all(&:present?).map { |l| l.downcase.strip }.uniq
   end)
 
   DIRECTIONS_OF_SCIENCE = [

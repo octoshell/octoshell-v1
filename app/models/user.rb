@@ -112,7 +112,11 @@ class User < ActiveRecord::Base
   end
 
   def report
-    reports.first
+    reports.first || begin
+      report = reports.create!
+      report.setup_defaults!
+      report
+    end
   end
 
   def abilities
