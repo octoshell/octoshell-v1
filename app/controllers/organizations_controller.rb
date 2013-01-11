@@ -9,4 +9,9 @@ class OrganizationsController < ApplicationController
     }
     respond_with(json)
   end
+
+  def show
+    @organization = Organization.find(params[:id])
+    respond_with({ id: @organization.id, text: @organization.name })
+  end
 end

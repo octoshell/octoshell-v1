@@ -38,7 +38,7 @@ class Report < ActiveRecord::Base
   def create_default_organizations
     user.memberships.each do |membership|
       organizations.create! do |org|
-        org.name = membership.organization.name
+        org.organization_id = membership.organization.id
         org.subdivision = ""
         org.position = membership.positions.where(name: "Должность").first.try(:value)
       end

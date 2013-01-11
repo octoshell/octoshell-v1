@@ -15,7 +15,7 @@
 
   legend = t('.organizations')
   = f.simple_fields_for :organizations do |f|
-    = f.input :name
+    = autocomplete :organization, f, name: :organization_id, admin: false
     = f.input :subdivision
     = f.input :position
     = f.input :organization_type, as: :radio_buttons, collection: Report::Organization::TYPES

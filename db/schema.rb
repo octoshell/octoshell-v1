@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130111073900) do
+ActiveRecord::Schema.define(:version => 20130111104355) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -333,6 +333,7 @@ ActiveRecord::Schema.define(:version => 20130111073900) do
     t.string  "subdivision"
     t.string  "position"
     t.string  "organization_type"
+    t.integer "organization_id"
   end
 
   create_table "report_personal_data", :force => true do |t|

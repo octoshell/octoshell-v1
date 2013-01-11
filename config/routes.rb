@@ -80,7 +80,7 @@ MSU::Application.routes.draw do
   resources :pages, only: [:index, :show]
 
   # organizations
-  resources :organizations, only: [:new, :create, :index]
+  resources :organizations, only: [:new, :create, :index, :show]
 
   # repliesorts
   resources :reports, only: [:edit, :update] do
