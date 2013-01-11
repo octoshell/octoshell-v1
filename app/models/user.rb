@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
   before_create :assign_token
   after_create :create_relations
   after_create :create_additional_email
+  after_create :setup_default_groups
   
   attr_accessible :first_name, :last_name, :middle_name, :email, :password,
     :password_confirmation, :remember_me, :new_organization, :organization_id,
@@ -295,5 +296,10 @@ private
     additional_emails.create! do |additional_email|
       additional_email.email = email
     end
+  end
+
+  def setup_default_groups
+    groups << Group.authorized
+    true
   end
 end

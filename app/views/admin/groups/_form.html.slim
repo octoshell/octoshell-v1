@@ -1,6 +1,6 @@
 = simple_form_for [:admin, @group], html: { class: 'form-horizontal' } do |f|
-  = f.input :name
-  legend = t('t.abilities')
+  = f.input :name, disabled: @group.system
+  legend = t('.abilities')
   div class="control-group"
     = f.fields_for :abilities do |f|
       div class="controls"

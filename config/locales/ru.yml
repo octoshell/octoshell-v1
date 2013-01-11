@@ -9,11 +9,13 @@ ru:
     cluster_fields:
       manage: Полный доступ к Дополнительным Полям Кластера
     cluster_projects:
-      manage: Польный доступ к Проектам на Кластере
+      manage: Полный доступ к Проектам на Кластере
     cluster_users:
       manage: Полный доступ к Пользователям на Кластере
     critical_technologies:
       manage: Полный доступ к Критическим Технологиям
+    credentials:
+      manage: Полный доступ к Публичным Ключам
     direction_of_sciences:
       manage: Полный доступ к Направлениям Науки
     extends:
@@ -35,7 +37,7 @@ ru:
     projects:
       manage: Полный доступ к Проектам
     pages:
-      manage: Полный доступ к Страницам Справке
+      manage: Полный доступ к Страницам Справки
       show_all: Просмотр всех Страниц Справки
     requests:
       manage: Полный доступ к Заявкам на ресурсы
@@ -542,6 +544,8 @@ ru:
       surety_member:
         full_name: ФИО
         email: Email
+      group:
+        name: Название
       project:
         organization: Главная организация
         organizations: Другие организации-участники

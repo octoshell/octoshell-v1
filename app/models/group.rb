@@ -11,7 +11,15 @@ class Group < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   def self.superadmin
-    find_or_create_by_name! 'superadmins'
+    find_or_create_by_name! 'superadmins' do |group|
+      group.system = true
+    end
+  end
+
+  def self.authorized
+    find_or_create_by_name! 'authorized' do |group|
+      group.system = true
+    end
   end
 
 private

@@ -15,6 +15,10 @@ ru:
         edit: Редактировать
         destroy: Удалить
         confirm_destroy: Вы уверены?
+      edit: 
+        title: Редактирование
+      form:
+        abilities: Права
   credentials:
     new:
       title: Новый публичный ключ
