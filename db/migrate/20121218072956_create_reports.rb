@@ -3,7 +3,7 @@ class CreateReports < ActiveRecord::Migration
     create_table :reports do |t|
       t.references :user
       t.references :project
-      t.hstore :points
+      # t.hstore :points
       t.timestamps
     end
   end
