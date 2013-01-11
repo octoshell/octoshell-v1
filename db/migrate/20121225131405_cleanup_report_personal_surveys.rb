@@ -8,7 +8,6 @@ class CleanupReportPersonalSurveys < ActiveRecord::Migration
       t.change "wanna_be_speaker", :text
       t.change "request_technology", :text
       t.change "other_technology", :text
-      t.change "precision", :text
       t.change "other_compilator", :text
       t.change "other_software", :text
       t.change "other_learning", :text
