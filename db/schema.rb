@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130110091724) do
+ActiveRecord::Schema.define(:version => 20130111073900) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -354,12 +354,12 @@ ActiveRecord::Schema.define(:version => 20130110091724) do
     t.text    "wanna_be_speaker"
     t.text    "request_technology"
     t.text    "other_technology"
-    t.text    "precision"
     t.text    "other_compilator"
     t.text    "other_software"
     t.text    "other_learning"
     t.text    "computing"
     t.text    "comment"
+    t.text    "precision"
   end
 
   create_table "report_projects", :force => true do |t|
