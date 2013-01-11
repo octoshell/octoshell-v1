@@ -106,7 +106,7 @@ class Report::Project < ActiveRecord::Base
     max_size: 50.megabytes
 
   with_options on: :update do |m|
-    m.validates :directions_of_science, length: { minimum: 1, maximum: 2 }
+    m.validates :directions_of_science, length: { minimum: 1, maximum: 2, message: 'Нужно выбрать хотя бы %{count}' }
 
     m.validate :materials_validator
     m.validates :ru_title, :ru_author, :ru_email, :ru_driver, :ru_strategy,
@@ -114,11 +114,11 @@ class Report::Project < ActiveRecord::Base
       :en_driver, :en_strategy, :en_objective, :en_impact, :en_usage,
       presence: true
     
-    m.validates :critical_technologies, length: { minimum: 1, maximum: 3 }
+    m.validates :critical_technologies, length: { minimum: 1, maximum: 3, message: 'Нужно выбрать хотя бы %{count}' }
 
     m.validates :areas, presence: true
     
-    m.validates :computing_systems, length: { minimum: 1 }
+    m.validates :computing_systems, length: { minimum: 1, message: 'Нужно выбрать хотя бы %{count}' }
     
     m.validate :logins_validator
     m.validates :all_logins, length: { minimum: 1, message: 'Хотя бы один логин должен быть указан' }
