@@ -12,6 +12,6 @@ class CleanupReportPersonalSurveys < ActiveRecord::Migration
       t.change "other_compilator", :text
       t.change "other_software", :text
       t.change "other_learning", :text
-    en
+    end
   end
 end
