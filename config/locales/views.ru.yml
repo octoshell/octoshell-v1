@@ -13,6 +13,8 @@ ru:
     application:
       help: Справка
       sign_out: Выход
+      sign_in: Вход
+      sign_up: Регистрация
   notifications:
     index:
       new_ticket: Создать заявку в Поддержке
@@ -167,3 +169,9 @@ ru:
       new_request: Новая заявка
     table:
       no_tickets: Нет заявок
+  sessions:
+    new:
+      title: Авторизация
+      forgot_password: Забыли пароль?
+      or: или 
+      have_not_received_confirmation_instructions: Не получили инстукции по подтверждению?
