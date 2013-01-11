@@ -9,6 +9,16 @@ ru:
         title: Заявки
       table:
         open: Открыть
+  credentials:
+    new:
+      title: Новый публичный ключ
+      choose_pub_file: Выберите публичный ключ
+      or_enter_as_text: Или скопируйте текстом
+  memberships:
+    new:
+      title: Новое место работы
+    form:
+      add_organization: Добавить организацию
   layouts:
     application:
       help: Справка
@@ -20,6 +30,7 @@ ru:
       new_ticket: Создать заявку в Поддержке
       support: Поддержка
       title: Оповещения
+      sureties: Поручительства
   project_joiners:
     new:
       code: Код приглашения
