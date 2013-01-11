@@ -5,6 +5,7 @@ class ReportsController < ApplicationController
     @report = get_report(params[:id])
     @report.personal_data.valid?(:update)
     @report.personal_survey.valid?(:update)
+    @report.organizations.each { |o| o.valid?(:update) }
     @report.projects.each { |p| p.valid?(:update) }
   end
 

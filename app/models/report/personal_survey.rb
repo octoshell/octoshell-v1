@@ -1,6 +1,38 @@
 # coding: utf-8
 class Report::PersonalSurvey < ActiveRecord::Base
-  SOFTWARE = (1..50).map { |n| "name#{n}" }
+  SOFTWARE = [
+    'Abinit',
+    'Amber',
+    'CRYSTAL-09',
+    'Firefly (PC-GAMESS)',
+    'FlowVision',
+    'Lammps',
+    'Magma',
+    'Materials Studio',
+    'Molpro',
+    'Namd',
+    'NWChem 6.1',
+    'OpenFOAM',
+    'Quantum Espresso',
+    'Turbomole',
+    'VASP',
+    'WIEN2k',
+    'Компиляторы Intel',
+    'PGI compiler',
+    'PathScale Compiler Suite',
+    'Intel VTune Amplifier XE 2011',
+    'TotalView',
+    'Allinea DDT',
+    'Intel Math Kernel Library',
+    'ACML',
+    'CUDA',
+    'ScaLAPACK',
+    'ATLAS',
+    'AMCL',
+    'BLAS',
+    'LAPACK',
+    'FFTW'
+  ]
   TECHNOLOGIES = [
     'C/C++',
     'Fortran',

@@ -514,6 +514,7 @@ ru:
         name: Название
         subdivision: Подразделение
         position: Должность
+        other_position: Другая (не из списка)
         organization_type: Категория
       report/personal_survey:
         software: 'Какие прикладные пакеты, библиотеки и средства Вы используете в работе на суперкомпьютерном комплексе МГУ?'

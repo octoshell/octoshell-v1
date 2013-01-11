@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130111104355) do
+ActiveRecord::Schema.define(:version => 20130111114214) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -334,6 +334,7 @@ ActiveRecord::Schema.define(:version => 20130111104355) do
     t.string  "position"
     t.string  "organization_type"
     t.integer "organization_id"
+    t.string  "other_position"
   end
 
   create_table "report_personal_data", :force => true do |t|

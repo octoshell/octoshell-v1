@@ -1,3 +1,4 @@
+# coding: utf-8
 class PositionName < ActiveRecord::Base
   include Models::Limitable
   
@@ -8,6 +9,10 @@ class PositionName < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   
   attr_accessible :name, :autocomplete, as: :admin
+
+  def self.rffi
+    find_by_name!('Должность по РФФИ')
+  end
   
   def values(q)
     q = q.to_s.strip

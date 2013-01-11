@@ -35,7 +35,10 @@ $(document).ready(function(){
     if (options.size() == 1) {
       $(options[0]).select()
     }
-    options = { placeholder: localization[window.locale] }
+    options = {
+      placeholder: localization[window.locale],
+      allowClear: $(this).hasClass('clearable')
+    }
     
     if (select.hasClass('ajax')) {
       options.ajax = {

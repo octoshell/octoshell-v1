@@ -17,7 +17,8 @@
   = f.simple_fields_for :organizations do |f|
     = autocomplete :organization, f, name: :organization_id, admin: false
     = f.input :subdivision
-    = f.input :position
+    = f.input :position, collection: PositionName.rffi.available_values, input_html: { class: 'chosen clearable' }
+    = f.input :other_position
     = f.input :organization_type, as: :radio_buttons, collection: Report::Organization::TYPES
   
   legend = t('.personal_survey')

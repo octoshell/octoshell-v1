@@ -40,7 +40,7 @@ class Report < ActiveRecord::Base
       organizations.create! do |org|
         org.organization_id = membership.organization.id
         org.subdivision = ""
-        org.position = membership.positions.where(name: "Должность").first.try(:value)
+        org.other_position = membership.positions.where(name: "Должность").first.try(:value)
       end
     end
     organizations.create! if organizations.empty?
