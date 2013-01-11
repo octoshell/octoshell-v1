@@ -9,6 +9,12 @@ ru:
         title: Заявки
       table:
         open: Открыть
+    groups:
+      index:
+        title: Группы
+        edit: Редактировать
+        destroy: Удалить
+        confirm_destroy: Вы уверены?
   credentials:
     new:
       title: Новый публичный ключ
