@@ -126,10 +126,10 @@ class Report::Project < ActiveRecord::Base
 
     m.validates :ru_title, :ru_author, :ru_driver, :ru_strategy,
       :ru_objective, :ru_impact, :ru_usage,
-      format: { with: /\A[а-яё\s\d,]+\z/i, message: "Должно быть на русском" }
+      format: { with: /\A[а-яё№\s\d[:punct:]]+\z/i, message: "Должно быть на русском" }
     m.validates :en_title, :en_author, :en_driver, :en_strategy,
       :en_objective, :en_impact, :en_usage,
-      format: { with: /\A[a-z\s\d,]+\z/i, message: "Должно быть на английском" }
+      format: { with: /\A[a-z\s\d[:punct:]]+\z/i, message: "Должно быть на английском" }
 
     m.validates :books_count, :vacs_count, :lectures_count,
       :international_conferences_count, :international_conferences_in_russia_count,
