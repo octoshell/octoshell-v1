@@ -32,6 +32,7 @@ gem 'maymay', github: 'redstonelabs/maymay'
 gem 'entity', github: 'redstonelabs/entity'
 gem 'rubyzip'
 gem 'poltergeist', github: 'brutuscat/poltergeist'
+gem 'therubyracer'
 
 group :test, :development do
   gem 'quiet_assets'
@@ -46,7 +47,6 @@ group :test, :development do
   gem 'guard-cucumber'
   gem 'database_cleaner'
   gem 'ci_reporter'
-  gem 'therubyracer'
 end
 
 group :test do
