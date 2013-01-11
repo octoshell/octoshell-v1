@@ -1,33 +1,20 @@
 # coding: utf-8
 class ProjectsController < ApplicationController
   before_filter :require_login
-  before_filter :setup_default_filter, only: :index, if: :admin?
   
   def index
+    @projects = current_user.all_projects.reorder('projects.id desc')
     respond_to do |format|
-      format.html do
-        if admin?
-          @search = Project.search(params[:search])
-          @projects = show_all? ? @search.all : @search.page(params[:page])
-        else
-          @projects = current_user.all_projects.reorder('projects.id desc')
-        end
-      end
+      format.html
       format.json do
-        if admin?
-          @projects = Project.finder(params[:q]).order('projects.name asc')
-          render json: { records: @projects.page(params[:page]).per(params[:per]), total: @projects.count }
-        else
-          @projects = current_user.all_projects.finder(params[:q]).order('projects.name asc')
-          render json: { records: @projects.page(params[:page]).per(params[:per]), total: @projects.count }
-        end
+        @projects = current_user.all_projects.finder(params[:q]).reorder('projects.name asc')
+        render json: { records: @projects.page(params[:page]).per(params[:per]), total: @projects.count }
       end
     end
   end
   
   def show
-    @project = Project.find(params[:id])
-    authorize! :show, @project
+    @project = find_project(params[:id])
     respond_to do |format|
       format.html
       format.json { render json: @project }
@@ -35,8 +22,7 @@ class ProjectsController < ApplicationController
   end
   
   def new
-    @project = Project.new
-    @project.user = current_user
+    @project = current_user.owned_projects.build
     @project.sureties.build do |surety|
       surety.surety_members.build do |member|
         member.email = current_user.email
@@ -46,9 +32,7 @@ class ProjectsController < ApplicationController
   end
   
   def create
-    @project = Project.new(params[:project], as_role)
-    @project.user = current_user unless admin?
-    @project.accounts.build { |a| a.user = @project.user }
+    @project = current_user.owned_projects.build(params[:project])
     if @project.save
       @project.user.track! :create_project, @project, current_user
       redirect_to @project
@@ -58,14 +42,12 @@ class ProjectsController < ApplicationController
   end
   
   def edit
-    @project = Project.find(params[:id])
-    authorize! :edit, @project
+    @project = find_project(params[:id])
   end
   
   def update
-    @project = Project.find(params[:id])
-    authorize! :update, @project
-    if @project.update_attributes(params[:project], as_role)
+    @project = find_project(params[:id])
+    if @project.update_attributes(params[:project])
       @project.user.track! :update_project, @project, current_user
       redirect_to @project
     else
@@ -74,8 +56,7 @@ class ProjectsController < ApplicationController
   end
   
   def close
-    @project = Project.find(params[:project_id])
-    authorize! :close, @project
+    @project = find_project(params[:project_id])
     if @project.close
       @project.user.track! :close_project, @project, current_user
       redirect_to @project
@@ -85,21 +66,17 @@ class ProjectsController < ApplicationController
   end
   
   def invite
-    @project = Project.find(params[:project_id])
-    authorize! :invite, @project
-    
+    @project = find_project(params[:project_id])
     @account = @project.accounts.build
     @surety = @project.build_additional_surety
     @surety.surety_members.build
   end
   
   def sureties
-    @project = Project.find(params[:project_id])
-    authorize! :sureties, @project
-    
+    @project = find_project(params[:project_id])
     @surety = @project.sureties.build(params[:surety])
     if @surety.save
-      redirect_to @project
+      redirect_to @project, notice: t('.surety_created', default: "Surety has been created")
     else
       @account = @project.accounts.build
       render :invite
@@ -107,13 +84,11 @@ class ProjectsController < ApplicationController
   end
   
   def accounts
-    @project = Project.find(params[:project_id])
-    authorize! :accounts, @project
-    
+    @project = find_project(params[:project_id])
     if params[:account][:user_id].present?
       conditions = { user_id: params[:account][:user_id] }
       @account = @project.accounts.where(conditions).first_or_create!
-      redirect_to(@project) and return if @account.active? || @account.activate!
+      redirect_to(@project, notice: t('.user_invited', default: "%{name} invited to the project", name: @account.user.full_name)) and return if @account.active? || @account.activate!
     end
     
     @account = @project.accounts.build
@@ -122,9 +97,9 @@ class ProjectsController < ApplicationController
   end
   
 private
-  
-  def namespace
-    admin? ? :admin : :dashboard
+
+  def find_project(id)
+    current_user.all_projects.find(id)
   end
   
   def setup_default_filter

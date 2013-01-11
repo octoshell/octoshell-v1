@@ -1,0 +1,19 @@
+- title @organization_kind.name
+
+div class="link-actions"
+  = link_to 'Новый тип организации', new_organization_kind_path, class: 'btn'
+  = " "
+  = link_to 'Редактировать', [:edit, @organization_kind], class: 'btn'
+  - if @organization_kind.can__close?
+    = " "
+    = link_to OrganizationKind.human_state_event_name(:_close), organization_kind_close_path(@organization_kind), method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
+  = " "
+  = link_to 'Версии', [@organization_kind, :versions], class: 'btn'
+
+table class="table table-bordered"
+  tr
+    th class="span4" = OrganizationKind.human_attribute_name(:name)
+    td = @organization_kind.name
+  tr
+    th = OrganizationKind.human_attribute_name(:state)
+    td = @organization_kind.human_state_name

@@ -1,0 +1,16 @@
+- title 'Пользователи на кластере'
+
+div class="link-actions"
+  = link_to 'Новый пользователь на кластере', new_admin_cluster_user_path, class: 'btn btn-danger'
+
+= simple_form_for [:admin, @search], method: :get, html: { class: 'form-horizontal' } do |f|
+  = autocomplete :project, f, name: :cluster_project_project_id_eq, required: false
+  = f.input :cluster_project_cluster_id_eq, collection: Cluster.all, input_html: { class: 'chosen' }, required: false
+  = f.input :username_eq, label: 'Login (на кластере)', required: false
+  = f.input :state_in, collection: ClusterUser.human_state_names, input_html: { multiple: true }, required: false
+  div class="form-actions"
+    = f.button :submit, 'Найти', class: 'btn-primary'
+
+= safe_paginate @cluster_users
+= render partial: 'admin/cluster_users/table', locals: { cluster_users: @cluster_users }
+= safe_paginate @cluster_users

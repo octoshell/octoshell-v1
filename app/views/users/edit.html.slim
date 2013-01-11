@@ -1,6 +1,0 @@
-- title 'Редактирование пользователя'
-
-= simple_form_for @user, html: { class: 'form-horizontal' } do |f|
-  = render partial: 'users/form_fields', locals: { f: f }
-  div class="form-actions"
-    = f.button :submit, 'Сохранить', id: 'user_submit', class: 'btn btn-primary'

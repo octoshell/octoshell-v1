@@ -1,16 +1,16 @@
-- title 'Приглашение пользователя в проект'
+- title t('.title', default: 'Invite user to Project')
 
-h2 У пользователя уже есть поручительство
+h2 = t('.user_has_a_surety', default: 'User has a surety')
 
-= simple_form_for [@project, @account], html: { class: 'form-horizontal' } do |f|
+= simple_form_for [@project, @account], html: { class: 'form-horizontal js-invite-with-surety' } do |f|
   = autocomplete :user, f, name: :user_id, source: users_path(scope: 'sured'), admin: false
   
   div class="form-actions"
-    = f.button :submit
+    = f.button :submit, t('.invite', default: 'Invite')
 
-h2 Новое поручительство
+h2 = t('.user_has_not_a_surety', default: 'New Surety')
 
-= simple_form_for [@project, @surety], html: { class: 'form-horizontal surety-form' } do |f|
+= simple_form_for [@project, @surety], html: { class: 'form-horizontal surety-form js-invite-without-surety' } do |f|
   = f.input :boss_full_name
   = f.input :boss_position
   = f.input :cpu_hours
@@ -31,7 +31,7 @@ h2 Новое поручительство
           - if f.object.errors.any?
             p class="help-inline" = f.object.errors.full_messages.join(', ')
   div class="controls"
-    p = link_to "Добавить", "#", class: 'add-member-row'
+    p = link_to t('.add', default: 'Add'), "#", class: 'add-member-row'
   
   div class="form-actions"
     = f.button :submit, class: 'btn-primary'

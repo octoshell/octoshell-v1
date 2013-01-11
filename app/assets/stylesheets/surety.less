@@ -9,6 +9,12 @@ body {
   padding-top: 5px;
 }
 
+.collapse-header {
+  cursor: pointer;
+  border-bottom: 1px dashed;
+  display: inline-block;
+}
+
 .hidden {
   display: none !important;
 }
@@ -146,7 +152,16 @@ img.preview {
   margin-top: 0;
 }
 
+.relative {
+  position: relative;
+}
+
 #help {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  width: 220px;
   ul {
     margin: 0;
   }
@@ -249,7 +264,6 @@ td.date {
   white-space: nowrap;
 }
 
-
 .remove-member {
   font-size: 20px;
   position: relative;
@@ -259,5 +273,28 @@ td.date {
   &:hover {
     color: red;
     text-decoration: none;
+  }
+}
+
+.nocontrol {
+  .controls {
+    margin-left: 140px;
+  }
+}
+
+.report-form {
+  .control-label {
+    width: 190px;
+  }
+  .controls {
+    margin-left: 210px;
+  }
+  .no-extra-margin {
+    .control-label {
+      width: 140px;
+    }
+    .controls {
+      margin-left: 160px;
+    }
   }
 }

@@ -42,6 +42,7 @@ Then /^I should get access to project "(.*)"$/ do |name|
 end
 
 And /^I register as "(.*)"$/ do |email|
+  visit new_user_path
   visit root_path
   step %(I click on "Sign Up")
   step %(I fill in "Email" with "#{email}")
@@ -72,4 +73,89 @@ end
 
 Then /^I should see "(.*)" Project Prefix$/ do |prefix|
   page.should have_content("edu-")
+end
+
+
+
+Given /I have a project/ do
+  @project = FactoryGirl.create(:project, user: @current_user)
+end
+
+When /I followed to new request page for the project/ do
+  visit root_path
+  click_on 'Projects'
+  click_on @project.name
+  within '.link-actions' do
+    click_on 'New Request'
+  end
+end
+
+When /I fill in the request form/ do
+  step %(I fill in "Gpu hours" with "1")
+  step %(I fill in "Cpu hours" with "1")
+  step %(I fill in "Size" with "1")
+end
+
+Given /I have an active request for the project/ do
+  FactoryGirl.create(:active_request, project_id: @project.id)
+end
+
+Given /I navigated to the admin surety/ do
+  visit root_path
+  click_on 'Sureties'
+  within ".js-surety-#{@surety.id}" do
+    click_on 'Open'
+  end
+end
+
+Given /I navigated to the surety/ do
+  visit root_path
+  step %(debug)
+  find('.js-menu-projects').click
+  step %(debug)
+  click_on @surety.project.name
+  step %(debug)
+  within ".js-surety-#{@surety.id}" do
+    click_on 'Open'
+  end
+end
+
+Given /I have a pending surety/ do
+  project = FactoryGirl.create(:project, user: @current_user)
+  @surety = FactoryGirl.create(:surety, project: project)
+  FactoryGirl.create(:surety_member, surety: @surety, user: @current_user)
+end
+
+Given /There is a pending surety/ do
+  @surety = FactoryGirl.create(:surety)  
+end
+
+Given /I navigated to Invite to the Project/ do
+  visit root_path
+  click_on 'Projects'
+  within ".js-project-#{@project.id}" do
+    click_on 'Invite'
+  end
+end
+
+And /I wait for a while/ do
+  sleep 1
+end
+
+Given /^There is a sured user "(.*?)"$/ do |name|
+  first, last = name.split(' ')
+  FactoryGirl.create(:sured_user, first_name: first, last_name: last)
+end
+
+When /^I choose "(.*?)" in select2 box$/ do |name|
+  within 'div.select2-container' do
+    find('.select2-choice > span').click
+    sleep 0.5
+  end
+
+  within '.select2-drop' do
+    find('.select2-input').set(name)
+    sleep 0.5
+    find('.select2-result-label', text: name).click
+  end
 end

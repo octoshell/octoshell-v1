@@ -1,0 +1,21 @@
+- if cluster_users.any?
+  table class="table table-bordered"
+    tr
+      th class="span1" #
+      th = Project.model_name.human
+      th = Cluster.model_name.human
+      th = User.model_name.human
+      th = ClusterUser.human_attribute_name(:username)
+      th = ClusterUser.human_attribute_name(:state)
+      th
+    - cluster_users.each do |cluster_user|
+      tr id="cluster-user-#{cluster_user.id}"
+        td = cluster_user.id
+        td = smart_link_to cluster_user.project
+        td = smart_link_to cluster_user.cluster
+        td = smart_link_to cluster_user.account.user
+        td = cluster_user.username
+        td = cluster_user.human_state_name
+        td = smart_link_to(cluster_user)
+- else
+  p Нет пользователей на кластере

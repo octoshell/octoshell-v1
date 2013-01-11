@@ -1,8 +1,6 @@
-- if can? :index, :projects
-  = submenu_item :projects, (link_to t('.projects'), projects_path)
-- if can? :index, :requests
-  = submenu_item :requests, (link_to t('.requests'), requests_path)
-- if can? :index, :clusters
-  = submenu_item :clusters, (link_to t('.clusters'), clusters_path)
-- if can? :show, :profiles
-  = submenu_item :profiles, (link_to t('.profile'), profile_path)
+= submenu_item :projects, (link_to t('.projects', default: 'Projects'), projects_path, class: 'js-menu-projects')
+= submenu_item :requests, (link_to t('.requests', default: 'Requests'), requests_path)
+= submenu_item :tickets, (link_to t('.tickets', default: 'Tickets'), tickets_path)
+= submenu_item :pages, (link_to t('.pages', default: 'Pages'), pages_path)
+= submenu_item :clusters, (link_to t('.clusters', default: 'Clusters'), clusters_path)
+= submenu_item :profiles, (link_to t('.profile', default: 'Profile'), profile_path)

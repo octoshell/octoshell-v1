@@ -1,0 +1,6 @@
+= simple_form_for [:admin, @ticket_question], html: { class: 'form-horizontal' } do |f|
+  = f.input :question
+  = f.association :ticket_question, label_method: :question, collection: @ticket_question.available_parents.active
+  
+  div class="form-actions"
+    = f.button :submit, class: 'btn-primary'

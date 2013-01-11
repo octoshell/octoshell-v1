@@ -1,8 +1,0 @@
-- title 'Редактирование Доступа к Проекту'
-
-= simple_form_for @account, html: { class: 'form-horizontal' } do |f|
-  = f.association :user, label_method: :full_name, disabled: true
-  = f.association :project, disabled: true
-  = f.input :username
-  div class="form-actions"
-    = f.button :submit, class: 'btn-primary'

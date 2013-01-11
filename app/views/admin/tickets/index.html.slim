@@ -1,0 +1,22 @@
+- title 'Заявки'
+
+= simple_form_for [:admin, @search], method: :get, html: { class: 'form-horizontal' } do |f|
+  = autocomplete :project, f
+  = autocomplete :user, f
+  = f.input :cluster_id_eq, collection: Cluster.all, required: false
+  = f.input :state_in, collection: Ticket.human_state_names, input_html: { multiple: true }, required: false
+  = f.input :ticket_tag_relations_ticket_tag_name_in, collection: TicketTag.active.pluck(:name), required: false, input_html: { multiple: true }
+
+  - options = { required: false, include_blank: true, start_year: 2012, end_year: Date.current.year, input_html: { class: 'datepicker' } }
+  = f.input :created_at_greater_than, options
+  = f.input :created_at_less_than, options
+  = f.input :updated_at_greater_than, options
+  = f.input :updated_at_less_than, options
+  div class="form-actions"
+    = f.button :submit, 'Найти', class: 'btn-primary'
+
+= safe_paginate @tickets
+
+= render partial: 'table', locals: { tickets: @tickets }
+
+= safe_paginate @tickets

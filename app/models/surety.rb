@@ -197,4 +197,8 @@ class Surety < ActiveRecord::Base
       ticket.attachment = file
     end
   end
+
+  def link_name
+    I18n.t('.link_name', default: 'Open')
+  end
 end

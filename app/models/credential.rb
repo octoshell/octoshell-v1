@@ -48,6 +48,10 @@ class Credential < ActiveRecord::Base
     end
   end
 
+  def link_name
+    name
+  end
+
 private
   
   def activate_accesses

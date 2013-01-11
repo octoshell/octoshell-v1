@@ -1,13 +1,14 @@
-- title 'Авторизация'
+- title t('.title', default: 'Sign In')
 
 = simple_form_for @user, url: session_path, html: { class: 'form-horizontal' } do |f|
   = f.input :email
   = f.input :password, required: true
   
   div class="form-actions"
-    = f.button :submit, t('.sign_in'), class: 'btn btn-primary'
-
+    = f.button :submit, t('.sign_in', default: 'Sign In'), class: 'btn btn-primary'
+    
 p
-  = link_to 'Забыли пароль?', new_password_path
-  = " или "
-  = link_to 'Не получили инструкции по активации?', new_activation_path
+  = link_to t('.forgot_password', default: 'Forgot your password?'), new_password_path
+  = t('.or', default: 'or')
+  |  
+  = link_to t('.have_not_received_confirmation_instructions', default: 'Have not received confirmation instuctions?'), new_activation_path

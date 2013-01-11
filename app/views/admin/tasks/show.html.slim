@@ -1,0 +1,44 @@
+- title "Процедура ##{@task.id}"
+
+blockquote
+  = @task.description
+
+div class="link-actions"
+  - if @task.can_perform_callbacks?
+    = link_to t('call_callbacks'), [:admin, @task, :perform_callbacks], class: 'btn', method: :put
+    = " "
+  - if @task.can__retry?
+    = link_to 'Повторить задание', [:admin, @task, :retry], class: 'btn btn-warning', method: :put
+  - if @task.can__resolve?
+    = " "
+    = link_to Task.human_state_event_name(:_resolve), [:admin, @task, :resolve], class: 'btn btn-success', method: :put
+  = " "
+  = link_to 'Версии', [:admin, @task, :versions], class: 'btn'
+
+table class="table table-bordered"
+  tr
+    th class="span3" = Task.human_attribute_name(:resource)
+    td
+      p = smart_link_to @task.resource
+      - resource = @task.resource_type.underscore
+      = render partial: "admin/#{resource.pluralize}/summary", locals: { resource.to_sym => @task.resource }
+  tr
+    th = Task.human_attribute_name(:procedure)
+    td = @task.procedure
+  tr
+    th = Task.human_attribute_name(:state)
+    td id="task-#{@task.id}-status" = @task.human_state_name
+  tr
+    th = Task.human_attribute_name(:comment)
+    td
+      textarea disabled="disabled" class="public-key" rows="10"
+        = @task.comment
+  tr
+    th = Task.human_attribute_name(:callbacks_performed)
+    td = @task.callbacks_performed ? 'Да' : 'Нет'
+  tr
+    th = Task.human_attribute_name(:created_at)
+    td = @task.created_at.to_formatted_s(:long)
+  tr
+    th = Task.human_attribute_name(:runned_at)
+    td = @task.runned_at.to_formatted_s(:long) rescue nil

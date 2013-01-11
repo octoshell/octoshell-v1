@@ -35,4 +35,6 @@ MSU::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  config.action_controller.asset_host = "http://octoshell.dev"
 end

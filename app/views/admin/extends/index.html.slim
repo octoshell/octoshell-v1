@@ -1,0 +1,21 @@
+- title 'Расширения'
+
+div class="link-actions"
+  = link_to 'Новое расширение', new_admin_extend_path, class: "btn"
+
+- if @extends.any?
+  table class="table table-bordered"
+    tr
+      th = Extend.human_attribute_name(:url)
+      th = Extend.human_attribute_name(:script)
+      th
+    - @extends.each do |extend|
+      tr
+        td = extend.url
+        td = extend.script
+        td
+          = link_to 'редактировать', [:edit, :admin, extend]
+          = " / "
+          = link_to 'удалить', [:admin, extend], method: :delete, confirm: 'Вы уверены?'
+- else
+  p Нет расширений

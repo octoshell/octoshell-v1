@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require role
 //= require underscore
 //= require bootstrap
 //= require raphael
@@ -23,44 +24,47 @@
 
 $(document).ready(function(){
   
-  if (window.env != 'test') {
-    $('.chosen').each(function(i, e){
-      var select = $(e)
-      var options = select.find('option')
-      if (options.size() == 1) {
-        options.first.select()
-      }
-      options = { placeholder: "Выберите значение" }
-      
-      if (select.hasClass('ajax')) {
-        options.ajax = {
-          url: select.data('source'),
-          dataType: 'json',
-          quietMillis: 100,
-          data: function(term, page) {
-            return {
-              q: $.trim(term),
-              page: page,
-              per: 10
-            }
-          },
-          results: function(data, page) {
-            var more = (page * 10) < data.total
-            return { results: data.records, more: more }
-          }
-        }
-        options.dropdownCssClass = "bigdrop"
-        options.initSelection = function (element, callback) {
-          if (element.val().length > 0) {
-            $.getJSON(select.data('source') + '/' + element.val(), {}, function(data) {
-              callback({ id: data.id, text: data.text })
-            })
-          }
-        }
-      }
-      select.select2(options)
-    })
+  var localization = {
+    ru: "Выберите значение",
+    en: "Choose"
   }
+
+  $('input.chosen, select.chosen').each(function(i, e){
+    var select = $(e)
+    var options = select.find('option')
+    if (options.size() == 1) {
+      $(options[0]).select()
+    }
+    options = { placeholder: localization[window.locale] }
+    
+    if (select.hasClass('ajax')) {
+      options.ajax = {
+        url: select.data('source'),
+        dataType: 'json',
+        quietMillis: 100,
+        data: function(term, page) {
+          return {
+            q: $.trim(term),
+            page: page,
+            per: 10
+          }
+        },
+        results: function(data, page) {
+          var more = (page * 10) < data.total
+          return { results: data.records, more: more }
+        }
+      }
+      options.dropdownCssClass = "bigdrop"
+      options.initSelection = function (element, callback) {
+        if (element.val().length > 0) {
+          $.getJSON(select.data('source') + '/' + element.val(), {}, function(data) {
+            callback({ id: data.id, text: data.text })
+          })
+        }
+      }
+    }
+    select.select2(options)
+  })
   
   $("select[multiple]=multiple").each(function(i, e){
     if (!$(e).hasClass('chosen')) {

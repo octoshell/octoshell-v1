@@ -1,0 +1,21 @@
+- if requests.any?
+  table class="table table-bordered"
+    tr
+      th class="span1" #
+      th = Project.model_name.human
+      th = User.model_name.human
+      th = Cluster.model_name.human
+      th = Request.human_attribute_name(:state)
+      th = Request.human_attribute_name(:created_at)
+      th
+    - requests.each do |request|
+      tr id="request-#{request.id}" class="js-request-#{request.id}"
+        td = request.id
+        td = smart_link_to request.project
+        td = smart_link_to request.user
+        td = smart_link_to request.cluster
+        td = request.human_state_name
+        td class="date" = request.created_at.strftime("%Y-%m-%d")
+        td = link_to t('.open'), [:admin, request]
+- else
+  p Нет заявок

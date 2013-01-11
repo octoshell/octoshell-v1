@@ -1,20 +1,9 @@
-- title 'Справка'
-
-- if admin?
-  div class="link-actions"
-    = link_to 'Новая страница', new_page_path, class: 'btn'
+- title t('.title', default: 'help')
 
 - if @pages.any?
   ul
     - @pages.each do |page|
       li
         = link_to page.name, page
-        - if admin?
-          span class="actions"
-            | 
-            small = link_to 'редактировать', edit_page_path(page.id)
-            |  / 
-            small = link_to 'удалить', page_path(page.id), method: :delete, confirm: 'Вы уверены?', class: 'danger'
-            | 
 - else
-  p Нет страниц
+  p = t('.no_pages', default: 'There are no pages')

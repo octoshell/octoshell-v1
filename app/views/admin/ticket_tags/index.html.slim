@@ -1,0 +1,13 @@
+- title 'Теги'
+
+div class="link-actions"
+  = link_to 'Новый тег', new_admin_ticket_tag_path, class: 'btn'
+  
+= simple_form_for [:admin, @search], method: :get, html: { class: 'form-horizontal' } do |f|
+  = f.input :state_in, collection: TicketTag.human_state_names, input_html: { multiple: true }
+  div class="form-actions"
+    = f.button :submit, 'Найти', class: 'btn-primary'
+
+= safe_paginate @ticket_tags
+= render partial: 'table', locals: { ticket_tags: @ticket_tags }
+= safe_paginate @ticket_tags

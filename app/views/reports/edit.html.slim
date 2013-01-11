@@ -1,0 +1,199 @@
+- title t('.title', default: 'Reports')
+
+- if @report.submitted?
+  div class="alert alert-info lead"
+    = t('.report_submitted')
+
+= simple_form_for @report, html: { class: 'form-horizontal report-form', multipart: true }, defaults: { disabled: @report.submitted? } do |f|
+  legend = t('.personal_data')
+  = f.simple_fields_for :personal_data do |f|
+    = f.input :first_name
+    = f.input :last_name
+    = f.input :middle_name
+    = f.input :email
+    = f.input :phone
+
+  legend = t('.organizations')
+  = f.simple_fields_for :organizations do |f|
+    = f.input :name
+    = f.input :subdivision
+    = f.input :position
+    = f.input :organization_type, as: :radio_buttons, collection: Report::Organization::TYPES
+  
+  legend = t('.personal_survey')
+  = f.simple_fields_for :personal_survey do |f|
+    legend
+      h5 = Report::PersonalSurvey.human_attribute_name(:software)
+    div class="control-group string optional"
+      div class='nocontrol'
+        - Report::PersonalSurvey::SOFTWARE.in_groups(3, false) do |group|
+          = f.input :software, as: :check_boxes, collection: group, label: false, wrapper_html: { class: 'span3' }
+    legend
+      h5 = Report::PersonalSurvey.human_attribute_name(:request_technology)
+    = f.input :request_technology, as: :text, input_html: { rows: 6, class: 'span5' }, hint: t('.request_technology_hint'), label: false
+    legend
+      h5 = Report::PersonalSurvey.human_attribute_name(:technologies)
+    = f.input :technologies, as: :check_boxes, collection: Report::PersonalSurvey::TECHNOLOGIES, label: false
+    = f.input :other_technology, input_html: { rows: 2, class: 'span5' }
+    legend
+      h5 = Report::PersonalSurvey.human_attribute_name(:compilators)
+    = f.input :compilators, as: :check_boxes, collection: Report::PersonalSurvey::COMPILATORS, label: false
+    = f.input :other_compilator, input_html: { rows: 2, class: 'span5' }
+    legend
+      h5 = Report::PersonalSurvey.human_attribute_name(:precision)
+    = f.input :precision, as: :radio_buttons, collection: Report::PersonalSurvey::PRECISIONS, label: false
+    legend
+      h5 = Report::PersonalSurvey.human_attribute_name(:computing)
+    = f.input :computing, as: :check_boxes, collection: Report::PersonalSurvey::COMPUTING, label: false
+    legend
+      h5 = Report::PersonalSurvey.human_attribute_name(:learning)
+    = f.input :learning, as: :check_boxes, collection: Report::PersonalSurvey::LEARNINGS, label: false
+    = f.input :other_learning, input_html: { rows: 2, class: 'span5' }
+
+    legend
+      h5 = Report::PersonalSurvey.human_attribute_name(:comment)
+    = f.input :comment, label: false, input_html: { rows: 4, class: 'span5' }
+
+  = f.simple_fields_for :projects do |f|
+    div role="project"
+      div class="title"
+        h2 = t('.project.html', name: f.object.ru_title)
+      div class="row"
+        div class="span6 no-extra-margin"
+          legend = t(".ru_project_card")
+          = f.input :ru_title,     as: :string, input_html: { role: 'project-name-autocompleter' }
+        div class="span6 no-extra-margin"
+          legend = t(".en_project_card")
+          = f.input :en_title,     as: :string
+      div class="row"
+        div class="span6 no-extra-margin"
+          = f.input :ru_author, input_html: { rows: 2 }, hint: t('.ru_author_hint')
+        div class="span6 no-extra-margin"
+          = f.input :en_author, input_html: { rows: 2 }, hint: t('.en_author_hint')
+      div class="row"
+        div class="span6 no-extra-margin"
+          = f.input :ru_email, input_html: { rows: 2 }, hint: t('.ru_email_hint')
+        div class="span6 no-extra-margin"
+          = f.input :en_email, input_html: { rows: 2 }, hint: t('.en_email_hint')
+      div class="row"
+        div class="span6 no-extra-margin"
+          = f.input :ru_driver, input_html: { rows: 2 }, hint: t('.ru_driver_hint')
+        div class="span6 no-extra-margin"
+          = f.input :en_driver, input_html: { rows: 2 }, hint: t('.en_driver_hint')
+      div class="row"
+        div class="span6 no-extra-margin"
+          = f.input :ru_strategy, input_html: { rows: 2 }, hint: t('.ru_strategy_hint')
+        div class="span6 no-extra-margin"
+          = f.input :en_strategy, input_html: { rows: 2 }, hint: t('.en_strategy_hint')
+      div class="row"
+        div class="span6 no-extra-margin"
+          = f.input :ru_objective, input_html: { rows: 2 }, hint: t('.ru_objective_hint')
+        div class="span6 no-extra-margin"
+          = f.input :en_objective, input_html: { rows: 2 }, hint: t('.en_objective_hint')
+      div class="row"
+        div class="span6 no-extra-margin"
+          = f.input :ru_impact, input_html: { rows: 2 }, hint: t('.ru_impact_hint')
+        div class="span6 no-extra-margin"
+          = f.input :en_impact, input_html: { rows: 2 }, hint: t('.en_impact_hint')
+      div class="row"
+        div class="span6 no-extra-margin"
+          = f.input :ru_usage, input_html: { rows: 2 }, hint: t('.ru_usage_hint')
+        div class="span6 no-extra-margin"
+          = f.input :en_usage, input_html: { rows: 2 }, hint: t('.en_usage_hint')
+
+      legend
+        h5 = Report::Project.human_attribute_name(:directions_of_science)
+      = f.input :directions_of_science, as: :check_boxes, collection: Report::Project::DIRECTIONS_OF_SCIENCE, label: false, wrapper_html: { 'data-max-values' => 2 }
+      legend
+        h5 = Report::Project.human_attribute_name(:critical_technologies)
+      = f.input :critical_technologies, as: :check_boxes, collection: Report::Project::CRITICAL_TECHNOLOGIES, label: false, wrapper_html: { 'data-max-values' => 3 }
+
+      legend
+        h5 = Report::Project.human_attribute_name(:areas)
+      = f.input :areas, collection: Report::Project::AREAS, label: false
+      legend
+        h5 = Report::Project.human_attribute_name(:computing_systems)
+      = f.input :computing_systems, as: :check_boxes, collection: Report::Project::COMPUTING_SYSTEMS, label: false
+      legend
+        h5 = t('.logins')
+      - if f.object.errors[:all_logins].any?
+        div class="control-group file optional error"
+          div class="controls"
+            span class="help-inline"
+              = f.object.errors[:all_logins].to_sentence
+      = f.input :lomonosov_logins, as: :string, input_html: { class: 'span6' }, hint: t('.logins_hint')
+      = f.input :chebyshev_logins, as: :string, input_html: { class: 'span6' }, hint: t('.logins_hint')
+      legend = t('.materials')
+      = f.input :materials, label: false, hint: t('.materials_hint')
+      - if f.object.materials?
+        div class="controls"
+          strong
+            = link_to f.object.materials_file_name, f.object.materials.url
+            |  (#{number_to_human_size(f.object.materials_file_size)})
+      legend = t(".project_survey")
+      legend
+        h5 = t('.publications')
+      = f.input :books_count
+      = f.input :vacs_count
+      = f.input :lectures_count
+      legend
+        h5 = t('.conferences')
+      = f.input :international_conferences_count
+      = f.input :international_conferences_in_russia_count
+      = f.input :russian_conferences_count
+      legend
+        h5 = t('.dissertations')
+      = f.input :doctors_dissertations_count
+      = f.input :candidates_dissertations_count
+      legend
+        h5 = t('.students')
+      = f.input :students_count
+      = f.input :graduates_count
+      legend
+        h5 = t('.your_students')
+      = f.input :your_students_count
+      legend
+        h5 = t('.grants')
+      = f.input :rffi_grants_count
+      = f.input :ministry_of_education_grants_count
+      = f.input :rosnano_grants_count
+      = f.input :ministry_of_communications_grants_count
+      = f.input :ministry_of_defence_grants_count
+      = f.input :ran_grants_count
+      = f.input :other_russian_grants_count
+      = f.input :other_intenational_grants_count
+      legend
+        h5 = t('.awards')
+      = f.input :award_names, as: :text, input_html: { rows: 3, class: 'span5' }
+      = f.input :awards_count
+      legend = t(".request")
+      legend
+        h5 = t('.hours')
+      = f.input :lomonosov_intel_hours
+      = f.input :lomonosov_nvidia_hours
+      = f.input :chebyshev_hours
+      legend
+        h5 = t('.size')
+      = f.input :lomonosov_size
+      = f.input :chebyshev_size
+      legend
+        h5 = t('.schedule')
+      = f.input :strict_schedule, as: :check_boxes, collection: Report::Project::STRICT_SCHEDULE, label: false
+      legend
+        h5 = t('.speak.html')
+      = f.input :wanna_speak
+      legend
+        h5 = t('.request_comment')
+      = f.input :request_comment, input_html: { rows: 3, class: 'span5' }
+
+      - if @report.editing?
+        p = link_to 'Удалить проект', report_project_path(@report, f.object), class: 'remove-project danger', role: 'report-button', data: { method: 'delete', confirm: 'Вы уверены?' }
+
+  - if @report.editing?
+    p = link_to 'Добавить проект', report_projects_path(@report), role: 'report-button', data: { method: 'post' }
+
+  - if @report.editing?
+    div class="form-actions"
+      = f.button :submit, 'Сохранить черновик'
+      |  
+      = link_to "Отправить на рассмотрение", [@report, :submit], role: 'report-button', class: 'btn btn-primary', data: { method: 'put' }

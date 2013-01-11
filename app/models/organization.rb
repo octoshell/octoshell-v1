@@ -75,6 +75,10 @@ class Organization < ActiveRecord::Base
   def as_json(options)
     { id: id, text: name }
   end
+
+  def link_name
+    name
+  end
   
 private
   

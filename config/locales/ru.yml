@@ -1,4 +1,73 @@
 ru:
+  abilities:
+    accesses:
+      manage: Полный доступ к Ключам на Кластере
+    accounts:
+      manage: Полный доступ к Доступам к Проектам
+    clusters:
+      manage: Полный доступ к Кластерам
+    cluster_fields:
+      manage: Полный доступ к Дополнительным Полям Кластера
+    cluster_projects:
+      manage: Польный доступ к Проектам на Кластере
+    cluster_users:
+      manage: Полный доступ к Пользователям на Кластере
+    critical_technologies:
+      manage: Полный доступ к Критическим Технологиям
+    direction_of_sciences:
+      manage: Полный доступ к Направлениям Науки
+    extends:
+      manage: Полный доступ к Расширениям
+    groups:
+      manage: Полный доступ к Группам
+    images:
+      manage: Полный доступ к Изображениям
+    import_items:
+      manage: Полный доступ к Импорту
+    history_items:
+      access: Просмотр Истории Пользователей
+    organizations:
+      manage: Полный доступ к Организациям
+    organization_kinds:
+      manage: Полный доступ к Типам Организации
+    position_names:
+      manage: Полный доступ к Названиям Позиций в Организациях
+    projects:
+      manage: Полный доступ к Проектам
+    pages:
+      manage: Полный доступ к Страницам Справке
+      show_all: Просмотр всех Страниц Справки
+    requests:
+      manage: Полный доступ к Заявкам на ресурсы
+    settings:
+      manage: Полный доступ к Настройкам
+    sureties:
+      manage: Полный доступ к Поручительствам
+      confirm: Предварительное одобрение поручительств
+      unconfirm: Снятие предварительного одобрение поручительств
+      activate: Активация поручительства
+      close: Закрытие поручительства
+      decline: Отказ в поручительстве
+    project_prefixes:
+      manage: Полный доступ к Префиксам Проектов
+    tasks:
+      manage: Полный доступ к Процедурам
+    tickets:
+      manage: Полный доступ к Заявкам в Поддержку
+    ticket_fields:
+      manage: Полный доступ к Дополнительным Полям к Заявкам в Поддержку
+    ticket_questions:
+      manage: Полный доступ к Вопросом к Заявкам в Поддержку
+    ticket_tags:
+      manage: Полный доступ к Тегам
+    ticket_templates:
+      manage: Полный доступ к Шаблонам ответов
+    users:
+      manage: Полный доступ к Пользователям
+    all:
+      show_all: Возможность просматривать все записи без пагинации
+    admin:
+      access: Доступ в Кабинет Администратора
   views:
     pagination:
       next: Следующая
@@ -348,6 +417,14 @@ ru:
       task: Задание
     errors:
       models:
+        report/project:
+          attributes:
+            materials:
+              no_image: В архиве нет изображений
+            lomonosov_logins:
+              not_found: "Логин %{login} не найден"
+            chebyshev_logins:
+              not_found: "Логин %{login} не найден"
         account:
           attributes:
             raw_emails:
@@ -374,6 +451,80 @@ ru:
               user_is_closed: Пользователь заблокирован.
               wrong_password: Не верный пароль.
     attributes:
+      report/personal_data:
+        first_name: Имя
+        last_name: Фамилия
+        middle_name: Отчество
+        phone: Номер телефона
+      report/project:
+        areas: Область исследований
+        ru_title: Название проекта
+        ru_author: 'Авторы'
+        ru_email: 'Emails'
+        ru_driver: 'Задача'
+        ru_strategy: 'Стратегия'
+        ru_objective: 'Цель'
+        ru_impact: 'Эффект'
+        ru_usage: 'Использование'
+        en_title: Title
+        en_author: Authors
+        en_email: Emails
+        en_driver: Driver
+        en_strategy: Strategy
+        en_objective: Objective
+        en_impact: Impact
+        en_usage: Usage
+        directions_of_science: 'Приоритетные направления развития науки, технологий и техники в Российской Федерации (утв. Указом Президента РФ от 7 июля 2011 г. N 899)'
+        critical_technologies: 'Перечень критических технологий Российской Федерации (утв. Указом Президента РФ от 7 июля 2011 г. N 899)'
+        books_count: 'Число опубликованных статей по проекту за год'
+        vacs_count: 'Число учебников и монографий'
+        lectures_count: 'Число тезисов докладов'
+        international_conferences_count: Международные (за рубежом)
+        russian_conferences_count: Российские
+        doctors_dissertations_count: Докторских
+        candidates_dissertations_count: Кандидатских
+        computing_systems: Задействованные в ходе работ вычислительные системы СКЦ МГУ
+        lomonosov_logins:  '"Ломоносов"'
+        chebyshev_logins: '"Чебышев"'
+        students_count: Студентов
+        graduates_count: Аспирантов
+        your_students_count: Число студентов
+        rffi_grants_count: РФФИ
+        ministry_of_education_grants_count: Минобрнауки РФ
+        rosnano_grants_count: Роснано
+        ministry_of_communications_grants_count: Минкомсвязи РФ
+        ministry_of_defence_grants_count: Минобороны РФ
+        ran_grants_count: Программы фундаментальных исследований РАН
+        other_russian_grants_count: Российские
+        international_conferences_in_russia_count: Международные (в России)
+        other_intenational_grants_count: Международные (за рубежом)
+        award_names: Названия
+        awards_count: Количество наград
+        comment: Комментарии
+        lomonosov_intel_hours: 'Ломоносов (Intel)'
+        lomonosov_nvidia_hours: 'Ломоносов (NVIDIA)'
+        lomonosov_size: 'Ломоносов, Гб'
+        chebyshev_size: 'Чебышев, ГБ'
+        chebyshev_hours: 'Чебышев'
+        request_comment: 'В этом поле следует описать имеющие место актуальные потребности, связанные с работой на системах СКЦ МГУ и любый другие необходимые пояснения'
+        wanna_speak: Да
+      report/organization:
+        name: Название
+        subdivision: Подразделение
+        position: Должность
+        organization_type: Категория
+      report/personal_survey:
+        software: 'Какие прикладные пакеты, библиотеки и средства Вы используете в работе на суперкомпьютерном комплексе МГУ?'
+        technologies: 'Какие языки и технологии параллельного программирования Вы используете или планируете использовать в ближайшем будущем?'
+        other_technology: Другие
+        compilators: 'Какие компиляторы Вы используете сейчас или планируете использовать в ближайшем будущем?'
+        other_compilator: Другие
+        learning: 'Какие направления для обучения и тренингов Вы видите для себя нужными?'
+        other_learning: Другие
+        request_technology: 'Какие прикладные пакеты, библиотеки и средства сейчас не установлены на суперкомпьютерном комплексе МГУ, но Вы хотели бы их использовать?'
+        precision: Какой тип вычислений наиболее характерен для Ваших задач?
+        computing: Кастельно вычислительной платформы для Ваших расчетов
+        comment: 'Если есть что-то еще, то поясните, пожалуйста'
       user:
         phone: Номер телефона
         email: Email
@@ -778,4 +929,7 @@ ru:
       admin: Администратором
       system: Системой
 
-  
+  cant_submit_report_because_of_errors: Отчет содержит ошибки. Невозможно отправить на рассмотрение
+  report_submitted: Отчет отправлен на рассмотрение
+  reports_draft_saved: Черновик отчета сохранен
+  open: Открыть

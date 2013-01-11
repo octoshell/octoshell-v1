@@ -1,5 +1,15 @@
 When /debug/ do
-  sleep 10
+  @debugger ||= Fiber.new do
+    n, path = 0, '/Users/releu/Desktop/'
+    loop do
+      n = n + 1
+      page.driver.render("#{path}/screenshot_#{n}.png", full: true)
+      Fiber.yield
+    end
+  end
+  sleep 0.5
+  @debugger.resume
+  save_and_open_page
 end
 
 Given /^I am signed in as "(.*)"$/ do |user|
@@ -20,7 +30,7 @@ Given /^I am on root page$/ do
   visit root_path
 end
 
-Given /^I click on "(.*)"$/ do |name|
+Given /^I click on "([^\"]+)"$/ do |name|
   if name =~ /^\.js-/
     find(name).click
   else
@@ -28,12 +38,13 @@ Given /^I click on "(.*)"$/ do |name|
   end
 end
 
-Given /^I click on "(.*)" the "(.*)"$/ do |element, place|
+Given /^I click on "([^\"]+)" the "([^\"]+)"$/ do |element, place|
+  click = proc { click_on element }
   case place.to_sym
   when :request then
-    within(".js-request-#{@request.id}") do
-      click_on element
-    end
+    within(".js-request-#{@request.id}", &click)
+  when :group then
+    within(".js-group-#{@group.id}", &click)
   end
 end
 
@@ -43,6 +54,12 @@ When /^I fill in "(.*)" with "(.*)"$/ do |field, value|
   else
     fill_in field, with: value
   end
+end
+
+When /^I fill in "(.*)" with "(.*)" in "(.*)" member$/ do |field, value, num|
+  num = num.to_i - 1
+  name = "surety[surety_members_attributes][#{num}][#{field.downcase.gsub(' ', '_')}]"
+  fill_in name, with: value
 end
 
 When /^I select "(.*)" from "(.*)"$/ do |value, field|
@@ -65,5 +82,9 @@ When /^I signed out$/ do
 end
 
 When /^I confirm dialog$/ do
-  page.driver.browser.switch_to.alert.accept
+  page.evaluate_script("window.confirm()")
+end
+
+When /^I check ability for "(\w+)" "(\w+)"$/ do |action, subject|
+  page.find(".js-ability-#{action}-#{subject}").set(true)
 end

@@ -1,0 +1,26 @@
+- if accesses.any?
+  table class="table table-bordered"
+    tr
+      th class="span1" #
+      th = User.model_name.human
+      th = Credential.model_name.human
+      th = Cluster.model_name.human
+      th Подключение
+      th = Access.human_attribute_name(:state)
+      th = ClusterUser.model_name.human
+      th = ClusterProject.model_name.human
+      th
+    - accesses.each do |access|
+      tr id="access-#{access.id}"
+        td = access.id
+        td = smart_link_to access.credential.user
+        td = smart_link_to access.credential
+        td = smart_link_to access.cluster
+        td = "#{access.cluster_user.username}@#{access.cluster_user.cluster_project.cluster.host}"
+        td = access.human_state_name
+        td = access.cluster_user.human_state_name
+        td = access.cluster_user.cluster_project.human_state_name
+        - if may? :manage, :accesses
+          td = smart_link_to access
+- else
+  p Нет доступов

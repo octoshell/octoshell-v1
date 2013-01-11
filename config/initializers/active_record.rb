@@ -38,6 +38,10 @@ module ActiveRecord
         state_machine.states.map &:name
       end
     end
+
+    def models_name
+      self.class.model_name.pluralize.underscore.to_sym
+    end
   end
   
   class RecordInProcess < StandardError

@@ -1,108 +1,106 @@
-- title "Проект: #{@project.name}"
+- title t('.title', default: "Project: %{name}", name: @project.name)
 
 p class="lead" = @project.description
 
-- if can?(:edit, @project) || @project.can__close? || can?(:index, :versions)
-  div class="link-actions"
-    = link_to 'Редактировать', edit_project_path(@project), class: 'btn'
-    |  
-    = link_to 'Создать заявку', new_request_path(project_id: @project.id), class: "btn #{disabled(can?(:create, :requests))}"
-    |  
-    = link_to 'Пригласить в проект', [@project, :invite], class: 'btn'
-    - if can? :index, :versions
-      = " "
-      = link_to 'Версии', [@project, :versions], class: 'btn'
-    - if @project.can__close? && can?(:close, @project)
-      = " "
-      = link_to Project.human_state_event_name(:_close), project_close_path(@project), method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены? Закрытие проекта закроет все доступы и заявки' }
+div class="link-actions"
+  = link_to t('.edit', default: 'Edit'), edit_project_path(@project), class: 'btn'
+  |  
+  = link_to t('.new_request', default: 'New Request'), new_request_path(project_id: @project.id), class: "btn"
+  |  
+  = link_to t('.invite', default: 'Invite'), [@project, :invite], class: 'btn'
+  - if @project.can__close?
     = " "
+    = link_to Project.human_state_event_name(:_close), project_close_path(@project), method: :put, class: 'btn btn-danger', data: { confirm: t('.confirm_close', default: 'Are you sure?') }
+  = " "
 
 table class="table table-bordered"
   tr
     th class="span4" = Project.human_attribute_name(:user)
-    td = link_to_user @project.user
+    td = @project.user.full_name
   tr
     th = Project.human_attribute_name(:state)
     td = @project.human_state_name
-  - if admin?
-    tr
-      th = Project.human_attribute_name(:username)
-      td = @project.username
 
-- if can? :show_invites, @project
-  - if @project.account_codes.any?
-    h3 Приглашения
-    table class="table table-bordered"
+- if @project.account_codes.any?
+  h3 = t('.invites', default: 'Invites')
+  table class="table table-bordered"
+    tr
+      th = AccountCode.human_attribute_name(:code)
+      th = AccountCode.human_attribute_name(:state)
+      th = AccountCode.human_attribute_name(:email)
+      th = User.model_name.human
+    - @project.account_codes.each do |account_code|
       tr
-        th = AccountCode.human_attribute_name(:code)
-        th = AccountCode.human_attribute_name(:state)
-        th = AccountCode.human_attribute_name(:email)
-        th = User.model_name.human
-      - @project.account_codes.each do |account_code|
-        tr
-          td = account_code.code
-          td = account_code.human_state_name
-          td = mail_to account_code.email
-          td
-            - if account_code.user
-              = link_to_user account_code.user
-            - else
-              | Нет
+        td = account_code.code
+        td = account_code.human_state_name
+        td = mail_to account_code.email
+        td
+          - if account_code.user
+            = account_code.user.full_name
+          - else
+            = t('.nothing', default: 'Nil')
 
 h3 Доступы
 
-= render partial: 'accounts/table', locals: { accounts: @project.accounts.active }
+- accounts = @project.accounts.active
+- if accounts.any?
+  table class="table table-bordered"
+    tr
+      th class="span1" #
+      th class="span5" = User.model_name.human
+      th = Account.human_attribute_name(:state)
+    - accounts.each do |account|
+      tr id="account-#{account.id}"
+        td = account.id
+        td = account.user.full_name
+        td
+          = account.human_state_name
+          - if account.active?
+            |  |  
+            = link_to t('.close', default: 'Закрыть'), [account, :cancel], class: 'btn btn-danger btn-mini', confirm: t('.confirm_close_account', default: 'Are you sure?'), method: :put
+- else
+  p = t('.no_accounts', default: 'There are no accounts')
 
 - if @project.sureties.any?
-  h3 Поручительства
-  = render partial: 'sureties/table', locals: { sureties: @project.sureties }
+  h3 = t('.sureties', default: 'Sureties')
 
-- if admin?
+  - sureties = @project.sureties
+  - if sureties.any?
+    table class="table table-bordered"
+      tr
+        th = Organization.model_name.human
+        th = Surety.human_attribute_name(:state)
+        th
+      - sureties.each do |surety|
+        tr id="surety-#{surety.id}" class="js-surety-#{surety.id}"
+          td = surety.organization.name
+          td = surety.human_state_name
+          td = link_to surety.link_name, surety
+  - else
+    p = t('.no_sureties', default: 'There are no sureties')
   
-  h3 На кластере:
-  - @project.cluster_projects.each do |cluster_project|
-    - if cluster_project.has_active_entities?
-      h4
-        | Группа пользователей 
-        = link_to cluster_project.username, cluster_project
-        |  на 
-        = link_to_cluster cluster_project.cluster
-      p
-        small Статус: #{cluster_project.human_state_name}
-    
-    - cluster_project.cluster_users.each do |cluster_user|
-      - if cluster_user.has_active_entities?
-        div class="row-fluid"
-          div class="offset1"
-            h5
-              | Пользователь на кластере 
-              = link_to cluster_user.username, cluster_user
-              |  для 
-              = link_to_user cluster_user.account.user
-            p
-              small Статус: #{cluster_user.human_state_name}
-      
-      - cluster_user.accesses.each do |access|
-        - if access.has_active_entities?
-          div class="row-fluid"
-            div class="offset2"
-              h6
-                | Публичный ключ 
-                = link_to access.credential.name, access
-              p
-                small Статус: #{access.human_state_name}
-  
-  h3 Процедуры
+h3 = t('.requests', default: 'Requests')
 
-  = render partial: 'tasks/table', locals: { tasks: @project.tasks }  
-  
-h3 Заявки
+p = link_to t('.new_request', deafult: 'New Request'), new_request_path
 
-p = link_to 'Новая заявка', new_request_path
+- requests = @project.requests
+- if requests.any?
+  table class="table table-bordered"
+    tr
+      th = Cluster.model_name.human
+      th = Request.human_attribute_name(:state)
+      th = Request.human_attribute_name(:created_at)
+      th
+    - requests.each do |request|
+      tr id="request-#{request.id}" class="js-request-#{request.id}"
+        td = request.cluster.name
+        td = request.human_state_name
+        td class="date" = request.created_at.strftime("%Y-%m-%d")
+        td = link_to t('.open'), request
+- else
+  p = t('.no_requests', default: 'There are no requests')
 
-= render partial: 'requests/table', locals: { requests: @project.requests }
-
-h3 Поддержка
+h3 = t('.support', default: 'Support')
 
 = render partial: 'tickets/table', locals: { tickets: @project.tickets }
 

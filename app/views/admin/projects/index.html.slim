@@ -1,0 +1,13 @@
+- title t('.title', default: 'Projects')
+
+= simple_form_for @search, url: projects_path, method: :get, html: { class: 'form-horizontal' } do |f|
+  = autocomplete :project, f, label: "Название", name: :id_eq
+  = autocomplete :user, f, label: "Руководитель"
+  = autocomplete :organization, f, label: "Главная организация"
+  = f.input :state_in, collection: Project.human_state_names, input_html: { multiple: true }, required: false
+  div class="form-actions"
+    = f.button :submit, 'Найти', class: 'btn-primary'
+
+= safe_paginate @projects
+= render partial: 'table', locals: { projects: @projects }
+= safe_paginate @projects

@@ -19,7 +19,8 @@ class Project < ActiveRecord::Base
   
   validates :name, uniqueness: true
   validates :user, :name, :description, :organization, presence: true
-  validates :organization, inclusion: { in: proc(&:allowed_organizations) }
+  # validates :organization, inclusion: { in: proc(&:allowed_organizations) }
+  # хз как тут делать
   validates :username, presence: true, on: :update
   validates :cluster_user_type, inclusion: { in: CLUSTER_USER_TYPES }
   validates :direction_of_science_ids, :critical_technology_ids,
@@ -28,6 +29,10 @@ class Project < ActiveRecord::Base
   attr_accessible :name, :description, :organization_id, :sureties_attributes,
     :organization_ids, :direction_of_science_ids, :critical_technology_ids,
     :project_prefix_id
+  attr_accessible :user_id, :organization_id, :organization_ids,
+    :project_prefix_id, :name, :username, :description,
+    :direction_of_science_ids, :critical_technology_ids, :cluster_user_type,
+    as: :admin
   
   after_create :assign_username
   after_create :create_relations
@@ -111,6 +116,10 @@ class Project < ActiveRecord::Base
 
   def login
     "#{project_prefix}#{username}"
+  end
+
+  def link_name
+    name
   end
   
 private

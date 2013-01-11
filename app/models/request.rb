@@ -97,4 +97,8 @@ private
       end
     end
   end
+
+  def link_name
+    "Request #{id}"
+  end
 end

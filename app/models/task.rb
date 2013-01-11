@@ -99,4 +99,8 @@ class Task < ActiveRecord::Base
   def description
     I18n.t("tasks.description.#{procedure}.html").html_safe
   end
+
+  def link_name
+    "Task #{id}"
+  end
 end

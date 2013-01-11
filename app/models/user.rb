@@ -23,6 +23,9 @@ class User < ActiveRecord::Base
   has_many :tickets
   has_many :additional_emails
   has_many :history_items
+  has_many :user_groups
+  has_many :groups, through: :user_groups
+  has_many :reports
   
   validates :first_name, :last_name, :middle_name, :email, :phone, presence: true
   validates :password, confirmation: true, length: { minimum: 6 }, on: :create
@@ -107,9 +110,29 @@ class User < ActiveRecord::Base
         sum_of_count
     end
   end
+
+  def report
+    reports.first || begin
+      report = reports.create!
+      report.setup_defaults!
+      report
+    end
+  end
+
+  def abilities
+    sort = %{
+      (case when available then 1 when available is null then 2 else 3 end) asc
+    }
+    abilities = Ability.where(group_id: group_ids).order(sort).uniq_by(&:to_definition)
+    abilities.any? ? abilities : Ability.default
+  end
   
   def all_projects
     projects.where("accounts.state = 'active' or projects.user_id = ?", id)
+  end
+
+  def managed_accounts
+    Account.where(project_id: owned_project_ids)
   end
   
   def new_organization=(attributes)
@@ -242,6 +265,14 @@ class User < ActiveRecord::Base
       item.data = record.attributes
       item.author_id = user ? user.id : nil
     end
+  end
+
+  def link_name
+    full_name
+  end
+
+  def can_cancel_account?(account)
+    owned_projects.map(&:account_ids).flatten.include?(account.id)
   end
   
 private

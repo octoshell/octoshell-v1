@@ -1,0 +1,9 @@
+- if memberships.any?
+  ul class="unstyled"
+    - memberships.each do |membership|
+      li
+        = smart_link_to membership.organization
+        |  - 
+        small = membership.positions.map { |p| "#{p.name}: #{p.value}" }.join(', ')
+- else
+  p Нет мест работы

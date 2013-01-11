@@ -1,37 +1,18 @@
-- title 'Оповещения'
-- if admin?
-  - if @requests.any?
-    h3 Заявки
-    = render partial: 'requests/table', locals: { requests: @requests }
+- title t('.title', default: 'Notifications')
 
-  - if @tasks.any?
-    h3 Процедуры
-    = render partial: 'tasks/table', locals: { tasks: @tasks }
+- if @sureties.any?
+  h3 = t('.sureties', default: 'Sureties')
+  = render partial: 'sureties/full_table', locals: { sureties: @sureties }
 
-  - if @sureties.any?
-    h3 Поручительства
-    = render partial: 'sureties/table', locals: { sureties: @sureties }
+- if @requests.any?
+  h3 = t('.requests', default: 'Requests')
+  = render partial: 'requests/table', locals: { requests: @requests }
 
-  - if @tickets.any?
-    h3 Заявки в саппорт
-    = render partial: 'tickets/table', locals: { tickets: @tickets }
+- if current_user.notifications_count.zero?
+  p = t('.no_notifications', default: 'There are no notifications')
 
-  - if current_user.notifications_count.zero?
-    p Нет задач. Все хорошо.
-- else
-  - if @sureties.any?
-    h3 Поручительства
-    = render partial: 'sureties/table', locals: { sureties: @sureties }
+h3 = t('.support', default: 'Support')
 
-  - if @requests.any?
-    h3 Заявки
-    = render partial: 'requests/table', locals: { requests: @requests }
-
-  - if current_user.notifications_count.zero?
-    p Нет оповещений.
-
-  h3 Поддержка
-
-  p = link_to 'Задать вопрос в техподдержку', new_ticket_path
-  - if @tickets.any?
-    = render partial: 'tickets/table', locals: { tickets: @tickets }
+p = link_to t('.new_ticket', default: 'Ask support'), new_ticket_path
+- if @tickets.any?
+  = render partial: 'tickets/table', locals: { tickets: @tickets }

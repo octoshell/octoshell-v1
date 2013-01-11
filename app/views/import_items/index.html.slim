@@ -1,9 +1,0 @@
-- title 'Импорт'
-
-div class="link-actions"
-  = link_to 'Загрузить файл', new_import_item_path, class: 'btn btn-success'
-
-p
-  | Ожидает импорта #{ImportItem.count} записей.
-  |  
-  = link_to 'Начать импорт', step_import_items_path

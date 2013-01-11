@@ -1,0 +1,29 @@
+- title "#{ClusterProject.model_name.human} ##{@cluster_project.id}"
+
+div class="link-actions"
+  = link_to 'Редактировать', [:admin, :edit, @cluster_project], class: 'btn btn-danger'
+  = " "
+  = link_to 'Версии', [:admin, @cluster_project, :versions], class: 'btn'
+
+table class="table table-bordered" id="cluster-project-#{@cluster_project.id}-detail"
+  tr
+    th class="span4" = Project.model_name.human
+    td = smart_link_to @cluster_project.project
+  tr
+    th = Cluster.model_name.human
+    td = smart_link_to @cluster_project.cluster
+  tr
+    th = ClusterProject.human_attribute_name(:state)
+    td = @cluster_project.human_state_name
+
+- if may? :access, :tasks
+  h3 Задания
+  = render partial: 'admin/tasks/table', locals: { tasks: @cluster_project.tasks }
+
+h3 Пользователи на кластерах
+
+= render partial: 'admin/cluster_users/table', locals: { cluster_users: @cluster_project.cluster_users.non_closed }
+
+h3 Ключи на кластерах
+
+= render partial: 'admin/accesses/table', locals: { accesses: @cluster_project.accesses.non_closed }

@@ -7,44 +7,43 @@ class ApplicationController < ActionController::Base
   before_filter :get_extends, :get_wikis
   
   protect_from_forgery
-  enable_authorization unless: :skip_action?
   
-  rescue_from CanCan::Unauthorized, with: :not_authorized
-  rescue_from ActiveRecord::RecordInProcess, with: :record_in_process
+  # rescue_from CanCan::Unauthorized, with: :not_authorized
+  # rescue_from ActiveRecord::RecordInProcess, with: :record_in_process
   
   def dashboard
-    if admin?
-      redirect_to admin_path
+    if may? :access, :admin
+      redirect_to admin_users_path
     elsif logged_in?
-      redirect_to dashboard_path
+      redirect_to projects_path
     else
       redirect_to new_session_path
     end
   end
+
+  def ability
+    @ability ||= begin
+      mm = MayMay::Ability.new(current_user)
+      (logged_in? ? current_user.abilities : Ability.default).each do |ability|
+        method = ability.available ? :may : :maynot
+        mm.send method, ability.action_name, ability.subject_name
+      end
+      mm
+    end
+  end
   
 private
-
-  def namespace
-    raise 'namespace method should be implemented in controller'
-  end
-  helper_method :namespace
-  
-  def admin?
-    current_user.admin? if logged_in?
-  end
-  helper_method :admin?
   
   def not_authenticated
     redirect_to new_session_path
   end
   
   def not_authorized
-    path = can?(:show, :dashboards) ? dashboard_path : new_session_path
-    redirect_to path, alert: "У вас недостаточно прав для доступа в #{"http://#{request.host}#{request.fullpath}"}"
+    redirect_to root_path, alert: "У вас недостаточно прав для доступа в #{"http://#{request.host}#{request.fullpath}"}"
   end
   
   def after_login_path
-    dashboard_path
+    projects_path
   end
   
   def skip_action?
@@ -58,7 +57,7 @@ private
   def block_closed_users
     if logged_in? && current_user.closed?
       logout
-      raise CanCan::Unauthorized
+      not_authorized
     end
   end
   
@@ -92,11 +91,20 @@ private
   
   def get_wikis
     @wikis = Page.all.find_all do |page|
-      request.path =~ %r{#{page.locator}} if page.locator? && can?(:show, page)
+      request.path =~ %r{#{page.locator}} if page.locator? && (page.publicized or may?(:show_all, :pages))
     end
   end
   
   def show_all?
-    params[:show_all] == '1' && admin?
+    params[:show_all] == '1' && may?(:access, :admin)
   end
+
+  def authorize_access_to_controller
+    authorize! :full_access, params[:controller].to_sym
+  end
+
+  def namespace
+    :dashboard
+  end
+  helper_method :namespace
 end

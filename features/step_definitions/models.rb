@@ -1,9 +1,23 @@
 Given /^there is a project "(.*)"$/ do |name|
-  FactoryGirl.create(:project, name: name)
+  @project = FactoryGirl.create(:project, name: name)
 end
 
 Given /^there is a cluster "(.*)"$/ do |name|
-  FactoryGirl.create(:cluster, name: name)
+  @cluster = FactoryGirl.create(:cluster, name: name)
+end
+
+Given /^there is an Ability "(.*)" "(.*)"$/ do |action, subject|
+  raw_definitions = Ability.raw_definitions.dup
+  Ability.stub(:raw_definitions) do
+    raw_definitions.merge(
+      subject => [action]
+    )
+  end
+  Ability.redefine!
+end
+
+Given /^there is a Group "(.*)"$/ do |name|
+  @group = FactoryGirl.create(:group, name: name)
 end
 
 Given /^there is a pending request for project "(.*)" on "(.*)"$/ do |project_name, cluster_name|
@@ -53,4 +67,10 @@ end
 
 Then /^project prefix with name "(.*)" should not be exists$/ do |prefix|
   ProjectPrefix.where(name: prefix).should_not be_exists
+end
+
+Then /^Group "(\w+)" should have abilities to "(\w+)" "(\w+)"$/ do |group_name, action, subject|
+  group = Group.find_by_name! group_name
+  ability = group.abilities.find_by_action_and_subject! action, subject
+  group.abilities.should include(ability)
 end

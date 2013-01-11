@@ -1,0 +1,22 @@
+- title "Доступ ##{@access.id}"
+
+div class="link-actions"
+  = link_to 'Редактировать', [:edit, @access], class: 'btn btn-danger'
+  |  
+  = link_to 'Версии', [@access, :versions], class: 'btn'
+
+table class="table table-bordered" id="access-#{@access.id}-detail"
+  tr
+    th class="span4" = User.model_name.human
+    td = smart_link_to @access.credential
+  tr
+    th = ClusterUser.model_name.human
+    td = smart_link_to @access.cluster_user
+  tr
+    th = Access.human_attribute_name(:state)
+    td = @access.human_state_name
+
+
+h3 Задания
+
+= render partial: 'admin/tasks/table', locals: { tasks: @access.tasks }

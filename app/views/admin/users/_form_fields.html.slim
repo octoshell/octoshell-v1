@@ -1,0 +1,15 @@
+= f.input :email
+= f.input :password, required: true, hint: 'минимум 6 символов', input_html: { class: 'js-password' }
+= f.input :password_confirmation, required: true, input_html: { class: 'js-password-confirmation' }
+= f.input :first_name
+= f.input :last_name
+= f.input :middle_name
+= f.input :avatar
+= f.input :phone
+- if f.object.persisted?
+  h4 Дополнительные email для нотификаций
+  = f.fields_for :additional_emails do |f|
+    = f.input :email
+    - if f.object.persisted?
+      div class="remove-form-item"
+        = f.input :_destroy, as: :boolean, label: 'Удалить'

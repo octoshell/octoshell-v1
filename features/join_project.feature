@@ -10,6 +10,7 @@ Feature: Join Project
     And There is a direction of science "OctoRobots"
     And There is a critical technology "OctoMath"
     And There is a membership for "OctoCorp" for current user
+    And debug
     And I havigated to new project
     When I select "OctoCorp" from "Main Organization"
     And I fill in "Name" with "OctoProj"

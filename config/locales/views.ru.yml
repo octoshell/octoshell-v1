@@ -1,64 +1,169 @@
+---
 ru:
+  admin:
+    memberships:
+      table:
+        no_memberships: Нет сотрудников
+    requests:
+      index:
+        title: Заявки
+      table:
+        open: Открыть
   layouts:
     application:
-      sign_in: Вход
-      sign_up: Регистрация
+      help: Справка
       sign_out: Выход
-  sessions:
+  notifications:
+    index:
+      new_ticket: Создать заявку в Поддержке
+      support: Поддержка
+      title: Оповещения
+  project_joiners:
     new:
-      sign_in: Войти
-  shared:
-    admin_menu:
-      users: Пользователи
+      code: Код приглашения
+      use: Использовать
+      use_code: Использовать код
+  clusters:
+    index:
+      title: Кластеры
+  pages:
+    index:
+      title: Справка
+      no_pages: Нет доступных страниц справки
+  projects:
+    index:
+      new_project: Новый проект
+      title: Проекты
+      use_code: Использовать код приглашения
+      report: Отчет по проектам
+      you_have_x_days_for_submitting_report:
+        html: "До конца приема отчетов осталось дней: <strong>%{days}</strong>."
+    table:
+      no_projects: Нет проектов
+      invite: Пригласить
+      remove: Удалить
+      no_accesses: Нет доступов
+      members: Участники
+      connection: Подключение
+    show:
+      title: "Проект: %{name}"
+      edit: Редактировать
+      new_request: Новая заявка
+      invite: Пригласить
+      no_accounts: Нет доступов к проекту
+      requests: Заявки
+      open: открыть
+      support: Поддержка
+      no_sureties: Нет поручительств
       sureties: Поручительства
-      requests: Заявки
-      tasks: Процедуры
-      projects: Проекты
-      clusters: Кластеры
-      memberships: Места работы
-      credentials: Публичные ключи
-      organizations: Организации
-      organization_kinds: Типы организаций
-      position_names: Должности
-      accounts: Доступы к проектам
-      accesses: Публичные ключи на кластере
-      cluster_projects: Проекты на кластере
-      cluster_users: Пользователи на кластере
-      extends: Расширения
-      images: Изображения
-      import: Импорт
-      project_prefixes: Префиксы проектов
-      more: Еще
-    dashboard_menu:
-      projects: Проекты
-      requests: Заявки
-      clusters: Кластеры
-      profile: Профиль
-  credentials:
-    new:
-      title: Новый публичный ключ
-      choose_pub_file: Выберите .pub файл
-      or_enter_as_text: Или введите текстом
+    invite:
+      title: Пригласить в проект
+      user_has_a_surety: У пользователя есть поручительство
+      user_has_not_a_surety: Новое поручительство для пользователя
+      add: Добавить
+      invite: Пригласить
+  reports:
+    edit:
+      title: Отчет по проектам
+      personal_data: Личные данные
+      organizations: Организация
+      personal_survey: Персональный опрос
+      request_technology_hint: "Названия, через запятую"
+      ru_project_card: Карточка проекта (Russian)
+      en_project_card: Project Card (English)
+      ru_author_hint: "Cписок авторов и организаций, первым указывается руководитель проекта"
+      ru_email_hint: "Контактные адреса авторов"
+      ru_driver_hint: "Описание решаемой задач, на решение которой направлен проект"
+      ru_strategy_hint: "Описание идеи подхода к решению задачи"
+      ru_objective_hint: "описание цели на которую нацелено решение конкретной задачи"
+      ru_impact_hint: "Ожидаемый эффект от успешного решения задачи (научный / коммерческий / социальный)"
+      ru_usage_hint: "Отрасли промышленности, сектора экономики, области науки, где могут быть использованы результаты проекта"
+      en_author_hint: "Authors and organizations. At first project manager should be named"
+      en_email_hint: "Emails of the Authors"
+      en_driver_hint: "A description of the problem being solved"
+      en_strategy_hint: "A description of the idea solve the problem"
+      en_objective_hint: "A description of the goal"
+      en_impact_hint: "The expected effect on the successful resolution of the problem (scientific / commercial / social)"
+      en_usage_hint: "Industry, economy, science, which can be used by the project results"
+      logins: "Список логинов, работавших над проектом"
+      logins_hint: "Через запятую"
+      materials: Материалы
+      materials_hint: "Aрхив zip, не более 50Мб, в архиве - минимум два файла, один из которых с расширением графического типа файла"
+      project_survey: Наукометрия
+      publications: Публикации
+      conferences: Конференции
+      dissertations: Диссертации
+      students: Количество студентов
+      your_students: Ваши студенты
+      grants: Гранты
+      awards: Награды
+      request: Заявка на следующий год
+      hours: Процессорочасы
+      size: Размер
+      schedule: "Необходимость привязки свободных процессоров к фиксированному времени (например, для поддержки вычислительного практикума, стоящего в сетке расписаний)"
+      speak:
+        html: 'Хотели бы Вы выступить с докладом на семинаре <a href="http://agora.guru.ru/sct" target="_blank">Суперкомпьютерные технологии в науке, образовании и промышленности</a>?'
+      project:
+        html: "Проект <span>%{name}</span>"
+      request_comment: Комментарий
+      report_submitted: Отчет на рассмотрении
+  requests:
+    index:
+      new: Новая заявка
+      title: Заявки
+    table:
+      no_requests: Нет заявок
+      open: открыть
   profiles:
     show:
       title: Профиль
       edit: Редактировать
+      memberships: Места работы
       new_membership: Добавить место работы
+      sureties: Поручительства
+      credentials: Публичные ключи
       new_credential: Добавить публичный ключ
-  projects:
-    index:
-      title: Проекты
-      new_project: Новый проект
-      use_code: Использовать код приглашения
-    form:
-      add_member: Добавить
-  requests:
-    table:
-      open: открыть
-  project_prefixes:
-    index:
+  shared:
+    admin_menu:
+      accesses: Публичные ключи на кластере
+      cluster_projects: Проекты на кластере
+      cluster_users: Пользователи на кластере
+      clusters: Кластеры
+      critical_technologies: Критические технологии
+      direction_of_sciences: Направления науки
+      extends: Расширения
+      groups: Группы
+      images: Изображения
+      import: Импорт
+      more: Еще
+      organization_kinds: Типы организаций
+      organizations: Организации
+      position_names: Должности
       project_prefixes: Префиксы проектов
+      projects: Проекты
+      requests: Заявки
+      sureties: Поручительства
+      tasks: Процедуры
+      users: Пользователи
+    dashboard_menu:
+      clusters: Кластеры
+      pages: Справка
+      profile: Профиль
+      projects: Проекты
+      requests: Заявки
+      tickets: Поддержка
+    top_menu:
+      admin: Кабинет Администратора
+      dashboard: Рабочий кабинет
+      notifications: "Оповещения (%{count})"
+  tickets:
+    index:
+      title: Поддержка
+      new_ticket: Новая заявка
     new:
-      new_project_prefix: Новый префиксы проектов
+      begin: Начало
+      choose: Выберите
+      continue: Продолжить
+      new_request: Новая заявка
     table:
-      there_are_no_project_prefixes: Нет префиксов проектов
+      no_tickets: Нет заявок

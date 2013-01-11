@@ -1,26 +1,13 @@
 class MembershipsController < ApplicationController
   before_filter :require_login
-  before_filter :setup_default_filter, only: :index
-  
-  def index
-    if admin?
-      @search = Membership.search(params[:search])
-      @memberships = show_all? ? @search.all : @search.page(params[:page])
-    else
-      @search = current_user.memberships.search(params[:search])
-      @memberships = @search.page(params[:page])
-    end
-  end
   
   def new
-    @membership = Membership.new
-    @membership.user = current_user unless admin?
+    @membership = current_user.memberships.build
     @membership.build_default_positions
   end
   
   def create
-    @membership = Membership.new(params[:membership], as_role)
-    @membership.user = current_user unless admin?
+    @membership = current_user.memberships.build(params[:membership])
     if @membership.save
       @membership.user.track! :create_membership, @membership, current_user
       redirect_to @membership
@@ -29,21 +16,19 @@ class MembershipsController < ApplicationController
       render :new
     end
   end
-  
+
   def show
-    @membership = find_membership(params[:id])
+    @membership = current_user.memberships.find(params[:id])
   end
-  
+    
   def edit
     @membership = find_membership(params[:id])
-    authorize! :edit, @membership
     @membership.build_default_positions
   end
   
   def update
     @membership = find_membership(params[:id])
-    authorize! :update, @membership
-    if @membership.update_attributes(params[:membership], as_role)
+    if @membership.update_attributes(params[:membership])
       @membership.user.track! :update_membership, @membership, current_user
       redirect_to @membership
     else
@@ -54,7 +39,6 @@ class MembershipsController < ApplicationController
   
   def close
     @membership = find_membership(params[:membership_id])
-    authorize! :close, @membership
     @membership.close
     @membership.user.track! :close_membership, @membership, current_user
     redirect_to @membership
@@ -63,11 +47,7 @@ class MembershipsController < ApplicationController
 private
   
   def find_membership(id)
-    Membership.find(id)
-  end
-  
-  def namespace
-    admin? ? :admin : :dashboard
+    current_user.memberships.find(id)
   end
   
   def setup_default_filter

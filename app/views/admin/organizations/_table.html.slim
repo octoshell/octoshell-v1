@@ -1,0 +1,26 @@
+table class="table table-bordered"
+  tr
+    th class="span1" #
+    th
+      - if @search
+        = sort_link @search, :name, Organization.human_attribute_name(:name), default_order: :asc
+      - else
+        = Organization.human_attribute_name(:name)
+    th = Organization.human_attribute_name(:abbreviation)
+    th = Organization.human_attribute_name(:organization_kind)
+    th = Organization.human_attribute_name(:state)
+    th
+      - if @search
+        = sort_link @search, :active_projects_count, 'Активных проектов', default_order: :desc
+      - else
+        | Активных проектов
+    th
+  - organizations.each do |organization|
+    tr
+      td = organization.id
+      td = smart_link_to organization
+      td = organization.abbreviation
+      td = organization.kind
+      td = organization.human_state_name
+      td = organization.active_projects_count
+      td = link_to 'открыть', [:admin, organization]

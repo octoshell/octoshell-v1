@@ -15,7 +15,8 @@ class Reply < ActiveRecord::Base
   belongs_to :ticket, touch: true
   
   validates :user, :ticket, :message, presence: true
-  validates :ticket_state_name, exclusion: { in: [:closed] }, if: :ticket
+  validates :ticket_state_name, exclusion: { in: [:closed] },
+    if: proc { |r| r.ticket.active? }
   
   attr_accessible :message, :ticket_id, :attachment
   

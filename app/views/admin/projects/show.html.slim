@@ -1,0 +1,96 @@
+- title "Проект: #{@project.name}"
+
+p class="lead" = @project.description
+
+div class="link-actions"
+  = link_to 'Редактировать', [:edit, :admin, @project], class: 'btn'
+  |  
+  = link_to 'Версии', [@project, :versions], class: 'btn'
+  
+  - if @project.can__close?
+    = " "
+    = link_to Project.human_state_event_name(:_close), project_close_path(@project), method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены? Закрытие проекта закроет все доступы и заявки' }
+  = " "
+
+table class="table table-bordered"
+  tr
+    th class="span4" = Project.human_attribute_name(:user)
+    td = smart_link_to @project.user
+  tr
+    th = Project.human_attribute_name(:state)
+    td = @project.human_state_name
+  tr
+    th = Project.human_attribute_name(:username)
+    td = @project.username
+
+- if @project.account_codes.any?
+  h3 Приглашения
+  table class="table table-bordered"
+    tr
+      th = AccountCode.human_attribute_name(:code)
+      th = AccountCode.human_attribute_name(:state)
+      th = AccountCode.human_attribute_name(:email)
+      th = User.model_name.human
+    - @project.account_codes.each do |account_code|
+      tr
+        td = account_code.code
+        td = account_code.human_state_name
+        td = mail_to account_code.email
+        td
+          - if account_code.user
+            = smart_link_to account_code.user
+          - else
+            | Нет
+
+h3 Доступы
+
+= render partial: 'admin/accounts/table', locals: { accounts: @project.accounts.active }
+
+- if @project.sureties.any?
+  h3 Поручительства
+  = render partial: 'admin/sureties/table', locals: { sureties: @project.sureties }
+
+- @project.cluster_projects.each do |cluster_project|
+  - if cluster_project.has_active_entities?
+    h4
+      | Группа пользователей 
+      = smart_link_to cluster_project
+      |  на 
+      = smart_link_to cluster_project.cluster
+    p
+      small Статус: #{cluster_project.human_state_name}
+  
+  - cluster_project.cluster_users.each do |cluster_user|
+    - if cluster_user.has_active_entities?
+      div class="row-fluid"
+        div class="offset1"
+          h5
+            | Пользователь на кластере 
+            = smart_link_to cluster_user
+            |  для 
+            = smart_link_to cluster_user.account.user
+          p
+            small Статус: #{cluster_user.human_state_name}
+    
+    - cluster_user.accesses.each do |access|
+      - if access.has_active_entities?
+        div class="row-fluid"
+          div class="offset2"
+            h6
+              | Публичный ключ 
+              = smart_link_to access, access.credential.name
+            p
+              small Статус: #{access.human_state_name}
+  
+  h3 Процедуры
+
+  = render partial: 'admin/tasks/table', locals: { tasks: @project.tasks }  
+  
+h3 Заявки
+
+= render partial: 'admin/requests/table', locals: { requests: @project.requests }
+
+h3 Поддержка
+
+= render partial: 'admin/tickets/table', locals: { tickets: @project.tickets }
+

@@ -1,24 +1,5 @@
 # coding: utf-8
 module ApplicationHelper
-  def link_to_attribute(record, attribute, value)
-    if attribute.to_s =~ /_id$/
-      link_to_relation(record, attribute, value)
-    else
-      value
-    end
-  end
-  
-  def link_to_relation(record, attribute, value)
-    record.send("#{attribute}=", value)
-    relation = attribute.to_s[/(.*)_id$/, 1]
-    link_method = "link_to_#{relation}"
-    if respond_to?(link_method) && record.respond_to?(relation)
-      link = send link_method, record.send(relation)
-      record.send("#{attribute}=", record.send("#{attribute}_was"))
-      link
-    end
-  end
-  
   def title title
     content_for :title, title
   end
@@ -40,84 +21,24 @@ module ApplicationHelper
     controller_name == params[:controller].to_sym
   end
   
-  def link_to_cluster(cluster)
-    return unless cluster
-    link_to_if can?(:show, cluster), cluster.name, cluster
-  end
-  
-  def link_to_user(user)
-    return unless user
-    link_to_if (can? :show, user), user.full_name, user
-  end
-  
   def link_to_project(project)
-    return unless project
-    link_to_if can?(:show, project), project.name, project
+    link_to project.name, project
   end
   
   def link_to_surety(surety)
-    return unless surety
-    link_to_if can?(:show, surety), 'открыть', surety
-  end
-  
-  def link_to_organization(organization)
-    return unless organization
-    link_to_if can?(:show, organization), organization.name, organization
-  end
-  
-  def link_to_organization_kind(organization_kind)
-    return unless organization_kind
-    link_to_if can?(:show, organization_kind), organization_kind.name, organization_kind
+    link_to 'открыть', surety
   end
   
   def link_to_membership(membership)
-    return unless membership
-    link_to_if can?(:show, membership), 'открыть', membership
+    link_to 'открыть', membership
   end
   
   def link_to_credential(credential)
-    return unless credential
-    link_to_if can?(:show, credential), credential.name, credential
-  end
-  
-  def link_to_ticket_template(ticket_template)
-    return unless ticket_template
-    link_to_if can?(:show, ticket_template), ticket_template.subject, ticket_template
-  end
-  
-  def link_to_ticket_question(ticket_question)
-    return unless ticket_question
-    link_to_if can?(:show, ticket_question), ticket_question.question, ticket_question
-  end
-  
-  def link_to_ticket_field(ticket_field)
-    return unless ticket_field
-    link_to_if can?(:show, ticket_field), ticket_field.name, ticket_field
-  end
-  
-  def link_to_task(task)
-    return unless task
-    link_to_if can?(:show, task), "Задание ##{task.id}", task
-  end
-  
-  def link_to_cluster_user(cluster_user)
-    return unless cluster_user
-    link_to_if can?(:show, cluster_user), cluster_user.username, cluster_user
-  end
-  
-  def link_to_task_resource(task)
-    return unless task
-    link_to_if can?(:show, task), task.resource.class.model_name.human, task.resource
+    link_to credential.name, credential
   end
   
   def link_to_ticket(ticket)
-    return unless ticket
-    link_to_if can?(:show, ticket), ticket.subject, ticket
-  end
-  
-  def link_to_ticket_tag(ticket_tag)
-    return unless ticket_tag
-    link_to_if can?(:show, ticket_tag), ticket_tag.name, ticket_tag
+    link_to ticket.subject, ticket
   end
   
   def link_to_function(name, *args, &block)
@@ -163,19 +84,19 @@ module ApplicationHelper
   def autocomplete(type, form, options = {})
     default_options = {
       organization: {
-        label: "Организация",
+        label: Organization.model_name.human,
         name: :organization_id_eq,
         admin: true,
         source: organizations_path
       },
       user: {
-        label: "Пользователь",
+        label: User.model_name.human,
         name: :user_id_eq,
         admin: true,
         source: users_path
       },
       project: {
-        label: "Проект", 
+        label: Project.model_name.human, 
         name: :project_id_eq,
         admin: true,
         source: projects_path
@@ -183,15 +104,14 @@ module ApplicationHelper
     }
     
     options = default_options[type].merge(options)
-    return if options[:admin] && !admin?
+    return if options[:admin] && maynot?(:access, :admin)
     
     content_tag(:div, class: "control-group select") do
       content_tag(:div, class: "select control-label") do
         content_tag :label, options[:label]
       end + 
         content_tag(:div, class: "controls") do
-          field_type = Rails.env.test? ? :text_field : :hidden_field
-          form.send field_type, options[:name], class: 'chosen ajax', data: { source: options[:source] }
+          form.hidden_field options[:name], class: 'chosen ajax', data: { source: options[:source] }
         end
     end
   end

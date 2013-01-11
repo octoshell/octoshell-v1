@@ -1,0 +1,16 @@
+- if ticket_fields.any?
+  table class="table table-bordered"
+    tr
+      th class="span1" #
+      th = TicketField.human_attribute_name(:name)
+      th = TicketField.human_attribute_name(:hint)
+      th
+    - ticket_fields.each do |field|
+      tr
+        td = field.id
+        td = smart_link_to field
+        td = field.hint
+        td
+          = link_to 'редактировать', [:edit, field]
+- else
+  p Нет дополнительных полей

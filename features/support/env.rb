@@ -52,8 +52,20 @@ end
 #   end
 #
 
+Before do
+  Ability.redefine!
+  FactoryGirl.create(:cluster, name: 'OctoClust')
+  visit new_session_path
+  visit root_path
+end
+
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+require 'cucumber/rspec/doubles'
+
+require 'capybara/poltergeist'
+
+Capybara.javascript_driver = :poltergeist

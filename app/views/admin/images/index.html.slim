@@ -1,0 +1,17 @@
+- title 'Изображения'
+
+div class="link-actions"
+  = link_to 'Новое изображение', new_admin_image_path, class: 'btn'
+
+- if @images.any?
+  - @images.each do |image|
+    div class="row scan"
+      div class="span4"
+        = image_tag "/images/#{image}", class: 'img-polaroid'
+      div class="span8"
+        p
+          | Код для вставки: 
+          code ![#{image[/(.*)\./, 1]}](/images/#{image})
+        p = link_to 'удалить', admin_image_path(id: Digest::SHA1.hexdigest(image)), method: :delete, class: 'btn btn-mini btn-danger', confirm: 'Вы уверены?'
+- else
+  p Нет изображений

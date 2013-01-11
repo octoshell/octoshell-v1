@@ -1,0 +1,63 @@
+- title "#{Surety.model_name.human} ##{@surety.id}"
+
+table class="table table-bordered noprint"
+  tr
+    th = Organization.model_name.human
+    td = smart_link_to @surety.organization
+  tr
+    th = User.model_name.human
+    td
+      = smart_link_to @surety.user
+      = render partial: 'admin/memberships/summary', locals: { memberships: @surety.user.memberships.active }
+  tr
+    th = Surety.human_attribute_name(:state)
+    td id="surety-#{@surety.id}-status" = @surety.human_state_name
+
+div class="link-actions noprint"
+  = link_to 'Скачать RTF', surety_path(@surety, format: :rtf), class: 'btn'
+  = " "
+  = link_to 'Загрузить скан', [@surety, :scan], class: 'btn'
+  |  
+  = link_to 'Версии', [:admin, @surety, :versions], class: 'btn'
+  - if @surety.can__activate?
+    = " "
+    = link_to Surety.human_state_event_name(:_activate), admin_surety_activate_path(@surety), class: 'btn btn-success', method: :put
+  
+  - if @surety.can__decline?
+    = " "
+    = link_to Surety.human_state_event_name(:_decline), admin_surety_decline_path(@surety), class: 'btn', method: :put
+    
+  - if @surety.can__confirm?
+    = " "
+    = link_to Surety.human_state_event_name(:_confirm), admin_surety_confirm_path(@surety), class: 'btn', method: :put
+  
+  - if @surety.can__unconfirm?
+    = " "
+    = link_to Surety.human_state_event_name(:_unconfirm), admin_surety_unconfirm_path(@surety), class: 'btn', method: :put
+    
+  - if @surety.can__close?
+    = " "
+    = link_to Surety.human_state_event_name(:_close), admin_surety_close_path(@surety), class: 'btn btn-danger', method: :put, data: { confirm: t('.confirm_close', default: 'Are you sure?') }
+
+blockquote class="noprint"
+  p
+    | Вы должны 
+    strong распечатать поручительтво, поставить подпись и печать.
+  p
+    | После этого отослать по адресу: 
+    strong 119991 Москва, Ленинские горы, 1, стр.4
+
+div id="surety"
+  == @surety.html_template 
+
+- if @surety.tickets.any?
+  div class="noprint"
+    h3 Сканы
+    - @surety.tickets.each do |ticket|
+      div class="row group scan"
+        div class="span5"
+          = link_to ticket.attachment.url, target: '_blank' do
+            = image_tag ticket.attachment.url, class: 'img-polaroid span4'
+        div class="span6"
+          p
+            strong = link_to 'Перейти к заявке', ticket

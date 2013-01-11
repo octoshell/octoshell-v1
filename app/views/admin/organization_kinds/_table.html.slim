@@ -1,0 +1,15 @@
+- if organization_kinds.any?
+  table class="table table-bordered"
+    tr
+      th class="span1" #
+      th class="span3" = OrganizationKind.human_attribute_name(:name)
+      th = OrganizationKind.human_attribute_name(:state)
+      th
+    - organization_kinds.each do |organization_kind|
+      tr
+        td = organization_kind.id
+        td = smart_link_to organization_kind
+        td = organization_kind.human_state_name
+        td = link_to 'открыть', [:admin, organization_kind]
+- else
+  p Нет типов организаций

@@ -1,21 +1,15 @@
-- title "Заявка ##{@ticket.id}"
+- title t('.title', default: "Ticket ##{@ticket.id}")
 
-- if can?(:close, @ticket) || can?(:resolve, @ticket) || can?(:index, :versions)
-  div class="link-actions"
-    - if can? :edit, @ticket
-      = link_to 'Редактировать', [:edit, @ticket], class: 'btn'
-      = " "
-    = link_to Ticket.human_state_event_name(:_resolve), ticket_resolve_path(@ticket), method: :put, class: 'btn btn-success' if can?(:resolve, @ticket)
-    = " "
-    = link_to Ticket.human_state_event_name(:_close), ticket_close_path(@ticket), method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' } if can?(:close, @ticket)
-    - if can? :index, :versions
-      = " "
-      = link_to 'Версии', [@ticket, :versions], class: 'btn'
+div class="link-actions"
+  = link_to t('.edit', default: 'Edit'), [:edit, @ticket], class: 'btn'
+  = " "
+  - if @ticket.can__resolve?
+    = link_to Ticket.human_state_event_name(:_resolve), ticket_resolve_path(@ticket), method: :put, class: 'btn btn-success'
+  = " "
+  - if @ticket.can__close?
+    = link_to Ticket.human_state_event_name(:_close), ticket_close_path(@ticket), method: :put, class: 'btn btn-danger', data: { confirm: t('.confirm_close', default: 'Are you sure?') }
 
 table class="table table-bordered"
-  tr
-    th class="span4" = User.model_name.human
-    td = link_to_user(@ticket.user)
   tr
     th = Ticket.human_attribute_name(:subject)
     td = @ticket.subject
@@ -27,13 +21,13 @@ table class="table table-bordered"
     td = link_to @ticket.url, @ticket.url if @ticket.url?
   tr
     th = Ticket.human_attribute_name(:attachment)
-    td = link_to_attachment @ticket
+    td = link_to_ticket @ticket
   tr
     th = Ticket.human_attribute_name(:project)
-    td = link_to_project(@ticket.project) if @ticket.project
+    td = link_to_project @ticket.project if @ticket.project
   tr
     th = Ticket.human_attribute_name(:cluster)
-    td = link_to_cluster(@ticket.cluster) if @ticket.cluster
+    td = link_to_cluster @ticket.cluster if @ticket.project
   - @ticket.ticket_field_values.each do |value|
     tr
       th = value.ticket_field_relation.ticket_field.name
@@ -42,20 +36,29 @@ table class="table table-bordered"
     th = Ticket.human_attribute_name(:state)
     td = @ticket.human_state_name
 
-- if admin?
-  = render partial: 'tag_relations_form', locals: { ticket: @ticket }
-  = render partial: 'ticket_tags/remote_form', locals: { ticket_tag: @ticket_tag }
+h2 = t('.conversation', default: 'Conversation')
 
-h2 Переписка
+- replies = @replies
+- if replies.any?
+  - replies.each do |reply|
+    div class="row"
+      div class="span8"
+        p
+          strong = reply.user.full_name
+          small  #{time_tag(reply.created_at)}
+    div class="row"
+      div class="span8"
+        blockquote class="#{reply.user_id == reply.ticket.user_id ? 'admin' : 'user'}"
+          p = reply.message
+          small class="reply"
+            = smart_link_to reply
+- else
+  p = t('.no_replies', default: 'There are no replies')
 
-= render partial: 'replies/table', locals: { replies: @replies }
-
-- if can?(:create, @reply) && @ticket.actual?
-  - if admin?
-    = select_tag :ticket_template, options_from_collection_for_select(TicketTemplate.active, :message, :subject), prompt: 'Шаблоны ответа'
+- if @ticket.actual?
   = simple_form_for @reply, html: { class: 'form-horizontal' } do |f|
     = f.input :ticket_id, as: :hidden
-    = f.input :message, input_html: { rows: 5, class: 'span6' }, hint: (admin? ? link_to('Создать шаблон из текущего сообщения', new_ticket_template_path, id: 'ticket-template-maker', target: '_blank') : nil)
+    = f.input :message, input_html: { rows: 5, class: 'span6' }
     = f.input :attachment
     div class="form-actions"
       = f.button :submit, class: 'btn-primary'

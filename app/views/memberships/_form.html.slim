@@ -1,6 +1,5 @@
 = simple_form_for @membership, html: { class: 'form-horizontal' } do |f|
-  = f.association :user, label_method: :full_name, input_html: { class: 'chosen' } if admin?
-  = f.association :organization, hint: link_to('Добавить организацию', new_organization_path), collection: Organization.active, input_html: { class: 'chosen' }
+  = f.association :organization, hint: link_to(t('.add_organization', default: 'Add organization'), new_organization_path), collection: Organization.active, input_html: { class: 'chosen' }
   = f.simple_fields_for :positions do |f|
     = f.input :name, as: :hidden
     - if f.object.available_values.any?

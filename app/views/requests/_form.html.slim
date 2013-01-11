@@ -1,10 +1,9 @@
 = simple_form_for @request, html: { class: 'form-horizontal' } do |f|
-  = f.association :user, label_method: :full_name, collection: User.sured, disabled: f.object.persisted?, input_html: { class: 'chosen' } if admin?
-  = autocomplete :project, f, name: :project_id, admin: false, required: true
   = f.input :cluster_id, collection: Cluster.active, disabled: f.object.persisted?, required: true, prompt: false, input_html: { class: 'chosen noprompt' }
+  = f.input :project_id, collection: @projects, disabled: f.object.persisted?, required: true, prompt: false, input_html: { class: 'chosen noprompt' }
   = f.input :cpu_hours
   = f.input :gpu_hours
-  = f.input :size, hint: 'Более 50ти обговаривается отдельно'
+  = f.input :size, hint: t('.size_hint', default: 'More than 50 must have already been discussed')
   - if f.object.persisted?
     = f.fields_for :request_properties do |f|
       = f.input :value, label: f.object.name

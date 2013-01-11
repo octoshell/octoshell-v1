@@ -1,0 +1,18 @@
+- title 'Ключи на кластерах'
+
+div class="link-actions"
+  = link_to 'Новый ключ на кластере', new_admin_access_path, class: 'btn btn-danger'
+
+= simple_form_for [:admin, @search], url: accesses_path, method: :get, html: { class: 'form-horizontal' } do |f|
+  = f.input :cluster_user_id_eq, label: 'ID пользователя на кластере', required: false
+  = f.input :credential_id_eq, label: 'ID публичного ключа', required: false
+  = f.input :cluster_user_username_contains, label: 'Имя пользователя содержит', required: false
+  = autocomplete :project, f, name: :cluster_user_cluster_project_project_id_eq
+  = autocomplete :user, f, name: :credential_user_id_eq
+  = f.input :state_in, collection: Access.human_state_names, input_html: { multiple: true, size: Access.human_state_names.size }, required: false
+  div class="form-actions"
+    = f.button :submit, 'Найти', class: 'btn-primary'
+
+= safe_paginate @accesses
+= render partial: 'admin/accesses/table', locals: { accesses: @accesses }
+= safe_paginate @accesses

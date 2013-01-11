@@ -1,4 +1,4 @@
-- title 'Регистрация'
+- title t('.title', default: 'Sign Up')
 
 = simple_form_for @user, html: { class: 'form-horizontal' } do |f|
   = render partial: 'users/form_fields', locals: { f: f }

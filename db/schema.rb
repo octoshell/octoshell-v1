@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121127131815) do
+ActiveRecord::Schema.define(:version => 20130110091724) do
+
+  create_table "abilities", :force => true do |t|
+    t.string   "action"
+    t.string   "subject"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.integer  "group_id"
+    t.boolean  "available",  :default => false
+  end
+
+  add_index "abilities", ["group_id", "subject", "action"], :name => "index_abilities_on_group_id_and_subject_and_action", :unique => true
+  add_index "abilities", ["group_id"], :name => "index_abilities_on_group_id"
 
   create_table "accesses", :force => true do |t|
     t.integer  "credential_id"
@@ -161,6 +173,23 @@ ActiveRecord::Schema.define(:version => 20121127131815) do
     t.datetime "updated_at",                :null => false
   end
 
+  create_table "group_abilities", :force => true do |t|
+    t.integer "group_id"
+    t.integer "ability_id"
+    t.boolean "available"
+  end
+
+  add_index "group_abilities", ["ability_id"], :name => "index_group_abilities_on_ability_id"
+  add_index "group_abilities", ["group_id", "ability_id"], :name => "index_group_abilities_on_group_id_and_ability_id", :unique => true
+  add_index "group_abilities", ["group_id"], :name => "index_group_abilities_on_group_id"
+
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.boolean  "system"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "history_items", :force => true do |t|
     t.integer  "user_id"
     t.text     "data"
@@ -297,6 +326,112 @@ ActiveRecord::Schema.define(:version => 20121127131815) do
 
   add_index "replies", ["ticket_id"], :name => "index_replies_on_ticket_id"
   add_index "replies", ["user_id"], :name => "index_replies_on_user_id"
+
+  create_table "report_organizations", :force => true do |t|
+    t.integer "report_id"
+    t.string  "name"
+    t.string  "subdivision"
+    t.string  "position"
+    t.string  "organization_type"
+  end
+
+  create_table "report_personal_data", :force => true do |t|
+    t.integer "report_id"
+    t.string  "last_name"
+    t.string  "first_name"
+    t.string  "middle_name"
+    t.string  "email"
+    t.string  "phone"
+    t.string  "confirm_data"
+  end
+
+  create_table "report_personal_surveys", :force => true do |t|
+    t.integer "report_id"
+    t.text    "software"
+    t.text    "technologies"
+    t.text    "compilators"
+    t.text    "learning"
+    t.text    "wanna_be_speaker"
+    t.text    "request_technology"
+    t.text    "other_technology"
+    t.text    "precision"
+    t.text    "other_compilator"
+    t.text    "other_software"
+    t.text    "other_learning"
+    t.text    "computing"
+    t.text    "comment"
+  end
+
+  create_table "report_projects", :force => true do |t|
+    t.integer  "report_id"
+    t.text     "ru_title"
+    t.text     "ru_author"
+    t.text     "ru_email"
+    t.text     "ru_driver"
+    t.text     "ru_strategy"
+    t.text     "ru_objective"
+    t.text     "ru_impact"
+    t.text     "ru_usage"
+    t.text     "en_title"
+    t.text     "en_author"
+    t.text     "en_email"
+    t.text     "en_driver"
+    t.text     "en_strategy"
+    t.text     "en_objective"
+    t.text     "en_impact"
+    t.text     "en_usage"
+    t.text     "directions_of_science"
+    t.text     "critical_technologies"
+    t.text     "areas"
+    t.text     "computing_systems"
+    t.text     "lomonosov_logins"
+    t.text     "chebyshev_logins"
+    t.string   "materials_file_name"
+    t.string   "materials_content_type"
+    t.integer  "materials_file_size"
+    t.datetime "materials_updated_at"
+    t.integer  "books_count",                               :default => 0
+    t.integer  "vacs_count",                                :default => 0
+    t.integer  "lectures_count",                            :default => 0
+    t.integer  "international_conferences_count",           :default => 0
+    t.integer  "russian_conferences_count",                 :default => 0
+    t.integer  "doctors_dissertations_count",               :default => 0
+    t.integer  "candidates_dissertations_count",            :default => 0
+    t.integer  "students_count",                            :default => 0
+    t.integer  "graduates_count",                           :default => 0
+    t.integer  "your_students_count",                       :default => 0
+    t.integer  "rffi_grants_count",                         :default => 0
+    t.integer  "ministry_of_education_grants_count",        :default => 0
+    t.integer  "rosnano_grants_count",                      :default => 0
+    t.integer  "ministry_of_communications_grants_count",   :default => 0
+    t.integer  "ministry_of_defence_grants_count",          :default => 0
+    t.integer  "ran_grants_count",                          :default => 0
+    t.integer  "other_russian_grants_count",                :default => 0
+    t.integer  "other_intenational_grants_count",           :default => 0
+    t.text     "award_names"
+    t.integer  "lomonosov_intel_hours",                     :default => 0
+    t.integer  "lomonosov_nvidia_hours",                    :default => 0
+    t.integer  "chebyshev_hours",                           :default => 0
+    t.integer  "lomonosov_size",                            :default => 0
+    t.integer  "chebyshev_size",                            :default => 0
+    t.text     "exclusive_usage"
+    t.text     "strict_schedule"
+    t.boolean  "wanna_speak"
+    t.text     "request_comment"
+    t.integer  "international_conferences_in_russia_count", :default => 0
+    t.integer  "awards_count",                              :default => 0
+  end
+
+  create_table "reports", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.integer  "illustrations_points"
+    t.integer  "statement_points"
+    t.integer  "summary_points"
+    t.string   "state"
+  end
 
   create_table "request_properties", :force => true do |t|
     t.string  "name"
@@ -490,6 +625,15 @@ ActiveRecord::Schema.define(:version => 20121127131815) do
   add_index "tickets", ["state"], :name => "index_tickets_on_state"
   add_index "tickets", ["surety_id"], :name => "index_tickets_on_surety_id"
   add_index "tickets", ["user_id"], :name => "index_tickets_on_user_id"
+
+  create_table "user_groups", :force => true do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+  end
+
+  add_index "user_groups", ["group_id"], :name => "index_user_groups_on_group_id"
+  add_index "user_groups", ["user_id", "group_id"], :name => "index_user_groups_on_user_id_and_group_id", :unique => true
+  add_index "user_groups", ["user_id"], :name => "index_user_groups_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email"
