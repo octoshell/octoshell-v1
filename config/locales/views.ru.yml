@@ -116,6 +116,8 @@ ru:
     table:
       no_requests: Нет заявок
       open: открыть
+    show:
+      title: "Заявка #%{id}"
   profiles:
     show:
       title: Профиль
