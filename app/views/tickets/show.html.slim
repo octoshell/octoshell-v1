@@ -1,4 +1,4 @@
-- title t('.title', default: "Ticket ##{@ticket.id}")
+- title t('.title', default: "Ticket #%{id}", id: @ticket.id)
 
 div class="link-actions"
   = link_to t('.edit', default: 'Edit'), [:edit, @ticket], class: 'btn'
@@ -50,8 +50,6 @@ h2 = t('.conversation', default: 'Conversation')
       div class="span8"
         blockquote class="#{reply.user_id == reply.ticket.user_id ? 'admin' : 'user'}"
           p = reply.message
-          small class="reply"
-            = smart_link_to reply
 - else
   p = t('.no_replies', default: 'There are no replies')
 

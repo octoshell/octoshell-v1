@@ -171,6 +171,13 @@ ru:
       new_request: Новая заявка
     table:
       no_tickets: Нет заявок
+    show:
+      title: "Заявка #%{id}"
+      conversation: Переписка
+      no_replies: Нет сообщений
+      edit: Редактировать
+    edit:
+      title: Редактирование
   sessions:
     new:
       title: Авторизация

@@ -33,4 +33,8 @@ private
   def notify_user
     Mailer.new_ticket_answer(ticket).deliver
   end
+
+  def link_name
+    I18n.t('.reply')
+  end
 end
