@@ -23,7 +23,7 @@ class ReportsController < ApplicationController
     @report = get_report(params[:report_id])
     @report.attributes = params[:report]
     if @report.valid? && (@report.submitted? || @report.submit!)
-      redirect_to root_path, notice: t('.report_submitted')
+      redirect_to projects_path, notice: t('.report_submitted')
     else
       flash.now[:alert] = t('.cant_submit_report_because_of_errors')
       render :edit

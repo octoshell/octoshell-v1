@@ -61,6 +61,8 @@ ru:
       report: Отчет по проектам
       you_have_x_days_for_submitting_report:
         html: "До конца приема отчетов осталось дней: <strong>%{days}</strong>."
+      your_report_is_submitted:
+        html: "Вы отправили ваш отчет. Нужна помощь? <a href='/tickets/new'>Оставьте заявку</a>"
     table:
       no_projects: Нет проектов
       invite: Пригласить
