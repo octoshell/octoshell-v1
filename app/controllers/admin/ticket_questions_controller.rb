@@ -33,7 +33,7 @@ class Admin::TicketQuestionsController < Admin::ApplicationController
   def update
     @ticket_question = find_ticket_question(params[:id])
     if @ticket_question.update_attributes(params[:ticket_question], as: :admin)
-      redirect_to @ticket_question
+      redirect_to [:admin, @ticket_question]
     else
       render :edit
     end
@@ -42,7 +42,7 @@ class Admin::TicketQuestionsController < Admin::ApplicationController
   def close
     @ticket_question = find_ticket_question(params[:ticket_question_id])
     if @ticket_question.close
-      redirect_to @ticket_question
+      redirect_to [:admin, @ticket_question]
     else
       render :show
     end
@@ -55,7 +55,7 @@ private
   end
   
   def redirect_to_index
-    redirect_to ticket_questions_path
+    redirect_to admin_ticket_questions_path
   end
   
   def setup_default_filter

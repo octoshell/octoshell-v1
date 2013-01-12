@@ -10,6 +10,6 @@
         td = ticket_template.id
         td = smart_link_to ticket_template
         td = ticket_template.human_state_name
-        td = link_to 'редактировать', [:edit, ticket_template]
+        td = link_to 'редактировать', [:edit, :admin, ticket_template]
 - else
   p Нет шаблонов ответов.
