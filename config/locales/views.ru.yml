@@ -19,6 +19,49 @@ ru:
         title: Редактирование
       form:
         abilities: Права
+    sureties:
+      table:
+        no_sureties: Нет поручительств
+    users:
+      show:
+        become_as_user: Зайти под пользователем
+        edit: Редактировать
+        history: История
+        versions: Версии
+        confirm_close: "Вы уверены что хотите закрыть пользователя? Это закроет все его проекты (созданные им), поручительства, места работы, тикеты и ключи доступа."
+        sureties: Поручительства
+        memberships: Места работы
+        projects: Проекты
+        accounts: Доступы к проектам
+        requests: Заявки
+        credentials: Публичные ключи
+        all_credentials: "Все публичные ключи (%{count})"
+    credentials:
+      table:
+        no_credentials: Нет публичных ключей
+    projects:
+      index:
+        title: Проекты
+    clusters:
+      index:
+        title: Кластеры
+        new_cluster: Новый кластер
+      new:
+        title: Новый кластер
+      edit:
+        title: Редактирование
+        additional_fields: Дополнительные поля
+        confirm_destroy: Вы уверены?
+        no_cluster_fields: Нет дополнительных полей
+        new_cluster_field: Новое поле
+        name: Название
+        create: Создать
+    tickets:
+      menu:
+        templates: Шаблоны
+        tags: Теги
+        questions: Вопросы
+        fields: Поля
   credentials:
     new:
       title: Новый публичный ключ
@@ -29,6 +72,13 @@ ru:
       title: Новое место работы
     form:
       add_organization: Добавить организацию
+    show:
+      title: Место работы
+      edit: Редактировать
+      positions: Позиции
+      no_positions: Нет позиций
+    edit:
+      title: Редактирование
   layouts:
     application:
       help: Справка
@@ -159,6 +209,8 @@ ru:
       sureties: Поручительства
       credentials: Публичные ключи
       new_credential: Добавить публичный ключ
+    edit:
+      title: Редактирование
   shared:
     admin_menu:
       accesses: Публичные ключи на кластере
@@ -181,6 +233,7 @@ ru:
       sureties: Поручительства
       tasks: Процедуры
       users: Пользователи
+      tickets: "Поддержка (%{count})"
     dashboard_menu:
       clusters: Кластеры
       pages: Справка
@@ -210,6 +263,12 @@ ru:
       edit: Редактировать
     edit:
       title: Редактирование
+  users:
+    new:
+      title: Регистрация
+    form_fields:
+      minimun_password_length: Минимум 6 символов
+      additional_emails: Дополнительные Email для нотификаций
   sessions:
     new:
       title: Авторизация

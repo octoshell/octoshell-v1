@@ -1,4 +1,4 @@
-class TicketFieldsController < Admin::ApplicationController
+class Admin::TicketFieldsController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
@@ -15,7 +15,7 @@ class TicketFieldsController < Admin::ApplicationController
   end
   
   def create
-    @ticket_field = TicketField.new(params[:ticket_field], as_role)
+    @ticket_field = TicketField.new(params[:ticket_field], as: :admin)
     if @ticket_field.save
       redirect_to @ticket_field
     else
@@ -29,7 +29,7 @@ class TicketFieldsController < Admin::ApplicationController
   
   def update
     @ticket_field = find_ticket_field(params[:id])
-    if @ticket_field.update_attributes(params[:ticket_field], as_role)
+    if @ticket_field.update_attributes(params[:ticket_field], as: :admin)
       redirect_to @ticket_field
     else
       render :edit

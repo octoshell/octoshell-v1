@@ -11,11 +11,11 @@ class Admin::TicketTemplatesController < Admin::ApplicationController
   end
   
   def new
-    @ticket_template = TicketTemplate.new(params[:ticket_template], as_role)
+    @ticket_template = TicketTemplate.new(params[:ticket_template], as: :admin)
   end
   
   def create
-    @ticket_template = TicketTemplate.new(params[:ticket_template], as_role)
+    @ticket_template = TicketTemplate.new(params[:ticket_template], as: :admin)
     if @ticket_template.save
       redirect_to @ticket_template
     else
@@ -29,7 +29,7 @@ class Admin::TicketTemplatesController < Admin::ApplicationController
   
   def update
     @ticket_template = find_ticket_template(params[:id])
-    if @ticket_template.update_attributes(params[:ticket_template], as_role)
+    if @ticket_template.update_attributes(params[:ticket_template], as: :admin)
       redirect_to @ticket_template
     else
       render :new

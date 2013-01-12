@@ -90,6 +90,15 @@ MSU::Application.routes.draw do
   # fix for bugged zip uploading
   # post '/reports/:id' => 'reports#updat
 
+  resources :tickets, only: [:new, :create, :index, :show, :edit, :update] do
+    post :continue, on: :collection
+    put :close
+    put :resolve
+  end
+
+  # replies
+  resources :replies, only: :create
+
   namespace :admin do
     # credentials
     resources :credentials, only: :destroy
@@ -223,49 +232,43 @@ MSU::Application.routes.draw do
     
     # direction of sciences
     resources :direction_of_sciences, only: [:index, :new, :create, :edit, :update, :destroy], path: 'directions_of_science'
-  end
-  
-  # tickets
-  resources :tickets, only: [:new, :create, :index, :show, :edit, :update] do
-    collection do
-      get :closed
-      post :continue
+
+    # ticket templates
+    resources :ticket_templates, except: :destroy do
+      put :close
+      resources :versions, only: [:index, :show], resource: 'TicketTemplate'
     end
-    get :tag_relations_form
-    put :close
-    put :resolve
-    resources :versions, only: [:index, :show], resource: 'Ticket'
-  end
-  
-  # ticket templates
-  resources :ticket_templates, except: :destroy do
-    get :closed, on: :collection
-    put :close
-    resources :versions, only: [:index, :show], resource: 'TicketTemplate'
-  end
-  
-  # replies
-  resources :replies, only: :create do
-    resources :versions, only: [:index, :show], resource: 'Reply'
-  end
-  
-  # ticket questions
-  resources :ticket_questions, except: :destroy do
-    put :close
-    resources :versions, only: [:index, :show], resource: 'TicketQuestion'
-  end
-  
-  # ticket fields
-  resources :ticket_fields, except: [:destroy] do
-    put :close
-    resources :versions, only: [:index, :show], resource: 'TicketField'
-  end
-  
-  # ticket tags
-  resources :ticket_tags, except: :destroy do
-    put :merge
-    put :close
-    resources :versions, only: [:index, :show], resource: 'TicketTag'
+
+    # tickets
+    resources :tickets, only: [:index, :show, :edit, :update] do
+      get :tag_relations_form
+      put :close
+      resources :versions, only: [:index, :show], resource: 'Ticket'
+    end
+
+    # replies
+    resources :replies, only: :create do
+      resources :versions, only: [:index, :show], resource: 'Reply'
+    end
+
+    # ticket questions
+    resources :ticket_questions, except: :destroy do
+      put :close
+      resources :versions, only: [:index, :show], resource: 'TicketQuestion'
+    end
+    
+    # ticket fields
+    resources :ticket_fields, except: [:destroy] do
+      put :close
+      resources :versions, only: [:index, :show], resource: 'TicketField'
+    end
+    
+    # ticket tags
+    resources :ticket_tags, except: :destroy do
+      put :merge
+      put :close
+      resources :versions, only: [:index, :show], resource: 'TicketTag'
+    end
   end
 
   root to: 'application#dashboard'

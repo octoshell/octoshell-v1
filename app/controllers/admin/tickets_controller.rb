@@ -4,21 +4,8 @@ class Admin::TicketsController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
-    if admin?
-      @search = Ticket.search(params[:search])
-      @tickets = show_all? ? @search.relation.uniq : @search.relation.uniq.page(params[:page])
-    else
-      @search = current_user.tickets.search(params[:search])
-      @tickets = @search.relation.uniq.page(params[:page])
-    end
-  end
-  
-  def closed
-    if admin?
-      @tickets = Ticket.closed
-    else
-      @tickets = current_user.tickets.closed
-    end
+    @search = Ticket.search(params[:search])
+    @tickets = show_all? ? @search.relation.uniq : @search.relation.uniq.page(params[:page])
   end
     
   def show
@@ -28,25 +15,12 @@ class Admin::TicketsController < Admin::ApplicationController
       reply.user = current_user
     end
     @ticket_tag = TicketTag.new
-    authorize! :show, @ticket
   end
   
   def close
     @ticket = Ticket.find(params[:ticket_id])
-    authorize! :close, @ticket
     if @ticket.close
       @ticket.user.track! :close_ticket, @ticket, current_user
-      redirect_to @ticket
-    else
-      redirect_to @ticket, alert: @ticket.errors.full_messages.join(', ')
-    end
-  end
-  
-  def resolve
-    @ticket = Ticket.find(params[:ticket_id])
-    authorize! :resolve, @ticket
-    if @ticket.resolve
-      @ticket.user.track! :resolve_ticket, @ticket, current_user
       redirect_to @ticket
     else
       redirect_to @ticket, alert: @ticket.errors.full_messages.join(', ')
@@ -59,7 +33,7 @@ class Admin::TicketsController < Admin::ApplicationController
   
   def update
     @ticket = Ticket.find(params[:id])
-    if @ticket.update_attributes(params[:ticket], as_role)
+    if @ticket.update_attributes(params[:ticket], as: :admin)
       @ticket.user.track! :update_ticket, @ticket, current_user
       redirect_to @ticket
     else
@@ -75,11 +49,8 @@ class Admin::TicketsController < Admin::ApplicationController
 private
 
   def setup_default_filter
-    states = admin? ? ['active'] : ['active', 'answered', 'resolved']
-    params[:search] ||= { state_in: states }
+    params[:search] ||= { state_in: ['active'] }
     params[:meta_sort] ||= 'id.asc'
-    if admin?
-      params[:search][:ticket_tag_relations_ticket_tag_name_in] ||= TicketTag.active.pluck(:name)
-    end
+    params[:search][:ticket_tag_relations_ticket_tag_name_in] ||= TicketTag.active.pluck(:name)
   end
 end

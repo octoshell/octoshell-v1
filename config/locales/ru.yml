@@ -938,7 +938,7 @@ ru:
   cant_submit_report_because_of_errors: Отчет содержит ошибки. Невозможно отправить на рассмотрение
   report_submitted: Отчет отправлен на рассмотрение
   reports_draft_saved: Черновик отчета сохранен
-  open: Открыть
+  open: открыть
   reply: Ответ
   user_invited: "Пользователь %{name} приглашен в проект"
   surety_created: "Поручительство создано"

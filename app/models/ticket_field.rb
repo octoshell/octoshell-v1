@@ -28,6 +28,10 @@ class TicketField < ActiveRecord::Base
   def hint
     self[:hint].blank? ? nil : self[:hint]
   end
+
+  def link_name
+    name
+  end
   
 private
   

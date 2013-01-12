@@ -199,6 +199,6 @@ class Surety < ActiveRecord::Base
   end
 
   def link_name
-    I18n.t('.link_name', default: 'Open')
+    I18n.t('.open', default: 'Open')
   end
 end

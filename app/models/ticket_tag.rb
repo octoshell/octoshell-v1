@@ -37,6 +37,10 @@ class TicketTag < ActiveRecord::Base
       tag.destroy
     end
   end
+
+  def link_name
+    name
+  end
   
 private
   

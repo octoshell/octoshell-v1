@@ -15,7 +15,7 @@ class Admin::TicketTagsController < Admin::ApplicationController
   end
   
   def create
-    @ticket_tag = TicketTag.new(params[:ticket_tag], as_role)
+    @ticket_tag = TicketTag.new(params[:ticket_tag], as: :admin)
     if @ticket_tag.save
       redirect_to @ticket_tag
     else
@@ -29,7 +29,7 @@ class Admin::TicketTagsController < Admin::ApplicationController
   
   def update
     @ticket_tag = find_ticket_tag(params[:id])
-    if @ticket_tag.update_attributes(params[:ticket_tag], as_role)
+    if @ticket_tag.update_attributes(params[:ticket_tag], as: :admin)
       redirect_to @ticket_tag
     else
       render :edit

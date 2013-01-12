@@ -11,11 +11,11 @@ class Admin::TicketQuestionsController < Admin::ApplicationController
   end
   
   def new
-    @ticket_question = TicketQuestion.new(params[:ticket_question], as_role)
+    @ticket_question = TicketQuestion.new(params[:ticket_question], as: :admin)
   end
   
   def create
-    @ticket_question = TicketQuestion.new(params[:ticket_question], as_role)
+    @ticket_question = TicketQuestion.new(params[:ticket_question], as: :admin)
     if @ticket_question.save
       redirect_to @ticket_question
     else
@@ -29,7 +29,7 @@ class Admin::TicketQuestionsController < Admin::ApplicationController
   
   def update
     @ticket_question = find_ticket_question(params[:id])
-    if @ticket_question.update_attributes(params[:ticket_question], as_role)
+    if @ticket_question.update_attributes(params[:ticket_question], as: :admin)
       redirect_to @ticket_question
     else
       render :edit

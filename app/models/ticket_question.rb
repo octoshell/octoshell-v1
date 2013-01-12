@@ -76,6 +76,10 @@ class TicketQuestion < ActiveRecord::Base
     true
   end
 
+  def link_name
+    question
+  end
+
 private
   
   def create_ticket_relations

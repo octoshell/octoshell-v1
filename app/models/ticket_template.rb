@@ -18,4 +18,8 @@ class TicketTemplate < ActiveRecord::Base
   
   define_defaults_events :close
   define_state_machine_scopes
+
+  def link_name
+    subject
+  end
 end

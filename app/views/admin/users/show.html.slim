@@ -1,14 +1,14 @@
 div class="link-actions"
-  = link_to 'Зайти под пользователем', become_session_path(user_id: @user.id), class: 'btn btn-success', method: :put
+  = link_to t('.become_as_user'), become_session_path(user_id: @user.id), class: 'btn btn-success', method: :put
   = " "
-  = link_to 'Редактировать', [:edit, :admin, @user], class: 'btn'
+  = link_to t('.edit'), [:edit, :admin, @user], class: 'btn'
   = " "
-  = link_to 'История', [:admin, @user, :history], class: 'btn'
+  = link_to t('.history'), [:admin, @user, :history], class: 'btn'
   = " "
-  = link_to 'Версии', [:admin, @user, :versions], class: 'btn'
+  = link_to t('.versions'), [:admin, @user, :versions], class: 'btn'
   - if @user.can__close?
     = " "
-    = link_to User.human_state_event_name(:_close), [:admin, @user, :close], class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены что хотите закрыть пользователя? Это закроет все его проекты (созданные им), поручительства, места работы, тикеты и ключи доступа.' }
+    = link_to User.human_state_event_name(:_close), [:admin, @user, :close], class: 'btn btn-danger', method: :put, data: { confirm: t('.confirm_close') }
 
 table class="table table-bordered"
   tr
@@ -37,24 +37,24 @@ div class="row"
 
     - if @user == current_user
       p
-        strong = link_to 'редактировать', edit_profile_path
+        strong = link_to t('.edit'), edit_profile_path
 
-h3 Поручительства
+h3 = t('.sureties')
 = render partial: 'admin/sureties/table', locals: { sureties: @user.sureties }
 
-h3 Места работы
+h3 = t('.memberships')
 = render partial: 'admin/memberships/table', locals: { memberships: @user.memberships }
 
-h3 Проекты
+h3 = t('.projects')
 = render partial: 'admin/projects/table', locals: { projects: @user.projects.where(accounts: { state: 'active' }) }
 
-h3 Доступы к проектам
+h3 = t('.accounts')
 = render partial: 'admin/accounts/table', locals: { accounts: @user.accounts.non_closed }
 
-h3 Заявки
+h3 = t('.requests')
 = render partial: 'admin/requests/table', locals: { requests: @user.requests }
 
-h3 Публичные ключи
+h3 = t('.credentials')
 
 = render partial: 'admin/credentials/table', locals: { credentials: @user.credentials.active }
-p = link_to "Все публичные ключи (#{@user.credentials.count})", credentials_path(search: { state_in: Credential.state_names, user_id_eq: @user.id })
+p = link_to t('.all_credentials', count: @user.credentials.count), credentials_path(search: { state_in: Credential.state_names, user_id_eq: @user.id })
