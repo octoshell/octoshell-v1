@@ -15,21 +15,21 @@ class Admin::TasksController < Admin::ApplicationController
   def retry
     @task = Task.find(params[:task_id])
     @task.retry
-    redirect_to @task
+    redirect_to [:admin, @task]
   end
   
   def resolve
     @task = Task.find(params[:task_id])
     @task.resolve
-    redirect_to @task
+    redirect_to [:admin, @task]
   end
   
   def perform_callbacks
     @task = Task.find(params[:task_id])
     if @task.perform_callbacks!
-      redirect_to @task
+      redirect_to [:admin, @task]
     else
-      redirect_to @task, alert: @task.errors.full_messages.join("\n")
+      redirect_to [:admin, @task], alert: @task.errors.full_messages.join("\n")
     end
   end
   
