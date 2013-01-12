@@ -107,4 +107,8 @@ private
     :dashboard
   end
   helper_method :namespace
+
+  def subnamespace
+  end
+  helper_method :subnamespace
 end

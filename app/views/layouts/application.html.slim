@@ -40,6 +40,8 @@ html
           = content_tag :div, message, class: "alert #{context}"
         - if logged_in? && current_user.project_steps.any?
           = render partial: 'shared/steps', locals: { steps: current_user.project_steps, title: t('.start_steps_title', default: 'In order to get started you need to:') }
+        - if content_for?(:submenu)
+          = yield(:submenu)
         div class="relative"
           div class="page-header group"
             h1 class="span6" = yield :title

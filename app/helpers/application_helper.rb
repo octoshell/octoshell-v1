@@ -8,8 +8,9 @@ module ApplicationHelper
     "<!-- version: #{MSU::VERSION} -->".html_safe
   end
   
-  def active_menu?(_namespace)
-    namespace == _namespace ? 'active' : ''
+  def active_menu?(_namespace, submenu = false)
+    n = submenu ? subnamespace :  namespace
+    _namespace == n ? 'active' : ''
   end
   
   def submenu_item(controller_name, link)

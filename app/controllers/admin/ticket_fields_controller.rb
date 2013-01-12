@@ -1,5 +1,8 @@
 class Admin::TicketFieldsController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
+  before_filter do
+    params[:controller] = :'admin/tickets'
+  end
   
   def index
     @search = TicketField.search(params[:search])
@@ -54,5 +57,9 @@ private
   
   def setup_default_filter
     params[:search] ||= { state_in: ['active'] }
+  end
+
+  def subnamespace
+    :ticket_fields
   end
 end
