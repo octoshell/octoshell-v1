@@ -91,6 +91,7 @@ ru:
       support: Поддержка
       title: Оповещения
       sureties: Поручительства
+      no_notifications: Нет оповещений
   project_joiners:
     new:
       code: Код приглашения

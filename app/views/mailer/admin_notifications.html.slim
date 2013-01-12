@@ -2,13 +2,13 @@
 
 ul style="margin: 0 20px 0 0"
   - @requests.each do |request|
-    li style="margin: 0 0 5" = link_to %(Заявка ##{request.id} в состоянии "#{request.human_state_name}"), request_url(request)
+    li style="margin: 0 0 5" = link_to %(Заявка ##{request.id} в состоянии "#{request.human_state_name}"), admin_request_url(request)
   - @tasks.each do |task|
-    li = link_to %(Процедура ##{task.id} в состоянии "#{task.human_state_name}"), task_url(task)
+    li = link_to %(Процедура ##{task.id} в состоянии "#{task.human_state_name}"), admin_task_url(task)
   - @sureties.each do |surety|
-    li = link_to %(Поручительство ##{surety.id} в состоянии "#{surety.human_state_name}"), surety_url(surety)
+    li = link_to %(Поручительство ##{surety.id} в состоянии "#{surety.human_state_name}"), admin_surety_url(surety)
   - @tickets.each do |ticket|
-    li = link_to %(Тикет ##{ticket.id} в состоянии "#{ticket.human_state_name}"), ticket_url(ticket)
+    li = link_to %(Тикет ##{ticket.id} в состоянии "#{ticket.human_state_name}"), admin_ticket_url(ticket)
 
 p = link_to "Перейти в Оповещения", notifications_url
   
