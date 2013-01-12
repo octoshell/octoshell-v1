@@ -24,13 +24,15 @@ describe Project do
     end
     
     context 'with not allowed organization' do
-      let!(:organization) { create(:organization) }
+      pending
       
-      before do
-        project.organization = organization
-      end
+      # let!(:organization) { create(:organization) }
       
-      it { should have(1).errors_on(:organization) }
+      # before do
+      #   project.organization = organization
+      # end
+      
+      # it { should have(1).errors_on(:organization) }
     end
   end
 
