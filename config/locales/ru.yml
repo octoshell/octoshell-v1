@@ -572,7 +572,8 @@ ru:
         cluster_id: Кластер
         project: Проект
         project_id: Проект
-        hours: Процессоро-часы
+        cpu_hours: CPU-часы
+        gpu_hours: GPU-часы
         created_at: Создана
         state: Статус
         size: 'Размер, GB'
@@ -939,3 +940,5 @@ ru:
   reports_draft_saved: Черновик отчета сохранен
   open: Открыть
   reply: Ответ
+  user_invited: "Пользователь %{name} приглашен в проект"
+  surety_created: "Поручительство создано"

@@ -81,6 +81,11 @@ ru:
       support: Поддержка
       no_sureties: Нет поручительств
       sureties: Поручительства
+      invites: Приглашения
+      confirm_close_account: Вы уверены?
+      no_accounts: Нет доступов
+      no_requests: Нет заявок
+      nothing: Нет
     invite:
       title: Пригласить в проект
       user_has_a_surety: У пользователя есть поручительство
@@ -141,6 +146,10 @@ ru:
       open: открыть
     show:
       title: "Заявка #%{id}"
+    new:
+      title: Новая заявка
+    form:
+      size_hint: Более 50ти обговариваются отдельно
   profiles:
     show:
       title: Профиль
