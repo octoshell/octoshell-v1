@@ -156,6 +156,8 @@ class Report::Project < ActiveRecord::Base
       end
       z.close
     end
+  rescue => e
+    errors.add(:materials, :invalid_archive)
   end
 
   def logins_validator

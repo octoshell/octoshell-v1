@@ -423,6 +423,7 @@ ru:
           attributes:
             materials:
               no_image: В архиве нет изображений
+              invalid_archive: Невозможно открыть архив
             lomonosov_logins:
               not_found: "Логин %{login} не найден"
             chebyshev_logins:
