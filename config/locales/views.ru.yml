@@ -170,7 +170,7 @@ ru:
       logins_hint: "Через запятую"
       materials: Материалы
       materials_hint: "Aрхив zip, не более 50Мб, в архиве - минимум два файла, один из которых с расширением графического типа файла"
-      project_survey: Наукометрия
+      project_survey: Количественные показатели
       publications: Публикации
       conferences: Конференции
       dissertations: Диссертации
