@@ -11,7 +11,7 @@ module AdminHelper
   def link_to_relation(record, attribute, value)
     record.send("#{attribute}=", value)
     relation = attribute.to_s[/(.*)_id$/, 1]
-    if respond_to?(link_method) && record.respond_to?(relation)
+    if respond_to?(attribute) && record.respond_to?(relation)
       link = smart_link_to record.send(relation)
       record.send("#{attribute}=", record.send("#{attribute}_was"))
       link

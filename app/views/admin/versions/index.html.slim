@@ -20,8 +20,16 @@ table class="table table-bordered"
             - changes.each do |attribute, values|
               tr
                 th = model.human_attribute_name(attribute)
-                td = smart_link_to values.first
-                td = smart_link_to values.last
+                td
+                  - if values.first.inherited_by?(ActiveRecord::Base)
+                    = smart_link_to values.first
+                  - else
+                    = values.first
+                td
+                  - if values.last.inherited_by?(ActiveRecord::Base)
+                    = smart_link_to values.last
+                  - else
+                    = values.last
           div class="toggle-box"
             div class="toggle" Показать объект
             div class="object"
@@ -29,5 +37,5 @@ table class="table table-bordered"
                 - record.attributes.each do |attribute, value|
                   tr
                     th = model.human_attribute_name(attribute)
-                    td = smart_link_to value)
+                    td = link_to_attribute(record, attribute, value)
       td = version.created_at.to_formatted_s(:long)
