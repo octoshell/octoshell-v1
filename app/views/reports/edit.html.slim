@@ -111,7 +111,7 @@
 
       legend
         h5 = Report::Project.human_attribute_name(:areas)
-      = f.input :areas, collection: Report::Project::AREAS, label: false
+      = f.input :areas, as: :check_boxes, collection: Report::Project::AREAS, label: false, wrapper_html: { 'data-max-values' => 2 }
       legend
         h5 = Report::Project.human_attribute_name(:computing_systems)
       = f.input :computing_systems, as: :check_boxes, collection: Report::Project::COMPUTING_SYSTEMS, label: false

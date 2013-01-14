@@ -103,7 +103,7 @@ class Report::Project < ActiveRecord::Base
   
   has_attached_file :materials,
     content_type: ['application/zip', 'application/x-zip-compressed'],
-    max_size: 50.megabytes
+    max_size: 20.megabytes
 
   with_options on: :update do |m|
     m.validates :directions_of_science, length: { minimum: 1, maximum: 2, message: 'Нужно выбрать хотя бы %{count}' }
@@ -116,7 +116,7 @@ class Report::Project < ActiveRecord::Base
     
     m.validates :critical_technologies, length: { minimum: 1, maximum: 3, message: 'Нужно выбрать хотя бы %{count}' }
 
-    m.validates :areas, presence: true
+    m.validates :areas, length: { minimum: 1, maximum: 2, message: 'Нужно выбрать хотя бы %{count}' }
     
     m.validates :computing_systems, length: { minimum: 1, message: 'Нужно выбрать хотя бы %{count}' }
     
@@ -126,7 +126,7 @@ class Report::Project < ActiveRecord::Base
 
     m.validates :ru_title, :ru_author, :ru_driver, :ru_strategy,
       :ru_objective, :ru_impact, :ru_usage,
-      format: { with: /\A[а-яё№\s\d[:punct:]]+\z/i, message: "Должно быть на русском" }
+      format: { with: /[а-яё№\s\d[:punct:]]+/i, message: "Должно быть на русском" }
     m.validates :en_title, :en_author, :en_driver, :en_strategy,
       :en_objective, :en_impact, :en_usage,
       format: { with: /\A[a-z\s\d[:punct:]]+\z/i, message: "Должно быть на английском" }
@@ -170,7 +170,7 @@ class Report::Project < ActiveRecord::Base
     end
   end
 
-  %w(critical_technologies directions_of_science computing_systems strict_schedule).each do |attr|
+  %w(critical_technologies directions_of_science computing_systems strict_schedule areas).each do |attr|
     define_method "#{attr}=" do |values|
       self[attr] = values.find_all(&:present?)
     end
@@ -208,4 +208,5 @@ class Report::Project < ActiveRecord::Base
   serialize :directions_of_science, Array
   serialize :critical_technologies, Array
   serialize :computing_systems, Array
+  serialize :areas, Array
 end
