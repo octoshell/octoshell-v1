@@ -1,13 +1,14 @@
 - title t('.title', default: 'Reports')
 
-div style="text-align: center;"
-  p class="lead"
-    | После заполнения всего отчета вам нужно отправить его на рассмотрение.
-    br
-    | После этого действия редактирование отчета невозможно.
+- if @report.editing?
+  div style="text-align: center;"
+    p class="lead"
+      | После заполнения всего отчета вам нужно отправить его на рассмотрение.
+      br
+      | После этого действия редактирование отчета невозможно.
 
-  p class="lead"
-    = link_to "Отправить на рассмотрение", [@report, :submit], method: :put, class: 'btn btn-primary'
+    p class="lead"
+      = link_to "Отправить на рассмотрение", [@report, :submit], method: :put, class: 'btn btn-primary'
 
 
 ul class="breadcrumb"

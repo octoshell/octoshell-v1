@@ -1,4 +1,4 @@
- { class: 'form-horizontal report-form', multipart: true }, defaults: { disabled: report.submitted? } do |f|
+= simple_form_for report, url: report_projects_path(report, step: 'projects_survey'), html:  { class: 'form-horizontal report-form', multipart: true }, defaults: { disabled: report.submitted? } do |f|
 
   = f.simple_fields_for :projects do |f|
     div role="project"

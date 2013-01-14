@@ -153,6 +153,7 @@ ru:
   reports:
     edit:
       title: Отчет по проектам
+      report_submitted: Отчет на рассмотрении
     personal_form:
       personal_data: Личные данные
       organizations: Организация
@@ -180,6 +181,7 @@ ru:
       logins_hint: "Через запятую"
       materials: Материалы
       materials_hint: "Aрхив zip, не более 20Мб, в архиве - помимо текста отчета, минимум один с расширением графического типа файла (минимум одна иллюстрация)"
+      request_comment: Комментарий
     projects_survey_form:
       project_survey: Количественные показатели
       publications: Публикации
@@ -197,8 +199,6 @@ ru:
         html: 'Хотели бы Вы выступить с докладом на семинаре <a href="http://agora.guru.ru/sct" target="_blank">Суперкомпьютерные технологии в науке, образовании и промышленности</a>?'
       project:
         html: "Проект <span>%{name}</span>"
-      request_comment: Комментарий
-      report_submitted: Отчет на рассмотрении
   requests:
     index:
       new: Новая заявка
