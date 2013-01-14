@@ -23,7 +23,7 @@ class Admin::OrganizationsController < Admin::ApplicationController
     @organization = Organization.new(params[:organization], as: :admin)
     if @organization.save
       current_user.track! :create_organization, @organization, current_user
-      redirect_to admin? ? @organization : projects_path
+      redirect_to [:admin, @organization]
     else
       render :new
     end
@@ -45,7 +45,7 @@ class Admin::OrganizationsController < Admin::ApplicationController
   def update
     @organization = find_organization(params[:id])
     if @organization.update_attributes(params[:organization], as: :admin)
-      redirect_to @organization
+      redirect_to [:admin, @organization]
     else
       render :edit
     end
@@ -55,7 +55,7 @@ class Admin::OrganizationsController < Admin::ApplicationController
     @organization = find_organization(params[:organization_id])
     @duplication = find_organization(params[:organization][:merge_id])
     if @organization.merge(@duplication)
-      redirect_to @organization
+      redirect_to [:admin, @organization]
     else
       render :show
     end
@@ -64,7 +64,7 @@ class Admin::OrganizationsController < Admin::ApplicationController
   def close
     @organization = find_organization(params[:organization_id])
     @organization.close
-    redirect_to @organization
+    redirect_to [:admin, @organization]
   end
   
 private
