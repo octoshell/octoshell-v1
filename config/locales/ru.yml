@@ -559,7 +559,7 @@ ru:
         cluster_user_type: Тип Проекта на кластере
         username: Группа пользователей
         created_at: Создан
-        direction_of_science: Направление исследований
+        direction_of_sciences: Направления исследований
         critical_technologies: Критические технологии
         project_prefix: Префикс
       organization_kind:

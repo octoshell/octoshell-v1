@@ -42,6 +42,8 @@ ru:
     projects:
       index:
         title: Проекты
+      form:
+        surety: Поручительство
     clusters:
       index:
         title: Кластеры
@@ -143,6 +145,11 @@ ru:
       user_has_not_a_surety: Новое поручительство для пользователя
       add: Добавить
       invite: Пригласить
+    form:
+      surety: Поручительство
+      members: Участники
+      user: Участник
+      add_member: Добавить участника
   reports:
     edit:
       title: Отчет по проектам
