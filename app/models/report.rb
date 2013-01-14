@@ -1,8 +1,10 @@
 # coding: utf-8
 class Report < ActiveRecord::Base
+  attr_accessor :validate_part
+
   # belongs_to :project
   belongs_to :user
-  has_many :projects, dependent: :destroy, validate: true
+  has_many :projects, dependent: :destroy, order: 'report_projects.id asc'
   has_many :organizations, dependent: :destroy
   has_one :personal_data, dependent: :destroy
   has_one :personal_survey, dependent: :destroy
@@ -36,6 +38,7 @@ class Report < ActiveRecord::Base
       d.first_name  = user.first_name
       d.last_name   = user.last_name
       d.middle_name = user.middle_name
+      d.email       = user.email
     end
   end
 
@@ -69,5 +72,9 @@ class Report < ActiveRecord::Base
       end
     end
     projects.create! if projects.empty?
+  end
+
+  def completely_valid?
+    [projects, organizations, personal_data, personal_survey].all?(&:valid?)
   end
 end

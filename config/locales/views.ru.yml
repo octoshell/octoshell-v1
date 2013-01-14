@@ -153,10 +153,13 @@ ru:
   reports:
     edit:
       title: Отчет по проектам
+    personal_form:
       personal_data: Личные данные
       organizations: Организация
+    personal_survey_form:
       personal_survey: Персональный опрос
       request_technology_hint: "Названия, через запятую"
+    projects_form:
       ru_project_card: Карточка проекта (Russian)
       en_project_card: Project Card (English)
       ru_author_hint: "Cписок авторов и организаций, первым указывается руководитель проекта"
@@ -177,6 +180,7 @@ ru:
       logins_hint: "Через запятую"
       materials: Материалы
       materials_hint: "Aрхив zip, не более 20Мб, в архиве - помимо текста отчета, минимум один с расширением графического типа файла (минимум одна иллюстрация)"
+    projects_survey_form:
       project_survey: Количественные показатели
       publications: Публикации
       conferences: Конференции

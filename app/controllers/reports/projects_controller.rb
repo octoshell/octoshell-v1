@@ -3,6 +3,7 @@ class Reports::ProjectsController < ApplicationController
     @report = get_report(params[:report_id])
     @report.projects.create! if @report.editing?
     @report.attributes = params[:report]
+    @form = 'projects_form'
     render 'reports/edit'
   end
 
@@ -10,6 +11,7 @@ class Reports::ProjectsController < ApplicationController
     @report = get_report(params[:report_id])
     @report.projects.find(params[:id]).destroy  if @report.editing?
     @report.attributes = params[:reports]
+    @form = 'projects_form'
     render 'reports/edit'
   end
 

@@ -1,0 +1,21 @@
+= simple_form_for report, url: report_personal_path(report, step: 'personal'), html: { class: 'form-horizontal report-form', multipart: true }, defaults: { disabled: report.submitted? } do |f|
+  
+  legend = t('.personal_data')
+  = f.simple_fields_for :personal_data do |f|
+    = f.input :first_name
+    = f.input :last_name
+    = f.input :middle_name
+    = f.input :email
+    = f.input :phone
+
+  legend = t('.organizations')
+  = f.simple_fields_for :organizations do |f|
+    = autocomplete :organization, f, name: :organization_id, admin: false
+    = f.input :subdivision
+    = f.input :position, collection: PositionName.rffi.available_values, input_html: { class: 'chosen clearable' }
+    = f.input :other_position
+    = f.input :organization_type, as: :radio_buttons, collection: Report::Organization::TYPES
+
+  - if report.editing?
+    div class="form-actions"
+      = f.button :submit, 'Сохранить и перейти к следующему пункту'

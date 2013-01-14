@@ -1,5 +1,46 @@
 class ReportsController < ApplicationController
   before_filter :require_login
+  before_filter :setup_form
+
+   def personal
+    @report = Report.find(params[:report_id])
+    @report.validate_part = :personal
+    if @report.update_attributes(params[:report])
+      redirect_to edit_report_url(@report, step: 'survey')
+    else
+      render :edit
+    end
+  end
+
+  def survey
+    @report = Report.find(params[:report_id])
+    @report.validate_part = :survey
+    if @report.update_attributes(params[:report])
+      redirect_to edit_report_url(@report, step: 'projects')
+    else
+      render :edit
+    end
+  end
+
+  def projects
+    @report = Report.find(params[:report_id])
+    @report.validate_part = :projects
+    if @report.update_attributes(params[:report])
+      redirect_to edit_report_url(@report, step: 'projects_survey')
+    else
+      render :edit
+    end
+  end
+
+  def projects_survey
+    @report = Report.find(params[:report_id])
+    @report.validate_part = :projects_survey
+    if @report.update_attributes(params[:report])
+      redirect_to edit_report_url(@report)
+    else
+      render :edit
+    end
+  end
 
   def edit
     @report = get_report(params[:id])
@@ -7,16 +48,6 @@ class ReportsController < ApplicationController
     @report.personal_survey.valid?(:update)
     @report.organizations.each { |o| o.valid?(:update) }
     @report.projects.each { |p| p.valid?(:update) }
-  end
-
-  def update
-    @report = get_report(params[:id])
-    @report.attributes = params[:report]
-    if @report.save(validate: false)
-      redirect_to [:edit, @report], notice: t('.reports_draft_saved')
-    else
-      render :edit
-    end
   end
 
   def submit
@@ -34,5 +65,14 @@ private
   
   def get_report(id)
     current_user.reports.find(id)
+  end
+
+  def setup_form
+    @form = ({
+      'personal'        => 'personal_form',
+      'survey'          => 'personal_survey_form',
+      'projects'        => 'projects_form',
+      'projects_survey' => 'projects_survey_form'
+    }[params[:step]] || 'personal_form')
   end
 end
