@@ -20,7 +20,7 @@
 = submenu_item :'admin/project_prefixes', (link_to t('.project_prefixes', default: 'Project Prefixes'), admin_project_prefixes_path), maynot?(:manage, :project_prefixes)
 = submenu_item :'admin/groups', (link_to t('.groups', default: 'Groups'), admin_groups_path), maynot?(:manage, :groups)
 
-li class="dropdown" style="display: none;"
+li class="dropdown"
   = link_to '#', 'data-toggle' => 'dropdown' do
     = t('.more', default: 'More')
     b class="caret"

@@ -215,7 +215,7 @@ $(document).ready(function(){
     var li = $(e)
     if (!dropped && prev && (prev.position().left > li.position().left)) {
       dropped = true
-      drop.show()
+      $('li.dropdown', menu).show()
       prev.appendTo(drop)
     } 
     if (dropped) {
