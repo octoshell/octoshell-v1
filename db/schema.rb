@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130111114214) do
+ActiveRecord::Schema.define(:version => 20130114091122) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -433,6 +433,7 @@ ActiveRecord::Schema.define(:version => 20130111114214) do
     t.integer  "statement_points"
     t.integer  "summary_points"
     t.string   "state"
+    t.integer  "expert_id"
   end
 
   create_table "request_properties", :force => true do |t|

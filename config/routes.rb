@@ -269,6 +269,15 @@ MSU::Application.routes.draw do
       put :close
       resources :versions, only: [:index, :show], resource: 'TicketTag'
     end
+
+    # reports
+    resources :reports, only: :index do
+      collection do
+        get '/not_selected'
+        get '/self_selected'
+        get '/all'
+      end
+    end
   end
 
   root to: 'application#dashboard'

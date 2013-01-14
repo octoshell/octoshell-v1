@@ -8,7 +8,7 @@ class Admin::ExtendsController < Admin::ApplicationController
   end
   
   def create
-    @extend = Extend.new(params[:extend], as_role)
+    @extend = Extend.new(params[:extend], as: :admin)
     if @extend.save
       redirect_to extends_path
     else
@@ -22,7 +22,7 @@ class Admin::ExtendsController < Admin::ApplicationController
   
   def update
     @extend = Extend.find(params[:id])
-    if @extend.update_attributes(params[:extend], as_role)
+    if @extend.update_attributes(params[:extend], as: :admin)
       redirect_to extends_path
     else
       render :edit

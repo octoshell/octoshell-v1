@@ -20,7 +20,7 @@ class Admin::OrganizationsController < Admin::ApplicationController
   end
   
   def create
-    @organization = Organization.new(params[:organization], as_role)
+    @organization = Organization.new(params[:organization], as: :admin)
     if @organization.save
       current_user.track! :create_organization, @organization, current_user
       redirect_to admin? ? @organization : projects_path
@@ -44,7 +44,7 @@ class Admin::OrganizationsController < Admin::ApplicationController
 
   def update
     @organization = find_organization(params[:id])
-    if @organization.update_attributes(params[:organization], as_role)
+    if @organization.update_attributes(params[:organization], as: :admin)
       redirect_to @organization
     else
       render :edit

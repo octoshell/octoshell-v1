@@ -18,7 +18,7 @@ class Admin::PositionNamesController < Admin::ApplicationController
   end
   
   def create
-    @position_name = PositionName.new(params[:position_name], as_role)
+    @position_name = PositionName.new(params[:position_name], as: :admin)
     if @position_name.save
       redirect_to_index
     else
@@ -32,7 +32,7 @@ class Admin::PositionNamesController < Admin::ApplicationController
   
   def update
     @position_name = find_position_name(params[:id])
-    if @position_name.update_attributes(params[:position_name], as_role)
+    if @position_name.update_attributes(params[:position_name], as: :admin)
       redirect_to_index
     else
       render :edit

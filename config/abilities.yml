@@ -66,5 +66,7 @@ pages:
   - show_all
 all:
   - show_all
+reports:
+  - manage
 admin:
   - access

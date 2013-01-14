@@ -70,7 +70,7 @@ class TicketsController < ApplicationController
   
   def update
     @ticket = find_ticket(params[:id])
-    if @ticket.update_attributes(params[:ticket], as_role)
+    if @ticket.update_attributes(params[:ticket], as: :admin)
       @ticket.user.track! :update_ticket, @ticket, current_user
       redirect_to @ticket
     else

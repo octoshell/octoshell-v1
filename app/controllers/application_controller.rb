@@ -50,10 +50,6 @@ private
     false
   end
   
-  def as_role
-    admin? ? { as: :admin } : {}
-  end
-  
   def block_closed_users
     if logged_in? && current_user.closed?
       logout

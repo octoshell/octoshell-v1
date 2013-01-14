@@ -22,7 +22,7 @@ class Admin::ImportItemsController < Admin::ApplicationController
   
   def import
     @import = ImportItem.find(params[:import_item_id])
-    if @import.import params[:import_item], as_role
+    if @import.import params[:import_item], as: :admin
       redirect_to step_admin_import_items_path
     else
       render :step

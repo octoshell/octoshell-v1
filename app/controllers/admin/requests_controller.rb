@@ -15,7 +15,7 @@ class Admin::RequestsController < Admin::ApplicationController
   def update
     @request = find_request(params[:id])
     @projects = @request.allowed_projects
-    if @request.update_attributes(params[:request], as_role)
+    if @request.update_attributes(params[:request], as: :admin)
       @request.user.track! :update_request, @request, current_user
       redirect_to_request(@request)
     else

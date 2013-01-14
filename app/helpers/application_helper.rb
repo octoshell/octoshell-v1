@@ -13,9 +13,11 @@ module ApplicationHelper
     _namespace == n ? 'active' : ''
   end
   
-  def submenu_item(controller_name, link)
-    klass = current_controller?(controller_name) ? 'active' : ''
-    content_tag :li, link, class: klass
+  def submenu_item(controller_name, link, disabled = false)
+    unless disabled
+      klass = current_controller?(controller_name) ? 'active' : ''
+      content_tag :li, link, class: klass
+    end
   end
   
   def current_controller?(controller_name)

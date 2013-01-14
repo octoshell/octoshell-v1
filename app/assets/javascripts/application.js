@@ -205,6 +205,24 @@ $(document).ready(function(){
   }
 
   $('.datepicker').datepicker({ format: 'yyyy-mm-dd' })
+
+  var menu = $('ul#top-menu')
+  var drop = $('ul.dropdown-menu', menu)
+  var prev = null
+  var dropped = false
+  
+  $('li[class!="dropdown"]', menu).each(function(i, e){
+    var li = $(e)
+    if (!dropped && prev && (prev.position().left > li.position().left)) {
+      dropped = true
+      drop.show()
+      prev.appendTo(drop)
+    } 
+    if (dropped) {
+      li.appendTo(drop)
+    }
+    prev = li
+  })
 });
 
 (function($){

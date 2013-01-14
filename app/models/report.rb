@@ -7,6 +7,10 @@ class Report < ActiveRecord::Base
   has_one :personal_data, dependent: :destroy
   has_one :personal_survey, dependent: :destroy
 
+  scope :not_selected, where(expert_id: nil)
+  scope :self_selected, lambda { |u| where(expert_id: u.id) }
+  scope :rated, where("illustrations_points is not null or statement_points is not null or summary_points is not null")
+
   accepts_nested_attributes_for :personal_data, :organizations, :personal_survey,
     :projects
   attr_accessible :personal_data_attributes,

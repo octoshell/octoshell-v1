@@ -33,7 +33,7 @@ html
       div class="noprint"
         - if logged_in?
           - if (menu = render "shared/#{namespace}_menu").present?
-            ul class="nav nav-tabs"
+            ul class="nav nav-tabs" id="top-menu"
               = menu
         - flash.each do |type, message|
           - context = type == :alert ? 'alert-error' : 'alert-info'

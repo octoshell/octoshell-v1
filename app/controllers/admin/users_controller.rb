@@ -30,7 +30,7 @@ class Admin::UsersController < Admin::ApplicationController
   
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(params[:user], as_role)
+    if @user.update_attributes(params[:user], as: :admin)
       redirect_to @user
     else
       render :edit
