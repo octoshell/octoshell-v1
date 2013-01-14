@@ -1,4 +1,4 @@
-set :rbenv_ruby_version, "1.9.3-p286"
+set :rbenv_ruby_version, "1.9.3-p327"
 set :default_environment, {
   'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH",
   'RBENV_VERSION' => rbenv_ruby_version
