@@ -11,6 +11,10 @@
   legend = t('.organizations')
   = f.simple_fields_for :organizations do |f|
     = autocomplete :organization, f, name: :organization_id, admin: false
+    - if f.object.errors[:organization_id]
+      div class="control-group string required error"
+        div class="controls"
+          span class="help-inline" = f.object.errors[:organization_id].to_sentence
     = f.input :subdivision
     = f.input :position, collection: PositionName.rffi.available_values, input_html: { class: 'chosen clearable' }
     = f.input :other_position
