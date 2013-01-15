@@ -8,6 +8,7 @@ class ReportsController < ApplicationController
     if @report.update_attributes(params[:report])
       redirect_to edit_report_url(@report, step: 'survey')
     else
+      @form = 'personal_form'
       render :edit
     end
   end
@@ -18,6 +19,7 @@ class ReportsController < ApplicationController
     if @report.update_attributes(params[:report])
       redirect_to edit_report_url(@report, step: 'projects')
     else
+      @form = 'survey_form'
       render :edit
     end
   end
@@ -28,6 +30,7 @@ class ReportsController < ApplicationController
     if @report.update_attributes(params[:report])
       redirect_to edit_report_url(@report, step: 'projects_survey')
     else
+      @form = 'projects_form'
       render :edit
     end
   end
@@ -38,6 +41,7 @@ class ReportsController < ApplicationController
     if @report.update_attributes(params[:report])
       redirect_to edit_report_url(@report)
     else
+      @form = 'projects_survey_form'
       render :edit
     end
   end

@@ -109,8 +109,8 @@ class Report::Project < ActiveRecord::Base
     m.validates :directions_of_science, length: { minimum: 1, maximum: 2, message: 'Нужно выбрать хотя бы %{count}' }
 
     m.validate :materials_validator
-    m.validates :ru_title, :ru_author, :ru_email, :ru_driver, :ru_strategy,
-      :ru_objective, :ru_impact, :ru_usage, :en_title, :en_author, :en_email,
+    m.validates :ru_title, :ru_author, :emails, :ru_driver, :ru_strategy,
+      :ru_objective, :ru_impact, :ru_usage, :en_title, :en_author,
       :en_driver, :en_strategy, :en_objective, :en_impact, :en_usage,
       presence: true
     
@@ -130,6 +130,7 @@ class Report::Project < ActiveRecord::Base
     m.validates :en_title, :en_author, :en_driver, :en_strategy,
       :en_objective, :en_impact, :en_usage,
       format: { with: /\A[a-z\s\d[:punct:]]+\z/i, message: "Должно быть на английском" }
+    m.validate :emails_validator
 
     m.validates :books_count, :vacs_count, :lectures_count,
       :international_conferences_count, :international_conferences_in_russia_count,
@@ -190,9 +191,17 @@ class Report::Project < ActiveRecord::Base
     (chebyshev_parsed_logins + lomonosov_parsed_logins).uniq
   end
 
-  attr_accessible :ru_title, :ru_author, :ru_email, :ru_area, :ru_driver,
+  def emails_validator
+    emails.split(',').each do |email|
+      if ValidatesEmailFormatOf.validate_email_format(email.strip)
+        errors.add(:emails, :format)
+      end
+    end
+  end
+
+  attr_accessible :ru_title, :ru_author, :emails, :ru_area, :ru_driver,
     :ru_strategy, :ru_objective, :ru_impact, :ru_usage, :en_title, :en_author,
-    :en_email, :en_area, :en_driver, :en_strategy, :en_objective, :en_impact,
+    :en_area, :en_driver, :en_strategy, :en_objective, :en_impact,
     :en_usage, :graduates_count, :your_students_count,
     :ministry_of_education_grants_count, :rosnano_grants_count,
     :ministry_of_defence_grants_count, :award_names, :lomonosov_intel_hours,

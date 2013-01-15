@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130114091122) do
+ActiveRecord::Schema.define(:version => 20130115122701) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -368,7 +368,7 @@ ActiveRecord::Schema.define(:version => 20130114091122) do
     t.integer  "report_id"
     t.text     "ru_title"
     t.text     "ru_author"
-    t.text     "ru_email"
+    t.text     "emails"
     t.text     "ru_driver"
     t.text     "ru_strategy"
     t.text     "ru_objective"
@@ -376,7 +376,6 @@ ActiveRecord::Schema.define(:version => 20130114091122) do
     t.text     "ru_usage"
     t.text     "en_title"
     t.text     "en_author"
-    t.text     "en_email"
     t.text     "en_driver"
     t.text     "en_strategy"
     t.text     "en_objective"

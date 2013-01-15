@@ -17,10 +17,8 @@
         div class="span6 no-extra-margin"
           = f.input :en_author, input_html: { rows: 2 }, hint: t('.en_author_hint')
       div class="row"
-        div class="span6 no-extra-margin"
-          = f.input :ru_email, input_html: { rows: 2 }, hint: t('.ru_email_hint')
-        div class="span6 no-extra-margin"
-          = f.input :en_email, input_html: { rows: 2 }, hint: t('.en_email_hint')
+        div class="span8 no-extra-margin"
+          = f.input :emails, input_html: { rows: 2, class: 'span4' }, hint: t('.ru_email_hint')
       div class="row"
         div class="span6 no-extra-margin"
           = f.input :ru_driver, input_html: { rows: 2 }, hint: t('.ru_driver_hint')
