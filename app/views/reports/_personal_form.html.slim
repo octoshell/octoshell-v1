@@ -11,7 +11,7 @@
   legend = t('.organizations')
   = f.simple_fields_for :organizations do |f|
     = autocomplete :organization, f, name: :organization_id, admin: false
-    - if f.object.errors[:organization_id]
+    - if f.object.errors[:organization_id].any?
       div class="control-group string required error"
         div class="controls"
           span class="help-inline" = f.object.errors[:organization_id].to_sentence

@@ -24,7 +24,7 @@ class Admin::PagesController < Admin::ApplicationController
   def create
     @page = Page.new(params[:page], as: :admin)
     if @page.save
-      redirect_to @page
+      redirect_to [:admin, @page]
     else
       render :new
     end
@@ -37,7 +37,7 @@ class Admin::PagesController < Admin::ApplicationController
   def update
     @page = Page.find(params[:id])
     if @page.update_attributes(params[:page], as: :admin)
-      redirect_to @page
+      redirect_to [:admin, @page]
     else
       render :edit
     end
@@ -46,7 +46,7 @@ class Admin::PagesController < Admin::ApplicationController
   def destroy
     @page = Page.find(params[:id])
     @page.destroy
-    redirect_to pages_path
+    redirect_to admin_pages_path
   end
   
 private

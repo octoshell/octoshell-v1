@@ -1,7 +1,7 @@
 - title 'Справка'
 
 div class="link-actions"
-  = link_to 'Новая страница', new_page_path, class: 'btn'
+  = link_to 'Новая страница', new_admin_page_path, class: 'btn'
 
 - if @pages.any?
   ul
@@ -10,9 +10,9 @@ div class="link-actions"
         = link_to page.name, page
         span class="actions"
           | 
-          small = link_to 'редактировать', edit_page_path(page.id)
+          small = link_to 'редактировать', edit_admin_page_path(page.id)
           |  / 
-          small = link_to 'удалить', page_path(page.id), method: :delete, confirm: 'Вы уверены?', class: 'danger'
+          small = link_to 'удалить', admin_page_path(page.id), method: :delete, confirm: 'Вы уверены?', class: 'danger'
           | 
 - else
   p Нет страниц
