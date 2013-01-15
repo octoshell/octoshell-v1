@@ -5,8 +5,8 @@ class Report::PersonalData < ActiveRecord::Base
       presence: true
     m.validates :first_name, :last_name, :middle_name, format: { with: /\A[A-ZА-ЯЁ]/ }
     m.validate :full_name_validator
-    m.validate :phone, format: { with: /\A[+\-\d\(\)\s]+\z/ }
-    validates_email_format_of :email
+    m.validates :phone, format: { with: /\A[\+\-\d\(\)\s]+\z/ }
+    m.validates_email_format_of :email
   end
   attr_accessible :first_name, :last_name, :middle_name, :email, :phone
 
