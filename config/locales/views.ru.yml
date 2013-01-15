@@ -246,6 +246,7 @@ ru:
       tasks: Процедуры
       users: Пользователи
       tickets: "Поддержка (%{count})"
+      pages: Справка
     dashboard_menu:
       clusters: Кластеры
       pages: Справка
