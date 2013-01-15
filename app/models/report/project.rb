@@ -192,7 +192,7 @@ class Report::Project < ActiveRecord::Base
   end
 
   def emails_validator
-    emails.split(',').each do |email|
+    emails.to_s.split(',').each do |email|
       if ValidatesEmailFormatOf.validate_email_format(email.strip)
         errors.add(:emails, :format)
       end
