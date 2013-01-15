@@ -1,7 +1,7 @@
 - title "#{ClusterProject.model_name.human} ##{@cluster_project.id}"
 
 div class="link-actions"
-  = link_to 'Редактировать', [:admin, :edit, @cluster_project], class: 'btn btn-danger'
+  = link_to 'Редактировать', [:edit, :admin, @cluster_project], class: 'btn btn-danger'
   = " "
   = link_to 'Версии', [:admin, @cluster_project, :versions], class: 'btn'
 

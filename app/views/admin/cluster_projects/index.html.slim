@@ -1,9 +1,9 @@
 - title 'Проекты на кластере'
 
 div class="link-actions"
-  = link_to 'Новый проект на кластере', new_cluster_project_path, class: 'btn btn-danger'
+  = link_to 'Новый проект на кластере', new_admin_cluster_project_path, class: 'btn btn-danger'
 
-= simple_form_for [:admin, @search], url: cluster_projects_path, method: :get, html: { class: 'form-horizontal' } do |f|
+= simple_form_for [:admin, @search], method: :get, html: { class: 'form-horizontal' } do |f|
   = autocomplete :project, f
   = f.input :cluster_id_eq, collection: Cluster.all, input_html: { class: 'chosen' }, required: false
   = f.input :username_eq, label: 'Group (на кластере)', required: false
