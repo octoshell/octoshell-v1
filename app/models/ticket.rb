@@ -77,6 +77,10 @@ class Ticket < ActiveRecord::Base
   def show_form?
     ticket_question && ticket_question.leaf?
   end
+
+  def link_name
+    subject
+  end
   
 private
   

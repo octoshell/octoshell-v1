@@ -9,7 +9,5 @@
       div class="span8"
         blockquote class="#{reply.user_id == reply.ticket.user_id ? 'admin' : 'user'}"
           p = reply.message
-          small class="reply"
-            = smart_link_to reply
 - else
   p Нет сообщений
