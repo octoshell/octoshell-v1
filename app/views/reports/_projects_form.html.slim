@@ -85,6 +85,9 @@
       = f.input :lomonosov_size
       = f.input :chebyshev_size
       legend
+        h5 = t('.monopoly')
+      = f.input :exclusive_usage, as: :check_boxes, collection: Report::Project::MONOPOLY, label: false
+      legend
         h5 = t('.schedule')
       = f.input :strict_schedule, as: :check_boxes, collection: Report::Project::STRICT_SCHEDULE, label: false
       legend

@@ -14,7 +14,7 @@ MSU::Application.routes.draw do
   resources :activations, only: [:new, :create]
 
   # credentials
-  resources :credentials, only: [:index, :new, :create, :show] do
+  resources :credentials, only: [:new, :create, :show] do
     put :close
     resources :versions, only: [:index, :show], resource: 'Credential'
   end
@@ -27,7 +27,7 @@ MSU::Application.routes.draw do
   end
 
   # memberships
-  resources :memberships, only: [:index, :new, :create, :edit, :update, :show] do
+  resources :memberships, only: [:new, :create, :edit, :update, :show] do
     put :close
   end
 

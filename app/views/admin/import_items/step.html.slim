@@ -79,4 +79,4 @@
   div class="form-actions"
     = f.submit 'Импортировать', class: 'btn btn-success'
     |  
-    = link_to 'Удалить', @import, method: :delete, class: 'btn btn-danger', confirm: 'Вы уверены?'
+    = link_to 'Удалить', [:admin, @import], method: :delete, class: 'btn btn-danger', confirm: 'Вы уверены?'

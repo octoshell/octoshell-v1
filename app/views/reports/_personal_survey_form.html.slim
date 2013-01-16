@@ -28,11 +28,8 @@
     legend
       h5 = Report::PersonalSurvey.human_attribute_name(:learning)
     = f.input :learning, as: :check_boxes, collection: Report::PersonalSurvey::LEARNINGS, label: false
-    = f.input :other_learning, input_html: { rows: 2, class: 'span5' }
-
-    legend
-      h5 = Report::PersonalSurvey.human_attribute_name(:comment)
-    = f.input :comment, label: false, input_html: { rows: 4, class: 'span5' }
+    = f.input :other_learning, input_html: { rows: 2, class: 'span5' }, hint: t('.other_learning_hint')
+    = f.input :comment, input_html: { rows: 4, class: 'span5' }
 
   - if report.editing?
     div class="form-actions"

@@ -100,6 +100,8 @@ class Report::Project < ActiveRecord::Base
     '"Ломоносов", узлы с процессорами NVIDIA',
     '"Чебышёв"'
   ]
+
+  MONOPOLY = STRICT_SCHEDULE
   
   has_attached_file :materials,
     content_type: ['application/zip', 'application/x-zip-compressed'],
@@ -214,7 +216,7 @@ class Report::Project < ActiveRecord::Base
     :students_count, :rffi_grants_count, :ministry_of_communications_grants_count,
     :ran_grants_count, :other_russian_grants_count, :other_intenational_grants_count,
     :strict_schedule, :international_conferences_in_russia_count, :awards_count,
-    :materials
+    :materials, :exclusive_usage
   
   serialize :directions_of_science, Array
   serialize :critical_technologies, Array
