@@ -13,6 +13,9 @@ class Admin::ImportItemsController < Admin::ApplicationController
     else
       redirect_to new_admin_import_item_path
     end
+  rescue => e
+    notify_airbrake(e)
+    redirect_to step_admin_import_items_path, alert: e.message
   end
   
   def step
@@ -27,6 +30,9 @@ class Admin::ImportItemsController < Admin::ApplicationController
     else
       render :step
     end
+  rescue => e
+    notify_airbrake(e)
+    redirect_to step_admin_import_items_path, alert: e.message
   end
   
   def destroy
