@@ -42,8 +42,10 @@ private
   def not_authorized
     if may?(:access, :admin)
       redirect_to admin_users_path, alert: "У вас недостаточно прав для доступа в #{"http://#{request.host}#{request.fullpath}"}"
-    else
+    elsif logged_in?
       redirect_to projects_path, alert: "У вас недостаточно прав для доступа в #{"http://#{request.host}#{request.fullpath}"}"
+    else
+      redirect_to root_path, alert: "У вас недостаточно прав для доступа в #{"http://#{request.host}#{request.fullpath}"}"
     end
   end
   
