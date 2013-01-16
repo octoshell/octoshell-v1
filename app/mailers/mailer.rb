@@ -1,6 +1,11 @@
 # coding: utf-8
 class Mailer < ActionMailer::Base
   default from: 'Octoshell Notifier <noreply@v1.parallel.ru>'
+
+  def welcome(user)
+    @user = user
+    mail to: 'releu@me.com', subject: 'Данные для пререгистрации на суперкомпьютерном комплексе МГУ'
+  end
   
   def activation_needed_email(user)
     @user = user
