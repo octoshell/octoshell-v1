@@ -1,8 +1,8 @@
-- title t('.title', default: 'Upload scan'
+- title t('.title', default: 'Upload scan')
 
 = form_tag [@surety, :scan], class: 'form-horizontal', multipart: true do
   div class="control-group"
-    = label_tag :file, t('.file', default: 'File', class: 'control-label'
+    = label_tag :file, t('.file', default: 'File'), class: 'control-label'
     div class="controls"
       = file_field_tag :file
   div class="form-actions"

@@ -15,7 +15,9 @@ class Admin::ImportItemsController < Admin::ApplicationController
     end
   rescue => e
     notify_airbrake(e)
-    redirect_to step_admin_import_items_path, alert: e.message
+    flash.now[:alert] = e.message
+    @import = ImportItem.new
+    render :new
   end
   
   def step
@@ -32,7 +34,8 @@ class Admin::ImportItemsController < Admin::ApplicationController
     end
   rescue => e
     notify_airbrake(e)
-    redirect_to step_admin_import_items_path, alert: e.message
+    flash.now[:alert] = e.message
+    render :step
   end
   
   def destroy

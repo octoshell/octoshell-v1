@@ -284,6 +284,11 @@ ru:
     form_fields:
       minimun_password_length: Минимум 6 символов
       additional_emails: Дополнительные Email для нотификаций
+  sureties:
+    new_scan:
+      title: Загрузка скана
+      file: Файл
+      upload: Загрузить
   sessions:
     new:
       title: Авторизация
