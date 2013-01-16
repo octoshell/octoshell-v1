@@ -154,7 +154,7 @@ class Report::Project < ActiveRecord::Base
       if entries.size < 2
         errors.add(:materials, :min_files_is_two)
       end
-      unless entries.find { |e| e.to_s =~ /(jpg|jpeg|png|tiff|bmp)\z/i }
+      unless entries.find { |e| e.to_s =~ /(jpg|jpeg|png|tiff|bmp|cdr|eps|ai)\z/i }
         errors.add(:materials, :no_image)
       end
       z.close
