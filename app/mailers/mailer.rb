@@ -5,7 +5,7 @@ class Mailer < ActionMailer::Base
 
   def welcome(user)
     @user = user
-    mail to: 'releu@me.com', subject: 'Данные для пререгистрации на суперкомпьютерном комплексе МГУ'
+    mail to: user.email, subject: 'Данные для пререгистрации на суперкомпьютерном комплексе МГУ'
   end
   
   def activation_needed_email(user)
