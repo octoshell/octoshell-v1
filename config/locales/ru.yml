@@ -517,9 +517,9 @@ ru:
         lomonosov_intel_hours: 'Ломоносов (Intel)'
         lomonosov_nvidia_hours: 'Ломоносов (NVIDIA)'
         lomonosov_size: 'Ломоносов, Гб'
-        chebyshev_size: 'Чебышев, ГБ'
+        chebyshev_size: 'Чебышев, Гб'
         chebyshev_hours: 'Чебышев'
-        request_comment: 'В этом поле следует описать имеющие место актуальные потребности, связанные с работой на системах СКЦ МГУ и любый другие необходимые пояснения'
+        request_comment: 'В этом поле следует описать имеющие место актуальные потребности, связанные с работой на системах СКЦ МГУ и любыe другие необходимые пояснения'
         wanna_speak: Да
       report/organization:
         name: Название

@@ -32,6 +32,10 @@ class Admin::AccessesController < Admin::ApplicationController
       render :edit
     end
   end
+
+  def show
+    @access = Access.find(params[:id])
+  end
   
 private
   

@@ -176,3 +176,15 @@ SimpleForm.setup do |config|
   # Cache SimpleForm inputs discovery
   # config.cache_discovery = !Rails.env.development?
 end
+
+
+module GroupedCollectionCheckBoxes
+  def grouped_collection_check_boxes(attribute, collection, group_method, group_label_method, 
+                                     option_key_method, option_value_method, options = {}, html_options = {})
+     collection.inject("".html_safe) do |html, group|
+       html << input(attribute, as: :check_boxes, label: group.send(group_label_method), collection: group.send(group_method), label_method: option_value_method, value_method: option_key_method)
+     end
+  end
+end
+
+SimpleForm::FormBuilder.send(:include, GroupedCollectionCheckBoxes)

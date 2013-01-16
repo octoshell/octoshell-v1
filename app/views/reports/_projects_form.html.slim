@@ -1,9 +1,12 @@
 = simple_form_for report, url: report_projects_path(report, step: 'projects_survey'), html:  { class: 'form-horizontal report-form', multipart: true }, defaults: { disabled: report.submitted? } do |f|
-
+  
   = f.simple_fields_for :projects do |f|
     div role="project"
       div class="title"
         h2 = t('.project.html', name: f.object.ru_title)
+      p
+        | Доступен 
+        = link_to "образец заполнения визитных карточек", 'http://parallel.ru/cluster/reregistration/project_card', target: '_blank'
       div class="row"
         div class="span6 no-extra-margin"
           legend = t(".ru_project_card")
@@ -54,7 +57,11 @@
 
       legend
         h5 = Report::Project.human_attribute_name(:areas)
-      = f.input :areas, as: :check_boxes, collection: Report::Project::AREAS, label: false, wrapper_html: { 'data-max-values' => 2 }
+
+      div data-max-values="2"
+        - Report::Project::AREAS.each do |group, values|
+          h6 style="margin-left: 210px" = group
+          = f.input :areas, as: :check_boxes, collection: values, label: false, error_html: { class: 'hidden' }
       legend
         h5 = Report::Project.human_attribute_name(:computing_systems)
       = f.input :computing_systems, as: :check_boxes, collection: Report::Project::COMPUTING_SYSTEMS, label: false
