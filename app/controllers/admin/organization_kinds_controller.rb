@@ -17,7 +17,7 @@ class Admin::OrganizationKindsController < Admin::ApplicationController
   def create
     @organization_kind = OrganizationKind.new(params[:organization_kind], as: :admin)
     if @organization_kind.save
-      redirect_to @organization_kind
+      redirect_to [:admin, @organization_kind]
     else
       render :new
     end
@@ -30,7 +30,7 @@ class Admin::OrganizationKindsController < Admin::ApplicationController
   def update
     @organization_kind = find_organization_kind(params[:id])
     if @organization_kind.update_attributes(params[:organization_kind], as: :admin)
-      redirect_to @organization_kind
+      redirect_to [:admin, @organization_kind]
     else
       render :edit
     end
@@ -39,7 +39,7 @@ class Admin::OrganizationKindsController < Admin::ApplicationController
   def close
     @organization_kind = find_organization_kind(params[:organization_kind_id])
     @organization_kind.close
-    redirect_to @organization_kind
+    redirect_to [:admin, @organization_kind]
   end
   
 private
