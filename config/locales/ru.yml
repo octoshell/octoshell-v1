@@ -508,9 +508,9 @@ ru:
         ministry_of_communications_grants_count: Минкомсвязи РФ
         ministry_of_defence_grants_count: Минобороны РФ
         ran_grants_count: Программы фундаментальных исследований РАН
-        other_russian_grants_count: Российские
+        other_russian_grants_count: Другие (российские)
         international_conferences_in_russia_count: Международные (в России)
-        other_intenational_grants_count: Международные (за рубежом)
+        other_intenational_grants_count: Международные
         award_names: Названия
         awards_count: Количество наград
         comment: Комментарии
