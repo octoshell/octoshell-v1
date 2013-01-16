@@ -2,6 +2,15 @@
 
 p class="lead" = @project.description
 
+- if @project.invalid?
+  div class="alert alert-error"
+    | Проект содержит ошибки. 
+    = link_to 'Исправьте их', [:edit, :admin, @project]
+    |  перед совершением действий над проектом.
+    br
+    = @project.errors.full_messages.to_sentence
+
+
 div class="link-actions"
   = link_to 'Редактировать', [:edit, :admin, @project], class: 'btn'
   |  
@@ -9,7 +18,7 @@ div class="link-actions"
   
   - if @project.can__close?
     = " "
-    = link_to Project.human_state_event_name(:_close), project_close_path(@project), method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены? Закрытие проекта закроет все доступы и заявки' }
+    = link_to Project.human_state_event_name(:_close), project_close_path(@project), method: :put, class: "btn btn-danger #{'disabled' if @project.invalid?}", data: { confirm: 'Вы уверены? Закрытие проекта закроет все доступы и заявки' }
   = " "
 
 table class="table table-bordered"

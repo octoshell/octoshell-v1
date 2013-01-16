@@ -571,6 +571,7 @@ ru:
         username: Группа пользователей
         created_at: Создан
         direction_of_sciences: Направления исследований
+        direction_of_science_ids: Направления исследований
         critical_technologies: Критические технологии
         project_prefix: Префикс
       organization_kind:
