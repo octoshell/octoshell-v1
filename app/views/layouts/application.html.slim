@@ -67,5 +67,8 @@ html
         div id="extend-footer"
           - @page_extends.each do |extend|
             = load_bar(extend, :footer)
-      footer class="noprint"
-        p &copy; #{link_to('Evrone', 'http://evrone.ru')} 2012
+      footer class="noprint" id="footer"
+        p
+          = link_to 'Суперкомпьютерный центр МГУ', 'http://parallel.ru/cluster)', target: '_blank'
+          br
+          | Created by #{link_to('Evrone', 'http://evrone.ru')} 2012
