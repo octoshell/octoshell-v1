@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   
   # rescue_from CanCan::Unauthorized, with: :not_authorized
   # rescue_from ActiveRecord::RecordInProcess, with: :record_in_process
+  rescue_from MayMay::Unauthorized, with: :not_authorized
   
   def dashboard
     if may? :access, :admin
@@ -39,7 +40,11 @@ private
   end
   
   def not_authorized
-    redirect_to root_path, alert: "У вас недостаточно прав для доступа в #{"http://#{request.host}#{request.fullpath}"}"
+    if may?(:access, :admin)
+      redirect_to admin_users_path, alert: "У вас недостаточно прав для доступа в #{"http://#{request.host}#{request.fullpath}"}"
+    else
+      redirect_to projects_path, alert: "У вас недостаточно прав для доступа в #{"http://#{request.host}#{request.fullpath}"}"
+    end
   end
   
   def after_login_path
