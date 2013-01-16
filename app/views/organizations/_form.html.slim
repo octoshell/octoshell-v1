@@ -1,0 +1,7 @@
+= simple_form_for @organization, html: { class: 'form-horizontal' } do |f|
+  = f.input :name
+  = f.input :abbreviation
+  = f.association :organization_kind, collection: OrganizationKind.non_closed
+  
+  div class="form-actions"
+    = f.button :submit, class: 'btn-primary'

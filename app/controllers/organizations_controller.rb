@@ -14,4 +14,17 @@ class OrganizationsController < ApplicationController
     @organization = Organization.find(params[:id])
     respond_with({ id: @organization.id, text: @organization.name })
   end
+
+  def new
+    @organization = Organization.new
+  end
+
+  def create
+    @organization = Organization.new(params[:organization])
+    if @organization.save
+      redirect_to profile_path, notice: t('organization_has_been_created', default: 'Organization has been created')
+    else
+      render :new
+    end
+  end
 end

@@ -26,7 +26,8 @@ class Mailer < ActionMailer::Base
   def notify_new_organization(organization)
     @organization = organization
     @admin = true
-    mail to: User.admins.pluck(:email), subject: 'Создана новая организация'
+    emails = Rails.env.production? ? User.admins.pluck(:email) : ['releu@me.com']
+    mail to: emails, subject: 'Создана новая организация'
   end
   
   def invite(account_code)
