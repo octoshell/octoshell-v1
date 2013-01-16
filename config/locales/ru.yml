@@ -429,15 +429,15 @@ ru:
             chebyshev_logins:
               not_found: "Логин %{login} не найден"
             emails:
-              format: Не верный формат email. Указывайте правильные email адереса через запятую
+              format: Неверный формат email. Указывайте правильные email адереса через запятую
         report/personal_data:
           attributes:
             first_name:
-              invalid_format: Не верный формат. Используйте только русские или английские буквы
+              invalid_format: Неверный формат. Используйте только русские или английские буквы
             last_name:
-              invalid_format: Не верный формат. Используйте только русские или английские буквы
+              invalid_format: Неверный формат. Используйте только русские или английские буквы
             middle_name:
-              invalid_format: Не верный формат. Используйте только русские или английские буквы
+              invalid_format: Неверный формат. Используйте только русские или английские буквы
         account:
           attributes:
             raw_emails:
