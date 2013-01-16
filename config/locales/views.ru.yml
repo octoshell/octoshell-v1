@@ -291,3 +291,11 @@ ru:
       or: или 
       sign_in: Войти
       have_not_received_confirmation_instructions: Не получили инстукции по подтверждению?
+  passwords:
+    new:
+      title: Восстановление пароля
+      send: Отправить
+  activations:
+    new:
+      title: Инструкции по активации
+      send: Отправить
