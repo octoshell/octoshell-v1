@@ -17,7 +17,7 @@ table class="table table-bordered"
     td = @ticket.subject
   tr
     th = Ticket.human_attribute_name(:message)
-    td = @ticket.message
+    td = markdown @ticket.message
   tr
     th = Ticket.human_attribute_name(:url)
     td = link_to @ticket.url, @ticket.url if @ticket.url?

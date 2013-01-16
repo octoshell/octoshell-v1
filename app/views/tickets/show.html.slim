@@ -15,7 +15,7 @@ table class="table table-bordered"
     td = @ticket.subject
   tr
     th = Ticket.human_attribute_name(:message)
-    td = @ticket.message
+    td = markdown @ticket.message
   tr
     th = Ticket.human_attribute_name(:url)
     td = link_to @ticket.url, @ticket.url if @ticket.url?
@@ -49,7 +49,7 @@ h2 = t('.conversation', default: 'Conversation')
     div class="row"
       div class="span8"
         blockquote class="#{reply.user_id == reply.ticket.user_id ? 'admin' : 'user'}"
-          p = reply.message
+          = markdown reply.message
 - else
   p = t('.no_replies', default: 'There are no replies')
 
