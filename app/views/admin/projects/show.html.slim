@@ -91,9 +91,9 @@ h3 Доступы
             p
               small Статус: #{access.human_state_name}
   
-  h3 Процедуры
+h3 Процедуры
 
-  = render partial: 'admin/tasks/table', locals: { tasks: @project.tasks }  
+= render partial: 'admin/tasks/table', locals: { tasks: @project.tasks }  
   
 h3 Заявки
 
