@@ -27,7 +27,7 @@ table class="table table-bordered"
     td = link_to_project @ticket.project if @ticket.project
   tr
     th = Ticket.human_attribute_name(:cluster)
-    td = link_to_cluster @ticket.cluster if @ticket.project
+    td = link_to @ticket.cluster.name, @ticket.cluster if @ticket.project
   - @ticket.ticket_field_values.each do |value|
     tr
       th = value.ticket_field_relation.ticket_field.name
