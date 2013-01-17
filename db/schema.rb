@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130115122701) do
+ActiveRecord::Schema.define(:version => 20130117142241) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20130115122701) do
   end
 
   add_index "account_codes", ["project_id"], :name => "index_account_codes_on_project_id"
+  add_index "account_codes", ["user_id"], :name => "index_account_codes_on_user_id"
 
   create_table "accounts", :force => true do |t|
     t.integer  "user_id"
@@ -67,6 +68,8 @@ ActiveRecord::Schema.define(:version => 20130115122701) do
     t.string  "email"
     t.integer "user_id"
   end
+
+  add_index "additional_emails", ["user_id"], :name => "index_additional_emails_on_user_id"
 
   create_table "cluster_fields", :force => true do |t|
     t.integer "cluster_id"
@@ -219,6 +222,8 @@ ActiveRecord::Schema.define(:version => 20130115122701) do
     t.string   "phone"
   end
 
+  add_index "import_items", ["cluster_id"], :name => "index_import_items_on_cluster_id"
+
   create_table "memberships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "organization_id"
@@ -250,6 +255,7 @@ ActiveRecord::Schema.define(:version => 20130115122701) do
     t.integer  "active_projects_count", :default => 0
   end
 
+  add_index "organizations", ["organization_kind_id"], :name => "index_organizations_on_organization_kind_id"
   add_index "organizations", ["state"], :name => "index_organizations_on_state"
 
   create_table "organizations_projects", :id => false, :force => true do |t|
@@ -309,6 +315,7 @@ ActiveRecord::Schema.define(:version => 20130115122701) do
   end
 
   add_index "projects", ["organization_id"], :name => "index_projects_on_organization_id"
+  add_index "projects", ["project_prefix_id"], :name => "index_projects_on_project_prefix_id"
   add_index "projects", ["state"], :name => "index_projects_on_state"
   add_index "projects", ["user_id"], :name => "index_projects_on_user_id"
 
@@ -435,6 +442,8 @@ ActiveRecord::Schema.define(:version => 20130115122701) do
     t.integer  "expert_id"
   end
 
+  add_index "reports", ["user_id"], :name => "index_reports_on_user_id"
+
   create_table "request_properties", :force => true do |t|
     t.string  "name"
     t.string  "value"
@@ -455,6 +464,7 @@ ActiveRecord::Schema.define(:version => 20130115122701) do
     t.integer  "gpu_hours",          :default => 0
   end
 
+  add_index "requests", ["cluster_project_id"], :name => "index_requests_on_cluster_project_id"
   add_index "requests", ["state"], :name => "index_requests_on_state"
   add_index "requests", ["user_id"], :name => "index_requests_on_user_id"
 
@@ -511,6 +521,7 @@ ActiveRecord::Schema.define(:version => 20130115122701) do
     t.integer "account_code_id"
   end
 
+  add_index "surety_members", ["account_code_id"], :name => "index_surety_members_on_account_code_id"
   add_index "surety_members", ["surety_id", "user_id"], :name => "index_surety_members_on_surety_id_and_user_id", :unique => true
   add_index "surety_members", ["surety_id"], :name => "index_surety_members_on_surety_id"
   add_index "surety_members", ["user_id"], :name => "index_surety_members_on_user_id"
@@ -626,6 +637,7 @@ ActiveRecord::Schema.define(:version => 20130115122701) do
   add_index "tickets", ["project_id"], :name => "index_tickets_on_project_id"
   add_index "tickets", ["state"], :name => "index_tickets_on_state"
   add_index "tickets", ["surety_id"], :name => "index_tickets_on_surety_id"
+  add_index "tickets", ["ticket_question_id"], :name => "index_tickets_on_ticket_question_id"
   add_index "tickets", ["user_id"], :name => "index_tickets_on_user_id"
 
   create_table "user_groups", :force => true do |t|

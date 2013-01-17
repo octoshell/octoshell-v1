@@ -48,6 +48,7 @@ group :test, :development do
   gem 'guard-cucumber'
   gem 'database_cleaner'
   gem 'ci_reporter'
+  gem 'lol_dba'
 end
 
 group :test do
