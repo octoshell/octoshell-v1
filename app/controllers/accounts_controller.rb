@@ -3,7 +3,6 @@ class AccountsController < ApplicationController
 
   def cancel
     @account = find_account(params[:account_id])
-    authorize! :cancel, @account
     if @account.cancel
       redirect_to :back
     else

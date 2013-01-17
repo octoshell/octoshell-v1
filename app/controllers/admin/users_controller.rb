@@ -31,7 +31,7 @@ class Admin::UsersController < Admin::ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user], as: :admin)
-      redirect_to @user
+      redirect_to [:admin, @user]
     else
       render :edit
     end
@@ -40,7 +40,7 @@ class Admin::UsersController < Admin::ApplicationController
   def close
     @user = User.find(params[:user_id])
     @user.close
-    redirect_to @user
+    redirect_to [:admin, @user]
   end
   
   def history

@@ -18,7 +18,7 @@ class Admin::ClusterUsersController < Admin::ApplicationController
   def create
     @cluster_user = ClusterUser.new(params[:cluster_user])
     if @cluster_user.save
-      redirect_to @cluster_user
+      redirect_to [:admin, @cluster_user]
     else
       render :new
     end
@@ -31,7 +31,7 @@ class Admin::ClusterUsersController < Admin::ApplicationController
   def update
     @cluster_user = ClusterUser.find(params[:id])
     if @cluster_user.update_attributes(params[:cluster_user])
-      redirect_to @cluster_user
+      redirect_to [:admin, @cluster_user]
     else
       render :edit
     end
