@@ -35,6 +35,7 @@ html
           - if (menu = render "shared/#{namespace}_menu").present?
             ul class="nav nav-tabs" id="top-menu"
               = menu
+          = render_breadcrumbs builder: BootstrapBreadcrumbs
         - flash.each do |type, message|
           - context = type == :alert ? 'alert-error' : 'alert-info'
           = content_tag :div, message, class: "alert #{context}"

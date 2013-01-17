@@ -33,6 +33,7 @@ gem 'entity', github: 'redstonelabs/entity'
 gem 'rubyzip'
 gem 'poltergeist', github: 'brutuscat/poltergeist'
 gem 'therubyracer'
+gem 'breadcrumbs_on_rails'
 
 group :test, :development do
   gem 'quiet_assets'

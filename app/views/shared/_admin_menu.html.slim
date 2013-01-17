@@ -21,7 +21,6 @@
 = submenu_item :'admin/groups', (link_to t('.groups', default: 'Groups'), admin_groups_path), maynot?(:manage, :groups)
 = submenu_item :'admin/pages', (link_to t('.pages', default: 'Pages'), admin_pages_path), maynot?(:manage, :pages)
 
-
 li class="dropdown"
   = link_to '#', 'data-toggle' => 'dropdown' do
     = t('.more', default: 'More')

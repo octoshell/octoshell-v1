@@ -85,6 +85,7 @@ GEM
     backports (2.6.5)
     bcrypt-ruby (3.0.1)
     blankslate (2.1.2.4)
+    breadcrumbs_on_rails (2.3.0)
     builder (3.0.4)
     capistrano (2.12.0)
       highline
@@ -367,6 +368,7 @@ PLATFORMS
 
 DEPENDENCIES
   airbrake
+  breadcrumbs_on_rails
   capistrano
   capybara
   ci_reporter
