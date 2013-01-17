@@ -55,7 +55,7 @@ class ImportItem < ActiveRecord::Base
   end
 
   def fio=(fio)
-    first, middle, last = fio.split(' ')
+    last, middle, first = fio.split(' ')
     if last.blank?
       last = middle
       middle = '-'
