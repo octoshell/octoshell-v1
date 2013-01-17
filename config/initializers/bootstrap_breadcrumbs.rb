@@ -1,5 +1,7 @@
 class BootstrapBreadcrumbs < BreadcrumbsOnRails::Breadcrumbs::Builder
   def render
+    return "" if @elements.empty?
+   
     menu = %{<ul class="breadcrumb">}
     menu << @elements.map { |e| render_element(e) }.join(" / ")
     menu << %{</ul>}
