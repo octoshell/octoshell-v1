@@ -283,6 +283,4 @@ MSU::Application.routes.draw do
   end
 
   root to: 'application#dashboard'
-  
-  mount Resque::Server.new, :at => '/resque'
 end
