@@ -1,6 +1,6 @@
 class Admin::ReportsController < Admin::ApplicationController
   def index
-    @reports = Report.submitted
+    @reports = Report.submitted.page(params[:page])
     @subnamespace = :index
   end
 
@@ -12,7 +12,7 @@ class Admin::ReportsController < Admin::ApplicationController
   end
 
   def all
-    @reports = Report.all
+    @reports = Report.page(params[:page])
     @subnamespace = :all
     render :index
   end
@@ -34,7 +34,7 @@ class Admin::ReportsController < Admin::ApplicationController
   end
 
   def assessed
-    @reports = Report.assessed
+    @reports = Report.assessed.page(params[:page])
     @subnamespace = :assessed
     render :index
   end
