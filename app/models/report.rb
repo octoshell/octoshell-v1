@@ -40,6 +40,10 @@ class Report < ActiveRecord::Base
   scope :submitted, with_state(:submitted)
   scope :assessed, with_state(:assessed)
 
+  def organization
+    Organization.find(organizations.first.organization_id)
+  end
+
   def setup_defaults!
     create_default_personal_data
     create_default_organizations

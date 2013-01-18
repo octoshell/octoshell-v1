@@ -9,3 +9,8 @@ table class="table table-striped table-bordered"
       td = @report.personal_data.send attr
 
 h3 Организация
+
+table class="table table-striped table-bordered"
+  tr
+    th class="span4" = Organization.model_name.human
+    td = smart_link_to @report.organization
