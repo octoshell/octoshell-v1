@@ -94,7 +94,6 @@ class ImportItem < ActiveRecord::Base
     users.push *User.where("last_name = :name or first_name = :name or middle_name = :name", name: last_name)
     users.push *User.where("email like ?", "%#{email[/^(.*)@/, 1]}%@%")
     users.uniq!
-    users.delete_if { |u| u.email.downcase == email.downcase }
     users
   end
   

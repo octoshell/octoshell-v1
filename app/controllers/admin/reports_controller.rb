@@ -34,7 +34,7 @@ class Admin::ReportsController < Admin::ApplicationController
   end
 
   def assessed
-    @reports = Report.rated
+    @reports = Report.assessed
     @subnamespace = :assessed
     render :index
   end

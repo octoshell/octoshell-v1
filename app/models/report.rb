@@ -10,9 +10,6 @@ class Report < ActiveRecord::Base
   has_one :personal_survey, dependent: :destroy
   belongs_to :expert, class_name: :User
 
-  scope :self_selected, lambda { |u| where(expert_id: u.id) }
-  scope :rated, where("illustrations_points is not null or statement_points is not null or summary_points is not null")
-
   accepts_nested_attributes_for :personal_data, :organizations, :personal_survey,
     :projects
   attr_accessible :personal_data_attributes,
@@ -41,6 +38,7 @@ class Report < ActiveRecord::Base
   end
 
   scope :submitted, with_state(:submitted)
+  scope :assessed, with_state(:assessed)
 
   def setup_defaults!
     create_default_personal_data
