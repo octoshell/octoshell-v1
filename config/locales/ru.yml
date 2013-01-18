@@ -746,6 +746,13 @@ ru:
             _close: Удалить
             _confirm: Предварительно одобрить
             _unconfirm: Отменить предварительное одобрение
+      report:
+        state:
+          states:
+            editing: Заполняется пользователем
+            submitted: Отправлен на рассмотрение
+            assessing: Оценивается
+            assessed: Оценен
       user:
         state:
           states:

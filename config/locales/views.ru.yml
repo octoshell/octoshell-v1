@@ -249,6 +249,7 @@ ru:
       users: Пользователи
       tickets: "Поддержка (%{count})"
       pages: Справка
+      reports: Отчеты
     dashboard_menu:
       clusters: Кластеры
       pages: Справка
