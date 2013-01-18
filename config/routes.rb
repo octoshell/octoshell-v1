@@ -273,10 +273,10 @@ MSU::Application.routes.draw do
     end
 
     # reports
-    resources :reports, only: :index do
+    resources :reports, only: [:show, :index] do
       collection do
-        get '/not_selected'
-        get '/self_selected'
+        get '/assessed'
+        get '/self', action: 'self_assessing'
         get '/all'
       end
       put :begin_assessing

@@ -8,6 +8,7 @@ class Report < ActiveRecord::Base
   has_many :organizations, dependent: :destroy
   has_one :personal_data, dependent: :destroy
   has_one :personal_survey, dependent: :destroy
+  belongs_to :expert, class_name: :User
 
   scope :self_selected, lambda { |u| where(expert_id: u.id) }
   scope :rated, where("illustrations_points is not null or statement_points is not null or summary_points is not null")

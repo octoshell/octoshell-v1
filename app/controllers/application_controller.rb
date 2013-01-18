@@ -112,6 +112,7 @@ private
   helper_method :namespace
 
   def subnamespace
+    @subnamespace
   end
   helper_method :subnamespace
 end

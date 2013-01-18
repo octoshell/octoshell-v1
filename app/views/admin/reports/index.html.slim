@@ -1,20 +1,26 @@
 - title 'Отчеты'
 
 ul class="nav nav-pills"
-  li = link_to 'Неразобранные'
-  li = link_to 'Свои'
-  li = link_to 'Все'
-  li = link_to 'Оцененные'
+  li class="#{active_menu? :index, true}" = link_to 'Неразобранные', admin_reports_path
+  li class="#{active_menu? :self_assessing, true}" = link_to 'Свои', self_admin_reports_path
+  li class="#{active_menu? :all, true}" = link_to 'Все', all_admin_reports_path
+  li class="#{active_menu? :assessed, true}" = link_to 'Оцененные', assessed_admin_reports_path
 
 table class="table table-bordered table-striped"
   tr
     th = Report.model_name.human
     th = Report.human_attribute_name(:state)
+    th Эксперт
     th
   - @reports.each do |report|
     tr
-      td = smart_link_to report
+      td
+        - if report.assessing? || report.assessed?
+          = smart_link_to report
+        - else
+          = report.link_name
       td = report.human_state_name
+      td = smart_link_to report.expert
       td
         - if report.can_begin_assessing?
-          = link_to 'Оценить', [:admin, report, :begin_assessing], class: 'btn', mehod: :put
+          = link_to 'Оценить', [:admin, report, :begin_assessing], class: 'btn', method: :put
