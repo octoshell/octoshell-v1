@@ -105,7 +105,7 @@
       = f.input :request_comment, input_html: { rows: 3, class: 'span5' }
 
       - if report.editing?
-        p = link_to 'Удалить проект', report_project_path(report, f.object), class: 'remove-project danger', role: 'report-button', data: { method: 'delete', confirm: 'Вы уверены?' }
+        p style="margin-bottom: 4em" = link_to 'Удалить проект', report_project_path(report, f.object), class: 'remove-project danger', role: 'report-button', data: { method: 'delete', confirm: 'Вы уверены?' }
 
   - if report.editing?
     p = link_to 'Добавить проект', report_projects_path(report), role: 'report-button', data: { method: 'post' }

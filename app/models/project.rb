@@ -71,7 +71,7 @@ class Project < ActiveRecord::Base
   end
   
   def allowed_organizations
-    memberships = user.memberships.active.map(&:organization).uniq
+    memberships = user.memberships.active.map(&:organization).uniq.sort(&:name)
   end
   
   def cluster_users

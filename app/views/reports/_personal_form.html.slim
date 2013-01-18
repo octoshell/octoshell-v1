@@ -15,10 +15,10 @@
       div class="control-group string required error"
         div class="controls"
           span class="help-inline" = f.object.errors[:organization_id].to_sentence
+    = f.input :organization_type, as: :radio_buttons, collection: Report::Organization::TYPES
     = f.input :subdivision
     = f.input :position, collection: PositionName.rffi.available_values, input_html: { class: 'chosen clearable' }
     = f.input :other_position
-    = f.input :organization_type, as: :radio_buttons, collection: Report::Organization::TYPES
 
   - if report.editing?
     div class="form-actions"

@@ -1,7 +1,7 @@
 = simple_form_for [:admin, @project], html: { class: 'form-horizontal surety-form project' } do |f|
   = f.association :user, label_method: :full_name, input_html: { class: 'chosen' }
   = f.association :organization, collection: f.object.allowed_organizations, input_html: { class: 'chosen' }
-  = f.association :organizations, input_html: { class: 'chosen' }
+  = f.association :organizations, input_html: { class: 'chosen' }, collection: Organization.order("name asc")
   = f.association :project_prefix, include_blank: true
   
   = f.input :name
