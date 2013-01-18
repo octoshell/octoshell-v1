@@ -240,4 +240,6 @@ class Report::Project < ActiveRecord::Base
   serialize :critical_technologies, Array
   serialize :computing_systems, Array
   serialize :areas, Array
+  serialize :exclusive_usage, Array
+  serialize :strict_schedule, Array
 end
