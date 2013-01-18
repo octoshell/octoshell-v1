@@ -9,7 +9,6 @@ class Report < ActiveRecord::Base
   has_one :personal_data, dependent: :destroy
   has_one :personal_survey, dependent: :destroy
 
-  scope :not_selected, where(expert_id: nil)
   scope :self_selected, lambda { |u| where(expert_id: u.id) }
   scope :rated, where("illustrations_points is not null or statement_points is not null or summary_points is not null")
 
@@ -21,10 +20,26 @@ class Report < ActiveRecord::Base
   state_machine initial: :editing do
     state :editing
     state :submitted
+    state :assessing do
+      validates :expert, presence: true
+    end
+    state :assessed do
+      validates :expert, presence: true
+    end
     event :submit do
       transition :editing => :submitted
     end
+
+    event :begin_assessing do
+      transition :submitted => :assessing
+    end
+
+    event :assess do
+      transition :assessing => :assessed
+    end
   end
+
+  scope :submitted, with_state(:submitted)
 
   def setup_defaults!
     create_default_personal_data
@@ -76,5 +91,9 @@ class Report < ActiveRecord::Base
 
   def completely_valid?
     [projects, organizations, personal_data, personal_survey].all?(&:valid?)
+  end
+
+  def link_name
+    I18n.t("report", id: id)
   end
 end

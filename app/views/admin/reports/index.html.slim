@@ -1,0 +1,20 @@
+- title 'Отчеты'
+
+ul class="nav nav-pills"
+  li = link_to 'Неразобранные'
+  li = link_to 'Свои'
+  li = link_to 'Все'
+  li = link_to 'Оцененные'
+
+table class="table table-bordered table-striped"
+  tr
+    th = Report.model_name.human
+    th = Report.human_attribute_name(:state)
+    th
+  - @reports.each do |report|
+    tr
+      td = smart_link_to report
+      td = report.human_state_name
+      td
+        - if report.can_begin_assessing?
+          = link_to 'Оценить', [:admin, report, :begin_assessing], class: 'btn', mehod: :put

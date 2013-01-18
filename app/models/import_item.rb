@@ -55,9 +55,8 @@ class ImportItem < ActiveRecord::Base
   end
 
   def fio=(fio)
-    last, middle, first = fio.split(' ')
-    if last.blank?
-      last = middle
+    last, first, middle = fio.split(' ')
+    if middle.blank?
       middle = '-'
     end
     self.first_name = first

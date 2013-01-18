@@ -417,6 +417,7 @@ ru:
       ticket_field: Дополнительное поле к заявке
       ticket_tag: Тег
       task: Задание
+      report: Отчет
     errors:
       models:
         report/project:
@@ -464,6 +465,8 @@ ru:
               user_is_closed: Пользователь заблокирован.
               wrong_password: Не верный пароль.
     attributes:
+      report:
+        state: Состояние
       report/personal_data:
         first_name: Имя
         last_name: Фамилия
@@ -955,3 +958,4 @@ ru:
   user_invited: "Пользователь %{name} приглашен в проект"
   surety_created: "Поручительство создано"
   organization_has_been_created: Организация создана
+  report: "Отчет #%{id}"

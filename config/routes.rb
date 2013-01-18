@@ -279,6 +279,7 @@ MSU::Application.routes.draw do
         get '/self_selected'
         get '/all'
       end
+      put :begin_assessing
     end
   end
 

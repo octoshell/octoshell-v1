@@ -1,6 +1,6 @@
 class Admin::ReportsController < Admin::ApplicationController
   def index
-    @reports = Report.not_selected
+    @reports = Report.submitted
   end
 
   def all
