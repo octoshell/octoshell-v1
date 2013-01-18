@@ -1,6 +1,7 @@
 class Admin::ReportsController < Admin::ApplicationController
   def index
     @reports = Report.submitted
+    @subnamespace = :index
   end
 
   def show
