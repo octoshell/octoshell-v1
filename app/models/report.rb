@@ -41,7 +41,7 @@ class Report < ActiveRecord::Base
   scope :assessed, with_state(:assessed)
 
   def organization
-    Organization.find(organizations.first.organization_id)
+    ::Organization.find(organizations.first.organization_id)
   end
 
   def setup_defaults!

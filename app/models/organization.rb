@@ -62,7 +62,7 @@ class Organization < ActiveRecord::Base
       organization.memberships.update_all(organization_id: id)
       organization.projects.update_all(organization_id: id)
       organization.coprojects.each do |project|
-        coprojects << projects
+        self.coprojects = (coprojects + projects).uniq
       end
       organization.destroy
     end
