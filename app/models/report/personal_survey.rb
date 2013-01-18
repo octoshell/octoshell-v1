@@ -70,11 +70,12 @@ class Report::PersonalSurvey < ActiveRecord::Base
   ]
   attr_accessible :software, :technologies, :compilators, :learning,
     :other_technology, :other_compilator, :other_learning, :request_technology,
-    :computing, :comment
+    :computing, :comment, :precision
 
 
   serialize :software, Array
   serialize :technologies, Array
   serialize :compilators, Array
   serialize :computing, Array
+  serialize :learning, Array
 end

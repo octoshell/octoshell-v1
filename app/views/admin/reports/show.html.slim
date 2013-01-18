@@ -1,1 +1,11 @@
 - title "Отчет #{@report.id}"
+
+h3 Личные данные
+
+table class="table table-striped table-bordered"
+  - %w(last_name first_name middle_name email phone).each do |attr|
+    tr
+      th class="span4" = Report::PersonalData.human_attribute_name attr
+      td = @report.personal_data.send attr
+
+h3 Организация
