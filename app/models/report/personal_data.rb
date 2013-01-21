@@ -1,5 +1,9 @@
 # coding: utf-8
 class Report::PersonalData < ActiveRecord::Base
+  belongs_to :report
+
+  has_paper_trail
+  
   with_options on: :update do |m|
     m.validates :first_name, :last_name, :middle_name, :email, :phone,
       presence: true

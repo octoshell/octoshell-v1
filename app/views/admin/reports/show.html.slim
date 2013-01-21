@@ -1,8 +1,11 @@
 - title "Отчет #{@report.id}"
 
+div class="link-actions"
+  = link_to 'Последние изменения', [:admin, @report, :versions], class: 'btn'
+
 h3 Личные данные
 
-table class="table table-striped table-bordered"
+table class="table table-striped table-bordered table-condensed"
   - %w(last_name first_name middle_name email phone).each do |attr|
     tr
       th class="span4" = Report::PersonalData.human_attribute_name attr
@@ -10,7 +13,7 @@ table class="table table-striped table-bordered"
 
 h3 Организация
 
-table class="table table-striped table-bordered"
+table class="table table-striped table-bordered table-condensed"
   tr
     th class="span4" = Organization.model_name.human
     td = smart_link_to @report.organization
@@ -90,7 +93,7 @@ h3 Проекты
 - @report.projects.each do |project|
   h4 = project.ru_title
 
-  table class="table table-striped table-bordered"
+  table class="table table-striped table-bordered table-condensed"
     - %w(title author).each do |attr|
       tr
         th class="span4" = Report::Project.human_attribute_name("ru_#{attr}")
@@ -131,7 +134,7 @@ h3 Проекты
 
   h6 Часы
 
-  table class="table table-striped table-bordered"
+  table class="table table-striped table-bordered table-condensed"
     tr
       th class="span4" = Report::Project.human_attribute_name(:lomonosov_intel_hours)
       th class="span4" = Report::Project.human_attribute_name(:lomonosov_nvidia_hours)
@@ -143,7 +146,7 @@ h3 Проекты
 
   h6 Размер
 
-  table class="table table-striped table-bordered"
+  table class="table table-striped table-bordered table-condensed"
     tr
       th class="span4" = Report::Project.human_attribute_name(:lomonosov_size)
       th = Report::Project.human_attribute_name(:chebyshev_size)
@@ -177,7 +180,7 @@ h3 Количественные характеристики
 
 h4 Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
 
-table class="table table-striped table-bordered summable"
+table class="table table-striped table-bordered summable table-condensed"
   tr
     th class="span4"
     - @report.projects.each do |project|
@@ -197,7 +200,7 @@ table class="table table-striped table-bordered summable"
 
 h4 Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ
 
-table class="table table-striped table-bordered summable"
+table class="table table-striped table-bordered summable table-condensed"
   tr
     th class="span4"
     - @report.projects.each do |project|
@@ -237,7 +240,7 @@ table class="table table-striped table-bordered summable"
 
 h4 Число премий, наград, медалей и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
 
-table class="table table-striped table-bordered summable"
+table class="table table-striped table-bordered summable table-condensed"
   tr
     th class="span4"
     - @report.projects.each do |project|

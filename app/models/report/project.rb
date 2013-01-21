@@ -125,6 +125,10 @@ class Report::Project < ActiveRecord::Base
     content_type: ['application/zip', 'application/x-zip-compressed'],
     max_size: 20.megabytes
 
+  belongs_to :report
+
+  has_paper_trail
+
   with_options on: :update do |m|
     m.validates :directions_of_science, length: { minimum: 1, maximum: 2, message: 'Нужно выбрать хотя бы %{count}' }
 

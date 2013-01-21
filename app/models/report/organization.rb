@@ -1,5 +1,9 @@
 # coding: utf-8
 class Report::Organization < ActiveRecord::Base
+  belongs_to :report
+
+  has_paper_trail
+  
   TYPES = [
     'Российский ВУЗ',
     'Институт РАН',

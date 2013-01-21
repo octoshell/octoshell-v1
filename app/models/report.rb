@@ -10,6 +10,8 @@ class Report < ActiveRecord::Base
   has_one :personal_survey, dependent: :destroy
   belongs_to :expert, class_name: :User
 
+  has_paper_trail
+
   accepts_nested_attributes_for :personal_data, :organizations, :personal_survey,
     :projects
   attr_accessible :personal_data_attributes,

@@ -1,4 +1,6 @@
 class Admin::ReportsController < Admin::ApplicationController
+  before_filter { authorize! :manage, :reports }
+
   def index
     @reports = Report.submitted.page(params[:page])
     @subnamespace = :index
@@ -37,5 +39,9 @@ class Admin::ReportsController < Admin::ApplicationController
     @reports = Report.assessed.page(params[:page])
     @subnamespace = :assessed
     render :index
+  end
+
+  def versions
+    @report = Report.find(params[:report_id])
   end
 end
