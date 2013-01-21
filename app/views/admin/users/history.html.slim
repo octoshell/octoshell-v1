@@ -1,6 +1,6 @@
 - title 'История пользователя'
 
-p = link_to 'Вернуться к пользователю', @user
+p = link_to 'Вернуться к пользователю', [:admin, @user]
 
 - if @history_items.any?
   ul class="unstyled"
