@@ -23,7 +23,7 @@ table class="table table-bordered"
     td = link_to @ticket.url, @ticket.url if @ticket.url?
   tr
     th = Ticket.human_attribute_name(:attachment)
-    td = smart_link_to @ticket
+    td = link_to_attachment @ticket
   tr
     th = Ticket.human_attribute_name(:project)
     td = smart_link_to @ticket.project
