@@ -2,17 +2,31 @@
 
 - if @sureties.any?
   h3 = t('.sureties', default: 'Sureties')
-  = render partial: 'sureties/full_table', locals: { sureties: @sureties }
+  - if may? :access, :admin
+    = render partial: 'admin/sureties/table', locals: { sureties: @sureties }
+  - else
+    = render partial: 'sureties/full_table', locals: { sureties: @sureties }
 
 - if @requests.any?
   h3 = t('.requests', default: 'Requests')
-  = render partial: 'requests/table', locals: { requests: @requests }
+  - if may? :access, :admin
+    = render partial: 'admin/requests/table', locals: { requests: @requests }
+  - else
+    = render partial: 'requests/table', locals: { requests: @requests }
 
-- if current_user.notifications_count.zero?
+- if may? :access, :admin
+  - if @tickets.any?
+    h3 = t('.support', default: 'Support')
+    = render partial: 'admin/tickets/table', locals: { tickets: @tickets }
+- else
+  h3 = t('.support', default: 'Support')
+  p = link_to t('.new_ticket', default: 'Ask support'), new_ticket_path
+  - if @tickets.any?
+    = render partial: 'tickets/table', locals: { tickets: @tickets }
+
+- if @tasks.any?
+  h3 = t('.tasks', default: 'Tasks')
+  = render partial: 'admin/tasks/table', locals: { tasks: @tasks }
+
+- if maynot?(:access, :admin) &&  current_user.notifications_count.zero?
   p = t('.no_notifications', default: 'There are no notifications')
-
-h3 = t('.support', default: 'Support')
-
-p = link_to t('.new_ticket', default: 'Ask support'), new_ticket_path
-- if @tickets.any?
-  = render partial: 'tickets/table', locals: { tickets: @tickets }

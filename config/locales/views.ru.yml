@@ -96,6 +96,7 @@ ru:
       sureties: Поручительства
       no_notifications: Нет оповещений
       requests: Заявки
+      tasks: Процедуры
   project_joiners:
     new:
       code: Код приглашения
