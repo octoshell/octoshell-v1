@@ -93,7 +93,10 @@ class Report < ActiveRecord::Base
   end
 
   def completely_valid?
-    [projects, organizations, personal_data, personal_survey].all?(&:valid?)
+    [ projects.to_a,
+      organizations.to_a,
+      personal_data,
+      personal_survey ].flatten.all?(&:valid?)
   end
 
   def link_name
