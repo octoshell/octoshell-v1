@@ -7,10 +7,8 @@ class Admin::ReportsController < Admin::ApplicationController
   end
 
   def show
-    @report = Report.find(params[:id])
-    if !(@report.expert == current_user || @report.assessing? || @report.assessed?)
-      raise MayMay::Unauthorized
-    end
+    @report = get_report(params[:id])
+    @reply = @report.replies.build
   end
 
   def all
@@ -41,7 +39,24 @@ class Admin::ReportsController < Admin::ApplicationController
     render :index
   end
 
-  def versions
-    @report = Report.find(params[:report_id])
+  def replies
+    @report = get_report(params[:report_id])
+    @reply = @report.replies.build(params[:report_reply])
+    @reply.user = current_user
+    if @reply.save
+      redirect_to admin_report_path(@report, anchor: 'replies')
+    else
+      render :show
+    end
+  end
+
+private
+  
+  def get_report(id)
+    report = Report.find(id)
+    if !(report.expert == current_user || report.assessing? || report.assessed?)
+      raise MayMay::Unauthorized
+    end
+    report
   end
 end

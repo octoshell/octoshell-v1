@@ -465,6 +465,8 @@ ru:
               user_is_closed: Пользователь заблокирован.
               wrong_password: Не верный пароль.
     attributes:
+      report/reply:
+        message: Сообщение
       report:
         state: Состояние
       report/personal_data:

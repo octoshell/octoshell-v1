@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130117142241) do
+ActiveRecord::Schema.define(:version => 20130121133202) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -429,6 +429,15 @@ ActiveRecord::Schema.define(:version => 20130117142241) do
     t.integer  "international_conferences_in_russia_count", :default => 0
     t.integer  "awards_count",                              :default => 0
   end
+
+  create_table "report_replies", :force => true do |t|
+    t.integer "report_id"
+    t.text    "message"
+    t.integer "user_id"
+  end
+
+  add_index "report_replies", ["report_id"], :name => "index_report_replies_on_report_id"
+  add_index "report_replies", ["user_id"], :name => "index_report_replies_on_user_id"
 
   create_table "reports", :force => true do |t|
     t.integer  "user_id"

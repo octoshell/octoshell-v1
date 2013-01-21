@@ -279,7 +279,7 @@ MSU::Application.routes.draw do
         get '/self', action: 'self_assessing'
         get '/all'
       end
-      get 'versions'
+      post :replies
       put :begin_assessing
     end
   end

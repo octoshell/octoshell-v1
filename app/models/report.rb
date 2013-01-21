@@ -8,6 +8,7 @@ class Report < ActiveRecord::Base
   has_many :organizations, dependent: :destroy
   has_one :personal_data, dependent: :destroy
   has_one :personal_survey, dependent: :destroy
+  has_many :replies
   belongs_to :expert, class_name: :User
 
   has_paper_trail
