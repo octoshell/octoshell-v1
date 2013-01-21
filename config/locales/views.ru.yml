@@ -87,6 +87,7 @@ ru:
       sign_out: Выход
       sign_in: Вход
       sign_up: Регистрация
+      start_steps_title: Для того чтобы начать работу вам нужно
   notifications:
     index:
       new_ticket: Создать заявку в Поддержке
