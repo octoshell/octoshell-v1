@@ -1,9 +1,16 @@
 class NotificationsController < ApplicationController
   def index
-    @user = current_user
-    @sureties = @user.sureties.pending
-    @requests = @user.requests.pending
-    @tickets = @user.tickets.answered
+    if may? :access, :admin
+      @tasks = Task.failed
+      @tickets = Ticket.active
+      @sureties = Surety.pending
+      @requests = Request.pending
+    else
+      @user = current_user
+      @sureties = @user.sureties.pending
+      @requests = @user.requests.pending
+      @tickets = @user.tickets.answered
+    end
   end
   
 private
