@@ -64,6 +64,7 @@ class Mailer < ActionMailer::Base
 
   def admin_notifications
     emails = User.admins.pluck(:email)
+    emails = ['releu@me.com'] unless Rails.env.production?
     @requests = Request.pending
     @tasks = Task.failed
     @sureties = Surety.pending
