@@ -2,7 +2,7 @@ class Admin::ReportsController < Admin::ApplicationController
   before_filter { authorize! :manage, :reports }
 
   def index
-    @reports = Report.submitted.page(params[:page])
+    @reports = Report.available.page(params[:page])
     @subnamespace = :index
   end
 
@@ -73,6 +73,12 @@ class Admin::ReportsController < Admin::ApplicationController
     else
       render :show
     end
+  end
+
+  def decline
+    @report = get_report(params[:report_id])
+    @report.editing? || @report.decline
+    redirect_to admin_reports_path, notice: t('.report_returned_to_user_for_edit')
   end
 
 private

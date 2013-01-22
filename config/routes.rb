@@ -283,6 +283,7 @@ MSU::Application.routes.draw do
       post :replies
       post :comments
       put :begin_assessing
+      put :decline
     end
     put '/reports/:report_id/projects/:project_id/assess' => 'reports#assess',
       as: :report_project_assess

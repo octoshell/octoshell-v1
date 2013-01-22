@@ -27,6 +27,7 @@ class Report < ActiveRecord::Base
       if Date.current < Date.new(2013, 2, 1)
         report.update_attribute(:sent_on_time, true)
       end
+      report.begin_assessing if report.expert
     end
 
     state :assessing do
@@ -53,6 +54,7 @@ class Report < ActiveRecord::Base
   end
 
   scope :submitted, with_state(:submitted)
+  scope :available, with_state(:submitted).where(expert_id: nil)
   scope :assessed, with_state(:assessed)
 
   def organization

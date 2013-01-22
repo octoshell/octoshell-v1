@@ -977,3 +977,4 @@ ru:
   report: "Отчет #%{id}"
   expert: "Эксперт #%{n}"
   ticket_accepted: Принято в работу
+  report_returned_to_user_for_edit: Отчет передан пользователю для редактирования

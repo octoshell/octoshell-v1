@@ -1,5 +1,9 @@
 - title "Отчет #{@report.id}"
 
+div class="link-actions"
+  - if @report.can_decline?
+    = link_to 'Вернуть отчет пользователю для редактирования', [:admin, @report, :decline], class: 'btn', method: :put
+
 - @report.projects.each do |project|
   h2 = project.ru_title
 
