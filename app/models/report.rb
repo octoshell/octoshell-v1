@@ -22,6 +22,13 @@ class Report < ActiveRecord::Base
   state_machine initial: :editing do
     state :editing
     state :submitted
+
+    after_transition on: :submit do |report, transition|
+      if Date.current < Date.new(2013, 2, 1)
+        report.update_attribute(:sent_on_time, true)
+      end
+    end
+
     state :assessing do
       validates :expert, presence: true
     end
@@ -29,7 +36,11 @@ class Report < ActiveRecord::Base
       validates :expert, presence: true
     end
     event :submit do
-      transition :editing => :submitted
+      transition editing: :submitted
+    end
+
+    event :decline do
+      transition :assessing => :editing
     end
 
     event :begin_assessing do
