@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   
   accepts_nested_attributes_for :additional_emails, allow_destroy: true, reject_if: :all_blank
   
-  scope :admins, where(admin: true)
+  scope :admins, where(admin: true).where("users.state != 'closed'")
   scope :finder, (lambda do |q|
     return scoped if q.blank?
     condition = q.split(/\s/).map do |word|
