@@ -4,7 +4,9 @@
 = f.input :first_name
 = f.input :last_name
 = f.input :middle_name
-= f.input :avatar
+- error = f.object.errors.find_all { |a| a[0] =~ /^avatar/ }.map { |a| a.last }.join(', ')
+- f.object.errors.add(:avatar, error) if error.present?
+= f.input :avatar, hint: 'до 150 Кб'
 = f.input :phone
 - if f.object.persisted?
   h4 = t('.additional_emails', default: 'Additional emails for notifications')

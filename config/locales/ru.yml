@@ -464,6 +464,8 @@ ru:
               user_is_not_activated: Пользователь еще не активирован. Пройдите по ссылке в письме об активации.
               user_is_closed: Пользователь заблокирован.
               wrong_password: Не верный пароль.
+            avatar_file_size:
+              in_between: Файл должен быть меньше 150 Кб
     attributes:
       report/reply:
         message: Сообщение
