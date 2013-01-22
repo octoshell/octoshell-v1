@@ -21,9 +21,9 @@ class Admin::TicketsController < Admin::ApplicationController
     @ticket = Ticket.find(params[:ticket_id])
     if @ticket.close
       @ticket.user.track! :close_ticket, @ticket, current_user
-      redirect_to @ticket
+      redirect_to [:admin, @ticket]
     else
-      redirect_to @ticket, alert: @ticket.errors.full_messages.join(', ')
+      redirect_to [:admin, @ticket], alert: @ticket.errors.full_messages.join(', ')
     end
   end
   
@@ -35,7 +35,7 @@ class Admin::TicketsController < Admin::ApplicationController
     @ticket = Ticket.find(params[:id])
     if @ticket.update_attributes(params[:ticket], as: :admin)
       @ticket.user.track! :update_ticket, @ticket, current_user
-      redirect_to @ticket
+      redirect_to [:admin, @ticket]
     else
       render :edit
     end

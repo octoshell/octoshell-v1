@@ -1,7 +1,7 @@
 # coding: utf-8
 class Mailer < ActionMailer::Base
   default from: 'Octoshell Notifier <support@parallel.ru>',
-          reply_to: 'support@parallel.ru'
+          reply_to: 'service@users.parallel.ru'
 
   def welcome(user)
     @user = user

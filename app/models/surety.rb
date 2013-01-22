@@ -191,7 +191,7 @@ class Surety < ActiveRecord::Base
     self.tickets.create! do |ticket|
       ticket.user = user
       ticket.subject = "Скан к поручительству ##{id}"
-      ticket.url = "/sureties/#{id}"
+      ticket.url = "/admin/sureties/#{id}"
       ticket.ticket_question_id = Settings.surety_ticket_question_id
       ticket.message = "Скан в приложении"
       ticket.attachment = file
