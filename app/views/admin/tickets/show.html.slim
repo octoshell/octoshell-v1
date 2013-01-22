@@ -2,10 +2,13 @@
 
 div class="link-actions"
   = link_to 'Редактировать', [:edit, :admin, @ticket], class: 'btn'
-  = " "
+  |  
+  - if @ticket.active?
+    = link_to 'Принять в работу', [:admin, @ticket, :accept], class: 'btn btn-success', method: :post
+  |  
   - if @ticket.can__close?
     = link_to Ticket.human_state_event_name(:_close), admin_ticket_close_path(@ticket), method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
-  = " "
+  |  
   = link_to 'Версии', [:admin, @ticket, :versions], class: 'btn'
 
 table class="table table-bordered"

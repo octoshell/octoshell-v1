@@ -45,6 +45,12 @@ class Admin::TicketsController < Admin::ApplicationController
     @ticket = Ticket.find(params[:ticket_id])
     render partial: 'tag_relations_form', locals: { ticket: @ticket }
   end
+
+  def accept
+    @ticket = Ticket.find(params[:ticket_id])
+    @ticket.accept(current_user)
+    redirect_to [:admin, @ticket]
+  end
   
 private
 

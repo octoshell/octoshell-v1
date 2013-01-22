@@ -976,3 +976,4 @@ ru:
   organization_has_been_created: Организация создана
   report: "Отчет #%{id}"
   expert: "Эксперт #%{n}"
+  ticket_accepted: Принято в работу

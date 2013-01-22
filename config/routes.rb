@@ -245,6 +245,7 @@ MSU::Application.routes.draw do
     resources :tickets, only: [:index, :show, :edit, :update] do
       get :tag_relations_form
       put :close
+      post :accept
       resources :versions, only: [:index, :show], resource: 'Ticket'
     end
 

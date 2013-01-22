@@ -57,6 +57,13 @@ class Ticket < ActiveRecord::Base
   def attachment_image?
     attachment_content_type.to_s =~ /image/
   end
+
+  def accept(user)
+    replies.create! do |reply|
+      reply.user = user
+      reply.message = I18n.t("ticket_accepted")
+    end
+  end
   
   def actual?
     not closed?
