@@ -9,6 +9,7 @@ class Admin::ReportsController < Admin::ApplicationController
   def show
     @report = get_report(params[:id])
     @reply = @report.replies.build
+    @comment = @report.comments.build
   end
 
   def all
@@ -41,10 +42,34 @@ class Admin::ReportsController < Admin::ApplicationController
 
   def replies
     @report = get_report(params[:report_id])
-    @reply = @report.replies.build(params[:report_reply])
+    @reply = @report.replies.build(params[:report_reply], as: :admin)
     @reply.user = current_user
     if @reply.save
       redirect_to admin_report_path(@report, anchor: 'replies')
+    else
+      @comment = @report.comments.build
+      render :show
+    end
+  end
+
+  def comments
+    @report = get_report(params[:report_id])
+    @comment = @report.comments.build(params[:report_comment], as: :admin)
+    @comment.user = current_user
+    if @comment.save
+      redirect_to admin_report_path(@report, anchor: 'comments')
+    else
+      @reply = @report.replies.build
+      render :show
+    end
+  end
+
+  def assess
+    @report = get_report(params[:report_id])
+    project = @report.projects.find(params[:project_id])
+    project.assign_attributes(params[:report_project], as: :admin)
+    if project.assessed? || project.assess
+      redirect_to [:admin, @report]
     else
       render :show
     end

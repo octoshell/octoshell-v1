@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130121133202) do
+ActiveRecord::Schema.define(:version => 20130122092446) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -334,6 +334,15 @@ ActiveRecord::Schema.define(:version => 20130121133202) do
   add_index "replies", ["ticket_id"], :name => "index_replies_on_ticket_id"
   add_index "replies", ["user_id"], :name => "index_replies_on_user_id"
 
+  create_table "report_comments", :force => true do |t|
+    t.text    "message"
+    t.integer "user_id"
+    t.integer "report_id"
+  end
+
+  add_index "report_comments", ["report_id"], :name => "index_report_comments_on_report_id"
+  add_index "report_comments", ["user_id"], :name => "index_report_comments_on_user_id"
+
   create_table "report_organizations", :force => true do |t|
     t.integer "report_id"
     t.string  "name"
@@ -428,6 +437,10 @@ ActiveRecord::Schema.define(:version => 20130121133202) do
     t.text     "request_comment"
     t.integer  "international_conferences_in_russia_count", :default => 0
     t.integer  "awards_count",                              :default => 0
+    t.integer  "illustrations_points",                      :default => 0
+    t.integer  "statement_points",                          :default => 0
+    t.integer  "summary_points",                            :default => 0
+    t.string   "state"
   end
 
   create_table "report_replies", :force => true do |t|

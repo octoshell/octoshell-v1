@@ -239,6 +239,9 @@ class Report::Project < ActiveRecord::Base
     :ran_grants_count, :other_russian_grants_count, :other_intenational_grants_count,
     :strict_schedule, :international_conferences_in_russia_count, :awards_count,
     :materials, :exclusive_usage
+
+  attr_accessible :illustrations_points, :statement_points,
+    :summary_points, as: :admin
   
   serialize :directions_of_science, Array
   serialize :critical_technologies, Array
@@ -246,4 +249,12 @@ class Report::Project < ActiveRecord::Base
   serialize :areas, Array
   serialize :exclusive_usage, Array
   serialize :strict_schedule, Array
+
+  state_machine :state, initial: :pending do
+    state :assessed
+
+    event :assess do
+      transition :pending => :assessed
+    end
+  end
 end

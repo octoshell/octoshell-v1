@@ -469,6 +469,8 @@ ru:
     attributes:
       report/reply:
         message: Сообщение
+      report/comment: 
+        message: Сообщение
       report:
         state: Состояние
       report/personal_data:
@@ -528,6 +530,9 @@ ru:
         chebyshev_hours: 'Чебышев'
         request_comment: 'В этом поле следует описать имеющие место актуальные потребности, связанные с работой на системах СКЦ МГУ и любыe другие необходимые пояснения'
         wanna_speak: Да
+        illustrations_points: Иллюстрации
+        statement_points: Изложение
+        summary_points: Общая оценка
       report/organization:
         name: Название
         subdivision: Подразделение
@@ -970,3 +975,4 @@ ru:
   surety_created: "Поручительство создано"
   organization_has_been_created: Организация создана
   report: "Отчет #%{id}"
+  expert: "Эксперт #%{n}"

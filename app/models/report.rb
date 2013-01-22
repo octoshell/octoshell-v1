@@ -9,6 +9,7 @@ class Report < ActiveRecord::Base
   has_one :personal_data, dependent: :destroy
   has_one :personal_survey, dependent: :destroy
   has_many :replies
+  has_many :comments
   belongs_to :expert, class_name: :User
 
   has_paper_trail
@@ -45,6 +46,11 @@ class Report < ActiveRecord::Base
 
   def organization
     ::Organization.find(organizations.first.organization_id)
+  end
+
+  def expert_name(user_id)
+    n = (replies + comments).map(&:user_id).uniq.index { |id| id == user_id }.next
+    I18n.t('expert', n: n)
   end
 
   def setup_defaults!

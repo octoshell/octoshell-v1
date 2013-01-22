@@ -280,8 +280,11 @@ MSU::Application.routes.draw do
         get '/all'
       end
       post :replies
+      post :comments
       put :begin_assessing
     end
+    put '/reports/:report_id/projects/:project_id/assess' => 'reports#assess',
+      as: :report_project_assess
   end
 
   root to: 'application#dashboard'

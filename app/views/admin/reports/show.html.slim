@@ -1,9 +1,7 @@
 - title "Отчет #{@report.id}"
 
-h3 Проекты
-
 - @report.projects.each do |project|
-  h4 = project.ru_title
+  h2 = project.ru_title
 
   table class="table table-striped table-bordered table-condensed"
     - %w(title author).each do |attr|
@@ -43,31 +41,43 @@ h3 Проекты
         = link_to project.materials_file_name, project.materials.url
         |  (#{number_to_human_size(project.materials_file_size)})
 
-h2 Оценка
+  h4 Оценки
 
-= simple_form_for [:admin, @report], html: { class: 'form-horizontal' } do |f|
-  - %w(illustrations_points statement_points summary_points).each do |attr|
-    div class="control-group"
-      label class="radio_buttons optional control-label"
-        = Report.human_attribute_name attr
-      div class="controls"
-        - (1..5).each do |i|
-          label class="radio inline"
-            = f.radio_button attr, i
-            = i
+  = simple_form_for project, url: admin_report_project_assess_path(report_id: @report.id, project_id: project.id), html: { class: 'form-horizontal' } do |f|
+    - %w(illustrations_points statement_points summary_points).each do |attr|
+      div class="control-group"
+        label class="radio_buttons optional control-label"
+          = Report::Project.human_attribute_name attr
+        div class="controls"
+          - { 0 => 'без оценки', 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5 }.each do |v, name|
+            label class="radio inline"
+              = f.radio_button attr, v, disabled: f.object.assessed?
+              = name
+              |  
             |  
-  div class="form-actions"
-    = f.button :submit, 'Оценить', data: { confirm: 'Вы уверены?' }
+    div class="form-actions"
+      = f.button :submit, 'Оценить', class: 'btn-primary', data: { confirm: 'Вы уверены?' }, disabled: f.object.assessed?
 
-
-h2 id="replies" Переписка
+h2 id="replies" Переписка с пользователем
 
 - @report.replies.find_all(&:persisted?).each do |reply|
   blockquote
     = markdown reply.message
-    small = reply.user_id == current_user.id ? 'Пользователь' : 'Эксперт'
+    small = reply.user_id == current_user.id ? reply.expert_name : 'Пользователь'
 
 = simple_form_for @reply, url: admin_report_replies_path(@report), html: { class: 'form-horizontal' } do |f|
   = f.input :message, input_html: { class: 'span6', rows: 4 }
   div class="form-actions"
     = f.button :submit, 'Отправить', class: 'btn-primary'
+
+h2 id="comments" Комментарии экспертов
+
+- @report.comments.find_all(&:persisted?).each do |comment|
+  blockquote
+    = markdown comment.message
+    small = comment.report.expert_name(comment.user_id)
+
+= simple_form_for @comment, url: admin_report_comments_path(@report), html: { class: 'form-horizontal' } do |f|
+  = f.input :message, input_html: { class: 'span6', rows: 4 }
+  div class="form-actions"
+    = f.button :submit, 'Отправить', class: 'btn-success'
