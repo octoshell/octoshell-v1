@@ -1,11 +1,14 @@
 - title "Отчет #{@report.id}"
 
-div class="link-actions"
-  - if @report.can_assess?
-    = link_to 'Закончить оценку', [:admin, @report, :assess], class: 'btn btn-primary', method: :put, data: { confirm: 'Вы уверены?' }
-    |  
-  - if @report.can_decline?
-    = link_to 'Вернуть отчет пользователю для редактирования', [:admin, @report, :decline], class: 'btn', method: :put
+- links = []
+- links << link_to('Закончить оценку', [:admin, @report, :assess], class: 'btn btn-primary', method: :put, data: { confirm: 'Вы уверены?' }) if @report.can_assess?
+- links << link_to('Вернуть отчет пользователю для редактирования', [:admin, @report, :decline], class: 'btn btn-danger', method: :put) if @report.can_decline?
+
+- if links.any?
+  div class="link-actions"
+    - links.each do |link|
+      == link
+      = " "
 
 - @report.projects.each do |project|
   h2 = project.ru_title
