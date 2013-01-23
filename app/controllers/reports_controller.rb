@@ -5,7 +5,8 @@ class ReportsController < ApplicationController
   def personal
     @report = Report.find(params[:report_id])
     @report.validate_part = :personal
-    if @report.update_attributes(params[:report])
+    @report.assign_attributes(params[:report])
+    if @report.save(validate: false)
       redirect_to edit_report_url(@report, step: 'survey')
     else
       @form = 'personal_form'
@@ -17,7 +18,8 @@ class ReportsController < ApplicationController
   def survey
     @report = Report.find(params[:report_id])
     @report.validate_part = :survey
-    if @report.update_attributes(params[:report])
+    @report.assign_attributes(params[:report])
+    if @report.save(validate: false)
       redirect_to edit_report_url(@report, step: 'projects')
     else
       @form = 'survey_form'
@@ -29,7 +31,8 @@ class ReportsController < ApplicationController
   def projects
     @report = Report.find(params[:report_id])
     @report.validate_part = :projects
-    if @report.update_attributes(params[:report])
+    @report.assign_attributes(params[:report])
+    if @report.save(validate: false)
       redirect_to edit_report_url(@report, step: 'projects_survey')
     else
       @form = 'projects_form'
@@ -41,7 +44,8 @@ class ReportsController < ApplicationController
   def projects_survey
     @report = Report.find(params[:report_id])
     @report.validate_part = :projects_survey
-    if @report.update_attributes(params[:report])
+    @report.assign_attributes(params[:report])
+    if @report.save(validate: false)
       redirect_to edit_report_url(@report)
     else
       @form = 'projects_survey_form'
@@ -77,6 +81,7 @@ class ReportsController < ApplicationController
       redirect_to projects_path, notice: t('.report_submitted')
     else
       flash.now[:alert] = t('.cant_submit_report_because_of_errors')
+      @reply = @report.replies.build
       render :edit
     end
   end
