@@ -2,7 +2,7 @@ class Admin::ReportProjectsController < Admin::ApplicationController
   def update
     @report = get_report(params[:report_id])
     project = @report.projects.find(params[:id])
-    if @report.accessing? && project.update_attributes(params[:report_project], as: :admin)
+    if @report.assessing? && project.update_attributes(params[:report_project], as: :admin)
       redirect_to [:admin, @report]
     else
       @reply = @report.replies.build
