@@ -284,9 +284,9 @@ MSU::Application.routes.draw do
       post :comments
       put :begin_assessing
       put :decline
+      put :assess
+      resources :report_projects, only: :update
     end
-    put '/reports/:report_id/projects/:project_id/assess' => 'reports#assess',
-      as: :report_project_assess
   end
 
   root to: 'application#dashboard'

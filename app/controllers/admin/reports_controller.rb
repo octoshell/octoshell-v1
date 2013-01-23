@@ -66,10 +66,8 @@ class Admin::ReportsController < Admin::ApplicationController
 
   def assess
     @report = get_report(params[:report_id])
-    project = @report.projects.find(params[:project_id])
-    project.assign_attributes(params[:report_project], as: :admin)
-    if project.assessed? || project.assess
-      redirect_to [:admin, @report]
+    if @report.assessed? || @report.assess
+      redirect_to admin_reports_path, notice: t('.report_successfuly_assessed')
     else
       render :show
     end

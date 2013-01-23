@@ -1,6 +1,9 @@
 - title "Отчет #{@report.id}"
 
 div class="link-actions"
+  - if @report.can_assess?
+    = link_to 'Закончить оценку', [:admin, @report, :assess], class: 'btn btn-primary', method: :put, data: { confirm: 'Вы уверены?' }
+    |  
   - if @report.can_decline?
     = link_to 'Вернуть отчет пользователю для редактирования', [:admin, @report, :decline], class: 'btn', method: :put
 
@@ -47,7 +50,7 @@ div class="link-actions"
 
   h4 Оценки
 
-  = simple_form_for project, url: admin_report_project_assess_path(report_id: @report.id, project_id: project.id), html: { class: 'form-horizontal' } do |f|
+  = simple_form_for [:admin, @report, project], html: { class: 'form-horizontal' } do |f|
     - %w(illustrations_points statement_points summary_points).each do |attr|
       div class="control-group"
         label class="radio_buttons optional control-label"
@@ -55,12 +58,12 @@ div class="link-actions"
         div class="controls"
           - { 0 => 'без оценки', 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5 }.each do |v, name|
             label class="radio inline"
-              = f.radio_button attr, v, disabled: f.object.assessed?
+              = f.radio_button attr, v, disabled: f.object.report.assessed?
               = name
               |  
             |  
     div class="form-actions"
-      = f.button :submit, 'Оценить', class: 'btn-primary', data: { confirm: 'Вы уверены?' }, disabled: f.object.assessed?
+      = f.button :submit, 'Сохранить', class: 'btn-primary', disabled: f.object.report.assessed?
 
 h2 id="replies" Переписка с пользователем
 

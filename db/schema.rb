@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130122122853) do
+ActiveRecord::Schema.define(:version => 20130123080439) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -440,7 +440,6 @@ ActiveRecord::Schema.define(:version => 20130122122853) do
     t.integer  "illustrations_points",                      :default => 0
     t.integer  "statement_points",                          :default => 0
     t.integer  "summary_points",                            :default => 0
-    t.string   "state"
   end
 
   create_table "report_replies", :force => true do |t|

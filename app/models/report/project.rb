@@ -249,12 +249,4 @@ class Report::Project < ActiveRecord::Base
   serialize :areas, Array
   serialize :exclusive_usage, Array
   serialize :strict_schedule, Array
-
-  state_machine :state, initial: :pending do
-    state :assessed
-
-    event :assess do
-      transition :pending => :assessed
-    end
-  end
 end
