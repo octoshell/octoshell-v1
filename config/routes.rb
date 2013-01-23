@@ -90,6 +90,7 @@ MSU::Application.routes.draw do
     put :projects_survey
     put :projects
     put :submit
+    post :replies
   end
 
   resources :tickets, only: [:new, :create, :index, :show, :edit, :update] do

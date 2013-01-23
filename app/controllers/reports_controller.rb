@@ -2,13 +2,14 @@ class ReportsController < ApplicationController
   before_filter :require_login
   before_filter :setup_form
 
-   def personal
+  def personal
     @report = Report.find(params[:report_id])
     @report.validate_part = :personal
     if @report.update_attributes(params[:report])
       redirect_to edit_report_url(@report, step: 'survey')
     else
       @form = 'personal_form'
+      @reply = @report.replies.build
       render :edit
     end
   end
@@ -20,6 +21,7 @@ class ReportsController < ApplicationController
       redirect_to edit_report_url(@report, step: 'projects')
     else
       @form = 'survey_form'
+      @reply = @report.replies.build
       render :edit
     end
   end
@@ -31,6 +33,7 @@ class ReportsController < ApplicationController
       redirect_to edit_report_url(@report, step: 'projects_survey')
     else
       @form = 'projects_form'
+      @reply = @report.replies.build
       render :edit
     end
   end
@@ -42,6 +45,7 @@ class ReportsController < ApplicationController
       redirect_to edit_report_url(@report)
     else
       @form = 'projects_survey_form'
+      @reply = @report.replies.build
       render :edit
     end
   end
@@ -52,6 +56,18 @@ class ReportsController < ApplicationController
     @report.personal_survey.valid?(:update)
     @report.organizations.each { |o| o.valid?(:update) }
     @report.projects.each { |p| p.valid?(:update) }
+    @reply = @report.replies.build
+  end
+
+  def replies
+    @report = get_report(params[:report_id])
+    @reply = @report.replies.build(params[:report_reply])
+    @reply.user = current_user
+    if @reply.save
+      redirect_to edit_report_path(@report, step: params[:step])
+    else
+      render :edit
+    end
   end
 
   def submit

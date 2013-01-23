@@ -62,8 +62,13 @@ class Report < ActiveRecord::Base
   end
 
   def expert_name(user_id)
-    n = (replies + comments).map(&:user_id).uniq.index { |id| id == user_id }.next
-    I18n.t('expert', n: n)
+    user_ids = (replies + comments).map(&:user_id).uniq
+    user_ids.delete(self[:user_id])
+    if n = user_ids.index { |id| id == user_id }
+      I18n.t('expert', n: n.next)
+    else
+      I18n.t('user')
+    end
   end
 
   def setup_defaults!

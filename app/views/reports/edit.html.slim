@@ -41,3 +41,16 @@ ul class="breadcrumb"
 
 = render partial: "reports/#{@form}", locals: { report: @report }
 
+- if @report.replies.find_all(&:persisted?).any?
+  h2 Комментарии экспертов
+
+  - @report.replies.find_all(&:persisted?).each do |reply|
+    blockquote
+      = markdown reply.message
+      small = reply.expert_name
+
+  = simple_form_for @reply, url: report_replies_path(@report), html: { class: 'form-horizontal' } do |f|
+    = hidden_field_tag :step, params[:step]
+    = f.input :message, input_html: { class: 'span6', rows: 4 }
+    div class="form-actions"
+      = f.button :submit, 'Отправить', class: 'btn-success'
