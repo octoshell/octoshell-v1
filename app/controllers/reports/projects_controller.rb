@@ -4,6 +4,7 @@ class Reports::ProjectsController < ApplicationController
     @report.projects.create! if @report.editing?
     @report.attributes = params[:report]
     @form = 'projects_form'
+    @reply = @report.replies.build
     render 'reports/edit'
   end
 
@@ -12,6 +13,7 @@ class Reports::ProjectsController < ApplicationController
     @report.projects.find(params[:id]).destroy  if @report.editing?
     @report.attributes = params[:reports]
     @form = 'projects_form'
+    @reply = @report.replies.build
     render 'reports/edit'
   end
 
