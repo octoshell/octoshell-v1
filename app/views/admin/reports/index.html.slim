@@ -8,19 +8,18 @@ ul class="nav nav-pills"
 
 table class="table table-bordered table-striped"
   tr
-    th = Report.model_name.human
-    th = Report.human_attribute_name(:state)
+    th class="span4" = Report.model_name.human
+    th class="span5" = Report.human_attribute_name(:state)
     th Эксперт
   - @reports.each do |report|
     tr
       td
+        - if report.can_begin_assessing?
+          = link_to 'Оценить', [:admin, report, :begin_assessing], class: 'btn btn-mini btn-info', method: :put, style: 'float: right; margin-right: 1em;'
         - if report.assessing? || report.assessed?
           = smart_link_to report
         - else
           = report.link_name
-        - if report.can_begin_assessing?
-          |  
-          = link_to 'Оценить', [:admin, report, :begin_assessing], class: 'btn btn-mini btn-info', method: :put
       td = report.human_state_name
       td = smart_link_to report.expert
 
