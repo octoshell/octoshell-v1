@@ -1,4 +1,6 @@
 class RepliesController < ApplicationController
+  before_filter :require_login
+  
   def create
     @reply = Reply.new(params[:reply])
     @reply.user = current_user

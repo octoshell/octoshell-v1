@@ -1,4 +1,6 @@
 class ProjectJoinersController < ApplicationController
+  before_filter :require_login
+  
   def new
     @project_joiner = ProjectJoiner.new(code: params[:code])
     @project_joiner.user_id = current_user.id

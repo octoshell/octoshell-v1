@@ -1,4 +1,6 @@
 class NotificationsController < ApplicationController
+  before_filter :require_login
+
   def index
     if may? :access, :admin
       @tasks = Task.failed

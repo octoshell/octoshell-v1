@@ -71,4 +71,15 @@ class Mailer < ActionMailer::Base
     @tickets = Ticket.active
     mail to: emails, subject: %{В Octoshell есть не обработанные оповещения}
   end
+
+  def report_reply(user, reply)
+    @user = user
+    @reply = reply
+    mail to: @user.email, subject: %{Новое сообщение в отчете ##{reply.report_id}}
+  end
+
+  def markdown(text)
+    Redcarpet.new(text, :smart, :filter_html, :hard_wrap).to_html.html_safe
+  end
+  helper_method :markdown
 end
