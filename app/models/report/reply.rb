@@ -18,7 +18,7 @@ class Report::Reply < ActiveRecord::Base
 private
 
   def notify
-    users = report.replies.pluck(:user_id).uniq
+    users = report.replies.pluck(:user_id).push(report.user_id).uniq
     users.delete(user_id)
     User.find(users).each do |user|
       Mailer.report_reply(user, self).deliver
