@@ -68,6 +68,22 @@
     div class="form-actions"
       = f.button :submit, 'Сохранить', class: 'btn-primary', disabled: f.object.report.assessed?
 
+
+  - if project.last_changes.any?
+    h3 Последние изменения
+
+    table class="table table-bordered table-condensed"
+      tr
+        th Аттрибут
+        th Было
+        th Стало
+      - project.last_changes.each do |changeset|
+        - changeset.each do |attribute, changes|
+          tr
+            td = Report::Project.human_attribute_name(attribute)
+            td = changes.first.inspect
+            td = changes.last.inspect
+
 h2 id="replies" Переписка с пользователем
 
 - @report.replies.find_all(&:persisted?).each do |reply|

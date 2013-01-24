@@ -6,6 +6,28 @@ class Report::Project < ActiveRecord::Base
     string.to_s.split(',').find_all(&:present?).map { |l| l.downcase.strip }.uniq
   end)
 
+  CARD_FIELDS = [
+    :ru_title,
+    :en_title,
+    :ru_author,
+    :en_author,
+    :emails,
+    :ru_driver,
+    :en_driver,
+    :ru_strategy,
+    :en_strategy,
+    :ru_objective,
+    :en_objective,
+    :ru_impact,
+    :en_inpact,
+    :ru_usage,
+    :en_usage,
+    :directions_of_science,
+    :critical_technologies,
+    :areas,
+    :computing_systems
+  ]
+
   DIRECTIONS_OF_SCIENCE = [
     'Безопасность и противодействие терроризму',
     'Индустрия наносистем',
@@ -166,6 +188,13 @@ class Report::Project < ActiveRecord::Base
       :other_intenational_grants_count, :awards_count, :lomonosov_intel_hours,
       :lomonosov_nvidia_hours, :chebyshev_hours, :lomonosov_size, :chebyshev_size,
       numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  end
+
+  def last_changes
+    vs = versions; vs.shift
+    vs.map do |version|
+      version.changeset.keep_if { |key, _| key.to_sym.in?(CARD_FIELDS) }
+    end.find_all { |set| set.any? }.flatten
   end
 
   def materials_validator

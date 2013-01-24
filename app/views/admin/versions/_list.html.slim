@@ -17,7 +17,7 @@ table class="table table-bordered"
               th Стало
             - changes.each do |attribute, values|
               tr
-                th = model.human_attribute_name(attribute)
+                td = model.human_attribute_name(attribute)
                 td
                   - if values.first.inherited_by?(ActiveRecord::Base)
                     = smart_link_to values.first
