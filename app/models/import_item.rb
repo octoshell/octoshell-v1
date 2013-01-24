@@ -287,7 +287,7 @@ private
       r = Request.to_generic_model.create! do |r|
         r.state = 'active'
         r.user_id = @user.id
-        r.cluster_project_id = @cluster_project.id
+        r.cluster_project_id = @group.id
         r.cpu_hours = 0
         r.gpu_hours = 0
         r.size      = 0
