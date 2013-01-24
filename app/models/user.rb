@@ -132,6 +132,10 @@ class User < ActiveRecord::Base
     abilities = Ability.where(group_id: group_ids).order(sort).uniq_by(&:to_definition)
     abilities.any? ? abilities : Ability.default
   end
+
+  def all_sureties
+    Surety.where("id in ? or project_id in ?", surety_ids, owned_project_ids)
+  end
   
   def all_projects
     projects.where("accounts.state = 'active' or projects.user_id = ?", id)

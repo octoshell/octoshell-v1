@@ -27,7 +27,14 @@ class Report < ActiveRecord::Base
       if Date.current < Date.new(2013, 2, 1)
         report.update_attribute(:sent_on_time, true)
       end
-      report.begin_assessing if report.expert
+      if report.expert
+        report.begin_assessing!
+        Mailer.report_submitted(report).deliver
+      end
+    end
+
+    after_transition on: :decline do |report, transition|
+      Mailer.report_declined(report).deliver
     end
 
     state :assessing do

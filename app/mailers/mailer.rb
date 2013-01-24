@@ -78,6 +78,18 @@ class Mailer < ActionMailer::Base
     mail to: @user.email, subject: %{Новое сообщение в отчете ##{reply.report_id}}
   end
 
+  def report_declined(report)
+    @report = report
+    mail to: @report.user.email, subject: %{Ваш отчет отклонен.}
+  end
+
+  def report_submitted(report)
+    @report = report
+    mail to: @report.user.email, subject: %{Пользователь отправил отчет ##{@report.id} на рассмотрение}
+  end
+
+private
+
   def markdown(text)
     Redcarpet.new(text, :smart, :filter_html, :hard_wrap).to_html.html_safe
   end

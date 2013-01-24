@@ -55,7 +55,7 @@ class SuretiesController < ApplicationController
 private
   
   def find_surety(id)
-    Surety.where(project_id: current_user.owned_project_ids).find(id)
+    current_user.sureties.find(id)
   end
   
   def redirect_to_surety_with_alert(surety)
