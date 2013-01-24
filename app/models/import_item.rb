@@ -284,7 +284,7 @@ private
 
   def create_request!
     @request = begin
-      r = Requet.to_generic_model.create! do |r|
+      r = Request.to_generic_model.create! do |r|
         t.state = 'active'
         t.user_id = @user.id
         t.cluster_project_id = @cluster_project.id
