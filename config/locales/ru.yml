@@ -533,6 +533,9 @@ ru:
         illustrations_points: Иллюстрации
         statement_points: Изложение
         summary_points: Общая оценка
+        materials_file_name: Материалы (название файла)
+        materials_file_size: Материалы (размер файла)
+        materials_updated_at: Материалы (обновлено в)
       report/organization:
         name: Название
         subdivision: Подразделение

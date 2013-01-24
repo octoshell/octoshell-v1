@@ -25,7 +25,10 @@ class Report::Project < ActiveRecord::Base
     :directions_of_science,
     :critical_technologies,
     :areas,
-    :computing_systems
+    :computing_systems,
+    :materials_file_name,
+    :materials_file_size,
+    :materials_updated_at
   ]
 
   DIRECTIONS_OF_SCIENCE = [
