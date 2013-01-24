@@ -48,6 +48,7 @@ class ImportItem < ActiveRecord::Base
         @login         = create_cluster_user!
         @keys          = create_credentials!
         @accesses      = create_accesses!
+        @request       = create_request!
         destroy
       end
       true
@@ -278,6 +279,20 @@ private
       end
       access.valid? or raise access.errors.inspect
       access
+    end
+  end
+
+  def create_request!
+    @request = begin
+      r = Requet.to_generic_model.create! do |r|
+        t.state = 'active'
+        t.user_id = @user.id
+        t.cluster_project_id = @cluster_project.id
+        t.cpu_hours = 0
+        t.gpu_hours = 0
+        t.size      = 0
+      end
+      Request.find(r.id)
     end
   end
 end
