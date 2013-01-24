@@ -52,7 +52,10 @@ class Admin::UsersController < Admin::ApplicationController
 private
   
   def setup_default_filter
-    params[:search] ||= { state_in: ['sured'] }
+    params[:search] ||= {
+      state_in: ['sured'],
+      user_groups_group_name_in: ['authorized', 'superadmins']
+    }
     params[:search][:meta_sort] ||= 'last_name.asc'
   end
 end

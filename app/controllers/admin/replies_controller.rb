@@ -1,4 +1,6 @@
 class Admin::RepliesController < Admin::ApplicationController
+  before_filter { authorize! :manage, :reports }
+  
   def create
     @reply = Reply.new(params[:reply])
     @reply.user = current_user

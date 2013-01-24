@@ -1,12 +1,13 @@
 = simple_form_for [:admin, @group], html: { class: 'form-horizontal' } do |f|
   = f.input :name, disabled: @group.system
-  legend = t('.abilities')
-  div class="control-group"
-    = f.fields_for :abilities do |f|
-      div class="controls"
-        label class="checkbox"
-          = f.check_box :available, class: "js-ability-#{f.object.action}-#{f.object.subject}"
-          |  
-          = f.object.description
+  - if f.object.persisted?
+    legend = t('.abilities')
+    div class="control-group"
+      = f.fields_for :abilities do |f|
+        div class="controls"
+          label class="checkbox"
+            = f.check_box :available, class: "js-ability-#{f.object.action}-#{f.object.subject}"
+            |  
+            = f.object.description
   div class="form-actions"
     = f.submit class: 'btn btn-primary'

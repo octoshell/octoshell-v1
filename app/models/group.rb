@@ -3,7 +3,7 @@ class Group < ActiveRecord::Base
   has_many :user_groups, dependent: :destroy
   has_many :abilities, dependent: :destroy, order: "id"
 
-  attr_accessible :name, :abilities_attributes
+  attr_accessible :name, :abilities_attributes, as: :admin
   accepts_nested_attributes_for :abilities
 
   after_create :create_abilities

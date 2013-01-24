@@ -6,7 +6,7 @@ class Ability < ActiveRecord::Base
   validates :action, :subject, :group, presence: true
   validates :action, uniqueness: { scope: [:subject, :group_id] }
 
-  attr_accessible :available
+  attr_accessible :available, as: :admin
 
   scope :by_definition, (lambda do |d|
     where(action: d.action, subject: d.subject)

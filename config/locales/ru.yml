@@ -568,6 +568,7 @@ ru:
         state: Состояние
         avatar: Фото
         created_at: Создан
+        groups: Группы
       surety_member:
         full_name: ФИО
         email: Email

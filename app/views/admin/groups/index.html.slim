@@ -1,15 +1,17 @@
 - title t('.title', default: 'Groups')
 
-/ div class="link-actions"
-/   = link_to t('.new_group'), new_admin_group_path, class: 'btn'
+div class="link-actions"
+  = link_to t('.new_group'), new_admin_group_path, class: 'btn'
 
 table class="table table-bordered"
   tr
     th = Group.human_attribute_name(:name)
-    th
+    th Пользователи
+    th 
   - @groups.each do |group|
     tr class="js-group-#{group.id}"
       td = group.name
+      td = link_to 'пользователи', admin_users_path(search: { user_groups_group_name_in: [group.name]})
       td
         = link_to t('.edit'), [:edit, :admin, group]
         |  / 

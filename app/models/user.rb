@@ -44,9 +44,10 @@ class User < ActiveRecord::Base
     :avatar, :additional_emails_attributes, :phone
   attr_accessible :first_name, :last_name, :middle_name, :email, :password,
     :password_confirmation, :remember_me, :new_organization, :organization_id,
-    :admin, :avatar, :additional_emails_attributes, :phone, as: :admin
+    :admin, :avatar, :additional_emails_attributes, :phone, :group_ids, as: :admin
   
   accepts_nested_attributes_for :additional_emails, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :groups
   
   scope :admins, where(admin: true).where("users.state != 'closed'")
   scope :finder, (lambda do |q|

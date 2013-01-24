@@ -4,6 +4,7 @@
   = autocomplete :user, f, label: "ФИО или email", name: :id_eq
   = autocomplete :organization, f, name: :memberships_organization_id_eq
   = f.input :accounts_cluster_users_username_eq, label: 'Login (на кластере)', required: false
+  = f.input :user_groups_group_name_in, label: 'Группа', required: false, collection: Group.pluck(:name), input_html: { multiple: true }
   = f.input :state_in, collection: User.human_state_names, input_html: { multiple: true }, required: false
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'

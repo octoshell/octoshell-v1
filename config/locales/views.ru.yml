@@ -15,6 +15,9 @@ ru:
         edit: Редактировать
         destroy: Удалить
         confirm_destroy: Вы уверены?
+        new_group: Новая группа
+      new:
+        title: Новая группа
       edit: 
         title: Редактирование
       form:
