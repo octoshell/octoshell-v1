@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   
   def dashboard
     if may? :access, :admin
-      redirect_to admin_users_path
+      redirect_to admin_start_path
     elsif logged_in?
       redirect_to projects_path
     else
@@ -41,7 +41,7 @@ private
   
   def not_authorized
     if may?(:access, :admin)
-      redirect_to admin_users_path, alert: "У вас недостаточно прав для доступа в #{"http://#{request.host}#{request.fullpath}"}"
+      redirect_to admin_start_path, alert: "У вас недостаточно прав для доступа в #{"http://#{request.host}#{request.fullpath}"}"
     elsif logged_in?
       redirect_to projects_path, alert: "У вас недостаточно прав для доступа в #{"http://#{request.host}#{request.fullpath}"}"
     else
@@ -115,4 +115,15 @@ private
     @subnamespace
   end
   helper_method :subnamespace
+
+  def admin_start_path
+    page = %w(users reports sureties requests projects tickets clusters tasks 
+        organizations organization_kinds critical_technologies
+        direction_of_sciences position_names accesses cluster_projects
+        cluster_users extends images project_prefixes groups pages).find do |i|
+      may? :manage, i.to_sym
+    end
+    send("admin_#{page}_path")
+  end
+  helper_method :admin_start_path
 end
