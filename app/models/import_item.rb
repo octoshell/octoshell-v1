@@ -285,12 +285,12 @@ private
   def create_request!
     @request = begin
       r = Request.to_generic_model.create! do |r|
-        t.state = 'active'
-        t.user_id = @user.id
-        t.cluster_project_id = @cluster_project.id
-        t.cpu_hours = 0
-        t.gpu_hours = 0
-        t.size      = 0
+        r.state = 'active'
+        r.user_id = @user.id
+        r.cluster_project_id = @cluster_project.id
+        r.cpu_hours = 0
+        r.gpu_hours = 0
+        r.size      = 0
       end
       Request.find(r.id)
     end
