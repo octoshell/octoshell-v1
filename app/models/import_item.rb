@@ -133,6 +133,7 @@ private
         user.additional_emails.build { |e| e.email = additional_email }
       end
     end.save!
+    user.send :setup_default_groups
     user
   end
   
