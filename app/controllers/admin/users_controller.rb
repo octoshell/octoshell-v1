@@ -10,7 +10,6 @@ class Admin::UsersController < Admin::ApplicationController
   
   def show
     @user = User.find(params[:id])
-    format.html
   end
     
   def edit
