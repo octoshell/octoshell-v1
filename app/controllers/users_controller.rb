@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :logout, except: [:index, :email]
+  before_filter :logout, except: [:index, :email, :show]
   before_filter :setup_default_filter, only: :index
   
   def new
@@ -22,6 +22,13 @@ class UsersController < ApplicationController
         @users = User.use_scope(params[:scope]).order('last_name asc, first_name asc').finder(params[:q])
         render json: { records: @users.page(params[:page]).per(params[:per]).as_json(for: :ajax), total: @users.count }
       end
+    end
+  end
+
+  def show
+    @user = User.find(params[:id])
+    respond_to do |format|
+      format.json { render json: @user.as_json(for: :ajax) }
     end
   end
   

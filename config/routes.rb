@@ -5,7 +5,7 @@ MSU::Application.routes.draw do
   resources :users, only: [:new, :create] do
     get :confirmation, on: :collection
   end
-  resources :users, only: [:index], as: :json
+  resources :users, only: [:index, :show], as: :json
 
   # notifications
   resources :notifications, only: :index

@@ -4,24 +4,13 @@ class Admin::UsersController < Admin::ApplicationController
   before_filter { authorize! :manage, :users }
   
   def index
-    respond_to do |format|
-      format.html do
-        @search = User.includes(:membershiped_organizations).search(params[:search])
-        @users = show_all? ? @search.all : @search.page(params[:page])
-      end
-      format.json do
-        @users = User.use_scope(params[:scope]).order('last_name asc, first_name asc').finder(params[:q])
-        render json: { records: @users.page(params[:page]).per(params[:per]).as_json(for: :ajax), total: @users.count }
-      end
-    end
+    @search = User.includes(:membershiped_organizations).search(params[:search])
+    @users = show_all? ? @search.all : @search.page(params[:page])
   end
   
   def show
     @user = User.find(params[:id])
-    respond_to do |format|
-      format.html
-      format.json { render json: @user }
-    end
+    format.html
   end
     
   def edit
