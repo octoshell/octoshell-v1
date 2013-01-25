@@ -309,7 +309,7 @@ private
   end
 
   def setup_default_groups
-    user_groups.where(group_id: Group.authorized.id).find_or_create!
+    user_groups.where(group_id: Group.authorized.id).first_or_create!
     true
   end
 end
