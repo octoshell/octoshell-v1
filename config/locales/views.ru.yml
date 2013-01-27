@@ -307,6 +307,9 @@ ru:
     new:
       title: Восстановление пароля
       send: Отправить
+    confirmation:
+      title: Восстановление пароля
+      intructions_are_sent: Инстукции по смене пароля отправлены
   activations:
     new:
       title: Инструкции по активации
