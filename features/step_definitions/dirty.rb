@@ -77,7 +77,7 @@ end
 
 
 
-Given /I have a project/ do
+Given /^I have a project$/ do
   @project = FactoryGirl.create(:project, user: @current_user)
 end
 

@@ -11,10 +11,12 @@ table class="table table-bordered table-striped"
     th class="span4" = Report.model_name.human
     th class="span5" = Report.human_attribute_name(:state)
     th Эксперт
+    - if may? :review, :reports
+      th
   - @reports.each do |report|
     tr
       td
-        - if report.can_begin_assessing?
+        - if report.can_begin_assessing? && may?(:manage, :reports)
           = link_to 'Оценить', [:admin, report, :begin_assessing], class: 'btn btn-mini btn-info', method: :put, style: 'float: right; margin-right: 1em;'
         - if report.assessing? || report.assessed?
           = smart_link_to report
@@ -22,5 +24,7 @@ table class="table table-bordered table-striped"
           = report.link_name
       td = report.human_state_name
       td = smart_link_to report.expert
+      - if may? :review, :reports
+        td = link_to 'просмотреть', [:admin, report, :review]
 
 = safe_paginate @reports

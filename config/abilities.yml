@@ -68,5 +68,7 @@ all:
   - show_all
 reports:
   - manage
+  - review
+  - access
 admin:
   - access

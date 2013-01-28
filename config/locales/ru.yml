@@ -71,7 +71,9 @@ ru:
     admin:
       access: Доступ в Кабинет Администратора
     reports:
+      access: Доступ в раздел отчетов
       manage: Эксперт (по отчетам)
+      review: Возможность просматривать отчеты
   views:
     pagination:
       next: Следующая

@@ -281,6 +281,7 @@ MSU::Application.routes.draw do
         get '/self', action: 'self_assessing'
         get '/all'
       end
+      get :review
       post :replies
       post :comments
       put :begin_assessing
