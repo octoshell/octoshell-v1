@@ -3,6 +3,7 @@
     tr
       th class="span1" #
       th = Organization.model_name.human
+      th = User.model_name.human
       th = Project.model_name.human
       th = Surety.human_attribute_name(:state)
       th
@@ -10,6 +11,7 @@
       tr id="surety-#{surety.id}" class="js-surety-#{surety.id}"
         td = surety.id
         td = smart_link_to surety.organization
+        td = smart_link_to surety.user
         td = smart_link_to surety.project
         td = surety.human_state_name
         td = smart_link_to surety

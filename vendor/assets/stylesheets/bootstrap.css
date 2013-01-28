@@ -2865,6 +2865,7 @@ table .span24 {
 .collapse {
   position: relative;
   height: 0;
+  padding: 0 !important;
   overflow: hidden;
   overflow: visible \9;
   -webkit-transition: height 0.35s ease;
@@ -2875,6 +2876,7 @@ table .span24 {
 
 .collapse.in {
   height: auto;
+  padding: inherit !important;
 }
 
 .close {

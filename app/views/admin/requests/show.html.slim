@@ -27,7 +27,7 @@ div class="request"
     tr
       th = Request.human_attribute_name(:user)
       td
-        table class="table table-bordered"
+        table class="table table-bordered table-condensed"
           tr
             th class="span3" = Request.human_attribute_name(:user)
             td = smart_link_to @request.user
@@ -47,7 +47,7 @@ div class="request"
     tr
       th = Organization.model_name.human
       td
-        table class="table table-bordered"
+        table class="table table-bordered table-condensed"
           tr
             th class="span3" = Organization.model_name.human
             td = smart_link_to @request.project.organization
@@ -76,3 +76,25 @@ div class="request"
       tr
         th = request_property.name
         td = request_property.value
+
+
+- @request.project.sureties.active.each do |surety|
+  h4 Поручительство ##{surety.id}
+
+  table class="table table-bordered table-condensed"
+    tr
+      th = Organization.model_name.human
+      td = smart_link_to surety.organization
+    tr
+      th = User.model_name.human
+      td = smart_link_to surety.user
+    tr
+      th = Project.model_name.human
+      td = smart_link_to surety.project
+    tr
+      td colspan="2"
+        div id="surety" class=""
+          div = link_to "Текст поручительства", "#surety_#{surety.id}", data: { toggle: "collapse",parent: "#surety_#{surety.id}" }
+          div id="surety_#{surety.id}" class="collapse"
+            == surety.html_template
+
