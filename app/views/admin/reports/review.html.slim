@@ -57,8 +57,8 @@ dl
 
   dt = Report::PersonalSurvey.human_attribute_name(:precision)
   dd
-    = @report.personal_survey.precision.to_sentence
-    - if @report.personal_survey.precision.empty?
+    = @report.personal_survey.precision
+    - unless @report.personal_survey.precision?
       | Нет 
 
   dt = Report::PersonalSurvey.human_attribute_name(:computing)
