@@ -110,11 +110,8 @@ end
 
 Given /I navigated to the surety/ do
   visit root_path
-  step %(debug)
   find('.js-menu-projects').click
-  step %(debug)
   click_on @surety.project.name
-  step %(debug)
   within ".js-surety-#{@surety.id}" do
     click_on 'Open'
   end
@@ -157,5 +154,29 @@ When /^I choose "(.*?)" in select2 box$/ do |name|
     find('.select2-input').set(name)
     sleep 0.5
     find('.select2-result-label', text: name).click
+  end
+end
+
+When /^I have a project with (\d) surety members$/ do |n|
+  step "I have a project"
+  @surety = FactoryGirl.create(:surety, project: @project)
+  @surety_member = FactoryGirl.create(:surety_member, {
+    user: @project.user,
+    surety: @surety
+  })
+  @surety_members = [@surety_member]
+  
+  (n.to_i - 1).times do
+    @surety_members << FactoryGirl.create(:surety_member, surety: @project.sureties.first)
+  end
+end
+
+Then /^the page should have a table of the Members List$/ do
+  
+  page.find("#surety-members").tap do |table|
+    @surety_members.each do |member|
+      should have_content(member.account_code.try(:code))
+      should have_content(member.full_name)
+    end
   end
 end

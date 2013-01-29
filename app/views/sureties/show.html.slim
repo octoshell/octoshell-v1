@@ -9,9 +9,13 @@ table class="table table-bordered noprint"
     td id="surety-#{@surety.id}-status" = @surety.human_state_name
 
 div class="link-actions noprint"
+  = link_to t('.print', default: 'Print'), '#', class: 'btn btn-primary  printable', data: { print: '#surety' }
+  |  
   = link_to 'Скачать RTF', surety_path(@surety, format: :rtf), class: 'btn'
-  = " "
+  |  
   = link_to 'Загрузить скан', [@surety, :scan], class: 'btn'
+  |  
+  = link_to t('.print_members_list', default: 'Print Members List'), '#', class: 'btn printable', data: { print: '#surety-members' }
   - if @surety.can__close?
     = " "
     = link_to Surety.human_state_event_name(:_close), surety_close_path(@surety), class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
@@ -38,3 +42,13 @@ div id="surety"
         div class="span6"
           p
             strong = link_to 'Перейти к заявке', ticket
+
+div id="surety-members" class="hidden"
+  table class="table table-bordered table-condensed"
+    tr
+      th ФИО
+      td Код приглашения
+    - @surety.surety_members.each do |member|
+      tr
+        td = member.full_name
+        td = member.account_code.try(:code)

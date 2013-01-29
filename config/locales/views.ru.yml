@@ -296,6 +296,9 @@ ru:
       title: Загрузка скана
       file: Файл
       upload: Загрузить
+    show:
+      print: Печать
+      print_members_list: Распечатать приглашения учасникам
   sessions:
     new:
       title: Авторизация

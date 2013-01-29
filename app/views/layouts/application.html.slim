@@ -12,6 +12,7 @@ html
       window.env = '#{Rails.env}'
       window.locale = '#{I18n.locale}'
   body
+    div id="print-me"
     div class="container"
       - if session[:soul_id]
         div class="soul-box"

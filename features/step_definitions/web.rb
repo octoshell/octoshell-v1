@@ -88,3 +88,7 @@ end
 When /^I check ability for "(\w+)" "(\w+)"$/ do |action, subject|
   page.find(".js-ability-#{action}-#{subject}").set(true)
 end
+
+And /^the page should have link to "(.*)"$/ do |name|
+  page.should have_link("Print Members List")
+end
