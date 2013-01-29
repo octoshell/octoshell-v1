@@ -135,7 +135,7 @@ class User < ActiveRecord::Base
   end
 
   def all_sureties
-    Surety.where("id in ? or project_id in ?", surety_ids, owned_project_ids)
+    Surety.where("id in (?) or project_id in (?)", surety_ids, owned_project_ids)
   end
   
   def all_projects

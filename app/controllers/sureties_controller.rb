@@ -55,7 +55,7 @@ class SuretiesController < ApplicationController
 private
   
   def find_surety(id)
-    current_user.sureties.find(id)
+    current_user.all_sureties.find(id)
   end
   
   def redirect_to_surety_with_alert(surety)
