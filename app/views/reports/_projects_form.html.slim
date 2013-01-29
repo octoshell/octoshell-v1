@@ -13,7 +13,7 @@
       div class="row"
         div class="span6 no-extra-margin"
           legend = t(".ru_project_card")
-          = f.input :ru_title,     as: :string, input_html: { role: 'project-name-autocompleter' }
+          = f.input :ru_title,     as: :string, input_html: { role: 'project-name-autocompleter' }, hint: 'Здесь следует ввести реальное название исследовательского проекта'
         div class="span6 no-extra-margin"
           legend = t(".en_project_card")
           = f.input :en_title,     as: :string
