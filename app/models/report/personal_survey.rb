@@ -79,7 +79,7 @@ class Report::PersonalSurvey < ActiveRecord::Base
   serialize :computing, Array
   serialize :learning, Array
 
-  %w(software technologies compilators learning computing precision).each do |attr|
+  %w(software technologies compilators learning computing).each do |attr|
     define_method attr do
       Array(self[attr]).find_all(&:present?)
     end
