@@ -44,16 +44,36 @@ class Project < ActiveRecord::Base
   scope :finder, lambda { |q| where("lower(name) like :q", q: "%#{q.to_s.mb_chars.downcase}%") }
   
   state_machine initial: :active do
+    state :announced
     state :active
+    state :blocked
     state :closed
     
     event :_close do
       transition active: :closed
     end
+    
+    event :activate do
+      transition [:announced, :blocked] => :active
+    end
+    
+    event :block do
+      transition [:announced, :active] => :blocked
+    end
   end
   
   define_defaults_events :close
   define_state_machine_scopes
+  
+  def revalidate!
+    if announced?
+      has_requests? and (has_active_request? ? activate! : block!)
+    elsif active?
+      has_active_request? or block!
+    elsif blocked?
+      has_active_request? and activate!
+    end
+  end
   
   def close!
     transaction do
@@ -128,6 +148,14 @@ class Project < ActiveRecord::Base
     valid = name == code
     errors.add(:confirmation_code, :invalid) unless valid
     valid
+  end
+  
+  def has_active_request?
+    requests.active.any?
+  end
+  
+  def has_requests?
+    requests.any?
   end
   
 private

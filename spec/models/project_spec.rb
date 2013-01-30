@@ -66,4 +66,116 @@ describe Project do
       project.requests.all?(&:closed?).should be_true
     end
   end
+  
+  describe '#revalidate!' do
+    context 'when announced' do
+      subject do
+        project = create(:project)
+        project.state = 'announced'
+        project
+      end
+      
+      context 'and has an active request' do
+        before do
+          subject.stub(:has_requests?).and_return(true)
+          subject.stub(:has_active_request?).and_return(true)
+          subject.revalidate!
+        end
+        
+        it { should be_active }
+      end
+      
+      context 'and has not any requests' do
+        it { should be_announced }
+      end
+      
+      context 'and has requests and but no one active' do
+        before do
+          subject.stub(:has_requests?).and_return(true)
+          subject.revalidate!
+        end
+        
+        it { should be_blocked }
+      end
+    end
+    
+    context 'when active' do
+      subject do
+        project = create(:project)
+        project.state = 'active'
+        project
+      end
+      
+      context 'and has an active request' do
+        before do
+          subject.stub(:has_requests?).and_return(true)
+          subject.stub(:has_active_request?).and_return(true)
+          subject.revalidate!
+        end
+        
+        it { should be_active }
+      end
+      
+      context 'and has not any active requests' do
+        before do
+          subject.stub(:has_requests?).and_return(true)
+          subject.revalidate!
+        end
+        
+        it { should be_blocked }
+      end
+    end
+    context 'when blocked' do
+      subject do
+        project = create(:project)
+        project.state = 'blocked'
+        project
+      end
+      
+      context 'and has an active request' do
+        before do
+          subject.stub(:has_requests?).and_return(true)
+          subject.stub(:has_active_request?).and_return(true)
+          subject.revalidate!
+        end
+        
+        it { should be_active }
+      end
+      
+      context 'and has not any active requests' do
+        before do
+          subject.stub(:has_requests?).and_return(true)
+          subject.revalidate!
+        end
+        
+        it { should be_blocked }
+      end
+    end
+    context 'when closed' do
+      subject do
+        project = create(:project)
+        project.state = 'closed'
+        project
+      end
+      
+      context 'and has an active request' do
+        before do
+          subject.stub(:has_requests?).and_return(true)
+          subject.stub(:has_active_request?).and_return(true)
+          subject.revalidate!
+        end
+        
+        it { should be_closed }
+      end
+      
+      context 'and has not any active requests' do
+        before do
+          subject.stub(:has_requests?).and_return(true)
+          subject.revalidate!
+        end
+        
+        it { should be_closed }
+      end
+    end
+  end
 end
