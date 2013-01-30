@@ -831,6 +831,8 @@ ru:
         state:
           states:
             active: Активен
+            announced: Анонсирован
+            blocked: Заблокирован
             closed: Удален
         events:
           _close: Удалить
