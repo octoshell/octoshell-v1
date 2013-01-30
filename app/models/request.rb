@@ -26,6 +26,7 @@ class Request < ActiveRecord::Base
   
   before_validation :assign_cluster_project, on: :create
   after_create :create_request_properties
+  after_save :revalidate_project
   
   scope :last_pending, where(state: 'pending').order('id desc')
   
@@ -100,5 +101,9 @@ private
 
   def link_name
     "Request #{id}"
+  end
+  
+  def revalidate_project
+    project.revalidate!
   end
 end
