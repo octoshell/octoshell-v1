@@ -1,3 +1,6 @@
 - title t('.title', default: 'New')
 
-= render 'form'
+- if @projects.any?
+  = render 'form'
+- else
+  p Нет активных проектов
