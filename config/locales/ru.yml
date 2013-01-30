@@ -594,6 +594,7 @@ ru:
         direction_of_science_ids: Направления исследований
         critical_technologies: Критические технологии
         project_prefix: Префикс
+        confirmation_code: Подтверждение
       organization_kind:
         name: Название
         state: Состояние
@@ -988,3 +989,5 @@ ru:
   report_returned_to_user_for_edit: Отчет передан пользователю для редактирования
   report_successfuly_assessed: Отчет успешно оценен
   user: Пользователь
+  project_successfully_closed: Проект успешно закрыт
+  wrong_confirmation_code: Неверный код подтверждения

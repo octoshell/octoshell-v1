@@ -12,13 +12,15 @@ p class="lead" = @project.description
 
 div class="link-actions"
   = link_to t('.edit', default: 'Edit'), edit_project_path(@project), class: 'btn'
+  
   |  
-  = link_to t('.new_request', default: 'New Request'), new_request_path(project_id: @project.id), class: "btn"
-  |  
+  - if @project.active?
+    = link_to t('.new_request', default: 'New Request'), new_request_path(project_id: @project.id), class: "btn"
+    |  
   = link_to t('.invite', default: 'Invite'), [@project, :invite], class: 'btn'
   - if @project.can__close?
     = " "
-    = link_to Project.human_state_event_name(:_close), project_close_path(@project), method: :put, class: "btn btn-danger #{'disabled' if @project.invalid?}", data: { confirm: t('.confirm_close', default: 'Are you sure?') }
+    = link_to t('.close', default: 'Close'), project_close_path(@project), class: "btn btn-danger"
   = " "
 
 table class="table table-bordered"

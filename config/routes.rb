@@ -52,6 +52,7 @@ MSU::Application.routes.draw do
     get :invite
     post :sureties
     post :accounts
+    get :close, action: :close_confirmation
     put :close
     resources :versions, only: [:index, :show], resource: 'Project'
   end

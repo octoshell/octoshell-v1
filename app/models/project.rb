@@ -2,6 +2,8 @@
 class Project < ActiveRecord::Base
   include Models::Limitable
   
+  attr_accessor :confirmation_code
+  
   CLUSTER_USER_TYPES = %w(account project)
   has_paper_trail
   
@@ -28,7 +30,7 @@ class Project < ActiveRecord::Base
   
   attr_accessible :name, :description, :organization_id, :sureties_attributes,
     :organization_ids, :direction_of_science_ids, :critical_technology_ids,
-    :project_prefix_id
+    :project_prefix_id, :confirmation_code
   attr_accessible :user_id, :organization_id, :organization_ids,
     :project_prefix_id, :name, :username, :description,
     :direction_of_science_ids, :critical_technology_ids, :cluster_user_type,
@@ -120,6 +122,12 @@ class Project < ActiveRecord::Base
 
   def link_name
     name
+  end
+  
+  def valid_to_close?(code)
+    valid = name == code
+    errors.add(:confirmation_code, :invalid) unless valid
+    valid
   end
   
 private

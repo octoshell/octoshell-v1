@@ -180,3 +180,15 @@ Then /^the page should have a table of the Members List$/ do
     end
   end
 end
+
+Given /^I have a project named "(.*?)"$/ do |name|
+  @project = FactoryGirl.create(:project, user: @current_user, name: name)
+end
+
+Given /^I navigated to the project$/ do
+  visit root_path
+  click_on 'Projects'
+  within ".js-project-#{@project.id}" do
+    click_on @project.name
+  end
+end

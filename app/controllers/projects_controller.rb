@@ -57,11 +57,12 @@ class ProjectsController < ApplicationController
   
   def close
     @project = find_project(params[:project_id])
-    if @project.close
+    code = params[:project][:confirmation_code]
+    if @project.valid_to_close?(code) && @project.close
       @project.user.track! :close_project, @project, current_user
-      redirect_to @project
+      redirect_to @project, notice: t('.project_successfully_closed', default: 'Project successfully closed')
     else
-      redirect_to @project, alert: @full_messages.join(', ')
+      flash.now[:alert] = t('.wrong_confirmation_code', default: 'Wrong confirmation code')
     end
   end
   
@@ -94,6 +95,11 @@ class ProjectsController < ApplicationController
     @account = @project.accounts.build
     @surety = @project.build_additional_surety
     render :invite
+  end
+  
+  def close_confirmation
+    @project = find_project(params[:project_id])
+    render :close
   end
   
 private

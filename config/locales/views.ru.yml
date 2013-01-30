@@ -122,6 +122,12 @@ ru:
         html: "До конца приема отчетов осталось дней: <strong>%{days}</strong>."
       your_report_is_submitted:
         html: "Вы отправили ваш отчет. Нужна помощь? <a href='/tickets/new'>Оставьте заявку</a>"
+    close:
+      title: Закрытие проекта
+      info:
+        html: Закрытие проекта удалит все данные и закроет доступы на кластеры.<br /> <strong>Вы не сможете отменить это действие</strong>.
+      enter_confirmation_code: "Введите название проекта, чтобы подтвердить его закрытие"
+      close: Закрыть
     table:
       no_projects: Нет проектов
       invite: Пригласить
@@ -145,6 +151,7 @@ ru:
       no_accounts: Нет доступов
       no_requests: Нет заявок
       nothing: Нет
+      close: Закрыть
     invite:
       title: Пригласить в проект
       user_has_a_surety: У пользователя есть поручительство
