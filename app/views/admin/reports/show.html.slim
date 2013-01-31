@@ -50,8 +50,65 @@
       td colspan="2"
         = link_to project.materials_file_name, project.materials.url
         |  (#{number_to_human_size(project.materials_file_size)})
+  
+  h3 Дополнительная информация
+  
+  p = project.request_comment? ? project.request_comment : "Нет"
+  
+  h3 Количественные характеристики
 
-  h4 Оценки
+  h5 Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
+
+  table class="table table-striped table-bordered table-condensed"
+    tr
+      td class="span5" = Report::Project.human_attribute_name :books_count
+      td = project.books_count
+    tr
+      td = Report::Project.human_attribute_name :vacs_count
+      td = project.vacs_count
+    tr
+      td = Report::Project.human_attribute_name :lectures_count
+      td = project.lectures_count
+
+  h5 Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ
+
+  table class="table table-striped table-bordered table-condensed"
+    tr
+      td class="span5" = Report::Project.human_attribute_name :rffi_grants_count
+      td = project.rffi_grants_count
+    tr
+      td = Report::Project.human_attribute_name :ministry_of_education_grants_count
+      td = project.ministry_of_education_grants_count
+    tr
+      td = Report::Project.human_attribute_name :rosnano_grants_count
+      td = project.rosnano_grants_count
+    tr
+      td = Report::Project.human_attribute_name :ministry_of_communications_grants_count
+      td = project.ministry_of_communications_grants_count
+    tr
+      td = Report::Project.human_attribute_name :ministry_of_defence_grants_count
+      td = project.ministry_of_defence_grants_count
+    tr
+      td = Report::Project.human_attribute_name :ran_grants_count
+      td = project.ran_grants_count
+    tr
+      td = Report::Project.human_attribute_name :other_russian_grants_count
+      td = project.other_russian_grants_count
+    tr
+      td = Report::Project.human_attribute_name :other_intenational_grants_count
+      td = project.other_intenational_grants_count
+
+  h5 Число премий, наград, медалей и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
+
+  table class="table table-striped table-bordered table-condensed"
+    tr
+      td class="span5" = Report::Project.human_attribute_name :award_names
+      td = project.award_names
+    tr
+      td = Report::Project.human_attribute_name :awards_count
+      td = project.awards_count
+
+  h3 Оценки
 
   = simple_form_for [:admin, @report, project], html: { class: 'form-horizontal' } do |f|
     - %w(illustrations_points statement_points summary_points).each do |attr|
