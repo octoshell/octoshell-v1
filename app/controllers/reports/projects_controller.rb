@@ -1,4 +1,6 @@
 class Reports::ProjectsController < ApplicationController
+  before_filter :require_login
+  
   def create
     @report = get_report(params[:report_id])
     @report.projects.create! if @report.editing?
