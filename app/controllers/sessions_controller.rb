@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     email, password, remember = fetch_user(params[:user])
     if @user = login(email, password, remember)
       @user.track! :create_session, @user, current_user
-      redirect_to root_url
+      redirect_back_or_to(root_url)
     else
       @user = User.initialize_with_auth_errors(email)
       flash.now[:alert] = @user.errors.full_messages.join(', ')
