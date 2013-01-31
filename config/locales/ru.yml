@@ -833,9 +833,9 @@ ru:
             active: Активен
             announced: Анонсирован
             blocked: Заблокирован
-            closed: Удален
+            closed: Завершен
         events:
-          _close: Удалить
+          _close: Завершить
       request:
         state:
           states:
@@ -993,3 +993,7 @@ ru:
   user: Пользователь
   project_successfully_closed: Проект успешно закрыт
   wrong_confirmation_code: Неверный код подтверждения
+  
+  mailer:
+    project_blocked:
+      subject: "Доступ к проекту %{name} заблокирован"

@@ -50,7 +50,7 @@ class Project < ActiveRecord::Base
     state :closed
     
     event :_close do
-      transition active: :closed
+      transition [:announced, :blocked, :active] => :closed
     end
     
     event :activate do
@@ -59,6 +59,10 @@ class Project < ActiveRecord::Base
     
     event :block do
       transition [:announced, :active] => :blocked
+    end
+    
+    after_transition :active => :blocked do |project|
+      project.notify_about_blocking
     end
   end
   
@@ -156,6 +160,12 @@ class Project < ActiveRecord::Base
   
   def has_requests?
     requests.any?
+  end
+  
+  def notify_about_blocking
+    accounts.active.each do |account|
+      Mailer.project_blocked(account).deliver
+    end
   end
   
 private

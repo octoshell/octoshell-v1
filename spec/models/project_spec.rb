@@ -178,4 +178,16 @@ describe Project do
       end
     end
   end
+  
+  describe '#notify_about_blocking' do
+    subject { create(:project) }
+    
+    it 'should send emails for all active accounts' do
+      mailer = mock; mailer.should_receive(:deliver)
+      project.accounts.each do |account|
+        Mailer.should_receive(:project_blocked).with(account).and_return(mailer)
+      end
+      project.notify_about_blocking
+    end
+  end
 end

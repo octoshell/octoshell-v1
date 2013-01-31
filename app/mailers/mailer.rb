@@ -87,6 +87,12 @@ class Mailer < ActionMailer::Base
     @report = report
     mail to: @report.user.email, subject: %{Пользователь отправил отчет ##{@report.id} на рассмотрение}
   end
+  
+  def project_blocked(account)
+    @project = account.project
+    @user = account.user
+    mail to: @user.email, subject: subject(name: @project.name)
+  end
 
 private
 
@@ -94,4 +100,9 @@ private
     Redcarpet.new(text, :smart, :filter_html, :hard_wrap).to_html.html_safe
   end
   helper_method :markdown
+  
+  def subject(options = {})
+    mail = caller[0][/`.*'/][1..-2]
+    t("mailer.#{mail}.subject", options)
+  end
 end
