@@ -60,9 +60,5 @@ private
   def setup_default_filter
     params[:search] ||= { state_in: ['sured'] }
     params[:search][:meta_sort] ||= 'last_name.asc'
-  end
-  
-  def skip_authentication_by_token
-    params[:action] == 'activate'
-  end
+  end  
 end

@@ -37,8 +37,4 @@ private
   def redirect_to_profile
     redirect_to edit_profile_path
   end
-  
-  def skip_authentication_by_token
-    params[:action] == 'change'
-  end
 end

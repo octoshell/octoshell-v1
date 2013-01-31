@@ -6,6 +6,6 @@
       strong = reply.user.full_name
     p = reply.message
 
-p = link_to 'Перейти к заявке', ticket_url(@ticket, token: @user.token)
+p = link_to 'Перейти к заявке', ticket_url(@ticket)
 
 = render 'signature'

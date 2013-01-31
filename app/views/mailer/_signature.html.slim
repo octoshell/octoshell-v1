@@ -6,8 +6,8 @@ hr
 p style="color: #666" Лаборатория Параллельных информационных технологий НИВЦ МГУ.
 p style="color: #666"
   - if @user && @user.activation_active?
-    = link_to 'Поддержка', new_ticket_url(token: @user.token)
+    = link_to 'Поддержка', new_ticket_url
     = " | "
-    = link_to 'Перейти на сайт', root_url(token: @user.token)
+    = link_to 'Перейти на сайт', root_url
   - else
     = link_to 'Перейти на сайт', root_url

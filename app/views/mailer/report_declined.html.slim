@@ -4,6 +4,6 @@ p Ваш отчет отклонен.
 
 p Вы можете его отредактировать и снова отправить эксперту.
 
-p = link_to "Отчет", edit_report_url(@report, token: @report.user.token)
+p = link_to "Отчет", edit_report_url(@report)
 
 = render 'signature'
