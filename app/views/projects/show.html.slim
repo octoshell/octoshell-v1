@@ -20,7 +20,7 @@ div class="link-actions"
   = link_to t('.invite', default: 'Invite'), [@project, :invite], class: 'btn'
   - if @project.can__close?
     = " "
-    = link_to t('.close', default: 'Close'), project_close_path(@project), class: "btn btn-danger"
+    = link_to t('.close', default: 'Close'), project_close_path(@project), class: "btn btn-danger #{'disabled' if @project.invalid?}"
   = " "
 
 table class="table table-bordered"

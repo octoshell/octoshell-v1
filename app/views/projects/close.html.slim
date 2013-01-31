@@ -6,4 +6,4 @@ p class="lead" = t('.info.html', default: 'Are you sure?')
   legend = t('.enter_confirmation_code', default: 'Enter the project name for confirm destroying.')
   = f.input :confirmation_code
   div class="form-actions"
-    = f.button :submit, t('.close', default: 'Close'), class: 'btn-danger'
+    = f.button :submit, t('.close', default: 'Close'), class: 'btn-danger', disabled: @project.invalid?
