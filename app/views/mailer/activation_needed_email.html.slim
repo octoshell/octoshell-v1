@@ -5,5 +5,8 @@ p
   | Для активации аккаунта пройдите по ссылке 
   = link_to 'Активировать', activate_user_url(token: @user.activation_token)
   | .
+  
+p Если у Вас возникли проблемы с переходом по ссылке скопируйте и вставьте её в браузер #{activate_user_url(token: @user.activation_token)}
+  
 
 = render 'signature'
