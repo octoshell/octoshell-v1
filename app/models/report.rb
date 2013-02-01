@@ -10,6 +10,7 @@ class Report < ActiveRecord::Base
   has_one :personal_survey, dependent: :destroy
   has_many :replies
   has_many :comments
+  has_one :ticket
   belongs_to :expert, class_name: :User
 
   has_paper_trail
@@ -135,5 +136,15 @@ class Report < ActiveRecord::Base
 
   def link_name
     projects.any? ? projects.map(&:ru_title).join(', ') : I18n.t("report", id: id)
+  end
+  
+  def get_or_create_ticket!
+    ticket or create_ticket! do |t|
+      t.user = expert
+      t.subject = "Проблема с отчетом ##{id}"
+      t.message = "Просмотр администратором: [отчет](/admin/reports/#{id}/review)"
+      t.url = "/admin/reports/#{id}"
+      t.ticket_question_id = 11
+    end
   end
 end

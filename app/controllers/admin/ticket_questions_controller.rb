@@ -20,7 +20,7 @@ class Admin::TicketQuestionsController < Admin::ApplicationController
   def create
     @ticket_question = TicketQuestion.new(params[:ticket_question], as: :admin)
     if @ticket_question.save
-      redirect_to @ticket_question
+      redirect_to [:admin, @ticket_question]
     else
       render :new
     end

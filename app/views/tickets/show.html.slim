@@ -21,7 +21,7 @@ table class="table table-bordered"
     td = link_to @ticket.url, @ticket.url if @ticket.url?
   tr
     th = Ticket.human_attribute_name(:attachment)
-    td = link_to_ticket @ticket
+    td = link_to_attachment @ticket
   tr
     th = Ticket.human_attribute_name(:project)
     td = link_to_project @ticket.project if @ticket.project

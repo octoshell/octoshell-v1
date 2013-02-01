@@ -89,6 +89,12 @@ class Admin::ReportsController < Admin::ApplicationController
     authorize! :review, :reports
     @report = Report.find(params[:report_id])
   end
+  
+  def ticket
+    authorize! :manage, :reports
+    @report = get_report(params[:report_id])
+    redirect_to @report.get_or_create_ticket!
+  end
 
 private
   

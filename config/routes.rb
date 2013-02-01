@@ -288,6 +288,7 @@ MSU::Application.routes.draw do
       put :begin_assessing
       put :decline
       put :assess
+      post :ticket
       resources :report_projects, only: :update
     end
   end

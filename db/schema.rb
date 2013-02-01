@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130123080439) do
+ActiveRecord::Schema.define(:version => 20130201072454) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -653,10 +653,12 @@ ActiveRecord::Schema.define(:version => 20130123080439) do
     t.integer  "project_id"
     t.integer  "cluster_id"
     t.integer  "surety_id"
+    t.integer  "report_id"
   end
 
   add_index "tickets", ["cluster_id"], :name => "index_tickets_on_cluster_id"
   add_index "tickets", ["project_id"], :name => "index_tickets_on_project_id"
+  add_index "tickets", ["report_id"], :name => "index_tickets_on_report_id"
   add_index "tickets", ["state"], :name => "index_tickets_on_state"
   add_index "tickets", ["surety_id"], :name => "index_tickets_on_surety_id"
   add_index "tickets", ["ticket_question_id"], :name => "index_tickets_on_ticket_question_id"
@@ -700,7 +702,6 @@ ActiveRecord::Schema.define(:version => 20130123080439) do
   end
 
   add_index "users", ["activation_token"], :name => "index_users_on_activation_token"
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"
   add_index "users", ["state"], :name => "index_users_on_state"
