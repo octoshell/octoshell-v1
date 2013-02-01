@@ -5,7 +5,7 @@ p
   |  
   span class="lead offset1"
     - if current_user.report.editing?
-      = t('.you_have_x_days_for_submitting_report.html', days: Date.new(2013, 2, 1).yday - Date.current.yday)
+      = t('.you_have_x_days_for_submitting_report.html')
     - else
       = t('.your_report_is_submitted.html')
 p style="margin-top: 30px; text-align: center;" class="lead"
