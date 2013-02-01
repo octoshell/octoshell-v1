@@ -134,6 +134,6 @@ class Report < ActiveRecord::Base
   end
 
   def link_name
-    I18n.t("report", id: id)
+    projects.any? ? projects.map(&:ru_title).join(', ') : I18n.t("report", id: id)
   end
 end

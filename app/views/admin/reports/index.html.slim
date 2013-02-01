@@ -8,8 +8,8 @@ ul class="nav nav-pills"
 
 table class="table table-bordered table-striped"
   tr
-    th class="span4" = Report.model_name.human
-    th class="span5" = Report.human_attribute_name(:state)
+    th class="span5" = Report.model_name.human
+    th class="span3" = Report.human_attribute_name(:state)
     th Эксперт
     - if may? :review, :reports
       th
