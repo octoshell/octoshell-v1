@@ -2,7 +2,7 @@
 
 div id="organizations"
   div class="link-actions"
-    = link_to 'Новая позиция', new_position_name_path, class: 'btn'
+    = link_to 'Новая позиция', new_admin_position_name_path, class: 'btn'
   
   table class="table table-bordered"
     tr
@@ -14,6 +14,6 @@ div id="organizations"
         td = position_name.id
         td = position_name.name
         td
-          = link_to 'редактировать', edit_position_name_path(position_name)
+          = link_to 'редактировать', edit_admin_position_name_path(position_name)
           = ' /   '
-          = link_to 'удалить', position_name, method: :delete, data: { confirm: 'Вы уверены что хотите это удалить?' }
+          = link_to 'удалить', [:admin, position_name], method: :delete, data: { confirm: 'Вы уверены что хотите это удалить?' }

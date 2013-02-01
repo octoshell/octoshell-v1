@@ -52,6 +52,6 @@ private
   end
   
   def redirect_to_index
-    redirect_to position_names_path
+    redirect_to admin_position_names_path
   end
 end
