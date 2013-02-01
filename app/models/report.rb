@@ -146,7 +146,7 @@ class Report < ActiveRecord::Base
       t.url = "/admin/reports/#{id}"
       t.ticket_question_id = 11
       t.ticket_field_values.build do |v|
-        v.ticket_field_relation_id = 104
+        v.ticket_field_relation_id = 93
         v.value = "/admin/reports/#{id}/review"
       end
     end
