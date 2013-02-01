@@ -22,7 +22,8 @@ table class="table table-bordered table-striped"
           = smart_link_to report
         - else
           = report.link_name
-      td = report.human_state_name
+      td
+        span class="badge" = report.human_state_name
       td = smart_link_to report.expert
       - if may? :review, :reports
         td = link_to 'просмотреть', [:admin, report, :review]
