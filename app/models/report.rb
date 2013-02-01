@@ -138,13 +138,17 @@ class Report < ActiveRecord::Base
     projects.any? ? projects.map(&:ru_title).join(', ') : I18n.t("report", id: id)
   end
   
-  def get_or_create_ticket!
-    ticket or create_ticket! do |t|
+  def build_support_ticket(attributes = {})
+    build_ticket do |t|
       t.user = expert
       t.subject = "Проблема с отчетом ##{id}"
-      t.message = "Просмотр администратором: [отчет](/admin/reports/#{id}/review)"
+      t.message = attributes[:message]
       t.url = "/admin/reports/#{id}"
       t.ticket_question_id = 11
+      t.ticket_field_values.build do |v|
+        v.ticket_field_relation_id = 104
+        v.value = "/admin/reports/#{id}/review"
+      end
     end
   end
 end

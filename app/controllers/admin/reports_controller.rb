@@ -10,7 +10,7 @@ class Admin::ReportsController < Admin::ApplicationController
     authorize! :manage, :reports
     @report = get_report(params[:id])
     @reply = @report.replies.build
-    @comment = @report.comments.build
+    @ticket = @report.build_support_ticket
   end
 
   def all
@@ -50,20 +50,7 @@ class Admin::ReportsController < Admin::ApplicationController
     if @reply.save
       redirect_to admin_report_path(@report, anchor: 'replies')
     else
-      @comment = @report.comments.build
-      render :show
-    end
-  end
-
-  def comments
-    authorize! :manage, :reports
-    @report = get_report(params[:report_id])
-    @comment = @report.comments.build(params[:report_comment], as: :admin)
-    @comment.user = current_user
-    if @comment.save
-      redirect_to admin_report_path(@report, anchor: 'comments')
-    else
-      @reply = @report.replies.build
+      @ticket = @report.build_support_ticket
       render :show
     end
   end
@@ -93,7 +80,13 @@ class Admin::ReportsController < Admin::ApplicationController
   def ticket
     authorize! :manage, :reports
     @report = get_report(params[:report_id])
-    redirect_to @report.get_or_create_ticket!
+    @ticket = @report.build_support_ticket(params[:ticket])
+    if @ticket.save
+      redirect_to @ticket
+    else
+      @reply = @report.replies.build
+      render :show
+    end
   end
 
 private

@@ -19,9 +19,6 @@ table class="table table-bordered"
     th = Ticket.human_attribute_name(:subject)
     td = @ticket.subject
   tr
-    th = Ticket.human_attribute_name(:message)
-    td = markdown @ticket.message
-  tr
     th = Ticket.human_attribute_name(:url)
     td = link_to @ticket.url, @ticket.url if @ticket.url?
   tr
@@ -43,6 +40,9 @@ table class="table table-bordered"
 
 = render partial: 'tag_relations_form', locals: { ticket: @ticket }
 = render partial: 'admin/ticket_tags/remote_form', locals: { ticket_tag: @ticket_tag }
+
+h3 = Ticket.human_attribute_name(:message)
+= markdown @ticket.message
 
 h2 Переписка
 

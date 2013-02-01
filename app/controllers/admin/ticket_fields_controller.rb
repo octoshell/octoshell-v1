@@ -20,7 +20,7 @@ class Admin::TicketFieldsController < Admin::ApplicationController
   def create
     @ticket_field = TicketField.new(params[:ticket_field], as: :admin)
     if @ticket_field.save
-      redirect_to @ticket_field
+      redirect_to [:admin, @ticket_field]
     else
       render :new
     end
@@ -33,7 +33,7 @@ class Admin::TicketFieldsController < Admin::ApplicationController
   def update
     @ticket_field = find_ticket_field(params[:id])
     if @ticket_field.update_attributes(params[:ticket_field], as: :admin)
-      redirect_to @ticket_field
+      redirect_to [:admin, @ticket_field]
     else
       render :edit
     end
@@ -42,7 +42,7 @@ class Admin::TicketFieldsController < Admin::ApplicationController
   def close
     @ticket_field = find_ticket_field(params[:ticket_field_id])
     @ticket_field.close
-    redirect_to @ticket_field
+    redirect_to [:admin, @ticket_field]
   end
   
 private

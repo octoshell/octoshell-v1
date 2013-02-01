@@ -17,8 +17,8 @@
     - %w(title author).each do |attr|
       tr
         th class="span4" = Report::Project.human_attribute_name("ru_#{attr}")
-        td = project.send "ru_#{attr}"
-        td = project.send "en_#{attr}"
+        td class="span6" = project.send "ru_#{attr}"
+        td class="span6" = project.send "en_#{attr}"
     tr
       th class="span4" = Report::Project.human_attribute_name(:emails)
       td colspan="2" = project.emails
@@ -193,7 +193,11 @@ h2 id="replies" Переписка с пользователем
 
 h2 id="support" Поддержка
 
-- if @report.ticket
+- if @report.ticket.persisted?
   p = link_to 'Перейти к заявке', @report.ticket, class: 'btn btn-success'
 - else
-  p = link_to "Создать заявку", [:admin, @report, :ticket], method: :post, class: 'btn btn-success'
+  = simple_form_for @ticket, url: admin_report_ticket_path(@report, anchor: 'support'), html: { class: 'form-horizontal' } do |f|
+    = f.input :message, input_html: { rows: 4, class: 'span6' }
+    
+    div class="form-actions"
+      = f.button :submit, "Создать заявку", class: 'btn btn-success'

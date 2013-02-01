@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130201072454) do
+ActiveRecord::Schema.define(:version => 20130201100531) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -588,9 +588,10 @@ ActiveRecord::Schema.define(:version => 20130201072454) do
   create_table "ticket_fields", :force => true do |t|
     t.string   "name"
     t.string   "hint"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "state"
+    t.boolean  "url",        :default => false
   end
 
   add_index "ticket_fields", ["state"], :name => "index_ticket_fields_on_state"

@@ -14,9 +14,6 @@ table class="table table-bordered"
     th = Ticket.human_attribute_name(:subject)
     td = @ticket.subject
   tr
-    th = Ticket.human_attribute_name(:message)
-    td = markdown @ticket.message
-  tr
     th = Ticket.human_attribute_name(:url)
     td = link_to @ticket.url, @ticket.url if @ticket.url?
   tr
@@ -31,10 +28,17 @@ table class="table table-bordered"
   - @ticket.ticket_field_values.each do |value|
     tr
       th = value.ticket_field_relation.ticket_field.name
-      td = value.value
+      td
+        - if value.ticket_field_relation.ticket_field.url?
+          = link_to value.value, value.value
+        - else
+          = value.value
   tr
     th = Ticket.human_attribute_name(:state)
     td = @ticket.human_state_name
+  
+h3 = Ticket.human_attribute_name(:message)
+= markdown @ticket.message
 
 h2 = t('.conversation', default: 'Conversation')
 
