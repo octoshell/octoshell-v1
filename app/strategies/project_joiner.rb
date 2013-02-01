@@ -20,7 +20,6 @@ class ProjectJoiner
         account_code.project.user.track! :use_account_code, account_code, user
       else
         errors.add :base, account_code.errors.to_sentence
-        render :join
       end
     else
       errors.add :code, :not_found
