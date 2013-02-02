@@ -198,6 +198,25 @@ table class="table table-striped table-bordered summable"
 h4 Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ
 
 table class="table table-striped table-bordered summable"
+  th class="span4"
+    - @report.projects.each do |project|
+      th = project.ru_title
+  tr
+    th = Report::Project.human_attribute_name :international_conferences_count
+    - @report.projects.each do |project|
+      td = project.international_conferences_count
+  tr
+    th = Report::Project.human_attribute_name :international_conferences_in_russia_count
+    - @report.projects.each do |project|
+      td = project.international_conferences_in_russia_count
+  tr
+    th = Report::Project.human_attribute_name :russian_conferences_count
+    - @report.projects.each do |project|
+      td = project.russian_conferences_count
+
+h4 Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ в рамках данного проекта
+
+table class="table table-striped table-bordered summable"
   tr
     th class="span4"
     - @report.projects.each do |project|

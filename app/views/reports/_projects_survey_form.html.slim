@@ -96,7 +96,7 @@
     tr
       th class="span4"
       = f.simple_fields_for :projects do |f|
-        td = f.object.ru_title
+        th = f.object.ru_title
     tr
       th = Report::Project.human_attribute_name :rffi_grants_count
       = f.simple_fields_for :projects do |f|
