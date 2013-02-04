@@ -25,8 +25,8 @@ class Project < ActiveRecord::Base
   # хз как тут делать
   validates :username, presence: true, on: :update
   validates :cluster_user_type, inclusion: { in: CLUSTER_USER_TYPES }
-  validates :direction_of_science_ids, :critical_technology_ids,
-    length: { minimum: 1, message: 'выберите не менее %{count}' }
+  # validates :direction_of_science_ids, :critical_technology_ids,
+  #   length: { minimum: 1, message: 'выберите не менее %{count}' }
   
   attr_accessible :name, :description, :organization_id, :sureties_attributes,
     :organization_ids, :direction_of_science_ids, :critical_technology_ids,
