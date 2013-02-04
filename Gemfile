@@ -36,6 +36,7 @@ gem 'therubyracer'
 gem 'breadcrumbs_on_rails'
 
 group :test, :development do
+  gem "nyan-cat-formatter"
   gem 'quiet_assets'
   gem 'spin'
   gem 'factory_girl_rails'

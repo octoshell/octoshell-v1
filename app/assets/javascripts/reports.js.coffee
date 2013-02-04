@@ -39,3 +39,8 @@ $ ->
 
     table.recalc()
     table.append(row)
+  
+  $('a@report-allower').on 'click', ->
+    $('input@allow-event').val $(@).data('event')
+    $('form@allow').submit()
+    return false

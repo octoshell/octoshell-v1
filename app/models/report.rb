@@ -1,6 +1,6 @@
 # coding: utf-8
 class Report < ActiveRecord::Base
-  attr_accessor :validate_part
+  attr_accessor :validate_part, :allow_event
 
   # belongs_to :project
   belongs_to :user
@@ -19,6 +19,7 @@ class Report < ActiveRecord::Base
     :projects
   attr_accessible :personal_data_attributes,
     :organizations_attributes, :personal_survey_attributes, :projects_attributes
+  attr_accessible :allow_event, :superviser_comment, as: :admin
 
   state_machine initial: :editing do
     state :editing
@@ -29,6 +30,11 @@ class Report < ActiveRecord::Base
         report.update_attribute(:sent_on_time, true)
       end
       report.submitted_at || report.touch(:submitted_at)
+      if report.late?
+        allowed? || notify_superviser
+      else
+        allowed? or update_attribute(:allowed, true)
+      end
       if report.expert
         report.begin_assessing!
         Mailer.report_submitted(report).deliver
@@ -61,13 +67,26 @@ class Report < ActiveRecord::Base
       transition :assessing => :assessed
     end
   end
+  
+  state_machine :allow_state, initial: :pending do
+    state :allowed
+    state :disallowed
+    
+    event :allow do
+      transition pending: :allowed
+    end
+    
+    event :disallow do
+      transition pending: :disallowed
+    end
+  end
 
   scope :submitted, with_state(:submitted)
   scope :available, with_state(:submitted).where(expert_id: nil)
   scope :assessed, with_state(:assessed)
   scope :already_submitted, where("submitted_at is not null")
   scope :latecommers, where("submitted_at >= ?", Date.new(2013, 2, 4))
-
+  
   def organization
     ::Organization.find(organizations.first.organization_id)
   end
@@ -157,5 +176,9 @@ class Report < ActiveRecord::Base
   
   def late?
     !submitted_at or submitted_at.to_date >= Date.new(2013, 2, 4)
+  end
+  
+  def notify_superviser
+    
   end
 end

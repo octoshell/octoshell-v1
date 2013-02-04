@@ -74,6 +74,7 @@ ru:
       access: Доступ в раздел отчетов
       manage: Эксперт (по отчетам)
       review: Возможность просматривать отчеты
+      supervise: Возможность принимать/откланять отчеты сданные после срока
   views:
     pagination:
       next: Следующая
@@ -478,6 +479,7 @@ ru:
       report:
         state: Состояние
         submitted_at: Отправлен на рассмотрение
+        superviser_comment: Комментарий
       report/personal_data:
         first_name: Имя
         last_name: Фамилия

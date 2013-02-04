@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130204065259) do
+ActiveRecord::Schema.define(:version => 20130204164054) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -471,6 +471,8 @@ ActiveRecord::Schema.define(:version => 20130204065259) do
     t.integer  "illustrations_points"
     t.boolean  "sent_on_time",         :default => false
     t.datetime "submitted_at"
+    t.string   "allow_state"
+    t.text     "superviser_comment"
   end
 
   add_index "reports", ["user_id"], :name => "index_reports_on_user_id"

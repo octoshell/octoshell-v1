@@ -94,6 +94,19 @@ class Admin::ReportsController < Admin::ApplicationController
       render :show
     end
   end
+  
+  def supervise
+    authorize! :supervise, :reports
+    @report = Report.find(params[:report_id])
+  end
+  
+  def allow
+    
+  end
+  
+  def disallow
+    
+  end
 
 private
   

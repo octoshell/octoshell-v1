@@ -70,5 +70,6 @@ reports:
   - manage
   - review
   - access
+  - supervise
 admin:
   - access
