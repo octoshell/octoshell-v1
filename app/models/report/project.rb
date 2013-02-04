@@ -201,8 +201,12 @@ class Report::Project < ActiveRecord::Base
   end
 
   def materials_validator
-    if materials? && materials.queued_for_write.any?
-      path = materials.queued_for_write.first[1].path
+    if materials?
+      if materials.queued_for_write.any?
+        path = materials.queued_for_write.first[1].path
+      else
+        path = materials.path
+      end
       z = Zip::ZipFile.open(path)
       entries = z.entries.find_all { |e| !(e.to_s =~ /\/$/) }
       if entries.size < 2
