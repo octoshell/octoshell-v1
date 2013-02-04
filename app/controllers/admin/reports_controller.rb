@@ -2,7 +2,7 @@ class Admin::ReportsController < Admin::ApplicationController
   before_filter { authorize! :access, :reports }
 
   def index
-    @reports = Report.available.page(params[:page])
+    @reports = show_all? ? Report.available : Report.available.page(params[:page])
     @subnamespace = :index
   end
 
@@ -14,7 +14,7 @@ class Admin::ReportsController < Admin::ApplicationController
   end
 
   def all
-    @reports = Report.page(params[:page])
+    @reports = show_all? ? Report.all : Report.page(params[:page])
     @subnamespace = :all
     render :index
   end
@@ -37,13 +37,13 @@ class Admin::ReportsController < Admin::ApplicationController
   end
 
   def assessed
-    @reports = Report.assessed.page(params[:page])
+    @reports = show_all? ? Report.assessed : Report.assessed.page(params[:page])
     @subnamespace = :assessed
     render :index
   end
   
   def latecommers
-    @reports = Report.latecommers.page(params[:page])
+    @reports = show_all? ? Report.latecommers : Report.latecommers.page(params[:page])
     @subnamespace = :latecommers
     render :index
   end

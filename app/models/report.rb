@@ -66,7 +66,7 @@ class Report < ActiveRecord::Base
   scope :available, with_state(:submitted).where(expert_id: nil)
   scope :assessed, with_state(:assessed)
   scope :already_submitted, where("submitted_at is not null")
-  scope :latecommers, where("submitted_at >= ?", Date.new(2013, 2, 1))
+  scope :latecommers, where("submitted_at >= ?", Date.new(2013, 2, 4))
 
   def organization
     ::Organization.find(organizations.first.organization_id)
@@ -156,6 +156,6 @@ class Report < ActiveRecord::Base
   end
   
   def late?
-    !submitted_at or submitted_at.to_date > Date.new(2013, 1, 31)
+    !submitted_at or submitted_at.to_date >= Date.new(2013, 2, 4)
   end
 end
