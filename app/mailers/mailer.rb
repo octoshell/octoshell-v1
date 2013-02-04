@@ -93,6 +93,11 @@ class Mailer < ActionMailer::Base
     @user = account.user
     mail to: @user.email, subject: subject(name: @project.name)
   end
+  
+  def failed_email(user)
+    @user = user
+    mail to: @user.email, subject: "Письмо о блокировке доступа"
+  end
 
 private
 
