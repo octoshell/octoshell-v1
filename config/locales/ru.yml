@@ -477,6 +477,7 @@ ru:
         message: Сообщение
       report:
         state: Состояние
+        submitted_at: Отправлен на рассмотрение
       report/personal_data:
         first_name: Имя
         last_name: Фамилия
