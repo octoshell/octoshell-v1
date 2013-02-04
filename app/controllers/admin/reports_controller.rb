@@ -41,6 +41,12 @@ class Admin::ReportsController < Admin::ApplicationController
     @subnamespace = :assessed
     render :index
   end
+  
+  def latecommers
+    @reports = Report.latecommers.page(params[:page])
+    @subnamespace = :latecommers
+    render :index
+  end
 
   def replies
     authorize! :manage, :reports

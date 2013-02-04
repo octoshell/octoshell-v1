@@ -10,6 +10,11 @@
       == link
       = " "
 
+- if @report.personal_data.reason?
+  h4 Ходатайство о рассмотрении отчёта, подаваемого вне установленного срока
+
+  = @report.personal_data.reason
+
 - @report.projects.each do |project|
   h2 = project.ru_title
 

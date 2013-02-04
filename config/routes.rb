@@ -282,7 +282,7 @@ MSU::Application.routes.draw do
         get '/assessed'
         get '/self', action: 'self_assessing'
         get '/all'
-        get '/latecomers'
+        get '/latecommers'
       end
       get :review
       post :replies
