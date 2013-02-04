@@ -11,6 +11,7 @@ class Admin::TicketTagsController < Admin::ApplicationController
   
   def show
     @ticket_tag = find_ticket_tag(params[:id])
+    @group = Group.new
   end
   
   def new
@@ -53,6 +54,12 @@ class Admin::TicketTagsController < Admin::ApplicationController
     else
       render :show
     end
+  end
+  
+  def groups
+    @ticket_tag = find_ticket_tag(params[:ticket_tag_id])
+    @ticket_tag.add_group(params[:group][:id])
+    redirect_to [:admin, @ticket_tag]
   end
   
 private

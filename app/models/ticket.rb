@@ -14,6 +14,7 @@ class Ticket < ActiveRecord::Base
   has_many :ticket_field_values, inverse_of: :ticket
   has_many :ticket_tag_relations
   has_many :ticket_tags, through: :ticket_tag_relations
+  has_and_belongs_to_many :users
   
   validates :user, :subject, :message, :ticket_question, presence: true
   
@@ -23,7 +24,7 @@ class Ticket < ActiveRecord::Base
     :ticket_field_values_attributes, :project_id, :cluster_id
   attr_accessible :message, :subject, :attachment, :ticket_question_id, :url,
     :ticket_field_values_attributes, :user_id, :project_id, :cluster_id,
-    :ticket_tag_relations_attributes, as: :admin
+    :ticket_tag_relations_attributes, :user_ids, as: :admin
 
   after_create :create_ticket_tag_relations
   

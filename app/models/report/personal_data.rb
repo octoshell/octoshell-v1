@@ -5,6 +5,7 @@ class Report::PersonalData < ActiveRecord::Base
   has_paper_trail
   
   with_options on: :update do |m|
+    m.validates :reason, presence: true, if: :report_late?
     m.validates :first_name, :last_name, :middle_name, :email, :phone,
       presence: true
     m.validates :first_name, :last_name, :middle_name, format: { with: /\A[A-ZА-ЯЁ\-']/ }
@@ -12,7 +13,11 @@ class Report::PersonalData < ActiveRecord::Base
     m.validates :phone, format: { with: /\A[\+\-\d\(\)\s]+\z/ }
     m.validates_email_format_of :email
   end
-  attr_accessible :first_name, :last_name, :middle_name, :email, :phone
+  attr_accessible :first_name, :last_name, :middle_name, :email, :phone, :reason
+  
+  def report_late?
+    report.late?
+  end
 
 private
 

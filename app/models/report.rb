@@ -28,6 +28,7 @@ class Report < ActiveRecord::Base
       if Date.current < Date.new(2013, 2, 1)
         report.update_attribute(:sent_on_time, true)
       end
+      report.submitted_at || report.touch(:submitted_at)
       if report.expert
         report.begin_assessing!
         Mailer.report_submitted(report).deliver
@@ -150,5 +151,9 @@ class Report < ActiveRecord::Base
         v.value = "/admin/reports/#{id}/review"
       end
     end
+  end
+  
+  def late?
+    !submitted_at or submitted_at.to_date > Date.new(2013, 1, 31)
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130201100531) do
+ActiveRecord::Schema.define(:version => 20130204065259) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -193,6 +193,15 @@ ActiveRecord::Schema.define(:version => 20130201100531) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "groups_ticket_tags", :id => false, :force => true do |t|
+    t.integer "group_id"
+    t.integer "ticket_tag_id"
+  end
+
+  add_index "groups_ticket_tags", ["group_id"], :name => "index_groups_ticket_tags_on_group_id"
+  add_index "groups_ticket_tags", ["ticket_tag_id", "group_id"], :name => "index_groups_ticket_tags_on_ticket_tag_id_and_group_id", :unique => true
+  add_index "groups_ticket_tags", ["ticket_tag_id"], :name => "index_groups_ticket_tags_on_ticket_tag_id"
+
   create_table "history_items", :force => true do |t|
     t.integer  "user_id"
     t.text     "data"
@@ -361,6 +370,7 @@ ActiveRecord::Schema.define(:version => 20130201100531) do
     t.string  "email"
     t.string  "phone"
     t.string  "confirm_data"
+    t.text    "reason"
   end
 
   create_table "report_personal_surveys", :force => true do |t|
@@ -462,6 +472,7 @@ ActiveRecord::Schema.define(:version => 20130201100531) do
     t.string   "state"
     t.integer  "expert_id"
     t.boolean  "sent_on_time",         :default => false
+    t.datetime "submitted_at"
   end
 
   add_index "reports", ["user_id"], :name => "index_reports_on_user_id"
@@ -637,6 +648,15 @@ ActiveRecord::Schema.define(:version => 20130201100531) do
   end
 
   add_index "ticket_templates", ["state"], :name => "index_ticket_templates_on_state"
+
+  create_table "ticket_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "ticket_id"
+  end
+
+  add_index "ticket_users", ["ticket_id", "user_id"], :name => "index_ticket_users_on_ticket_id_and_user_id", :unique => true
+  add_index "ticket_users", ["ticket_id"], :name => "index_ticket_users_on_ticket_id"
+  add_index "ticket_users", ["user_id"], :name => "index_ticket_users_on_user_id"
 
   create_table "tickets", :force => true do |t|
     t.string   "subject"

@@ -1,12 +1,12 @@
 - title "Тег #{@ticket_tag.name}"
 
 div class="link-actions"
-  = link_to 'Редактировать', edit_ticket_tag_path(@ticket_tag), class: 'btn'
+  = link_to 'Редактировать', [:edit, :admin, @ticket_tag], class: 'btn'
   = " "
   - if @ticket_tag.can__close?
-    = link_to TicketTag.human_state_event_name(:_close), [@ticket_tag, :close], method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
+    = link_to TicketTag.human_state_event_name(:_close), [:admin, @ticket_tag, :close], method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
     = " "
-  = link_to 'Версии', [@ticket_tag, :versions], class: 'btn'
+  = link_to 'Версии', [:admin, @ticket_tag, :versions], class: 'btn'
 
 table class="table table-bordered"
   tr
@@ -16,14 +16,28 @@ table class="table table-bordered"
     th = TicketTag.human_attribute_name(:state)
     td = @ticket_tag.human_state_name
 
-= simple_form_for @ticket_tag, url: ticket_tag_merge_path(@ticket_tag), method: :put, html: { class: 'form-horizontal' } do |f|
+= simple_form_for @ticket_tag, url: admin_ticket_tag_merge_path(@ticket_tag), method: :put, html: { class: 'form-horizontal' } do |f|
   legend Объединие
   = f.input :merge_id, collection: TicketTag.all, hint: 'Выбранный тег будет объединен с текущим.'
 
   div class="form-actions"
     = f.button :submit, 'Объединить'
-  
 
-h2 Поддержка
+h3 Группы
+- groups = @ticket_tag.groups.find_all(&:persisted?)
+- if groups && groups.any?
+  ul
+    - groups.each do |group|
+      li = group.name
+- else
+  p Нет групп
 
-= render partial: 'tickets/table', locals: { tickets: @ticket_tag.tickets.where(ticket_tag_relations: { active: true }) }
+= simple_form_for @group, url: admin_ticket_tag_groups_path(@ticket_tag), html: { class: 'form-horizontal' } do |f|
+  h4 Добавить группу
+  = f.input :id, collection: Group.all, label: 'Группа'
+  div class="form-actions"
+    = f.button :submit, 'Добавить'
+
+h3 Поддержка
+
+= render partial: 'admin/tickets/table', locals: { tickets: @ticket_tag.tickets.where(ticket_tag_relations: { active: true }) }

@@ -55,4 +55,4 @@ h2 Переписка
     = f.input :message, input_html: { rows: 5, class: 'span6' }, hint: link_to('Создать шаблон из текущего сообщения', new_admin_ticket_template_path, id: 'ticket-template-maker', target: '_blank')
     = f.input :attachment
     div class="form-actions"
-      = f.button :submit, class: 'btn-primary'
+      = f.button :submit, 'Отправить', class: 'btn-primary'

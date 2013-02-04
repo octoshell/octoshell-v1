@@ -1,4 +1,8 @@
 = simple_form_for report, url: report_personal_path(report, step: 'personal'), html: { class: 'form-horizontal report-form', multipart: true }, defaults: { disabled: report.submitted? } do |f|
+  legend Ходатайство о рассмотрении отчёта, подаваемого вне установленного срока
+  
+  = f.simple_fields_for :personal_data do |f|
+    = f.input :reason, input_html: { class: 'span6', rows: 4 }, label: false
   
   legend = t('.personal_data')
   = f.simple_fields_for :personal_data do |f|

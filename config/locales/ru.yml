@@ -482,6 +482,7 @@ ru:
         last_name: Фамилия
         middle_name: Отчество
         phone: Номер телефона
+        reason: Ходатайство
       report/project:
         areas: Область исследований
         ru_title: Название проекта
