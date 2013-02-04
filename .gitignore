@@ -15,6 +15,7 @@
 /tmp
 
 /db/wiki.git
+/db/data.yml
 
 /public/system
 
