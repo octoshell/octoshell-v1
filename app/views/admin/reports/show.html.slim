@@ -1,15 +1,5 @@
 - title "Отчет #{@report.id}"
 
-- links = []
-- links << link_to('Закончить оценку', [:admin, @report, :assess], class: 'btn btn-primary', method: :put, data: { confirm: 'Вы уверены?' }) if @report.can_assess?
-- links << link_to('Вернуть отчет пользователю для редактирования', [:admin, @report, :decline], class: 'btn btn-danger', method: :put) if @report.can_decline?
-
-- if links.any?
-  div class="link-actions"
-    - links.each do |link|
-      == link
-      = " "
-
 - if @report.personal_data.reason?
   h4 Ходатайство о рассмотрении отчёта, подаваемого вне установленного срока
 
@@ -191,3 +181,14 @@ h2 id="support" Поддержка
     
     div class="form-actions"
       = f.button :submit, "Создать заявку", class: 'btn btn-success'
+      
+      
+- links = []
+- links << link_to('Закончить оценку', [:admin, @report, :assess], class: 'btn btn-primary', method: :put, data: { confirm: 'Вы уверены?' }) if @report.can_assess?
+- links << link_to('Вернуть отчет пользователю для редактирования', [:admin, @report, :decline], class: 'btn btn-danger', method: :put) if @report.can_decline?
+
+- if links.any?
+  div class="link-actions"
+    - links.each do |link|
+      == link
+      = " "
