@@ -34,7 +34,6 @@ gem 'rubyzip'
 gem 'poltergeist', github: 'brutuscat/poltergeist'
 gem 'therubyracer'
 gem 'breadcrumbs_on_rails'
-gem 'ssl_routes'
 
 group :test, :development do
   gem "nyan-cat-formatter"
