@@ -4,5 +4,5 @@ $ ->
     document.location = input.data('url').replace('%s', input.val())
     
   
-  $("form@autosubmit :input[role!='instance-search']").on 'change', ->
+  $("form@autosubmit :hidden[role!='instance-search']").on 'change', ->
     $(@).parents('form:first').submit()
