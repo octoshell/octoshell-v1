@@ -75,7 +75,7 @@ class Admin::ReportsController < Admin::ApplicationController
     authorize! :manage, :reports
     @report = get_report(params[:report_id])
     @report.editing? || @report.decline
-    redirect_to admin_reports_path, notice: t('.report_returned_to_user_for_edit')
+    redirect_to [:admin, @report], notice: t('.report_returned_to_user_for_edit')
   end
 
   def review
