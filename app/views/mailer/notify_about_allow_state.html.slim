@@ -6,6 +6,7 @@
   p Вам отказали в разрешении на подачу отчёта
 
 - if @report.superviser_comment?
-  p = @report.superviser_comment
+  p
+    strong = @report.superviser_comment
 
 = render 'signature'

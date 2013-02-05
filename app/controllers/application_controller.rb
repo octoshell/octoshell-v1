@@ -1,5 +1,11 @@
 # coding: utf-8
 class ApplicationController < ActionController::Base
+  enforce_protocols do |config|
+    config.parameter = :ssl
+    config.secure_session = true
+    config.enable_ssl = true
+  end
+  
   before_filter :block_closed_users
   before_filter :get_extends, :get_wikis
   

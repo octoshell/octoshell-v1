@@ -192,8 +192,7 @@ class Report < ActiveRecord::Base
   end
   
   def notify_superviser
-    ids = Rails.env.development? ? [2] : [2, 4, 5]
-    User.find(ids).each do |user|
+    Group.find_by_name("paper managers").users.each do |user|
       Mailer.superviser_required(self, user).deliver
     end
   end
