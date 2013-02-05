@@ -1,8 +1,8 @@
 = f.input :email
 = f.input :password, required: true, hint: t('.minimun_password_length', default: '6 simbols minimum'), input_html: { class: 'js-password' }
 = f.input :password_confirmation, required: true, input_html: { class: 'js-password-confirmation' }
-= f.input :first_name
 = f.input :last_name
+= f.input :first_name
 = f.input :middle_name
 - error = f.object.errors.find_all { |a| a[0] =~ /^avatar/ }.map { |a| a.last }.join(', ')
 - f.object.errors.add(:avatar, error) if error.present?

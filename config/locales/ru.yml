@@ -391,7 +391,7 @@ ru:
     credential:
       html: <a href="/credentials/new">Добавить публичный ключ</a>
   meta_search:
-    or: 'or-diddly'
+    or: 'или'
     predicates:
       contains: '<em>%{attribute}</em> содержит'
       equals: '<em>%{attribute}</em>'
