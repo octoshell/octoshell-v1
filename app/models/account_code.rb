@@ -52,6 +52,10 @@ class AccountCode < ActiveRecord::Base
     end
   end
   
+  def obfuscated_email
+    "#{email.to_s[/(.*)@/, 1]}@..."
+  end
+  
 private
   
   def assign_code

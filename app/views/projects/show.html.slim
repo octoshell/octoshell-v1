@@ -43,7 +43,7 @@ table class="table table-bordered"
       tr
         td = account_code.code
         td = account_code.human_state_name
-        td = mail_to account_code.email
+        td = account_code.obfuscated_email
         td
           - if account_code.user
             = account_code.user.full_name
