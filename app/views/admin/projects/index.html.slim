@@ -1,6 +1,6 @@
 - title t('.title', default: 'Projects')
 
-= simple_form_for @search, url: projects_path, method: :get, html: { class: 'form-horizontal' } do |f|
+= simple_form_for @search, url: projects_path, method: :get, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|
   = autocomplete :project, f, label: "Название", name: :id_eq, role: 'instance-search', url: '/admin/projects/%s'
   = autocomplete :user, f, label: "Руководитель"
   = autocomplete :organization, f, label: "Главная организация"

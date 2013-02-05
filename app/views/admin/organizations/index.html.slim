@@ -3,7 +3,7 @@
 div class="link-actions"
   = link_to 'Новая организация', new_admin_organization_path, class: 'btn'
 
-= simple_form_for [:admin, @search], method: :get, html: { class: 'form-horizontal' } do |f|
+= simple_form_for [:admin, @search], method: :get, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|
   = autocomplete :organization, f, name: :id_eq, label: "Название", role: 'instance-search', url: '/admin/organizations/%s'
   = f.input :abbreviation_contains, required: false
   = f.input :organization_kind_id_eq, collection: OrganizationKind.all, required: false
