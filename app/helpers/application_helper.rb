@@ -118,7 +118,7 @@ module ApplicationHelper
         content_tag :label, options[:label]
       end + 
         content_tag(:div, class: "controls") do
-          form.hidden_field options[:name], class: 'chosen ajax', data: { source: options[:source] }
+          form.hidden_field options[:name], class: 'chosen ajax', data: { source: options[:source], url: options[:url] }, role: options[:role]
         end
     end
   end
