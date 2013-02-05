@@ -14,10 +14,12 @@ class ProjectsController < ApplicationController
   end
   
   def show
-    @project = find_project(params[:id])
     respond_to do |format|
-      format.html
-      format.json { render json: @project }
+      format.html { @project = find_project(params[:id]) }
+      format.json do
+        @project = Project.find(params[:id])
+        render json: @project
+      end
     end
   end
   
