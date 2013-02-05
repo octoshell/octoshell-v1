@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @projects = current_user.all_projects.finder(params[:q]).reorder('projects.name asc')
+        @projects = Project.finder(params[:q]).reorder('projects.name asc')
         render json: { records: @projects.page(params[:page]).per(params[:per]), total: @projects.count }
       end
     end

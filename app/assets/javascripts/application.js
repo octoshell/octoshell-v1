@@ -75,6 +75,7 @@ $(document).ready(function(){
       $(e).before(select_all)
       select_all.click(function(){
         $(e).find("option").each(function(i, e){ e.selected = true })
+        $(e).trigger('change')
         return false
       })
     }
