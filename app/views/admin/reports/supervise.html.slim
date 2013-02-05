@@ -6,13 +6,13 @@ blockquote class="lead"
 
 = simple_form_for @report, url: [:admin, @report, :allow], html: { class: 'form-vertical', role: 'allow' } do |f|
   = f.input :allow_event, as: :hidden, input_html: { role: 'allow-event' }
-  = f.input :superviser_comment, input_html: { class: 'span6', rows: 2, autofocus: true }
+  = f.input :superviser_comment, input_html: { class: 'span6', rows: 2, autofocus: true }, disabled: !f.object.pending?
 
 - if @report.can_allow?
   = link_to 'Разрешить', [:admin, @report, :allow], class: 'btn btn-success', role: 'report-allower', data: { event: 'allow' }
   |  
 - if @report.can_disallow?
-  = link_to 'Отказать', [:admin, @report, :disallow], class: 'btn btn-danger', role: 'report-allower', data: { event: 'disallow' }
+  = link_to 'Отказать', [:admin, @report, :allow], class: 'btn btn-danger', role: 'report-allower', data: { event: 'disallow' }
 - unless @report.pending?
   p class="lead"
     | Уже рассмотрено: #{@report.human_allow_state_name}

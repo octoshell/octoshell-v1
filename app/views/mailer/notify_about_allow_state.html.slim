@@ -1,0 +1,11 @@
+= render 'header'
+
+- if @report.allowed?
+  p Вам дали разрешение на подачу отчёта
+- else
+  p Вам отказали в разрешении на подачу отчёта
+
+- if @report.superviser_comment?
+  p = @report.superviser_comment
+
+= render 'signature'

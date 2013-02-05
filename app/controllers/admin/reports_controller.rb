@@ -101,17 +101,20 @@ class Admin::ReportsController < Admin::ApplicationController
   end
   
   def allow
-    
-  end
-  
-  def disallow
-    
+    authorize! :supervise, :reports
+    @report = Report.find(params[:report_id])
+    @report.assign_attributes(params[:report], as: :admin)
+    if @report.choose_allow_state
+      redirect_to admin_reports_path
+    else
+      render :supervise
+    end
   end
 
 private
   
   def get_report(id)
-    report = Report.find(id)
+    report = Report.allowed.find(id)
     if !(report.expert == current_user || report.assessing? || report.assessed?)
       raise MayMay::Unauthorized
     end

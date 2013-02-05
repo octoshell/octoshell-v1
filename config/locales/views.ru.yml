@@ -119,7 +119,7 @@ ru:
       use_code: Использовать код приглашения
       report: Отчет по проектам
       you_have_x_days_for_submitting_report:
-        html: "<strong>Последний день приема отчетов!</strong>"
+        html: "<strong>Перерегистрация завершена.</strong>"
       your_report_is_submitted:
         html: "Вы отправили ваш отчет. Нужна помощь? <a href='/tickets/new'>Оставьте заявку</a>"
     close:

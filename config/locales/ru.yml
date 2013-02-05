@@ -478,8 +478,9 @@ ru:
         message: Сообщение
       report:
         state: Состояние
-        submitted_at: Отправлен на рассмотрение
+        submitted_at: Отправлен
         superviser_comment: Комментарий
+        allow_state: Разрешение
       report/personal_data:
         first_name: Имя
         last_name: Фамилия
@@ -771,10 +772,15 @@ ru:
       report:
         state:
           states:
-            editing: Заполняется пользователем
-            submitted: Отправлен на рассмотрение
+            editing: Заполняется
+            submitted: Отправлен
             assessing: Оценивается
             assessed: Оценен
+        allow_state:
+          states:
+            pending: Ожидает решения
+            allowed: Разрешено
+            disallowed: Запрещено
       user:
         state:
           states:

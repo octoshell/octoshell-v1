@@ -4,12 +4,7 @@ p
   = link_to t('.report'), [:edit, current_user.report], class: 'btn btn-primary btn-large' if current_user.report
   |  
   span class="lead offset1"
-    - if current_user.report.editing?
-      = t('.you_have_x_days_for_submitting_report.html')
-    - else
-      = t('.your_report_is_submitted.html')
-p style="margin-top: 30px; text-align: center;" class="lead"
-  | По итогам отчета у Вас останется или закроется доступ к Вашим проектам.
+    = t('.you_have_x_days_for_submitting_report.html')
 
 div class="link-actions"
   = link_to t('.new_project'), new_project_path, class: "btn"

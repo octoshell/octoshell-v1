@@ -26,18 +26,15 @@ class Report < ActiveRecord::Base
     state :submitted
 
     after_transition on: :submit do |report, transition|
-      if Date.current < Date.new(2013, 2, 1)
-        report.update_attribute(:sent_on_time, true)
-      end
       report.submitted_at || report.touch(:submitted_at)
       if report.late?
-        allowed? || notify_superviser
+        report.allowed? || report.notify_superviser
       else
-        allowed? or update_attribute(:allowed, true)
+        report.allowed? || report.update_attribute(:allow_state, 'allowed')
       end
       if report.expert
         report.begin_assessing!
-        Mailer.report_submitted(report).deliver
+        Mailer.report_submitted(report).deliver if report.allowed?
       end
     end
 
@@ -79,10 +76,20 @@ class Report < ActiveRecord::Base
     event :disallow do
       transition pending: :disallowed
     end
+    
+    after_transition on: :allow do |report, transition|
+      report.notify_user_about_allow_state
+      Mailer.report_submitted(report).deliver if report.expert
+    end
+    
+    after_transition on: :disallow do |report, transition|
+      report.notify_user_about_allow_state
+    end
   end
-
+  
+  scope :allowed, with_allow_state(:allowed)
   scope :submitted, with_state(:submitted)
-  scope :available, with_state(:submitted).where(expert_id: nil)
+  scope :available, allowed.with_state(:submitted).where(expert_id: nil)
   scope :assessed, with_state(:assessed)
   scope :already_submitted, where("submitted_at is not null")
   scope :latecommers, where("submitted_at >= ?", Date.new(2013, 2, 4))
@@ -178,7 +185,20 @@ class Report < ActiveRecord::Base
     !submitted_at or submitted_at.to_date >= Date.new(2013, 2, 4)
   end
   
+  def choose_allow_state
+    if allow_event.in? %w(allow disallow)
+      send(allow_event)
+    end
+  end
+  
   def notify_superviser
-    
+    ids = Rails.env.development? ? [2] : [2, 4, 5]
+    User.find(ids).each do |user|
+      Mailer.superviser_required(self, user).deliver
+    end
+  end
+  
+  def notify_user_about_allow_state
+    Mailer.notify_about_allow_state(self).deliver
   end
 end

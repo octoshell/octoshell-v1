@@ -11,7 +11,7 @@ table class="table table-bordered table-striped"
   tr
     th class="span5" = Report.model_name.human
     th class="span3" = Report.human_attribute_name(:state)
-    th class="span2" = Report.human_attribute_name(:submitted_at)
+    th class="span1" = Report.human_attribute_name(:submitted_at)
     th Эксперт
     - if may? :review, :reports
       th
@@ -20,12 +20,20 @@ table class="table table-bordered table-striped"
       td
         - if report.can_begin_assessing? && may?(:manage, :reports)
           = link_to 'Оценить', [:admin, report, :begin_assessing], class: 'btn btn-mini btn-info', method: :put, style: 'float: right; margin-right: 1em;'
-        - if report.assessing? || report.assessed?
+        - if report.allowed? && (report.assessing? || report.assessed?)
           = smart_link_to report
         - else
           = report.link_name
       td
-        span class="badge" = report.human_state_name
+        small = Report.human_attribute_name(:state)
+        |  
+        span class="label label-info"
+          = report.human_state_name
+        br
+        small = Report.human_attribute_name(:allow_state)
+        |  
+        span class="label label-warning"
+          = report.human_allow_state_name
       td = report.submitted_at and report.submitted_at.strftime("%Y-%m-%d")
       td = smart_link_to report.expert
       - if may? :review, :reports

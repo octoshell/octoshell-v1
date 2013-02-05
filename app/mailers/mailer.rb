@@ -98,6 +98,19 @@ class Mailer < ActionMailer::Base
     @user = user
     mail to: @user.email, subject: "Письмо о блокировке доступа"
   end
+  
+  def superviser_required(report, user)
+    @report = report
+    @user = user
+    mail to: @user.email, subject: "Необходимо разрешение на подачу отчёта после срока"
+  end
+  
+  def notify_about_allow_state(report)
+    @report = report
+    @user = report.user
+    subject = @report.allowed? ? "Вам дали разрешение на подачу отчёта" : "Вам отказали в разрешении на подачу отчёта"
+    mail to: @user.email, subject: subject
+  end
 
 private
 
