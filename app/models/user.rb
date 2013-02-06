@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   has_many :groups, through: :user_groups
   has_many :reports
   has_many :assessing_reports, class_name: :Report, foreign_key: :expert_id
+  has_and_belongs_to_many :subscribed_tickets, join_table: :tickets_users, class_name: :Ticket, uniq: true
   
   validates :first_name, :last_name, :middle_name, :email, :phone, presence: true
   validates :password, confirmation: true, length: { minimum: 6 }, on: :create

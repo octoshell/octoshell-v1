@@ -14,7 +14,7 @@ class Ticket < ActiveRecord::Base
   has_many :ticket_field_values, inverse_of: :ticket
   has_many :ticket_tag_relations
   has_many :ticket_tags, through: :ticket_tag_relations
-  has_and_belongs_to_many :users
+  has_and_belongs_to_many :users, uniq: true
   
   validates :user, :subject, :message, :ticket_question, presence: true
   
@@ -27,7 +27,6 @@ class Ticket < ActiveRecord::Base
     :ticket_tag_relations_attributes, :user_ids, as: :admin
 
   after_create :create_ticket_tag_relations
-  after_create :create_default_subscribers
   
   state_machine :state, initial: :active do
     state :active
@@ -103,12 +102,6 @@ private
         relation.ticket_tag = tag
         relation.active = ticket_question.ticket_tags.include?(tag)
       end
-    end
-  end
-  
-  def create_default_subscribers
-    active_ticket_tags.map(&:groups).flatten.uniq.each do |group|
-      users << group.users
     end
   end
 end
