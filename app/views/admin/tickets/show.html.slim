@@ -41,10 +41,17 @@ table class="table table-bordered"
 = render partial: 'tag_relations_form', locals: { ticket: @ticket }
 = render partial: 'admin/ticket_tags/remote_form', locals: { ticket_tag: @ticket_tag }
 
+h3 Подписчики
+
+= simple_form_for [:admin, @ticket], html: { class: 'form-horizontal' } do |f|
+  = f.association :users, collection: f.object.users, as: :check_boxes
+  div class="form-actions"
+    = f.button :submit
+
 h3 = Ticket.human_attribute_name(:message)
 = markdown @ticket.message
 
-h2 Переписка
+h3 Переписка
 
 = render partial: 'admin/replies/table', locals: { replies: @replies }
 

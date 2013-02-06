@@ -107,7 +107,6 @@ private
   end
   
   def create_default_subscribers
-    users << user
     active_ticket_tags.map(&:groups).flatten.uniq.each do |group|
       users << group.users
     end

@@ -30,7 +30,6 @@ describe Ticket do
       
       its(:active_ticket_tags) { should == [tag] }
       its(:users) { should include(user) }
-      it { subject.users.should include(subject.user) }
     end
   end
   

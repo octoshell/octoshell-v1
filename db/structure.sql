@@ -3253,6 +3253,13 @@ CREATE INDEX index_ticket_tag_relations_on_ticket_id ON ticket_tag_relations USI
 
 
 --
+-- Name: index_ticket_tag_relations_on_ticket_id_and_ticket_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_ticket_tag_relations_on_ticket_id_and_ticket_tag_id ON ticket_tag_relations USING btree (ticket_id, ticket_tag_id);
+
+
+--
 -- Name: index_ticket_tag_relations_on_ticket_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3918,3 +3925,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130204164054');
 INSERT INTO schema_migrations (version) VALUES ('20130206064714');
 
 INSERT INTO schema_migrations (version) VALUES ('20130206102858');
+
+INSERT INTO schema_migrations (version) VALUES ('20130206105842');

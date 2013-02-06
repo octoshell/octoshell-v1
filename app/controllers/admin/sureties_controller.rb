@@ -84,28 +84,28 @@ class Admin::SuretiesController < Admin::ApplicationController
     File.open("#{Rails.root}/config/surety.liquid", 'w+') do |f|
       f.write params[:template]
     end
-    redirect_to template_sureties_path, notice: 'Шаблон сохранен'
+    redirect_to template_admin_sureties_path, notice: 'Шаблон сохранен'
   end
   
   def default_template
     File.open("#{Rails.root}/config/surety.liquid", 'w+') do |f|
       f.write File.read("#{Rails.root}/config/surety.liquid.default")
     end
-    redirect_to template_sureties_path, notice: 'Шаблон сохранен'
+    redirect_to template_admin_sureties_path, notice: 'Шаблон сохранен'
   end
   
   def rtf_template
     File.open("#{Rails.root}/config/surety.rtf", 'w+') do |f|
       f.write params[:template]
     end
-    redirect_to template_sureties_path, notice: 'Шаблон загружен'
+    redirect_to template_admin_sureties_path, notice: 'Шаблон загружен'
   end
   
   def default_rtf
     File.open("#{Rails.root}/config/surety.rtf", 'w+') do |f|
       f.write File.read("#{Rails.root}/config/surety.rtf.default")
     end
-    redirect_to template_sureties_path, notice: 'Шаблон восстановлен'
+    redirect_to template_admin_sureties_path, notice: 'Шаблон восстановлен'
   end
   
   def download_rtf_template
@@ -116,9 +116,9 @@ class Admin::SuretiesController < Admin::ApplicationController
     @surety = Surety.find(params[:surety_id])
     if @surety.load_scan(params[:file])
       @surety.user.track! :create_scan, @surety, current_user
-      redirect_to @surety, notice: "Файл загружен"
+      redirect_to [:admin, @surety], notice: "Файл загружен"
     else
-      redirect_to [@surety, :scan], alert: @surety.errors.full_messages.join(', ')
+      redirect_to [:admin, @surety, :scan], alert: @surety.errors.full_messages.join(', ')
     end
   end
   
