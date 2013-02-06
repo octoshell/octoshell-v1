@@ -18,7 +18,9 @@ describe Ticket do
   
   describe '#create' do
     context 'with question with default tags' do
-      let(:tag) { create(:ticket_tag) }
+      let(:user) { create(:user) }
+      let(:group) { create(:group).tap { |g| g.users << user } }
+      let(:tag) { create(:ticket_tag).tap { |t| t.groups << group } }
       let(:question) do
         question = create(:ticket_question)
         question.ticket_tags << tag
@@ -27,6 +29,8 @@ describe Ticket do
       subject { create(:ticket, ticket_question: question) }
       
       its(:active_ticket_tags) { should == [tag] }
+      its(:users) { should include(user) }
+      it { subject.users.should include(subject.user) }
     end
   end
   

@@ -27,6 +27,7 @@ class Ticket < ActiveRecord::Base
     :ticket_tag_relations_attributes, :user_ids, as: :admin
 
   after_create :create_ticket_tag_relations
+  after_create :create_default_subscribers
   
   state_machine :state, initial: :active do
     state :active
@@ -102,6 +103,13 @@ private
         relation.ticket_tag = tag
         relation.active = ticket_question.ticket_tags.include?(tag)
       end
+    end
+  end
+  
+  def create_default_subscribers
+    users << user
+    active_ticket_tags.map(&:groups).flatten.uniq.each do |group|
+      users << group.users
     end
   end
 end
