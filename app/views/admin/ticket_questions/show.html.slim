@@ -21,6 +21,13 @@ table class="table table-bordered"
     th = TicketQuestion.human_attribute_name(:state)
     td = @ticket_question.human_state_name
 
+h2 Теги по умолчанию
+
+= simple_form_for [:admin, @ticket_question], html: { class: 'form-horizontal' } do |f|
+  = f.association :ticket_tags, as: :check_boxes, label: false
+  div class="form-actions"
+    = f.button :submit, class: 'btn-primary'
+
 h2 Дополнительные поля
 
 div class="link-actions"

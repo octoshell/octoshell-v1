@@ -16,6 +16,20 @@ describe Ticket do
     ticket.should have(1).ticket_tag_relations
   end
   
+  describe '#create' do
+    context 'with question with default tags' do
+      let(:tag) { create(:ticket_tag) }
+      let(:question) do
+        question = create(:ticket_question)
+        question.ticket_tags << tag
+        question
+      end
+      subject { create(:ticket, ticket_question: question) }
+      
+      its(:active_ticket_tags) { should == [tag] }
+    end
+  end
+  
   describe '#answer' do
     %w(active answered resolved).each do |state|
       context state do

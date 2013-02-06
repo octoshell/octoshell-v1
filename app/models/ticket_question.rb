@@ -9,6 +9,7 @@ class TicketQuestion < ActiveRecord::Base
   has_many :ticket_questions, inverse_of: :ticket_question
   has_many :ticket_field_relations
   has_many :ticket_fields, through: :ticket_field_relations
+  has_and_belongs_to_many :ticket_tags
   
   validates :question, presence: true
   validates :ticket_question_id, exclusion: { in: proc { |tq| [tq.id] } }, allow_nil: true
@@ -21,7 +22,7 @@ class TicketQuestion < ActiveRecord::Base
   accepts_nested_attributes_for :ticket_field_relations
   
   attr_accessible :question, :ticket_question_id,
-    :ticket_field_relations_attributes, as: :admin
+    :ticket_field_relations_attributes, :ticket_tag_ids, as: :admin
   
   state_machine initial: :active do
     state :active

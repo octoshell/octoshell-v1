@@ -90,12 +90,17 @@ class Ticket < ActiveRecord::Base
     subject
   end
   
+  def active_ticket_tags
+    ticket_tags.where(ticket_tag_relations: { active: true })
+  end
+  
 private
   
   def create_ticket_tag_relations
     TicketTag.all.each do |tag|
       ticket_tag_relations.create! do |relation|
         relation.ticket_tag = tag
+        relation.active = ticket_question.ticket_tags.include?(tag)
       end
     end
   end

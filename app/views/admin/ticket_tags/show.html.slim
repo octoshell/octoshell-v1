@@ -21,22 +21,14 @@ table class="table table-bordered"
   = f.input :merge_id, collection: TicketTag.all, hint: 'Выбранный тег будет объединен с текущим.'
 
   div class="form-actions"
-    = f.button :submit, 'Объединить'
+    = f.button :submit, 'Объединить', class: 'btn-primary'
 
 h3 Группы
-- groups = @ticket_tag.groups.find_all(&:persisted?)
-- if groups && groups.any?
-  ul
-    - groups.each do |group|
-      li = group.name
-- else
-  p Нет групп
 
-= simple_form_for @group, url: admin_ticket_tag_groups_path(@ticket_tag), html: { class: 'form-horizontal' } do |f|
-  h4 Добавить группу
-  = f.input :id, collection: Group.all, label: 'Группа'
+= simple_form_for [:admin, @ticket_tag], html: { class: 'form-horizontal' } do |f|
+  = f.association :groups, as: :check_boxes, label: false
   div class="form-actions"
-    = f.button :submit, 'Добавить'
+    = f.button :submit, class: 'btn-primary'
 
 h3 Поддержка
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130204164054) do
+ActiveRecord::Schema.define(:version => 20130206064714) do
 
   create_table "abilities", :force => true do |t|
     t.string   "action"
@@ -466,9 +466,11 @@ ActiveRecord::Schema.define(:version => 20130204164054) do
     t.integer  "project_id"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
+    t.integer  "illustrations_points"
+    t.integer  "statement_points"
+    t.integer  "summary_points"
     t.string   "state"
     t.integer  "expert_id"
-    t.integer  "illustrations_points"
     t.boolean  "sent_on_time",         :default => false
     t.datetime "submitted_at"
     t.string   "allow_state"
@@ -500,6 +502,31 @@ ActiveRecord::Schema.define(:version => 20130204164054) do
   add_index "requests", ["cluster_project_id"], :name => "index_requests_on_cluster_project_id"
   add_index "requests", ["state"], :name => "index_requests_on_state"
   add_index "requests", ["user_id"], :name => "index_requests_on_user_id"
+
+  create_table "role_accesses", :force => true do |t|
+    t.string  "action"
+    t.string  "controller"
+    t.text    "condition"
+    t.boolean "all",        :default => false
+  end
+
+  create_table "role_name_relations", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_name_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "role_names", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "role_relations", :force => true do |t|
+    t.integer "role_access_id"
+    t.integer "role_name_id"
+  end
 
   create_table "sureties", :force => true do |t|
     t.integer  "user_id"
@@ -593,6 +620,15 @@ ActiveRecord::Schema.define(:version => 20130204164054) do
 
   add_index "ticket_questions", ["state"], :name => "index_ticket_questions_on_state"
   add_index "ticket_questions", ["ticket_question_id"], :name => "index_ticket_questions_on_ticket_question_id"
+
+  create_table "ticket_questions_ticket_tags", :id => false, :force => true do |t|
+    t.integer "ticket_question_id"
+    t.integer "ticket_tag_id"
+  end
+
+  add_index "ticket_questions_ticket_tags", ["ticket_question_id", "ticket_tag_id"], :name => "unique_question_tag_relation", :unique => true
+  add_index "ticket_questions_ticket_tags", ["ticket_question_id"], :name => "index_ticket_questions_ticket_tags_on_ticket_question_id"
+  add_index "ticket_questions_ticket_tags", ["ticket_tag_id"], :name => "index_ticket_questions_ticket_tags_on_ticket_tag_id"
 
   create_table "ticket_tag_relations", :force => true do |t|
     t.integer  "ticket_id"

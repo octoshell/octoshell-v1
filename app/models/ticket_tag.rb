@@ -9,10 +9,11 @@ class TicketTag < ActiveRecord::Base
   has_many :ticket_tag_relations, dependent: :destroy
   has_many :tickets, through: :ticket_tag_relations
   has_and_belongs_to_many :groups
+  has_and_belongs_to_many :ticket_questions
   
   validates :name, presence: true
   
-  attr_accessible :name, as: :admin
+  attr_accessible :name, :group_ids, as: :admin
   
   after_create :create_ticket_tag_relations
   
@@ -41,10 +42,6 @@ class TicketTag < ActiveRecord::Base
 
   def link_name
     name
-  end
-  
-  def add_group(id)
-    self.group_ids = group_ids.push(id).uniq
   end
   
 private
