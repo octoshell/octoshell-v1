@@ -7,9 +7,7 @@ class Admin::ReportProjectsController < Admin::ApplicationController
     if @report.assessing? && project.update_attributes(params[:report_project], as: :admin)
       redirect_to [:admin, @report]
     else
-      @reply = @report.replies.build
-      @comment = @report.comments.build
-      render :show
+      redirect_to [:admin, @report], alert: project.errors.full_messages.to_sentence
     end
   end
 
