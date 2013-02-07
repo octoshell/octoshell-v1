@@ -1,22 +1,24 @@
 class Ticket < ActiveRecord::Base
+  attr_accessor :role
   include Models::Limitable
   
   has_paper_trail
   
   has_attached_file :attachment
   
-  belongs_to :user
-  belongs_to :ticket_question
+  belongs_to :resource, polymorphic: true
   belongs_to :project
   belongs_to :cluster
-  belongs_to :surety
+  belongs_to :ticket_question
+  belongs_to :user
   has_many :replies
   has_many :ticket_field_values, inverse_of: :ticket
   has_many :ticket_tag_relations
   has_many :ticket_tags, through: :ticket_tag_relations
   has_and_belongs_to_many :users, uniq: true
   
-  validates :user, :subject, :message, :ticket_question, presence: true
+  validates :subject, :message, presence: true
+  validates :ticket_question, presence: true, if: :user
   
   accepts_nested_attributes_for :ticket_field_values, :ticket_tag_relations
   
@@ -25,8 +27,9 @@ class Ticket < ActiveRecord::Base
   attr_accessible :message, :subject, :attachment, :ticket_question_id, :url,
     :ticket_field_values_attributes, :user_id, :project_id, :cluster_id,
     :ticket_tag_relations_attributes, :user_ids, as: :admin
-
+  
   after_create :create_ticket_tag_relations
+  after_create :assign_special_tags, if: :role
   
   state_machine :state, initial: :active do
     state :active
@@ -54,6 +57,16 @@ class Ticket < ActiveRecord::Base
   define_defaults_events :reply, :answer, :resolve, :close
   
   define_state_machine_scopes
+  
+  class << self
+    def create_for!(resource)
+      create! do |ticket|
+        ticket.resource = resource
+        ticket.tags << TicketTag.surety
+        yield(ticket)
+      end
+    end
+  end
   
   def attachment_image?
     attachment_content_type.to_s =~ /image/
@@ -103,5 +116,11 @@ private
         relation.active = ticket_question.ticket_tags.include?(tag)
       end
     end
+  end
+  
+  def assign_special_tags
+    ticket_tag_relations.where({
+      ticket_tag_id: TicketTag.send(role).id
+    }).update_all(active: true)
   end
 end

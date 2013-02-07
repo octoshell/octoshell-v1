@@ -38,4 +38,14 @@ describe TicketTag do
       first_tag.ticket_tag_relations.first.should be_active
     end
   end
+  
+  describe '#close' do
+    context 'system' do
+      subject { create(:ticket_tag, system: true) }
+      
+      it 'should not being closed' do
+        subject.close.should be_false
+      end
+    end
+  end
 end

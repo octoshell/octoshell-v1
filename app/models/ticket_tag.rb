@@ -1,3 +1,4 @@
+# coding: utf-8
 class TicketTag < ActiveRecord::Base
   include Models::Limitable
   
@@ -16,18 +17,50 @@ class TicketTag < ActiveRecord::Base
   attr_accessible :name, :group_ids, as: :admin
   
   after_create :create_ticket_tag_relations
+  scope :not_system, where(system: false)
   
   state_machine :state, initial: :active do
     state :active
-    state :closed
+    state :closed do
+      validate do
+        if system?
+          errors.add(:base, :impossible_to_close_system_ticket)
+        end
+      end
+    end
     
-    event :_close do
+    event :close do
       transition active: :closed
     end
   end
   
-  define_defaults_events :close
   define_state_machine_scopes
+  
+  class << self
+    def pending_surety
+      special(:pending_surety)
+    end
+    
+    def failed_task
+      special(:failed_task)
+    end
+    
+    def surety_scan
+      special(:surety_scan)
+    end
+    
+    def support
+      special(:support)
+    end
+    
+    def special(code)
+      find_or_create_by_code!(code) do |t|
+        t.name = code
+        t.system = true
+      end
+    end
+    private :special
+  end
   
   def merge(tag)
     return false if self == tag

@@ -3,8 +3,8 @@
 div class="link-actions"
   = link_to 'Редактировать', [:edit, :admin, @ticket_tag], class: 'btn'
   = " "
-  - if @ticket_tag.can__close?
-    = link_to TicketTag.human_state_event_name(:_close), [:admin, @ticket_tag, :close], method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
+  - if @ticket_tag.can_close?
+    = link_to TicketTag.human_state_event_name(:close), [:admin, @ticket_tag, :close], method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
     = " "
   = link_to 'Версии', [:admin, @ticket_tag, :versions], class: 'btn'
 
@@ -18,7 +18,7 @@ table class="table table-bordered"
 
 = simple_form_for @ticket_tag, url: admin_ticket_tag_merge_path(@ticket_tag), method: :put, html: { class: 'form-horizontal' } do |f|
   legend Объединие
-  = f.input :merge_id, collection: TicketTag.all, hint: 'Выбранный тег будет объединен с текущим.'
+  = f.input :merge_id, collection: TicketTag.not_system, hint: 'Выбранный тег будет объединен с текущим.'
 
   div class="form-actions"
     = f.button :submit, 'Объединить', class: 'btn-primary'

@@ -31,6 +31,12 @@ describe Ticket do
       its(:active_ticket_tags) { should == [tag] }
       its(:users) { should include(user) }
     end
+    
+    context 'with specified role' do
+      subject { create(:ticket, role: :support) }
+      
+      its(:active_ticket_tags) { should == [TicketTag.support] }
+    end
   end
   
   describe '#answer' do

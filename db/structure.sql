@@ -1681,7 +1681,9 @@ CREATE TABLE ticket_tags (
     name character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    state character varying(255)
+    state character varying(255),
+    system boolean DEFAULT false,
+    code character varying(255)
 );
 
 
@@ -1768,7 +1770,10 @@ CREATE TABLE tickets (
     project_id integer,
     cluster_id integer,
     surety_id integer,
-    report_id integer
+    report_id integer,
+    resource_id integer,
+    resource_type character varying(255),
+    code character varying(255)
 );
 
 
@@ -3323,6 +3328,13 @@ CREATE INDEX index_tickets_on_report_id ON tickets USING btree (report_id);
 
 
 --
+-- Name: index_tickets_on_resource_type_and_resource_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_tickets_on_resource_type_and_resource_id ON tickets USING btree (resource_type, resource_id);
+
+
+--
 -- Name: index_tickets_on_state; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3927,3 +3939,13 @@ INSERT INTO schema_migrations (version) VALUES ('20130206064714');
 INSERT INTO schema_migrations (version) VALUES ('20130206102858');
 
 INSERT INTO schema_migrations (version) VALUES ('20130206105842');
+
+INSERT INTO schema_migrations (version) VALUES ('20130207064812');
+
+INSERT INTO schema_migrations (version) VALUES ('20130207101457');
+
+INSERT INTO schema_migrations (version) VALUES ('20130207103251');
+
+INSERT INTO schema_migrations (version) VALUES ('20130207115142');
+
+INSERT INTO schema_migrations (version) VALUES ('20130207121150');

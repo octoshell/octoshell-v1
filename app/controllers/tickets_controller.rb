@@ -26,7 +26,9 @@ class TicketsController < ApplicationController
   end
   
   def create
-    @ticket = current_user.tickets.build(params[:ticket])
+    @ticket = current_user.tickets.build(params[:ticket]) do |t|
+      t.role = :support
+    end
     if @ticket.save
       @ticket.user.track! :create_ticket, @ticket, current_user
       redirect_to @ticket, notice: t('.ticket_created')
