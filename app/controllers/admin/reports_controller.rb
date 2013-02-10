@@ -43,7 +43,8 @@ class Admin::ReportsController < Admin::ApplicationController
   end
   
   def latecommers
-    @reports = show_all? ? Report.latecommers : Report.latecommers.page(params[:page])
+    @reports = Report.latecommers.with_state(:submitted)
+    @reports = @reports.page(params[:page]) if show_all?
     @subnamespace = :latecommers
     render :index
   end
