@@ -245,6 +245,7 @@ MSU::Application.routes.draw do
 
     # tickets
     resources :tickets, only: [:index, :show, :edit, :update] do
+      get :all, on: :collection
       get :tag_relations_form
       put :close
       post :accept

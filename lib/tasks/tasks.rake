@@ -1,4 +1,4 @@
-namspace :tasks do
+namespace :tasks do
   task :create_tickets => :environment do
     sql = %{
       SELECT "tasks".* FROM "tasks"

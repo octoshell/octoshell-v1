@@ -4,8 +4,16 @@ class Admin::TicketsController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
+    @search = current_user.subscribed_tickets.search(params[:search])
+    @tickets = show_all? ? @search.relation.uniq : @search.relation.uniq.page(params[:page])
+    @subnamespace = :subscribed_tickets
+  end
+  
+  def all
     @search = Ticket.search(params[:search])
     @tickets = show_all? ? @search.relation.uniq : @search.relation.uniq.page(params[:page])
+    @subnamespace = :all_tickets
+    render :index
   end
     
   def show

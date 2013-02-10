@@ -52,6 +52,9 @@ class Ticket < ActiveRecord::Base
   end
   
   define_state_machine_scopes
+  scope :active, where(%{
+    #{table_name}.state = 'pending' or #{table_name}.answer_state = 'replied'
+  })
   
   def attachment_image?
     attachment_content_type.to_s =~ /image/

@@ -63,6 +63,8 @@ ru:
         create: Создать
     tickets:
       menu:
+        subscribed_tickets: Заявки
+        all_tickets: Все заявки
         templates: Шаблоны
         tags: Теги
         questions: Вопросы

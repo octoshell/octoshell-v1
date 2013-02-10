@@ -110,8 +110,7 @@ class User < ActiveRecord::Base
     end
 
     def admin_notifications_count
-      [Task.failed, Ticket.active, Surety.pending, Request.pending].
-        sum_of_count
+      0
     end
   end
 
