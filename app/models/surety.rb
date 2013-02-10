@@ -9,7 +9,7 @@ class Surety < ActiveRecord::Base
     to: :project, allow_nil: true
   
   belongs_to :project, inverse_of: :sureties
-  has_many :tickets
+  has_many :tickets, as: :resource
   has_many :surety_members, inverse_of: :surety
   
   validates :boss_full_name, :boss_position, :project, presence: true
@@ -51,6 +51,8 @@ class Surety < ActiveRecord::Base
   define_defaults_events :activate, :decline, :close, :confirm, :unconfirm
   
   define_state_machine_scopes
+  
+  after_create :create_ticket
   
   def activate!
     transaction do
@@ -188,7 +190,7 @@ class Surety < ActiveRecord::Base
       return false
     end
     
-    Ticket.create!(surety) do |ticket|
+    Ticket.create! do |ticket|
       ticket.resource = self
       ticket.subject = "Скан к поручительству ##{id}"
       ticket.url = "/admin/sureties/#{id}"
@@ -200,5 +202,17 @@ class Surety < ActiveRecord::Base
 
   def link_name
     I18n.t('.open', default: 'Open')
+  end
+  
+private
+  
+  def create_ticket
+    Ticket.create! do |ticket|
+      ticket.resource = self
+      ticket.subject = "Поручительство ##{id} ожидает подтверждения"
+      ticket.url = "/admin/sureties/#{id}"
+      ticket.role = :pending_surety
+      ticket.message = "Ожидает подтверждения"
+    end
   end
 end

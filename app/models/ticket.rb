@@ -58,16 +58,6 @@ class Ticket < ActiveRecord::Base
   
   define_state_machine_scopes
   
-  class << self
-    def create_for!(resource)
-      create! do |ticket|
-        ticket.resource = resource
-        ticket.tags << TicketTag.surety
-        yield(ticket)
-      end
-    end
-  end
-  
   def attachment_image?
     attachment_content_type.to_s =~ /image/
   end
@@ -113,7 +103,9 @@ private
     TicketTag.all.each do |tag|
       ticket_tag_relations.create! do |relation|
         relation.ticket_tag = tag
-        relation.active = ticket_question.ticket_tags.include?(tag)
+        if ticket_question
+          relation.active = ticket_question.ticket_tags.include?(tag)
+        end
       end
     end
   end

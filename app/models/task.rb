@@ -16,6 +16,7 @@ class Task < ActiveRecord::Base
   )
   
   belongs_to :resource, polymorphic: true
+  has_many :tickets, as: :resource
   
   validates :resource, :procedure, presence: true
   validates :procedure_string, inclusion: { in: PROCEDURES }
@@ -102,5 +103,15 @@ class Task < ActiveRecord::Base
 
   def link_name
     "Task #{id}"
+  end
+  
+  def create_failure_ticket!
+    Ticket.create! do |ticket|
+      ticket.resource = self
+      ticket.subject = "Процедура ##{id} выполнилась с ошибкой"
+      ticket.url = "/admin/tasks/#{id}"
+      ticket.role = :failed_task
+      ticket.message = "Ошибка"
+    end
   end
 end

@@ -8,6 +8,14 @@ describe Surety do
     should be
   end
   
+  describe "#create" do
+    subject { create(:surety) }
+
+    it 'creates ticket about pending surety' do
+      should have(1).tickets
+    end
+  end
+  
   describe '#activate' do
     it 'should revalidate user' do
       surety.user.should_receive(:revalidate!).once

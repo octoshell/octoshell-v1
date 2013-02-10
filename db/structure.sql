@@ -1772,8 +1772,7 @@ CREATE TABLE tickets (
     surety_id integer,
     report_id integer,
     resource_id integer,
-    resource_type character varying(255),
-    code character varying(255)
+    resource_type character varying(255)
 );
 
 
@@ -3949,3 +3948,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130207103251');
 INSERT INTO schema_migrations (version) VALUES ('20130207115142');
 
 INSERT INTO schema_migrations (version) VALUES ('20130207121150');
+
+INSERT INTO schema_migrations (version) VALUES ('20130207122906');
