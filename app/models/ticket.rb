@@ -31,30 +31,25 @@ class Ticket < ActiveRecord::Base
   after_create :create_ticket_tag_relations
   after_create :assign_special_tags, if: :role
   
-  state_machine :state, initial: :active do
-    state :active
-    state :answered
+  state_machine :state, initial: :pending do
+    state :pending
+    state :accepted
     state :resolved
     state :closed
-    
-    event :_answer do
-      transition [:active, :resolved, :answered] => :answered
-    end
-    
-    event :_reply do
-      transition [:active, :resolved, :answered] => :active
-    end
-    
-    event :_resolve do
-      transition [:active, :answered] => :resolved
-    end
-    
-    event :_close do
-      transition [:active, :resolved, :answered] => :closed
-    end
   end
   
-  define_defaults_events :reply, :answer, :resolve, :close
+  state_machine :answer_state, initial: :pending do
+    state :replied
+    state :answered
+    
+    event :reply do
+      transition any => :replied
+    end
+    
+    event :answer do
+      transition any => :answered
+    end
+  end
   
   define_state_machine_scopes
   
@@ -62,13 +57,6 @@ class Ticket < ActiveRecord::Base
     attachment_content_type.to_s =~ /image/
   end
 
-  def accept(user)
-    replies.create! do |reply|
-      reply.user = user
-      reply.message = I18n.t("ticket_accepted")
-    end
-  end
-  
   def actual?
     not closed?
   end
