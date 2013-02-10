@@ -11,6 +11,8 @@ table class="table table-bordered table-striped"
   tr
     th class="span5" = Report.model_name.human
     th class="span3" = Report.human_attribute_name(:state)
+    - if may? :supervise, :reports
+      th Ходатайство
     th class="span1" = Report.human_attribute_name(:submitted_at)
     th Эксперт
     - if may? :review, :reports
@@ -34,9 +36,13 @@ table class="table table-bordered table-striped"
         |  
         span class="label label-warning"
           = report.human_allow_state_name
+      - if may? :supervise, :reports
+        td
+          - if report.personal_data.reason?
+            = link_to 'Ходатайство', [:admin, report, :supervise]
       td = report.submitted_at and report.submitted_at.strftime("%Y-%m-%d")
       td = smart_link_to report.expert
       - if may? :review, :reports
-        td = link_to 'просмотреть', [:admin, report, :review]
+        td = link_to 'Просмотреть', [:admin, report, :review]
 
 = safe_paginate @reports
