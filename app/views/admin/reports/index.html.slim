@@ -7,7 +7,7 @@ ul class="nav nav-pills"
   li class="#{active_menu? :assessed, true}" = link_to "Оцененные (#{Report.assessed.count})", assessed_admin_reports_path
   li class="#{active_menu? :latecommers, true}" = link_to "Отправленные позже срока (#{Report.latecommers.with_state(:submitted).count})", latecommers_admin_reports_path
 
-table class="table table-bordered table-striped"
+table class="table table-bordered table-striped table-condensed"
   tr
     th class="span5" = Report.model_name.human
     th class="span3" = Report.human_attribute_name(:state)
