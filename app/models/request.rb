@@ -81,7 +81,7 @@ class Request < ActiveRecord::Base
   end
   
   def allowed_projects
-    user ? user.owned_projects.active : []
+    user ? user.owned_projects.with_states(:active, :blocked, :announced) : []
   end
     
 private
