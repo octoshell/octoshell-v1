@@ -14,7 +14,7 @@ div class="link-actions"
   = link_to t('.edit', default: 'Edit'), edit_project_path(@project), class: 'btn'
   
   |  
-  - if @project.active?
+  - if @project.announced? || @project.active? || @project.blocked?
     = link_to t('.new_request', default: 'New Request'), new_request_path(project_id: @project.id), class: "btn"
     |  
   = link_to t('.invite', default: 'Invite'), [@project, :invite], class: 'btn'
