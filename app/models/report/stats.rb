@@ -7,10 +7,7 @@ class Report::Stats
   def organizations_count_by_kind
     data = []
     reports_grouped_by_org_kind.each do |kind, reports|
-      data << {
-        label: kind.gsub(' ', "\n"),
-        value: reports.size
-      }
+      data << [kind, reports.size]
     end
     data
   end
@@ -18,10 +15,10 @@ class Report::Stats
   def projects_count_by_organization_kind
     data = []
     reports_grouped_by_org_kind.each do |kind, reports|
-      data << {
-        label: kind.gsub(' ', "\n"),
-        value: reports.sum { |r| r.projects.size }
-      }
+      data << [
+        kind.gsub(' ', "\n"),
+        reports.sum { |r| r.projects.size }
+      ]
     end
     data
   end
