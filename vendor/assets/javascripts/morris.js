@@ -1,1 +1,1589 @@
-(function(){var e,t,n,r,i=[].slice,s=function(e,t){return function(){return e.apply(t,arguments)}},o={}.hasOwnProperty,u=function(e,t){function r(){this.constructor=e}for(var n in t)o.call(t,n)&&(e[n]=t[n]);return r.prototype=t.prototype,e.prototype=new r,e.__super__=t.prototype,e};t=window.Morris={},e=jQuery,t.EventEmitter=function(){function e(){}return e.prototype.on=function(e,t){return this.handlers==null&&(this.handlers={}),this.handlers[e]==null&&(this.handlers[e]=[]),this.handlers[e].push(t)},e.prototype.fire=function(){var e,t,n,r,s,o,u;n=arguments[0],e=2<=arguments.length?i.call(arguments,1):[];if(this.handlers!=null&&this.handlers[n]!=null){o=this.handlers[n],u=[];for(r=0,s=o.length;r<s;r++)t=o[r],u.push(t.apply(null,e));return u}},e}(),t.commas=function(e){var t,n,r,i;return e===null?"n/a":(r=e<0?"-":"",t=Math.abs(e),n=Math.floor(t).toFixed(0),r+=n.replace(/(?=(?:\d{3})+$)(?!^)/g,","),i=t.toString(),i.length>n.length&&(r+=i.slice(n.length)),r)},t.pad2=function(e){return(e<10?"0":"")+e},t.Donut=function(){function n(n){this.select=s(this.select,this);if(!(this instanceof t.Donut))return new t.Donut(n);typeof n.element=="string"?this.el=e(document.getElementById(n.element)):this.el=e(n.element),n.colors!=null&&(this.colors=n.colors);if(this.el===null||this.el.length===0)throw new Error("Graph placeholder not found.");if(n.data===void 0||n.data.length===0)return;this.data=n.data,this.el.addClass("graph-initialised"),this.redraw()}return n.prototype.colors=["#0B62A4","#3980B5","#679DC6","#95BBD7","#B0CCE1","#095791","#095085","#083E67","#052C48","#042135"],n.prototype.redraw=function(){var e,n,r,i,s,o,u,a,f,l,c,h,p,d,v,m,g,y,b,w,E,S,x;this.el.empty(),this.r=new Raphael(this.el[0]),n=this.el.width()/2,r=this.el.height()/2,h=(Math.min(n,r)-10)/3,c=0,w=this.data;for(d=0,g=w.length;d<g;d++)p=w[d],c+=p.value;a=5/(2*h),e=1.9999*Math.PI-a*this.data.length,o=0,s=0,this.segments=[],E=this.data;for(v=0,y=E.length;v<y;v++)i=E[v],f=o+a+e*(i.value/c),l=new t.DonutSegment(n,r,h*2,h,o,f,this.colors[s%this.colors.length],i),l.render(this.r),this.segments.push(l),l.on("hover",this.select),o=f,s+=1;this.text1=this.r.text(n,r-10,"").attr({"font-size":15,"font-weight":800}),this.text2=this.r.text(n,r+10,"").attr({"font-size":14}),u=Math.max.apply(null,function(){var e,t,n,r;n=this.data,r=[];for(e=0,t=n.length;e<t;e++)i=n[e],r.push(i.value);return r}.call(this)),s=0,S=this.data,x=[];for(m=0,b=S.length;m<b;m++){i=S[m];if(i.value===u){this.select(this.segments[s]);break}x.push(s+=1)}return x},n.prototype.select=function(e){var n,r,i,s;s=this.segments;for(r=0,i=s.length;r<i;r++)n=s[r],n.deselect();return e.select(),this.setLabels(e.data.label,t.commas(e.data.value))},n.prototype.setLabels=function(e,t){var n,r,i,s,o,u,a,f;return n=(Math.min(this.el.width()/2,this.el.height()/2)-10)*2/3,s=1.8*n,i=n/2,r=n/3,this.text1.attr({text:e,transform:""}),o=this.text1.getBBox(),u=Math.min(s/o.width,i/o.height),this.text1.attr({transform:"S"+u+","+u+","+(o.x+o.width/2)+","+(o.y+o.height)}),this.text2.attr({text:t,transform:""}),a=this.text2.getBBox(),f=Math.min(s/a.width,r/a.height),this.text2.attr({transform:"S"+f+","+f+","+(a.x+a.width/2)+","+a.y})},n}(),t.DonutSegment=function(e){function t(e,t,n,r,i,o,u,a){this.cx=e,this.cy=t,this.inner=n,this.outer=r,this.color=u,this.data=a,this.deselect=s(this.deselect,this),this.select=s(this.select,this),this.sin_p0=Math.sin(i),this.cos_p0=Math.cos(i),this.sin_p1=Math.sin(o),this.cos_p1=Math.cos(o),this.long=o-i>Math.PI?1:0,this.path=this.calcSegment(this.inner+3,this.inner+this.outer-5),this.selectedPath=this.calcSegment(this.inner+3,this.inner+this.outer),this.hilight=this.calcArc(this.inner)}return u(t,e),t.prototype.calcArcPoints=function(e){return[this.cx+e*this.sin_p0,this.cy+e*this.cos_p0,this.cx+e*this.sin_p1,this.cy+e*this.cos_p1]},t.prototype.calcSegment=function(e,t){var n,r,i,s,o,u,a,f,l,c;return l=this.calcArcPoints(e),n=l[0],i=l[1],r=l[2],s=l[3],c=this.calcArcPoints(t),o=c[0],a=c[1],u=c[2],f=c[3],"M"+n+","+i+("A"+e+","+e+",0,"+this.long+",0,"+r+","+s)+("L"+u+","+f)+("A"+t+","+t+",0,"+this.long+",1,"+o+","+a)+"Z"},t.prototype.calcArc=function(e){var t,n,r,i,s;return s=this.calcArcPoints(e),t=s[0],r=s[1],n=s[2],i=s[3],"M"+t+","+r+("A"+e+","+e+",0,"+this.long+",0,"+n+","+i)},t.prototype.render=function(e){var t=this;return this.arc=e.path(this.hilight).attr({stroke:this.color,"stroke-width":2,opacity:0}),this.seg=e.path(this.path).attr({fill:this.color,stroke:"white","stroke-width":3}).hover(function(){return t.fire("hover",t)})},t.prototype.select=function(){if(!this.selected)return this.seg.animate({path:this.selectedPath},150,"<>"),this.arc.animate({opacity:1},150,"<>"),this.selected=!0},t.prototype.deselect=function(){if(this.selected)return this.seg.animate({path:this.path},150,"<>"),this.arc.animate({opacity:0},150,"<>"),this.selected=!1},t}(t.EventEmitter),t.Line=function(){function n(n){this.updateHilight=s(this.updateHilight,this),this.hilight=s(this.hilight,this),this.updateHover=s(this.updateHover,this),this.transY=s(this.transY,this),this.transX=s(this.transX,this);var r,i=this;if(!(this instanceof t.Line))return new t.Line(n);typeof n.element=="string"?this.el=e(document.getElementById(n.element)):this.el=e(n.element);if(this.el===null||this.el.length===0)throw new Error("Graph placeholder not found.");this.options=e.extend({},this.defaults,n),typeof this.options.units=="string"&&(this.options.postUnits=n.units);if(this.options.data===void 0||this.options.data.length===0)return;this.el.addClass("graph-initialised"),this.r=new Raphael(this.el[0]),this.pointGrow=Raphael.animation({r:this.options.pointSize+3},25,"linear"),this.pointShrink=Raphael.animation({r:this.options.pointSize},25,"linear"),this.elementWidth=null,this.elementHeight=null,this.dirty=!1,this.prevHilight=null,this.el.mousemove(function(e){return i.updateHilight(e.pageX)}),this.options.hideHover&&this.el.mouseout(function(e){return i.hilight(null)}),r=function(e){var t;return t=e.originalEvent.touches[0]||e.originalEvent.changedTouches[0],i.updateHilight(t.pageX),t},this.el.bind("touchstart",r),this.el.bind("touchmove",r),this.el.bind("touchend",r),this.seriesLabels=this.options.labels,this.setData(this.options.data)}return n.prototype.defaults={lineWidth:3,pointSize:4,lineColors:["#0b62a4","#7A92A3","#4da74d","#afd8f8","#edc240","#cb4b4b","#9440ed"],ymax:"auto",ymin:"auto 0",marginTop:25,marginRight:25,marginBottom:30,marginLeft:25,numLines:5,gridLineColor:"#aaa",gridTextColor:"#888",gridTextSize:12,gridStrokeWidth:.5,hoverPaddingX:10,hoverPaddingY:5,hoverMargin:10,hoverFillColor:"#fff",hoverBorderColor:"#ccc",hoverBorderWidth:2,hoverOpacity:.95,hoverLabelColor:"#444",hoverFontSize:12,smooth:!0,hideHover:!1,parseTime:!0,preUnits:"",postUnits:"",dateFormat:function(e){return(new Date(e)).toString()},xLabels:"auto",xLabelFormat:null},n.prototype.setData=function(n,r){var i,s,o,u,a,f,l,c,h,p,d,v,m,g,y=this;r==null&&(r=!0),this.options.data=n.slice(0),this.options.data.sort(function(e,t){return(e[y.options.xkey]<t[y.options.xkey])-(t[y.options.xkey]<e[y.options.xkey])}),this.columnLabels=e.map(this.options.data,function(e){return e[y.options.xkey]}),this.series=[],d=this.options.ykeys;for(f=0,h=d.length;f<h;f++){o=d[f],s=[],v=this.options.data;for(l=0,p=v.length;l<p;l++)i=v[l],s.push(function(){switch(typeof i[o]){case"number":return i[o];case"string":return parseFloat(i[o]);default:return null}}());this.series.push(s)}this.options.parseTime?this.xvals=e.map(this.columnLabels,function(e){return t.parseDate(e)}):this.xvals=function(){g=[];for(var e=m=this.columnLabels.length-1;m<=0?e<=0:e>=0;m<=0?e++:e--)g.push(e);return g}.apply(this),this.options.parseTime&&(this.columnLabels=e.map(this.columnLabels,function(e){return typeof e=="number"?y.options.dateFormat(e):e})),this.xmin=Math.min.apply(null,this.xvals),this.xmax=Math.max.apply(null,this.xvals),this.xmin===this.xmax&&(this.xmin-=1,this.xmax+=1),typeof this.options.ymax=="string"&&this.options.ymax.slice(0,4)==="auto"?(u=Math.max.apply(null,Array.prototype.concat.apply([],this.series)),this.options.ymax.length>5?this.ymax=Math.max(parseInt(this.options.ymax.slice(5),10),u):this.ymax=u):typeof this.options.ymax=="string"?this.ymax=parseInt(this.options.ymax,10):this.ymax=this.options.ymax,typeof this.options.ymin=="string"&&this.options.ymin.slice(0,4)==="auto"?(a=Math.min.apply(null,Array.prototype.concat.apply([],this.series)),this.options.ymin.length>5?this.ymin=Math.min(parseInt(this.options.ymin.slice(5),10),a):this.ymin=a):typeof this.options.ymin=="string"?this.ymin=parseInt(this.options.ymin,10):this.ymin=this.options.ymin,this.ymin===this.ymax&&(this.ymin-=1,this.ymax+=1),this.yInterval=(this.ymax-this.ymin)/(this.options.numLines-1),this.yInterval>0&&this.yInterval<1?this.precision=-Math.floor(Math.log(this.yInterval)/Math.log(10)):this.precision=0,this.dirty=!0;if(r)return this.redraw()},n.prototype.calc=function(){var t,n,r,i,s,o,u,a,f=this;i=this.el.width(),t=this.el.height();if(this.elementWidth!==i||this.elementHeight!==t||this.dirty){this.elementWidth=i,this.elementHeight=t,this.dirty=!1,this.maxYLabelWidth=Math.max(this.measureText(this.yLabelFormat(this.ymin),this.options.gridTextSize).width,this.measureText(this.yLabelFormat(this.ymax),this.options.gridTextSize).width),this.left=this.maxYLabelWidth+this.options.marginLeft,this.width=this.el.width()-this.left-this.options.marginRight,this.height=this.el.height()-this.options.marginTop-this.options.marginBottom,this.dx=this.width/(this.xmax-this.xmin),this.dy=this.height/(this.ymax-this.ymin),this.columns=function(){var e,t,n,r;n=this.xvals,r=[];for(e=0,t=n.length;e<t;e++)s=n[e],r.push(this.transX(s));return r}.call(this),this.seriesCoords=[],a=this.series;for(o=0,u=a.length;o<u;o++)n=a[o],r=[],e.each(n,function(e,t){return t===null?r.push(null):r.push({x:f.columns[e],y:f.transY(t)})}),this.seriesCoords.push(r);return this.hoverMargins=e.map(this.columns.slice(1),function(e,t){return(e+f.columns[t])/2})}},n.prototype.transX=function(e){return this.xvals.length===1?this.left+this.width/2:this.left+(e-this.xmin)*this.dx},n.prototype.transY=function(e){return this.options.marginTop+this.height-(e-this.ymin)*this.dy},n.prototype.redraw=function(){return this.r.clear(),this.calc(),this.drawGrid(),this.drawSeries(),this.drawHover(),this.hilight(this.options.hideHover?null:0)},n.prototype.drawGrid=function(){var e,n,r,i,s,o,u,a,f,l,c,h,p,d,v,m,g,y,b,w,E,S=this;n=this.ymin,o=this.ymax;for(u=p=n,g=this.yInterval;n<=o?p<=o:p>=o;u=p+=g)f=parseFloat(u.toFixed(this.precision)),c=this.transY(f),this.r.text(this.left-this.options.marginLeft/2,c,this.yLabelFormat(f)).attr("font-size",this.options.gridTextSize).attr("fill",this.options.gridTextColor).attr("text-anchor","end"),this.r.path("M"+this.left+","+c+"H"+(this.left+this.width)).attr("stroke",this.options.gridLineColor).attr("stroke-width",this.options.gridStrokeWidth);h=this.options.marginTop+this.height+this.options.marginBottom/2,l=50,a=null,e=function(e,t){var n,r;return n=S.r.text(S.transX(t),h,e).attr("font-size",S.options.gridTextSize).attr("fill",S.options.gridTextColor),r=n.getBBox(),(a===null||a<=r.x)&&r.x>=0&&r.x+r.width<S.el.width()?a=r.x+r.width+l:n.remove()};if(this.options.parseTime){if(this.columnLabels.length===1&&this.options.xLabels==="auto")return e(this.columnLabels[0],this.xvals[0]);y=t.labelSeries(this.xmin,this.xmax,this.width,this.options.xLabels,this.options.xLabelFormat),w=[];for(d=0,m=y.length;d<m;d++)i=y[d],w.push(e(i[0],i[1]));return w}E=[];for(r=v=0,b=this.columnLabels.length;0<=b?v<=b:v>=b;r=0<=b?++v:--v)s=this.columnLabels[this.columnLabels.length-r-1],E.push(e(s,r));return E},n.prototype.drawSeries=function(){var t,n,r,i,s,o,u,a,f,l;for(i=o=a=this.seriesCoords.length-1;a<=0?o<=0:o>=0;i=a<=0?++o:--o)r=e.map(this.seriesCoords[i],function(e){return e}),r.length>1&&(s=this.createPath(r,this.options.marginTop,this.left,this.options.marginTop+this.height,this.left+this.width),this.r.path(s).attr("stroke",this.options.lineColors[i]).attr("stroke-width",this.options.lineWidth));this.seriesPoints=function(){var e,t,n;n=[];for(i=e=0,t=this.seriesCoords.length-1;0<=t?e<=t:e>=t;i=0<=t?++e:--e)n.push([]);return n}.call(this),l=[];for(i=u=f=this.seriesCoords.length-1;f<=0?u<=0:u>=0;i=f<=0?++u:--u)l.push(function(){var e,r,s,o;s=this.seriesCoords[i],o=[];for(e=0,r=s.length;e<r;e++)t=s[e],t===null?n=null:n=this.r.circle(t.x,t.y,this.options.pointSize).attr("fill",this.options.lineColors[i]).attr("stroke-width",1).attr("stroke","#ffffff"),o.push(this.seriesPoints[i].push(n));return o}.call(this));return l},n.prototype.createPath=function(t,n,r,i,s){var o,u,a,f,l,c,h,p,d,v,m,g,y,b;p="";if(this.options.smooth){a=this.gradients(t);for(f=y=0,b=t.length-1;0<=b?y<=b:y>=b;f=0<=b?++y:--y)o=t[f],f===0?p+="M"+o.x+","+o.y:(u=a[f],c=t[f-1],h=a[f-1],l=(o.x-c.x)/4,d=c.x+l,m=Math.min(i,c.y+l*h),v=o.x-l,g=Math.min(i,o.y-l*u),p+="C"+d+","+m+","+v+","+g+","+o.x+","+o.y)}else p="M"+e.map(t,function(e){return""+e.x+","+e.y}).join("L");return p},n.prototype.gradients=function(t){return e.map(t,function(e,n){return n===0?(t[1].y-e.y)/(t[1].x-e.x):n===t.length-1?(e.y-t[n-1].y)/(e.x-t[n-1].x):(t[n+1].y-t[n-1].y)/(t[n+1].x-t[n-1].x)})},n.prototype.drawHover=function(){var e,t,n,r,i;this.hoverHeight=this.options.hoverFontSize*1.5*(this.series.length+1),this.hover=this.r.rect(-10,-this.hoverHeight/2-this.options.hoverPaddingY,20,this.hoverHeight+this.options.hoverPaddingY*2,10).attr("fill",this.options.hoverFillColor).attr("stroke",this.options.hoverBorderColor).attr("stroke-width",this.options.hoverBorderWidth).attr("opacity",this.options.hoverOpacity),this.xLabel=this.r.text(0,this.options.hoverFontSize*.75-this.hoverHeight/2,"").attr("fill",this.options.hoverLabelColor).attr("font-weight","bold").attr("font-size",this.options.hoverFontSize),this.hoverSet=this.r.set(),this.hoverSet.push(this.hover),this.hoverSet.push(this.xLabel),this.yLabels=[],i=[];for(e=n=0,r=this.series.length-1;0<=r?n<=r:n>=r;e=0<=r?++n:--n)t=this.r.text(0,this.options.hoverFontSize*1.5*(e+1.5)-this.hoverHeight/2,"").attr("fill",this.options.lineColors[e]).attr("font-size",this.options.hoverFontSize),this.yLabels.push(t),i.push(this.hoverSet.push(t));return i},n.prototype.updateHover=function(t){var n,r,i,s,o,u,a=this;this.hoverSet.show(),this.xLabel.attr("text",this.columnLabels[t]);for(n=o=0,u=this.series.length-1;0<=u?o<=u:o>=u;n=0<=u?++o:--o)this.yLabels[n].attr("text",""+this.seriesLabels[n]+": "+this.yLabelFormat(this.series[n][t]));return r=Math.max.apply(null,e.map(this.yLabels,function(e){return e.getBBox().width})),r=Math.max(r,this.xLabel.getBBox().width),this.hover.attr("width",r+this.options.hoverPaddingX*2),this.hover.attr("x",-this.options.hoverPaddingX-r/2),s=Math.min.apply(null,e.map(this.series,function(e){return a.transY(e[t])})),s>this.hoverHeight+this.options.hoverPaddingY*2+this.options.hoverMargin+this.options.marginTop?s=s-this.hoverHeight/2-this.options.hoverPaddingY-this.options.hoverMargin:s=s+this.hoverHeight/2+this.options.hoverPaddingY+this.options.hoverMargin,s=Math.max(this.options.marginTop+this.hoverHeight/2+this.options.hoverPaddingY,s),s=Math.min(this.options.marginTop+this.height-this.hoverHeight/2-this.options.hoverPaddingY,s),i=Math.min(this.left+this.width-r/2-this.options.hoverPaddingX,this.columns[t]),i=Math.max(this.left+r/2+this.options.hoverPaddingX,i),this.hoverSet.attr("transform","t"+i+","+s)},n.prototype.hideHover=function(){return this.hoverSet.hide()},n.prototype.hilight=function(e){var t,n,r,i,s;if(this.prevHilight!==null&&this.prevHilight!==e)for(t=n=0,i=this.seriesPoints.length-1;0<=i?n<=i:n>=i;t=0<=i?++n:--n)this.seriesPoints[t][this.prevHilight]&&this.seriesPoints[t][this.prevHilight].animate(this.pointShrink);if(e!==null&&this.prevHilight!==e){for(t=r=0,s=this.seriesPoints.length-1;0<=s?r<=s:r>=s;t=0<=s?++r:--r)this.seriesPoints[t][e]&&this.seriesPoints[t][e].animate(this.pointGrow);this.updateHover(e)}this.prevHilight=e;if(e===null)return this.hideHover()},n.prototype.updateHilight=function(e){var t,n,r,i;e-=this.el.offset().left,i=[];for(t=n=r=this.hoverMargins.length;r<=0?n<=0:n>=0;t=r<=0?++n:--n){if(t===0||this.hoverMargins[t-1]>e){this.hilight(t);break}i.push(void 0)}return i},n.prototype.measureText=function(e,t){var n,r;return t==null&&(t=12),r=this.r.text(100,100,e).attr("font-size",t),n=r.getBBox(),r.remove(),n},n.prototype.yLabelFormat=function(e){return""+this.options.preUnits+t.commas(e)+this.options.postUnits},n}(),t.parseDate=function(e){var t,n,r,i,s,o,u,a,f,l,c;return typeof e=="number"?e:(n=e.match(/^(\d+) Q(\d)$/),i=e.match(/^(\d+)-(\d+)$/),s=e.match(/^(\d+)-(\d+)-(\d+)$/),u=e.match(/^(\d+) W(\d+)$/),a=e.match(/^(\d+)-(\d+)-(\d+)[ T](\d+):(\d+)(Z|([+-])(\d\d):?(\d\d))?$/),f=e.match(/^(\d+)-(\d+)-(\d+)[ T](\d+):(\d+):(\d+(\.\d+)?)(Z|([+-])(\d\d):?(\d\d))?$/),n?(new Date(parseInt(n[1],10),parseInt(n[2],10)*3-1,1)).getTime():i?(new Date(parseInt(i[1],10),parseInt(i[2],10)-1,1)).getTime():s?(new Date(parseInt(s[1],10),parseInt(s[2],10)-1,parseInt(s[3],10))).getTime():u?(l=new Date(parseInt(u[1],10),0,1),l.getDay()!==4&&l.setMonth(0,1+(4-l.getDay()+7)%7),l.getTime()+parseInt(u[2],10)*6048e5):a?a[6]?(o=0,a[6]!=="Z"&&(o=parseInt(a[8],10)*60+parseInt(a[9],10),a[7]==="+"&&(o=0-o)),Date.UTC(parseInt(a[1],10),parseInt(a[2],10)-1,parseInt(a[3],10),parseInt(a[4],10),parseInt(a[5],10)+o)):(new Date(parseInt(a[1],10),parseInt(a[2],10)-1,parseInt(a[3],10),parseInt(a[4],10),parseInt(a[5],10))).getTime():f?(c=parseFloat(f[6]),t=Math.floor(c),r=Math.round((c-t)*1e3),f[8]?(o=0,f[8]!=="Z"&&(o=parseInt(f[10],10)*60+parseInt(f[11],10),f[9]==="+"&&(o=0-o)),Date.UTC(parseInt(f[1],10),parseInt(f[2],10)-1,parseInt(f[3],10),parseInt(f[4],10),parseInt(f[5],10)+o,t,r)):(new Date(parseInt(f[1],10),parseInt(f[2],10)-1,parseInt(f[3],10),parseInt(f[4],10),parseInt(f[5],10),t,r)).getTime()):(new Date(parseInt(e,10),0,1)).getTime())},t.labelSeries=function(n,r,i,s,o){var u,a,f,l,c,h,p,d,v,m,g;f=200*(r-n)/i,a=new Date(n),p=t.LABEL_SPECS[s];if(p===void 0){g=t.AUTO_LABEL_ORDER;for(v=0,m=g.length;v<m;v++){l=g[v],h=t.LABEL_SPECS[l];if(f>=h.span){p=h;break}}}p===void 0&&(p=t.LABEL_SPECS.second),o&&(p=e.extend({},p,{fmt:o})),u=p.start(a),c=[];while((d=u.getTime())<=r)d>=n&&c.push([p.fmt(u),d]),p.incr(u);return c},n=function(e){return{span:e*60*1e3,start:function(e){return new Date(e.getFullYear(),e.getMonth(),e.getDate(),e.getHours())},fmt:function(e){return""+t.pad2(e.getHours())+":"+t.pad2(e.getMinutes())},incr:function(t){return t.setMinutes(t.getMinutes()+e)}}},r=function(e){return{span:e*1e3,start:function(e){return new Date(e.getFullYear(),e.getMonth(),e.getDate(),e.getHours(),e.getMinutes())},fmt:function(e){return""+t.pad2(e.getHours())+":"+t.pad2(e.getMinutes())+":"+t.pad2(e.getSeconds())},incr:function(t){return t.setSeconds(t.getSeconds()+e)}}},t.LABEL_SPECS={year:{span:1728e7,start:function(e){return new Date(e.getFullYear(),0,1)},fmt:function(e){return""+e.getFullYear()},incr:function(e){return e.setFullYear(e.getFullYear()+1)}},month:{span:24192e5,start:function(e){return new Date(e.getFullYear(),e.getMonth(),1)},fmt:function(e){return""+e.getFullYear()+"-"+t.pad2(e.getMonth()+1)},incr:function(e){return e.setMonth(e.getMonth()+1)}},day:{span:864e5,start:function(e){return new Date(e.getFullYear(),e.getMonth(),e.getDate())},fmt:function(e){return""+e.getFullYear()+"-"+t.pad2(e.getMonth()+1)+"-"+t.pad2(e.getDate())},incr:function(e){return e.setDate(e.getDate()+1)}},hour:n(60),"30min":n(30),"15min":n(15),"10min":n(10),"5min":n(5),minute:n(1),"30sec":r(30),"15sec":r(15),"10sec":r(10),"5sec":r(5),second:r(1)},t.AUTO_LABEL_ORDER=["year","month","day","hour","30min","15min","10min","5min","minute","30sec","15sec","10sec","5sec","second"]}).call(this);
+(function() {
+  var $, Morris, minutesSpecHelper, secondsSpecHelper,
+    __slice = [].slice,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+  Morris = window.Morris = {};
+
+  $ = jQuery;
+
+  Morris.EventEmitter = (function() {
+
+    function EventEmitter() {}
+
+    EventEmitter.prototype.on = function(name, handler) {
+      if (this.handlers == null) {
+        this.handlers = {};
+      }
+      if (this.handlers[name] == null) {
+        this.handlers[name] = [];
+      }
+      return this.handlers[name].push(handler);
+    };
+
+    EventEmitter.prototype.fire = function() {
+      var args, handler, name, _i, _len, _ref, _results;
+      name = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+      if ((this.handlers != null) && (this.handlers[name] != null)) {
+        _ref = this.handlers[name];
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          handler = _ref[_i];
+          _results.push(handler.apply(null, args));
+        }
+        return _results;
+      }
+    };
+
+    return EventEmitter;
+
+  })();
+
+  Morris.commas = function(num) {
+    var absnum, intnum, ret, strabsnum;
+    if (num != null) {
+      ret = num < 0 ? "-" : "";
+      absnum = Math.abs(num);
+      intnum = Math.floor(absnum).toFixed(0);
+      ret += intnum.replace(/(?=(?:\d{3})+$)(?!^)/g, ',');
+      strabsnum = absnum.toString();
+      if (strabsnum.length > intnum.length) {
+        ret += strabsnum.slice(intnum.length);
+      }
+      return ret;
+    } else {
+      return '-';
+    }
+  };
+
+  Morris.pad2 = function(number) {
+    return (number < 10 ? '0' : '') + number;
+  };
+
+  Morris.Grid = (function(_super) {
+
+    __extends(Grid, _super);
+
+    function Grid(options) {
+      var _this = this;
+      if (typeof options.element === 'string') {
+        this.el = $(document.getElementById(options.element));
+      } else {
+        this.el = $(options.element);
+      }
+      if (!(this.el != null) || this.el.length === 0) {
+        throw new Error("Graph container element not found");
+      }
+      if (this.el.css('position') === 'static') {
+        this.el.css('position', 'relative');
+      }
+      this.options = $.extend({}, this.gridDefaults, this.defaults || {}, options);
+      if (typeof this.options.units === 'string') {
+        this.options.postUnits = options.units;
+      }
+      this.raphael = new Raphael(this.el[0]);
+      this.elementWidth = null;
+      this.elementHeight = null;
+      this.dirty = false;
+      if (this.init) {
+        this.init();
+      }
+      this.setData(this.options.data);
+      this.el.bind('mousemove', function(evt) {
+        var offset;
+        offset = _this.el.offset();
+        return _this.fire('hovermove', evt.pageX - offset.left, evt.pageY - offset.top);
+      });
+      this.el.bind('mouseout', function(evt) {
+        return _this.fire('hoverout');
+      });
+      this.el.bind('touchstart touchmove touchend', function(evt) {
+        var offset, touch;
+        touch = evt.originalEvent.touches[0] || evt.originalEvent.changedTouches[0];
+        offset = _this.el.offset();
+        _this.fire('hover', touch.pageX - offset.left, touch.pageY - offset.top);
+        return touch;
+      });
+      if (this.postInit) {
+        this.postInit();
+      }
+    }
+
+    Grid.prototype.gridDefaults = {
+      dateFormat: null,
+      axes: true,
+      grid: true,
+      gridLineColor: '#aaa',
+      gridStrokeWidth: 0.5,
+      gridTextColor: '#888',
+      gridTextSize: 12,
+      hideHover: false,
+      yLabelFormat: null,
+      numLines: 5,
+      padding: 25,
+      parseTime: true,
+      postUnits: '',
+      preUnits: '',
+      ymax: 'auto',
+      ymin: 'auto 0',
+      goals: [],
+      goalStrokeWidth: 1.0,
+      goalLineColors: ['#666633', '#999966', '#cc6666', '#663333'],
+      events: [],
+      eventStrokeWidth: 1.0,
+      eventLineColors: ['#005a04', '#ccffbb', '#3a5f0b', '#005502']
+    };
+
+    Grid.prototype.setData = function(data, redraw) {
+      var e, idx, index, maxGoal, minGoal, ret, row, total, ykey, ymax, ymin, yval;
+      if (redraw == null) {
+        redraw = true;
+      }
+      if (!(data != null) || data.length === 0) {
+        this.data = [];
+        this.raphael.clear();
+        if (this.hover != null) {
+          this.hover.hide();
+        }
+        return;
+      }
+      ymax = this.cumulative ? 0 : null;
+      ymin = this.cumulative ? 0 : null;
+      if (this.options.goals.length > 0) {
+        minGoal = Math.min.apply(null, this.options.goals);
+        maxGoal = Math.max.apply(null, this.options.goals);
+        ymin = ymin != null ? Math.min(ymin, minGoal) : minGoal;
+        ymax = ymax != null ? Math.max(ymax, maxGoal) : maxGoal;
+      }
+      this.data = (function() {
+        var _i, _len, _results;
+        _results = [];
+        for (index = _i = 0, _len = data.length; _i < _len; index = ++_i) {
+          row = data[index];
+          ret = {};
+          ret.label = row[this.options.xkey];
+          if (this.options.parseTime) {
+            ret.x = Morris.parseDate(ret.label);
+            if (this.options.dateFormat) {
+              ret.label = this.options.dateFormat(ret.x);
+            } else if (typeof ret.label === 'number') {
+              ret.label = new Date(ret.label).toString();
+            }
+          } else {
+            ret.x = index;
+          }
+          total = 0;
+          ret.y = (function() {
+            var _j, _len1, _ref, _results1;
+            _ref = this.options.ykeys;
+            _results1 = [];
+            for (idx = _j = 0, _len1 = _ref.length; _j < _len1; idx = ++_j) {
+              ykey = _ref[idx];
+              yval = row[ykey];
+              if (typeof yval === 'string') {
+                yval = parseFloat(yval);
+              }
+              if ((yval != null) && typeof yval !== 'number') {
+                yval = null;
+              }
+              if (yval != null) {
+                if (this.cumulative) {
+                  total += yval;
+                } else {
+                  if (ymax != null) {
+                    ymax = Math.max(yval, ymax);
+                    ymin = Math.min(yval, ymin);
+                  } else {
+                    ymax = ymin = yval;
+                  }
+                }
+              }
+              if (this.cumulative && (total != null)) {
+                ymax = Math.max(total, ymax);
+                ymin = Math.min(total, ymin);
+              }
+              _results1.push(yval);
+            }
+            return _results1;
+          }).call(this);
+          _results.push(ret);
+        }
+        return _results;
+      }).call(this);
+      if (this.options.parseTime) {
+        this.data = this.data.sort(function(a, b) {
+          return (a.x > b.x) - (b.x > a.x);
+        });
+      }
+      this.xmin = this.data[0].x;
+      this.xmax = this.data[this.data.length - 1].x;
+      this.events = [];
+      if (this.options.parseTime && this.options.events.length > 0) {
+        this.events = (function() {
+          var _i, _len, _ref, _results;
+          _ref = this.options.events;
+          _results = [];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            e = _ref[_i];
+            _results.push(Morris.parseDate(e));
+          }
+          return _results;
+        }).call(this);
+        this.xmax = Math.max(this.xmax, Math.max.apply(null, this.events));
+        this.xmin = Math.min(this.xmin, Math.min.apply(null, this.events));
+      }
+      if (this.xmin === this.xmax) {
+        this.xmin -= 1;
+        this.xmax += 1;
+      }
+      this.ymin = this.yboundary('min', ymin);
+      this.ymax = this.yboundary('max', ymax);
+      if (this.ymin === this.ymax) {
+        if (ymin) {
+          this.ymin -= 1;
+        }
+        this.ymax += 1;
+      }
+      this.yInterval = (this.ymax - this.ymin) / (this.options.numLines - 1);
+      if (this.yInterval > 0 && this.yInterval < 1) {
+        this.precision = -Math.floor(Math.log(this.yInterval) / Math.log(10));
+      } else {
+        this.precision = 0;
+      }
+      this.dirty = true;
+      if (redraw) {
+        return this.redraw();
+      }
+    };
+
+    Grid.prototype.yboundary = function(boundaryType, currentValue) {
+      var boundaryOption, suggestedValue;
+      boundaryOption = this.options["y" + boundaryType];
+      if (typeof boundaryOption === 'string') {
+        if (boundaryOption.slice(0, 4) === 'auto') {
+          if (boundaryOption.length > 5) {
+            suggestedValue = parseInt(boundaryOption.slice(5), 10);
+            if (currentValue == null) {
+              return suggestedValue;
+            }
+            return Math[boundaryType](currentValue, suggestedValue);
+          } else {
+            if (currentValue != null) {
+              return currentValue;
+            } else {
+              return 0;
+            }
+          }
+        } else {
+          return parseInt(boundaryOption, 10);
+        }
+      } else {
+        return boundaryOption;
+      }
+    };
+
+    Grid.prototype._calc = function() {
+      var h, maxYLabelWidth, w;
+      w = this.el.width();
+      h = this.el.height();
+      if (this.elementWidth !== w || this.elementHeight !== h || this.dirty) {
+        this.elementWidth = w;
+        this.elementHeight = h;
+        this.dirty = false;
+        this.left = this.options.padding;
+        this.right = this.elementWidth - this.options.padding;
+        this.top = this.options.padding;
+        this.bottom = this.elementHeight - this.options.padding;
+        if (this.options.axes) {
+          maxYLabelWidth = Math.max(this.measureText(this.yAxisFormat(this.ymin), this.options.gridTextSize).width, this.measureText(this.yAxisFormat(this.ymax), this.options.gridTextSize).width);
+          this.left += maxYLabelWidth;
+          this.bottom -= 1.5 * this.options.gridTextSize;
+        }
+        this.width = this.right - this.left;
+        this.height = this.bottom - this.top;
+        this.dx = this.width / (this.xmax - this.xmin);
+        this.dy = this.height / (this.ymax - this.ymin);
+        if (this.calc) {
+          return this.calc();
+        }
+      }
+    };
+
+    Grid.prototype.transY = function(y) {
+      return this.bottom - (y - this.ymin) * this.dy;
+    };
+
+    Grid.prototype.transX = function(x) {
+      if (this.data.length === 1) {
+        return (this.left + this.right) / 2;
+      } else {
+        return this.left + (x - this.xmin) * this.dx;
+      }
+    };
+
+    Grid.prototype.redraw = function() {
+      this.raphael.clear();
+      this._calc();
+      this.drawGrid();
+      this.drawGoals();
+      this.drawEvents();
+      if (this.draw) {
+        return this.draw();
+      }
+    };
+
+    Grid.prototype.measureText = function(text, fontSize) {
+      var ret, tt;
+      if (fontSize == null) {
+        fontSize = 12;
+      }
+      tt = this.raphael.text(100, 100, text).attr('font-size', fontSize);
+      ret = tt.getBBox();
+      tt.remove();
+      return ret;
+    };
+
+    Grid.prototype.yAxisFormat = function(label) {
+      return this.yLabelFormat(label);
+    };
+
+    Grid.prototype.yLabelFormat = function(label) {
+      if (typeof this.options.yLabelFormat === 'function') {
+        return this.options.yLabelFormat(label);
+      } else {
+        return "" + this.options.preUnits + (Morris.commas(label)) + this.options.postUnits;
+      }
+    };
+
+    Grid.prototype.updateHover = function(x, y) {
+      var hit, _ref;
+      hit = this.hitTest(x, y);
+      if (hit != null) {
+        return (_ref = this.hover).update.apply(_ref, hit);
+      }
+    };
+
+    Grid.prototype.drawGrid = function() {
+      var firstY, lastY, lineY, v, y, _i, _ref, _results;
+      if (this.options.grid === false && this.options.axes === false) {
+        return;
+      }
+      firstY = this.ymin;
+      lastY = this.ymax;
+      _results = [];
+      for (lineY = _i = firstY, _ref = this.yInterval; firstY <= lastY ? _i <= lastY : _i >= lastY; lineY = _i += _ref) {
+        v = parseFloat(lineY.toFixed(this.precision));
+        y = this.transY(v);
+        if (this.options.axes) {
+          this.drawYAxisLabel(this.left - this.options.padding / 2, y, this.yAxisFormat(v));
+        }
+        if (this.options.grid) {
+          _results.push(this.drawGridLine("M" + this.left + "," + y + "H" + (this.left + this.width)));
+        } else {
+          _results.push(void 0);
+        }
+      }
+      return _results;
+    };
+
+    Grid.prototype.drawGoals = function() {
+      var color, goal, i, _i, _len, _ref, _results;
+      _ref = this.options.goals;
+      _results = [];
+      for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+        goal = _ref[i];
+        color = this.options.goalLineColors[i % this.options.goalLineColors.length];
+        _results.push(this.drawGoal(goal, color));
+      }
+      return _results;
+    };
+
+    Grid.prototype.drawEvents = function() {
+      var color, event, i, _i, _len, _ref, _results;
+      _ref = this.events;
+      _results = [];
+      for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+        event = _ref[i];
+        color = this.options.eventLineColors[i % this.options.eventLineColors.length];
+        _results.push(this.drawEvent(event, color));
+      }
+      return _results;
+    };
+
+    Grid.prototype.drawGoal = function(goal, color) {
+      return this.raphael.path("M" + this.left + "," + (this.transY(goal)) + "H" + this.right).attr('stroke', color).attr('stroke-width', this.options.goalStrokeWidth);
+    };
+
+    Grid.prototype.drawEvent = function(event, color) {
+      return this.raphael.path("M" + (this.transX(event)) + "," + this.bottom + "V" + this.top).attr('stroke', color).attr('stroke-width', this.options.eventStrokeWidth);
+    };
+
+    Grid.prototype.drawYAxisLabel = function(xPos, yPos, text) {
+      return this.raphael.text(xPos, yPos, text).attr('font-size', this.options.gridTextSize).attr('fill', this.options.gridTextColor).attr('text-anchor', 'end');
+    };
+
+    Grid.prototype.drawGridLine = function(path) {
+      return this.raphael.path(path).attr('stroke', this.options.gridLineColor).attr('stroke-width', this.options.gridStrokeWidth);
+    };
+
+    return Grid;
+
+  })(Morris.EventEmitter);
+
+  Morris.parseDate = function(date) {
+    var isecs, m, msecs, n, o, offsetmins, p, q, r, ret, secs;
+    if (typeof date === 'number') {
+      return date;
+    }
+    m = date.match(/^(\d+) Q(\d)$/);
+    n = date.match(/^(\d+)-(\d+)$/);
+    o = date.match(/^(\d+)-(\d+)-(\d+)$/);
+    p = date.match(/^(\d+) W(\d+)$/);
+    q = date.match(/^(\d+)-(\d+)-(\d+)[ T](\d+):(\d+)(Z|([+-])(\d\d):?(\d\d))?$/);
+    r = date.match(/^(\d+)-(\d+)-(\d+)[ T](\d+):(\d+):(\d+(\.\d+)?)(Z|([+-])(\d\d):?(\d\d))?$/);
+    if (m) {
+      return new Date(parseInt(m[1], 10), parseInt(m[2], 10) * 3 - 1, 1).getTime();
+    } else if (n) {
+      return new Date(parseInt(n[1], 10), parseInt(n[2], 10) - 1, 1).getTime();
+    } else if (o) {
+      return new Date(parseInt(o[1], 10), parseInt(o[2], 10) - 1, parseInt(o[3], 10)).getTime();
+    } else if (p) {
+      ret = new Date(parseInt(p[1], 10), 0, 1);
+      if (ret.getDay() !== 4) {
+        ret.setMonth(0, 1 + ((4 - ret.getDay()) + 7) % 7);
+      }
+      return ret.getTime() + parseInt(p[2], 10) * 604800000;
+    } else if (q) {
+      if (!q[6]) {
+        return new Date(parseInt(q[1], 10), parseInt(q[2], 10) - 1, parseInt(q[3], 10), parseInt(q[4], 10), parseInt(q[5], 10)).getTime();
+      } else {
+        offsetmins = 0;
+        if (q[6] !== 'Z') {
+          offsetmins = parseInt(q[8], 10) * 60 + parseInt(q[9], 10);
+          if (q[7] === '+') {
+            offsetmins = 0 - offsetmins;
+          }
+        }
+        return Date.UTC(parseInt(q[1], 10), parseInt(q[2], 10) - 1, parseInt(q[3], 10), parseInt(q[4], 10), parseInt(q[5], 10) + offsetmins);
+      }
+    } else if (r) {
+      secs = parseFloat(r[6]);
+      isecs = Math.floor(secs);
+      msecs = Math.round((secs - isecs) * 1000);
+      if (!r[8]) {
+        return new Date(parseInt(r[1], 10), parseInt(r[2], 10) - 1, parseInt(r[3], 10), parseInt(r[4], 10), parseInt(r[5], 10), isecs, msecs).getTime();
+      } else {
+        offsetmins = 0;
+        if (r[8] !== 'Z') {
+          offsetmins = parseInt(r[10], 10) * 60 + parseInt(r[11], 10);
+          if (r[9] === '+') {
+            offsetmins = 0 - offsetmins;
+          }
+        }
+        return Date.UTC(parseInt(r[1], 10), parseInt(r[2], 10) - 1, parseInt(r[3], 10), parseInt(r[4], 10), parseInt(r[5], 10) + offsetmins, isecs, msecs);
+      }
+    } else {
+      return new Date(parseInt(date, 10), 0, 1).getTime();
+    }
+  };
+
+  Morris.Hover = (function() {
+
+    Hover.defaults = {
+      "class": 'morris-hover morris-default-style'
+    };
+
+    function Hover(options) {
+      if (options == null) {
+        options = {};
+      }
+      this.options = $.extend({}, Morris.Hover.defaults, options);
+      this.el = $("<div class='" + this.options["class"] + "'></div>");
+      this.el.hide();
+      this.options.parent.append(this.el);
+    }
+
+    Hover.prototype.update = function(html, x, y) {
+      this.html(html);
+      this.show();
+      return this.moveTo(x, y);
+    };
+
+    Hover.prototype.html = function(content) {
+      return this.el.html(content);
+    };
+
+    Hover.prototype.moveTo = function(x, y) {
+      var hoverHeight, hoverWidth, left, parentHeight, parentWidth, top;
+      parentWidth = this.options.parent.innerWidth();
+      parentHeight = this.options.parent.innerHeight();
+      hoverWidth = this.el.outerWidth();
+      hoverHeight = this.el.outerHeight();
+      left = Math.min(Math.max(0, x - hoverWidth / 2), parentWidth - hoverWidth);
+      if (y != null) {
+        top = y - hoverHeight - 10;
+        if (top < 0) {
+          top = y + 10;
+          if (top + hoverHeight > parentHeight) {
+            top = parentHeight / 2 - hoverHeight / 2;
+          }
+        }
+      } else {
+        top = parentHeight / 2 - hoverHeight / 2;
+      }
+      return this.el.css({
+        left: left + "px",
+        top: top + "px"
+      });
+    };
+
+    Hover.prototype.show = function() {
+      return this.el.show();
+    };
+
+    Hover.prototype.hide = function() {
+      return this.el.hide();
+    };
+
+    return Hover;
+
+  })();
+
+  Morris.Line = (function(_super) {
+
+    __extends(Line, _super);
+
+    function Line(options) {
+      this.hilight = __bind(this.hilight, this);
+
+      this.onHoverOut = __bind(this.onHoverOut, this);
+
+      this.onHoverMove = __bind(this.onHoverMove, this);
+      if (!(this instanceof Morris.Line)) {
+        return new Morris.Line(options);
+      }
+      Line.__super__.constructor.call(this, options);
+    }
+
+    Line.prototype.init = function() {
+      this.pointGrow = Raphael.animation({
+        r: this.options.pointSize + 3
+      }, 25, 'linear');
+      this.pointShrink = Raphael.animation({
+        r: this.options.pointSize
+      }, 25, 'linear');
+      if (this.options.hideHover !== 'always') {
+        this.hover = new Morris.Hover({
+          parent: this.el
+        });
+        this.on('hovermove', this.onHoverMove);
+        return this.on('hoverout', this.onHoverOut);
+      }
+    };
+
+    Line.prototype.defaults = {
+      lineWidth: 3,
+      pointSize: 4,
+      lineColors: ['#0b62a4', '#7A92A3', '#4da74d', '#afd8f8', '#edc240', '#cb4b4b', '#9440ed'],
+      pointWidths: [1],
+      pointStrokeColors: ['#ffffff'],
+      pointFillColors: [],
+      smooth: true,
+      xLabels: 'auto',
+      xLabelFormat: null,
+      xLabelMargin: 50,
+      continuousLine: true,
+      hideHover: false
+    };
+
+    Line.prototype.calc = function() {
+      this.calcPoints();
+      return this.generatePaths();
+    };
+
+    Line.prototype.calcPoints = function() {
+      var row, y, _i, _len, _ref, _results;
+      _ref = this.data;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        row = _ref[_i];
+        row._x = this.transX(row.x);
+        row._y = (function() {
+          var _j, _len1, _ref1, _results1;
+          _ref1 = row.y;
+          _results1 = [];
+          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+            y = _ref1[_j];
+            if (y != null) {
+              _results1.push(this.transY(y));
+            } else {
+              _results1.push(y);
+            }
+          }
+          return _results1;
+        }).call(this);
+        _results.push(row._ymax = Math.min.apply(null, [this.bottom].concat((function() {
+          var _j, _len1, _ref1, _results1;
+          _ref1 = row._y;
+          _results1 = [];
+          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+            y = _ref1[_j];
+            if (y != null) {
+              _results1.push(y);
+            }
+          }
+          return _results1;
+        })())));
+      }
+      return _results;
+    };
+
+    Line.prototype.hitTest = function(x, y) {
+      var index, r, _i, _len, _ref;
+      if (this.data.length === 0) {
+        return null;
+      }
+      _ref = this.data.slice(1);
+      for (index = _i = 0, _len = _ref.length; _i < _len; index = ++_i) {
+        r = _ref[index];
+        if (x < (r._x + this.data[index]._x) / 2) {
+          break;
+        }
+      }
+      return index;
+    };
+
+    Line.prototype.onHoverMove = function(x, y) {
+      var index;
+      index = this.hitTest(x, y);
+      return this.displayHoverForRow(index);
+    };
+
+    Line.prototype.onHoverOut = function() {
+      if (this.options.hideHover === 'auto') {
+        return this.displayHoverForRow(null);
+      }
+    };
+
+    Line.prototype.displayHoverForRow = function(index) {
+      var _ref;
+      if (index != null) {
+        (_ref = this.hover).update.apply(_ref, this.hoverContentForRow(index));
+        return this.hilight(index);
+      } else {
+        this.hover.hide();
+        return this.hilight();
+      }
+    };
+
+    Line.prototype.hoverContentForRow = function(index) {
+      var content, j, row, y, _i, _len, _ref;
+      row = this.data[index];
+      if (typeof this.options.hoverCallback === 'function') {
+        content = this.options.hoverCallback(index, this.options);
+      } else {
+        content = "<div class='morris-hover-row-label'>" + row.label + "</div>";
+        _ref = row.y;
+        for (j = _i = 0, _len = _ref.length; _i < _len; j = ++_i) {
+          y = _ref[j];
+          content += "<div class='morris-hover-point' style='color: " + (this.colorFor(row, j, 'label')) + "'>\n  " + this.options.labels[j] + ":\n  " + (this.yLabelFormat(y)) + "\n</div>";
+        }
+      }
+      return [content, row._x, row._ymax];
+    };
+
+    Line.prototype.generatePaths = function() {
+      var c, coords, i, r, smooth;
+      return this.paths = (function() {
+        var _i, _ref, _ref1, _results;
+        _results = [];
+        for (i = _i = 0, _ref = this.options.ykeys.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+          smooth = this.options.smooth === true || (_ref1 = this.options.ykeys[i], __indexOf.call(this.options.smooth, _ref1) >= 0);
+          coords = (function() {
+            var _j, _len, _ref2, _results1;
+            _ref2 = this.data;
+            _results1 = [];
+            for (_j = 0, _len = _ref2.length; _j < _len; _j++) {
+              r = _ref2[_j];
+              if (r._y[i] !== void 0) {
+                _results1.push({
+                  x: r._x,
+                  y: r._y[i]
+                });
+              }
+            }
+            return _results1;
+          }).call(this);
+          if (this.options.continuousLine) {
+            coords = (function() {
+              var _j, _len, _results1;
+              _results1 = [];
+              for (_j = 0, _len = coords.length; _j < _len; _j++) {
+                c = coords[_j];
+                if (c.y !== null) {
+                  _results1.push(c);
+                }
+              }
+              return _results1;
+            })();
+          }
+          if (coords.length > 1) {
+            _results.push(Morris.Line.createPath(coords, smooth, this.bottom));
+          } else {
+            _results.push(null);
+          }
+        }
+        return _results;
+      }).call(this);
+    };
+
+    Line.prototype.draw = function() {
+      if (this.options.axes) {
+        this.drawXAxis();
+      }
+      this.drawSeries();
+      if (this.options.hideHover === false) {
+        return this.displayHoverForRow(this.data.length - 1);
+      }
+    };
+
+    Line.prototype.drawXAxis = function() {
+      var drawLabel, l, labels, prevLabelMargin, row, ypos, _i, _len, _results,
+        _this = this;
+      ypos = this.bottom + this.options.gridTextSize * 1.25;
+      prevLabelMargin = null;
+      drawLabel = function(labelText, xpos) {
+        var label, labelBox;
+        label = _this.drawXAxisLabel(_this.transX(xpos), ypos, labelText);
+        labelBox = label.getBBox();
+        if ((!(prevLabelMargin != null) || prevLabelMargin >= labelBox.x + labelBox.width) && labelBox.x >= 0 && (labelBox.x + labelBox.width) < _this.el.width()) {
+          return prevLabelMargin = labelBox.x - _this.options.xLabelMargin;
+        } else {
+          return label.remove();
+        }
+      };
+      if (this.options.parseTime) {
+        if (this.data.length === 1 && this.options.xLabels === 'auto') {
+          labels = [[this.data[0].label, this.data[0].x]];
+        } else {
+          labels = Morris.labelSeries(this.xmin, this.xmax, this.width, this.options.xLabels, this.options.xLabelFormat);
+        }
+      } else {
+        labels = (function() {
+          var _i, _len, _ref, _results;
+          _ref = this.data;
+          _results = [];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            row = _ref[_i];
+            _results.push([row.label, row.x]);
+          }
+          return _results;
+        }).call(this);
+      }
+      labels.reverse();
+      _results = [];
+      for (_i = 0, _len = labels.length; _i < _len; _i++) {
+        l = labels[_i];
+        _results.push(drawLabel(l[0], l[1]));
+      }
+      return _results;
+    };
+
+    Line.prototype.drawSeries = function() {
+      var circle, i, path, row, _i, _j, _ref, _ref1, _results;
+      for (i = _i = _ref = this.options.ykeys.length - 1; _ref <= 0 ? _i <= 0 : _i >= 0; i = _ref <= 0 ? ++_i : --_i) {
+        path = this.paths[i];
+        if (path !== null) {
+          this.drawLinePath(path, this.colorFor(row, i, 'line'));
+        }
+      }
+      this.seriesPoints = (function() {
+        var _j, _ref1, _results;
+        _results = [];
+        for (i = _j = 0, _ref1 = this.options.ykeys.length; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; i = 0 <= _ref1 ? ++_j : --_j) {
+          _results.push([]);
+        }
+        return _results;
+      }).call(this);
+      _results = [];
+      for (i = _j = _ref1 = this.options.ykeys.length - 1; _ref1 <= 0 ? _j <= 0 : _j >= 0; i = _ref1 <= 0 ? ++_j : --_j) {
+        _results.push((function() {
+          var _k, _len, _ref2, _results1;
+          _ref2 = this.data;
+          _results1 = [];
+          for (_k = 0, _len = _ref2.length; _k < _len; _k++) {
+            row = _ref2[_k];
+            if (row._y[i] != null) {
+              circle = this.drawLinePoint(row._x, row._y[i], this.options.pointSize, this.colorFor(row, i, 'point'), i);
+            } else {
+              circle = null;
+            }
+            _results1.push(this.seriesPoints[i].push(circle));
+          }
+          return _results1;
+        }).call(this));
+      }
+      return _results;
+    };
+
+    Line.createPath = function(coords, smooth, bottom) {
+      var coord, g, grads, i, ix, lg, path, prevCoord, x1, x2, y1, y2, _i, _len;
+      path = "";
+      if (smooth) {
+        grads = Morris.Line.gradients(coords);
+      }
+      prevCoord = {
+        y: null
+      };
+      for (i = _i = 0, _len = coords.length; _i < _len; i = ++_i) {
+        coord = coords[i];
+        if (coord.y != null) {
+          if (prevCoord.y != null) {
+            if (smooth) {
+              g = grads[i];
+              lg = grads[i - 1];
+              ix = (coord.x - prevCoord.x) / 4;
+              x1 = prevCoord.x + ix;
+              y1 = Math.min(bottom, prevCoord.y + ix * lg);
+              x2 = coord.x - ix;
+              y2 = Math.min(bottom, coord.y - ix * g);
+              path += "C" + x1 + "," + y1 + "," + x2 + "," + y2 + "," + coord.x + "," + coord.y;
+            } else {
+              path += "L" + coord.x + "," + coord.y;
+            }
+          } else {
+            if (!smooth || (grads[i] != null)) {
+              path += "M" + coord.x + "," + coord.y;
+            }
+          }
+        }
+        prevCoord = coord;
+      }
+      return path;
+    };
+
+    Line.gradients = function(coords) {
+      var coord, grad, i, nextCoord, prevCoord, _i, _len, _results;
+      grad = function(a, b) {
+        return (a.y - b.y) / (a.x - b.x);
+      };
+      _results = [];
+      for (i = _i = 0, _len = coords.length; _i < _len; i = ++_i) {
+        coord = coords[i];
+        if (coord.y != null) {
+          nextCoord = coords[i + 1] || {
+            y: null
+          };
+          prevCoord = coords[i - 1] || {
+            y: null
+          };
+          if ((prevCoord.y != null) && (nextCoord.y != null)) {
+            _results.push(grad(prevCoord, nextCoord));
+          } else if (prevCoord.y != null) {
+            _results.push(grad(prevCoord, coord));
+          } else if (nextCoord.y != null) {
+            _results.push(grad(coord, nextCoord));
+          } else {
+            _results.push(null);
+          }
+        } else {
+          _results.push(null);
+        }
+      }
+      return _results;
+    };
+
+    Line.prototype.hilight = function(index) {
+      var i, _i, _j, _ref, _ref1;
+      if (this.prevHilight !== null && this.prevHilight !== index) {
+        for (i = _i = 0, _ref = this.seriesPoints.length - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+          if (this.seriesPoints[i][this.prevHilight]) {
+            this.seriesPoints[i][this.prevHilight].animate(this.pointShrink);
+          }
+        }
+      }
+      if (index !== null && this.prevHilight !== index) {
+        for (i = _j = 0, _ref1 = this.seriesPoints.length - 1; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; i = 0 <= _ref1 ? ++_j : --_j) {
+          if (this.seriesPoints[i][index]) {
+            this.seriesPoints[i][index].animate(this.pointGrow);
+          }
+        }
+      }
+      return this.prevHilight = index;
+    };
+
+    Line.prototype.colorFor = function(row, sidx, type) {
+      if (typeof this.options.lineColors === 'function') {
+        return this.options.lineColors.call(this, row, sidx, type);
+      } else if (type === 'point') {
+        return this.options.pointFillColors[sidx % this.options.pointFillColors.length] || this.options.lineColors[sidx % this.options.lineColors.length];
+      } else {
+        return this.options.lineColors[sidx % this.options.lineColors.length];
+      }
+    };
+
+    Line.prototype.drawXAxisLabel = function(xPos, yPos, text) {
+      return this.raphael.text(xPos, yPos, text).attr('font-size', this.options.gridTextSize).attr('fill', this.options.gridTextColor);
+    };
+
+    Line.prototype.drawLinePath = function(path, lineColor) {
+      return this.raphael.path(path).attr('stroke', lineColor).attr('stroke-width', this.options.lineWidth);
+    };
+
+    Line.prototype.drawLinePoint = function(xPos, yPos, size, pointColor, lineIndex) {
+      return this.raphael.circle(xPos, yPos, size).attr('fill', pointColor).attr('stroke-width', this.strokeWidthForSeries(lineIndex)).attr('stroke', this.strokeForSeries(lineIndex));
+    };
+
+    Line.prototype.strokeWidthForSeries = function(index) {
+      return this.options.pointWidths[index % this.options.pointWidths.length];
+    };
+
+    Line.prototype.strokeForSeries = function(index) {
+      return this.options.pointStrokeColors[index % this.options.pointStrokeColors.length];
+    };
+
+    return Line;
+
+  })(Morris.Grid);
+
+  Morris.labelSeries = function(dmin, dmax, pxwidth, specName, xLabelFormat) {
+    var d, d0, ddensity, name, ret, s, spec, t, _i, _len, _ref;
+    ddensity = 200 * (dmax - dmin) / pxwidth;
+    d0 = new Date(dmin);
+    spec = Morris.LABEL_SPECS[specName];
+    if (spec === void 0) {
+      _ref = Morris.AUTO_LABEL_ORDER;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        name = _ref[_i];
+        s = Morris.LABEL_SPECS[name];
+        if (ddensity >= s.span) {
+          spec = s;
+          break;
+        }
+      }
+    }
+    if (spec === void 0) {
+      spec = Morris.LABEL_SPECS["second"];
+    }
+    if (xLabelFormat) {
+      spec = $.extend({}, spec, {
+        fmt: xLabelFormat
+      });
+    }
+    d = spec.start(d0);
+    ret = [];
+    while ((t = d.getTime()) <= dmax) {
+      if (t >= dmin) {
+        ret.push([spec.fmt(d), t]);
+      }
+      spec.incr(d);
+    }
+    return ret;
+  };
+
+  minutesSpecHelper = function(interval) {
+    return {
+      span: interval * 60 * 1000,
+      start: function(d) {
+        return new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours());
+      },
+      fmt: function(d) {
+        return "" + (Morris.pad2(d.getHours())) + ":" + (Morris.pad2(d.getMinutes()));
+      },
+      incr: function(d) {
+        return d.setMinutes(d.getMinutes() + interval);
+      }
+    };
+  };
+
+  secondsSpecHelper = function(interval) {
+    return {
+      span: interval * 1000,
+      start: function(d) {
+        return new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes());
+      },
+      fmt: function(d) {
+        return "" + (Morris.pad2(d.getHours())) + ":" + (Morris.pad2(d.getMinutes())) + ":" + (Morris.pad2(d.getSeconds()));
+      },
+      incr: function(d) {
+        return d.setSeconds(d.getSeconds() + interval);
+      }
+    };
+  };
+
+  Morris.LABEL_SPECS = {
+    "decade": {
+      span: 172800000000,
+      start: function(d) {
+        return new Date(d.getFullYear() - d.getFullYear() % 10, 0, 1);
+      },
+      fmt: function(d) {
+        return "" + (d.getFullYear());
+      },
+      incr: function(d) {
+        return d.setFullYear(d.getFullYear() + 10);
+      }
+    },
+    "year": {
+      span: 17280000000,
+      start: function(d) {
+        return new Date(d.getFullYear(), 0, 1);
+      },
+      fmt: function(d) {
+        return "" + (d.getFullYear());
+      },
+      incr: function(d) {
+        return d.setFullYear(d.getFullYear() + 1);
+      }
+    },
+    "month": {
+      span: 2419200000,
+      start: function(d) {
+        return new Date(d.getFullYear(), d.getMonth(), 1);
+      },
+      fmt: function(d) {
+        return "" + (d.getFullYear()) + "-" + (Morris.pad2(d.getMonth() + 1));
+      },
+      incr: function(d) {
+        return d.setMonth(d.getMonth() + 1);
+      }
+    },
+    "day": {
+      span: 86400000,
+      start: function(d) {
+        return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+      },
+      fmt: function(d) {
+        return "" + (d.getFullYear()) + "-" + (Morris.pad2(d.getMonth() + 1)) + "-" + (Morris.pad2(d.getDate()));
+      },
+      incr: function(d) {
+        return d.setDate(d.getDate() + 1);
+      }
+    },
+    "hour": minutesSpecHelper(60),
+    "30min": minutesSpecHelper(30),
+    "15min": minutesSpecHelper(15),
+    "10min": minutesSpecHelper(10),
+    "5min": minutesSpecHelper(5),
+    "minute": minutesSpecHelper(1),
+    "30sec": secondsSpecHelper(30),
+    "15sec": secondsSpecHelper(15),
+    "10sec": secondsSpecHelper(10),
+    "5sec": secondsSpecHelper(5),
+    "second": secondsSpecHelper(1)
+  };
+
+  Morris.AUTO_LABEL_ORDER = ["decade", "year", "month", "day", "hour", "30min", "15min", "10min", "5min", "minute", "30sec", "15sec", "10sec", "5sec", "second"];
+
+  Morris.Area = (function(_super) {
+
+    __extends(Area, _super);
+
+    function Area(options) {
+      if (!(this instanceof Morris.Area)) {
+        return new Morris.Area(options);
+      }
+      this.cumulative = true;
+      Area.__super__.constructor.call(this, options);
+    }
+
+    Area.prototype.calcPoints = function() {
+      var row, total, y, _i, _len, _ref, _results;
+      _ref = this.data;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        row = _ref[_i];
+        row._x = this.transX(row.x);
+        total = 0;
+        row._y = (function() {
+          var _j, _len1, _ref1, _results1;
+          _ref1 = row.y;
+          _results1 = [];
+          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+            y = _ref1[_j];
+            total += y || 0;
+            _results1.push(this.transY(total));
+          }
+          return _results1;
+        }).call(this);
+        _results.push(row._ymax = row._y[row._y.length - 1]);
+      }
+      return _results;
+    };
+
+    Area.prototype.drawSeries = function() {
+      var i, path, _i, _ref;
+      for (i = _i = _ref = this.options.ykeys.length - 1; _ref <= 0 ? _i <= 0 : _i >= 0; i = _ref <= 0 ? ++_i : --_i) {
+        path = this.paths[i];
+        if (path !== null) {
+          path = path + ("L" + (this.transX(this.xmax)) + "," + this.bottom + "L" + (this.transX(this.xmin)) + "," + this.bottom + "Z");
+          this.drawFilledPath(path, this.fillForSeries(i));
+        }
+      }
+      return Area.__super__.drawSeries.call(this);
+    };
+
+    Area.prototype.fillForSeries = function(i) {
+      var color;
+      color = Raphael.rgb2hsl(this.colorFor(this.data[i], i, 'line'));
+      return Raphael.hsl(color.h, Math.min(255, color.s * 0.75), Math.min(255, color.l * 1.25));
+    };
+
+    Area.prototype.drawFilledPath = function(path, fill) {
+      return this.raphael.path(path).attr('fill', fill).attr('stroke-width', 0);
+    };
+
+    return Area;
+
+  })(Morris.Line);
+
+  Morris.Bar = (function(_super) {
+
+    __extends(Bar, _super);
+
+    function Bar(options) {
+      this.onHoverOut = __bind(this.onHoverOut, this);
+
+      this.onHoverMove = __bind(this.onHoverMove, this);
+      if (!(this instanceof Morris.Bar)) {
+        return new Morris.Bar(options);
+      }
+      Bar.__super__.constructor.call(this, $.extend({}, options, {
+        parseTime: false
+      }));
+    }
+
+    Bar.prototype.init = function() {
+      this.cumulative = this.options.stacked;
+      if (this.options.hideHover !== 'always') {
+        this.hover = new Morris.Hover({
+          parent: this.el
+        });
+        this.on('hovermove', this.onHoverMove);
+        return this.on('hoverout', this.onHoverOut);
+      }
+    };
+
+    Bar.prototype.defaults = {
+      barSizeRatio: 0.75,
+      barGap: 3,
+      barColors: ['#0b62a4', '#7a92a3', '#4da74d', '#afd8f8', '#edc240', '#cb4b4b', '#9440ed'],
+      xLabelMargin: 50
+    };
+
+    Bar.prototype.calc = function() {
+      var _ref;
+      this.calcBars();
+      if (this.options.hideHover === false) {
+        return (_ref = this.hover).update.apply(_ref, this.hoverContentForRow(this.data.length - 1));
+      }
+    };
+
+    Bar.prototype.calcBars = function() {
+      var idx, row, y, _i, _len, _ref, _results;
+      _ref = this.data;
+      _results = [];
+      for (idx = _i = 0, _len = _ref.length; _i < _len; idx = ++_i) {
+        row = _ref[idx];
+        row._x = this.left + this.width * (idx + 0.5) / this.data.length;
+        _results.push(row._y = (function() {
+          var _j, _len1, _ref1, _results1;
+          _ref1 = row.y;
+          _results1 = [];
+          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+            y = _ref1[_j];
+            if (y != null) {
+              _results1.push(this.transY(y));
+            } else {
+              _results1.push(null);
+            }
+          }
+          return _results1;
+        }).call(this));
+      }
+      return _results;
+    };
+
+    Bar.prototype.draw = function() {
+      if (this.options.axes) {
+        this.drawXAxis();
+      }
+      return this.drawSeries();
+    };
+
+    Bar.prototype.drawXAxis = function() {
+      var i, label, labelBox, prevLabelMargin, row, ypos, _i, _ref, _results;
+      ypos = this.bottom + this.options.gridTextSize * 1.25;
+      prevLabelMargin = null;
+      _results = [];
+      for (i = _i = 0, _ref = this.data.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+        row = this.data[this.data.length - 1 - i];
+        label = this.drawXAxisLabel(row._x, ypos, row.label);
+        labelBox = label.getBBox();
+        if ((!(prevLabelMargin != null) || prevLabelMargin >= labelBox.x + labelBox.width) && labelBox.x >= 0 && (labelBox.x + labelBox.width) < this.el.width()) {
+          _results.push(prevLabelMargin = labelBox.x - this.options.xLabelMargin);
+        } else {
+          _results.push(label.remove());
+        }
+      }
+      return _results;
+    };
+
+    Bar.prototype.drawSeries = function() {
+      var barWidth, bottom, groupWidth, idx, lastTop, left, leftPadding, numBars, row, sidx, size, top, ypos, zeroPos;
+      groupWidth = this.width / this.options.data.length;
+      numBars = this.options.stacked != null ? 1 : this.options.ykeys.length;
+      barWidth = (groupWidth * this.options.barSizeRatio - this.options.barGap * (numBars - 1)) / numBars;
+      leftPadding = groupWidth * (1 - this.options.barSizeRatio) / 2;
+      zeroPos = this.ymin <= 0 && this.ymax >= 0 ? this.transY(0) : null;
+      return this.bars = (function() {
+        var _i, _len, _ref, _results;
+        _ref = this.data;
+        _results = [];
+        for (idx = _i = 0, _len = _ref.length; _i < _len; idx = ++_i) {
+          row = _ref[idx];
+          lastTop = 0;
+          _results.push((function() {
+            var _j, _len1, _ref1, _results1;
+            _ref1 = row._y;
+            _results1 = [];
+            for (sidx = _j = 0, _len1 = _ref1.length; _j < _len1; sidx = ++_j) {
+              ypos = _ref1[sidx];
+              if (ypos !== null) {
+                if (zeroPos) {
+                  top = Math.min(ypos, zeroPos);
+                  bottom = Math.max(ypos, zeroPos);
+                } else {
+                  top = ypos;
+                  bottom = this.bottom;
+                }
+                left = this.left + idx * groupWidth + leftPadding;
+                if (!this.options.stacked) {
+                  left += sidx * (barWidth + this.options.barGap);
+                }
+                size = bottom - top;
+                if (this.options.stacked) {
+                  top -= lastTop;
+                }
+                this.drawBar(left, top, barWidth, size, this.colorFor(row, sidx, 'bar'));
+                _results1.push(lastTop += size);
+              } else {
+                _results1.push(null);
+              }
+            }
+            return _results1;
+          }).call(this));
+        }
+        return _results;
+      }).call(this);
+    };
+
+    Bar.prototype.colorFor = function(row, sidx, type) {
+      var r, s;
+      if (typeof this.options.barColors === 'function') {
+        r = {
+          x: row.x,
+          y: row.y[sidx],
+          label: row.label
+        };
+        s = {
+          index: sidx,
+          key: this.options.ykeys[sidx],
+          label: this.options.labels[sidx]
+        };
+        return this.options.barColors.call(this, r, s, type);
+      } else {
+        return this.options.barColors[sidx % this.options.barColors.length];
+      }
+    };
+
+    Bar.prototype.hitTest = function(x, y) {
+      if (this.data.length === 0) {
+        return null;
+      }
+      x = Math.max(Math.min(x, this.right), this.left);
+      return Math.min(this.data.length - 1, Math.floor((x - this.left) / (this.width / this.data.length)));
+    };
+
+    Bar.prototype.onHoverMove = function(x, y) {
+      var index, _ref;
+      index = this.hitTest(x, y);
+      return (_ref = this.hover).update.apply(_ref, this.hoverContentForRow(index));
+    };
+
+    Bar.prototype.onHoverOut = function() {
+      if (this.options.hideHover === 'auto') {
+        return this.hover.hide();
+      }
+    };
+
+    Bar.prototype.hoverContentForRow = function(index) {
+      var content, j, row, x, y, _i, _len, _ref;
+      if (typeof this.options.hoverCallback === 'function') {
+        content = this.options.hoverCallback(index, this.options);
+      } else {
+        row = this.data[index];
+        content = "<div class='morris-hover-row-label'>" + row.label + "</div>";
+        _ref = row.y;
+        for (j = _i = 0, _len = _ref.length; _i < _len; j = ++_i) {
+          y = _ref[j];
+          content += "<div class='morris-hover-point' style='color: " + (this.colorFor(row, j, 'label')) + "'>\n  " + this.options.labels[j] + ":\n  " + (this.yLabelFormat(y)) + "\n</div>";
+        }
+      }
+      x = this.left + (index + 0.5) * this.width / this.data.length;
+      return [content, x];
+    };
+
+    Bar.prototype.drawXAxisLabel = function(xPos, yPos, text) {
+      var label;
+      return label = this.raphael.text(xPos, yPos, text).attr('font-size', this.options.gridTextSize).attr('fill', this.options.gridTextColor);
+    };
+
+    Bar.prototype.drawBar = function(xPos, yPos, width, height, barColor) {
+      return this.raphael.rect(xPos, yPos, width, height).attr('fill', barColor).attr('stroke-width', 0);
+    };
+
+    return Bar;
+
+  })(Morris.Grid);
+
+  Morris.Donut = (function() {
+
+    Donut.prototype.defaults = {
+      colors: ['#0B62A4', '#3980B5', '#679DC6', '#95BBD7', '#B0CCE1', '#095791', '#095085', '#083E67', '#052C48', '#042135'],
+      backgroundColor: '#FFFFFF',
+      labelColor: '#000000',
+      formatter: Morris.commas
+    };
+
+    function Donut(options) {
+      this.select = __bind(this.select, this);
+      if (!(this instanceof Morris.Donut)) {
+        return new Morris.Donut(options);
+      }
+      if (typeof options.element === 'string') {
+        this.el = $(document.getElementById(options.element));
+      } else {
+        this.el = $(options.element);
+      }
+      this.options = $.extend({}, this.defaults, options);
+      if (this.el === null || this.el.length === 0) {
+        throw new Error("Graph placeholder not found.");
+      }
+      if (options.data === void 0 || options.data.length === 0) {
+        return;
+      }
+      this.data = options.data;
+      this.redraw();
+    }
+
+    Donut.prototype.redraw = function() {
+      var C, cx, cy, d, idx, last, max_value, min, next, seg, total, w, x, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2, _results;
+      this.el.empty();
+      this.raphael = new Raphael(this.el[0]);
+      cx = this.el.width() / 2;
+      cy = this.el.height() / 2;
+      w = (Math.min(cx, cy) - 10) / 3;
+      total = 0;
+      _ref = this.data;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        x = _ref[_i];
+        total += x.value;
+      }
+      min = 5 / (2 * w);
+      C = 1.9999 * Math.PI - min * this.data.length;
+      last = 0;
+      idx = 0;
+      this.segments = [];
+      _ref1 = this.data;
+      for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+        d = _ref1[_j];
+        next = last + min + C * (d.value / total);
+        seg = new Morris.DonutSegment(cx, cy, w * 2, w, last, next, this.options.colors[idx % this.options.colors.length], this.options.backgroundColor, d, this.raphael);
+        seg.render();
+        this.segments.push(seg);
+        seg.on('hover', this.select);
+        last = next;
+        idx += 1;
+      }
+      this.text1 = this.drawEmptyDonutLabel(cx, cy - 10, this.options.labelColor, 15, 800);
+      this.text2 = this.drawEmptyDonutLabel(cx, cy + 10, this.options.labelColor, 14);
+      max_value = Math.max.apply(null, (function() {
+        var _k, _len2, _ref2, _results;
+        _ref2 = this.data;
+        _results = [];
+        for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
+          d = _ref2[_k];
+          _results.push(d.value);
+        }
+        return _results;
+      }).call(this));
+      idx = 0;
+      _ref2 = this.data;
+      _results = [];
+      for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
+        d = _ref2[_k];
+        if (d.value === max_value) {
+          this.select(idx);
+          break;
+        }
+        _results.push(idx += 1);
+      }
+      return _results;
+    };
+
+    Donut.prototype.select = function(idx) {
+      var s, segment, _i, _len, _ref;
+      _ref = this.segments;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        s = _ref[_i];
+        s.deselect();
+      }
+      if (typeof idx === 'number') {
+        segment = this.segments[idx];
+      } else {
+        segment = idx;
+      }
+      segment.select();
+      return this.setLabels(segment.data.label, this.options.formatter(segment.data.value, segment.data));
+    };
+
+    Donut.prototype.setLabels = function(label1, label2) {
+      var inner, maxHeightBottom, maxHeightTop, maxWidth, text1bbox, text1scale, text2bbox, text2scale;
+      inner = (Math.min(this.el.width() / 2, this.el.height() / 2) - 10) * 2 / 3;
+      maxWidth = 1.8 * inner;
+      maxHeightTop = inner / 2;
+      maxHeightBottom = inner / 3;
+      this.text1.attr({
+        text: label1,
+        transform: ''
+      });
+      text1bbox = this.text1.getBBox();
+      text1scale = Math.min(maxWidth / text1bbox.width, maxHeightTop / text1bbox.height);
+      this.text1.attr({
+        transform: "S" + text1scale + "," + text1scale + "," + (text1bbox.x + text1bbox.width / 2) + "," + (text1bbox.y + text1bbox.height)
+      });
+      this.text2.attr({
+        text: label2,
+        transform: ''
+      });
+      text2bbox = this.text2.getBBox();
+      text2scale = Math.min(maxWidth / text2bbox.width, maxHeightBottom / text2bbox.height);
+      return this.text2.attr({
+        transform: "S" + text2scale + "," + text2scale + "," + (text2bbox.x + text2bbox.width / 2) + "," + text2bbox.y
+      });
+    };
+
+    Donut.prototype.drawEmptyDonutLabel = function(xPos, yPos, color, fontSize, fontWeight) {
+      var text;
+      text = this.raphael.text(xPos, yPos, '').attr('font-size', fontSize).attr('fill', color);
+      if (fontWeight != null) {
+        text.attr('font-weight', fontWeight);
+      }
+      return text;
+    };
+
+    return Donut;
+
+  })();
+
+  Morris.DonutSegment = (function(_super) {
+
+    __extends(DonutSegment, _super);
+
+    function DonutSegment(cx, cy, inner, outer, p0, p1, color, backgroundColor, data, raphael) {
+      this.cx = cx;
+      this.cy = cy;
+      this.inner = inner;
+      this.outer = outer;
+      this.color = color;
+      this.backgroundColor = backgroundColor;
+      this.data = data;
+      this.raphael = raphael;
+      this.deselect = __bind(this.deselect, this);
+
+      this.select = __bind(this.select, this);
+
+      this.sin_p0 = Math.sin(p0);
+      this.cos_p0 = Math.cos(p0);
+      this.sin_p1 = Math.sin(p1);
+      this.cos_p1 = Math.cos(p1);
+      this.is_long = (p1 - p0) > Math.PI ? 1 : 0;
+      this.path = this.calcSegment(this.inner + 3, this.inner + this.outer - 5);
+      this.selectedPath = this.calcSegment(this.inner + 3, this.inner + this.outer);
+      this.hilight = this.calcArc(this.inner);
+    }
+
+    DonutSegment.prototype.calcArcPoints = function(r) {
+      return [this.cx + r * this.sin_p0, this.cy + r * this.cos_p0, this.cx + r * this.sin_p1, this.cy + r * this.cos_p1];
+    };
+
+    DonutSegment.prototype.calcSegment = function(r1, r2) {
+      var ix0, ix1, iy0, iy1, ox0, ox1, oy0, oy1, _ref, _ref1;
+      _ref = this.calcArcPoints(r1), ix0 = _ref[0], iy0 = _ref[1], ix1 = _ref[2], iy1 = _ref[3];
+      _ref1 = this.calcArcPoints(r2), ox0 = _ref1[0], oy0 = _ref1[1], ox1 = _ref1[2], oy1 = _ref1[3];
+      return ("M" + ix0 + "," + iy0) + ("A" + r1 + "," + r1 + ",0," + this.is_long + ",0," + ix1 + "," + iy1) + ("L" + ox1 + "," + oy1) + ("A" + r2 + "," + r2 + ",0," + this.is_long + ",1," + ox0 + "," + oy0) + "Z";
+    };
+
+    DonutSegment.prototype.calcArc = function(r) {
+      var ix0, ix1, iy0, iy1, _ref;
+      _ref = this.calcArcPoints(r), ix0 = _ref[0], iy0 = _ref[1], ix1 = _ref[2], iy1 = _ref[3];
+      return ("M" + ix0 + "," + iy0) + ("A" + r + "," + r + ",0," + this.is_long + ",0," + ix1 + "," + iy1);
+    };
+
+    DonutSegment.prototype.render = function() {
+      var _this = this;
+      this.arc = this.drawDonutArc(this.hilight, this.color);
+      return this.seg = this.drawDonutSegment(this.path, this.color, this.backgroundColor, function() {
+        return _this.fire('hover', _this);
+      });
+    };
+
+    DonutSegment.prototype.drawDonutArc = function(path, color) {
+      return this.raphael.path(path).attr({
+        stroke: color,
+        'stroke-width': 2,
+        opacity: 0
+      });
+    };
+
+    DonutSegment.prototype.drawDonutSegment = function(path, fillColor, strokeColor, hoverFunction) {
+      return this.raphael.path(path).attr({
+        fill: fillColor,
+        stroke: strokeColor,
+        'stroke-width': 3
+      }).hover(hoverFunction);
+    };
+
+    DonutSegment.prototype.select = function() {
+      if (!this.selected) {
+        this.seg.animate({
+          path: this.selectedPath
+        }, 150, '<>');
+        this.arc.animate({
+          opacity: 1
+        }, 150, '<>');
+        return this.selected = true;
+      }
+    };
+
+    DonutSegment.prototype.deselect = function() {
+      if (this.selected) {
+        this.seg.animate({
+          path: this.path
+        }, 150, '<>');
+        this.arc.animate({
+          opacity: 0
+        }, 150, '<>');
+        return this.selected = false;
+      }
+    };
+
+    return DonutSegment;
+
+  })(Morris.EventEmitter);
+
+}).call(this);

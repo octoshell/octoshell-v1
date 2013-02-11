@@ -1,0 +1,51 @@
+- title 'Статистика по отчетам'
+
+javascript:
+  window.morrisHoverCallback = function(index, options) {
+    var row = options.data[index];
+    var max = 0
+    for (i in options.data) {
+      max = max + options.data[i].value
+    }
+    return "" + Number((row.value*100/max).toFixed(1)) + "%"
+  }
+
+h2 Число организаций по типам организаций
+
+div class="row report-stats"
+  div id="organizations_count_by_kind_bar" class="span8"
+  div id="organizations_count_by_kind_donut" class="offset1 span3"
+
+javascript:
+  Morris.Bar({
+    element: 'organizations_count_by_kind_bar',
+    data: #{@stats.organizations_count_by_kind.to_json.html_safe},
+    xkey: 'label',
+    ykeys: ['value'],
+    labels: ['Количество'],
+    hoverCallback: window.morrisHoverCallback
+  });
+  Morris.Donut({
+    element: 'organizations_count_by_kind_donut',
+    data: #{@stats.organizations_count_by_kind.to_json.html_safe}
+  })
+
+h2 Число организаций по типам организаций
+
+div class="row report-stats"
+  div id="projects_count_by_organization_kind_bar" class="span8"
+  div id="projects_count_by_organization_kind_donut" class="offset1 span3"
+
+javascript:
+  Morris.Bar({
+    element: 'projects_count_by_organization_kind_bar',
+    data: #{@stats.projects_count_by_organization_kind.to_json.html_safe},
+    xkey: 'label',
+    ykeys: ['value'],
+    labels: ['Количество'],
+    hoverCallback: window.morrisHoverCallback
+  });
+  Morris.Donut({
+    element: 'projects_count_by_organization_kind_donut',
+    data: #{@stats.projects_count_by_organization_kind.to_json.html_safe}
+  })

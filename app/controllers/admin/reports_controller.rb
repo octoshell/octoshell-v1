@@ -111,6 +111,10 @@ class Admin::ReportsController < Admin::ApplicationController
       render :supervise
     end
   end
+  
+  def stats
+    @stats = Report::Stats.new
+  end
 
 private
   

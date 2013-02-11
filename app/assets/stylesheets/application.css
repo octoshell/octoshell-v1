@@ -13,6 +13,7 @@
  *= require surety
  *= require select2
  *= require datepicker
+ *= require morris
  */
 
 textarea.public-key {
