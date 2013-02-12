@@ -12,7 +12,6 @@ private
   end
   
   def to_pie_chart(options = {})
-    [{ type: 'pie',
-      data: self }]
+    [{ type: 'pie', data: self, name: options[:name] }]
   end
 end

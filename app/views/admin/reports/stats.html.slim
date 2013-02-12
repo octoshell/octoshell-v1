@@ -14,17 +14,36 @@ div class="tab-content"
         tr
           th class="span4" = title
           td = value
-  div class="tab-pane" id="organizations_count_by_kind_bar"
-  div class="tab-pane" id="organizations_count_by_kind_pie"
+  div id="organizations_count_by_kind_bar"
+  div id="organizations_count_by_kind_pie"
 
 javascript:
+  var chartEvents = {
+    load: function(chart){
+      $(chart.currentTarget.renderTo).addClass('tab-pane')
+    }
+  }
+
   new Highcharts.Chart({
     chart: {
       renderTo: 'organizations_count_by_kind_bar',
-      type: 'column'
+      type: 'column',
+      events: chartEvents
     },
-    xAxis: {
-      categories: #{@stats.organizations_count_by_kind.map(&:first).to_json.html_safe}
+    title: {
+      text: 'Число организаций по типам'
+    },
+    yAxis: {
+      title: {
+        text: 'Количетсво'
+      }
+    },
+    plotOptions: {
+      column: {
+        dataLabels: {
+          enabled: true
+        }
+      }
     },
     title: 'Число организаций по типам',
     series: #{@stats.organizations_count_by_kind.to_chart(:column).html_safe}
@@ -33,9 +52,27 @@ javascript:
   new Highcharts.Chart({
     chart: {
       renderTo: 'organizations_count_by_kind_pie',
-      type: 'column'
+      type: 'column',
+      events: chartEvents
     },
-    series: #{@stats.organizations_count_by_kind.to_chart(:pie).html_safe}
+    title: {
+      text: 'Число организаций по типам'
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          color: '#000000',
+          connectorColor: '#000000',
+          formatter: function() {
+            return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %';
+          }
+        }
+      }
+    },
+    series: #{@stats.organizations_count_by_kind.to_chart(:pie, name: 'Количество').html_safe}
   })
 
 h2 Число организаций по типам организаций
