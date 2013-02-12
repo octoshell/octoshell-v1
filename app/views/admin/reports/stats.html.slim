@@ -32,7 +32,7 @@ javascript:
       events: window.chartEvents
     },
     title: {
-      text: 'Число организаций по типам'
+      text: ''
     },
     yAxis: {
       title: {
@@ -46,7 +46,6 @@ javascript:
         }
       }
     },
-    title: 'Число организаций по типам',
     series: #{@stats.organizations_count_by_kind.to_chart(:column).html_safe}
   });
   
@@ -57,7 +56,7 @@ javascript:
       events: window.chartEvents
     },
     title: {
-      text: 'Число организаций по типам'
+      text: ''
     },
     plotOptions: {
       pie: {
@@ -78,12 +77,71 @@ javascript:
 
 h2 Число проектов по типам организаций
 
+ul class="nav nav-tabs"
+  li class="active" = link_to 'Таблица', '#projects_count_by_organization_kind_table', data: { toggle: 'tab' }
+  li = link_to 'Диаграмма', '#projects_count_by_organization_kind_bar', data: { toggle: 'tab' }
+  li = link_to 'Пирог', '#projects_count_by_organization_kind_pie', data: { toggle: 'tab' }
+
+
 div class="tab-content"
-  div class="tab-pane active" id="organizations_count_by_kind_table"
+  div class="tab-pane active" id="projects_count_by_organization_kind_table"
     table class="table table-bordered"
-      - @stats.organizations_count_by_kind.each do |title, value|
+      - @stats.projects_count_by_organization_kind.each do |title, value|
         tr
           th class="span4" = title
           td = value
-  div id="organizations_count_by_kind_bar"
-  div id="organizations_count_by_kind_pie"
+  div id="projects_count_by_organization_kind_bar"
+  div id="projects_count_by_organization_kind_pie"
+
+  javascript:
+    new Highcharts.Chart({
+      chart: {
+        renderTo: 'projects_count_by_organization_kind_bar',
+        type: 'column',
+        events: window.chartEvents
+      },
+      title: {
+        text: ''
+      },
+      yAxis: {
+        title: {
+          text: 'Количество'
+        }
+      },
+      plotOptions: {
+        column: {
+          dataLabels: {
+            enabled: true
+          }
+        }
+      },
+      title: 'Число организаций по типам',
+      series: #{@stats.projects_count_by_organization_kind.to_chart(:column).html_safe}
+    });
+
+    new Highcharts.Chart({
+      chart: {
+        renderTo: 'projects_count_by_organization_kind_pie',
+        type: 'column',
+        events: window.chartEvents
+      },
+      title: {
+        text: ''
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            color: '#000000',
+            connectorColor: '#000000',
+            formatter: function() {
+              return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %';
+            }
+          }
+        }
+      },
+      series: #{@stats.projects_count_by_organization_kind.to_chart(:pie, name: 'Количество').html_safe}
+    })
+
