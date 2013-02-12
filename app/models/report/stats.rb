@@ -9,18 +9,15 @@ class Report::Stats
     reports_grouped_by_org_kind.each do |kind, reports|
       data << [kind, reports.size]
     end
-    data
+    data.extend(Chartable)
   end
   
   def projects_count_by_organization_kind
     data = []
     reports_grouped_by_org_kind.each do |kind, reports|
-      data << [
-        kind.gsub(' ', "\n"),
-        reports.sum { |r| r.projects.size }
-      ]
+      data << [kind, reports.sum { |r| r.projects.size }]
     end
-    data
+    data.extend(Chartable)
   end
   
 private

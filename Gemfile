@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails'
 gem 'pg'
 gem 'jquery-rails'
 gem 'unicorn'
@@ -34,6 +34,7 @@ gem 'rubyzip'
 gem 'poltergeist', github: 'brutuscat/poltergeist'
 gem 'therubyracer'
 gem 'breadcrumbs_on_rails'
+gem 'highcharts-rails'
 
 group :test, :development do
   gem "nyan-cat-formatter"

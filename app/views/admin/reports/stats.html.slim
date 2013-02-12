@@ -1,8 +1,5 @@
 - title 'Статистика по отчетам'
 
-javascript:
-  google.load('visualization', '1.0', {'packages':['corechart']});
-
 h2 Число организаций по типам
 
 ul class="nav nav-tabs"
@@ -21,22 +18,25 @@ div class="tab-content"
   div class="tab-pane" id="organizations_count_by_kind_pie"
 
 javascript:
-  var organizationsCountByKind = function(){
-    var data, div, chart
-    data = new google.visualization.DataTable();
-    data.addColumn('string', 'Тип')
-    data.addColumn('number', 'Число')
-    data.addRows(
-      #{@stats.organizations_count_by_kind.to_json.html_safe}
-    )
-    div = $('#organizations_count_by_kind_bar')[0]
-    chart = new google.visualization.BarChart(div)
-    chart.draw(data, { height: 400, width: 940 })
-    div = $('#organizations_count_by_kind_pie')[0]
-    chart = new google.visualization.PieChart(div)  
-    chart.draw(data, { height: 400, width: 940, is3D: true })
-  }
-  google.setOnLoadCallback(organizationsCountByKind);
+  new Highcharts.Chart({
+    chart: {
+      renderTo: 'organizations_count_by_kind_bar',
+      type: 'column'
+    },
+    xAxis: {
+      categories: #{@stats.organizations_count_by_kind.map(&:first).to_json.html_safe}
+    },
+    title: 'Число организаций по типам',
+    series: #{@stats.organizations_count_by_kind.to_chart(:column).html_safe}
+  });
+  
+  new Highcharts.Chart({
+    chart: {
+      renderTo: 'organizations_count_by_kind_pie',
+      type: 'column'
+    },
+    series: #{@stats.organizations_count_by_kind.to_chart(:pie).html_safe}
+  })
 
 h2 Число организаций по типам организаций
 
