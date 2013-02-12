@@ -27,6 +27,18 @@ class Report::Stats
     data.extend(Chartable)
   end
   
+  def directions_of_science_by_count
+    ::Report::Project::DIRECTIONS_OF_SCIENCE.map do |direction|
+      [direction, @reports.map(&:projects).flatten.find_all do |p|
+        p.directions_of_science.include?(direction)
+      end.size]
+    end.extend(Chartable)
+  end
+  
+  def directions_of_science_count_by_msu_subdivistions
+    
+  end
+  
 private
   
   def reports_grouped_by_org_kind

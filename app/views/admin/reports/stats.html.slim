@@ -82,7 +82,6 @@ ul class="nav nav-tabs"
   li = link_to 'Диаграмма', '#projects_count_by_organization_kind_bar', data: { toggle: 'tab' }
   li = link_to 'Пирог', '#projects_count_by_organization_kind_pie', data: { toggle: 'tab' }
 
-
 div class="tab-content"
   div class="tab-pane active" id="projects_count_by_organization_kind_table"
     table class="table table-bordered"
@@ -93,55 +92,128 @@ div class="tab-content"
   div id="projects_count_by_organization_kind_bar"
   div id="projects_count_by_organization_kind_pie"
 
-  javascript:
-    new Highcharts.Chart({
-      chart: {
-        renderTo: 'projects_count_by_organization_kind_bar',
-        type: 'column',
-        events: window.chartEvents
-      },
+javascript:
+  new Highcharts.Chart({
+    chart: {
+      renderTo: 'projects_count_by_organization_kind_bar',
+      type: 'column',
+      events: window.chartEvents
+    },
+    title: {
+      text: ''
+    },
+    yAxis: {
       title: {
-        text: ''
-      },
-      yAxis: {
-        title: {
-          text: 'Количество'
+        text: 'Количество'
+      }
+    },
+    plotOptions: {
+      column: {
+        dataLabels: {
+          enabled: true
         }
-      },
-      plotOptions: {
-        column: {
-          dataLabels: {
-            enabled: true
-          }
-        }
-      },
-      title: 'Число организаций по типам',
-      series: #{@stats.projects_count_by_organization_kind.to_chart(:column).html_safe}
-    });
+      }
+    },
+    title: 'Число организаций по типам',
+    series: #{@stats.projects_count_by_organization_kind.to_chart(:column).html_safe}
+  });
 
-    new Highcharts.Chart({
-      chart: {
-        renderTo: 'projects_count_by_organization_kind_pie',
-        type: 'column',
-        events: window.chartEvents
-      },
-      title: {
-        text: ''
-      },
-      plotOptions: {
-        pie: {
-          allowPointSelect: true,
-          cursor: 'pointer',
-          dataLabels: {
-            enabled: true,
-            color: '#000000',
-            connectorColor: '#000000',
-            formatter: function() {
-              return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %';
-            }
+  new Highcharts.Chart({
+    chart: {
+      renderTo: 'projects_count_by_organization_kind_pie',
+      type: 'column',
+      events: window.chartEvents
+    },
+    title: {
+      text: ''
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          color: '#000000',
+          connectorColor: '#000000',
+          formatter: function() {
+            return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %';
           }
         }
-      },
-      series: #{@stats.projects_count_by_organization_kind.to_chart(:pie, name: 'Количество').html_safe}
-    })
+      }
+    },
+    series: #{@stats.projects_count_by_organization_kind.to_chart(:pie, name: 'Количество').html_safe}
+  })
+
+h2 Направления исследований
+
+ul class="nav nav-tabs"
+  li class="active" = link_to 'Таблица', '#directions_of_science_by_count_table', data: { toggle: 'tab' }
+  li = link_to 'Диаграмма', '#directions_of_science_by_count_bar', data: { toggle: 'tab' }
+  li = link_to 'Пирог', '#directions_of_science_by_count_pie', data: { toggle: 'tab' }
+
+div class="tab-content"
+  div class="tab-pane active" id="directions_of_science_by_count_table"
+    table class="table table-bordered"
+      - @stats.directions_of_science_by_count.each do |title, value|
+        tr
+          th class="span4" = title
+          td = value
+  div id="directions_of_science_by_count_bar"
+  div id="directions_of_science_by_count_pie"
+
+javascript:
+  new Highcharts.Chart({
+    chart: {
+      renderTo: 'directions_of_science_by_count_bar',
+      type: 'column',
+      events: window.chartEvents
+    },
+    title: {
+      text: ''
+    },
+    yAxis: {
+      title: {
+        text: 'Количество'
+      }
+    },
+    plotOptions: {
+      column: {
+        dataLabels: {
+          enabled: true
+        }
+      }
+    },
+    title: 'Число организаций по типам',
+    series: #{@stats.directions_of_science_by_count.to_chart(:column).html_safe}
+  });
+
+  new Highcharts.Chart({
+    chart: {
+      renderTo: 'directions_of_science_by_count_pie',
+      type: 'column',
+      events: window.chartEvents
+    },
+    title: {
+      text: ''
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          color: '#000000',
+          connectorColor: '#000000',
+          formatter: function() {
+            return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %';
+          }
+        }
+      }
+    },
+    series: #{@stats.directions_of_science_by_count.to_chart(:pie, name: 'Количество').html_safe}
+  })
+
+
+h3 Направления исследований по подразделениям МГУ
+
 
