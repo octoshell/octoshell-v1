@@ -131,7 +131,7 @@ class Admin::ReportsController < Admin::ApplicationController
 private
   
   def get_report(id)
-    report = Report.allowed.find(id)
+    report = Report.find(id)
     if !(report.expert == current_user || report.assessing? || report.assessed?)
       raise MayMay::Unauthorized
     end

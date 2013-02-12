@@ -1,5 +1,12 @@
 - title 'Статистика по отчетам'
 
+javascript:
+  window.chartEvents = {
+    load: function(chart){
+      $(chart.currentTarget.renderTo).addClass('tab-pane')
+    }
+  }
+
 h2 Число организаций по типам
 
 ul class="nav nav-tabs"
@@ -18,24 +25,18 @@ div class="tab-content"
   div id="organizations_count_by_kind_pie"
 
 javascript:
-  var chartEvents = {
-    load: function(chart){
-      $(chart.currentTarget.renderTo).addClass('tab-pane')
-    }
-  }
-
   new Highcharts.Chart({
     chart: {
       renderTo: 'organizations_count_by_kind_bar',
       type: 'column',
-      events: chartEvents
+      events: window.chartEvents
     },
     title: {
       text: 'Число организаций по типам'
     },
     yAxis: {
       title: {
-        text: 'Количетсво'
+        text: 'Количество'
       }
     },
     plotOptions: {
@@ -53,7 +54,7 @@ javascript:
     chart: {
       renderTo: 'organizations_count_by_kind_pie',
       type: 'column',
-      events: chartEvents
+      events: window.chartEvents
     },
     title: {
       text: 'Число организаций по типам'
@@ -75,9 +76,14 @@ javascript:
     series: #{@stats.organizations_count_by_kind.to_chart(:pie, name: 'Количество').html_safe}
   })
 
-h2 Число организаций по типам организаций
+h2 Число проектов по типам организаций
 
-div class="row report-stats"
-  div id="organizations_count_by_kind_table"
-  div id="projects_count_by_organization_kind_bar" class="span8"
-  div id="projects_count_by_organization_kind_donut" class="offset1 span3"
+div class="tab-content"
+  div class="tab-pane active" id="organizations_count_by_kind_table"
+    table class="table table-bordered"
+      - @stats.organizations_count_by_kind.each do |title, value|
+        tr
+          th class="span4" = title
+          td = value
+  div id="organizations_count_by_kind_bar"
+  div id="organizations_count_by_kind_pie"
