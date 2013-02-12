@@ -1,3 +1,4 @@
+# coding: utf-8
 class Admin::ReportsController < Admin::ApplicationController
   before_filter { authorize! :access, :reports }
 
@@ -112,7 +113,18 @@ class Admin::ReportsController < Admin::ApplicationController
     end
   end
   
+  def submit
+    authorize! :manage, :reports
+    @report = get_report(params[:report_id])
+    if @report.submit
+      redirect_to [:admin, @report], notice: 'Отчет отправлен на оценку'
+    else
+      redirect_to [:admin, @report], alert: 'Невозможно отправить отчет на оценку'
+    end
+  end
+  
   def stats
+    authorize! :manage, :reports
     @stats = Report::Stats.new
   end
 

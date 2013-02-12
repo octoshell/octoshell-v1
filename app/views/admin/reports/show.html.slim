@@ -187,6 +187,11 @@ h2 id="support" Поддержка
 - links = []
 - links << link_to('Закончить оценку', [:admin, @report, :assess], class: 'btn btn-primary', method: :put, data: { confirm: 'Вы уверены?' }) if @report.can_assess?
 - links << link_to('Вернуть отчет пользователю для редактирования', [:admin, @report, :decline], class: 'btn btn-danger', method: :put) if @report.can_decline?
+- if @report.can_submit?
+  - if @report.completely_valid?
+    - links << link_to('Вернуть отчет для оценки', [:admin, @report, :submit], class: "btn btn-danger", method: :put)
+  - else
+    - links << link_to('Вернуть отчет для оценки', '#', class: "btn btn-danger disabled")
 
 - if links.any?
   div class="link-actions"

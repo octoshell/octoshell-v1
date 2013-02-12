@@ -292,6 +292,7 @@ MSU::Application.routes.draw do
       put :assess
       get :supervise
       put :allow
+      put :submit
       post :ticket
       resources :report_projects, only: :update
     end
