@@ -36,7 +36,25 @@ class Report::Stats
   end
   
   def directions_of_science_count_by_msu_subdivistions
-    
+    msu_subdivisions.map do |subdivision, reports|
+      seria = Hash[::Report::Project::DIRECTIONS_OF_SCIENCE.map do |direction|
+        [direction, reports.map(&:projects).flatten.find_all do |p|
+          p.directions_of_science.include?(direction)
+        end.size]
+      end]
+      [subdivision, seria]
+    end
+  end
+  
+  def directions_of_science_count_by_msu_subdivistions_bar
+    msu_subdivisions.map do |subdivision, reports|
+      seria = ::Report::Project::DIRECTIONS_OF_SCIENCE.map do |direction|
+        [direction, reports.map(&:projects).flatten.find_all do |p|
+          p.directions_of_science.include?(direction)
+        end.size]
+      end
+      { name: subdivision, data: seria, type: 'column' }
+    end
   end
   
 private
