@@ -73,10 +73,53 @@ class Report::Stats
     books_count + vacs_count + lectures_count
   end
   
+  def international_conferences_count
+    projects.sum &:international_conferences_count
+  end
+  
+  def international_conferences_in_russia_count
+    projects.sum &:international_conferences_in_russia_count
+  end
+  
+  def russian_conferences_count
+    projects.sum &:russian_conferences_count
+  end
+  
+  def conferences_count
+    [ international_conferences_count,
+      international_conferences_in_russia_count,
+      russian_conferences_count ].sum
+  end
+  
+  def doctors_dissertations_count
+    projects.sum &:doctors_dissertations_count
+  end
+  
+  def candidates_dissertations_count
+    projects.sum &:candidates_dissertations_count
+  end
+  
+  def dissertations_count
+    [ doctors_dissertations_count,
+      candidates_dissertations_count ].sum
+  end
+  
+  def students_count
+    projects.sum &:students_count
+  end
+  
+  def graduates_count
+    projects.sum &:graduates_count
+  end
+  
+  def studies_count
+    [students_count, graduates_count].sum
+  end
+  
 private
 
   def projects
-    @reports.map(&:projects).flatten
+    @projects ||= @reports.map(&:projects).flatten
   end
   
   def reports_grouped_by_org_kind

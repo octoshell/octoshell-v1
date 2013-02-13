@@ -280,3 +280,48 @@ table class="table table-bordered table-condensed"
   tr
     th class="span6" Всего
     td = @stats.publications_count
+
+h4 Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ
+
+table class="table table-bordered table-condensed"
+  tr
+    th class="span6" Международные (за рубежом)
+    td = @stats.international_conferences_count
+  tr
+    th class="span6" Международные (в России)
+    td = @stats.international_conferences_in_russia_count
+  tr
+    th class="span6" Российские
+    td = @stats.russian_conferences_count
+  tr
+    th class="span6" Всего
+    td = @stats.conferences_count
+
+h4 Число защищенных диссертаций, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
+
+table class="table table-bordered table-condensed"
+  tr
+    th class="span6" Докторских
+    td = @stats.doctors_dissertations_count
+  tr
+    th class="span6" Кандидатских
+    td = @stats.candidates_dissertations_count
+  tr
+    th class="span6" Всего
+    td = @stats.dissertations_count
+
+h4 Число учащихся, ведущих научную работу с использованием суперкомпьютерного комплекса МГУ
+
+table class="table table-bordered table-condensed"
+  tr
+    th class="span6" Студентов
+    td = @stats.students_count
+  tr
+    th class="span6" Аспирантов
+    td = @stats.graduates_count
+  tr
+    th class="span6" Всего
+    td = @stats.studies_count
+
+    
+  
