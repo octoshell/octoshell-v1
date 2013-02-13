@@ -1,3 +1,4 @@
+# coding: utf-8
 class Report::Stats
   def initialize
     @reports = Report.with_state(:assessed).
@@ -57,32 +58,38 @@ class Report::Stats
     end
   end
   
-  def books_count
-    projects.sum &:books_count
-  end
-  
-  def vacs_count
-    projects.sum &:vacs_count
-  end
-  
-  def lectures_count
-    projects.sum &:lectures_count
+  [ :books_count,
+    :vacs_count,
+    :lectures_count,
+    :international_conferences_count,
+    :international_conferences_in_russia_count,
+    :russian_conferences_count,
+    :doctors_dissertations_count,
+    :candidates_dissertations_count,
+    :students_count,
+    :graduates_count,
+    :your_students_count,
+    :rffi_grants_count,
+    :ministry_of_education_grants_count,
+    :rosnano_grants_count,
+    :ministry_of_communications_grants_count,
+    :ministry_of_defence_grants_count,
+    :ran_grants_count,
+    :other_russian_grants_count,
+    :other_intenational_grants_count,
+    :awards_count ].each do |attribute|
+    
+    define_method attribute do
+      projects.sum &attribute
+    end
   end
   
   def publications_count
     books_count + vacs_count + lectures_count
   end
   
-  def international_conferences_count
-    projects.sum &:international_conferences_count
-  end
-  
-  def international_conferences_in_russia_count
-    projects.sum &:international_conferences_in_russia_count
-  end
-  
-  def russian_conferences_count
-    projects.sum &:russian_conferences_count
+  def publications_count_by_subdivision
+    counts_by_subdivision(:books_count, :vacs_count, :lectures_count)
   end
   
   def conferences_count
@@ -91,12 +98,12 @@ class Report::Stats
       russian_conferences_count ].sum
   end
   
-  def doctors_dissertations_count
-    projects.sum &:doctors_dissertations_count
-  end
-  
-  def candidates_dissertations_count
-    projects.sum &:candidates_dissertations_count
+  def conferences_count_by_subdivision
+    counts_by_subdivision(
+      :international_conferences_count,
+      :international_conferences_in_russia_count,
+      :russian_conferences_count
+    )
   end
   
   def dissertations_count
@@ -104,52 +111,23 @@ class Report::Stats
       candidates_dissertations_count ].sum
   end
   
-  def students_count
-    projects.sum &:students_count
-  end
-  
-  def graduates_count
-    projects.sum &:graduates_count
+  def dissertations_count_by_subdivision
+    counts_by_subdivision(
+      :doctors_dissertations_count,
+      :candidates_dissertations_count
+    )
   end
   
   def studies_count
     [students_count, graduates_count].sum
   end
   
-  def your_students_count
-    projects.sum &:your_students_count
+  def studies_count_by_subdivision
+    counts_by_subdivision(:students_count, :graduates_count)
   end
   
-  def rffi_grants_count
-    projects.sum &:rffi_grants_count
-  end
-  
-  def ministry_of_education_grants_count
-    projects.sum &:ministry_of_education_grants_count
-  end
-  
-  def rosnano_grants_count
-    projects.sum &:rosnano_grants_count
-  end
-  
-  def ministry_of_communications_grants_count
-    projects.sum &:ministry_of_communications_grants_count
-  end
-  
-  def ministry_of_defence_grants_count
-    projects.sum &:ministry_of_defence_grants_count
-  end
-  
-  def ran_grants_count
-    projects.sum &:ran_grants_count
-  end
-  
-  def other_russian_grants_count
-    projects.sum &:other_russian_grants_count
-  end
-  
-  def other_intenational_grants_count
-    projects.sum &:other_intenational_grants_count
+  def your_students_count_by_subdivision
+    counts_by_subdivision(:your_students_count)
   end
   
   def grants_count
@@ -163,6 +141,19 @@ class Report::Stats
       other_intenational_grants_count ].sum
   end
   
+  def grants_count_by_subdivision
+    counts_by_subdivision(
+      :rffi_grants_count,
+      :ministry_of_defence_grants_count,
+      :rosnano_grants_count,
+      :ministry_of_communications_grants_count,
+      :ministry_of_defence_grants_count,
+      :ran_grants_count,
+      :other_russian_grants_count,
+      :other_intenational_grants_count
+    )
+  end
+  
   def award_names
     group = projects.map(&:award_names).flatten.
       find_all(&:present?).group_by { |award| award }
@@ -171,11 +162,33 @@ class Report::Stats
     end]
   end
   
-  def awards_count
-    projects.sum &:awards_count
+  def award_names_by_subdivision
+    names = award_names.keys
+    Hash[msu_subdivisions.map do |subdivision, reports|
+      projects = reports.map(&:projects).flatten
+      groups = projects.map(&:award_names).flatten.
+        find_all(&:present?).group_by { |award| award }
+      counts = names.map do |name|
+        group = groups.find { |award, awards| award == name }
+        group ? group[1].size : 0
+      end
+      counts << counts.sum
+      [subdivision, counts]
+    end]
   end
   
 private
+
+  def counts_by_subdivision(*attributes)
+    Hash[msu_subdivisions.map do |subdivision, reports|
+      projects = reports.map(&:projects).flatten
+      counts = attributes.map do |attr|
+        projects.sum(&attr)
+      end
+      counts << counts.sum
+      [subdivision, counts]
+    end]
+  end
 
   def projects
     @projects ||= @reports.map(&:projects).flatten
@@ -188,7 +201,7 @@ private
   end
   
   def msu_organization
-    ::Organization.find(497)
+    @msu_organization ||= ::Organization.find(497)
   end
   
   def msu_organization_reports
@@ -198,7 +211,7 @@ private
   end
   
   def msu_subdivisions
-    msu_organization_reports.group_by do |report|
+    @msu_subdivisions ||= msu_organization_reports.group_by do |report|
       report.organizations.first.subdivision
     end
   end

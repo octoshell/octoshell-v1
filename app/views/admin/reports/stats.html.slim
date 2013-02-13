@@ -330,7 +330,7 @@ table class="table table-bordered table-condensed"
     th class="span6" Число студентов
     td = @stats.your_students_count
 
-h4 Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ в рамках данного проекта
+h4 Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ
 
 table class="table table-bordered table-condensed"
   tr
@@ -364,17 +364,116 @@ table class="table table-bordered table-condensed"
 h4 Число премий, наград, медалей и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
 
 table class="table table-bordered table-condensed"
-  tr
-    th 
-    th Награды
-  tr
-    th class="span3"
-    td
-      table class="table table-bordered table-condensed"
-        - @stats.award_names.each do |award, count|
-          tr
-            td class="span6" = award
-            td = count
+  - @stats.award_names.each do |award, count|
+    tr
+      th class="span6" = award
+      td = count
   tr
     th class="span3" Всего
     td = @stats.awards_count
+
+
+h3 По подразделениям МГУ
+
+h4 Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
+
+table class="table table-bordered table-condensed"
+  tr
+    th class="span4" Подразделение
+    th Число опубликованных статей по проекту за год
+    th Число учебников и монографий
+    th Число тезисов докладов
+    th Всего
+  - @stats.publications_count_by_subdivision.each do |sub, counts|
+    tr
+      th = sub
+      - counts.each do |count|
+        td class="span2" = count
+
+h4 Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ
+
+table class="table table-bordered table-condensed"
+  tr
+    th class="span4" Подразделение
+    th Международные (за рубежом)
+    th Международные (в России)
+    th Российские
+    th Всего
+  - @stats.publications_count_by_subdivision.each do |sub, counts|
+    tr
+      th = sub
+      - counts.each do |count|
+        td class="span2" = count
+
+h4 Число защищенных диссертаций, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
+
+table class="table table-bordered table-condensed"
+  tr
+    th class="span4" Подразделение
+    th Докторских
+    th Кандидатских
+    th Всего
+  - @stats.dissertations_count_by_subdivision.each do |sub, counts|
+    tr
+      th = sub
+      - counts.each do |count|
+        td class="span2" = count
+
+h4 Число учащихся, ведущих научную работу с использованием суперкомпьютерного комплекса МГУ
+
+table class="table table-bordered table-condensed"
+  tr
+    th class="span4" Подразделение
+    th Студентов
+    th Аспирантов
+    th Всего
+  - @stats.studies_count_by_subdivision.each do |sub, counts|
+    tr
+      th = sub
+      - counts.each do |count|
+        td class="span2" = count
+    
+h4 Число студентов, прошедших под руководством через вычислительный практикум на суперкомпьютерном комплексе МГУ
+
+table class="table table-bordered table-condensed"
+  tr
+    th class="span6" Подразделение
+    th Число студентов
+  - @stats.your_students_count_by_subdivision.each do |sub, counts|
+    tr
+      th = sub
+      td = counts.first
+  
+h4 Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ
+
+table class="table table-bordered table-condensed"
+  tr
+    th class="span6" Подразделение
+    th РФФИ
+    th Минобрнауки РФ
+    th Роснано
+    th Минкомсвязи РФ
+    th Минобороны РФ
+    th Программы фундаментальных исследований РАН
+    th Другие (российские)
+    th Международные
+    th Всего
+  - @stats.grants_count_by_subdivision.each do |sub, counts|
+    tr
+      th = sub
+      - counts.each do |count|
+        td class="span1" = count
+
+h4 Число премий, наград, медалей и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
+
+table class="table table-bordered table-condensed"
+  tr
+    th Подразделение
+    - @stats.award_names.keys.each do |name|
+      th = name
+    th Всего
+  - @stats.award_names_by_subdivision.each do |sub, counts|
+    tr
+      th = sub
+      - counts.each do |count|
+        td = count
