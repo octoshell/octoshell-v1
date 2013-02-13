@@ -3,7 +3,7 @@
 p class="lead"
   | Всего взято эксперами: #{@picked}
   br
-  | Оценено: #{@assessed} (#{((@picked - @assessed.to_f) * 100 / @picked).to_i }%)
+  | Оценено: #{@assessed} (#{100 - ((@picked - @assessed.to_f) * 100 / @picked).to_i }%)
   br
   | Оценивается: #{@assessing}
   br
