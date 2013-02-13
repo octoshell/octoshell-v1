@@ -57,7 +57,27 @@ class Report::Stats
     end
   end
   
+  def books_count
+    projects.sum &:books_count
+  end
+  
+  def vacs_count
+    projects.sum &:vacs_count
+  end
+  
+  def lectures_count
+    projects.sum &:lectures_count
+  end
+  
+  def publications_count
+    books_count + vacs_count + lectures_count
+  end
+  
 private
+
+  def projects
+    @reports.map(&:projects).flatten
+  end
   
   def reports_grouped_by_org_kind
     @reports_grouped_by_org_kind ||= begin

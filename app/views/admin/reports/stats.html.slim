@@ -262,3 +262,21 @@ javascript:
     title: 'Число организаций по типам',
     series: #{@stats.directions_of_science_count_by_msu_subdivistions_bar.to_json.html_safe}
   });
+
+h2 Суммы
+
+h4 Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
+
+table class="table table-bordered table-condensed"
+  tr
+    th class="span6" Число опубликованных статей по проекту за год
+    td = @stats.books_count
+  tr
+    th class="span6" Число учебников и монографий
+    td = @stats.vacs_count
+  tr
+    th class="span6" Число тезисов докладов
+    td = @stats.lectures_count
+  tr
+    th class="span6" Всего
+    td = @stats.publications_count
