@@ -163,18 +163,7 @@ class Report::Stats
   end
   
   def award_names_by_subdivision
-    names = award_names.keys
-    Hash[msu_subdivisions.map do |subdivision, reports|
-      projects = reports.map(&:projects).flatten
-      groups = projects.map(&:award_names).flatten.
-        find_all(&:present?).group_by { |award| award }
-      counts = names.map do |name|
-        group = groups.find { |award, awards| award == name }
-        group ? group[1].size : 0
-      end
-      counts << counts.sum
-      [subdivision, counts]
-    end]
+    counts_by_subdivision(:awards_count)
   end
   
 private

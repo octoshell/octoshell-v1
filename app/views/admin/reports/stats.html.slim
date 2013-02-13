@@ -468,12 +468,9 @@ h4 Число премий, наград, медалей и т.п. за рабо
 
 table class="table table-bordered table-condensed"
   tr
-    th Подразделение
-    - @stats.award_names.keys.each do |name|
-      th = name
-    th Всего
+    th class="span6" Подразделение
+    th Количество
   - @stats.award_names_by_subdivision.each do |sub, counts|
     tr
-      th = sub
-      - counts.each do |count|
-        td = count
+      td = sub
+      td = counts.first
