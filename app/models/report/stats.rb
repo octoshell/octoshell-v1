@@ -116,6 +116,65 @@ class Report::Stats
     [students_count, graduates_count].sum
   end
   
+  def your_students_count
+    projects.sum &:your_students_count
+  end
+  
+  def rffi_grants_count
+    projects.sum &:rffi_grants_count
+  end
+  
+  def ministry_of_education_grants_count
+    projects.sum &:ministry_of_education_grants_count
+  end
+  
+  def rosnano_grants_count
+    projects.sum &:rosnano_grants_count
+  end
+  
+  def ministry_of_communications_grants_count
+    projects.sum &:ministry_of_communications_grants_count
+  end
+  
+  def ministry_of_defence_grants_count
+    projects.sum &:ministry_of_defence_grants_count
+  end
+  
+  def ran_grants_count
+    projects.sum &:ran_grants_count
+  end
+  
+  def other_russian_grants_count
+    projects.sum &:other_russian_grants_count
+  end
+  
+  def other_intenational_grants_count
+    projects.sum &:other_intenational_grants_count
+  end
+  
+  def grants_count
+    [ rffi_grants_count,
+      ministry_of_education_grants_count,
+      rosnano_grants_count,
+      ministry_of_communications_grants_count,
+      ministry_of_defence_grants_count,
+      ran_grants_count,
+      other_russian_grants_count,
+      other_intenational_grants_count ].sum
+  end
+  
+  def award_names
+    group = projects.map(&:award_names).flatten.
+      find_all(&:present?).group_by { |award| award }
+    Hash[group.map do |award, awards|
+      [award, awards.size]
+    end]
+  end
+  
+  def awards_count
+    projects.sum &:awards_count
+  end
+  
 private
 
   def projects

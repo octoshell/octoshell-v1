@@ -322,6 +322,59 @@ table class="table table-bordered table-condensed"
   tr
     th class="span6" Всего
     td = @stats.studies_count
-
     
-  
+h4 Число студентов, прошедших под руководством через вычислительный практикум на суперкомпьютерном комплексе МГУ
+
+table class="table table-bordered table-condensed"
+  tr
+    th class="span6" Число студентов
+    td = @stats.your_students_count
+
+h4 Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ в рамках данного проекта
+
+table class="table table-bordered table-condensed"
+  tr
+    th class="span6" РФФИ
+    td = @stats.rffi_grants_count
+  tr
+    th class="span6" Минобрнауки РФ
+    td = @stats.ministry_of_education_grants_count
+  tr
+    th class="span6" Роснано
+    td = @stats.rosnano_grants_count
+  tr
+    th class="span6" Минкомсвязи РФ
+    td = @stats.ministry_of_communications_grants_count
+  tr
+    th class="span6" Минобороны РФ
+    td = @stats.ministry_of_defence_grants_count
+  tr
+    th class="span6" Программы фундаментальных исследований РАН
+    td = @stats.ran_grants_count
+  tr
+    th class="span6" Другие (российские)
+    td = @stats.other_russian_grants_count
+  tr
+    th class="span6" Международные
+    td = @stats.other_intenational_grants_count
+  tr
+    th class="span6" Всего
+    td = @stats.grants_count
+    
+h4 Число премий, наград, медалей и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
+
+table class="table table-bordered table-condensed"
+  tr
+    th 
+    th Награды
+  tr
+    th class="span3"
+    td
+      table class="table table-bordered table-condensed"
+        - @stats.award_names.each do |award, count|
+          tr
+            td class="span6" = award
+            td = count
+  tr
+    th class="span3" Всего
+    td = @stats.awards_count
