@@ -93,6 +93,7 @@ class Report < ActiveRecord::Base
   scope :assessed, with_state(:assessed)
   scope :already_submitted, where("submitted_at is not null")
   scope :latecommers, where("submitted_at >= ?", Date.new(2013, 2, 4))
+  scope :picked, where("expert_id is not null")
   
   def organization
     ::Organization.find(organizations.first.organization_id)

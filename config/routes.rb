@@ -283,6 +283,7 @@ MSU::Application.routes.draw do
         get '/all'
         get '/latecommers'
         get '/stats'
+        get '/progress'
       end
       get :review
       post :replies

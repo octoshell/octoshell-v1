@@ -127,6 +127,14 @@ class Admin::ReportsController < Admin::ApplicationController
     authorize! :manage, :reports
     @stats = Report::Stats.new
   end
+  
+  def progress
+    authorize! :manage, :reports
+    @assessing = Report.with_state(:assessing).count
+    @assessed  = Report.with_state(:assessed).count
+    @picked    = Report.picked.count
+    @editing   = Report.picked.with_state(:editing).count
+  end
 
 private
   
