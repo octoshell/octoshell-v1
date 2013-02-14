@@ -287,6 +287,12 @@ class User < ActiveRecord::Base
     owned_projects.map(&:account_ids).flatten.include?(account.id)
   end
   
+  def mentioned_reports
+    Report::Project.where("report_projects.emails like '%#{email}%'").map do |p|
+      p.report
+    end.uniq
+  end
+  
 private
   
   def step_name(name)

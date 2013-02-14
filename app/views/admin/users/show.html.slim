@@ -39,6 +39,22 @@ div class="row"
       p
         strong = link_to t('.edit'), edit_profile_path
 
+h3 Отчеты
+
+h4 Поданные пользователем
+
+- @user.reports.each do |report|
+  p = link_to "Отчет ##{report.id} (#{report.human_state_name})", [:admin, report, :review]
+
+h4 В которых упоминался пользователь
+
+- reports = @user.mentioned_reports
+- if reports.any?
+  - reports.each do |report|
+    p = link_to "Отчет ##{report.id} (#{report.human_state_name})", [:admin, report, :review]
+- else
+  p Нет
+
 h3 = t('.sureties')
 = render partial: 'admin/sureties/table', locals: { sureties: @user.sureties }
 
