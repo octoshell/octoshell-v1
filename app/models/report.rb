@@ -89,7 +89,7 @@ class Report < ActiveRecord::Base
   
   scope :allowed, with_allow_state(:allowed)
   scope :submitted, with_state(:submitted)
-  scope :available, allowed.with_state(:submitted).where(expert_id: nil)
+  scope :available, with_state(:submitted).where(expert_id: nil)
   scope :assessed, with_state(:assessed)
   scope :already_submitted, where("submitted_at is not null")
   scope :latecommers, where("submitted_at >= ?", Date.new(2013, 2, 4))
