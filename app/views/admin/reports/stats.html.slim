@@ -10,7 +10,7 @@ javascript:
 
 div class="row"
   div class="span3"
-    div class="well" style="padding: 8px 0; max-width: 228px" data-spy="affix"
+    div class="well" style="padding: 8px 0; max-width: 228px" data-spy="affix"  id="left-menu"
       ul class="nav nav-list"
         li = link_to 'Число организаций по типам', '#organizations_count_by_kind'
         li = link_to 'Число проектов по типам организаций', '#projects_count_by_organization_kind'
@@ -537,4 +537,3 @@ div class="row"
     p Всего: #{@stats.strict_schedule_count}
 
     h2 Топы
-
