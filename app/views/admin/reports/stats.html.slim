@@ -470,7 +470,22 @@ table class="table table-bordered table-condensed"
   tr
     th class="span6" Подразделение
     th Количество
-  - @stats.award_names_by_subdivision.each do |sub, counts|
+  - @stats.award_count_by_subdivision.each do |sub, counts|
     tr
       td = sub
       td = counts.first
+
+div class="accordion"
+  - @stats.award_names_by_subdivision.each_with_index do |arr, i|
+    - sub, names = arr
+    div class="accordion-group" id="award_names_by_subdivision_#{i}_parent"
+      div class="accordion-heading"
+        = link_to sub, "#award_names_by_subdivision_#{i}", data: { toggle: 'collapse', parent: "#award_names_by_subdivision_#{i}_parent" }, class: 'accordion-toggle'
+      div class="accordion-body collapse" id="award_names_by_subdivision_#{i}"
+        div class="accordion-inner"
+          - if names.any?
+            ul
+              - names.each do |name|
+                li = name
+          - else
+            | Нет

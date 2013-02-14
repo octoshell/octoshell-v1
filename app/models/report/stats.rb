@@ -162,8 +162,17 @@ class Report::Stats
     end]
   end
   
-  def award_names_by_subdivision
+  def award_count_by_subdivision
     counts_by_subdivision(:awards_count)
+  end
+  
+  def award_names_by_subdivision
+    Hash[msu_subdivisions.map do |subdivision, reports|
+      names = reports.map(&:projects).flatten.map do |project|
+        project.award_names
+      end.find_all(&:present?)
+      [subdivision, names]
+    end]
   end
   
 private
