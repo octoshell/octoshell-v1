@@ -134,6 +134,7 @@ class Admin::ReportsController < Admin::ApplicationController
     @assessed  = Report.with_state(:assessed).count
     @picked    = Report.picked.count
     @editing   = Report.picked.with_state(:editing).count
+    @subnamespace = :progress
   end
 
 private

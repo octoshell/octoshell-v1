@@ -1,0 +1,8 @@
+ul class="nav nav-pills"
+  li class="#{active_menu? :index, true}" = link_to "Неразобранные (#{Report.available.count})", admin_reports_path
+  li class="#{active_menu? :self_assessing, true}" = link_to "Свои (#{current_user.assessing_reports.count})", self_admin_reports_path
+  li class="#{active_menu? :all, true}" = link_to "Все (#{Report.count})", all_admin_reports_path
+  li class="#{active_menu? :assessed, true}" = link_to "Оцененные (#{Report.assessed.count})", assessed_admin_reports_path
+  li class="#{active_menu? :latecommers, true}" = link_to "Отправленные позже срока (#{Report.latecommers.with_state(:submitted).count})", latecommers_admin_reports_path
+  - if may? :manage, :reports
+    li class="#{active_menu? :progress, true}" = link_to "Прогресс", progress_admin_reports_path
