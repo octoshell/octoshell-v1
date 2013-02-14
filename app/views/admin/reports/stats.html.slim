@@ -16,7 +16,7 @@ ul class="nav nav-tabs"
 
 div class="tab-content"
   div class="tab-pane active" id="organizations_count_by_kind_table"
-    table class="table table-bordered"
+    table class="table table-bordered table-striped"
       - @stats.organizations_count_by_kind.each do |title, value|
         tr
           th class="span4" = title
@@ -84,7 +84,7 @@ ul class="nav nav-tabs"
 
 div class="tab-content"
   div class="tab-pane active" id="projects_count_by_organization_kind_table"
-    table class="table table-bordered"
+    table class="table table-bordered table-striped"
       - @stats.projects_count_by_organization_kind.each do |title, value|
         tr
           th class="span4" = title
@@ -153,7 +153,7 @@ ul class="nav nav-tabs"
 
 div class="tab-content"
   div class="tab-pane active" id="directions_of_science_by_count_table"
-    table class="table table-bordered"
+    table class="table table-bordered table-striped"
       - @stats.directions_of_science_by_count.each do |title, value|
         tr
           th class="span4" = title
@@ -222,19 +222,21 @@ ul class="nav nav-tabs"
 
 div class="tab-content"
   div class="tab-pane active" id="directions_of_science_count_by_msu_subdivistions_table"
-    table class="table table-bordered"
-      tr
-        th Подразделение
-        th Направления исследований
-      - @stats.directions_of_science_count_by_msu_subdivistions.each do |title, value|
-        tr
-          th class="span4" = title
-          td
-            table class="table table-bordered table-condensed"
-              - value.each do |direction, count|
-                tr
-                  td = direction
-                  td class="span1" = count
+    
+    div class="accordion"
+      - @stats.directions_of_science_count_by_msu_subdivistions.each_with_index do |arr, i|
+        - title, value = arr
+        div class="accordion-group" id="directions_of_science_count_by_msu_subdivistions_#{i}_parent"
+          div class="accordion-heading"
+            = link_to title, "#directions_of_science_count_by_msu_subdivistions_#{i}", data: { parent: "#directions_of_science_count_by_msu_subdivistions_#{i}_parent", toggle: 'collapse' }, class: 'accordion-toggle'
+          div class="accordion-body collapse" id="directions_of_science_count_by_msu_subdivistions_#{i}"
+            div class="accordion-inner"
+              table class="table table-bordered table-striped"
+                - value.each do |direction, count|
+                  tr
+                    td class="span6" = direction
+                    td = count
+            
   div id="directions_of_science_count_by_msu_subdivistions_bar"
 
 javascript:
@@ -517,3 +519,6 @@ table class="table table-bordered"
 h4 Необходимость привязки свободных процессоров к фиксированному времени
 
 p Всего: #{@stats.strict_schedule_count}
+
+h2 Топы
+
