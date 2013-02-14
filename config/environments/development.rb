@@ -18,10 +18,13 @@ MSU::Application.configure do
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { host: 'octoshell.dev', protocol: 'https' }
-  config.action_mailer.delivery_method = :mailgun
-  config.action_mailer.mailgun_settings = {
-    api_key:  'key-2bbtwydaex8px6vvl7twssc1puchy2m7',
-    api_host: 'releu.mailgun.org'
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :user_name => 'releu-5a39f94f6e7e49b6',
+    :password => '0eb3fc59c72fe799',
+    :address => 'mailtrap.io',
+    :port => '2525',
+    :authentication => :plain,
   }
 
   # Print deprecation notices to the Rails logger
