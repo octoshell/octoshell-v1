@@ -141,7 +141,7 @@
               |  
             |  
     div class="form-actions"
-      = f.button :submit, 'Сохранить', class: 'btn-primary', disabled: f.object.report.assessed?
+      = f.button :submit, 'Сохранить', class: 'btn-primary', disabled: !f.object.report.assessing?
       p
         span class="help-block" Вам нужно сохранить оценки перед тем как закончите оценку всего отчета.
 
