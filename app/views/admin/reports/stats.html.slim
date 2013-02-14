@@ -489,3 +489,31 @@ div class="accordion"
                 li = name
           - else
             | Нет
+
+h3 Заявки ресурсов
+
+table class="table table-bordered"
+  tr
+    th Система
+    th Процессорочасы
+    th Объем диска, Gb
+  tr
+    th Ломоносов
+    td
+      = @stats.lomonosov_intel_hours
+      |  Intel, 
+      = @stats.lomonosov_nvidia_hours
+      |  NVIDIA
+    td = @stats.lomonosov_size
+  tr
+    th Чебышев
+    td = @stats.chebyshev_hours
+    td = @stats.chebyshev_size
+  tr
+    th Всего
+    td = @stats.hours_sum
+    td = @stats.size_sum
+
+h4 Необходимость привязки свободных процессоров к фиксированному времени
+
+p Всего: #{@stats.strict_schedule_count}

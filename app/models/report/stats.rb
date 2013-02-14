@@ -77,7 +77,12 @@ class Report::Stats
     :ran_grants_count,
     :other_russian_grants_count,
     :other_intenational_grants_count,
-    :awards_count ].each do |attribute|
+    :awards_count,
+    :lomonosov_intel_hours,
+    :lomonosov_nvidia_hours,
+    :chebyshev_hours,
+    :lomonosov_size,
+    :chebyshev_size ].each do |attribute|
     
     define_method attribute do
       projects.sum &attribute
@@ -173,6 +178,18 @@ class Report::Stats
       end.find_all(&:present?)
       [subdivision, names]
     end]
+  end
+  
+  def hours_sum
+    lomonosov_intel_hours + lomonosov_nvidia_hours + chebyshev_hours
+  end
+  
+  def size_sum
+    lomonosov_size + chebyshev_size
+  end
+  
+  def strict_schedule_count
+    projects.map(&:strict_schedule).sum &:size
   end
   
 private
