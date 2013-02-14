@@ -6,519 +6,535 @@ javascript:
       $(chart.currentTarget.renderTo).addClass('tab-pane')
     }
   }
-
-h2 Число организаций по типам
-
-ul class="nav nav-tabs"
-  li class="active" = link_to 'Таблица', '#organizations_count_by_kind_table', data: { toggle: 'tab' }
-  li = link_to 'Диаграмма', '#organizations_count_by_kind_bar', data: { toggle: 'tab' }
-  li = link_to 'Пирог', '#organizations_count_by_kind_pie', data: { toggle: 'tab' }
-
-div class="tab-content"
-  div class="tab-pane active" id="organizations_count_by_kind_table"
-    table class="table table-bordered table-striped"
-      - @stats.organizations_count_by_kind.each do |title, value|
-        tr
-          th class="span4" = title
-          td = value
-  div id="organizations_count_by_kind_bar"
-  div id="organizations_count_by_kind_pie"
-
-javascript:
-  new Highcharts.Chart({
-    chart: {
-      renderTo: 'organizations_count_by_kind_bar',
-      type: 'column',
-      events: window.chartEvents
-    },
-    title: {
-      text: ''
-    },
-    yAxis: {
-      title: {
-        text: 'Количество'
-      }
-    },
-    plotOptions: {
-      column: {
-        dataLabels: {
-          enabled: true
-        }
-      }
-    },
-    series: #{@stats.organizations_count_by_kind.to_chart(:column).html_safe}
-  });
   
-  new Highcharts.Chart({
-    chart: {
-      renderTo: 'organizations_count_by_kind_pie',
-      type: 'column',
-      events: window.chartEvents
-    },
-    title: {
-      text: ''
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: 'pointer',
-        dataLabels: {
-          enabled: true,
-          color: '#000000',
-          connectorColor: '#000000',
-          formatter: function() {
-            return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %';
+
+div class="row"
+  div class="span3"
+    div class="well" style="padding: 8px 0; max-width: 228px" data-spy="affix"
+      ul class="nav nav-list"
+        li = link_to 'Число организаций по типам', '#organizations_count_by_kind'
+        li = link_to 'Число проектов по типам организаций', '#projects_count_by_organization_kind'
+        li class="nav-header" Направления исследований
+        li = link_to 'Общие', '#directions_of_science_by_count'
+        li = link_to 'По подразделениям МГУ', '#directions_of_science_count_by_msu_subdivistions'
+        li class="nav-header" Суммы
+        li = link_to 'Общие', '#sums'
+        li = link_to 'По подразделениям МГУ', '#sums_by_subdivisions'
+        li = link_to 'Заявки ресурсов', '#requests'
+    | &nbsp;
+  div class="span9"
+    h2 id="organizations_count_by_kind" Число организаций по типам
+
+    ul class="nav nav-tabs"
+      li class="active" = link_to 'Таблица', '#organizations_count_by_kind_table', data: { toggle: 'tab' }
+      li = link_to 'Диаграмма', '#organizations_count_by_kind_bar', data: { toggle: 'tab' }
+      li = link_to 'Пирог', '#organizations_count_by_kind_pie', data: { toggle: 'tab' }
+
+    div class="tab-content"
+      div class="tab-pane active" id="organizations_count_by_kind_table"
+        table class="table table-bordered table-striped"
+          - @stats.organizations_count_by_kind.each do |title, value|
+            tr
+              th class="span4" = title
+              td = value
+      div id="organizations_count_by_kind_bar"
+      div id="organizations_count_by_kind_pie"
+
+    javascript:
+      new Highcharts.Chart({
+        chart: {
+          renderTo: 'organizations_count_by_kind_bar',
+          type: 'column',
+          events: window.chartEvents
+        },
+        title: {
+          text: ''
+        },
+        yAxis: {
+          title: {
+            text: 'Количество'
           }
-        }
-      }
-    },
-    series: #{@stats.organizations_count_by_kind.to_chart(:pie, name: 'Количество').html_safe}
-  })
+        },
+        plotOptions: {
+          column: {
+            dataLabels: {
+              enabled: true
+            }
+          }
+        },
+        series: #{@stats.organizations_count_by_kind.to_chart(:column).html_safe}
+      });
 
-h2 Число проектов по типам организаций
+      new Highcharts.Chart({
+        chart: {
+          renderTo: 'organizations_count_by_kind_pie',
+          type: 'column',
+          events: window.chartEvents
+        },
+        title: {
+          text: ''
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: true,
+              color: '#000000',
+              connectorColor: '#000000',
+              formatter: function() {
+                return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %';
+              }
+            }
+          }
+        },
+        series: #{@stats.organizations_count_by_kind.to_chart(:pie, name: 'Количество').html_safe}
+      })
 
-ul class="nav nav-tabs"
-  li class="active" = link_to 'Таблица', '#projects_count_by_organization_kind_table', data: { toggle: 'tab' }
-  li = link_to 'Диаграмма', '#projects_count_by_organization_kind_bar', data: { toggle: 'tab' }
-  li = link_to 'Пирог', '#projects_count_by_organization_kind_pie', data: { toggle: 'tab' }
+    h2 id="projects_count_by_organization_kind" Число проектов по типам организаций
 
-div class="tab-content"
-  div class="tab-pane active" id="projects_count_by_organization_kind_table"
+    ul class="nav nav-tabs"
+      li class="active" = link_to 'Таблица', '#projects_count_by_organization_kind_table', data: { toggle: 'tab' }
+      li = link_to 'Диаграмма', '#projects_count_by_organization_kind_bar', data: { toggle: 'tab' }
+      li = link_to 'Пирог', '#projects_count_by_organization_kind_pie', data: { toggle: 'tab' }
+
+    div class="tab-content"
+      div class="tab-pane active" id="projects_count_by_organization_kind_table"
+        table class="table table-bordered table-striped"
+          - @stats.projects_count_by_organization_kind.each do |title, value|
+            tr
+              th class="span4" = title
+              td = value
+      div id="projects_count_by_organization_kind_bar"
+      div id="projects_count_by_organization_kind_pie"
+
+    javascript:
+      new Highcharts.Chart({
+        chart: {
+          renderTo: 'projects_count_by_organization_kind_bar',
+          type: 'column',
+          events: window.chartEvents
+        },
+        title: {
+          text: ''
+        },
+        yAxis: {
+          title: {
+            text: 'Количество'
+          }
+        },
+        plotOptions: {
+          column: {
+            dataLabels: {
+              enabled: true
+            }
+          }
+        },
+        title: 'Число организаций по типам',
+        series: #{@stats.projects_count_by_organization_kind.to_chart(:column).html_safe}
+      });
+
+      new Highcharts.Chart({
+        chart: {
+          renderTo: 'projects_count_by_organization_kind_pie',
+          type: 'column',
+          events: window.chartEvents
+        },
+        title: {
+          text: ''
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: true,
+              color: '#000000',
+              connectorColor: '#000000',
+              formatter: function() {
+                return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %';
+              }
+            }
+          }
+        },
+        series: #{@stats.projects_count_by_organization_kind.to_chart(:pie, name: 'Количество').html_safe}
+      })
+
+    h2 id="directions_of_science_by_count" Направления исследований
+
+    ul class="nav nav-tabs"
+      li class="active" = link_to 'Таблица', '#directions_of_science_by_count_table', data: { toggle: 'tab' }
+      li = link_to 'Диаграмма', '#directions_of_science_by_count_bar', data: { toggle: 'tab' }
+      li = link_to 'Пирог', '#directions_of_science_by_count_pie', data: { toggle: 'tab' }
+
+    div class="tab-content"
+      div class="tab-pane active" id="directions_of_science_by_count_table"
+        table class="table table-bordered table-striped"
+          - @stats.directions_of_science_by_count.each do |title, value|
+            tr
+              th class="span4" = title
+              td = value
+      div id="directions_of_science_by_count_bar"
+      div id="directions_of_science_by_count_pie"
+
+    javascript:
+      new Highcharts.Chart({
+        chart: {
+          renderTo: 'directions_of_science_by_count_bar',
+          type: 'column',
+          events: window.chartEvents
+        },
+        title: {
+          text: ''
+        },
+        yAxis: {
+          title: {
+            text: 'Количество'
+          }
+        },
+        plotOptions: {
+          column: {
+            dataLabels: {
+              enabled: true
+            }
+          }
+        },
+        title: 'Число организаций по типам',
+        series: #{@stats.directions_of_science_by_count.to_chart(:column).html_safe}
+      });
+
+      new Highcharts.Chart({
+        chart: {
+          renderTo: 'directions_of_science_by_count_pie',
+          type: 'column',
+          events: window.chartEvents
+        },
+        title: {
+          text: ''
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: true,
+              color: '#000000',
+              connectorColor: '#000000',
+              formatter: function() {
+                return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %';
+              }
+            }
+          }
+        },
+        series: #{@stats.directions_of_science_by_count.to_chart(:pie, name: 'Количество').html_safe}
+      })
+
+
+    h3 id="directions_of_science_count_by_msu_subdivistions" Направления исследований по подразделениям МГУ
+
+    ul class="nav nav-tabs"
+      li class="active" = link_to 'Таблица', '#directions_of_science_count_by_msu_subdivistions_table', data: { toggle: 'tab' }
+      li = link_to 'Диаграмма', '#directions_of_science_count_by_msu_subdivistions_bar', data: { toggle: 'tab' }
+
+    div class="tab-content"
+      div class="tab-pane active" id="directions_of_science_count_by_msu_subdivistions_table"
+  
+        div class="accordion"
+          - @stats.directions_of_science_count_by_msu_subdivistions.each_with_index do |arr, i|
+            - title, value = arr
+            div class="accordion-group" id="directions_of_science_count_by_msu_subdivistions_#{i}_parent"
+              div class="accordion-heading"
+                = link_to title, "#directions_of_science_count_by_msu_subdivistions_#{i}", data: { parent: "#directions_of_science_count_by_msu_subdivistions_#{i}_parent", toggle: 'collapse' }, class: 'accordion-toggle'
+              div class="accordion-body collapse" id="directions_of_science_count_by_msu_subdivistions_#{i}"
+                div class="accordion-inner"
+                  table class="table table-bordered table-striped"
+                    - value.each do |direction, count|
+                      tr
+                        td class="span6" = direction
+                        td = count
+          
+      div id="directions_of_science_count_by_msu_subdivistions_bar"
+
+    javascript:
+      new Highcharts.Chart({
+        chart: {
+          renderTo: 'directions_of_science_count_by_msu_subdivistions_bar',
+          type: 'column',
+          events: window.chartEvents
+        },
+        title: {
+          text: ''
+        },
+        yAxis: {
+          title: {
+            text: 'Количество'
+          }
+        },
+        plotOptions: {
+          column: {
+            dataLabels: {
+              enabled: true
+            }
+          }
+        },
+        title: 'Число организаций по типам',
+        series: #{@stats.directions_of_science_count_by_msu_subdivistions_bar.to_json.html_safe}
+      });
+
+    h2 id="sums" Суммы
+
+    h4 Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
+
     table class="table table-bordered table-striped"
-      - @stats.projects_count_by_organization_kind.each do |title, value|
-        tr
-          th class="span4" = title
-          td = value
-  div id="projects_count_by_organization_kind_bar"
-  div id="projects_count_by_organization_kind_pie"
+      tr
+        th class="span6" Число опубликованных статей по проекту за год
+        td = @stats.books_count
+      tr
+        th class="span6" Число учебников и монографий
+        td = @stats.vacs_count
+      tr
+        th class="span6" Число тезисов докладов
+        td = @stats.lectures_count
+      tr
+        th class="span6" Всего
+        td = @stats.publications_count
 
-javascript:
-  new Highcharts.Chart({
-    chart: {
-      renderTo: 'projects_count_by_organization_kind_bar',
-      type: 'column',
-      events: window.chartEvents
-    },
-    title: {
-      text: ''
-    },
-    yAxis: {
-      title: {
-        text: 'Количество'
-      }
-    },
-    plotOptions: {
-      column: {
-        dataLabels: {
-          enabled: true
-        }
-      }
-    },
-    title: 'Число организаций по типам',
-    series: #{@stats.projects_count_by_organization_kind.to_chart(:column).html_safe}
-  });
+    h4 Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ
 
-  new Highcharts.Chart({
-    chart: {
-      renderTo: 'projects_count_by_organization_kind_pie',
-      type: 'column',
-      events: window.chartEvents
-    },
-    title: {
-      text: ''
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: 'pointer',
-        dataLabels: {
-          enabled: true,
-          color: '#000000',
-          connectorColor: '#000000',
-          formatter: function() {
-            return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %';
-          }
-        }
-      }
-    },
-    series: #{@stats.projects_count_by_organization_kind.to_chart(:pie, name: 'Количество').html_safe}
-  })
-
-h2 Направления исследований
-
-ul class="nav nav-tabs"
-  li class="active" = link_to 'Таблица', '#directions_of_science_by_count_table', data: { toggle: 'tab' }
-  li = link_to 'Диаграмма', '#directions_of_science_by_count_bar', data: { toggle: 'tab' }
-  li = link_to 'Пирог', '#directions_of_science_by_count_pie', data: { toggle: 'tab' }
-
-div class="tab-content"
-  div class="tab-pane active" id="directions_of_science_by_count_table"
     table class="table table-bordered table-striped"
-      - @stats.directions_of_science_by_count.each do |title, value|
+      tr
+        th class="span6" Международные (за рубежом)
+        td = @stats.international_conferences_count
+      tr
+        th class="span6" Международные (в России)
+        td = @stats.international_conferences_in_russia_count
+      tr
+        th class="span6" Российские
+        td = @stats.russian_conferences_count
+      tr
+        th class="span6" Всего
+        td = @stats.conferences_count
+
+    h4 Число защищенных диссертаций, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
+
+    table class="table table-bordered table-striped"
+      tr
+        th class="span6" Докторских
+        td = @stats.doctors_dissertations_count
+      tr
+        th class="span6" Кандидатских
+        td = @stats.candidates_dissertations_count
+      tr
+        th class="span6" Всего
+        td = @stats.dissertations_count
+
+    h4 Число учащихся, ведущих научную работу с использованием суперкомпьютерного комплекса МГУ
+
+    table class="table table-bordered table-striped"
+      tr
+        th class="span6" Студентов
+        td = @stats.students_count
+      tr
+        th class="span6" Аспирантов
+        td = @stats.graduates_count
+      tr
+        th class="span6" Всего
+        td = @stats.studies_count
+  
+    h4 Число студентов, прошедших под руководством через вычислительный практикум на суперкомпьютерном комплексе МГУ
+
+    table class="table table-bordered table-striped"
+      tr
+        th class="span6" Число студентов
+        td = @stats.your_students_count
+
+    h4 Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ
+
+    table class="table table-bordered table-striped"
+      tr
+        th class="span6" РФФИ
+        td = @stats.rffi_grants_count
+      tr
+        th class="span6" Минобрнауки РФ
+        td = @stats.ministry_of_education_grants_count
+      tr
+        th class="span6" Роснано
+        td = @stats.rosnano_grants_count
+      tr
+        th class="span6" Минкомсвязи РФ
+        td = @stats.ministry_of_communications_grants_count
+      tr
+        th class="span6" Минобороны РФ
+        td = @stats.ministry_of_defence_grants_count
+      tr
+        th class="span6" Программы фундаментальных исследований РАН
+        td = @stats.ran_grants_count
+      tr
+        th class="span6" Другие (российские)
+        td = @stats.other_russian_grants_count
+      tr
+        th class="span6" Международные
+        td = @stats.other_intenational_grants_count
+      tr
+        th class="span6" Всего
+        td = @stats.grants_count
+  
+    h4 Число премий, наград, медалей и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
+
+    table class="table table-bordered table-striped"
+      - @stats.award_names.each do |award, count|
         tr
-          th class="span4" = title
-          td = value
-  div id="directions_of_science_by_count_bar"
-  div id="directions_of_science_by_count_pie"
-
-javascript:
-  new Highcharts.Chart({
-    chart: {
-      renderTo: 'directions_of_science_by_count_bar',
-      type: 'column',
-      events: window.chartEvents
-    },
-    title: {
-      text: ''
-    },
-    yAxis: {
-      title: {
-        text: 'Количество'
-      }
-    },
-    plotOptions: {
-      column: {
-        dataLabels: {
-          enabled: true
-        }
-      }
-    },
-    title: 'Число организаций по типам',
-    series: #{@stats.directions_of_science_by_count.to_chart(:column).html_safe}
-  });
-
-  new Highcharts.Chart({
-    chart: {
-      renderTo: 'directions_of_science_by_count_pie',
-      type: 'column',
-      events: window.chartEvents
-    },
-    title: {
-      text: ''
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: 'pointer',
-        dataLabels: {
-          enabled: true,
-          color: '#000000',
-          connectorColor: '#000000',
-          formatter: function() {
-            return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %';
-          }
-        }
-      }
-    },
-    series: #{@stats.directions_of_science_by_count.to_chart(:pie, name: 'Количество').html_safe}
-  })
+          th class="span6" = award
+          td = count
+      tr
+        th class="span3" Всего
+        td = @stats.awards_count
 
 
-h3 Направления исследований по подразделениям МГУ
+    h3 id="sums_by_subdivisions" По подразделениям МГУ
 
-ul class="nav nav-tabs"
-  li class="active" = link_to 'Таблица', '#directions_of_science_count_by_msu_subdivistions_table', data: { toggle: 'tab' }
-  li = link_to 'Диаграмма', '#directions_of_science_count_by_msu_subdivistions_bar', data: { toggle: 'tab' }
+    h4 Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
 
-div class="tab-content"
-  div class="tab-pane active" id="directions_of_science_count_by_msu_subdivistions_table"
-    
+    table class="table table-bordered table-striped"
+      tr
+        th class="span4" Подразделение
+        th Число опубликованных статей по проекту за год
+        th Число учебников и монографий
+        th Число тезисов докладов
+        th Всего
+      - @stats.publications_count_by_subdivision.each do |sub, counts|
+        tr
+          th = sub
+          - counts.each do |count|
+            td class="span2" = count
+
+    h4 Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ
+
+    table class="table table-bordered table-striped"
+      tr
+        th class="span4" Подразделение
+        th Международные (за рубежом)
+        th Международные (в России)
+        th Российские
+        th Всего
+      - @stats.publications_count_by_subdivision.each do |sub, counts|
+        tr
+          th = sub
+          - counts.each do |count|
+            td class="span2" = count
+
+    h4 Число защищенных диссертаций, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
+
+    table class="table table-bordered table-striped"
+      tr
+        th class="span4" Подразделение
+        th Докторских
+        th Кандидатских
+        th Всего
+      - @stats.dissertations_count_by_subdivision.each do |sub, counts|
+        tr
+          th = sub
+          - counts.each do |count|
+            td class="span2" = count
+
+    h4 Число учащихся, ведущих научную работу с использованием суперкомпьютерного комплекса МГУ
+
+    table class="table table-bordered table-striped"
+      tr
+        th class="span4" Подразделение
+        th Студентов
+        th Аспирантов
+        th Всего
+      - @stats.studies_count_by_subdivision.each do |sub, counts|
+        tr
+          th = sub
+          - counts.each do |count|
+            td class="span2" = count
+  
+    h4 Число студентов, прошедших под руководством через вычислительный практикум на суперкомпьютерном комплексе МГУ
+
+    table class="table table-bordered table-striped"
+      tr
+        th class="span6" Подразделение
+        th Число студентов
+      - @stats.your_students_count_by_subdivision.each do |sub, counts|
+        tr
+          th = sub
+          td = counts.first
+
+    h4 Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ
+
+    table class="table table-bordered table-striped"
+      tr
+        th class="span6" Подразделение
+        th РФФИ
+        th Минобрнауки РФ
+        th Роснано
+        th Минкомсвязи РФ
+        th Минобороны РФ
+        th Программы фундаментальных исследований РАН
+        th Другие (российские)
+        th Международные
+        th Всего
+      - @stats.grants_count_by_subdivision.each do |sub, counts|
+        tr
+          th = sub
+          - counts.each do |count|
+            td = count
+
+    h4 Число премий, наград, медалей и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
+
+    table class="table table-bordered table-striped"
+      tr
+        th class="span6" Подразделение
+        th Количество
+      - @stats.award_count_by_subdivision.each do |sub, counts|
+        tr
+          td = sub
+          td = counts.first
+
     div class="accordion"
-      - @stats.directions_of_science_count_by_msu_subdivistions.each_with_index do |arr, i|
-        - title, value = arr
-        div class="accordion-group" id="directions_of_science_count_by_msu_subdivistions_#{i}_parent"
+      - @stats.award_names_by_subdivision.each_with_index do |arr, i|
+        - sub, names = arr
+        div class="accordion-group" id="award_names_by_subdivision_#{i}_parent"
           div class="accordion-heading"
-            = link_to title, "#directions_of_science_count_by_msu_subdivistions_#{i}", data: { parent: "#directions_of_science_count_by_msu_subdivistions_#{i}_parent", toggle: 'collapse' }, class: 'accordion-toggle'
-          div class="accordion-body collapse" id="directions_of_science_count_by_msu_subdivistions_#{i}"
+            = link_to sub, "#award_names_by_subdivision_#{i}", data: { toggle: 'collapse', parent: "#award_names_by_subdivision_#{i}_parent" }, class: 'accordion-toggle'
+          div class="accordion-body collapse" id="award_names_by_subdivision_#{i}"
             div class="accordion-inner"
-              table class="table table-bordered table-striped"
-                - value.each do |direction, count|
-                  tr
-                    td class="span6" = direction
-                    td = count
-            
-  div id="directions_of_science_count_by_msu_subdivistions_bar"
+              - if names.any?
+                ul
+                  - names.each do |name|
+                    li = name
+              - else
+                | Нет
 
-javascript:
-  new Highcharts.Chart({
-    chart: {
-      renderTo: 'directions_of_science_count_by_msu_subdivistions_bar',
-      type: 'column',
-      events: window.chartEvents
-    },
-    title: {
-      text: ''
-    },
-    yAxis: {
-      title: {
-        text: 'Количество'
-      }
-    },
-    plotOptions: {
-      column: {
-        dataLabels: {
-          enabled: true
-        }
-      }
-    },
-    title: 'Число организаций по типам',
-    series: #{@stats.directions_of_science_count_by_msu_subdivistions_bar.to_json.html_safe}
-  });
+    h3 id="requests" Заявки ресурсов
 
-h2 Суммы
+    table class="table table-bordered"
+      tr
+        th Система
+        th Процессорочасы
+        th Объем диска, Gb
+      tr
+        th Ломоносов
+        td
+          = @stats.lomonosov_intel_hours
+          |  Intel, 
+          = @stats.lomonosov_nvidia_hours
+          |  NVIDIA
+        td = @stats.lomonosov_size
+      tr
+        th Чебышев
+        td = @stats.chebyshev_hours
+        td = @stats.chebyshev_size
+      tr
+        th Всего
+        td = @stats.hours_sum
+        td = @stats.size_sum
 
-h4 Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
+    h4 Необходимость привязки свободных процессоров к фиксированному времени
 
-table class="table table-bordered table-condensed"
-  tr
-    th class="span6" Число опубликованных статей по проекту за год
-    td = @stats.books_count
-  tr
-    th class="span6" Число учебников и монографий
-    td = @stats.vacs_count
-  tr
-    th class="span6" Число тезисов докладов
-    td = @stats.lectures_count
-  tr
-    th class="span6" Всего
-    td = @stats.publications_count
+    p Всего: #{@stats.strict_schedule_count}
 
-h4 Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ
-
-table class="table table-bordered table-condensed"
-  tr
-    th class="span6" Международные (за рубежом)
-    td = @stats.international_conferences_count
-  tr
-    th class="span6" Международные (в России)
-    td = @stats.international_conferences_in_russia_count
-  tr
-    th class="span6" Российские
-    td = @stats.russian_conferences_count
-  tr
-    th class="span6" Всего
-    td = @stats.conferences_count
-
-h4 Число защищенных диссертаций, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
-
-table class="table table-bordered table-condensed"
-  tr
-    th class="span6" Докторских
-    td = @stats.doctors_dissertations_count
-  tr
-    th class="span6" Кандидатских
-    td = @stats.candidates_dissertations_count
-  tr
-    th class="span6" Всего
-    td = @stats.dissertations_count
-
-h4 Число учащихся, ведущих научную работу с использованием суперкомпьютерного комплекса МГУ
-
-table class="table table-bordered table-condensed"
-  tr
-    th class="span6" Студентов
-    td = @stats.students_count
-  tr
-    th class="span6" Аспирантов
-    td = @stats.graduates_count
-  tr
-    th class="span6" Всего
-    td = @stats.studies_count
-    
-h4 Число студентов, прошедших под руководством через вычислительный практикум на суперкомпьютерном комплексе МГУ
-
-table class="table table-bordered table-condensed"
-  tr
-    th class="span6" Число студентов
-    td = @stats.your_students_count
-
-h4 Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ
-
-table class="table table-bordered table-condensed"
-  tr
-    th class="span6" РФФИ
-    td = @stats.rffi_grants_count
-  tr
-    th class="span6" Минобрнауки РФ
-    td = @stats.ministry_of_education_grants_count
-  tr
-    th class="span6" Роснано
-    td = @stats.rosnano_grants_count
-  tr
-    th class="span6" Минкомсвязи РФ
-    td = @stats.ministry_of_communications_grants_count
-  tr
-    th class="span6" Минобороны РФ
-    td = @stats.ministry_of_defence_grants_count
-  tr
-    th class="span6" Программы фундаментальных исследований РАН
-    td = @stats.ran_grants_count
-  tr
-    th class="span6" Другие (российские)
-    td = @stats.other_russian_grants_count
-  tr
-    th class="span6" Международные
-    td = @stats.other_intenational_grants_count
-  tr
-    th class="span6" Всего
-    td = @stats.grants_count
-    
-h4 Число премий, наград, медалей и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
-
-table class="table table-bordered table-condensed"
-  - @stats.award_names.each do |award, count|
-    tr
-      th class="span6" = award
-      td = count
-  tr
-    th class="span3" Всего
-    td = @stats.awards_count
-
-
-h3 По подразделениям МГУ
-
-h4 Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
-
-table class="table table-bordered table-condensed"
-  tr
-    th class="span4" Подразделение
-    th Число опубликованных статей по проекту за год
-    th Число учебников и монографий
-    th Число тезисов докладов
-    th Всего
-  - @stats.publications_count_by_subdivision.each do |sub, counts|
-    tr
-      th = sub
-      - counts.each do |count|
-        td class="span2" = count
-
-h4 Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ
-
-table class="table table-bordered table-condensed"
-  tr
-    th class="span4" Подразделение
-    th Международные (за рубежом)
-    th Международные (в России)
-    th Российские
-    th Всего
-  - @stats.publications_count_by_subdivision.each do |sub, counts|
-    tr
-      th = sub
-      - counts.each do |count|
-        td class="span2" = count
-
-h4 Число защищенных диссертаций, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
-
-table class="table table-bordered table-condensed"
-  tr
-    th class="span4" Подразделение
-    th Докторских
-    th Кандидатских
-    th Всего
-  - @stats.dissertations_count_by_subdivision.each do |sub, counts|
-    tr
-      th = sub
-      - counts.each do |count|
-        td class="span2" = count
-
-h4 Число учащихся, ведущих научную работу с использованием суперкомпьютерного комплекса МГУ
-
-table class="table table-bordered table-condensed"
-  tr
-    th class="span4" Подразделение
-    th Студентов
-    th Аспирантов
-    th Всего
-  - @stats.studies_count_by_subdivision.each do |sub, counts|
-    tr
-      th = sub
-      - counts.each do |count|
-        td class="span2" = count
-    
-h4 Число студентов, прошедших под руководством через вычислительный практикум на суперкомпьютерном комплексе МГУ
-
-table class="table table-bordered table-condensed"
-  tr
-    th class="span6" Подразделение
-    th Число студентов
-  - @stats.your_students_count_by_subdivision.each do |sub, counts|
-    tr
-      th = sub
-      td = counts.first
-  
-h4 Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ
-
-table class="table table-bordered table-condensed"
-  tr
-    th class="span6" Подразделение
-    th РФФИ
-    th Минобрнауки РФ
-    th Роснано
-    th Минкомсвязи РФ
-    th Минобороны РФ
-    th Программы фундаментальных исследований РАН
-    th Другие (российские)
-    th Международные
-    th Всего
-  - @stats.grants_count_by_subdivision.each do |sub, counts|
-    tr
-      th = sub
-      - counts.each do |count|
-        td class="span1" = count
-
-h4 Число премий, наград, медалей и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
-
-table class="table table-bordered table-condensed"
-  tr
-    th class="span6" Подразделение
-    th Количество
-  - @stats.award_count_by_subdivision.each do |sub, counts|
-    tr
-      td = sub
-      td = counts.first
-
-div class="accordion"
-  - @stats.award_names_by_subdivision.each_with_index do |arr, i|
-    - sub, names = arr
-    div class="accordion-group" id="award_names_by_subdivision_#{i}_parent"
-      div class="accordion-heading"
-        = link_to sub, "#award_names_by_subdivision_#{i}", data: { toggle: 'collapse', parent: "#award_names_by_subdivision_#{i}_parent" }, class: 'accordion-toggle'
-      div class="accordion-body collapse" id="award_names_by_subdivision_#{i}"
-        div class="accordion-inner"
-          - if names.any?
-            ul
-              - names.each do |name|
-                li = name
-          - else
-            | Нет
-
-h3 Заявки ресурсов
-
-table class="table table-bordered"
-  tr
-    th Система
-    th Процессорочасы
-    th Объем диска, Gb
-  tr
-    th Ломоносов
-    td
-      = @stats.lomonosov_intel_hours
-      |  Intel, 
-      = @stats.lomonosov_nvidia_hours
-      |  NVIDIA
-    td = @stats.lomonosov_size
-  tr
-    th Чебышев
-    td = @stats.chebyshev_hours
-    td = @stats.chebyshev_size
-  tr
-    th Всего
-    td = @stats.hours_sum
-    td = @stats.size_sum
-
-h4 Необходимость привязки свободных процессоров к фиксированному времени
-
-p Всего: #{@stats.strict_schedule_count}
-
-h2 Топы
+    h2 Топы
 
