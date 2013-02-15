@@ -244,7 +244,22 @@ class Report::Stats
     end
   end
   
+  def organizations_top(attribute)
+    organizations.sort_by do |org, reports|
+      reports.sum { |report| report.projects.sum(&attribute) }
+    end.reverse.map do |arr|
+      org, reports = arr
+      val = reports.sum { |report| report.projects.sum(&attribute) }
+      org.define_singleton_method(attribute) { val }
+      org
+    end.find_all { |org| org.send(attribute) > 0 }
+  end
+  
 private
+
+  def organizations
+    @organizations ||= @reports.group_by(&:organization)
+  end
 
   def personal_survey_percent(attribute, value)
     top = send("#{attribute}_top")
