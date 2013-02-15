@@ -122,4 +122,26 @@ module ApplicationHelper
         end
     end
   end
+  
+  def accordion_group(parent, title, &inner)
+    rand = SecureRandom.hex(3)
+    content_tag :div, class: 'accordion-group' do
+      header = content_tag :div, class: 'accordion-heading' do
+        link_to(
+          title,
+          "#accordion-group-#{rand}",
+          data: { toggle: 'collapse', parent: "##{parent}" },
+          class: 'accordion-toggle'
+        )
+      end
+      body = content_tag :div, class: 'accordion-body collapse', id: "accordion-group-#{rand}" do
+        content_tag :div, class: 'accordion-inner' do
+          inner.call
+        end
+      end
+      
+      header + body
+    end
+  end
+  
 end

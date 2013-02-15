@@ -285,4 +285,33 @@ class Report::Project < ActiveRecord::Base
   serialize :areas, Array
   serialize :exclusive_usage, Array
   serialize :strict_schedule, Array
+  
+  def publications_count
+    books_count + vacs_count + lectures_count
+  end
+  
+  def conferences_count
+    international_conferences_count +
+      international_conferences_in_russia_count +
+      russian_conferences_count
+  end
+  
+  def dissertations_count
+    doctors_dissertations_count + candidates_dissertations_count
+  end
+  
+  def studies_count
+    students_count + graduates_count
+  end
+  
+  def grants_count
+    [ rffi_grants_count,
+      ministry_of_education_grants_count,
+      rosnano_grants_count,
+      ministry_of_communications_grants_count,
+      ministry_of_defence_grants_count,
+      ran_grants_count,
+      other_russian_grants_count,
+      other_intenational_grants_count ].sum
+  end
 end

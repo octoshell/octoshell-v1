@@ -238,6 +238,12 @@ class Report::Stats
     personal_survey_top(:computing).to_a.extend(Chartable)
   end
   
+  def projects_top(attribute)
+    projects.sort_by(&attribute).reverse.find_all do |project|
+      project.send(attribute) > 0
+    end
+  end
+  
 private
 
   def personal_survey_percent(attribute, value)
