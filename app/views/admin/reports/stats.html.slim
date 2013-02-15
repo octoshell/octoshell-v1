@@ -13,8 +13,8 @@ div class="row"
     div class="well" style="padding: 8px 0; max-width: 220px;" id="left-menu"
       ul class="nav nav-list"
         li class="nav-header" Распределения
-        li = link_to 'Число организаций по типам', '#organizations_count_by_kind'
-        li = link_to 'Число проектов по типам организаций', '#projects_count_by_organization_kind'
+        li = link_to 'Организации по типам', '#organizations_count_by_kind'
+        li = link_to 'Проекты по типам орг.', '#projects_count_by_organization_kind'
         li class="nav-header" Направления исследований
         li = link_to 'Общие', '#directions_of_science_by_count'
         li = link_to 'По подразделениям МГУ', '#directions_of_science_count_by_msu_subdivistions'
@@ -28,8 +28,10 @@ div class="row"
         li = link_to 'Заявки ресурсов', '#requests'
         li class="nav-header" Индивидуальный опросник
         li = link_to 'Приложения', '#software'
-        li = link_to 'Заявки на приложения', '#request_technologies'
-        li = link_to 'Заявки ресурсов', '#requests'
+        li = link_to 'Технологии', '#technologies'
+        li = link_to 'Компиляторы', '#compilators'
+        li = link_to 'Вычисления', '#precision'
+        li = link_to 'Направления обучения', '#learning'
     | &nbsp;
   div class="span9"
     h2 id="organizations_count_by_kind" Число организаций по типам
@@ -564,7 +566,96 @@ div class="row"
         tr
           th class="span5" = name
           td = count
-
+    
+    h3 id="technologies" Языки и технологии параллельного программирования используемые или планируемые использовать в ближайшем будущем
+    
+    table class="table table-bordered table-striped"
+      - @stats.technologies_top.each do |name, count|
+        tr
+          th class="span5" = name
+          td = count
+          td = @stats.technology_percent(name)
+    
+    h3 id="compilators" Компиляторы используемые сейчас или планируемые использовать в ближайшем будущем
+    
+    table class="table table-bordered table-striped"
+      - @stats.compilators_top.each do |name, count|
+        tr
+          th class="span5" = name
+          td = count
+          td = @stats.compilator_percent(name)
+    
+    h3 id="precision" Типы вычислений
+    
+    div id="precision_pie"
+    
+    javascript:
+      new Highcharts.Chart({
+        chart: {
+          renderTo: 'precision_pie',
+          type: 'column',
+          events: window.chartEvents
+        },
+        title: {
+          text: ''
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: true,
+              color: '#000000',
+              connectorColor: '#000000',
+              formatter: function() {
+                return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %';
+              }
+            }
+          }
+        },
+        series: #{@stats.precision.to_chart(:pie, name: 'Количество').html_safe}
+      })
+    
+    h3 id="computing" Вычислительные платформы
+    
+    div id="computing_pie"
+    
+    javascript:
+      new Highcharts.Chart({
+        chart: {
+          renderTo: 'computing_pie',
+          type: 'column',
+          events: window.chartEvents
+        },
+        title: {
+          text: ''
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: true,
+              color: '#000000',
+              connectorColor: '#000000',
+              formatter: function() {
+                return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %';
+              }
+            }
+          }
+        },
+        series: #{@stats.computing.to_chart(:pie, name: 'Количество').html_safe}
+      })
+    
+    h3 id="learning" Направления обучения
+    
+    table class="table table-bordered table-striped"
+      - @stats.learning_top.each do |name, count|
+        tr
+          th class="span5" = name
+          td = count
+          td = @stats.learning_percent(name)
+    
 javascript:
   $('#left-menu').affix({
     offset: {

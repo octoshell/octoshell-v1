@@ -193,11 +193,7 @@ class Report::Stats
   end
   
   def software_top
-    Hash[personal_surveys.map(&:software).flatten.find_all(&:present?).
-      group_by { |i| i }.sort_by { |i, iis| - iis.size }.first(20).map do |arr|
-        key, values = arr
-        [key, values.size]
-      end]
+    personal_survey_top(:software)
   end
   
   def request_technologies_top
@@ -210,7 +206,54 @@ class Report::Stats
     end]
   end
   
+  def technologies_top
+    personal_survey_top(:technologies)
+  end
+  
+  def technology_percent(name)
+    personal_survey_percent(:technologies, name)
+  end
+  
+  def compilators_top
+    personal_survey_top(:compilators)
+  end
+  
+  def compilator_percent(name)
+    personal_survey_percent(:compilators, name)
+  end
+  
+  def learning_top
+    personal_survey_top(:learning)
+  end
+  
+  def learning_percent(name)
+    personal_survey_percent(:learning, name)
+  end
+  
+  def precision
+    personal_survey_top(:precision).to_a.extend(Chartable)
+  end
+  
+  def computing
+    personal_survey_top(:computing).to_a.extend(Chartable)
+  end
+  
 private
+
+  def personal_survey_percent(attribute, value)
+    top = send("#{attribute}_top")
+    all = top.sum { |k, v| v }
+    current = top[value]
+    "#{((current / all.to_f) * 100).round(2)} %"
+  end
+
+  def personal_survey_top(attribute)
+    Hash[personal_surveys.map(&attribute).flatten.find_all(&:present?).
+      group_by { |i| i }.sort_by { |i, iis| - iis.size }.map do |arr|
+        key, values = arr
+        [key, values.size]
+      end]
+  end
 
   def counts_by_subdivision(*attributes)
     Hash[msu_subdivisions.map do |subdivision, reports|
