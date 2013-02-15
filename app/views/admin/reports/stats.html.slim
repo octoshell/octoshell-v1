@@ -27,8 +27,8 @@ div class="row"
         li = link_to 'Заявки ресурсов', '#requests'
         li = link_to 'Заявки ресурсов', '#requests'
         li class="nav-header" Индивидуальный опросник
-        li = link_to 'Заявки ресурсов', '#requests'
-        li = link_to 'Заявки ресурсов', '#requests'
+        li = link_to 'Приложения', '#software'
+        li = link_to 'Заявки на приложения', '#request_technologies'
         li = link_to 'Заявки ресурсов', '#requests'
     | &nbsp;
   div class="span9"
@@ -546,6 +546,24 @@ div class="row"
     p Всего: #{@stats.strict_schedule_count}
 
     h2 Топы
+    
+    h2 Персональный опросник
+    
+    h3 id="software" Прикладные пакеты, библиотеки и средства используемые в работе на суперкомпьютерном комплексе МГУ
+    
+    table class="table table-bordered table-striped"
+      - @stats.software_top.each do |name, count|
+        tr
+          th class="span5" = name
+          td = count
+    
+    h3 id="request_technologies" Прикладные пакеты, библиотеки и средства сейчас не установленые на суперкомпьютерном комплексе МГУ, но пользователи хотели бы их использовать
+    
+    table class="table table-bordered table-striped"
+      - @stats.request_technologies_top.each do |name, count|
+        tr
+          th class="span5" = name
+          td = count
 
 javascript:
   $('#left-menu').affix({

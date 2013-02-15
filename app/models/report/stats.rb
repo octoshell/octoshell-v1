@@ -192,6 +192,24 @@ class Report::Stats
     projects.map(&:strict_schedule).sum &:size
   end
   
+  def software_top
+    Hash[personal_surveys.map(&:software).flatten.find_all(&:present?).
+      group_by { |i| i }.sort_by { |i, iis| - iis.size }.first(20).map do |arr|
+        key, values = arr
+        [key, values.size]
+      end]
+  end
+  
+  def request_technologies_top
+    Hash[personal_surveys.map do |ps|
+      ps.request_technology.split(',').map &:strip
+    end.flatten.find_all(&:present?).group_by { |t| t }.
+    sort_by { |t, tts| tts.size }.first(20).map do |arr|
+      key, values = arr
+      [key, values.size]
+    end]
+  end
+  
 private
 
   def counts_by_subdivision(*attributes)
@@ -203,6 +221,10 @@ private
       counts << counts.sum
       [subdivision, counts]
     end]
+  end
+  
+  def personal_surveys
+    @personal_survey ||= @reports.map &:personal_survey
   end
 
   def projects
