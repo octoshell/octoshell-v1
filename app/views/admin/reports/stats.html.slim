@@ -53,57 +53,67 @@ div class="row"
       div id="organizations_count_by_kind_pie"
 
     javascript:
-      window.charts.push(
-        new Highcharts.Chart({
-          chart: {
-            renderTo: 'organizations_count_by_kind_bar',
-            type: 'column',
-            events: window.chartEvents
-          },
-          title: {
-            text: ''
-          },
-          yAxis: {
-            title: {
-              text: 'Количество'
-            }
-          },
-          plotOptions: {
+      Highcharts.render = function(selector, type, series) {
+        var plotOptions
+        if (type == 'column') {
+          plotOptions = {
             column: {
               dataLabels: {
-                enabled: true
-              }
-            }
-          },
-          series: #{@stats.organizations_count_by_kind.to_chart(:column).html_safe}
-        })
-      )
-
-      new Highcharts.Chart({
-        chart: {
-          renderTo: 'organizations_count_by_kind_pie',
-          type: 'column',
-          events: window.chartEvents
-        },
-        title: {
-          text: ''
-        },
-        plotOptions: {
-          pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-              enabled: true,
-              color: '#000000',
-              connectorColor: '#000000',
-              formatter: function() {
-                return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %';
+                enabled: true,
+                formatter: function() {
+                  if (this.y > 0) {
+                    return this.y
+                  } else {
+                    return ''
+                  }
+                }
               }
             }
           }
-        },
-        series: #{@stats.organizations_count_by_kind.to_chart(:pie, name: 'Количество').html_safe}
-      })
+        } else if (type == 'pie') {
+          plotOptions = {
+            pie: {
+              allowPointSelect: true,
+              cursor: 'pointer',
+              dataLabels: {
+                enabled: true,
+                color: '#000000',
+                connectorColor: '#000000',
+                formatter: function() {
+                  return '' + this.percentage.toFixed(1) +' %';
+                }
+              }
+            }
+          }
+        }
+        var categories = []
+        for (i in series) {
+          categories.push(series[i].name)
+        }
+        new Highcharts.Chart({
+          chart: {
+            renderTo: selector,
+            type: type,
+            events: window.chartEvents
+          },
+          title: { text: '' },
+          xAxis: {
+            categories: categories
+          },
+          yAxis: { title: { text: 'Количество' } },
+          plotOptions: plotOptions,
+          legend: false,
+          series: series
+        })
+      }
+      Highcharts.render(
+        'organizations_count_by_kind_bar', 'column',
+        #{@stats.organizations_count_by_kind.to_chart(:column).html_safe}
+      )
+      Highcharts.render(
+        'organizations_count_by_kind_pie', 'pie',
+        #{@stats.organizations_count_by_kind.to_chart(:pie, name: 'Количество').html_safe}
+      )
 
     h2 id="projects_count_by_organization_kind" Число проектов по типам организаций
 
@@ -123,56 +133,14 @@ div class="row"
       div id="projects_count_by_organization_kind_pie"
 
     javascript:
-      new Highcharts.Chart({
-        chart: {
-          renderTo: 'projects_count_by_organization_kind_bar',
-          type: 'column',
-          events: window.chartEvents
-        },
-        title: {
-          text: ''
-        },
-        yAxis: {
-          title: {
-            text: 'Количество'
-          }
-        },
-        plotOptions: {
-          column: {
-            dataLabels: {
-              enabled: true
-            }
-          }
-        },
-        title: 'Число организаций по типам',
-        series: #{@stats.projects_count_by_organization_kind.to_chart(:column).html_safe}
-      });
-
-      new Highcharts.Chart({
-        chart: {
-          renderTo: 'projects_count_by_organization_kind_pie',
-          type: 'column',
-          events: window.chartEvents
-        },
-        title: {
-          text: ''
-        },
-        plotOptions: {
-          pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-              enabled: true,
-              color: '#000000',
-              connectorColor: '#000000',
-              formatter: function() {
-                return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %';
-              }
-            }
-          }
-        },
-        series: #{@stats.projects_count_by_organization_kind.to_chart(:pie, name: 'Количество').html_safe}
-      })
+      Highcharts.render(
+        'projects_count_by_organization_kind_bar', 'column',
+        #{@stats.projects_count_by_organization_kind.to_chart(:column).html_safe}
+      )
+      Highcharts.render(
+        'projects_count_by_organization_kind_pie', 'pie',
+        #{@stats.projects_count_by_organization_kind.to_chart(:pie, name: 'Количество').html_safe}
+      )
 
     h2 id="directions_of_science_by_count" Направления исследований
 
@@ -192,57 +160,14 @@ div class="row"
       div id="directions_of_science_by_count_pie"
 
     javascript:
-      new Highcharts.Chart({
-        chart: {
-          renderTo: 'directions_of_science_by_count_bar',
-          type: 'column',
-          events: window.chartEvents
-        },
-        title: {
-          text: ''
-        },
-        yAxis: {
-          title: {
-            text: 'Количество'
-          }
-        },
-        plotOptions: {
-          column: {
-            dataLabels: {
-              enabled: true
-            }
-          }
-        },
-        title: 'Число организаций по типам',
-        series: #{@stats.directions_of_science_by_count.to_chart(:column).html_safe}
-      });
-
-      new Highcharts.Chart({
-        chart: {
-          renderTo: 'directions_of_science_by_count_pie',
-          type: 'column',
-          events: window.chartEvents
-        },
-        title: {
-          text: ''
-        },
-        plotOptions: {
-          pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-              enabled: true,
-              color: '#000000',
-              connectorColor: '#000000',
-              formatter: function() {
-                return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %';
-              }
-            }
-          }
-        },
-        series: #{@stats.directions_of_science_by_count.to_chart(:pie, name: 'Количество').html_safe}
-      })
-
+      Highcharts.render(
+        'directions_of_science_by_count_bar', 'column',
+        #{@stats.directions_of_science_by_count.to_chart(:column).html_safe}
+      )
+      Highcharts.render(
+        'directions_of_science_by_count_pie', 'pie',
+        #{@stats.directions_of_science_by_count.to_chart(:pie, name: 'Количество').html_safe}
+      )
 
     h3 id="directions_of_science_count_by_msu_subdivistions" Направления исследований по подразделениям МГУ
 
@@ -266,34 +191,13 @@ div class="row"
                       tr
                         td class="span6" = direction
                         td = count
-          
       div id="directions_of_science_count_by_msu_subdivistions_bar"
 
     javascript:
-      new Highcharts.Chart({
-        chart: {
-          renderTo: 'directions_of_science_count_by_msu_subdivistions_bar',
-          type: 'column',
-          events: window.chartEvents
-        },
-        title: {
-          text: ''
-        },
-        yAxis: {
-          title: {
-            text: 'Количество'
-          }
-        },
-        plotOptions: {
-          column: {
-            dataLabels: {
-              enabled: true
-            }
-          }
-        },
-        title: 'Число организаций по типам',
-        series: #{@stats.directions_of_science_count_by_msu_subdivistions_bar.to_json.html_safe}
-      });
+      Highcharts.render(
+        'directions_of_science_count_by_msu_subdivistions_bar', 'column',
+        #{@stats.directions_of_science_count_by_msu_subdivistions_bar.to_json.html_safe}
+      )
 
     h2 id="sums" Суммы
     
@@ -1024,62 +928,20 @@ div class="row"
     div id="precision_pie"
     
     javascript:
-      new Highcharts.Chart({
-        chart: {
-          renderTo: 'precision_pie',
-          type: 'column',
-          events: window.chartEvents
-        },
-        title: {
-          text: ''
-        },
-        plotOptions: {
-          pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-              enabled: true,
-              color: '#000000',
-              connectorColor: '#000000',
-              formatter: function() {
-                return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %';
-              }
-            }
-          }
-        },
-        series: #{@stats.precision.to_chart(:pie, name: 'Количество').html_safe}
-      })
+      Highcharts.render(
+        'precision_pie', 'pie',
+        #{@stats.precision.to_chart(:pie, name: 'Количество').html_safe}
+      )
     
     h3 id="computing" Вычислительные платформы
     
     div id="computing_pie"
     
     javascript:
-      new Highcharts.Chart({
-        chart: {
-          renderTo: 'computing_pie',
-          type: 'column',
-          events: window.chartEvents
-        },
-        title: {
-          text: ''
-        },
-        plotOptions: {
-          pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-              enabled: true,
-              color: '#000000',
-              connectorColor: '#000000',
-              formatter: function() {
-                return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(1) +' %';
-              }
-            }
-          }
-        },
-        series: #{@stats.computing.to_chart(:pie, name: 'Количество').html_safe}
-      })
+      Highcharts.render(
+        'computing_pie', 'pie',
+        #{@stats.computing.to_chart(:pie, name: 'Количество').html_safe}
+      )
     
     h3 id="learning" Направления обучения
     
