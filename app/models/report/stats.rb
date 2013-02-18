@@ -74,6 +74,66 @@ class Report::Stats
     end
   end
   
+  def areas_by_count
+    ::Report::Project::AREAS.values.flatten.map do |area|
+      [area, @reports.map(&:projects).flatten.find_all do |p|
+        p.areas.include?(area)
+      end.size]
+    end.extend(Chartable)
+  end
+  
+  def areas_by_count_by_msu_subdivistions
+    msu_subdivisions.map do |subdivision, reports|
+      seria = Hash[::Report::Project::AREAS.values.flatten.map do |area|
+        [area, reports.map(&:projects).flatten.find_all do |p|
+          p.areas.include?(area)
+        end.size]
+      end]
+      [subdivision, seria]
+    end
+  end
+  
+  def areas_by_count_by_msu_subdivistions_bar
+    msu_subdivisions.map do |subdivision, reports|
+      seria = ::Report::Project::AREAS.values.flatten.map do |area|
+        [area, reports.map(&:projects).flatten.find_all do |p|
+          p.areas.include?(area)
+        end.size]
+      end
+      { name: subdivision, data: seria, type: 'column' }
+    end
+  end
+  
+  def critical_technologies_by_count
+    ::Report::Project::CRITICAL_TECHNOLOGIES.map do |tech|
+      [tech, @reports.map(&:projects).flatten.find_all do |p|
+        p.critical_technologies.include?(tech)
+      end.size]
+    end.extend(Chartable)
+  end
+  
+  def critical_technologies_by_count_by_msu_subdivistions
+    msu_subdivisions.map do |subdivision, reports|
+      seria = Hash[::Report::Project::CRITICAL_TECHNOLOGIES.map do |tech|
+        [tech, reports.map(&:projects).flatten.find_all do |p|
+          p.critical_technologies.include?(tech)
+        end.size]
+      end]
+      [subdivision, seria]
+    end
+  end
+  
+  def critical_technologies_by_count_by_msu_subdivistions_bar
+    msu_subdivisions.map do |subdivision, reports|
+      seria = ::Report::Project::CRITICAL_TECHNOLOGIES.map do |tech|
+        [tech, reports.map(&:projects).flatten.find_all do |p|
+          p.critical_technologies.include?(tech)
+        end.size]
+      end
+      { name: subdivision, data: seria, type: 'column' }
+    end
+  end
+    
   [ :books_count,
     :vacs_count,
     :lectures_count,
