@@ -1,6 +1,7 @@
 - title 'Статистика по отчетам'
 
 javascript:
+  window.charts = []
   window.chartEvents = {
     load: function(chart){
       $(chart.currentTarget.renderTo).addClass('tab-pane')
@@ -9,7 +10,7 @@ javascript:
   
 
 div class="row"
-  div class="span3"
+  div class="span3" id="submenu"
     div class="well" style="padding: 8px 0; max-width: 220px;" id="left-menu"
       ul class="nav nav-list"
         li class="nav-header" Распределения
@@ -33,7 +34,7 @@ div class="row"
         li = link_to 'Вычисления', '#precision'
         li = link_to 'Направления обучения', '#learning'
     | &nbsp;
-  div class="span9"
+  div class="span9" id="reports"
     h2 id="organizations_count_by_kind" Число организаций по типам
 
     ul class="nav nav-tabs"
@@ -52,29 +53,31 @@ div class="row"
       div id="organizations_count_by_kind_pie"
 
     javascript:
-      new Highcharts.Chart({
-        chart: {
-          renderTo: 'organizations_count_by_kind_bar',
-          type: 'column',
-          events: window.chartEvents
-        },
-        title: {
-          text: ''
-        },
-        yAxis: {
+      window.charts.push(
+        new Highcharts.Chart({
+          chart: {
+            renderTo: 'organizations_count_by_kind_bar',
+            type: 'column',
+            events: window.chartEvents
+          },
           title: {
-            text: 'Количество'
-          }
-        },
-        plotOptions: {
-          column: {
-            dataLabels: {
-              enabled: true
+            text: ''
+          },
+          yAxis: {
+            title: {
+              text: 'Количество'
             }
-          }
-        },
-        series: #{@stats.organizations_count_by_kind.to_chart(:column).html_safe}
-      });
+          },
+          plotOptions: {
+            column: {
+              dataLabels: {
+                enabled: true
+              }
+            }
+          },
+          series: #{@stats.organizations_count_by_kind.to_chart(:column).html_safe}
+        })
+      )
 
       new Highcharts.Chart({
         chart: {
@@ -293,216 +296,204 @@ div class="row"
       });
 
     h2 id="sums" Суммы
-
-    h4 Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
-
-    table class="table table-bordered table-striped"
-      tr
-        th class="span6" Число опубликованных статей по проекту за год
-        td = @stats.books_count
-      tr
-        th class="span6" Число учебников и монографий
-        td = @stats.vacs_count
-      tr
-        th class="span6" Число тезисов докладов
-        td = @stats.lectures_count
-      tr
-        th class="span6" Всего
-        td = @stats.publications_count
-
-    h4 Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ
-
-    table class="table table-bordered table-striped"
-      tr
-        th class="span6" Международные (за рубежом)
-        td = @stats.international_conferences_count
-      tr
-        th class="span6" Международные (в России)
-        td = @stats.international_conferences_in_russia_count
-      tr
-        th class="span6" Российские
-        td = @stats.russian_conferences_count
-      tr
-        th class="span6" Всего
-        td = @stats.conferences_count
-
-    h4 Число защищенных диссертаций, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
-
-    table class="table table-bordered table-striped"
-      tr
-        th class="span6" Докторских
-        td = @stats.doctors_dissertations_count
-      tr
-        th class="span6" Кандидатских
-        td = @stats.candidates_dissertations_count
-      tr
-        th class="span6" Всего
-        td = @stats.dissertations_count
-
-    h4 Число учащихся, ведущих научную работу с использованием суперкомпьютерного комплекса МГУ
-
-    table class="table table-bordered table-striped"
-      tr
-        th class="span6" Студентов
-        td = @stats.students_count
-      tr
-        th class="span6" Аспирантов
-        td = @stats.graduates_count
-      tr
-        th class="span6" Всего
-        td = @stats.studies_count
+    
+    div class="accordion" id="common_sums"
+      = accordion_group :common_sums, 'Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ' do
+        table class="table table-bordered table-striped"
+          tr
+            th class="span6" Число опубликованных статей по проекту за год
+            td = @stats.books_count
+          tr
+            th class="span6" Число учебников и монографий
+            td = @stats.vacs_count
+          tr
+            th class="span6" Число тезисов докладов
+            td = @stats.lectures_count
+          tr
+            th class="span6" Всего
+            td = @stats.publications_count
+      
+      = accordion_group :common_sums, 'Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ' do
+        table class="table table-bordered table-striped"
+          tr
+            th class="span6" Международные (за рубежом)
+            td = @stats.international_conferences_count
+          tr
+            th class="span6" Международные (в России)
+            td = @stats.international_conferences_in_russia_count
+          tr
+            th class="span6" Российские
+            td = @stats.russian_conferences_count
+          tr
+            th class="span6" Всего
+            td = @stats.conferences_count
+      
+      = accordion_group :common_sums, 'Число защищенных диссертаций, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ' do
+        table class="table table-bordered table-striped"
+          tr
+            th class="span6" Докторских
+            td = @stats.doctors_dissertations_count
+          tr
+            th class="span6" Кандидатских
+            td = @stats.candidates_dissertations_count
+          tr
+            th class="span6" Всего
+            td = @stats.dissertations_count
+      
+      = accordion_group :common_sums, 'Число учащихся, ведущих научную работу с использованием суперкомпьютерного комплекса МГУ' do
+        table class="table table-bordered table-striped"
+          tr
+            th class="span6" Студентов
+            td = @stats.students_count
+          tr
+            th class="span6" Аспирантов
+            td = @stats.graduates_count
+          tr
+            th class="span6" Всего
+            td = @stats.studies_count
+      
+      = accordion_group :common_sums, 'Число студентов, прошедших под руководством через вычислительный практикум на суперкомпьютерном комплексе МГУ' do
+        table class="table table-bordered table-striped"
+          tr
+            th class="span6" Число студентов
+            td = @stats.your_students_count
+      
+      = accordion_group :common_sums, 'Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ' do
+        table class="table table-bordered table-striped"
+          tr
+            th class="span6" РФФИ
+            td = @stats.rffi_grants_count
+          tr
+            th class="span6" Минобрнауки РФ
+            td = @stats.ministry_of_education_grants_count
+          tr
+            th class="span6" Роснано
+            td = @stats.rosnano_grants_count
+          tr
+            th class="span6" Минкомсвязи РФ
+            td = @stats.ministry_of_communications_grants_count
+          tr
+            th class="span6" Минобороны РФ
+            td = @stats.ministry_of_defence_grants_count
+          tr
+            th class="span6" Программы фундаментальных исследований РАН
+            td = @stats.ran_grants_count
+          tr
+            th class="span6" Другие (российские)
+            td = @stats.other_russian_grants_count
+          tr
+            th class="span6" Международные
+            td = @stats.other_intenational_grants_count
+          tr
+            th class="span6" Всего
+            td = @stats.grants_count
   
-    h4 Число студентов, прошедших под руководством через вычислительный практикум на суперкомпьютерном комплексе МГУ
-
-    table class="table table-bordered table-striped"
-      tr
-        th class="span6" Число студентов
-        td = @stats.your_students_count
-
-    h4 Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ
-
-    table class="table table-bordered table-striped"
-      tr
-        th class="span6" РФФИ
-        td = @stats.rffi_grants_count
-      tr
-        th class="span6" Минобрнауки РФ
-        td = @stats.ministry_of_education_grants_count
-      tr
-        th class="span6" Роснано
-        td = @stats.rosnano_grants_count
-      tr
-        th class="span6" Минкомсвязи РФ
-        td = @stats.ministry_of_communications_grants_count
-      tr
-        th class="span6" Минобороны РФ
-        td = @stats.ministry_of_defence_grants_count
-      tr
-        th class="span6" Программы фундаментальных исследований РАН
-        td = @stats.ran_grants_count
-      tr
-        th class="span6" Другие (российские)
-        td = @stats.other_russian_grants_count
-      tr
-        th class="span6" Международные
-        td = @stats.other_intenational_grants_count
-      tr
-        th class="span6" Всего
-        td = @stats.grants_count
-  
-    h4 Число премий, наград, медалей и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
-
-    table class="table table-bordered table-striped"
-      - @stats.award_names.each do |award, count|
-        tr
-          th class="span6" = award
-          td = count
-      tr
-        th class="span3" Всего
-        td = @stats.awards_count
+      = accordion_group :common_sums, 'Число премий, наград, медалей и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ' do
+        table class="table table-bordered table-striped"
+          - @stats.award_names.each do |award, count|
+            tr
+              th class="span6" = award
+              td = count
+          tr
+            th class="span3" Всего
+            td = @stats.awards_count
 
 
     h3 id="sums_by_subdivisions" По подразделениям МГУ
+    
+    div class="accordion" id="common_sums_by_subdivisions"
+      = accordion_group :common_sums_by_subdivisions, 'Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ' do
+        table class="table table-bordered table-striped"
+          tr
+            th class="span4" Подразделение
+            th Число опубликованных статей по проекту за год
+            th Число учебников и монографий
+            th Число тезисов докладов
+            th Всего
+          - @stats.publications_count_by_subdivision.each do |sub, counts|
+            tr
+              th = sub
+              - counts.each do |count|
+                td class="span2" = count
+    
+      = accordion_group :common_sums_by_subdivisions, 'Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ' do
+        table class="table table-bordered table-striped"
+          tr
+            th class="span4" Подразделение
+            th Международные (за рубежом)
+            th Международные (в России)
+            th Российские
+            th Всего
+          - @stats.publications_count_by_subdivision.each do |sub, counts|
+            tr
+              th = sub
+              - counts.each do |count|
+                td class="span2" = count
 
-    h4 Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
+      = accordion_group :common_sums_by_subdivisions, 'Число защищенных диссертаций, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ' do
+        table class="table table-bordered table-striped"
+          tr
+            th class="span4" Подразделение
+            th Докторских
+            th Кандидатских
+            th Всего
+          - @stats.dissertations_count_by_subdivision.each do |sub, counts|
+            tr
+              th = sub
+              - counts.each do |count|
+                td class="span2" = count
 
-    table class="table table-bordered table-striped"
-      tr
-        th class="span4" Подразделение
-        th Число опубликованных статей по проекту за год
-        th Число учебников и монографий
-        th Число тезисов докладов
-        th Всего
-      - @stats.publications_count_by_subdivision.each do |sub, counts|
-        tr
-          th = sub
-          - counts.each do |count|
-            td class="span2" = count
-
-    h4 Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ
-
-    table class="table table-bordered table-striped"
-      tr
-        th class="span4" Подразделение
-        th Международные (за рубежом)
-        th Международные (в России)
-        th Российские
-        th Всего
-      - @stats.publications_count_by_subdivision.each do |sub, counts|
-        tr
-          th = sub
-          - counts.each do |count|
-            td class="span2" = count
-
-    h4 Число защищенных диссертаций, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
-
-    table class="table table-bordered table-striped"
-      tr
-        th class="span4" Подразделение
-        th Докторских
-        th Кандидатских
-        th Всего
-      - @stats.dissertations_count_by_subdivision.each do |sub, counts|
-        tr
-          th = sub
-          - counts.each do |count|
-            td class="span2" = count
-
-    h4 Число учащихся, ведущих научную работу с использованием суперкомпьютерного комплекса МГУ
-
-    table class="table table-bordered table-striped"
-      tr
-        th class="span4" Подразделение
-        th Студентов
-        th Аспирантов
-        th Всего
-      - @stats.studies_count_by_subdivision.each do |sub, counts|
-        tr
-          th = sub
-          - counts.each do |count|
-            td class="span2" = count
+      = accordion_group :common_sums_by_subdivisions, 'Число учащихся, ведущих научную работу с использованием суперкомпьютерного комплекса МГУ' do
+        table class="table table-bordered table-striped"
+          tr
+            th class="span4" Подразделение
+            th Студентов
+            th Аспирантов
+            th Всего
+          - @stats.studies_count_by_subdivision.each do |sub, counts|
+            tr
+              th = sub
+              - counts.each do |count|
+                td class="span2" = count
   
-    h4 Число студентов, прошедших под руководством через вычислительный практикум на суперкомпьютерном комплексе МГУ
+      = accordion_group :common_sums_by_subdivisions, 'Число студентов, прошедших под руководством через вычислительный практикум на суперкомпьютерном комплексе МГУ' do
+        table class="table table-bordered table-striped"
+          tr
+            th class="span6" Подразделение
+            th Число студентов
+          - @stats.your_students_count_by_subdivision.each do |sub, counts|
+            tr
+              th = sub
+              td = counts.first
 
-    table class="table table-bordered table-striped"
-      tr
-        th class="span6" Подразделение
-        th Число студентов
-      - @stats.your_students_count_by_subdivision.each do |sub, counts|
-        tr
-          th = sub
-          td = counts.first
+      = accordion_group :common_sums_by_subdivisions, 'Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ' do
+        table class="table table-bordered table-striped"
+          tr
+            th class="span6" Подразделение
+            th РФФИ
+            th Минобрнауки РФ
+            th Роснано
+            th Минкомсвязи РФ
+            th Минобороны РФ
+            th Программы фундаментальных исследований РАН
+            th Другие (российские)
+            th Международные
+            th Всего
+          - @stats.grants_count_by_subdivision.each do |sub, counts|
+            tr
+              th = sub
+              - counts.each do |count|
+                td = count
 
-    h4 Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ
-
-    table class="table table-bordered table-striped"
-      tr
-        th class="span6" Подразделение
-        th РФФИ
-        th Минобрнауки РФ
-        th Роснано
-        th Минкомсвязи РФ
-        th Минобороны РФ
-        th Программы фундаментальных исследований РАН
-        th Другие (российские)
-        th Международные
-        th Всего
-      - @stats.grants_count_by_subdivision.each do |sub, counts|
-        tr
-          th = sub
-          - counts.each do |count|
-            td = count
-
-    h4 Число премий, наград, медалей и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
-
-    table class="table table-bordered table-striped"
-      tr
-        th class="span6" Подразделение
-        th Количество
-      - @stats.award_count_by_subdivision.each do |sub, counts|
-        tr
-          td = sub
-          td = counts.first
+      = accordion_group :common_sums_by_subdivisions, 'Число премий, наград, медалей и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ' do
+        table class="table table-bordered table-striped"
+          tr
+            th class="span6" Подразделение
+            th Количество
+          - @stats.award_count_by_subdivision.each do |sub, counts|
+            tr
+              td = sub
+              td = counts.first
 
     div class="accordion"
       - @stats.award_names_by_subdivision.each_with_index do |arr, i|
