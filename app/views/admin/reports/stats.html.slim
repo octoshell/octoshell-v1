@@ -141,7 +141,34 @@ div class="row"
         'projects_count_by_organization_kind_pie', 'pie',
         #{@stats.projects_count_by_organization_kind.to_chart(:pie, name: 'Количество').html_safe}
       )
-
+      
+    h2 id="users_count_by_organization_kind" Число пользователей по типам организаций
+    
+    ul class="nav nav-tabs"
+      li class="active" = link_to 'Таблица', '#users_count_by_organization_kind_table', data: { toggle: 'tab' }
+      li = link_to 'Диаграмма', '#users_count_by_organization_kind_bar', data: { toggle: 'tab' }
+      li = link_to 'Пирог', '#users_count_by_organization_kind_pie', data: { toggle: 'tab' }
+    
+    div class="tab-content"
+      div class="tab-pane active" id="users_count_by_organization_kind_table"
+        table class="table table-bordered table-striped"
+          - @stats.users_count_by_organization_kind.each do |title, value|
+            tr
+              th class="span4" = title
+              td = value
+      div id="users_count_by_organization_kind_bar"
+      div id="users_count_by_organization_kind_pie"
+    
+    javascript:
+      Highcharts.render(
+        'users_count_by_organization_kind_bar', 'column',
+        #{@stats.users_count_by_organization_kind.to_chart(:column).html_safe}
+      )
+      Highcharts.render(
+        'users_count_by_organization_kind_pie', 'pie',
+        #{@stats.users_count_by_organization_kind.to_chart(:pie, name: 'Количество').html_safe}
+      )
+    
     h2 id="directions_of_science_by_count" Направления исследований
 
     ul class="nav nav-tabs"
@@ -168,7 +195,7 @@ div class="row"
         'directions_of_science_by_count_pie', 'pie',
         #{@stats.directions_of_science_by_count.to_chart(:pie, name: 'Количество').html_safe}
       )
-
+    
     h3 id="directions_of_science_count_by_msu_subdivistions" Направления исследований по подразделениям МГУ
 
     ul class="nav nav-tabs"

@@ -28,6 +28,22 @@ class Report::Stats
     data.extend(Chartable)
   end
   
+  def users_count_by_organization_kind
+    data = []
+    data = reports_grouped_by_org_kind.inject([]) do |data, group|
+      kind, reports = group
+      data << [kind, reports.size]
+    end
+    data << [
+      msu_organization.abbreviation,
+      msu_organization_reports.size
+    ]
+    msu_subdivisions.each do |subdivision, reports|
+      data << [subdivision, reports.size]
+    end
+    data.extend(Chartable)
+  end
+  
   def directions_of_science_by_count
     ::Report::Project::DIRECTIONS_OF_SCIENCE.map do |direction|
       [direction, @reports.map(&:projects).flatten.find_all do |p|
