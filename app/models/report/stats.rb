@@ -255,6 +255,66 @@ class Report::Stats
     end.find_all { |org| org.send(attribute) > 0 }
   end
   
+  def project_requests_top_for_lomonosov_intel_hours
+    projects.sort_by(&:lomonosov_intel_hours).reverse
+  end
+  
+  def project_requests_top_for_lomonosov_nvidia_hours
+    projects.sort_by(&:lomonosov_nvidia_hours).reverse
+  end
+  
+  def project_requests_top_for_chebyshev_hours
+    projects.sort_by(&:chebyshev_hours).reverse
+  end
+  
+  def project_requests_top_for_chebyshev_size
+    projects.sort_by(&:chebyshev_size).reverse
+  end
+  
+  def project_requests_top_for_lomonosov_size
+    projects.sort_by(&:lomonosov_size).reverse
+  end
+  
+  def organization_requests_top_for_lomonosov_intel_hours
+    organizations.map do |org, reports|
+      val = reports.sum { |r| r.projects.sum { |p| p.lomonosov_intel_hours } }
+      org.define_singleton_method(:lomonosov_intel_hours) { val }
+      org
+    end.sort_by(&:lomonosov_intel_hours).reverse
+  end
+  
+  def organization_requests_top_for_lomonosov_nvidia_hours
+    organizations.map do |org, reports|
+      val = reports.sum { |r| r.projects.sum { |p| p.lomonosov_nvidia_hours } }
+      org.define_singleton_method(:lomonosov_nvidia_hours) { val }
+      org
+    end.sort_by(&:lomonosov_nvidia_hours).reverse
+  end
+  
+  def organization_requests_top_for_chebyshev_hours
+    organizations.map do |org, reports|
+      val = reports.sum { |r| r.projects.sum { |p| p.chebyshev_hours } }
+      org.define_singleton_method(:chebyshev_hours) { val }
+      org
+    end.sort_by(&:chebyshev_hours).reverse
+  end
+  
+  def organization_requests_top_for_chebyshev_size
+    organizations.map do |org, reports|
+      val = reports.sum { |r| r.projects.sum { |p| p.chebyshev_size } }
+      org.define_singleton_method(:chebyshev_size) { val }
+      org
+    end.sort_by(&:chebyshev_size).reverse
+  end
+  
+  def organization_requests_top_for_lomonosov_size
+    organizations.map do |org, reports|
+      val = reports.sum { |r| r.projects.sum { |p| p.lomonosov_size } }
+      org.define_singleton_method(:lomonosov_size) { val }
+      org
+    end.sort_by(&:lomonosov_size).reverse
+  end
+  
 private
 
   def organizations
