@@ -981,6 +981,7 @@ div class="row"
               td = project.report.organization.name
               td = project.ru_title
               td = project.exclusive_usage.find_all(&:present?).to_sentence
+      
       = accordion_group :top_mix, 'Список изъявивших желание выступить с докладом' do
         table class="table table-bordered table-striped"
           tr
