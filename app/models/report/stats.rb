@@ -381,7 +381,7 @@ private
   
   def msu_subdivisions
     @msu_subdivisions ||= msu_organization_reports.group_by do |report|
-      report.organizations.first.subdivision
+      report.organizations.first.subdivision.downcase.strip
     end
   end
 end
