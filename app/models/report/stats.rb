@@ -315,6 +315,14 @@ class Report::Stats
     end.sort_by(&:lomonosov_size).reverse
   end
   
+  def exclusive_usage
+    projects.find_all { |p| p.exclusive_usage.any?(&:present?) }
+  end
+  
+  def wanners_speak
+    projects.find_all(&:wanna_speak)
+  end
+  
 private
 
   def organizations

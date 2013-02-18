@@ -967,6 +967,30 @@ div class="row"
               th = organization.name
               th class="span2" = organization.chebyshev_size
     
+    div class="accordion" id="top_mix"
+      = accordion_group :top_mix, 'Список нужнающихся в монопольном использовании' do
+        table class="table table-bordered table-striped"
+          tr
+            th Пользователь
+            th Организация
+            th Проект
+            th Системы
+          - @stats.exclusive_usage.each do |project|
+            tr
+              td = project.report.user.full_name
+              td = project.report.organization.name
+              td = project.ru_title
+              td = project.exclusive_usage.find_all(&:present?).to_sentence
+      = accordion_group :top_mix, 'Список изъявивших желание выступить с докладом' do
+        table class="table table-bordered table-striped"
+          tr
+            th Пользователь
+            th Организация
+          - @stats.wanners_speak do |project|
+            td = project.report.user.full_name
+            td = project.report.organization.name
+      
+    
     h2 Персональный опросник
     
     h3 id="software" Прикладные пакеты, библиотеки и средства используемые в работе на суперкомпьютерном комплексе МГУ
