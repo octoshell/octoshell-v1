@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   # rescue_from CanCan::Unauthorized, with: :not_authorized
-  # rescue_from ActiveRecord::RecordInProcess, with: :record_in_process
+  rescue_from ActiveRecord::RecordInProcess, with: :record_in_process
   rescue_from MayMay::Unauthorized, with: :not_authorized
   
   def dashboard
