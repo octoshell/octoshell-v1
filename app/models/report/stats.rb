@@ -402,7 +402,7 @@ class Report::Stats
   end
   
   def wanners_speak
-    projects.find_all(&:wanna_speak)
+    projects.find_all(&:wanna_speak?)
   end
   
 private

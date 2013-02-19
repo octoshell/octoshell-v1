@@ -1115,9 +1115,10 @@ div class="row"
           tr
             th Пользователь
             th Организация
-          - @stats.wanners_speak do |project|
-            td = smart_link_to project.report.user
-            td = smart_link_to project.report.organization
+          - @stats.wanners_speak.each do |project|
+            tr
+              td = smart_link_to project.report.user
+              td = smart_link_to project.report.organization
       
     
     h2 Персональный опросник
