@@ -399,7 +399,7 @@ div class="row"
             th class="span6" Всего
             td = @stats.studies_count
       
-      = accordion_group :common_sums, 'Число студентов, прошедших под руководством через вычислительный практикум на суперкомпьютерном комплексе МГУ' do
+      = accordion_group :common_sums, 'Число студентов, прошедших практикум на суперкомпьютерном комплексе МГУ' do
         table class="table table-bordered table-striped"
           tr
             th class="span6" Число студентов
@@ -503,7 +503,7 @@ div class="row"
               - counts.each do |count|
                 td class="span2" = count
   
-      = accordion_group :common_sums_by_subdivisions, 'Число студентов, прошедших под руководством через вычислительный практикум на суперкомпьютерном комплексе МГУ' do
+      = accordion_group :common_sums_by_subdivisions, 'Число студентов, прошедших практикум на суперкомпьютерном комплексе МГУ' do
         table class="table table-bordered table-striped"
           tr
             th class="span6" Подразделение
