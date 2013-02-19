@@ -590,32 +590,44 @@ div class="row"
     h3 id="projects_top" Проекты
     
     div class="accordion" id="projects_top_publications"
-      = accordion_group :projects_top_publications, 'По колличеству публикаций' do
+      = accordion_group :projects_top_publications, 'По количеству публикаций' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:publications_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.publications_count
       
       = accordion_group :projects_top_publications, 'По числу опубликованных статей по проекту за год' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:books_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               td class="span2" = project.books_count
       
       = accordion_group :projects_top_publications, 'По числу учебников и монографий' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:vacs_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.vacs_count
       
       = accordion_group :projects_top_publications, 'По числу тезисов докладов' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:lectures_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.lectures_count
     
     div class="accordion" id="projects_top_conferences"
@@ -623,28 +635,40 @@ div class="row"
         table class="table table-bordered table-striped"
           - @stats.projects_top(:conferences_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.conferences_count
 
       = accordion_group :projects_top_conferences, 'По международным за рубежом' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:international_conferences_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               td class="span2" = project.international_conferences_count
 
       = accordion_group :projects_top_conferences, 'По международным в России' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:international_conferences_in_russia_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.international_conferences_in_russia_count
 
       = accordion_group :projects_top_conferences, 'По российским' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:russian_conferences_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.russian_conferences_count
     
     div class="accordion" id="projects_top_dissertations"
@@ -652,19 +676,28 @@ div class="row"
         table class="table table-bordered table-striped"
           - @stats.projects_top(:dissertations_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.dissertations_count
       = accordion_group :projects_top_dissertations, 'По докторским' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:doctors_dissertations_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.doctors_dissertations_count
       = accordion_group :projects_top_dissertations, 'По кандидатским' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:candidates_dissertations_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.candidates_dissertations_count
     
     div class="accordion" id="projects_top_studies"
@@ -672,19 +705,28 @@ div class="row"
         table class="table table-bordered table-striped"
           - @stats.projects_top(:studies_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.studies_count
       = accordion_group :projects_top_studies, 'По студентам' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:students_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.students_count
       = accordion_group :projects_top_studies, 'По аспирантам' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:graduates_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.graduates_count
     
     div class="accordion" id="projects_top_your_students_count"
@@ -692,7 +734,10 @@ div class="row"
         table class="table table-bordered table-striped"
           - @stats.projects_top(:your_students_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.your_students_count
     
     div class="accordion" id="projects_top_grants"
@@ -700,55 +745,82 @@ div class="row"
         table class="table table-bordered table-striped"
           - @stats.projects_top(:grants_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.grants_count
       = accordion_group :projects_top_grants, 'По РФФИ' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:rffi_grants_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.rffi_grants_count
       = accordion_group :projects_top_grants, 'По Минобрнауки РФ' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:ministry_of_education_grants_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.ministry_of_education_grants_count
       = accordion_group :projects_top_grants, 'По Роснано' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:rosnano_grants_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.rosnano_grants_count
       = accordion_group :projects_top_grants, 'По Минкомсвязи РФ' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:ministry_of_communications_grants_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.ministry_of_communications_grants_count
       = accordion_group :projects_top_grants, 'По Минобороны РФ' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:ministry_of_defence_grants_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.ministry_of_defence_grants_count
       = accordion_group :projects_top_grants, 'По программам фундаментальных исследований РАН' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:ran_grants_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.ran_grants_count
       = accordion_group :projects_top_grants, 'По другим российским' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:other_russian_grants_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.other_russian_grants_count
       = accordion_group :projects_top_grants, 'По международным' do
         table class="table table-bordered table-striped"
           - @stats.projects_top(:other_intenational_grants_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.other_intenational_grants_count
     
     div class="accordion" id="projects_top_awards"
@@ -756,38 +828,41 @@ div class="row"
         table class="table table-bordered table-striped"
           - @stats.projects_top(:awards_count).first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.awards_count
     
     h3 id="organizations_top" Организации
     
     div class="accordion" id="organizations_top_publications"
-      = accordion_group :organizations_top_publications, 'По колличеству публикаций' do
+      = accordion_group :organizations_top_publications, 'По количеству публикаций' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:publications_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.publications_count
       
       = accordion_group :organizations_top_publications, 'По числу опубликованных статей по проекту за год' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:books_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               td class="span2" = organization.books_count
       
       = accordion_group :organizations_top_publications, 'По числу учебников и монографий' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:vacs_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.vacs_count
       
       = accordion_group :organizations_top_publications, 'По числу тезисов докладов' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:lectures_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.lectures_count
     
     div class="accordion" id="organizations_top_conferences"
@@ -795,140 +870,140 @@ div class="row"
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:conferences_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.conferences_count
 
       = accordion_group :organizations_top_conferences, 'По международным за рубежом' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:international_conferences_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               td class="span2" = organization.international_conferences_count
 
-      = accordion_group :projects_top_conferences, 'По международным в России' do
+      = accordion_group :organizations_top_conferences, 'По международным в России' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:international_conferences_in_russia_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.international_conferences_in_russia_count
 
-      = accordion_group :projects_top_conferences, 'По российским' do
+      = accordion_group :organizations_top_conferences, 'По российским' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:russian_conferences_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.russian_conferences_count
     
-    div class="accordion" id="projects_top_dissertations"
-      = accordion_group :projects_top_dissertations, 'По числу защищенных диссертаций' do
+    div class="accordion" id="organizations_top_dissertations"
+      = accordion_group :organizations_top_dissertations, 'По числу защищенных диссертаций' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:dissertations_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.dissertations_count
-      = accordion_group :projects_top_dissertations, 'По докторским' do
+      = accordion_group :organizations_top_dissertations, 'По докторским' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:doctors_dissertations_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.doctors_dissertations_count
-      = accordion_group :projects_top_dissertations, 'По кандидатским' do
+      = accordion_group :organizations_top_dissertations, 'По кандидатским' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:candidates_dissertations_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.candidates_dissertations_count
     
-    div class="accordion" id="projects_top_studies"
-      = accordion_group :projects_top_studies, 'По числу учащихся' do
+    div class="accordion" id="organizations_top_studies"
+      = accordion_group :organizations_top_studies, 'По числу учащихся' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:studies_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.studies_count
-      = accordion_group :projects_top_studies, 'По студентам' do
+      = accordion_group :organizations_top_studies, 'По студентам' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:students_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.students_count
-      = accordion_group :projects_top_studies, 'По аспирантам' do
+      = accordion_group :organizations_top_studies, 'По аспирантам' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:graduates_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.graduates_count
     
     div class="accordion" id="projects_top_your_students_count"
-      = accordion_group :projects_top_your_students_count, 'По числу учащихся' do
+      = accordion_group :organizations_top_your_students_count, 'По числу учащихся' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:your_students_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.your_students_count
     
     div class="accordion" id="projects_top_grants"
-      = accordion_group :projects_top_grants, 'По числу грантов, контрактов, договоров и т.п.' do
+      = accordion_group :organizations_top_grants, 'По числу грантов, контрактов, договоров и т.п.' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:grants_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.grants_count
-      = accordion_group :projects_top_grants, 'По РФФИ' do
+      = accordion_group :organizations_top_grants, 'По РФФИ' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:rffi_grants_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.rffi_grants_count
-      = accordion_group :projects_top_grants, 'По Минобрнауки РФ' do
+      = accordion_group :organizations_top_grants, 'По Минобрнауки РФ' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:ministry_of_education_grants_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.ministry_of_education_grants_count
-      = accordion_group :projects_top_grants, 'По Роснано' do
+      = accordion_group :organizations_top_grants, 'По Роснано' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:rosnano_grants_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.rosnano_grants_count
-      = accordion_group :projects_top_grants, 'По Минкомсвязи РФ' do
+      = accordion_group :organizations_top_grants, 'По Минкомсвязи РФ' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:ministry_of_communications_grants_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.ministry_of_communications_grants_count
-      = accordion_group :projects_top_grants, 'По Минобороны РФ' do
+      = accordion_group :organizations_top_grants, 'По Минобороны РФ' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:ministry_of_defence_grants_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.ministry_of_defence_grants_count
-      = accordion_group :projects_top_grants, 'По программам фундаментальных исследований РАН' do
+      = accordion_group :organizations_top_grants, 'По программам фундаментальных исследований РАН' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:ran_grants_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.ran_grants_count
-      = accordion_group :projects_top_grants, 'По другим российским' do
+      = accordion_group :organizations_top_grants, 'По другим российским' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:other_russian_grants_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.other_russian_grants_count
-      = accordion_group :projects_top_grants, 'По международным' do
+      = accordion_group :organizations_top_grants, 'По международным' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:other_intenational_grants_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.other_intenational_grants_count
     
-    div class="accordion" id="projects_top_awards"
-      = accordion_group :projects_top_awards, 'По числу премий, наград, медалей' do
+    div class="accordion" id="organizations_top_awards"
+      = accordion_group :organizations_top_awards, 'По числу премий, наград, медалей' do
         table class="table table-bordered table-striped"
           - @stats.organizations_top(:awards_count).first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.awards_count
     
     h3 id="requests_top" Заявки ресурсов
@@ -938,35 +1013,50 @@ div class="row"
         table class="table table-bordered table-striped"
           - @stats.project_requests_top_for_lomonosov_intel_hours.first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.lomonosov_intel_hours
               
       = accordion_group :projects_top_requests, 'Проекты по процессорочасам NVIDIA на Ломоносов' do
         table class="table table-bordered table-striped"
           - @stats.project_requests_top_for_lomonosov_nvidia_hours.first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.lomonosov_nvidia_hours
       
       = accordion_group :projects_top_requests, 'Проекты по процессорочасам на Чебышев' do
         table class="table table-bordered table-striped"
           - @stats.project_requests_top_for_chebyshev_hours.first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.chebyshev_hours
       
       = accordion_group :projects_top_requests, 'Проекты по размеру на Ломоносове' do
         table class="table table-bordered table-striped"
           - @stats.project_requests_top_for_lomonosov_size.first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.lomonosov_size
       
       = accordion_group :projects_top_requests, 'Проекты по размеру на Чебышеве' do
         table class="table table-bordered table-striped"
           - @stats.project_requests_top_for_chebyshev_size.first(20).each do |project|
             tr
-              th = project.ru_title
+              th
+                = project.ru_title
+                br
+                = smart_link_to project.report.user
               th class="span2" = project.chebyshev_size
             
     div class="accordion" id="organization_top_requests"
@@ -974,35 +1064,35 @@ div class="row"
         table class="table table-bordered table-striped"
           - @stats.organization_requests_top_for_lomonosov_intel_hours.first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.lomonosov_intel_hours
 
       = accordion_group :organization_top_requests, 'Организации по процессорочасам NVIDIA на Ломоносов' do
         table class="table table-bordered table-striped"
           - @stats.organization_requests_top_for_lomonosov_nvidia_hours.first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.lomonosov_nvidia_hours
 
       = accordion_group :organization_top_requests, 'Организации по процессорочасам на Чебышев' do
         table class="table table-bordered table-striped"
           - @stats.organization_requests_top_for_chebyshev_hours.first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.chebyshev_hours
 
       = accordion_group :organization_top_requests, 'Организации по размеру на Ломоносове' do
         table class="table table-bordered table-striped"
           - @stats.organization_requests_top_for_lomonosov_size.first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.lomonosov_size
 
       = accordion_group :organization_top_requests, 'Организации по размеру на Чебышеве' do
         table class="table table-bordered table-striped"
           - @stats.organization_requests_top_for_chebyshev_size.first(20).each do |organization|
             tr
-              th = organization.name
+              th = smart_link_to organization
               th class="span2" = organization.chebyshev_size
     
     div class="accordion" id="top_mix"
@@ -1015,8 +1105,8 @@ div class="row"
             th Системы
           - @stats.exclusive_usage.each do |project|
             tr
-              td = project.report.user.full_name
-              td = project.report.organization.name
+              td = smart_link_to project.report.user
+              td = smart_link_to project.report.organization
               td = project.ru_title
               td = project.exclusive_usage.find_all(&:present?).to_sentence
       
@@ -1026,8 +1116,8 @@ div class="row"
             th Пользователь
             th Организация
           - @stats.wanners_speak do |project|
-            td = project.report.user.full_name
-            td = project.report.organization.name
+            td = smart_link_to project.report.user
+            td = smart_link_to project.report.organization
       
     
     h2 Персональный опросник
@@ -1094,6 +1184,14 @@ div class="row"
           th class="span5" = name
           td = count
           td = @stats.learning_percent(name)
+    
+    h4 Другие
+    
+    table class="table table-bordered table-striped"
+      - @stats.other_learning.each do |ps|
+        tr
+          th class="span5" = ps.other_learning
+          td = smart_link_to ps.report.user
     
 javascript:
   $('#left-menu').affix({

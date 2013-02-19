@@ -225,7 +225,7 @@ class Report::Stats
   def grants_count_by_subdivision
     counts_by_subdivision(
       :rffi_grants_count,
-      :ministry_of_defence_grants_count,
+      :ministry_of_education_grants_count,
       :rosnano_grants_count,
       :ministry_of_communications_grants_count,
       :ministry_of_defence_grants_count,
@@ -300,6 +300,12 @@ class Report::Stats
   
   def learning_top
     personal_survey_top(:learning)
+  end
+  
+  def other_learning
+    personal_surveys.keep_if do |personal_survey|
+      personal_survey.other_learning?
+    end
   end
   
   def learning_percent(name)
@@ -450,8 +456,11 @@ private
   end
   
   def msu_organization_reports
-    @reports.find_all do |report|
-      report.organization == msu_organization
+    @msu_organization_reports ||= begin
+      
+      @reports.find_all do |report|
+        report.organization == msu_organization
+      end
     end
   end
   

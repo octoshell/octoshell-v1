@@ -1,5 +1,7 @@
 # coding: utf-8
 class Report::PersonalSurvey < ActiveRecord::Base
+  belongs_to :report
+  
   SOFTWARE = [
     'Abinit',
     'Amber',
