@@ -44,7 +44,7 @@ Highcharts.render = function(selector, type, series) {
     },
     title: { text: '' },
     xAxis: {
-      categories: categories,
+      categories: [''],
       labels: {
         style: {
           fontSize: '11px',
