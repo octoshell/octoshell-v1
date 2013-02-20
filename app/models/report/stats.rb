@@ -33,14 +33,14 @@ class Report::Stats
     data.extend(Chartable)
   end
   
-  def projects_count_by_msu_subdivistions
+  def projects_count_by_msu_subdivisions
     msu_subdivisions.map do |subdivision, reports|
       [subdivision, reports.sum { |r| r.projects.size } ]
     end.extend(Chartable)
   end
   
-  def projects_count_by_msu_subdivistions_sum
-    projects_count_by_msu_subdivistions.sum(&:last)
+  def projects_count_by_msu_subdivisions_sum
+    projects_count_by_msu_subdivisions.sum(&:last)
   end
   
   def users_count_by_organization_kind
@@ -74,26 +74,15 @@ class Report::Stats
     end.extend(Chartable)
   end
   
-  def directions_of_science_count_by_msu_subdivistions
+  def directions_of_science_count_by_msu_subdivisions(direction)
     msu_subdivisions.map do |subdivision, reports|
-      seria = Hash[::Report::Project::DIRECTIONS_OF_SCIENCE.map do |direction|
-        [direction, reports.map(&:projects).flatten.find_all do |p|
+      sum = reports.sum do |report|
+        report.projects.find_all do |p|
           p.directions_of_science.include?(direction)
-        end.size]
-      end]
-      [subdivision, seria]
-    end
-  end
-  
-  def directions_of_science_count_by_msu_subdivistions_bar
-    msu_subdivisions.map do |subdivision, reports|
-      seria = ::Report::Project::DIRECTIONS_OF_SCIENCE.map do |direction|
-        [direction, reports.map(&:projects).flatten.find_all do |p|
-          p.directions_of_science.include?(direction)
-        end.size]
+        end.size
       end
-      { name: subdivision, data: seria, type: 'column' }
-    end
+      [subdivision, sum]
+    end.extend(Chartable)
   end
   
   def areas_by_count
@@ -104,7 +93,7 @@ class Report::Stats
     end.extend(Chartable)
   end
   
-  def areas_by_count_by_msu_subdivistions
+  def areas_by_count_by_msu_subdivisions
     msu_subdivisions.map do |subdivision, reports|
       seria = Hash[::Report::Project::AREAS.values.flatten.map do |area|
         [area, reports.map(&:projects).flatten.find_all do |p|
@@ -115,7 +104,7 @@ class Report::Stats
     end
   end
   
-  def areas_by_count_by_msu_subdivistions_bar
+  def areas_by_count_by_msu_subdivisions_bar
     msu_subdivisions.map do |subdivision, reports|
       seria = ::Report::Project::AREAS.values.flatten.map do |area|
         [area, reports.map(&:projects).flatten.find_all do |p|
@@ -134,7 +123,7 @@ class Report::Stats
     end.extend(Chartable)
   end
   
-  def critical_technologies_by_count_by_msu_subdivistions
+  def critical_technologies_by_count_by_msu_subdivisions
     msu_subdivisions.map do |subdivision, reports|
       seria = Hash[::Report::Project::CRITICAL_TECHNOLOGIES.map do |tech|
         [tech, reports.map(&:projects).flatten.find_all do |p|
@@ -145,7 +134,7 @@ class Report::Stats
     end
   end
   
-  def critical_technologies_by_count_by_msu_subdivistions_bar
+  def critical_technologies_by_count_by_msu_subdivisions_bar
     msu_subdivisions.map do |subdivision, reports|
       seria = ::Report::Project::CRITICAL_TECHNOLOGIES.map do |tech|
         [tech, reports.map(&:projects).flatten.find_all do |p|
