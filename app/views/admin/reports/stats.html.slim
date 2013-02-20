@@ -17,8 +17,8 @@ div class="row"
         li class="nav-header" Распределения
         li = link_to 'Организации по типам', '#organizations_count_by_kind'
         li = link_to 'Проекты по типам орг.', '#projects_count_by_organization_kind'
-        li = link_to 'Направл. исследований', '#directions_of_science_by_count'
-        li = link_to 'Приоритетные направления', '#areas_by_count'
+        li = link_to 'Приоритетные направления', '#directions_of_science_by_count'
+        li = link_to 'Области исследований', '#areas_by_count'
         li = link_to 'Критические технологии', '#critical_technologies_by_count'
         li class="nav-header" Суммы
         li = link_to 'Общие', '#sums'
@@ -239,7 +239,7 @@ div class="row"
         #{@stats.users_count_by_msu_subdivisions.to_chart(:pie, name: 'Количество').html_safe}
       )
     
-    h2 id="directions_of_science_by_count" Направления исследований
+    h2 id="directions_of_science_by_count" Приоритетные направления
 
     ul class="nav nav-tabs"
       li class="active" = link_to 'Таблица', '#directions_of_science_by_count_table', data: { toggle: 'tab' }
@@ -266,7 +266,7 @@ div class="row"
         #{@stats.directions_of_science_by_count.to_chart(:pie, name: 'Количество').html_safe}
       )
     
-    h3 id="directions_of_science_count_by_msu_subdivisions" Направления исследований по подразделениям МГУ
+    h3 id="directions_of_science_count_by_msu_subdivisions" Приоритетные направления по подразделениям МГУ
       
     - ::Report::Project::DIRECTIONS_OF_SCIENCE.each_with_index do |direction, i|
       h4 = direction
@@ -289,7 +289,7 @@ div class="row"
         javascript:
           window.series.#{key} = JSON.parse(#{@stats.directions_of_science_count_by_msu_subdivisions(direction).to_chart(:column).to_json.html_safe})
     
-    h2 id="areas_by_count" Приоритетные направления
+    h2 id="areas_by_count" Области исследований
 
     ul class="nav nav-tabs"
       li class="active" = link_to 'Таблица', '#areas_by_count_table', data: { toggle: 'tab' }
@@ -306,46 +306,38 @@ div class="row"
       div id="areas_by_count_bar"
       div id="areas_by_count_pie"
 
-    / javascript:
-    /   Highcharts.render(
-    /     'areas_by_count_bar', 'column',
-    /     #{@stats.areas_by_count.to_chart(:column).html_safe}
-    /   )
-    /   Highcharts.render(
-    /     'areas_by_count_pie', 'pie',
-    /     #{@stats.areas_by_count.to_chart(:pie, name: 'Количество').html_safe}
-    /   )
+    javascript:
+      Highcharts.render(
+        'areas_by_count_bar', 'column',
+        #{@stats.areas_by_count.to_chart(:column).html_safe}
+      )
+      Highcharts.render(
+        'areas_by_count_pie', 'pie',
+        #{@stats.areas_by_count.to_chart(:pie, name: 'Количество').html_safe}
+      )
 
-    h3 id="areas_by_count_by_msu_subdivisions" Приоритетные направления по подразделениям МГУ
-
-    ul class="nav nav-tabs"
-      li class="active" = link_to 'Таблица', '#areas_by_count_by_msu_subdivisions_table', data: { toggle: 'tab' }
-      li = link_to 'Диаграмма', '#areas_by_count_by_msu_subdivisions_bar', data: { toggle: 'tab' }
-
-    div class="tab-content"
-      div class="tab-pane active" id="areas_by_count_by_msu_subdivisions_table"
-
-        div class="accordion"
-          - @stats.areas_by_count_by_msu_subdivisions.each_with_index do |arr, i|
-            - title, value = arr
-            div class="accordion-group" id="areas_by_count_by_msu_subdivisions_#{i}_parent"
-              div class="accordion-heading"
-                = link_to title, "#areas_by_count_by_msu_subdivisions_#{i}", data: { parent: "#directions_of_science_count_by_msu_subdivisions_#{i}_parent", toggle: 'collapse' }, class: 'accordion-toggle'
-              div class="accordion-body collapse" id="areas_by_count_by_msu_subdivisions_#{i}"
-                div class="accordion-inner"
-                  table class="table table-bordered table-striped"
-                    - value.each do |direction, count|
-                      tr
-                        td class="span6" = direction
-                        td = count
-      div id="areas_by_count_by_msu_subdivisions_bar"
-
-    / javascript:
-    /   Highcharts.render(
-    /     'areas_by_count_by_msu_subdivisions_bar', 'column',
-    /     #{@stats.areas_by_count_by_msu_subdivisions_bar.to_json.html_safe}
-    /   )
-  
+    h3 id="areas_by_count_by_msu_subdivisions" Области исследований по подразделениям МГУ
+    
+    - ::Report::Project::AREAS.values.flatten.each_with_index do |area, i|
+      h4 = area
+      
+      ul class="nav nav-tabs"
+        li class="active" = link_to 'Таблица', "#areas_#{i}_count_by_msu_subdivisions_table", data: { toggle: 'tab' }
+        li = link_to 'Диаграмма', "#areas_#{i}_count_by_msu_subdivisions_bar", data: { toggle: 'tab' }, class: 'chartable'
+      
+      div class="tab-content"
+        div class="tab-pane active" id="areas_#{i}_count_by_msu_subdivisions_table"
+          div class="accordion" id="areas_#{i}_group"
+            = accordion_group "areas_#{i}_group", 'По подразделениям' do
+              table class="table table-bordered table-striped"
+                - @stats.areas_count_by_msu_subdivisions(area).each do |subdivision, count|
+                  tr
+                    td class="span6" = subdivision
+                    td = count
+        - key = "areas_#{i}_count_by_msu_subdivisions_bar"
+        div id="#{key}" data-chart-type="column"
+        javascript:
+          window.series.#{key} = JSON.parse(#{@stats.areas_count_by_msu_subdivisions(area).to_chart(:column).to_json.html_safe})
   
     h2 id="critical_technologies_by_count" Критические технологии
 
@@ -364,39 +356,38 @@ div class="row"
       div id="critical_technologies_by_count_bar"
       div id="critical_technologies_by_count_pie"
 
-    / javascript:
-    /   Highcharts.render(
-    /     'critical_technologies_by_count_bar', 'column',
-    /     #{@stats.critical_technologies_by_count.to_chart(:column).html_safe}
-    /   )
-    /   Highcharts.render(
-    /     'critical_technologies_by_count_pie', 'pie',
-    /     #{@stats.critical_technologies_by_count.to_chart(:pie, name: 'Количество').html_safe}
-    /   )
+    javascript:
+      Highcharts.render(
+        'critical_technologies_by_count_bar', 'column',
+        #{@stats.critical_technologies_by_count.to_chart(:column).html_safe}
+      )
+      Highcharts.render(
+        'critical_technologies_by_count_pie', 'pie',
+        #{@stats.critical_technologies_by_count.to_chart(:pie, name: 'Количество').html_safe}
+      )
 
     h3 id="critical_technologies_by_count_by_msu_subdivisions" Критические технологии по подразделениям МГУ
 
-    ul class="nav nav-tabs"
-      li class="active" = link_to 'Таблица', '#critical_technologies_by_count_by_msu_subdivisions_table', data: { toggle: 'tab' }
-      li = link_to 'Диаграмма', '#critical_technologies_by_count_by_msu_subdivisions_bar', data: { toggle: 'tab' }
-
-    div class="tab-content"
-      div class="tab-pane active" id="critical_technologies_by_count_by_msu_subdivisions_table"
-
-        div class="accordion"
-          - @stats.critical_technologies_by_count_by_msu_subdivisions.each_with_index do |arr, i|
-            - title, value = arr
-            div class="accordion-group" id="critical_technologies_by_count_by_msu_subdivisions_#{i}_parent"
-              div class="accordion-heading"
-                = link_to title, "#critical_technologies_by_count_by_msu_subdivisions_#{i}", data: { parent: "#directions_of_science_count_by_msu_subdivisions_#{i}_parent", toggle: 'collapse' }, class: 'accordion-toggle'
-              div class="accordion-body collapse" id="critical_technologies_by_count_by_msu_subdivisions_#{i}"
-                div class="accordion-inner"
-                  table class="table table-bordered table-striped"
-                    - value.each do |direction, count|
-                      tr
-                        td class="span6" = direction
-                        td = count
-      div id="critical_technologies_by_count_by_msu_subdivisions_bar" data-chart-type="column" data-chart-series="#{@stats.critical_technologies_by_count_by_msu_subdivisions_bar.to_json.html_safe}"
+    - ::Report::Project::CRITICAL_TECHNOLOGIES.each_with_index do |tech, i|
+      h4 = tech
+      
+      ul class="nav nav-tabs"
+        li class="active" = link_to 'Таблица', "#tech_#{i}_count_by_msu_subdivisions_table", data: { toggle: 'tab' }
+        li = link_to 'Диаграмма', "#tech_#{i}_count_by_msu_subdivisions_bar", data: { toggle: 'tab' }, class: 'chartable'
+      
+      div class="tab-content"
+        div class="tab-pane active" id="tech_#{i}_count_by_msu_subdivisions_table"
+          div class="accordion" id="tech_#{i}_group"
+            = accordion_group "tech_#{i}_group", 'По подразделениям' do
+              table class="table table-bordered table-striped"
+                - @stats.tech_count_by_msu_subdivisions(tech).each do |subdivision, count|
+                  tr
+                    td class="span6" = subdivision
+                    td = count
+        - key = "tech_#{i}_count_by_msu_subdivisions_bar"
+        div id="#{key}" data-chart-type="column"
+        javascript:
+          window.series.#{key} = JSON.parse(#{@stats.tech_count_by_msu_subdivisions(tech).to_chart(:column).to_json.html_safe})
     
 
     h2 id="sums" Суммы
