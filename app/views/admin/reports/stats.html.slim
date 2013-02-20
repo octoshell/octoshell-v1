@@ -1,1258 +1,1259 @@
 - title 'Статистика по отчетам'
 
-javascript:
-  window.charts = []
-  window.series = {}
-  window.chartEvents = {
-    load: function(chart){
-      $(chart.currentTarget.renderTo).addClass('tab-pane')
+- cache expires_in: 10.minutes do
+  javascript:
+    window.charts = []
+    window.series = {}
+    window.chartEvents = {
+      load: function(chart){
+        $(chart.currentTarget.renderTo).addClass('tab-pane')
+      }
     }
-  }
   
 
-div class="row"
-  div class="span3" id="submenu"
-    div class="well" style="padding: 8px 0; max-width: 220px;" id="left-menu"
-      ul class="nav nav-list"
-        li class="nav-header" Распределения
-        li = link_to 'Организации по типам', '#organizations_count_by_kind'
-        li = link_to 'Проекты по типам орг.', '#projects_count_by_organization_kind'
-        li = link_to 'Приоритетные направления', '#directions_of_science_by_count'
-        li = link_to 'Области исследований', '#areas_by_count'
-        li = link_to 'Критические технологии', '#critical_technologies_by_count'
-        li class="nav-header" Суммы
-        li = link_to 'Общие', '#sums'
-        li = link_to 'По подразделениям МГУ', '#sums_by_subdivisions'
-        li = link_to 'Заявки ресурсов', '#requests'
-        li class="nav-header" Топы
-        li = link_to 'Проекты', '#projects_top'
-        li = link_to 'Организации', '#organizations_top'
-        li = link_to 'Заявки ресурсов', '#requests_top'
-        li class="nav-header" Индивидуальный опросник
-        li = link_to 'Приложения', '#software'
-        li = link_to 'Технологии', '#technologies'
-        li = link_to 'Компиляторы', '#compilators'
-        li = link_to 'Вычисления', '#precision'
-        li = link_to 'Направления обучения', '#learning'
-    | &nbsp;
-  div class="span9" id="reports"
-    h2 id="organizations_count_by_kind" Число организаций по типам
+  div class="row"
+    div class="span3" id="submenu"
+      div class="well" style="padding: 8px 0; max-width: 220px;" id="left-menu"
+        ul class="nav nav-list"
+          li class="nav-header" Распределения
+          li = link_to 'Организации по типам', '#organizations_count_by_kind'
+          li = link_to 'Проекты по типам орг.', '#projects_count_by_organization_kind'
+          li = link_to 'Приоритетные направления', '#directions_of_science_by_count'
+          li = link_to 'Области исследований', '#areas_by_count'
+          li = link_to 'Критические технологии', '#critical_technologies_by_count'
+          li class="nav-header" Суммы
+          li = link_to 'Общие', '#sums'
+          li = link_to 'По подразделениям МГУ', '#sums_by_subdivisions'
+          li = link_to 'Заявки ресурсов', '#requests'
+          li class="nav-header" Топы
+          li = link_to 'Проекты', '#projects_top'
+          li = link_to 'Организации', '#organizations_top'
+          li = link_to 'Заявки ресурсов', '#requests_top'
+          li class="nav-header" Индивидуальный опросник
+          li = link_to 'Приложения', '#software'
+          li = link_to 'Технологии', '#technologies'
+          li = link_to 'Компиляторы', '#compilators'
+          li = link_to 'Вычисления', '#precision'
+          li = link_to 'Направления обучения', '#learning'
+      | &nbsp;
+    div class="span9" id="reports"
+      h2 id="organizations_count_by_kind" Число организаций по типам
 
-    ul class="nav nav-tabs"
-      li class="active" = link_to 'Таблица', '#organizations_count_by_kind_table', data: { toggle: 'tab' }
-      li = link_to 'Диаграмма', '#organizations_count_by_kind_bar', data: { toggle: 'tab' }
-      li = link_to 'Пирог', '#organizations_count_by_kind_pie', data: { toggle: 'tab' }
+      ul class="nav nav-tabs"
+        li class="active" = link_to 'Таблица', '#organizations_count_by_kind_table', data: { toggle: 'tab' }
+        li = link_to 'Диаграмма', '#organizations_count_by_kind_bar', data: { toggle: 'tab' }
+        li = link_to 'Пирог', '#organizations_count_by_kind_pie', data: { toggle: 'tab' }
 
-    div class="tab-content"
-      div class="tab-pane active" id="organizations_count_by_kind_table"
-        table class="table table-bordered table-striped"
-          - @stats.organizations_count_by_kind.each do |title, value|
+      div class="tab-content"
+        div class="tab-pane active" id="organizations_count_by_kind_table"
+          table class="table table-bordered table-striped"
+            - @stats.organizations_count_by_kind.each do |title, value|
+              tr
+                th class="span4" = title
+                td = value
             tr
-              th class="span4" = title
-              td = value
-          tr
-            th class="span4" Всего
-            td = @stats.organizations_count_by_kind_sum
-      div id="organizations_count_by_kind_bar"
-      div id="organizations_count_by_kind_pie"
+              th class="span4" Всего
+              td = @stats.organizations_count_by_kind_sum
+        div id="organizations_count_by_kind_bar"
+        div id="organizations_count_by_kind_pie"
 
-    javascript:
-      Highcharts.render = function(selector, type, series) {
-        var plotOptions
-        if (type == 'column') {
-          plotOptions = {
-            column: {
-              dataLabels: {
-                enabled: true,
-                formatter: function() {
-                  if (this.y > 0) {
-                    return this.y
-                  } else {
-                    return ''
+      javascript:
+        Highcharts.render = function(selector, type, series) {
+          var plotOptions
+          if (type == 'column') {
+            plotOptions = {
+              column: {
+                dataLabels: {
+                  enabled: true,
+                  formatter: function() {
+                    if (this.y > 0) {
+                      return this.y
+                    } else {
+                      return ''
+                    }
+                  }
+                }
+              }
+            }
+          } else if (type == 'pie') {
+            plotOptions = {
+              pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                  enabled: true,
+                  color: '#000000',
+                  connectorColor: '#000000',
+                  formatter: function() {
+                    return '' + this.y + ' (' + this.percentage.toFixed(1) +'%)';
                   }
                 }
               }
             }
           }
-        } else if (type == 'pie') {
-          plotOptions = {
-            pie: {
-              allowPointSelect: true,
-              cursor: 'pointer',
-              dataLabels: {
-                enabled: true,
-                color: '#000000',
-                connectorColor: '#000000',
-                formatter: function() {
-                  return '' + this.y + ' (' + this.percentage.toFixed(1) +'%)';
-                }
-              }
-            }
+          var categories = []
+          for (i in series) {
+            categories.push(series[i].name)
           }
+          new Highcharts.Chart({
+            chart: {
+              renderTo: selector,
+              type: type,
+              events: window.chartEvents
+            },
+            title: { text: '' },
+            xAxis: {
+              categories: categories
+            },
+            yAxis: { title: { text: 'Количество' } },
+            plotOptions: plotOptions,
+            legend: false,
+            series: series
+          })
         }
-        var categories = []
-        for (i in series) {
-          categories.push(series[i].name)
-        }
-        new Highcharts.Chart({
-          chart: {
-            renderTo: selector,
-            type: type,
-            events: window.chartEvents
-          },
-          title: { text: '' },
-          xAxis: {
-            categories: categories
-          },
-          yAxis: { title: { text: 'Количество' } },
-          plotOptions: plotOptions,
-          legend: false,
-          series: series
-        })
-      }
-      Highcharts.render(
-        'organizations_count_by_kind_bar', 'column',
-        #{@stats.organizations_count_by_kind.to_chart(:column).html_safe}
-      )
-      Highcharts.render(
-        'organizations_count_by_kind_pie', 'pie',
-        #{@stats.organizations_count_by_kind.to_chart(:pie, name: 'Количество').html_safe}
-      )
+        Highcharts.render(
+          'organizations_count_by_kind_bar', 'column',
+          #{@stats.organizations_count_by_kind.to_chart(:column).html_safe}
+        )
+        Highcharts.render(
+          'organizations_count_by_kind_pie', 'pie',
+          #{@stats.organizations_count_by_kind.to_chart(:pie, name: 'Количество').html_safe}
+        )
 
-    h2 id="projects_count_by_organization_kind" Число проектов по типам организаций
+      h2 id="projects_count_by_organization_kind" Число проектов по типам организаций
 
-    ul class="nav nav-tabs"
-      li class="active" = link_to 'Таблица', '#projects_count_by_organization_kind_table', data: { toggle: 'tab' }
-      li = link_to 'Диаграмма', '#projects_count_by_organization_kind_bar', data: { toggle: 'tab' }
-      li = link_to 'Пирог', '#projects_count_by_organization_kind_pie', data: { toggle: 'tab' }
+      ul class="nav nav-tabs"
+        li class="active" = link_to 'Таблица', '#projects_count_by_organization_kind_table', data: { toggle: 'tab' }
+        li = link_to 'Диаграмма', '#projects_count_by_organization_kind_bar', data: { toggle: 'tab' }
+        li = link_to 'Пирог', '#projects_count_by_organization_kind_pie', data: { toggle: 'tab' }
 
-    div class="tab-content"
-      div class="tab-pane active" id="projects_count_by_organization_kind_table"
-        table class="table table-bordered table-striped"
-          - @stats.projects_count_by_organization_kind.each do |title, value|
+      div class="tab-content"
+        div class="tab-pane active" id="projects_count_by_organization_kind_table"
+          table class="table table-bordered table-striped"
+            - @stats.projects_count_by_organization_kind.each do |title, value|
+              tr
+                th class="span4" = title
+                td = value
             tr
-              th class="span4" = title
-              td = value
-          tr
-            th class="span4" Всего
-            td = @stats.projects_count_by_organization_kind_sum
+              th class="span4" Всего
+              td = @stats.projects_count_by_organization_kind_sum
             
-      div id="projects_count_by_organization_kind_bar"
-      div id="projects_count_by_organization_kind_pie"
+        div id="projects_count_by_organization_kind_bar"
+        div id="projects_count_by_organization_kind_pie"
 
-    javascript:
-      Highcharts.render(
-        'projects_count_by_organization_kind_bar', 'column',
-        #{@stats.projects_count_by_organization_kind.to_chart(:column).html_safe}
-      )
-      Highcharts.render(
-        'projects_count_by_organization_kind_pie', 'pie',
-        #{@stats.projects_count_by_organization_kind.to_chart(:pie, name: 'Количество').html_safe}
-      )
+      javascript:
+        Highcharts.render(
+          'projects_count_by_organization_kind_bar', 'column',
+          #{@stats.projects_count_by_organization_kind.to_chart(:column).html_safe}
+        )
+        Highcharts.render(
+          'projects_count_by_organization_kind_pie', 'pie',
+          #{@stats.projects_count_by_organization_kind.to_chart(:pie, name: 'Количество').html_safe}
+        )
     
-    h3 id="projects_count_by_msu_subdivisions" Проекты по подразделениям МГУ
+      h3 id="projects_count_by_msu_subdivisions" Проекты по подразделениям МГУ
     
-    ul class="nav nav-tabs"
-      li class="active" = link_to 'Таблица', '#projects_count_by_msu_subdivisions_table', data: { toggle: 'tab' }
-      li = link_to 'Диаграмма', '#projects_count_by_msu_subdivisions_bar', data: { toggle: 'tab' }
-      li = link_to 'Пирог', '#projects_count_by_msu_subdivisions_pie', data: { toggle: 'tab' }
+      ul class="nav nav-tabs"
+        li class="active" = link_to 'Таблица', '#projects_count_by_msu_subdivisions_table', data: { toggle: 'tab' }
+        li = link_to 'Диаграмма', '#projects_count_by_msu_subdivisions_bar', data: { toggle: 'tab' }
+        li = link_to 'Пирог', '#projects_count_by_msu_subdivisions_pie', data: { toggle: 'tab' }
 
-    div class="tab-content"
-      div class="tab-pane active" id="projects_count_by_msu_subdivisions_table"
-        table class="table table-bordered table-striped"
-          - @stats.projects_count_by_msu_subdivisions.each do |title, value|
+      div class="tab-content"
+        div class="tab-pane active" id="projects_count_by_msu_subdivisions_table"
+          table class="table table-bordered table-striped"
+            - @stats.projects_count_by_msu_subdivisions.each do |title, value|
+              tr
+                th class="span4" = title
+                td = value
             tr
-              th class="span4" = title
-              td = value
-          tr
-            th class="span4" Всего
-            td = @stats.projects_count_by_msu_subdivisions_sum
+              th class="span4" Всего
+              td = @stats.projects_count_by_msu_subdivisions_sum
             
-      div id="projects_count_by_msu_subdivisions_bar"
-      div id="projects_count_by_msu_subdivisions_pie"
+        div id="projects_count_by_msu_subdivisions_bar"
+        div id="projects_count_by_msu_subdivisions_pie"
 
-    javascript:
-      Highcharts.render(
-        'projects_count_by_msu_subdivisions_bar', 'column',
-        #{@stats.projects_count_by_msu_subdivisions.to_chart(:column).html_safe}
-      )
-      Highcharts.render(
-        'projects_count_by_msu_subdivisions_pie', 'pie',
-        #{@stats.projects_count_by_msu_subdivisions.to_chart(:pie, name: 'Количество').html_safe}
-      )
+      javascript:
+        Highcharts.render(
+          'projects_count_by_msu_subdivisions_bar', 'column',
+          #{@stats.projects_count_by_msu_subdivisions.to_chart(:column).html_safe}
+        )
+        Highcharts.render(
+          'projects_count_by_msu_subdivisions_pie', 'pie',
+          #{@stats.projects_count_by_msu_subdivisions.to_chart(:pie, name: 'Количество').html_safe}
+        )
     
-    h2 id="users_count_by_organization_kind" Число пользователей по типам организаций
+      h2 id="users_count_by_organization_kind" Число пользователей по типам организаций
     
-    ul class="nav nav-tabs"
-      li class="active" = link_to 'Таблица', '#users_count_by_organization_kind_table', data: { toggle: 'tab' }
-      li = link_to 'Диаграмма', '#users_count_by_organization_kind_bar', data: { toggle: 'tab' }
-      li = link_to 'Пирог', '#users_count_by_organization_kind_pie', data: { toggle: 'tab' }
-    
-    div class="tab-content"
-      div class="tab-pane active" id="users_count_by_organization_kind_table"
-        table class="table table-bordered table-striped"
-          - @stats.users_count_by_organization_kind.each do |title, value|
-            tr
-              th class="span4" = title
-              td = value
-      div id="users_count_by_organization_kind_bar"
-      div id="users_count_by_organization_kind_pie"
-    
-    javascript:
-      Highcharts.render(
-        'users_count_by_organization_kind_bar', 'column',
-        #{@stats.users_count_by_organization_kind.to_chart(:column).html_safe}
-      )
-      Highcharts.render(
-        'users_count_by_organization_kind_pie', 'pie',
-        #{@stats.users_count_by_organization_kind.to_chart(:pie, name: 'Количество').html_safe}
-      )
-    
-    h3 id="users_count_by_msu_subdivisions" Пользователи по подразделениям МГУ
-
-    ul class="nav nav-tabs"
-      li class="active" = link_to 'Таблица', '#users_count_by_msu_subdivisions_table', data: { toggle: 'tab' }
-      li = link_to 'Диаграмма', '#users_count_by_msu_subdivisions_bar', data: { toggle: 'tab' }
-      li = link_to 'Пирог', '#users_count_by_msu_subdivisions_pie', data: { toggle: 'tab' }
-
-    div class="tab-content"
-      div class="tab-pane active" id="users_count_by_msu_subdivisions_table"
-        table class="table table-bordered table-striped"
-          - @stats.users_count_by_msu_subdivisions.each do |title, value|
-            tr
-              th class="span4" = title
-              td = value
-          tr
-            th class="span4" Всего
-            td = @stats.users_count_by_msu_subdivisions_sum
-
-      div id="users_count_by_msu_subdivisions_bar"
-      div id="users_count_by_msu_subdivisions_pie"
-
-    javascript:
-      Highcharts.render(
-        'users_count_by_msu_subdivisions_bar', 'column',
-        #{@stats.users_count_by_msu_subdivisions.to_chart(:column).html_safe}
-      )
-      Highcharts.render(
-        'users_count_by_msu_subdivisions_pie', 'pie',
-        #{@stats.users_count_by_msu_subdivisions.to_chart(:pie, name: 'Количество').html_safe}
-      )
-    
-    h2 id="directions_of_science_by_count" Приоритетные направления
-
-    ul class="nav nav-tabs"
-      li class="active" = link_to 'Таблица', '#directions_of_science_by_count_table', data: { toggle: 'tab' }
-      li = link_to 'Диаграмма', '#directions_of_science_by_count_bar', data: { toggle: 'tab' }
-      li = link_to 'Пирог', '#directions_of_science_by_count_pie', data: { toggle: 'tab' }
-
-    div class="tab-content"
-      div class="tab-pane active" id="directions_of_science_by_count_table"
-        table class="table table-bordered table-striped"
-          - @stats.directions_of_science_by_count.each do |title, value|
-            tr
-              th class="span4" = title
-              td = value
-      div id="directions_of_science_by_count_bar"
-      div id="directions_of_science_by_count_pie"
-
-    javascript:
-      Highcharts.render(
-        'directions_of_science_by_count_bar', 'column',
-        #{@stats.directions_of_science_by_count.to_chart(:column).html_safe}
-      )
-      Highcharts.render(
-        'directions_of_science_by_count_pie', 'pie',
-        #{@stats.directions_of_science_by_count.to_chart(:pie, name: 'Количество').html_safe}
-      )
-    
-    h3 id="directions_of_science_count_by_msu_subdivisions" Приоритетные направления по подразделениям МГУ
-      
-    - ::Report::Project::DIRECTIONS_OF_SCIENCE.each_with_index do |direction, i|
-      h4 = direction
-      
       ul class="nav nav-tabs"
-        li class="active" = link_to 'Таблица', "#directions_of_science_#{i}_count_by_msu_subdivisions_table", data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', "#directions_of_science_#{i}_count_by_msu_subdivisions_bar", data: { toggle: 'tab' }, class: 'chartable'
-      
+        li class="active" = link_to 'Таблица', '#users_count_by_organization_kind_table', data: { toggle: 'tab' }
+        li = link_to 'Диаграмма', '#users_count_by_organization_kind_bar', data: { toggle: 'tab' }
+        li = link_to 'Пирог', '#users_count_by_organization_kind_pie', data: { toggle: 'tab' }
+    
       div class="tab-content"
-        div class="tab-pane active" id="directions_of_science_#{i}_count_by_msu_subdivisions_table"
-          div class="accordion" id="directions_of_science_#{i}_group"
-            = accordion_group "directions_of_science_#{i}_group", 'По подразделениям' do
-              table class="table table-bordered table-striped"
-                - @stats.directions_of_science_count_by_msu_subdivisions(direction).each do |subdivision, count|
-                  tr
-                    td class="span6" = subdivision
-                    td = count
-        - key = "directions_of_science_#{i}_count_by_msu_subdivisions_bar"
-        div id="#{key}" data-chart-type="column"
-        javascript:
-          window.series.#{key} = JSON.parse(#{@stats.directions_of_science_count_by_msu_subdivisions(direction).to_chart(:column).to_json.html_safe})
+        div class="tab-pane active" id="users_count_by_organization_kind_table"
+          table class="table table-bordered table-striped"
+            - @stats.users_count_by_organization_kind.each do |title, value|
+              tr
+                th class="span4" = title
+                td = value
+        div id="users_count_by_organization_kind_bar"
+        div id="users_count_by_organization_kind_pie"
     
-    h2 id="areas_by_count" Области исследований
-
-    ul class="nav nav-tabs"
-      li class="active" = link_to 'Таблица', '#areas_by_count_table', data: { toggle: 'tab' }
-      li = link_to 'Диаграмма', '#areas_by_count_bar', data: { toggle: 'tab' }
-      li = link_to 'Пирог', '#areas_by_count_pie', data: { toggle: 'tab' }
-
-    div class="tab-content"
-      div class="tab-pane active" id="areas_by_count_table"
-        table class="table table-bordered table-striped"
-          - @stats.areas_by_count.each do |title, value|
-            tr
-              th class="span4" = title
-              td = value
-      div id="areas_by_count_bar"
-      div id="areas_by_count_pie"
-
-    javascript:
-      Highcharts.render(
-        'areas_by_count_bar', 'column',
-        #{@stats.areas_by_count.to_chart(:column).html_safe}
-      )
-      Highcharts.render(
-        'areas_by_count_pie', 'pie',
-        #{@stats.areas_by_count.to_chart(:pie, name: 'Количество').html_safe}
-      )
-
-    h3 id="areas_by_count_by_msu_subdivisions" Области исследований по подразделениям МГУ
+      javascript:
+        Highcharts.render(
+          'users_count_by_organization_kind_bar', 'column',
+          #{@stats.users_count_by_organization_kind.to_chart(:column).html_safe}
+        )
+        Highcharts.render(
+          'users_count_by_organization_kind_pie', 'pie',
+          #{@stats.users_count_by_organization_kind.to_chart(:pie, name: 'Количество').html_safe}
+        )
     
-    - ::Report::Project::AREAS.values.flatten.each_with_index do |area, i|
-      h4 = area
-      
+      h3 id="users_count_by_msu_subdivisions" Пользователи по подразделениям МГУ
+
       ul class="nav nav-tabs"
-        li class="active" = link_to 'Таблица', "#areas_#{i}_count_by_msu_subdivisions_table", data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', "#areas_#{i}_count_by_msu_subdivisions_bar", data: { toggle: 'tab' }, class: 'chartable'
-      
+        li class="active" = link_to 'Таблица', '#users_count_by_msu_subdivisions_table', data: { toggle: 'tab' }
+        li = link_to 'Диаграмма', '#users_count_by_msu_subdivisions_bar', data: { toggle: 'tab' }
+        li = link_to 'Пирог', '#users_count_by_msu_subdivisions_pie', data: { toggle: 'tab' }
+
       div class="tab-content"
-        div class="tab-pane active" id="areas_#{i}_count_by_msu_subdivisions_table"
-          div class="accordion" id="areas_#{i}_group"
-            = accordion_group "areas_#{i}_group", 'По подразделениям' do
-              table class="table table-bordered table-striped"
-                - @stats.areas_count_by_msu_subdivisions(area).each do |subdivision, count|
-                  tr
-                    td class="span6" = subdivision
-                    td = count
-        - key = "areas_#{i}_count_by_msu_subdivisions_bar"
-        div id="#{key}" data-chart-type="column"
-        javascript:
-          window.series.#{key} = JSON.parse(#{@stats.areas_count_by_msu_subdivisions(area).to_chart(:column).to_json.html_safe})
-  
-    h2 id="critical_technologies_by_count" Критические технологии
-
-    ul class="nav nav-tabs"
-      li class="active" = link_to 'Таблица', '#critical_technologies_by_count_table', data: { toggle: 'tab' }
-      li = link_to 'Диаграмма', '#critical_technologies_by_count_bar', data: { toggle: 'tab' }
-      li = link_to 'Пирог', '#critical_technologies_by_count_pie', data: { toggle: 'tab' }
-
-    div class="tab-content"
-      div class="tab-pane active" id="critical_technologies_by_count_table"
-        table class="table table-bordered table-striped"
-          - @stats.critical_technologies_by_count.each do |title, value|
+        div class="tab-pane active" id="users_count_by_msu_subdivisions_table"
+          table class="table table-bordered table-striped"
+            - @stats.users_count_by_msu_subdivisions.each do |title, value|
+              tr
+                th class="span4" = title
+                td = value
             tr
-              th class="span4" = title
-              td = value
-      div id="critical_technologies_by_count_bar"
-      div id="critical_technologies_by_count_pie"
+              th class="span4" Всего
+              td = @stats.users_count_by_msu_subdivisions_sum
 
-    javascript:
-      Highcharts.render(
-        'critical_technologies_by_count_bar', 'column',
-        #{@stats.critical_technologies_by_count.to_chart(:column).html_safe}
-      )
-      Highcharts.render(
-        'critical_technologies_by_count_pie', 'pie',
-        #{@stats.critical_technologies_by_count.to_chart(:pie, name: 'Количество').html_safe}
-      )
+        div id="users_count_by_msu_subdivisions_bar"
+        div id="users_count_by_msu_subdivisions_pie"
 
-    h3 id="critical_technologies_by_count_by_msu_subdivisions" Критические технологии по подразделениям МГУ
+      javascript:
+        Highcharts.render(
+          'users_count_by_msu_subdivisions_bar', 'column',
+          #{@stats.users_count_by_msu_subdivisions.to_chart(:column).html_safe}
+        )
+        Highcharts.render(
+          'users_count_by_msu_subdivisions_pie', 'pie',
+          #{@stats.users_count_by_msu_subdivisions.to_chart(:pie, name: 'Количество').html_safe}
+        )
+    
+      h2 id="directions_of_science_by_count" Приоритетные направления
 
-    - ::Report::Project::CRITICAL_TECHNOLOGIES.each_with_index do |tech, i|
-      h4 = tech
-      
       ul class="nav nav-tabs"
-        li class="active" = link_to 'Таблица', "#tech_#{i}_count_by_msu_subdivisions_table", data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', "#tech_#{i}_count_by_msu_subdivisions_bar", data: { toggle: 'tab' }, class: 'chartable'
-      
+        li class="active" = link_to 'Таблица', '#directions_of_science_by_count_table', data: { toggle: 'tab' }
+        li = link_to 'Диаграмма', '#directions_of_science_by_count_bar', data: { toggle: 'tab' }
+        li = link_to 'Пирог', '#directions_of_science_by_count_pie', data: { toggle: 'tab' }
+
       div class="tab-content"
-        div class="tab-pane active" id="tech_#{i}_count_by_msu_subdivisions_table"
-          div class="accordion" id="tech_#{i}_group"
-            = accordion_group "tech_#{i}_group", 'По подразделениям' do
-              table class="table table-bordered table-striped"
-                - @stats.tech_count_by_msu_subdivisions(tech).each do |subdivision, count|
-                  tr
-                    td class="span6" = subdivision
-                    td = count
-        - key = "tech_#{i}_count_by_msu_subdivisions_bar"
-        div id="#{key}" data-chart-type="column"
-        javascript:
-          window.series.#{key} = JSON.parse(#{@stats.tech_count_by_msu_subdivisions(tech).to_chart(:column).to_json.html_safe})
-    
+        div class="tab-pane active" id="directions_of_science_by_count_table"
+          table class="table table-bordered table-striped"
+            - @stats.directions_of_science_by_count.each do |title, value|
+              tr
+                th class="span4" = title
+                td = value
+        div id="directions_of_science_by_count_bar"
+        div id="directions_of_science_by_count_pie"
 
-    h2 id="sums" Суммы
+      javascript:
+        Highcharts.render(
+          'directions_of_science_by_count_bar', 'column',
+          #{@stats.directions_of_science_by_count.to_chart(:column).html_safe}
+        )
+        Highcharts.render(
+          'directions_of_science_by_count_pie', 'pie',
+          #{@stats.directions_of_science_by_count.to_chart(:pie, name: 'Количество').html_safe}
+        )
     
-    div class="accordion" id="common_sums"
-      = accordion_group :common_sums, 'Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ' do
-        table class="table table-bordered table-striped"
-          tr
-            th class="span6" Число опубликованных статей по проекту за год
-            td = @stats.books_count
-          tr
-            th class="span6" Число учебников и монографий
-            td = @stats.vacs_count
-          tr
-            th class="span6" Число тезисов докладов
-            td = @stats.lectures_count
-          tr
-            th class="span6" Всего
-            td = @stats.publications_count
+      h3 id="directions_of_science_count_by_msu_subdivisions" Приоритетные направления по подразделениям МГУ
       
-      = accordion_group :common_sums, 'Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ' do
-        table class="table table-bordered table-striped"
-          tr
-            th class="span6" Международные (за рубежом)
-            td = @stats.international_conferences_count
-          tr
-            th class="span6" Международные (в России)
-            td = @stats.international_conferences_in_russia_count
-          tr
-            th class="span6" Российские
-            td = @stats.russian_conferences_count
-          tr
-            th class="span6" Всего
-            td = @stats.conferences_count
+      - ::Report::Project::DIRECTIONS_OF_SCIENCE.each_with_index do |direction, i|
+        h4 = direction
       
-      = accordion_group :common_sums, 'Число защищенных диссертаций, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ' do
-        table class="table table-bordered table-striped"
-          tr
-            th class="span6" Докторских
-            td = @stats.doctors_dissertations_count
-          tr
-            th class="span6" Кандидатских
-            td = @stats.candidates_dissertations_count
-          tr
-            th class="span6" Всего
-            td = @stats.dissertations_count
+        ul class="nav nav-tabs"
+          li class="active" = link_to 'Таблица', "#directions_of_science_#{i}_count_by_msu_subdivisions_table", data: { toggle: 'tab' }
+          li = link_to 'Диаграмма', "#directions_of_science_#{i}_count_by_msu_subdivisions_bar", data: { toggle: 'tab' }, class: 'chartable'
       
-      = accordion_group :common_sums, 'Число учащихся, ведущих научную работу с использованием суперкомпьютерного комплекса МГУ' do
-        table class="table table-bordered table-striped"
-          tr
-            th class="span6" Студентов
-            td = @stats.students_count
-          tr
-            th class="span6" Аспирантов
-            td = @stats.graduates_count
-          tr
-            th class="span6" Всего
-            td = @stats.studies_count
+        div class="tab-content"
+          div class="tab-pane active" id="directions_of_science_#{i}_count_by_msu_subdivisions_table"
+            div class="accordion" id="directions_of_science_#{i}_group"
+              = accordion_group "directions_of_science_#{i}_group", 'По подразделениям' do
+                table class="table table-bordered table-striped"
+                  - @stats.directions_of_science_count_by_msu_subdivisions(direction).each do |subdivision, count|
+                    tr
+                      td class="span6" = subdivision
+                      td = count
+          - key = "directions_of_science_#{i}_count_by_msu_subdivisions_bar"
+          div id="#{key}" data-chart-type="column"
+          javascript:
+            window.series.#{key} = JSON.parse(#{@stats.directions_of_science_count_by_msu_subdivisions(direction).to_chart(:column).to_json.html_safe})
+    
+      h2 id="areas_by_count" Области исследований
+
+      ul class="nav nav-tabs"
+        li class="active" = link_to 'Таблица', '#areas_by_count_table', data: { toggle: 'tab' }
+        li = link_to 'Диаграмма', '#areas_by_count_bar', data: { toggle: 'tab' }
+        li = link_to 'Пирог', '#areas_by_count_pie', data: { toggle: 'tab' }
+
+      div class="tab-content"
+        div class="tab-pane active" id="areas_by_count_table"
+          table class="table table-bordered table-striped"
+            - @stats.areas_by_count.each do |title, value|
+              tr
+                th class="span4" = title
+                td = value
+        div id="areas_by_count_bar"
+        div id="areas_by_count_pie"
+
+      javascript:
+        Highcharts.render(
+          'areas_by_count_bar', 'column',
+          #{@stats.areas_by_count.to_chart(:column).html_safe}
+        )
+        Highcharts.render(
+          'areas_by_count_pie', 'pie',
+          #{@stats.areas_by_count.to_chart(:pie, name: 'Количество').html_safe}
+        )
+
+      h3 id="areas_by_count_by_msu_subdivisions" Области исследований по подразделениям МГУ
+    
+      - ::Report::Project::AREAS.values.flatten.each_with_index do |area, i|
+        h4 = area
       
-      = accordion_group :common_sums, 'Число студентов, прошедших практикум на суперкомпьютерном комплексе МГУ' do
-        table class="table table-bordered table-striped"
-          tr
-            th class="span6" Число студентов
-            td = @stats.your_students_count
+        ul class="nav nav-tabs"
+          li class="active" = link_to 'Таблица', "#areas_#{i}_count_by_msu_subdivisions_table", data: { toggle: 'tab' }
+          li = link_to 'Диаграмма', "#areas_#{i}_count_by_msu_subdivisions_bar", data: { toggle: 'tab' }, class: 'chartable'
       
-      = accordion_group :common_sums, 'Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ' do
-        table class="table table-bordered table-striped"
-          tr
-            th class="span6" РФФИ
-            td = @stats.rffi_grants_count
-          tr
-            th class="span6" Минобрнауки РФ
-            td = @stats.ministry_of_education_grants_count
-          tr
-            th class="span6" Роснано
-            td = @stats.rosnano_grants_count
-          tr
-            th class="span6" Минкомсвязи РФ
-            td = @stats.ministry_of_communications_grants_count
-          tr
-            th class="span6" Минобороны РФ
-            td = @stats.ministry_of_defence_grants_count
-          tr
-            th class="span6" Программы фундаментальных исследований РАН
-            td = @stats.ran_grants_count
-          tr
-            th class="span6" Другие (российские)
-            td = @stats.other_russian_grants_count
-          tr
-            th class="span6" Международные
-            td = @stats.other_intenational_grants_count
-          tr
-            th class="span6" Всего
-            td = @stats.grants_count
+        div class="tab-content"
+          div class="tab-pane active" id="areas_#{i}_count_by_msu_subdivisions_table"
+            div class="accordion" id="areas_#{i}_group"
+              = accordion_group "areas_#{i}_group", 'По подразделениям' do
+                table class="table table-bordered table-striped"
+                  - @stats.areas_count_by_msu_subdivisions(area).each do |subdivision, count|
+                    tr
+                      td class="span6" = subdivision
+                      td = count
+          - key = "areas_#{i}_count_by_msu_subdivisions_bar"
+          div id="#{key}" data-chart-type="column"
+          javascript:
+            window.series.#{key} = JSON.parse(#{@stats.areas_count_by_msu_subdivisions(area).to_chart(:column).to_json.html_safe})
   
-      = accordion_group :common_sums, 'Число премий, наград, медалей и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ' do
-        table class="table table-bordered table-striped"
-          - @stats.award_names.each do |award, count|
-            tr
-              th class="span6" = award
-              td = count
-          tr
-            th class="span3" Всего
-            td = @stats.awards_count
+      h2 id="critical_technologies_by_count" Критические технологии
 
+      ul class="nav nav-tabs"
+        li class="active" = link_to 'Таблица', '#critical_technologies_by_count_table', data: { toggle: 'tab' }
+        li = link_to 'Диаграмма', '#critical_technologies_by_count_bar', data: { toggle: 'tab' }
+        li = link_to 'Пирог', '#critical_technologies_by_count_pie', data: { toggle: 'tab' }
 
-    h3 id="sums_by_subdivisions" По подразделениям МГУ
+      div class="tab-content"
+        div class="tab-pane active" id="critical_technologies_by_count_table"
+          table class="table table-bordered table-striped"
+            - @stats.critical_technologies_by_count.each do |title, value|
+              tr
+                th class="span4" = title
+                td = value
+        div id="critical_technologies_by_count_bar"
+        div id="critical_technologies_by_count_pie"
+
+      javascript:
+        Highcharts.render(
+          'critical_technologies_by_count_bar', 'column',
+          #{@stats.critical_technologies_by_count.to_chart(:column).html_safe}
+        )
+        Highcharts.render(
+          'critical_technologies_by_count_pie', 'pie',
+          #{@stats.critical_technologies_by_count.to_chart(:pie, name: 'Количество').html_safe}
+        )
+
+      h3 id="critical_technologies_by_count_by_msu_subdivisions" Критические технологии по подразделениям МГУ
+
+      - ::Report::Project::CRITICAL_TECHNOLOGIES.each_with_index do |tech, i|
+        h4 = tech
+      
+        ul class="nav nav-tabs"
+          li class="active" = link_to 'Таблица', "#tech_#{i}_count_by_msu_subdivisions_table", data: { toggle: 'tab' }
+          li = link_to 'Диаграмма', "#tech_#{i}_count_by_msu_subdivisions_bar", data: { toggle: 'tab' }, class: 'chartable'
+      
+        div class="tab-content"
+          div class="tab-pane active" id="tech_#{i}_count_by_msu_subdivisions_table"
+            div class="accordion" id="tech_#{i}_group"
+              = accordion_group "tech_#{i}_group", 'По подразделениям' do
+                table class="table table-bordered table-striped"
+                  - @stats.tech_count_by_msu_subdivisions(tech).each do |subdivision, count|
+                    tr
+                      td class="span6" = subdivision
+                      td = count
+          - key = "tech_#{i}_count_by_msu_subdivisions_bar"
+          div id="#{key}" data-chart-type="column"
+          javascript:
+            window.series.#{key} = JSON.parse(#{@stats.tech_count_by_msu_subdivisions(tech).to_chart(:column).to_json.html_safe})
     
-    div class="accordion" id="common_sums_by_subdivisions"
-      = accordion_group :common_sums_by_subdivisions, 'Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ' do
-        table class="table table-bordered table-striped"
-          tr
-            th class="span4" Подразделение
-            th Число опубликованных статей по проекту за год
-            th Число учебников и монографий
-            th Число тезисов докладов
-            th Всего
-          - @stats.publications_count_by_subdivision.each do |sub, counts|
-            tr
-              th = sub
-              - counts.each do |count|
-                td class="span2" = count
+
+      h2 id="sums" Суммы
     
-      = accordion_group :common_sums_by_subdivisions, 'Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ' do
-        table class="table table-bordered table-striped"
-          tr
-            th class="span4" Подразделение
-            th Международные (за рубежом)
-            th Международные (в России)
-            th Российские
-            th Всего
-          - @stats.publications_count_by_subdivision.each do |sub, counts|
+      div class="accordion" id="common_sums"
+        = accordion_group :common_sums, 'Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ' do
+          table class="table table-bordered table-striped"
             tr
-              th = sub
-              - counts.each do |count|
-                td class="span2" = count
-
-      = accordion_group :common_sums_by_subdivisions, 'Число защищенных диссертаций, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ' do
-        table class="table table-bordered table-striped"
-          tr
-            th class="span4" Подразделение
-            th Докторских
-            th Кандидатских
-            th Всего
-          - @stats.dissertations_count_by_subdivision.each do |sub, counts|
+              th class="span6" Число опубликованных статей по проекту за год
+              td = @stats.books_count
             tr
-              th = sub
-              - counts.each do |count|
-                td class="span2" = count
-
-      = accordion_group :common_sums_by_subdivisions, 'Число учащихся, ведущих научную работу с использованием суперкомпьютерного комплекса МГУ' do
-        table class="table table-bordered table-striped"
-          tr
-            th class="span4" Подразделение
-            th Студентов
-            th Аспирантов
-            th Всего
-          - @stats.studies_count_by_subdivision.each do |sub, counts|
+              th class="span6" Число учебников и монографий
+              td = @stats.vacs_count
             tr
-              th = sub
-              - counts.each do |count|
-                td class="span2" = count
+              th class="span6" Число тезисов докладов
+              td = @stats.lectures_count
+            tr
+              th class="span6" Всего
+              td = @stats.publications_count
+      
+        = accordion_group :common_sums, 'Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ' do
+          table class="table table-bordered table-striped"
+            tr
+              th class="span6" Международные (за рубежом)
+              td = @stats.international_conferences_count
+            tr
+              th class="span6" Международные (в России)
+              td = @stats.international_conferences_in_russia_count
+            tr
+              th class="span6" Российские
+              td = @stats.russian_conferences_count
+            tr
+              th class="span6" Всего
+              td = @stats.conferences_count
+      
+        = accordion_group :common_sums, 'Число защищенных диссертаций, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ' do
+          table class="table table-bordered table-striped"
+            tr
+              th class="span6" Докторских
+              td = @stats.doctors_dissertations_count
+            tr
+              th class="span6" Кандидатских
+              td = @stats.candidates_dissertations_count
+            tr
+              th class="span6" Всего
+              td = @stats.dissertations_count
+      
+        = accordion_group :common_sums, 'Число учащихся, ведущих научную работу с использованием суперкомпьютерного комплекса МГУ' do
+          table class="table table-bordered table-striped"
+            tr
+              th class="span6" Студентов
+              td = @stats.students_count
+            tr
+              th class="span6" Аспирантов
+              td = @stats.graduates_count
+            tr
+              th class="span6" Всего
+              td = @stats.studies_count
+      
+        = accordion_group :common_sums, 'Число студентов, прошедших практикум на суперкомпьютерном комплексе МГУ' do
+          table class="table table-bordered table-striped"
+            tr
+              th class="span6" Число студентов
+              td = @stats.your_students_count
+      
+        = accordion_group :common_sums, 'Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ' do
+          table class="table table-bordered table-striped"
+            tr
+              th class="span6" РФФИ
+              td = @stats.rffi_grants_count
+            tr
+              th class="span6" Минобрнауки РФ
+              td = @stats.ministry_of_education_grants_count
+            tr
+              th class="span6" Роснано
+              td = @stats.rosnano_grants_count
+            tr
+              th class="span6" Минкомсвязи РФ
+              td = @stats.ministry_of_communications_grants_count
+            tr
+              th class="span6" Минобороны РФ
+              td = @stats.ministry_of_defence_grants_count
+            tr
+              th class="span6" Программы фундаментальных исследований РАН
+              td = @stats.ran_grants_count
+            tr
+              th class="span6" Другие (российские)
+              td = @stats.other_russian_grants_count
+            tr
+              th class="span6" Международные
+              td = @stats.other_intenational_grants_count
+            tr
+              th class="span6" Всего
+              td = @stats.grants_count
   
-      = accordion_group :common_sums_by_subdivisions, 'Число студентов, прошедших практикум на суперкомпьютерном комплексе МГУ' do
-        table class="table table-bordered table-striped"
-          tr
-            th class="span6" Подразделение
-            th Число студентов
-          - @stats.your_students_count_by_subdivision.each do |sub, counts|
-            tr
-              th = sub
-              td = counts.first
-
-      = accordion_group :common_sums_by_subdivisions, 'Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ' do
-        table class="table table-bordered table-striped"
-          tr
-            th class="span6" Подразделение
-            th РФФИ
-            th Минобрнауки РФ
-            th Роснано
-            th Минкомсвязи РФ
-            th Минобороны РФ
-            th Программы фундаментальных исследований РАН
-            th Другие (российские)
-            th Международные
-            th Всего
-          - @stats.grants_count_by_subdivision.each do |sub, counts|
-            tr
-              th = sub
-              - counts.each do |count|
+        = accordion_group :common_sums, 'Число премий, наград, медалей и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ' do
+          table class="table table-bordered table-striped"
+            - @stats.award_names.each do |award, count|
+              tr
+                th class="span6" = award
                 td = count
+            tr
+              th class="span3" Всего
+              td = @stats.awards_count
 
-      = accordion_group :common_sums_by_subdivisions, 'Число премий, наград, медалей и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ' do
-        table class="table table-bordered table-striped"
-          tr
-            th class="span6" Подразделение
-            th Количество
-          - @stats.award_count_by_subdivision.each do |sub, counts|
-            tr
-              td = sub
-              td = counts.first
 
-    div class="accordion"
-      - @stats.award_names_by_subdivision.each_with_index do |arr, i|
-        - sub, names = arr
-        div class="accordion-group" id="award_names_by_subdivision_#{i}_parent"
-          div class="accordion-heading"
-            = link_to sub, "#award_names_by_subdivision_#{i}", data: { toggle: 'collapse', parent: "#award_names_by_subdivision_#{i}_parent" }, class: 'accordion-toggle'
-          div class="accordion-body collapse" id="award_names_by_subdivision_#{i}"
-            div class="accordion-inner"
-              - if names.any?
-                ul
-                  - names.each do |name|
-                    li = name
-              - else
-                | Нет
+      h3 id="sums_by_subdivisions" По подразделениям МГУ
+    
+      div class="accordion" id="common_sums_by_subdivisions"
+        = accordion_group :common_sums_by_subdivisions, 'Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ' do
+          table class="table table-bordered table-striped"
+            tr
+              th class="span4" Подразделение
+              th Число опубликованных статей по проекту за год
+              th Число учебников и монографий
+              th Число тезисов докладов
+              th Всего
+            - @stats.publications_count_by_subdivision.each do |sub, counts|
+              tr
+                th = sub
+                - counts.each do |count|
+                  td class="span2" = count
+    
+        = accordion_group :common_sums_by_subdivisions, 'Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ' do
+          table class="table table-bordered table-striped"
+            tr
+              th class="span4" Подразделение
+              th Международные (за рубежом)
+              th Международные (в России)
+              th Российские
+              th Всего
+            - @stats.publications_count_by_subdivision.each do |sub, counts|
+              tr
+                th = sub
+                - counts.each do |count|
+                  td class="span2" = count
 
-    h3 id="requests" Заявки ресурсов
+        = accordion_group :common_sums_by_subdivisions, 'Число защищенных диссертаций, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ' do
+          table class="table table-bordered table-striped"
+            tr
+              th class="span4" Подразделение
+              th Докторских
+              th Кандидатских
+              th Всего
+            - @stats.dissertations_count_by_subdivision.each do |sub, counts|
+              tr
+                th = sub
+                - counts.each do |count|
+                  td class="span2" = count
 
-    table class="table table-bordered"
-      tr
-        th Система
-        th Процессорочасы
-        th Объем диска, Gb
-      tr
-        th Ломоносов
-        td
-          = @stats.lomonosov_intel_hours
-          |  Intel, 
-          = @stats.lomonosov_nvidia_hours
-          |  NVIDIA
-        td = @stats.lomonosov_size
-      tr
-        th Чебышев
-        td = @stats.chebyshev_hours
-        td = @stats.chebyshev_size
-      tr
-        th Всего
-        td = @stats.hours_sum
-        td = @stats.size_sum
-
-    h4 Необходимость привязки свободных процессоров к фиксированному времени
-
-    p Всего: #{@stats.strict_schedule_count}
-
-    h2 Топы
-    
-    h3 id="projects_top" Проекты
-    
-    div class="accordion" id="projects_top_publications"
-      = accordion_group :projects_top_publications, 'По количеству публикаций' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:publications_count).first(20).each do |project|
+        = accordion_group :common_sums_by_subdivisions, 'Число учащихся, ведущих научную работу с использованием суперкомпьютерного комплекса МГУ' do
+          table class="table table-bordered table-striped"
             tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.publications_count
-      
-      = accordion_group :projects_top_publications, 'По числу опубликованных статей по проекту за год' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:books_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              td class="span2" = project.books_count
-      
-      = accordion_group :projects_top_publications, 'По числу учебников и монографий' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:vacs_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.vacs_count
-      
-      = accordion_group :projects_top_publications, 'По числу тезисов докладов' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:lectures_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.lectures_count
-    
-    div class="accordion" id="projects_top_conferences"
-      = accordion_group :projects_top_conferences, 'По числу конференций' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:conferences_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.conferences_count
-
-      = accordion_group :projects_top_conferences, 'По международным за рубежом' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:international_conferences_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              td class="span2" = project.international_conferences_count
-
-      = accordion_group :projects_top_conferences, 'По международным в России' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:international_conferences_in_russia_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.international_conferences_in_russia_count
-
-      = accordion_group :projects_top_conferences, 'По российским' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:russian_conferences_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.russian_conferences_count
-    
-    div class="accordion" id="projects_top_dissertations"
-      = accordion_group :projects_top_dissertations, 'По числу защищенных диссертаций' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:dissertations_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.dissertations_count
-      = accordion_group :projects_top_dissertations, 'По докторским' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:doctors_dissertations_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.doctors_dissertations_count
-      = accordion_group :projects_top_dissertations, 'По кандидатским' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:candidates_dissertations_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.candidates_dissertations_count
-    
-    div class="accordion" id="projects_top_studies"
-      = accordion_group :projects_top_studies, 'По числу учащихся' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:studies_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.studies_count
-      = accordion_group :projects_top_studies, 'По студентам' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:students_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.students_count
-      = accordion_group :projects_top_studies, 'По аспирантам' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:graduates_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.graduates_count
-    
-    div class="accordion" id="projects_top_your_students_count"
-      = accordion_group :projects_top_your_students_count, 'По числу учащихся' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:your_students_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.your_students_count
-    
-    div class="accordion" id="projects_top_grants"
-      = accordion_group :projects_top_grants, 'По числу грантов, контрактов, договоров и т.п.' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:grants_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.grants_count
-      = accordion_group :projects_top_grants, 'По РФФИ' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:rffi_grants_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.rffi_grants_count
-      = accordion_group :projects_top_grants, 'По Минобрнауки РФ' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:ministry_of_education_grants_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.ministry_of_education_grants_count
-      = accordion_group :projects_top_grants, 'По Роснано' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:rosnano_grants_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.rosnano_grants_count
-      = accordion_group :projects_top_grants, 'По Минкомсвязи РФ' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:ministry_of_communications_grants_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.ministry_of_communications_grants_count
-      = accordion_group :projects_top_grants, 'По Минобороны РФ' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:ministry_of_defence_grants_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.ministry_of_defence_grants_count
-      = accordion_group :projects_top_grants, 'По программам фундаментальных исследований РАН' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:ran_grants_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.ran_grants_count
-      = accordion_group :projects_top_grants, 'По другим российским' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:other_russian_grants_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.other_russian_grants_count
-      = accordion_group :projects_top_grants, 'По международным' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:other_intenational_grants_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.other_intenational_grants_count
-    
-    div class="accordion" id="projects_top_awards"
-      = accordion_group :projects_top_awards, 'По числу премий, наград, медалей' do
-        table class="table table-bordered table-striped"
-          - @stats.projects_top(:awards_count).first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.awards_count
-    
-    h3 id="organizations_top" Организации
-    
-    div class="accordion" id="organizations_top_publications"
-      = accordion_group :organizations_top_publications, 'По количеству публикаций' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:publications_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.publications_count
-      
-      = accordion_group :organizations_top_publications, 'По числу опубликованных статей по проекту за год' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:books_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              td class="span2" = organization.books_count
-      
-      = accordion_group :organizations_top_publications, 'По числу учебников и монографий' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:vacs_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.vacs_count
-      
-      = accordion_group :organizations_top_publications, 'По числу тезисов докладов' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:lectures_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.lectures_count
-    
-    div class="accordion" id="organizations_top_conferences"
-      = accordion_group :organizations_top_conferences, 'По числу конференций' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:conferences_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.conferences_count
-
-      = accordion_group :organizations_top_conferences, 'По международным за рубежом' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:international_conferences_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              td class="span2" = organization.international_conferences_count
-
-      = accordion_group :organizations_top_conferences, 'По международным в России' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:international_conferences_in_russia_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.international_conferences_in_russia_count
-
-      = accordion_group :organizations_top_conferences, 'По российским' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:russian_conferences_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.russian_conferences_count
-    
-    div class="accordion" id="organizations_top_dissertations"
-      = accordion_group :organizations_top_dissertations, 'По числу защищенных диссертаций' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:dissertations_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.dissertations_count
-      = accordion_group :organizations_top_dissertations, 'По докторским' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:doctors_dissertations_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.doctors_dissertations_count
-      = accordion_group :organizations_top_dissertations, 'По кандидатским' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:candidates_dissertations_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.candidates_dissertations_count
-    
-    div class="accordion" id="organizations_top_studies"
-      = accordion_group :organizations_top_studies, 'По числу учащихся' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:studies_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.studies_count
-      = accordion_group :organizations_top_studies, 'По студентам' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:students_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.students_count
-      = accordion_group :organizations_top_studies, 'По аспирантам' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:graduates_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.graduates_count
-    
-    div class="accordion" id="projects_top_your_students_count"
-      = accordion_group :organizations_top_your_students_count, 'По числу учащихся' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:your_students_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.your_students_count
-    
-    div class="accordion" id="projects_top_grants"
-      = accordion_group :organizations_top_grants, 'По числу грантов, контрактов, договоров и т.п.' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:grants_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.grants_count
-      = accordion_group :organizations_top_grants, 'По РФФИ' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:rffi_grants_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.rffi_grants_count
-      = accordion_group :organizations_top_grants, 'По Минобрнауки РФ' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:ministry_of_education_grants_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.ministry_of_education_grants_count
-      = accordion_group :organizations_top_grants, 'По Роснано' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:rosnano_grants_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.rosnano_grants_count
-      = accordion_group :organizations_top_grants, 'По Минкомсвязи РФ' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:ministry_of_communications_grants_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.ministry_of_communications_grants_count
-      = accordion_group :organizations_top_grants, 'По Минобороны РФ' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:ministry_of_defence_grants_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.ministry_of_defence_grants_count
-      = accordion_group :organizations_top_grants, 'По программам фундаментальных исследований РАН' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:ran_grants_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.ran_grants_count
-      = accordion_group :organizations_top_grants, 'По другим российским' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:other_russian_grants_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.other_russian_grants_count
-      = accordion_group :organizations_top_grants, 'По международным' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:other_intenational_grants_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.other_intenational_grants_count
-    
-    div class="accordion" id="organizations_top_awards"
-      = accordion_group :organizations_top_awards, 'По числу премий, наград, медалей' do
-        table class="table table-bordered table-striped"
-          - @stats.organizations_top(:awards_count).first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.awards_count
-    
-    h3 id="requests_top" Заявки ресурсов
-    
-    div class="accordion" id="projects_top_requests"
-      = accordion_group :projects_top_requests, 'Проекты по процессорочасам Intel на Ломоносов' do
-        table class="table table-bordered table-striped"
-          - @stats.project_requests_top_for_lomonosov_intel_hours.first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.lomonosov_intel_hours
-              
-      = accordion_group :projects_top_requests, 'Проекты по процессорочасам NVIDIA на Ломоносов' do
-        table class="table table-bordered table-striped"
-          - @stats.project_requests_top_for_lomonosov_nvidia_hours.first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.lomonosov_nvidia_hours
-      
-      = accordion_group :projects_top_requests, 'Проекты по процессорочасам на Чебышев' do
-        table class="table table-bordered table-striped"
-          - @stats.project_requests_top_for_chebyshev_hours.first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.chebyshev_hours
-      
-      = accordion_group :projects_top_requests, 'Проекты по размеру на Ломоносове' do
-        table class="table table-bordered table-striped"
-          - @stats.project_requests_top_for_lomonosov_size.first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.lomonosov_size
-      
-      = accordion_group :projects_top_requests, 'Проекты по размеру на Чебышеве' do
-        table class="table table-bordered table-striped"
-          - @stats.project_requests_top_for_chebyshev_size.first(20).each do |project|
-            tr
-              th
-                = project.ru_title
-                br
-                = smart_link_to project.report.user
-              th class="span2" = project.chebyshev_size
-            
-    div class="accordion" id="organization_top_requests"
-      = accordion_group :organization_top_requests, 'Организации по процессорочасам Intel на Ломоносов' do
-        table class="table table-bordered table-striped"
-          - @stats.organization_requests_top_for_lomonosov_intel_hours.first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.lomonosov_intel_hours
-
-      = accordion_group :organization_top_requests, 'Организации по процессорочасам NVIDIA на Ломоносов' do
-        table class="table table-bordered table-striped"
-          - @stats.organization_requests_top_for_lomonosov_nvidia_hours.first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.lomonosov_nvidia_hours
-
-      = accordion_group :organization_top_requests, 'Организации по процессорочасам на Чебышев' do
-        table class="table table-bordered table-striped"
-          - @stats.organization_requests_top_for_chebyshev_hours.first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.chebyshev_hours
-
-      = accordion_group :organization_top_requests, 'Организации по размеру на Ломоносове' do
-        table class="table table-bordered table-striped"
-          - @stats.organization_requests_top_for_lomonosov_size.first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.lomonosov_size
-
-      = accordion_group :organization_top_requests, 'Организации по размеру на Чебышеве' do
-        table class="table table-bordered table-striped"
-          - @stats.organization_requests_top_for_chebyshev_size.first(20).each do |organization|
-            tr
-              th = smart_link_to organization
-              th class="span2" = organization.chebyshev_size
-    
-    div class="accordion" id="top_mix"
-      = accordion_group :top_mix, 'Список нужнающихся в монопольном использовании' do
-        table class="table table-bordered table-striped"
-          tr
-            th Пользователь
-            th Организация
-            th Проект
-            th Системы
-          - @stats.exclusive_usage.each do |project|
-            tr
-              td = smart_link_to project.report.user
-              td = smart_link_to project.report.organization
-              td = project.ru_title
-              td = project.exclusive_usage.find_all(&:present?).to_sentence
-      
-      = accordion_group :top_mix, 'Список изъявивших желание выступить с докладом' do
-        table class="table table-bordered table-striped"
-          tr
-            th Пользователь
-            th Организация
-          - @stats.wanners_speak.each do |project|
-            tr
-              td = smart_link_to project.report.user
-              td = smart_link_to project.report.organization
-      
-    
-    h2 Персональный опросник
-    
-    h3 id="software" Прикладные пакеты, библиотеки и средства используемые в работе на суперкомпьютерном комплексе МГУ
-    
-    table class="table table-bordered table-striped"
-      - @stats.software_top.each do |name, count|
-        tr
-          th class="span5" = name
-          td = count
-    
-    h3 id="request_technologies" Прикладные пакеты, библиотеки и средства сейчас не установленые на суперкомпьютерном комплексе МГУ, но пользователи хотели бы их использовать
-    
-    table class="table table-bordered table-striped"
-      - @stats.request_technologies_top.each do |name, count|
-        tr
-          th class="span5" = name
-          td = count
-    
-    h3 id="technologies" Языки и технологии параллельного программирования используемые или планируемые использовать в ближайшем будущем
-    
-    table class="table table-bordered table-striped"
-      - @stats.technologies_top.each do |name, count|
-        tr
-          th class="span5" = name
-          td = count
-          td = @stats.technology_percent(name)
-    
-    h3 id="compilators" Компиляторы используемые сейчас или планируемые использовать в ближайшем будущем
-    
-    table class="table table-bordered table-striped"
-      - @stats.compilators_top.each do |name, count|
-        tr
-          th class="span5" = name
-          td = count
-          td = @stats.compilator_percent(name)
-    
-    h3 id="precision" Типы вычислений
-    
-    div id="precision_pie"
-    
-    javascript:
-      Highcharts.render(
-        'precision_pie', 'pie',
-        #{@stats.precision.to_chart(:pie, name: 'Количество').html_safe}
-      )
-    
-    h3 id="computing" Вычислительные платформы
-    
-    div id="computing_pie"
-    
-    javascript:
-      Highcharts.render(
-        'computing_pie', 'pie',
-        #{@stats.computing.to_chart(:pie, name: 'Количество').html_safe}
-      )
-    
-    h3 id="learning" Направления обучения
-    
-    table class="table table-bordered table-striped"
-      - @stats.learning_top.each do |name, count|
-        tr
-          th class="span5" = name
-          td = count
-          td = @stats.learning_percent(name)
-    
-    h4 Другие
-    
-    table class="table table-bordered table-striped"
-      - @stats.other_learning.each do |ps|
-        tr
-          th class="span5" = ps.other_learning
-          td = smart_link_to ps.report.user
-    
-javascript:
-  $('#left-menu').affix({
-    offset: {
-      top: 283
-    }
-  })
+              th class="span4" Подразделение
+              th Студентов
+              th Аспирантов
+              th Всего
+            - @stats.studies_count_by_subdivision.each do |sub, counts|
+              tr
+                th = sub
+                - counts.each do |count|
+                  td class="span2" = count
   
-  $('a.chartable[data-toggle="tab"]').on('shown', function(e){
-    div = $(e.target.hash)
-    if (div.is(':empty')) {
-      id = div.attr('id')
-      Highcharts.render(id, div.data('chart-type'), window.series[id])
-    }
-  })
+        = accordion_group :common_sums_by_subdivisions, 'Число студентов, прошедших практикум на суперкомпьютерном комплексе МГУ' do
+          table class="table table-bordered table-striped"
+            tr
+              th class="span6" Подразделение
+              th Число студентов
+            - @stats.your_students_count_by_subdivision.each do |sub, counts|
+              tr
+                th = sub
+                td = counts.first
+
+        = accordion_group :common_sums_by_subdivisions, 'Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ' do
+          table class="table table-bordered table-striped"
+            tr
+              th class="span6" Подразделение
+              th РФФИ
+              th Минобрнауки РФ
+              th Роснано
+              th Минкомсвязи РФ
+              th Минобороны РФ
+              th Программы фундаментальных исследований РАН
+              th Другие (российские)
+              th Международные
+              th Всего
+            - @stats.grants_count_by_subdivision.each do |sub, counts|
+              tr
+                th = sub
+                - counts.each do |count|
+                  td = count
+
+        = accordion_group :common_sums_by_subdivisions, 'Число премий, наград, медалей и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ' do
+          table class="table table-bordered table-striped"
+            tr
+              th class="span6" Подразделение
+              th Количество
+            - @stats.award_count_by_subdivision.each do |sub, counts|
+              tr
+                td = sub
+                td = counts.first
+
+      div class="accordion"
+        - @stats.award_names_by_subdivision.each_with_index do |arr, i|
+          - sub, names = arr
+          div class="accordion-group" id="award_names_by_subdivision_#{i}_parent"
+            div class="accordion-heading"
+              = link_to sub, "#award_names_by_subdivision_#{i}", data: { toggle: 'collapse', parent: "#award_names_by_subdivision_#{i}_parent" }, class: 'accordion-toggle'
+            div class="accordion-body collapse" id="award_names_by_subdivision_#{i}"
+              div class="accordion-inner"
+                - if names.any?
+                  ul
+                    - names.each do |name|
+                      li = name
+                - else
+                  | Нет
+
+      h3 id="requests" Заявки ресурсов
+
+      table class="table table-bordered"
+        tr
+          th Система
+          th Процессорочасы
+          th Объем диска, Gb
+        tr
+          th Ломоносов
+          td
+            = @stats.lomonosov_intel_hours
+            |  Intel, 
+            = @stats.lomonosov_nvidia_hours
+            |  NVIDIA
+          td = @stats.lomonosov_size
+        tr
+          th Чебышев
+          td = @stats.chebyshev_hours
+          td = @stats.chebyshev_size
+        tr
+          th Всего
+          td = @stats.hours_sum
+          td = @stats.size_sum
+
+      h4 Необходимость привязки свободных процессоров к фиксированному времени
+
+      p Всего: #{@stats.strict_schedule_count}
+
+      h2 Топы
+    
+      h3 id="projects_top" Проекты
+    
+      div class="accordion" id="projects_top_publications"
+        = accordion_group :projects_top_publications, 'По количеству публикаций' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:publications_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.publications_count
+      
+        = accordion_group :projects_top_publications, 'По числу опубликованных статей по проекту за год' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:books_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                td class="span2" = project.books_count
+      
+        = accordion_group :projects_top_publications, 'По числу учебников и монографий' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:vacs_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.vacs_count
+      
+        = accordion_group :projects_top_publications, 'По числу тезисов докладов' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:lectures_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.lectures_count
+    
+      div class="accordion" id="projects_top_conferences"
+        = accordion_group :projects_top_conferences, 'По числу конференций' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:conferences_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.conferences_count
+
+        = accordion_group :projects_top_conferences, 'По международным за рубежом' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:international_conferences_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                td class="span2" = project.international_conferences_count
+
+        = accordion_group :projects_top_conferences, 'По международным в России' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:international_conferences_in_russia_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.international_conferences_in_russia_count
+
+        = accordion_group :projects_top_conferences, 'По российским' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:russian_conferences_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.russian_conferences_count
+    
+      div class="accordion" id="projects_top_dissertations"
+        = accordion_group :projects_top_dissertations, 'По числу защищенных диссертаций' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:dissertations_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.dissertations_count
+        = accordion_group :projects_top_dissertations, 'По докторским' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:doctors_dissertations_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.doctors_dissertations_count
+        = accordion_group :projects_top_dissertations, 'По кандидатским' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:candidates_dissertations_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.candidates_dissertations_count
+    
+      div class="accordion" id="projects_top_studies"
+        = accordion_group :projects_top_studies, 'По числу учащихся' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:studies_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.studies_count
+        = accordion_group :projects_top_studies, 'По студентам' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:students_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.students_count
+        = accordion_group :projects_top_studies, 'По аспирантам' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:graduates_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.graduates_count
+    
+      div class="accordion" id="projects_top_your_students_count"
+        = accordion_group :projects_top_your_students_count, 'По числу учащихся' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:your_students_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.your_students_count
+    
+      div class="accordion" id="projects_top_grants"
+        = accordion_group :projects_top_grants, 'По числу грантов, контрактов, договоров и т.п.' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:grants_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.grants_count
+        = accordion_group :projects_top_grants, 'По РФФИ' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:rffi_grants_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.rffi_grants_count
+        = accordion_group :projects_top_grants, 'По Минобрнауки РФ' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:ministry_of_education_grants_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.ministry_of_education_grants_count
+        = accordion_group :projects_top_grants, 'По Роснано' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:rosnano_grants_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.rosnano_grants_count
+        = accordion_group :projects_top_grants, 'По Минкомсвязи РФ' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:ministry_of_communications_grants_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.ministry_of_communications_grants_count
+        = accordion_group :projects_top_grants, 'По Минобороны РФ' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:ministry_of_defence_grants_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.ministry_of_defence_grants_count
+        = accordion_group :projects_top_grants, 'По программам фундаментальных исследований РАН' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:ran_grants_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.ran_grants_count
+        = accordion_group :projects_top_grants, 'По другим российским' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:other_russian_grants_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.other_russian_grants_count
+        = accordion_group :projects_top_grants, 'По международным' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:other_intenational_grants_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.other_intenational_grants_count
+    
+      div class="accordion" id="projects_top_awards"
+        = accordion_group :projects_top_awards, 'По числу премий, наград, медалей' do
+          table class="table table-bordered table-striped"
+            - @stats.projects_top(:awards_count).first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.awards_count
+    
+      h3 id="organizations_top" Организации
+    
+      div class="accordion" id="organizations_top_publications"
+        = accordion_group :organizations_top_publications, 'По количеству публикаций' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:publications_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.publications_count
+      
+        = accordion_group :organizations_top_publications, 'По числу опубликованных статей по проекту за год' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:books_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                td class="span2" = organization.books_count
+      
+        = accordion_group :organizations_top_publications, 'По числу учебников и монографий' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:vacs_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.vacs_count
+      
+        = accordion_group :organizations_top_publications, 'По числу тезисов докладов' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:lectures_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.lectures_count
+    
+      div class="accordion" id="organizations_top_conferences"
+        = accordion_group :organizations_top_conferences, 'По числу конференций' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:conferences_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.conferences_count
+
+        = accordion_group :organizations_top_conferences, 'По международным за рубежом' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:international_conferences_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                td class="span2" = organization.international_conferences_count
+
+        = accordion_group :organizations_top_conferences, 'По международным в России' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:international_conferences_in_russia_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.international_conferences_in_russia_count
+
+        = accordion_group :organizations_top_conferences, 'По российским' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:russian_conferences_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.russian_conferences_count
+    
+      div class="accordion" id="organizations_top_dissertations"
+        = accordion_group :organizations_top_dissertations, 'По числу защищенных диссертаций' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:dissertations_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.dissertations_count
+        = accordion_group :organizations_top_dissertations, 'По докторским' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:doctors_dissertations_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.doctors_dissertations_count
+        = accordion_group :organizations_top_dissertations, 'По кандидатским' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:candidates_dissertations_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.candidates_dissertations_count
+    
+      div class="accordion" id="organizations_top_studies"
+        = accordion_group :organizations_top_studies, 'По числу учащихся' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:studies_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.studies_count
+        = accordion_group :organizations_top_studies, 'По студентам' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:students_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.students_count
+        = accordion_group :organizations_top_studies, 'По аспирантам' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:graduates_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.graduates_count
+    
+      div class="accordion" id="projects_top_your_students_count"
+        = accordion_group :organizations_top_your_students_count, 'По числу учащихся' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:your_students_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.your_students_count
+    
+      div class="accordion" id="projects_top_grants"
+        = accordion_group :organizations_top_grants, 'По числу грантов, контрактов, договоров и т.п.' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:grants_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.grants_count
+        = accordion_group :organizations_top_grants, 'По РФФИ' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:rffi_grants_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.rffi_grants_count
+        = accordion_group :organizations_top_grants, 'По Минобрнауки РФ' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:ministry_of_education_grants_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.ministry_of_education_grants_count
+        = accordion_group :organizations_top_grants, 'По Роснано' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:rosnano_grants_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.rosnano_grants_count
+        = accordion_group :organizations_top_grants, 'По Минкомсвязи РФ' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:ministry_of_communications_grants_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.ministry_of_communications_grants_count
+        = accordion_group :organizations_top_grants, 'По Минобороны РФ' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:ministry_of_defence_grants_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.ministry_of_defence_grants_count
+        = accordion_group :organizations_top_grants, 'По программам фундаментальных исследований РАН' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:ran_grants_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.ran_grants_count
+        = accordion_group :organizations_top_grants, 'По другим российским' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:other_russian_grants_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.other_russian_grants_count
+        = accordion_group :organizations_top_grants, 'По международным' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:other_intenational_grants_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.other_intenational_grants_count
+    
+      div class="accordion" id="organizations_top_awards"
+        = accordion_group :organizations_top_awards, 'По числу премий, наград, медалей' do
+          table class="table table-bordered table-striped"
+            - @stats.organizations_top(:awards_count).first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.awards_count
+    
+      h3 id="requests_top" Заявки ресурсов
+    
+      div class="accordion" id="projects_top_requests"
+        = accordion_group :projects_top_requests, 'Проекты по процессорочасам Intel на Ломоносов' do
+          table class="table table-bordered table-striped"
+            - @stats.project_requests_top_for_lomonosov_intel_hours.first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.lomonosov_intel_hours
+              
+        = accordion_group :projects_top_requests, 'Проекты по процессорочасам NVIDIA на Ломоносов' do
+          table class="table table-bordered table-striped"
+            - @stats.project_requests_top_for_lomonosov_nvidia_hours.first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.lomonosov_nvidia_hours
+      
+        = accordion_group :projects_top_requests, 'Проекты по процессорочасам на Чебышев' do
+          table class="table table-bordered table-striped"
+            - @stats.project_requests_top_for_chebyshev_hours.first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.chebyshev_hours
+      
+        = accordion_group :projects_top_requests, 'Проекты по размеру на Ломоносове' do
+          table class="table table-bordered table-striped"
+            - @stats.project_requests_top_for_lomonosov_size.first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.lomonosov_size
+      
+        = accordion_group :projects_top_requests, 'Проекты по размеру на Чебышеве' do
+          table class="table table-bordered table-striped"
+            - @stats.project_requests_top_for_chebyshev_size.first(20).each do |project|
+              tr
+                th
+                  = project.ru_title
+                  br
+                  = smart_link_to project.report.user
+                th class="span2" = project.chebyshev_size
+            
+      div class="accordion" id="organization_top_requests"
+        = accordion_group :organization_top_requests, 'Организации по процессорочасам Intel на Ломоносов' do
+          table class="table table-bordered table-striped"
+            - @stats.organization_requests_top_for_lomonosov_intel_hours.first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.lomonosov_intel_hours
+
+        = accordion_group :organization_top_requests, 'Организации по процессорочасам NVIDIA на Ломоносов' do
+          table class="table table-bordered table-striped"
+            - @stats.organization_requests_top_for_lomonosov_nvidia_hours.first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.lomonosov_nvidia_hours
+
+        = accordion_group :organization_top_requests, 'Организации по процессорочасам на Чебышев' do
+          table class="table table-bordered table-striped"
+            - @stats.organization_requests_top_for_chebyshev_hours.first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.chebyshev_hours
+
+        = accordion_group :organization_top_requests, 'Организации по размеру на Ломоносове' do
+          table class="table table-bordered table-striped"
+            - @stats.organization_requests_top_for_lomonosov_size.first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.lomonosov_size
+
+        = accordion_group :organization_top_requests, 'Организации по размеру на Чебышеве' do
+          table class="table table-bordered table-striped"
+            - @stats.organization_requests_top_for_chebyshev_size.first(20).each do |organization|
+              tr
+                th = smart_link_to organization
+                th class="span2" = organization.chebyshev_size
+    
+      div class="accordion" id="top_mix"
+        = accordion_group :top_mix, 'Список нужнающихся в монопольном использовании' do
+          table class="table table-bordered table-striped"
+            tr
+              th Пользователь
+              th Организация
+              th Проект
+              th Системы
+            - @stats.exclusive_usage.each do |project|
+              tr
+                td = smart_link_to project.report.user
+                td = smart_link_to project.report.organization
+                td = project.ru_title
+                td = project.exclusive_usage.find_all(&:present?).to_sentence
+      
+        = accordion_group :top_mix, 'Список изъявивших желание выступить с докладом' do
+          table class="table table-bordered table-striped"
+            tr
+              th Пользователь
+              th Организация
+            - @stats.wanners_speak.each do |project|
+              tr
+                td = smart_link_to project.report.user
+                td = smart_link_to project.report.organization
+      
+    
+      h2 Персональный опросник
+    
+      h3 id="software" Прикладные пакеты, библиотеки и средства используемые в работе на суперкомпьютерном комплексе МГУ
+    
+      table class="table table-bordered table-striped"
+        - @stats.software_top.each do |name, count|
+          tr
+            th class="span5" = name
+            td = count
+    
+      h3 id="request_technologies" Прикладные пакеты, библиотеки и средства сейчас не установленые на суперкомпьютерном комплексе МГУ, но пользователи хотели бы их использовать
+    
+      table class="table table-bordered table-striped"
+        - @stats.request_technologies_top.each do |name, count|
+          tr
+            th class="span5" = name
+            td = count
+    
+      h3 id="technologies" Языки и технологии параллельного программирования используемые или планируемые использовать в ближайшем будущем
+    
+      table class="table table-bordered table-striped"
+        - @stats.technologies_top.each do |name, count|
+          tr
+            th class="span5" = name
+            td = count
+            td = @stats.technology_percent(name)
+    
+      h3 id="compilators" Компиляторы используемые сейчас или планируемые использовать в ближайшем будущем
+    
+      table class="table table-bordered table-striped"
+        - @stats.compilators_top.each do |name, count|
+          tr
+            th class="span5" = name
+            td = count
+            td = @stats.compilator_percent(name)
+    
+      h3 id="precision" Типы вычислений
+    
+      div id="precision_pie"
+    
+      javascript:
+        Highcharts.render(
+          'precision_pie', 'pie',
+          #{@stats.precision.to_chart(:pie, name: 'Количество').html_safe}
+        )
+    
+      h3 id="computing" Вычислительные платформы
+    
+      div id="computing_pie"
+    
+      javascript:
+        Highcharts.render(
+          'computing_pie', 'pie',
+          #{@stats.computing.to_chart(:pie, name: 'Количество').html_safe}
+        )
+    
+      h3 id="learning" Направления обучения
+    
+      table class="table table-bordered table-striped"
+        - @stats.learning_top.each do |name, count|
+          tr
+            th class="span5" = name
+            td = count
+            td = @stats.learning_percent(name)
+    
+      h4 Другие
+    
+      table class="table table-bordered table-striped"
+        - @stats.other_learning.each do |ps|
+          tr
+            th class="span5" = ps.other_learning
+            td = smart_link_to ps.report.user
+    
+  javascript:
+    $('#left-menu').affix({
+      offset: {
+        top: 283
+      }
+    })
+  
+    $('a.chartable[data-toggle="tab"]').on('shown', function(e){
+      div = $(e.target.hash)
+      if (div.is(':empty')) {
+        id = div.attr('id')
+        Highcharts.render(id, div.data('chart-type'), window.series[id])
+      }
+    })
