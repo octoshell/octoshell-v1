@@ -49,6 +49,9 @@ div class="row"
             tr
               th class="span4" = title
               td = value
+          tr
+            th class="span4" Всего
+            td = @stats.organizations_count_by_kind_sum
       div id="organizations_count_by_kind_bar"
       div id="organizations_count_by_kind_pie"
 
@@ -129,6 +132,10 @@ div class="row"
             tr
               th class="span4" = title
               td = value
+          tr
+            th class="span4" Всего
+            td = @stats.projects_count_by_organization_kind_sum
+            
       div id="projects_count_by_organization_kind_bar"
       div id="projects_count_by_organization_kind_pie"
 
@@ -141,7 +148,38 @@ div class="row"
         'projects_count_by_organization_kind_pie', 'pie',
         #{@stats.projects_count_by_organization_kind.to_chart(:pie, name: 'Количество').html_safe}
       )
-      
+    
+    h3 id="projects_count_by_msu_subdivistions" Проекты по подразделениям МГУ
+    
+    ul class="nav nav-tabs"
+      li class="active" = link_to 'Таблица', '#projects_count_by_msu_subdivistions_table', data: { toggle: 'tab' }
+      li = link_to 'Диаграмма', '#projects_count_by_msu_subdivistions_bar', data: { toggle: 'tab' }
+      li = link_to 'Пирог', '#projects_count_by_msu_subdivistions_pie', data: { toggle: 'tab' }
+
+    div class="tab-content"
+      div class="tab-pane active" id="projects_count_by_msu_subdivistions_table"
+        table class="table table-bordered table-striped"
+          - @stats.projects_count_by_msu_subdivistions.each do |title, value|
+            tr
+              th class="span4" = title
+              td = value
+          tr
+            th class="span4" Всего
+            td = @stats.projects_count_by_msu_subdivistions_sum
+            
+      div id="projects_count_by_msu_subdivistions_bar"
+      div id="projects_count_by_msu_subdivistions_pie"
+
+    javascript:
+      Highcharts.render(
+        'projects_count_by_msu_subdivistions_bar', 'column',
+        #{@stats.projects_count_by_msu_subdivistions.to_chart(:column).html_safe}
+      )
+      Highcharts.render(
+        'projects_count_by_msu_subdivistions_pie', 'pie',
+        #{@stats.projects_count_by_msu_subdivistions.to_chart(:pie, name: 'Количество').html_safe}
+      )
+    
     h2 id="users_count_by_organization_kind" Число пользователей по типам организаций
     
     ul class="nav nav-tabs"
@@ -167,6 +205,37 @@ div class="row"
       Highcharts.render(
         'users_count_by_organization_kind_pie', 'pie',
         #{@stats.users_count_by_organization_kind.to_chart(:pie, name: 'Количество').html_safe}
+      )
+    
+    h3 id="users_count_by_msu_subdivistions" Пользователи по подразделениям МГУ
+
+    ul class="nav nav-tabs"
+      li class="active" = link_to 'Таблица', '#users_count_by_msu_subdivisions_table', data: { toggle: 'tab' }
+      li = link_to 'Диаграмма', '#users_count_by_msu_subdivisions_bar', data: { toggle: 'tab' }
+      li = link_to 'Пирог', '#users_count_by_msu_subdivisions_pie', data: { toggle: 'tab' }
+
+    div class="tab-content"
+      div class="tab-pane active" id="users_count_by_msu_subdivisions_table"
+        table class="table table-bordered table-striped"
+          - @stats.users_count_by_msu_subdivisions.each do |title, value|
+            tr
+              th class="span4" = title
+              td = value
+          tr
+            th class="span4" Всего
+            td = @stats.users_count_by_msu_subdivisions_sum
+
+      div id="users_count_by_msu_subdivisions_bar"
+      div id="users_count_by_msu_subdivisions_pie"
+
+    javascript:
+      Highcharts.render(
+        'users_count_by_msu_subdivisions_bar', 'column',
+        #{@stats.users_count_by_msu_subdivisions.to_chart(:column).html_safe}
+      )
+      Highcharts.render(
+        'users_count_by_msu_subdivisions_pie', 'pie',
+        #{@stats.users_count_by_msu_subdivisions.to_chart(:pie, name: 'Количество').html_safe}
       )
     
     h2 id="directions_of_science_by_count" Направления исследований

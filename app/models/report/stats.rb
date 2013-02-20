@@ -12,6 +12,14 @@ class Report::Stats
     end.extend(Chartable)
   end
   
+  def organizations_count_by_kind_sum
+    organizations_count_by_kind.sum(&:last)
+  end
+  
+  def projects_count_by_organization_kind_sum
+    projects_count_by_organization_kind.sum(&:last)
+  end
+  
   def projects_count_by_organization_kind
     data = []
     data = reports_grouped_by_org_kind.inject([]) do |data, group|
@@ -22,10 +30,17 @@ class Report::Stats
       msu_organization.abbreviation,
       msu_organization_reports.sum { |r| r.projects.size }
     ]
-    msu_subdivisions.each do |subdivision, reports|
-      data << [subdivision, reports.sum { |r| r.projects.size } ]
-    end
     data.extend(Chartable)
+  end
+  
+  def projects_count_by_msu_subdivistions
+    msu_subdivisions.map do |subdivision, reports|
+      [subdivision, reports.sum { |r| r.projects.size } ]
+    end.extend(Chartable)
+  end
+  
+  def projects_count_by_msu_subdivistions_sum
+    projects_count_by_msu_subdivistions.sum(&:last)
   end
   
   def users_count_by_organization_kind
@@ -38,10 +53,17 @@ class Report::Stats
       msu_organization.abbreviation,
       msu_organization_reports.size
     ]
-    msu_subdivisions.each do |subdivision, reports|
-      data << [subdivision, reports.size]
-    end
     data.extend(Chartable)
+  end
+  
+  def users_count_by_msu_subdivisions
+    msu_subdivisions.map do |subdivision, reports|
+      [subdivision, reports.size]
+    end.extend(Chartable)
+  end
+  
+  def users_count_by_msu_subdivisions_sum
+    users_count_by_msu_subdivisions.sum(&:last)
   end
   
   def directions_of_science_by_count
