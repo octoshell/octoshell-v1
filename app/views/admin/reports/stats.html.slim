@@ -188,7 +188,7 @@
                       td class="span6" = subdivision
                       td = count
           - key = "directions_of_science_#{i}_count_by_msu_subdivisions_bar"
-          div id="#{key}" data-chart-type="column"
+          div id="#{key}" class="tab-pane" data-chart-type="column"
           javascript:
             window.series.#{key} = #{{@stats.directions_of_science_count_by_msu_subdivisions(direction).to_chart(:column)}}
     
@@ -232,7 +232,7 @@
                       td class="span6" = subdivision
                       td = count
           - key = "areas_#{i}_count_by_msu_subdivisions_bar"
-          div id="#{key}" data-chart-type="column"
+          div id="#{key}" class="tab-pane" data-chart-type="column"
           javascript:
             window.series.#{key} = #{{@stats.areas_count_by_msu_subdivisions(area).to_chart(:column)}}
   
@@ -276,7 +276,7 @@
                       td class="span6" = subdivision
                       td = count
           - key = "tech_#{i}_count_by_msu_subdivisions_bar"
-          div id="#{key}" data-chart-type="column"
+          div id="#{key}" class="tab-pane" data-chart-type="column"
           javascript:
             window.series.#{key} = #{{@stats.tech_count_by_msu_subdivisions(tech).to_chart(:column)}}
     

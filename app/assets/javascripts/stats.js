@@ -44,7 +44,13 @@ Highcharts.render = function(selector, type, series) {
     },
     title: { text: '' },
     xAxis: {
-      categories: categories
+      categories: categories,
+      labels: {
+        style: {
+          fontSize: '11px',
+          fontFamily: 'Verdana, sans-serif'
+        }
+      }
     },
     yAxis: { title: { text: 'Количество' } },
     plotOptions: plotOptions,
