@@ -1,15 +1,7 @@
 - title 'Статистика по отчетам'
 
-- cache expires_in: 10.minutes do
-  javascript:
-    window.charts = []
-    window.series = {}
-    window.chartEvents = {
-      load: function(chart){
-        $(chart.currentTarget.renderTo).addClass('tab-pane')
-      }
-    }
-  
+- args = Rails.env.developement? ? :tap : [:cache, expires_in: 10.minutes]
+- send(*args) do
 
   div class="row"
     div class="span3" id="submenu"
@@ -41,8 +33,8 @@
 
       ul class="nav nav-tabs"
         li class="active" = link_to 'Таблица', '#organizations_count_by_kind_table', data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', '#organizations_count_by_kind_bar', data: { toggle: 'tab' }
-        li = link_to 'Пирог', '#organizations_count_by_kind_pie', data: { toggle: 'tab' }
+        li = link_to 'Диаграмма', '#organizations_count_by_kind_bar', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Пирог', '#organizations_count_by_kind_pie', data: { toggle: 'tab' }, class: 'chartable'
 
       div class="tab-content"
         div class="tab-pane active" id="organizations_count_by_kind_table"
@@ -54,78 +46,19 @@
             tr
               th class="span4" Всего
               td = @stats.organizations_count_by_kind_sum
-        div id="organizations_count_by_kind_bar"
-        div id="organizations_count_by_kind_pie"
+        div class="tab-pane" id="organizations_count_by_kind_bar" data-chart-type="column"
+        div class="tab-pane" id="organizations_count_by_kind_pie" data-chart-type="pie"
 
       javascript:
-        Highcharts.render = function(selector, type, series) {
-          var plotOptions
-          if (type == 'column') {
-            plotOptions = {
-              column: {
-                dataLabels: {
-                  enabled: true,
-                  formatter: function() {
-                    if (this.y > 0) {
-                      return this.y
-                    } else {
-                      return ''
-                    }
-                  }
-                }
-              }
-            }
-          } else if (type == 'pie') {
-            plotOptions = {
-              pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                  enabled: true,
-                  color: '#000000',
-                  connectorColor: '#000000',
-                  formatter: function() {
-                    return '' + this.y + ' (' + this.percentage.toFixed(1) +'%)';
-                  }
-                }
-              }
-            }
-          }
-          var categories = []
-          for (i in series) {
-            categories.push(series[i].name)
-          }
-          new Highcharts.Chart({
-            chart: {
-              renderTo: selector,
-              type: type,
-              events: window.chartEvents
-            },
-            title: { text: '' },
-            xAxis: {
-              categories: categories
-            },
-            yAxis: { title: { text: 'Количество' } },
-            plotOptions: plotOptions,
-            legend: false,
-            series: series
-          })
-        }
-        Highcharts.render(
-          'organizations_count_by_kind_bar', 'column',
-          #{@stats.organizations_count_by_kind.to_chart(:column).html_safe}
-        )
-        Highcharts.render(
-          'organizations_count_by_kind_pie', 'pie',
-          #{@stats.organizations_count_by_kind.to_chart(:pie, name: 'Количество').html_safe}
-        )
+        window.series.organizations_count_by_kind_bar = #{{@stats.organizations_count_by_kind.to_chart(:column)}}
+        window.series.organizations_count_by_kind_pie = #{{@stats.organizations_count_by_kind.to_chart(:pie, name: 'Количество')}}
 
       h2 id="projects_count_by_organization_kind" Число проектов по типам организаций
 
       ul class="nav nav-tabs"
         li class="active" = link_to 'Таблица', '#projects_count_by_organization_kind_table', data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', '#projects_count_by_organization_kind_bar', data: { toggle: 'tab' }
-        li = link_to 'Пирог', '#projects_count_by_organization_kind_pie', data: { toggle: 'tab' }
+        li = link_to 'Диаграмма', '#projects_count_by_organization_kind_bar', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Пирог', '#projects_count_by_organization_kind_pie', data: { toggle: 'tab' }, class: 'chartable'
 
       div class="tab-content"
         div class="tab-pane active" id="projects_count_by_organization_kind_table"
@@ -138,25 +71,19 @@
               th class="span4" Всего
               td = @stats.projects_count_by_organization_kind_sum
             
-        div id="projects_count_by_organization_kind_bar"
-        div id="projects_count_by_organization_kind_pie"
+        div id="projects_count_by_organization_kind_bar" class="tab-pane" data-chart-type="column"
+        div id="projects_count_by_organization_kind_pie" class="tab-pane" data-chart-type="pie"
 
       javascript:
-        Highcharts.render(
-          'projects_count_by_organization_kind_bar', 'column',
-          #{@stats.projects_count_by_organization_kind.to_chart(:column).html_safe}
-        )
-        Highcharts.render(
-          'projects_count_by_organization_kind_pie', 'pie',
-          #{@stats.projects_count_by_organization_kind.to_chart(:pie, name: 'Количество').html_safe}
-        )
+        window.series.projects_count_by_organization_kind_bar = #{{@stats.projects_count_by_organization_kind.to_chart(:column)}}
+        window.series.projects_count_by_organization_kind_pie = #{{@stats.projects_count_by_organization_kind.to_chart(:pie, name: 'Количество')}}
     
       h3 id="projects_count_by_msu_subdivisions" Проекты по подразделениям МГУ
     
       ul class="nav nav-tabs"
         li class="active" = link_to 'Таблица', '#projects_count_by_msu_subdivisions_table', data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', '#projects_count_by_msu_subdivisions_bar', data: { toggle: 'tab' }
-        li = link_to 'Пирог', '#projects_count_by_msu_subdivisions_pie', data: { toggle: 'tab' }
+        li = link_to 'Диаграмма', '#projects_count_by_msu_subdivisions_bar', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Пирог', '#projects_count_by_msu_subdivisions_pie', data: { toggle: 'tab' }, class: 'chartable'
 
       div class="tab-content"
         div class="tab-pane active" id="projects_count_by_msu_subdivisions_table"
@@ -169,25 +96,19 @@
               th class="span4" Всего
               td = @stats.projects_count_by_msu_subdivisions_sum
             
-        div id="projects_count_by_msu_subdivisions_bar"
-        div id="projects_count_by_msu_subdivisions_pie"
+        div id="projects_count_by_msu_subdivisions_bar" class="tab-pane" data-chart-type="column"
+        div id="projects_count_by_msu_subdivisions_pie" class="tab-pane" data-chart-type="pie"
 
       javascript:
-        Highcharts.render(
-          'projects_count_by_msu_subdivisions_bar', 'column',
-          #{@stats.projects_count_by_msu_subdivisions.to_chart(:column).html_safe}
-        )
-        Highcharts.render(
-          'projects_count_by_msu_subdivisions_pie', 'pie',
-          #{@stats.projects_count_by_msu_subdivisions.to_chart(:pie, name: 'Количество').html_safe}
-        )
+        window.series.projects_count_by_msu_subdivisions_bar = #{{@stats.projects_count_by_msu_subdivisions.to_chart(:column)}}
+        window.series.projects_count_by_msu_subdivisions_pie = #{{@stats.projects_count_by_msu_subdivisions.to_chart(:pie, name: 'Количество')}}
     
       h2 id="users_count_by_organization_kind" Число пользователей по типам организаций
     
       ul class="nav nav-tabs"
         li class="active" = link_to 'Таблица', '#users_count_by_organization_kind_table', data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', '#users_count_by_organization_kind_bar', data: { toggle: 'tab' }
-        li = link_to 'Пирог', '#users_count_by_organization_kind_pie', data: { toggle: 'tab' }
+        li = link_to 'Диаграмма', '#users_count_by_organization_kind_bar', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Пирог', '#users_count_by_organization_kind_pie', data: { toggle: 'tab' }, class: 'chartable'
     
       div class="tab-content"
         div class="tab-pane active" id="users_count_by_organization_kind_table"
@@ -196,25 +117,19 @@
               tr
                 th class="span4" = title
                 td = value
-        div id="users_count_by_organization_kind_bar"
-        div id="users_count_by_organization_kind_pie"
+        div id="users_count_by_organization_kind_bar" class="tab-pane" data-chart-type="column"
+        div id="users_count_by_organization_kind_pie" class="tab-pane" data-chart-type="pie"
     
       javascript:
-        Highcharts.render(
-          'users_count_by_organization_kind_bar', 'column',
-          #{@stats.users_count_by_organization_kind.to_chart(:column).html_safe}
-        )
-        Highcharts.render(
-          'users_count_by_organization_kind_pie', 'pie',
-          #{@stats.users_count_by_organization_kind.to_chart(:pie, name: 'Количество').html_safe}
-        )
+        window.series.users_count_by_organization_kind_bar = #{{@stats.users_count_by_organization_kind.to_chart(:column)}}
+        window.series.users_count_by_organization_kind_pie = #{{@stats.users_count_by_organization_kind.to_chart(:pie, name: 'Количество')}}
     
       h3 id="users_count_by_msu_subdivisions" Пользователи по подразделениям МГУ
 
       ul class="nav nav-tabs"
         li class="active" = link_to 'Таблица', '#users_count_by_msu_subdivisions_table', data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', '#users_count_by_msu_subdivisions_bar', data: { toggle: 'tab' }
-        li = link_to 'Пирог', '#users_count_by_msu_subdivisions_pie', data: { toggle: 'tab' }
+        li = link_to 'Диаграмма', '#users_count_by_msu_subdivisions_bar', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Пирог', '#users_count_by_msu_subdivisions_pie', data: { toggle: 'tab' }, class: 'chartable'
 
       div class="tab-content"
         div class="tab-pane active" id="users_count_by_msu_subdivisions_table"
@@ -227,25 +142,19 @@
               th class="span4" Всего
               td = @stats.users_count_by_msu_subdivisions_sum
 
-        div id="users_count_by_msu_subdivisions_bar"
-        div id="users_count_by_msu_subdivisions_pie"
+        div id="users_count_by_msu_subdivisions_bar" class="tab-pane" data-chart-type="column"
+        div id="users_count_by_msu_subdivisions_pie" class="tab-pane" data-chart-type="pie"
 
       javascript:
-        Highcharts.render(
-          'users_count_by_msu_subdivisions_bar', 'column',
-          #{@stats.users_count_by_msu_subdivisions.to_chart(:column).html_safe}
-        )
-        Highcharts.render(
-          'users_count_by_msu_subdivisions_pie', 'pie',
-          #{@stats.users_count_by_msu_subdivisions.to_chart(:pie, name: 'Количество').html_safe}
-        )
+        window.series.users_count_by_msu_subdivisions_bar = #{{@stats.users_count_by_msu_subdivisions.to_chart(:column).html_safe}}
+        window.series.users_count_by_msu_subdivisions_pie = #{{@stats.users_count_by_msu_subdivisions.to_chart(:pie, name: 'Количество')}}
     
       h2 id="directions_of_science_by_count" Приоритетные направления
 
       ul class="nav nav-tabs"
         li class="active" = link_to 'Таблица', '#directions_of_science_by_count_table', data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', '#directions_of_science_by_count_bar', data: { toggle: 'tab' }
-        li = link_to 'Пирог', '#directions_of_science_by_count_pie', data: { toggle: 'tab' }
+        li = link_to 'Диаграмма', '#directions_of_science_by_count_bar', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Пирог', '#directions_of_science_by_count_pie', data: { toggle: 'tab' }, class: 'chartable'
 
       div class="tab-content"
         div class="tab-pane active" id="directions_of_science_by_count_table"
@@ -254,18 +163,11 @@
               tr
                 th class="span4" = title
                 td = value
-        div id="directions_of_science_by_count_bar"
-        div id="directions_of_science_by_count_pie"
-
-      javascript:
-        Highcharts.render(
-          'directions_of_science_by_count_bar', 'column',
-          #{@stats.directions_of_science_by_count.to_chart(:column).html_safe}
-        )
-        Highcharts.render(
-          'directions_of_science_by_count_pie', 'pie',
-          #{@stats.directions_of_science_by_count.to_chart(:pie, name: 'Количество').html_safe}
-        )
+        div id="directions_of_science_by_count_bar" class="tab-pane" data-chart-type="column"
+        div id="directions_of_science_by_count_pie" class="tab-pane" data-chart-type="pie"
+        javascript:
+          window.series.directions_of_science_by_count_bar = #{@stats.directions_of_science_by_count.to_chart(:column).html_safe}
+          window.series.directions_of_science_by_count_pie = #{@stats.directions_of_science_by_count.to_chart(:pie, name: 'Количество').html_safe}
     
       h3 id="directions_of_science_count_by_msu_subdivisions" Приоритетные направления по подразделениям МГУ
       
@@ -288,14 +190,14 @@
           - key = "directions_of_science_#{i}_count_by_msu_subdivisions_bar"
           div id="#{key}" data-chart-type="column"
           javascript:
-            window.series.#{key} = JSON.parse(#{@stats.directions_of_science_count_by_msu_subdivisions(direction).to_chart(:column).to_json.html_safe})
+            window.series.#{key} = #{{@stats.directions_of_science_count_by_msu_subdivisions(direction).to_chart(:column)}}
     
       h2 id="areas_by_count" Области исследований
 
       ul class="nav nav-tabs"
         li class="active" = link_to 'Таблица', '#areas_by_count_table', data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', '#areas_by_count_bar', data: { toggle: 'tab' }
-        li = link_to 'Пирог', '#areas_by_count_pie', data: { toggle: 'tab' }
+        li = link_to 'Диаграмма', '#areas_by_count_bar', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Пирог', '#areas_by_count_pie', data: { toggle: 'tab' }, class: 'chartable'
 
       div class="tab-content"
         div class="tab-pane active" id="areas_by_count_table"
@@ -304,18 +206,12 @@
               tr
                 th class="span4" = title
                 td = value
-        div id="areas_by_count_bar"
-        div id="areas_by_count_pie"
+        div id="areas_by_count_bar" class="tab-pane" data-chart-type="column"
+        div id="areas_by_count_pie" class="tab-pane" data-chart-type="pie"
 
       javascript:
-        Highcharts.render(
-          'areas_by_count_bar', 'column',
-          #{@stats.areas_by_count.to_chart(:column).html_safe}
-        )
-        Highcharts.render(
-          'areas_by_count_pie', 'pie',
-          #{@stats.areas_by_count.to_chart(:pie, name: 'Количество').html_safe}
-        )
+        window.series.areas_by_count_bar = #{{@stats.areas_by_count.to_chart(:column)}}
+        window.series.areas_by_count_pie = #{{@stats.areas_by_count.to_chart(:pie, name: 'Количество')}}
 
       h3 id="areas_by_count_by_msu_subdivisions" Области исследований по подразделениям МГУ
     
@@ -338,14 +234,14 @@
           - key = "areas_#{i}_count_by_msu_subdivisions_bar"
           div id="#{key}" data-chart-type="column"
           javascript:
-            window.series.#{key} = JSON.parse(#{@stats.areas_count_by_msu_subdivisions(area).to_chart(:column).to_json.html_safe})
+            window.series.#{key} = #{{@stats.areas_count_by_msu_subdivisions(area).to_chart(:column)}}
   
       h2 id="critical_technologies_by_count" Критические технологии
 
       ul class="nav nav-tabs"
         li class="active" = link_to 'Таблица', '#critical_technologies_by_count_table', data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', '#critical_technologies_by_count_bar', data: { toggle: 'tab' }
-        li = link_to 'Пирог', '#critical_technologies_by_count_pie', data: { toggle: 'tab' }
+        li = link_to 'Диаграмма', '#critical_technologies_by_count_bar', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Пирог', '#critical_technologies_by_count_pie', data: { toggle: 'tab' }, class: 'chartable'
 
       div class="tab-content"
         div class="tab-pane active" id="critical_technologies_by_count_table"
@@ -354,18 +250,12 @@
               tr
                 th class="span4" = title
                 td = value
-        div id="critical_technologies_by_count_bar"
-        div id="critical_technologies_by_count_pie"
+        div id="critical_technologies_by_count_bar" class="tab-pane" data-chart-type="column"
+        div id="critical_technologies_by_count_pie" class="tab-pane" data-chart-type="pie"
 
       javascript:
-        Highcharts.render(
-          'critical_technologies_by_count_bar', 'column',
-          #{@stats.critical_technologies_by_count.to_chart(:column).html_safe}
-        )
-        Highcharts.render(
-          'critical_technologies_by_count_pie', 'pie',
-          #{@stats.critical_technologies_by_count.to_chart(:pie, name: 'Количество').html_safe}
-        )
+        window.series.critical_technologies_by_count_bar = #{{@stats.critical_technologies_by_count.to_chart(:column)}}
+        window.series.critical_technologies_by_count_pie = #{{@stats.critical_technologies_by_count.to_chart(:pie, name: 'Количество')}}
 
       h3 id="critical_technologies_by_count_by_msu_subdivisions" Критические технологии по подразделениям МГУ
 
@@ -388,7 +278,7 @@
           - key = "tech_#{i}_count_by_msu_subdivisions_bar"
           div id="#{key}" data-chart-type="column"
           javascript:
-            window.series.#{key} = JSON.parse(#{@stats.tech_count_by_msu_subdivisions(tech).to_chart(:column).to_json.html_safe})
+            window.series.#{key} = #{{@stats.tech_count_by_msu_subdivisions(tech).to_chart(:column)}}
     
 
       h2 id="sums" Суммы
@@ -1213,7 +1103,7 @@
       javascript:
         Highcharts.render(
           'precision_pie', 'pie',
-          #{@stats.precision.to_chart(:pie, name: 'Количество').html_safe}
+          #{{@stats.precision.to_chart(:pie, name: 'Количество')}}
         )
     
       h3 id="computing" Вычислительные платформы
@@ -1223,7 +1113,7 @@
       javascript:
         Highcharts.render(
           'computing_pie', 'pie',
-          #{@stats.computing.to_chart(:pie, name: 'Количество').html_safe}
+          #{{@stats.computing.to_chart(:pie, name: 'Количество')}}
         )
     
       h3 id="learning" Направления обучения
