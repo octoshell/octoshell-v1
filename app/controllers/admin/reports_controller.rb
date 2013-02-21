@@ -136,14 +136,4 @@ class Admin::ReportsController < Admin::ApplicationController
     @editing   = Report.picked.with_state(:editing).count
     @subnamespace = :progress
   end
-
-private
-  
-  def get_report(id)
-    report = Report.find(id)
-    if !(report.expert == current_user || report.assessing? || report.assessed?)
-      raise MayMay::Unauthorized
-    end
-    report
-  end
 end

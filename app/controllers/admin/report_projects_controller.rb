@@ -10,14 +10,4 @@ class Admin::ReportProjectsController < Admin::ApplicationController
       redirect_to [:admin, @report], alert: project.errors.full_messages.to_sentence
     end
   end
-
-private
-  
-  def get_report(id)
-    report = Report.find(id)
-    if !(report.expert == current_user || report.assessing? || report.assessed?)
-      raise MayMay::Unauthorized
-    end
-    report
-  end
 end

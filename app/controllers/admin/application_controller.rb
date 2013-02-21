@@ -32,4 +32,12 @@ private
   def authorize_admins!
     authorize! :access, :admin
   end
+  
+  def get_report(id)
+    report = Report.find(id)
+    if !(report.expert == current_user || report.assessing? || report.assessed?)
+      raise MayMay::Unauthorized
+    end
+    report
+  end
 end
