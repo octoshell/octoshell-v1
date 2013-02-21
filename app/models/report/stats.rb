@@ -67,11 +67,17 @@ class Report::Stats
   end
   
   def directions_of_science_by_count
-    ::Report::Project::DIRECTIONS_OF_SCIENCE.map do |direction|
-      [direction, @reports.map(&:projects).flatten.find_all do |p|
+    tooltips = []
+    chart = ::Report::Project::DIRECTIONS_OF_SCIENCE.map do |direction|
+      d = cutted_direction_of_science(direction)
+      size = @reports.map(&:projects).flatten.find_all do |p|
         p.directions_of_science.include?(direction)
-      end.size]
+      end.size
+      tooltips << "#{direction}: #{size}"
+      [d, size]
     end.extend(Chartable)
+    chart.default_options = { tooltips: tooltips }
+    chart
   end
   
   def directions_of_science_count_by_msu_subdivisions(direction)
@@ -86,11 +92,17 @@ class Report::Stats
   end
   
   def areas_by_count
-    ::Report::Project::AREAS.values.flatten.map do |area|
-      [area, @reports.map(&:projects).flatten.find_all do |p|
+    tooltips = []
+    chart = ::Report::Project::AREAS.values.flatten.map do |area|
+      a = cutted_area(area)
+      size = @reports.map(&:projects).flatten.find_all do |p|
         p.areas.include?(area)
-      end.size]
+      end.size
+      tooltips << "#{area}: #{size}"
+      [a, size]
     end.extend(Chartable)
+    chart.default_options = { tooltips: tooltips }
+    chart
   end
   
   def areas_count_by_msu_subdivisions(area)
@@ -105,11 +117,17 @@ class Report::Stats
   end
   
   def critical_technologies_by_count
-    ::Report::Project::CRITICAL_TECHNOLOGIES.map do |tech|
-      [tech, @reports.map(&:projects).flatten.find_all do |p|
+    tooltips = []
+    chart = ::Report::Project::CRITICAL_TECHNOLOGIES.map do |tech|
+      t = cutted_tech(tech)
+      size = @reports.map(&:projects).flatten.find_all do |p|
         p.critical_technologies.include?(tech)
-      end.size]
+      end.size
+      tooltips << "#{tech}: #{size}"
+      [t, size]
     end.extend(Chartable)
+    chart.default_options = { tooltips: tooltips }
+    chart
   end
   
   def tech_count_by_msu_subdivisions(tech)
@@ -392,6 +410,18 @@ class Report::Stats
   
   def wanners_speak
     projects.find_all(&:wanna_speak?)
+  end
+  
+  def cutted_direction_of_science(direction)
+    "##{Report::Project::DIRECTIONS_OF_SCIENCE.index(direction).next}"
+  end
+  
+  def cutted_area(area)
+    "##{Report::Project::AREAS.values.flatten.index(area).next}"
+  end
+  
+  def cutted_tech(tech)
+    "##{Report::Project::CRITICAL_TECHNOLOGIES.index(tech).next}"
   end
   
 private

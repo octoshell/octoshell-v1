@@ -1,6 +1,8 @@
 window.series = {}
 
 Highcharts.render = function(selector, type, series) {
+  console.log(series)
+  var tooltips = series[0].tooltips
   var plotOptions;
   if (type == 'column') {
     plotOptions = {
@@ -33,7 +35,15 @@ Highcharts.render = function(selector, type, series) {
       }
     }
   }
-  console.log(series[0])
+  var rotation = 0;
+  var align = 'center';
+  _(series[0].categories).each(function(category){
+    if (category.length > 5) {
+      rotation = -25
+      align = 'right'
+    }
+  })
+  
   new Highcharts.Chart({
     chart: {
       renderTo: selector,
@@ -43,8 +53,8 @@ Highcharts.render = function(selector, type, series) {
     xAxis: {
       categories: series[0].categories,
       labels: {
-        rotation: -25,
-        align: 'right',
+        rotation: rotation,
+        align: align,
         style: {
           fontSize: '11px',
           fontFamily: 'Verdana, sans-serif'
@@ -54,6 +64,11 @@ Highcharts.render = function(selector, type, series) {
     yAxis: { title: { text: 'Количество' } },
     plotOptions: plotOptions,
     legend: false,
+    tooltip: {
+      formatter: function() {
+        return tooltips[this.point.x]
+      }
+    },
     series: series
   });
 };

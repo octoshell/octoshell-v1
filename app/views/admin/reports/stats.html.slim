@@ -33,8 +33,8 @@
 
       ul class="nav nav-tabs"
         li class="active" = link_to 'Таблица', '#organizations_count_by_kind_table', data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', '#organizations_count_by_kind_bar', data: { toggle: 'tab' }, class: 'chartable'
-        li = link_to 'Пирог', '#organizations_count_by_kind_pie', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Диаграмма', '#organizations_count_by_kind_bar_pane', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Пирог', '#organizations_count_by_kind_pie_pane', data: { toggle: 'tab' }, class: 'chartable'
 
       div class="tab-content"
         div class="tab-pane active" id="organizations_count_by_kind_table"
@@ -46,8 +46,10 @@
             tr
               th class="span4" Всего
               td = @stats.organizations_count_by_kind_sum
-        div class="tab-pane" id="organizations_count_by_kind_bar" data-chart-type="column"
-        div class="tab-pane" id="organizations_count_by_kind_pie" data-chart-type="pie"
+        div class="tab-pane" id="organizations_count_by_kind_bar_pane" data-chart-type="column" data-chart-container="organizations_count_by_kind_bar"
+          div id="organizations_count_by_kind_bar"
+        div class="tab-pane" id="organizations_count_by_kind_pie_pane" data-chart-type="pie" data-chart-container="organizations_count_by_kind_pie"
+          div id="organizations_count_by_kind_pie"
 
       javascript:
         window.series.organizations_count_by_kind_bar = #{{@stats.organizations_count_by_kind.to_chart(:column)}}
@@ -57,8 +59,8 @@
 
       ul class="nav nav-tabs"
         li class="active" = link_to 'Таблица', '#projects_count_by_organization_kind_table', data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', '#projects_count_by_organization_kind_bar', data: { toggle: 'tab' }, class: 'chartable'
-        li = link_to 'Пирог', '#projects_count_by_organization_kind_pie', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Диаграмма', '#projects_count_by_organization_kind_bar_pane', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Пирог', '#projects_count_by_organization_kind_pie_pane', data: { toggle: 'tab' }, class: 'chartable'
 
       div class="tab-content"
         div class="tab-pane active" id="projects_count_by_organization_kind_table"
@@ -71,8 +73,10 @@
               th class="span4" Всего
               td = @stats.projects_count_by_organization_kind_sum
             
-        div id="projects_count_by_organization_kind_bar" class="tab-pane" data-chart-type="column"
-        div id="projects_count_by_organization_kind_pie" class="tab-pane" data-chart-type="pie"
+        div id="projects_count_by_organization_kind_bar_pane" class="tab-pane" data-chart-type="column" data-chart-container="projects_count_by_organization_kind_bar"
+          div id="projects_count_by_organization_kind_bar"
+        div id="projects_count_by_organization_kind_pie_pane" class="tab-pane" data-chart-type="pie" data-chart-container="projects_count_by_organization_kind_pie"
+          div id="projects_count_by_organization_kind_pie"
 
       javascript:
         window.series.projects_count_by_organization_kind_bar = #{{@stats.projects_count_by_organization_kind.to_chart(:column)}}
@@ -82,8 +86,8 @@
     
       ul class="nav nav-tabs"
         li class="active" = link_to 'Таблица', '#projects_count_by_msu_subdivisions_table', data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', '#projects_count_by_msu_subdivisions_bar', data: { toggle: 'tab' }, class: 'chartable'
-        li = link_to 'Пирог', '#projects_count_by_msu_subdivisions_pie', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Диаграмма', '#projects_count_by_msu_subdivisions_bar_pane', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Пирог', '#projects_count_by_msu_subdivisions_pie_pane', data: { toggle: 'tab' }, class: 'chartable'
 
       div class="tab-content"
         div class="tab-pane active" id="projects_count_by_msu_subdivisions_table"
@@ -96,8 +100,10 @@
               th class="span4" Всего
               td = @stats.projects_count_by_msu_subdivisions_sum
             
-        div id="projects_count_by_msu_subdivisions_bar" class="tab-pane" data-chart-type="column"
-        div id="projects_count_by_msu_subdivisions_pie" class="tab-pane" data-chart-type="pie"
+        div id="projects_count_by_msu_subdivisions_bar_pane" class="tab-pane" data-chart-type="column" data-chart-container="projects_count_by_msu_subdivisions_bar"
+          div id="projects_count_by_msu_subdivisions_bar"
+        div id="projects_count_by_msu_subdivisions_pie_pane" class="tab-pane" data-chart-type="pie" data-chart-container="projects_count_by_msu_subdivisions_pie"
+          div id="projects_count_by_msu_subdivisions_pie"
 
       javascript:
         window.series.projects_count_by_msu_subdivisions_bar = #{{@stats.projects_count_by_msu_subdivisions.to_chart(:column)}}
@@ -107,8 +113,8 @@
     
       ul class="nav nav-tabs"
         li class="active" = link_to 'Таблица', '#users_count_by_organization_kind_table', data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', '#users_count_by_organization_kind_bar', data: { toggle: 'tab' }, class: 'chartable'
-        li = link_to 'Пирог', '#users_count_by_organization_kind_pie', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Диаграмма', '#users_count_by_organization_kind_bar_pane', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Пирог', '#users_count_by_organization_kind_pie_pane', data: { toggle: 'tab' }, class: 'chartable'
     
       div class="tab-content"
         div class="tab-pane active" id="users_count_by_organization_kind_table"
@@ -117,9 +123,11 @@
               tr
                 th class="span4" = title
                 td = value
-        div id="users_count_by_organization_kind_bar" class="tab-pane" data-chart-type="column"
-        div id="users_count_by_organization_kind_pie" class="tab-pane" data-chart-type="pie"
-    
+        div id="users_count_by_organization_kind_bar_pane" class="tab-pane" data-chart-type="column" data-chart-container="users_count_by_organization_kind_bar"
+          div id="users_count_by_organization_kind_bar"
+        div id="users_count_by_organization_kind_pie_pane" class="tab-pane" data-chart-type="pie" data-chart-container="users_count_by_organization_kind_pie"
+          div id="users_count_by_organization_kind_pie"
+      
       javascript:
         window.series.users_count_by_organization_kind_bar = #{{@stats.users_count_by_organization_kind.to_chart(:column)}}
         window.series.users_count_by_organization_kind_pie = #{{@stats.users_count_by_organization_kind.to_chart(:pie, name: 'Количество')}}
@@ -128,8 +136,8 @@
 
       ul class="nav nav-tabs"
         li class="active" = link_to 'Таблица', '#users_count_by_msu_subdivisions_table', data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', '#users_count_by_msu_subdivisions_bar', data: { toggle: 'tab' }, class: 'chartable'
-        li = link_to 'Пирог', '#users_count_by_msu_subdivisions_pie', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Диаграмма', '#users_count_by_msu_subdivisions_bar_pane', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Пирог', '#users_count_by_msu_subdivisions_pie_pane', data: { toggle: 'tab' }, class: 'chartable'
 
       div class="tab-content"
         div class="tab-pane active" id="users_count_by_msu_subdivisions_table"
@@ -142,8 +150,10 @@
               th class="span4" Всего
               td = @stats.users_count_by_msu_subdivisions_sum
 
-        div id="users_count_by_msu_subdivisions_bar" class="tab-pane" data-chart-type="column"
-        div id="users_count_by_msu_subdivisions_pie" class="tab-pane" data-chart-type="pie"
+        div id="users_count_by_msu_subdivisions_bar_pane" class="tab-pane" data-chart-type="column" data-chart-container="users_count_by_msu_subdivisions_bar"
+          div id="users_count_by_msu_subdivisions_bar"
+        div id="users_count_by_msu_subdivisions_pie_pane" class="tab-pane" data-chart-type="pie" data-chart-container="users_count_by_msu_subdivisions_pie"
+          div id="users_count_by_msu_subdivisions_pie"
 
       javascript:
         window.series.users_count_by_msu_subdivisions_bar = #{{@stats.users_count_by_msu_subdivisions.to_chart(:column).html_safe}}
@@ -153,8 +163,8 @@
 
       ul class="nav nav-tabs"
         li class="active" = link_to 'Таблица', '#directions_of_science_by_count_table', data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', '#directions_of_science_by_count_bar', data: { toggle: 'tab' }, class: 'chartable'
-        li = link_to 'Пирог', '#directions_of_science_by_count_pie', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Диаграмма', '#directions_of_science_by_count_bar_pane', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Пирог', '#directions_of_science_by_count_pie_pane', data: { toggle: 'tab' }, class: 'chartable'
 
       div class="tab-content"
         div class="tab-pane active" id="directions_of_science_by_count_table"
@@ -163,8 +173,15 @@
               tr
                 th class="span4" = title
                 td = value
-        div id="directions_of_science_by_count_bar" class="tab-pane" data-chart-type="column"
-        div id="directions_of_science_by_count_pie" class="tab-pane" data-chart-type="pie"
+        div id="directions_of_science_by_count_bar_pane" class="tab-pane" data-chart-type="column" data-chart-container="directions_of_science_by_count_bar"
+          div id="directions_of_science_by_count_bar"
+          table class="table table-condensed"
+            - Report::Project::DIRECTIONS_OF_SCIENCE.each do |direction|
+              tr
+                th = @stats.cutted_direction_of_science(direction)
+                td = direction
+        div id="directions_of_science_by_count_pie_pane" class="tab-pane" data-chart-type="pie" data-chart-container="directions_of_science_by_count_pie"
+          div id="directions_of_science_by_count_pie"
         javascript:
           window.series.directions_of_science_by_count_bar = #{@stats.directions_of_science_by_count.to_chart(:column).html_safe}
           window.series.directions_of_science_by_count_pie = #{@stats.directions_of_science_by_count.to_chart(:pie, name: 'Количество').html_safe}
@@ -176,7 +193,7 @@
       
         ul class="nav nav-tabs"
           li class="active" = link_to 'Таблица', "#directions_of_science_#{i}_count_by_msu_subdivisions_table", data: { toggle: 'tab' }
-          li = link_to 'Диаграмма', "#directions_of_science_#{i}_count_by_msu_subdivisions_bar", data: { toggle: 'tab' }, class: 'chartable'
+          li = link_to 'Диаграмма', "#directions_of_science_#{i}_count_by_msu_subdivisions_bar_pane", data: { toggle: 'tab' }, class: 'chartable'
       
         div class="tab-content"
           div class="tab-pane active" id="directions_of_science_#{i}_count_by_msu_subdivisions_table"
@@ -188,7 +205,8 @@
                       td class="span6" = subdivision
                       td = count
           - key = "directions_of_science_#{i}_count_by_msu_subdivisions_bar"
-          div id="#{key}" class="tab-pane" data-chart-type="column"
+          div id="#{key}_pane" class="tab-pane" data-chart-type="column" data-chart-container="#{key}"
+            div id="#{key}"
           javascript:
             window.series.#{key} = #{{@stats.directions_of_science_count_by_msu_subdivisions(direction).to_chart(:column)}}
     
@@ -196,8 +214,8 @@
 
       ul class="nav nav-tabs"
         li class="active" = link_to 'Таблица', '#areas_by_count_table', data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', '#areas_by_count_bar', data: { toggle: 'tab' }, class: 'chartable'
-        li = link_to 'Пирог', '#areas_by_count_pie', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Диаграмма', '#areas_by_count_bar_pane', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Пирог', '#areas_by_count_pie_pane', data: { toggle: 'tab' }, class: 'chartable'
 
       div class="tab-content"
         div class="tab-pane active" id="areas_by_count_table"
@@ -206,9 +224,21 @@
               tr
                 th class="span4" = title
                 td = value
-        div id="areas_by_count_bar" class="tab-pane" data-chart-type="column"
-        div id="areas_by_count_pie" class="tab-pane" data-chart-type="pie"
-
+        div id="areas_by_count_bar_pane" class="tab-pane" data-chart-type="column" data-chart-container="areas_by_count_bar"
+          div id="areas_by_count_bar"
+          table class="table table-condensed"
+            - Report::Project::AREAS.values.flatten.each do |area|
+              tr
+                th = @stats.cutted_area(area)
+                td = area
+        div id="areas_by_count_pie_pane" class="tab-pane" data-chart-type="pie" data-chart-container="areas_by_count_pie"
+          div id="areas_by_count_pie"
+          table class="table table-condensed"
+            - Report::Project::AREAS.values.flatten.each do |area|
+              tr
+                th = @stats.cutted_area(area)
+                td = area
+        
       javascript:
         window.series.areas_by_count_bar = #{{@stats.areas_by_count.to_chart(:column)}}
         window.series.areas_by_count_pie = #{{@stats.areas_by_count.to_chart(:pie, name: 'Количество')}}
@@ -220,7 +250,7 @@
       
         ul class="nav nav-tabs"
           li class="active" = link_to 'Таблица', "#areas_#{i}_count_by_msu_subdivisions_table", data: { toggle: 'tab' }
-          li = link_to 'Диаграмма', "#areas_#{i}_count_by_msu_subdivisions_bar", data: { toggle: 'tab' }, class: 'chartable'
+          li = link_to 'Диаграмма', "#areas_#{i}_count_by_msu_subdivisions_bar_pane", data: { toggle: 'tab' }, class: 'chartable'
       
         div class="tab-content"
           div class="tab-pane active" id="areas_#{i}_count_by_msu_subdivisions_table"
@@ -232,7 +262,8 @@
                       td class="span6" = subdivision
                       td = count
           - key = "areas_#{i}_count_by_msu_subdivisions_bar"
-          div id="#{key}" class="tab-pane" data-chart-type="column"
+          div id="#{key}_pane" class="tab-pane" data-chart-type="column" data-chart-container="#{key}"
+            div id="#{key}"
           javascript:
             window.series.#{key} = #{{@stats.areas_count_by_msu_subdivisions(area).to_chart(:column)}}
   
@@ -240,8 +271,8 @@
 
       ul class="nav nav-tabs"
         li class="active" = link_to 'Таблица', '#critical_technologies_by_count_table', data: { toggle: 'tab' }
-        li = link_to 'Диаграмма', '#critical_technologies_by_count_bar', data: { toggle: 'tab' }, class: 'chartable'
-        li = link_to 'Пирог', '#critical_technologies_by_count_pie', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Диаграмма', '#critical_technologies_by_count_bar_pane', data: { toggle: 'tab' }, class: 'chartable'
+        li = link_to 'Пирог', '#critical_technologies_by_count_pie_pane', data: { toggle: 'tab' }, class: 'chartable'
 
       div class="tab-content"
         div class="tab-pane active" id="critical_technologies_by_count_table"
@@ -250,8 +281,20 @@
               tr
                 th class="span4" = title
                 td = value
-        div id="critical_technologies_by_count_bar" class="tab-pane" data-chart-type="column"
-        div id="critical_technologies_by_count_pie" class="tab-pane" data-chart-type="pie"
+        div id="critical_technologies_by_count_bar_pane" class="tab-pane" data-chart-type="column" data-chart-container="critical_technologies_by_count_bar"
+          div id="critical_technologies_by_count_bar"
+          table class="table table-condensed"
+            - Report::Project::CRITICAL_TECHNOLOGIES.each do |tech|
+              tr
+                th = @stats.cutted_tech(tech)
+                td = tech
+        div id="critical_technologies_by_count_pie_pane" class="tab-pane" data-chart-type="pie" data-chart-container="critical_technologies_by_count_pie"
+          div id="critical_technologies_by_count_pie"
+          table class="table table-condensed"
+            - Report::Project::CRITICAL_TECHNOLOGIES.each do |tech|
+              tr
+                th = @stats.cutted_tech(tech)
+                td = tech
 
       javascript:
         window.series.critical_technologies_by_count_bar = #{{@stats.critical_technologies_by_count.to_chart(:column)}}
@@ -264,7 +307,7 @@
       
         ul class="nav nav-tabs"
           li class="active" = link_to 'Таблица', "#tech_#{i}_count_by_msu_subdivisions_table", data: { toggle: 'tab' }
-          li = link_to 'Диаграмма', "#tech_#{i}_count_by_msu_subdivisions_bar", data: { toggle: 'tab' }, class: 'chartable'
+          li = link_to 'Диаграмма', "#tech_#{i}_count_by_msu_subdivisions_bar_pane", data: { toggle: 'tab' }, class: 'chartable'
       
         div class="tab-content"
           div class="tab-pane active" id="tech_#{i}_count_by_msu_subdivisions_table"
@@ -276,7 +319,8 @@
                       td class="span6" = subdivision
                       td = count
           - key = "tech_#{i}_count_by_msu_subdivisions_bar"
-          div id="#{key}" class="tab-pane" data-chart-type="column"
+          div id="#{key}_pane" class="tab-pane" data-chart-type="column" data-chart-container="#{key}"
+            div id="#{key}"
           javascript:
             window.series.#{key} = #{{@stats.tech_count_by_msu_subdivisions(tech).to_chart(:column)}}
     
@@ -1142,8 +1186,8 @@
   
     $('a.chartable[data-toggle="tab"]').on('shown', function(e){
       div = $(e.target.hash)
-      if (div.is(':empty')) {
-        id = div.attr('id')
+      id = div.data('chart-container')
+      if ($("#" + id).is(':empty')) {
         Highcharts.render(id, div.data('chart-type'), window.series[id])
       }
     })
