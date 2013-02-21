@@ -169,7 +169,7 @@
       div class="tab-content"
         div class="tab-pane active" id="directions_of_science_by_count_table"
           table class="table table-bordered table-striped"
-            - @stats.directions_of_science_by_count.each do |title, value|
+            - @stats.directions_of_science_by_count_table.each do |title, value|
               tr
                 th class="span4" = title
                 td = value
@@ -220,7 +220,7 @@
       div class="tab-content"
         div class="tab-pane active" id="areas_by_count_table"
           table class="table table-bordered table-striped"
-            - @stats.areas_by_count.each do |title, value|
+            - @stats.areas_by_count_table.each do |title, value|
               tr
                 th class="span4" = title
                 td = value
@@ -277,7 +277,7 @@
       div class="tab-content"
         div class="tab-pane active" id="critical_technologies_by_count_table"
           table class="table table-bordered table-striped"
-            - @stats.critical_technologies_by_count.each do |title, value|
+            - @stats.critical_technologies_by_count_table.each do |title, value|
               tr
                 th class="span4" = title
                 td = value

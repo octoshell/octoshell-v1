@@ -80,6 +80,15 @@ class Report::Stats
     chart
   end
   
+  def directions_of_science_by_count_table
+    ::Report::Project::DIRECTIONS_OF_SCIENCE.map do |direction|
+      size = @reports.map(&:projects).flatten.find_all do |p|
+        p.directions_of_science.include?(direction)
+      end.size
+      [direction, size]
+    end
+  end
+  
   def directions_of_science_count_by_msu_subdivisions(direction)
     msu_subdivisions.map do |subdivision, reports|
       sum = reports.sum do |report|
@@ -105,6 +114,15 @@ class Report::Stats
     chart
   end
   
+  def areas_by_count_table
+    ::Report::Project::AREAS.values.flatten.map do |area|
+      size = @reports.map(&:projects).flatten.find_all do |p|
+        p.areas.include?(area)
+      end.size
+      [area, size]
+    end
+  end
+  
   def areas_count_by_msu_subdivisions(area)
     msu_subdivisions.map do |subdivision, reports|
       sum = reports.sum do |report|
@@ -128,6 +146,15 @@ class Report::Stats
     end.extend(Chartable)
     chart.default_options = { tooltips: tooltips }
     chart
+  end
+  
+  def critical_technologies_by_count_table
+    ::Report::Project::CRITICAL_TECHNOLOGIES.map do |tech|
+      size = @reports.map(&:projects).flatten.find_all do |p|
+        p.critical_technologies.include?(tech)
+      end.size
+      [tech, size]
+    end
   end
   
   def tech_count_by_msu_subdivisions(tech)
