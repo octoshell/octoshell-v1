@@ -33,10 +33,7 @@ Highcharts.render = function(selector, type, series) {
       }
     }
   }
-  var categories = [];
-  for (i in series) {
-    categories.push(series[i].name)
-  };
+  console.log(series[0])
   new Highcharts.Chart({
     chart: {
       renderTo: selector,
@@ -44,8 +41,10 @@ Highcharts.render = function(selector, type, series) {
     },
     title: { text: '' },
     xAxis: {
-      categories: ['--'],
+      categories: series[0].categories,
       labels: {
+        rotation: -25,
+        align: 'right',
         style: {
           fontSize: '11px',
           fontFamily: 'Verdana, sans-serif'
