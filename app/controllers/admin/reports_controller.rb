@@ -3,8 +3,14 @@ class Admin::ReportsController < Admin::ApplicationController
   before_filter { authorize! :access, :reports }
 
   def index
-    @reports = show_all? ? Report.available : Report.available.page(params[:page])
-    @subnamespace = :index
+    if params[:search]
+      relation = Report
+    else
+      relation = Report.available
+      @subnamespace = :index
+    end
+    @search = relation.search(params[:search])
+    @reports = show_all? ? @search.all : @search.page(params[:page])
   end
 
   def show
