@@ -4,7 +4,7 @@ class Admin::ReportsController < Admin::ApplicationController
 
   def index
     if params[:search]
-      relation = Report
+      relation = Report.assessed
     else
       relation = Report.available
       @subnamespace = :index
