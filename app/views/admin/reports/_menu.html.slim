@@ -1,22 +1,23 @@
-= simple_form_for [:admin, @search], html: { class: 'form-horizontal' } do |f|
-  = f.input :projects_illustrations_points_equals, collection: (0..5), label: 'Оценка иллюстраций равна', required: false
-  = f.input :projects_statement_points_equals, collection: (0..5), label: 'Оценка изложения равна', required: false
-  = f.input :projects_summary_points_equals, collection: (0..5), label: 'Общая оценка равна', required: false
+- if @search
+  = simple_form_for [:admin, @search], html: { class: 'form-horizontal' } do |f|
+    = f.input :projects_illustrations_points_equals, collection: (0..5), label: 'Оценка иллюстраций равна', required: false
+    = f.input :projects_statement_points_equals, collection: (0..5), label: 'Оценка изложения равна', required: false
+    = f.input :projects_summary_points_equals, collection: (0..5), label: 'Общая оценка равна', required: false
   
-  hr
+    hr
 
-  = f.input :projects_illustrations_points_greater_than_or_equal_to, collection: (0..5), label: 'Оценка иллюстраций больше или равна', required: false
-  = f.input :projects_statement_points_greater_than_or_equal_to, collection: (0..5), label: 'Оценка изложения больше или равна', required: false
-  = f.input :projects_summary_points_greater_than_or_equal_to, collection: (0..5), label: 'Общая оценка больше или равна', required: false
+    = f.input :projects_illustrations_points_greater_than_or_equal_to, collection: (0..5), label: 'Оценка иллюстраций больше или равна', required: false
+    = f.input :projects_statement_points_greater_than_or_equal_to, collection: (0..5), label: 'Оценка изложения больше или равна', required: false
+    = f.input :projects_summary_points_greater_than_or_equal_to, collection: (0..5), label: 'Общая оценка больше или равна', required: false
   
-  hr
+    hr
   
-  = f.input :projects_illustrations_points_less_than_or_equal_to, collection: (0..5), label: 'Оценка иллюстраций меньше или равна', required: false
-  = f.input :projects_statement_points_less_than_or_equal_to, collection: (0..5), label: 'Оценка изложения меньше или равна', required: false
-  = f.input :projects_summary_points_less_than_or_equal_to, collection: (0..5), label: 'Общая оценка меньше или равна', required: false
+    = f.input :projects_illustrations_points_less_than_or_equal_to, collection: (0..5), label: 'Оценка иллюстраций меньше или равна', required: false
+    = f.input :projects_statement_points_less_than_or_equal_to, collection: (0..5), label: 'Оценка изложения меньше или равна', required: false
+    = f.input :projects_summary_points_less_than_or_equal_to, collection: (0..5), label: 'Общая оценка меньше или равна', required: false
   
-  div class="form-actions"
-    = f.button :submit, 'Найти'
+    div class="form-actions"
+      = f.button :submit, 'Найти'
 
 ul class="nav nav-pills"
   li class="#{active_menu? :index, true}" = link_to "Неразобранные (#{Report.available.count})", admin_reports_path
