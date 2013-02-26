@@ -981,11 +981,11 @@ ru:
     update_request: "Обновлена <a href='/requests/%{id}'>заявка #%{id}</a>"
     activate_request: "Активирована <a href='/requests/%{id}'>заявка #%{id}</a>"
     decline_request: "Отклонена <a href='/requests/%{id}'>заявка #%{id}</a>"
-    close_request: "Закрыта <a href='/requests/%{id}'>заявка #%{id}</a>"
-    report_assessing: "Отчет #%{id} взят экспертом"
-    report_declined: "Отчет #%{id} возвращен пользователю"
-    report_submitted: "Отчет #%{id} отправлен на рассмотрение"
-    report_assessed: "Отчет #%{id} оценен"
+    close_request: "Закрыта <a href='/requests/%{id}/review'>заявка #%{id}</a>"
+    report_assessing: "<a href='/admin/reports/%{id}/review'>Отчет #%{id}</a> взят экспертом"
+    report_declined: "<a href='/admin/reports/%{id}/review'>Отчет #%{id}</a> возвращен пользователю"
+    report_submitted: "<a href='/admin/reports/%{id}/review'>Отчет #%{id}</a> отправлен на рассмотрение"
+    report_assessed: "<a href='/admin/reports/%{id}/review'>Отчет #%{id}</a> оценен"
     author:
       self: Пользователем
       admin: Администратором
