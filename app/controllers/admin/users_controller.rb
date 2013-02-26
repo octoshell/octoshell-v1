@@ -34,7 +34,7 @@ class Admin::UsersController < Admin::ApplicationController
   
   def history
     @user = User.find(params[:user_id])
-    @history_items = @user.history_items.order(:id)
+    @history_items = @user.history_items.order(:created_at)
   end
   
 private
