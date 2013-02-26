@@ -78,6 +78,7 @@ class ReportsController < ApplicationController
     @report = get_report(params[:report_id])
     @report.attributes = params[:report]
     if @report.completely_valid? && (@report.submitted? || @report.submit!)
+      @report.user.track! :report_submitted, @report, current_user
       redirect_to projects_path, notice: t('.report_submitted')
     else
       flash.now[:alert] = t('.cant_submit_report_because_of_errors')

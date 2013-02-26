@@ -982,6 +982,10 @@ ru:
     activate_request: "Активирована <a href='/requests/%{id}'>заявка #%{id}</a>"
     decline_request: "Отклонена <a href='/requests/%{id}'>заявка #%{id}</a>"
     close_request: "Закрыта <a href='/requests/%{id}'>заявка #%{id}</a>"
+    report_assessing: "Отчет #%{id} взят экспертом"
+    report_declined: "Отчет #%{id} возвращен пользователю"
+    report_submitted: "Отчет #%{id} отправлен на рассмотрение"
+    report_assessed: "Отчет #%{id} оценен"
     author:
       self: Пользователем
       admin: Администратором

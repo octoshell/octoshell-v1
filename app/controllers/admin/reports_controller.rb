@@ -31,6 +31,7 @@ class Admin::ReportsController < Admin::ApplicationController
     @report = Report.find(params[:report_id])
     @report.expert = current_user
     if @report.assessing? or @report.begin_assessing
+      @report.user.track! :report_assessing, @report, current_user
       redirect_to [:admin, @report]
     else
       redirect_to admin_reports_path
@@ -73,6 +74,7 @@ class Admin::ReportsController < Admin::ApplicationController
     authorize! :manage, :reports
     @report = get_report(params[:report_id])
     if @report.assessed? || @report.assess
+      @report.user.track! :report_assessed, @report, current_user
       redirect_to admin_reports_path, notice: t('.report_successfuly_assessed')
     else
       render :show
@@ -82,7 +84,10 @@ class Admin::ReportsController < Admin::ApplicationController
   def decline
     authorize! :manage, :reports
     @report = get_report(params[:report_id])
-    @report.editing? || @report.decline
+    unless @report.editing?
+      @report.decline
+      @report.user.track! :report_declined, @report, current_user
+    end
     redirect_to [:admin, @report], notice: t('.report_returned_to_user_for_edit')
   end
 
@@ -123,6 +128,7 @@ class Admin::ReportsController < Admin::ApplicationController
     authorize! :manage, :reports
     @report = get_report(params[:report_id])
     if @report.submit
+      @report.user.track! :report_submitted, @report, current_user
       redirect_to [:admin, @report], notice: 'Отчет отправлен на оценку'
     else
       redirect_to [:admin, @report], alert: 'Невозможно отправить отчет на оценку'
