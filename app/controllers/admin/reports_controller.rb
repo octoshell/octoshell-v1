@@ -88,7 +88,7 @@ class Admin::ReportsController < Admin::ApplicationController
 
   def review
     authorize! :review, :reports
-    @report = Report.find(params[:report_id])
+    @report = Report.without_state(:editing).find(params[:report_id])
   end
   
   def ticket

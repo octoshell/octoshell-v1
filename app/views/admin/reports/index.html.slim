@@ -37,7 +37,7 @@ table class="table table-bordered table-striped table-condensed"
             = link_to 'Ходатайство', [:admin, report, :supervise]
       td = report.submitted_at and report.submitted_at.strftime("%Y-%m-%d")
       td = smart_link_to report.expert
-      - if may? :review, :reports
+      - if may?(:review, :reports) && !report.editing?
         td = link_to 'Просмотреть', [:admin, report, :review]
 
 = safe_paginate @reports
