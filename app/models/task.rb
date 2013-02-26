@@ -51,7 +51,9 @@ class Task < ActiveRecord::Base
         task = scoped.create! do |task|
           task.procedure = procedure
         end
-        Resque.enqueue TasksRequestsWorker, task.id
+        if task.resource.cluster.id != 1
+          Resque.enqueue TasksRequestsWorker, task.id
+        end
         task
       end
     end
