@@ -64,6 +64,9 @@ class Organization < ActiveRecord::Base
       organization.coprojects.each do |project|
         self.coprojects = (coprojects + projects).uniq
       end
+      Report::Organization.
+        where(organization_id: organization.id).
+        update_all(organization_id: id)
       organization.destroy
     end
   end
