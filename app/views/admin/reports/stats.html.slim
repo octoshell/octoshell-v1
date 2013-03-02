@@ -1097,11 +1097,19 @@
           table class="table table-bordered table-striped"
             tr
               th Пользователь
+              th Email
               th Организация
+              th Подразделение
+              th Проект
+              th Общая оценка отчета
             - @stats.wanners_speak.each do |project|
               tr
                 td = smart_link_to project.report.user
+                td = project.report.user.email
                 td = smart_link_to project.report.organization
+                td = project.report.organizations.first.subdivision
+                td = project.ru_title
+                td = project.summary_points
       
     
       h2 Персональный опросник
