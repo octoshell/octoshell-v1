@@ -1560,8 +1560,7 @@ ALTER SEQUENCE survey_values_id_seq OWNED BY survey_values.id;
 --
 
 CREATE TABLE surveys (
-    id integer NOT NULL,
-    session_id integer
+    id integer NOT NULL
 );
 
 
@@ -3377,13 +3376,6 @@ CREATE UNIQUE INDEX index_survey_values_on_survey_field_id_and_user_id ON survey
 
 
 --
--- Name: index_surveys_on_session_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_surveys_on_session_id ON surveys USING btree (session_id);
-
-
---
 -- Name: index_tasks_on_resource_id_and_resource_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4149,3 +4141,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130311201758');
 INSERT INTO schema_migrations (version) VALUES ('20130311201843');
 
 INSERT INTO schema_migrations (version) VALUES ('20130311202019');
+
+INSERT INTO schema_migrations (version) VALUES ('20130311205123');

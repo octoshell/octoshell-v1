@@ -8,7 +8,7 @@ class Session < ActiveRecord::Base
   
   attr_accessible :start_at, :end_at, as: :admin
   
-  after_create :create_surveys!
+  before_create :create_surveys!
   
 private
   
@@ -26,8 +26,9 @@ private
   end
   
   def create_surveys!
-    create_personal_survey!
-    create_projects_survey!
-    create_counters_survey!
+    self.create_personal_survey!
+    self.create_projects_survey!
+    self.create_counters_survey!
+    true
   end
 end
