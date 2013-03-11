@@ -13,27 +13,36 @@
 
 ul class="breadcrumb"
   - if @form == 'personal_form'
-    li class="active" Персональные данные
+    li class="active"
+      | Персональные данные
+      span class="divider" > 
   - else
-    = link_to 'Персональные данные', edit_report_path(@report, step: 'personal')
-  span class="divider" > 
+    li
+      = link_to 'Персональные данные', edit_report_path(@report, step: 'personal')
+      span class="divider" > 
 
   - if @form == 'personal_survey_form'
-    li class="active" Персональный опрос
+    li class="active"
+      | Персональный опрос
+      span class="divider" > 
   - else
-    li = link_to 'Персональный опрос', edit_report_path(@report, step: 'survey')
-  span class="divider" > 
+    li
+      = link_to 'Персональный опрос', edit_report_path(@report, step: 'survey')
+      span class="divider" > 
 
   - if @form == 'projects_form'
-    li class="active" Проекты
+    li class="active"
+      | Проекты
+      span class="divider" > 
   - else
-    = link_to 'Проекты', edit_report_path(@report, step: 'projects')
-  span class="divider" > 
+    li
+      = link_to 'Проекты', edit_report_path(@report, step: 'projects')
+      span class="divider" > 
 
   - if @form == 'projects_survey_form'
     li class="active" Количественные характеристики
   - else
-    = link_to 'Количественные характеристики', edit_report_path(@report, step: 'projects_survey')
+    li = link_to 'Количественные характеристики', edit_report_path(@report, step: 'projects_survey')
 
 - if @report.submitted?
   div class="alert alert-info lead"
