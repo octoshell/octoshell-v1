@@ -13,7 +13,7 @@ table class="table table-bordered table-striped"
     td = @report.submitted_at.to_s :short
   - @report.projects.each do |p|
     tr
-      th Проект "#{p.ru_title}" обновлен
+      th Обновлен (#{p.ru_title})
       td = p.versions.last.created_at.to_s :short
 
 h3 Личные данные
