@@ -297,6 +297,9 @@ MSU::Application.routes.draw do
       post :ticket
       resources :report_projects, only: :update
     end
+    
+    # sessions
+    resources :sessions, only: [:new, :create, :index, :show]
   end
 
   root to: 'application#dashboard'

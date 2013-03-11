@@ -75,6 +75,8 @@ ru:
       manage: Эксперт (по отчетам)
       review: Возможность просматривать отчеты
       supervise: Возможность принимать/отклонять отчеты сданные после срока
+    sessions:
+      manage: Возможность запускать перерегистрацию
   views:
     pagination:
       next: Следующая
@@ -450,6 +452,10 @@ ru:
               invalid_email: "Не верный формат email: %{email}"
             base:
               not_ready_to_be_activated: Не может быть активирован. Необходимо подтвержденное поручительство и заполенное место работы.
+        session:
+          attributes:
+            base:
+              date_is_out_of_available_range: Не подходящий период
         request:
           attributes:
             base:
@@ -563,6 +569,9 @@ ru:
         precision: Какой тип вычислений наиболее характерен для Ваших задач?
         computing: Касательно вычислительной платформы для Ваших расчетов
         comment: 'Что-то другое, не вошедшее в этот список'
+      session:
+        start_at: Начало
+        end_at: Конец
       user:
         phone: Номер телефона
         email: Email

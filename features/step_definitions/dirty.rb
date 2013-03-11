@@ -192,3 +192,10 @@ Given /^I navigated to the project$/ do
     click_on @project.name
   end
 end
+
+Given /^I have a session from "(.*?)" till "(.*?)"$/ do |start_at, end_at|
+  Session.create! do |s|
+    s.start_at = start_at
+    s.end_at = end_at
+  end
+end

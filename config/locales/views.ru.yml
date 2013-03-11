@@ -39,6 +39,9 @@ ru:
         requests: Заявки
         credentials: Публичные ключи
         all_credentials: "Все публичные ключи (%{count})"
+    sessions:
+      index:
+        new: Новая
     credentials:
       table:
         no_credentials: Нет публичных ключей

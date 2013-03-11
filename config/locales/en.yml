@@ -12,6 +12,12 @@ en:
     attributes:
       project:
         organization: Main Organization
+    errors:
+      models:
+        session:
+          attributes:
+            base:
+              date_is_out_of_available_range: Impossible to create a session
   activemodel:
     errors:
       models:

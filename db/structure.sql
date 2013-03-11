@@ -1390,9 +1390,8 @@ CREATE TABLE schema_migrations (
 
 CREATE TABLE sessions (
     id integer NOT NULL,
-    state character varying(255),
-    started_at timestamp without time zone,
-    ended_at timestamp without time zone
+    start_at date,
+    end_at date
 );
 
 
