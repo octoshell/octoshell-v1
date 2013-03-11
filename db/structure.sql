@@ -1391,7 +1391,10 @@ CREATE TABLE schema_migrations (
 CREATE TABLE sessions (
     id integer NOT NULL,
     start_at date,
-    end_at date
+    end_at date,
+    personal_survey_id integer,
+    projects_survey_id integer,
+    counters_survey_id integer
 );
 
 
@@ -1485,6 +1488,100 @@ CREATE SEQUENCE surety_members_id_seq
 --
 
 ALTER SEQUENCE surety_members_id_seq OWNED BY surety_members.id;
+
+
+--
+-- Name: survey_fields; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE survey_fields (
+    id integer NOT NULL,
+    survey_id integer,
+    kind character varying(255),
+    collection text,
+    collection_sql text,
+    max_values integer DEFAULT 1,
+    weight integer DEFAULT 0
+);
+
+
+--
+-- Name: survey_fields_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE survey_fields_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: survey_fields_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE survey_fields_id_seq OWNED BY survey_fields.id;
+
+
+--
+-- Name: survey_values; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE survey_values (
+    id integer NOT NULL,
+    value text,
+    survey_field_id integer,
+    user_id integer
+);
+
+
+--
+-- Name: survey_values_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE survey_values_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: survey_values_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE survey_values_id_seq OWNED BY survey_values.id;
+
+
+--
+-- Name: surveys; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE surveys (
+    id integer NOT NULL,
+    session_id integer
+);
+
+
+--
+-- Name: surveys_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE surveys_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: surveys_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE surveys_id_seq OWNED BY surveys.id;
 
 
 --
@@ -2268,6 +2365,27 @@ ALTER TABLE ONLY surety_members ALTER COLUMN id SET DEFAULT nextval('surety_memb
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY survey_fields ALTER COLUMN id SET DEFAULT nextval('survey_fields_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY survey_values ALTER COLUMN id SET DEFAULT nextval('survey_values_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY surveys ALTER COLUMN id SET DEFAULT nextval('surveys_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY tasks ALTER COLUMN id SET DEFAULT nextval('tasks_id_seq'::regclass);
 
 
@@ -2673,6 +2791,30 @@ ALTER TABLE ONLY sureties
 
 ALTER TABLE ONLY surety_members
     ADD CONSTRAINT surety_members_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: survey_fields_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY survey_fields
+    ADD CONSTRAINT survey_fields_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: survey_values_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY survey_values
+    ADD CONSTRAINT survey_values_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: surveys_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY surveys
+    ADD CONSTRAINT surveys_pkey PRIMARY KEY (id);
 
 
 --
@@ -3218,6 +3360,27 @@ CREATE UNIQUE INDEX index_surety_members_on_surety_id_and_user_id ON surety_memb
 --
 
 CREATE INDEX index_surety_members_on_user_id ON surety_members USING btree (user_id);
+
+
+--
+-- Name: index_survey_fields_on_survey_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_survey_fields_on_survey_id ON survey_fields USING btree (survey_id);
+
+
+--
+-- Name: index_survey_values_on_survey_field_id_and_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_survey_values_on_survey_field_id_and_user_id ON survey_values USING btree (survey_field_id, user_id);
+
+
+--
+-- Name: index_surveys_on_session_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_surveys_on_session_id ON surveys USING btree (session_id);
 
 
 --
@@ -3974,3 +4137,15 @@ INSERT INTO schema_migrations (version) VALUES ('20130206102858');
 INSERT INTO schema_migrations (version) VALUES ('20130206105842');
 
 INSERT INTO schema_migrations (version) VALUES ('20130311084434');
+
+INSERT INTO schema_migrations (version) VALUES ('20130311200649');
+
+INSERT INTO schema_migrations (version) VALUES ('20130311200850');
+
+INSERT INTO schema_migrations (version) VALUES ('20130311201010');
+
+INSERT INTO schema_migrations (version) VALUES ('20130311201758');
+
+INSERT INTO schema_migrations (version) VALUES ('20130311201843');
+
+INSERT INTO schema_migrations (version) VALUES ('20130311202019');

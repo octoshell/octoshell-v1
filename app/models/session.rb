@@ -1,8 +1,14 @@
 class Session < ActiveRecord::Base
+  belongs_to :personal_survey, class_name: :Survey
+  belongs_to :projects_survey, class_name: :Survey
+  belongs_to :counters_survey, class_name: :Survey
+  
   validates :start_at, :end_at, presence: true
   validate :range_validator, if: proc { |s| s.start_at? && s.end_at? }
   
   attr_accessible :start_at, :end_at, as: :admin
+  
+  after_create :create_surveys!
   
 private
   
@@ -17,5 +23,11 @@ private
     if start_at > end_at
       errors.add(:base, :date_is_out_of_available_range)
     end
+  end
+  
+  def create_surveys!
+    create_personal_survey!
+    create_projects_survey!
+    create_counters_survey!
   end
 end

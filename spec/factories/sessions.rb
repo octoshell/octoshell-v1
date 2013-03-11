@@ -1,6 +1,6 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :session do
+    sequence(:start_at) { |n| Date.today + (n * 5).days }
+    sequence(:end_at) { |n| Date.today + (n * 5 + 1).days }
   end
 end
