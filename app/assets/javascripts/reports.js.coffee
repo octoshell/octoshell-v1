@@ -65,10 +65,11 @@ $ ->
       updater: (item) ->
         @$element.addClass('field-valid')
         item
-    $input.on 'blur', ->
-      if window.cache[url][$input.val()]
-        $controlGroup.removeClass('error').addClass('success')
-      else
-        $controlGroup.removeClass('success').addClass('error')
-    $input.on 'focus', ->
-      $controlGroup.removeClass('error').removeClass('success')
+    if $input.data('strict-collection')
+      $input.on 'blur', ->
+        if window.cache[url][$input.val()]
+          $controlGroup.removeClass('error').addClass('success')
+        else
+          $controlGroup.removeClass('success').addClass('error')
+      $input.on 'focus', ->
+        $controlGroup.removeClass('error').removeClass('success')

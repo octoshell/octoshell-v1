@@ -102,6 +102,9 @@ MSU::Application.routes.draw do
 
   # replies
   resources :replies, only: :create
+  
+  # positions
+  resources :positions, only: :index
 
   namespace :admin do
     # credentials
