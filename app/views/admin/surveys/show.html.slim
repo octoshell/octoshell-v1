@@ -11,11 +11,14 @@ p = link_to 'Новое поле', [:new, :admin, @survey, :survey_field], class
       = field.name
       - if field.required?
         abbr title="Обязательное" *
-    = render field
+    div class="control-group"
+      = render field
     p
-      em = link_to 'Редактировать', [:edit, :admin, @survey, field]
-      |  / 
-      em = link_to 'Удалить', [:admin, @survey, field], class: 'danger', data: { confirm: 'Вы уверены?' }
+      small
+        em
+          = link_to 'Редактировать', [:edit, :admin, @survey, field]
+          |  / 
+          = link_to 'Удалить', [:admin, @survey, field], class: 'danger', data: { confirm: 'Вы уверены?' }
 - else
   p Нет полей
   
