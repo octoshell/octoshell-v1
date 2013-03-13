@@ -3,8 +3,8 @@ class Admin::ClusterUsersController < Admin::ApplicationController
   before_filter { authorize! :manage, :cluster_users }
   
   def index
-    @search = ClusterUser.search(params[:search])
-    @cluster_users = @search.page(params[:page])
+    @search = ClusterUser.search(params[:q])
+    @cluster_users = @search.result(distinct: true).page(params[:page])
   end
   
   def show
@@ -40,6 +40,6 @@ class Admin::ClusterUsersController < Admin::ApplicationController
 private
   
   def setup_default_filter
-    params[:search] ||= { state_in: ['active'] }
+    params[:q] ||= { state_in: ['active'] }
   end
 end

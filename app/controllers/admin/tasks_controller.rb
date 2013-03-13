@@ -4,8 +4,8 @@ class Admin::TasksController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
-    @search = Task.search(params[:search])
-    @tasks = show_all? ? @search.all : @search.page(params[:page])
+    @search = Task.search(params[:q])
+    @tasks = show_all? ? @search.all : @search.result(distinct: true).page(params[:page])
   end
   
   def show
@@ -36,7 +36,7 @@ class Admin::TasksController < Admin::ApplicationController
 private
   
   def setup_default_filter
-    params[:search] ||= {
+    params[:q] ||= {
       state_in: ['failed'],
       procedure_in: Task::PROCEDURES,
       resource_type_in: Task.human_resource_types.map(&:last)

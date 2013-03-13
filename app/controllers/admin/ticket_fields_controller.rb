@@ -5,8 +5,8 @@ class Admin::TicketFieldsController < Admin::ApplicationController
   end
   
   def index
-    @search = TicketField.search(params[:search])
-    @ticket_fields = show_all? ? @search.all : @search.page(params[:page])
+    @search = TicketField.search(params[:q])
+    @ticket_fields = show_all? ? @search.all : @search.result(distinct: true).page(params[:page])
   end
   
   def show
@@ -56,7 +56,7 @@ private
   end
   
   def setup_default_filter
-    params[:search] ||= { state_in: ['active'] }
+    params[:q] ||= { state_in: ['active'] }
   end
 
   def subnamespace

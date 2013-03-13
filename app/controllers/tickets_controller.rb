@@ -4,7 +4,7 @@ class TicketsController < ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
-    @search = current_user.tickets.search(params[:search])
+    @search = current_user.tickets.search(params[:q])
     @tickets = @search.relation.uniq.page(params[:page])
   end
   
@@ -85,7 +85,7 @@ private
   end
   
   def setup_default_filter
-    params[:search] ||= { state_in: ['active', 'answered', 'resolved'] }
+    params[:q] ||= { state_in: ['active', 'answered', 'resolved'] }
     params[:meta_sort] ||= 'id.asc'
   end
 end

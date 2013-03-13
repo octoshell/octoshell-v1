@@ -405,7 +405,7 @@ ru:
       company:
         reverse_name: "Company reverse name-diddly"
       developer:
-        name_contains: "Developer name-diddly contains-aroonie"
+        name_cont: "Developer name-diddly contains-aroonie"
   activerecord:
     models:
       user: Пользователь

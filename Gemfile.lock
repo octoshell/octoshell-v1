@@ -206,11 +206,6 @@ GEM
       actionmailer
       activesupport
       curb
-    meta_search (1.1.3)
-      actionpack (~> 3.1)
-      activerecord (~> 3.1)
-      activesupport (~> 3.1)
-      polyamorous (~> 0.5.0)
     mime-types (1.21)
     multi_json (1.6.1)
     multipart-post (1.1.5)
@@ -274,6 +269,10 @@ GEM
       thor (>= 0.14.6, < 2.0)
     raindrops (0.10.0)
     rake (10.0.3)
+    ransack (0.7.2)
+      actionpack (~> 3.0)
+      activerecord (~> 3.0)
+      polyamorous (~> 0.5.0)
     rb-fchange (0.0.5)
       ffi
     rb-fsevent (0.9.1)
@@ -397,7 +396,6 @@ DEPENDENCIES
   lol_dba
   mailgun-rails
   maymay!
-  meta_search
   nyan-cat-formatter
   paper_trail
   paperclip
@@ -405,6 +403,7 @@ DEPENDENCIES
   poltergeist!
   quiet_assets
   rails
+  ransack
   redcarpet (= 1.17.2)
   resque
   rspec-nc

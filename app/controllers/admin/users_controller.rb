@@ -4,8 +4,8 @@ class Admin::UsersController < Admin::ApplicationController
   before_filter { authorize! :manage, :users }
   
   def index
-    @search = User.includes(:membershiped_organizations).search(params[:search])
-    @users = show_all? ? @search.all : @search.page(params[:page])
+    @search = User.includes(:membershiped_organizations).search(params[:q])
+    @users = show_all? ? @search.all : @search.result(distinct: true).page(params[:page])
   end
   
   def show
@@ -40,10 +40,10 @@ class Admin::UsersController < Admin::ApplicationController
 private
   
   def setup_default_filter
-    params[:search] ||= {
+    params[:q] ||= {
       state_in: ['sured'],
       user_groups_group_name_in: ['authorized', 'superadmins']
     }
-    params[:search][:meta_sort] ||= 'last_name.asc'
+    params[:q][:meta_sort] ||= 'last_name.asc'
   end
 end

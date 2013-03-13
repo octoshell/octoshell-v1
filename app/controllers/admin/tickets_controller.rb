@@ -4,7 +4,7 @@ class Admin::TicketsController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
-    @search = Ticket.search(params[:search])
+    @search = Ticket.search(params[:q])
     @tickets = show_all? ? @search.relation.uniq : @search.relation.uniq.page(params[:page])
   end
     
@@ -55,8 +55,8 @@ class Admin::TicketsController < Admin::ApplicationController
 private
 
   def setup_default_filter
-    params[:search] ||= { state_in: ['active'] }
+    params[:q] ||= { state_in: ['active'] }
     params[:meta_sort] ||= 'id.asc'
-    params[:search][:ticket_tag_relations_ticket_tag_name_in] ||= TicketTag.active.pluck(:name)
+    params[:q][:ticket_tag_relations_ticket_tag_name_in] ||= TicketTag.active.pluck(:name)
   end
 end

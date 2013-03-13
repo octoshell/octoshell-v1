@@ -1,9 +1,9 @@
 - title 'Пользователи'
 
-= simple_form_for [:admin, @search], method: :get, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|
+= simple_form_for @search, method: :get, url: admin_users_path, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|
   = autocomplete :user, f, label: "ФИО или email", name: :id_eq, role: 'instance-search', url: '/admin/users/%s'
-  = f.input :last_name_or_first_name_or_middle_name_contains
-  = f.input :email_contains
+  = f.input :last_name_or_first_name_or_middle_name_cont
+  = f.input :email_cont
   = autocomplete :organization, f, name: :memberships_organization_id_eq
   = f.input :accounts_cluster_users_username_eq, label: 'Login (на кластере)', required: false
   = f.input :user_groups_group_name_in, label: 'Группа', required: false, collection: Group.pluck(:name), input_html: { multiple: true }

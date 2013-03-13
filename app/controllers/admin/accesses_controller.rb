@@ -3,8 +3,8 @@ class Admin::AccessesController < Admin::ApplicationController
   before_filter { authorize! :manage, :accesses }
 
   def index
-    @search = Access.search(params[:search])
-    @accesses = show_all? ? @search.all : @search.page(params[:page])
+    @search = Access.search(params[:q])
+    @accesses = show_all? ? @search.all : @search.result(distinct: true).page(params[:page])
   end
   
   def new
@@ -40,6 +40,6 @@ class Admin::AccessesController < Admin::ApplicationController
 private
   
   def setup_default_filter
-    params[:search] ||= { state_in: ['active'] }
+    params[:q] ||= { state_in: ['active'] }
   end
 end

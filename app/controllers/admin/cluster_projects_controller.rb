@@ -3,8 +3,8 @@ class Admin::ClusterProjectsController < Admin::ApplicationController
   before_filter { authorize! :manage, :cluster_projects }
   
   def index
-    @search = ClusterProject.search(params[:search])
-    @cluster_projects = show_all? ? @search.all : @search.page(params[:page])
+    @search = ClusterProject.search(params[:q])
+    @cluster_projects = show_all? ? @search.all : @search.result(distinct: true).page(params[:page])
   end
   
   def show
@@ -40,6 +40,6 @@ class Admin::ClusterProjectsController < Admin::ApplicationController
 private
   
   def setup_default_filter
-    params[:search] ||= { state_in: ['active'] }
+    params[:q] ||= { state_in: ['active'] }
   end
 end

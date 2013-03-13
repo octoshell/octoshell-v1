@@ -4,8 +4,8 @@ class SuretiesController < ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
-    @search = current_user.sureties.search(params[:search])
-    @sureties = @search.page(params[:page])
+    @search = current_user.sureties.search(params[:q])
+    @sureties = @search.result(distinct: true).page(params[:page])
   end
   
   def show
@@ -71,6 +71,6 @@ private
   end
   
   def setup_default_filter
-    params[:search] ||= { state_in: ['pending', 'active', 'confirmed'] }
+    params[:q] ||= { state_in: ['pending', 'active', 'confirmed'] }
   end
 end

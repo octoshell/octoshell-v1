@@ -1,20 +1,20 @@
 - if @search
-  = simple_form_for [:admin, @search], html: { class: 'form-horizontal' } do |f|
-    = f.input :projects_illustrations_points_equals, collection: (0..5), label: 'Оценка иллюстраций равна', required: false
-    = f.input :projects_statement_points_equals, collection: (0..5), label: 'Оценка изложения равна', required: false
-    = f.input :projects_summary_points_equals, collection: (0..5), label: 'Общая оценка равна', required: false
+  = simple_form_for @search, url: admin_reports_path, html: { class: 'form-horizontal' }, method: :get do |f|
+    = f.input :projects_illustrations_points_eq, collection: (0..5), label: 'Оценка иллюстраций равна', required: false
+    = f.input :projects_statement_points_eq, collection: (0..5), label: 'Оценка изложения равна', required: false
+    = f.input :projects_summary_points_eq, collection: (0..5), label: 'Общая оценка равна', required: false
   
     hr
 
-    = f.input :projects_illustrations_points_greater_than_or_equal_to, collection: (0..5), label: 'Оценка иллюстраций больше или равна', required: false
-    = f.input :projects_statement_points_greater_than_or_equal_to, collection: (0..5), label: 'Оценка изложения больше или равна', required: false
-    = f.input :projects_summary_points_greater_than_or_equal_to, collection: (0..5), label: 'Общая оценка больше или равна', required: false
+    = f.input :projects_illustrations_points_gteq, collection: (0..5), label: 'Оценка иллюстраций больше или равна', required: false
+    = f.input :projects_statement_points_gteq, collection: (0..5), label: 'Оценка изложения больше или равна', required: false
+    = f.input :projects_summary_points_gteq, collection: (0..5), label: 'Общая оценка больше или равна', required: false
   
     hr
   
-    = f.input :projects_illustrations_points_less_than_or_equal_to, collection: (0..5), label: 'Оценка иллюстраций меньше или равна', required: false
-    = f.input :projects_statement_points_less_than_or_equal_to, collection: (0..5), label: 'Оценка изложения меньше или равна', required: false
-    = f.input :projects_summary_points_less_than_or_equal_to, collection: (0..5), label: 'Общая оценка меньше или равна', required: false
+    = f.input :projects_illustrations_points_lteq, collection: (0..5), label: 'Оценка иллюстраций меньше или равна', required: false
+    = f.input :projects_statement_points_lteq, collection: (0..5), label: 'Оценка изложения меньше или равна', required: false
+    = f.input :projects_summary_points_lteq, collection: (0..5), label: 'Общая оценка меньше или равна', required: false
   
     div class="form-actions"
       = f.button :submit, 'Найти'
