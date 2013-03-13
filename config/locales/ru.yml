@@ -1,4 +1,14 @@
 ru:
+  survey_field_kinds:
+    radio: Радио
+    select: Список
+    mselect: Множественный список
+    aselect: Ассоциация
+    text: Текст
+    string: Короткий текст
+  survey_field_entities:
+    organization: Активная организация
+    positions: Должность
   abilities:
     accesses:
       manage: Полный доступ к Ключам на Кластере
@@ -572,6 +582,15 @@ ru:
       session:
         start_at: Начало
         end_at: Конец
+      survey/field:
+        name: Название
+        kind: Тип
+        collection: Значения списка
+        entity: Сущность
+        strict_collection: Строгий список
+        max_values: Максимальное кол-во значений
+        required: Обязательное
+        weight: Вес
       user:
         phone: Номер телефона
         email: Email
