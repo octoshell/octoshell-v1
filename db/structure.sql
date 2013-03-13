@@ -1499,9 +1499,11 @@ CREATE TABLE survey_fields (
     survey_id integer,
     kind character varying(255),
     collection text,
-    collection_sql text,
     max_values integer DEFAULT 1,
-    weight integer DEFAULT 0
+    weight integer DEFAULT 0,
+    name character varying(255),
+    required boolean DEFAULT false,
+    entity character varying(255)
 );
 
 
@@ -4143,3 +4145,9 @@ INSERT INTO schema_migrations (version) VALUES ('20130311201843');
 INSERT INTO schema_migrations (version) VALUES ('20130311202019');
 
 INSERT INTO schema_migrations (version) VALUES ('20130311205123');
+
+INSERT INTO schema_migrations (version) VALUES ('20130313124706');
+
+INSERT INTO schema_migrations (version) VALUES ('20130313130642');
+
+INSERT INTO schema_migrations (version) VALUES ('20130313132025');

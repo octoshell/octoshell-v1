@@ -1,3 +1,4 @@
 class Survey < ActiveRecord::Base
-  attr_accessible :session_id
+  has_many :fields
+  
 end

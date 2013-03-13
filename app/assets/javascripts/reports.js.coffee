@@ -44,3 +44,28 @@ $ ->
     $('input@allow-event').val $(@).data('event')
     $('form@allow').submit()
     return false
+
+  
+  
+  window.cache ||= {}
+  $('.typeahead').each (i, html) ->
+    $input = $(html)
+    url = $input.data('entity-source')
+    window.cache[url] = {}
+    $input.typeahead
+      minLength: 1,
+      source: (query, process) ->
+        $.getJSON url, { q: query }, (data) ->
+          process(
+            data.records.map (r) ->
+              window.cache[url][r.text] = true
+              r.text
+          )
+      updater: (item) ->
+        @$element.addClass('field-valid')
+        item
+    $input.on 'change', (e) ->
+      if window.cache[url][$input.val()]
+        $input.parents('div.control-group:first').removeClass('error').addClass('success')
+      else
+        $input.parents('div.control-group:first').removeClass('success').addClass('error')

@@ -302,7 +302,9 @@ MSU::Application.routes.draw do
     resources :sessions, only: [:new, :create, :index, :show]
     
     # surveys
-    resources :surveys, only: :show
+    resources :surveys, only: :show do
+      resources :survey_fields, except: :index, path: :fields
+    end
   end
 
   root to: 'application#dashboard'
