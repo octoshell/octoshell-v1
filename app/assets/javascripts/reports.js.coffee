@@ -50,6 +50,7 @@ $ ->
   window.cache ||= {}
   $('.typeahead').each (i, html) ->
     $input = $(html)
+    $controlGroup = $input.parents('div.control-group:first')
     url = $input.data('entity-source')
     window.cache[url] = {}
     $input.typeahead
@@ -64,8 +65,10 @@ $ ->
       updater: (item) ->
         @$element.addClass('field-valid')
         item
-    $input.on 'change', (e) ->
+    $input.on 'blur', ->
       if window.cache[url][$input.val()]
-        $input.parents('div.control-group:first').removeClass('error').addClass('success')
+        $controlGroup.removeClass('error').addClass('success')
       else
-        $input.parents('div.control-group:first').removeClass('success').addClass('error')
+        $controlGroup.removeClass('success').addClass('error')
+    $input.on 'focus', ->
+      $controlGroup.removeClass('error').removeClass('success')
