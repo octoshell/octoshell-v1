@@ -2,15 +2,10 @@
 
 p class="lead" с #{@session.start_at} по #{@session.end_at}
 
-h3 Персональный опрос
-
-p = link_to 'Редактировать', [:admin, @session.personal_survey]
-
-h3 Опросы по проектам
-
-p = link_to 'Редактировать', [:admin, @session.projects_survey]
-
-h3 Количественные характеристики
-
-p = link_to 'Редактировать', [:admin, @session.counters_survey]
+p
+  strong = link_to 'Персональный опрос', [:admin, @session.personal_survey]
+p
+  strong = link_to 'Опросы по проектам', [:admin, @session.projects_survey]
+p
+  strong = link_to 'Количественные характеристики', [:admin, @session.counters_survey]
 
