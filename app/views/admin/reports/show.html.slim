@@ -194,7 +194,7 @@ h2 id="support" Поддержка
     - links << link_to('Вернуть отчет для оценки', '#', class: "btn btn-danger disabled")
 
 - if links.any?
-  div class="link-actions"
+  div class="well"
     - links.each do |link|
       == link
       = " "

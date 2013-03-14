@@ -1,6 +1,6 @@
 - title "Дополнительное поле #{@ticket_field.name}"
 
-div class="link-actions"
+div class="well"
   = link_to 'Редактировать', edit_admin_ticket_field_path(@ticket_field), class: 'btn'
   - if @ticket_field.can__close?
     = " "

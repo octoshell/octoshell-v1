@@ -1,6 +1,6 @@
 - title 'Ключи на кластерах'
 
-div class="link-actions"
+div class="well"
   = link_to 'Новый ключ на кластере', new_admin_access_path, class: 'btn btn-danger'
 
 = simple_form_for [:admin, @search], method: :get, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|

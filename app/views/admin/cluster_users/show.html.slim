@@ -1,6 +1,6 @@
 - title "#{ClusterUser.model_name.human} ##{@cluster_user.id}"
 
-div class="link-actions"
+div class="well"
   = link_to 'Редактировать', [:edit, :admin, @cluster_user], class: 'btn btn-danger'
   |  
   = link_to 'Версии', [:admin, @cluster_user, :versions], class: 'btn'

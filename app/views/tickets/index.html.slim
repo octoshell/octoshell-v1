@@ -1,6 +1,6 @@
 - title t('.title', default: 'Tickets')
 
-div class="link-actions"
+div class="well"
   = link_to t('.new_ticket', default: 'New Ticket'), new_ticket_path, class: 'btn'
 
 = safe_paginate @tickets

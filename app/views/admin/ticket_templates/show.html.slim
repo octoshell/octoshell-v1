@@ -1,6 +1,6 @@
 - title 'Шаблон ответа'
 
-div class="link-actions"
+div class="well"
   = link_to 'Редактировать', [:edit, :admin, @ticket_template], class: 'btn'
   - if @ticket_template.can__close?
     = " "

@@ -3,7 +3,7 @@
 - if @ticket_question.active?
   = render partial: 'list', locals: { ticket_questions: TicketQuestion.root.active, highlight: @ticket_question.id }
 
-div class="link-actions"
+div class="well"
   = link_to 'Редактировать', edit_admin_ticket_question_path(@ticket_question), class: 'btn'
   = " "
   = link_to 'Новый вопрос', new_admin_ticket_question_path(ticket_question: { ticket_question_id: @ticket_question.id }), class: 'btn'
@@ -30,7 +30,7 @@ h2 Теги по умолчанию
 
 h2 Дополнительные поля
 
-div class="link-actions"
+div class="well"
   = link_to 'Новое поле', new_admin_ticket_field_path, class: 'btn'
 
 - if @ticket_question.ticket_field_relations.any?

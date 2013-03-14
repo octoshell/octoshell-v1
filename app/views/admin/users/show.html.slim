@@ -1,4 +1,4 @@
-div class="link-actions"
+div class="well"
   = link_to t('.become_as_user'), become_session_path(user_id: @user.id), class: 'btn btn-success', method: :put
   = " "
   = link_to t('.edit'), [:edit, :admin, @user], class: 'btn'

@@ -1,6 +1,6 @@
 - title t('.title')
 
-div class="link-actions"
+div class="well"
   = link_to t('.new_cluster'), new_admin_cluster_path, class: 'btn'
 
 = simple_form_for [:admin, @search], url: clusters_path, method: :get, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|

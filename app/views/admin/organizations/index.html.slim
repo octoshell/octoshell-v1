@@ -1,6 +1,6 @@
 - title 'Организации'
 
-div class="link-actions"
+div class="well"
   = link_to 'Новая организация', new_admin_organization_path, class: 'btn'
 
 = simple_form_for [:admin, @search], method: :get, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|

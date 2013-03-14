@@ -10,7 +10,7 @@ p class="lead" = @project.description
     br
     = @project.errors.full_messages.to_sentence
 
-div class="link-actions"
+div class="well"
   = link_to t('.edit', default: 'Edit'), edit_project_path(@project), class: 'btn'
   
   |  

@@ -1,6 +1,6 @@
 - title "Заявка ##{@request.id}"
 
-div class="link-actions"
+div class="well"
   = link_to 'Редактировать', [:edit, :admin, @request], class: 'btn'
   = " "
   - if @request.can__activate?

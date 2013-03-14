@@ -1,6 +1,6 @@
 - title t('.title', default: 'Directions of Science')
 
-div class="link-actions"
+div class="well"
   = link_to t('.new', default: 'New'), [:new, :admin, :direction_of_science], class: 'btn'
 
 - if @direction_of_sciences.any?
