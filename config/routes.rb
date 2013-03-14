@@ -302,7 +302,10 @@ MSU::Application.routes.draw do
     end
     
     # sessions
-    resources :sessions, only: [:new, :create, :index, :show]
+    resources :sessions, only: [:new, :create, :index, :show] do
+      put :start
+      put :stop
+    end
     
     # surveys
     resources :surveys, only: :show do

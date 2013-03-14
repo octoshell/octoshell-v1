@@ -18,6 +18,31 @@ class Admin::SessionsController < Admin::ApplicationController
   end
   
   def show
-    @session = Session.find(params[:id])
+    @session = get_session(params[:id])
   end
+  
+  def start
+    @session = get_session(params[:session_id])
+    if @session.start
+      redirect_to [:admin, @session]
+    else
+      redirect_to [:admin, @session], alert: @session.errors.full_messages.to_sentence
+    end
+  end
+  
+  def stop
+    @session = get_session(params[:session_id])
+    if @session.stop
+      redirect_to [:admin, @session]
+    else
+      redirect_to [:admin, @session], alert: @session.errors.full_messages.to_sentence
+    end
+  end
+  
+private
+  
+  def get_session(id)
+    Session.find(id)
+  end
+  
 end

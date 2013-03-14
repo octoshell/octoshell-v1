@@ -1390,12 +1390,13 @@ CREATE TABLE schema_migrations (
 
 CREATE TABLE sessions (
     id integer NOT NULL,
-    start_at date,
-    end_at date,
     personal_survey_id integer,
     projects_survey_id integer,
     counters_survey_id integer,
-    state character varying(255)
+    state character varying(255),
+    started_at timestamp without time zone,
+    ended_at timestamp without time zone,
+    description character varying(255)
 );
 
 
@@ -1971,7 +1972,8 @@ CREATE TABLE user_surveys (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     user_id integer,
-    survey_id integer
+    survey_id integer,
+    project_id integer
 );
 
 
@@ -3652,6 +3654,13 @@ CREATE UNIQUE INDEX index_user_groups_on_user_id_and_group_id ON user_groups USI
 
 
 --
+-- Name: index_user_surveys_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_surveys_on_project_id ON user_surveys USING btree (project_id);
+
+
+--
 -- Name: index_user_surveys_on_survey_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3666,10 +3675,10 @@ CREATE INDEX index_user_surveys_on_user_id ON user_surveys USING btree (user_id)
 
 
 --
--- Name: index_user_surveys_on_user_id_and_survey_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_user_surveys_on_user_id_and_survey_id_and_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_user_surveys_on_user_id_and_survey_id ON user_surveys USING btree (user_id, survey_id);
+CREATE UNIQUE INDEX index_user_surveys_on_user_id_and_survey_id_and_project_id ON user_surveys USING btree (user_id, survey_id, project_id);
 
 
 --
@@ -4239,3 +4248,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130314095643');
 INSERT INTO schema_migrations (version) VALUES ('20130314104603');
 
 INSERT INTO schema_migrations (version) VALUES ('20130314110526');
+
+INSERT INTO schema_migrations (version) VALUES ('20130314160909');
+
+INSERT INTO schema_migrations (version) VALUES ('20130314164946');

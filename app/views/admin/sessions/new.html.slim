@@ -1,8 +1,6 @@
 - title 'Новая перерегистрация'
 
-= simple_form_for [:admin, @session], html: { class: 'form-horizontal alert alert-error' } do |f|
-  legend Вы не сможете отменить перерегистрацию или изменить данные
-  = f.input :start_at, as: :string
-  = f.input :end_at, as: :string
+= simple_form_for [:admin, @session], html: { class: 'form-horizontal' } do |f|
+  = f.input :description
   div class="form-actions"
-    = f.button :submit, data: { confirm: 'Вы уверены?' }
+    = f.button :submit

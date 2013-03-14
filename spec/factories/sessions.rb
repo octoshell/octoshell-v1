@@ -1,6 +1,11 @@
 FactoryGirl.define do
   factory :session do
-    sequence(:start_at) { |n| Date.today + (n * 5).days }
-    sequence(:end_at) { |n| Date.today + (n * 5 + 1).days }
+    description 'text'
+    
+    factory :active_session do
+      after(:create) do |session|
+        session.start!
+      end
+    end
   end
 end

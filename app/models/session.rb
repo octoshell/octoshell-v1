@@ -3,23 +3,28 @@ class Session < ActiveRecord::Base
   belongs_to :projects_survey, class_name: :Survey
   belongs_to :counters_survey, class_name: :Survey
   
-  validates :start_at, :end_at, presence: true
-  validate :range_validator, if: proc { |s| s.start_at? && s.end_at? }, on: :create
+  validates :description, presence: true
   
-  attr_accessible :start_at, :end_at, as: :admin
+  attr_accessible :description, as: :admin
   
   before_create :create_surveys!
   
   state_machine :state, initial: :pending do
     state :pending
-    state :active
+    state :active do
+      validate do
+        if Session.with_state(:active).exists?
+          errors.add(:base, :date_is_out_of_available_range)
+        end
+      end
+    end
     state :ended
     
     event :start do
       transition :pending => :active
     end
     
-    event :end do
+    event :stop do
       transition :active => :ended
     end
     
@@ -27,6 +32,14 @@ class Session < ActiveRecord::Base
       session.transaction do
         block.call
         session.create_surveys_for_users!
+        session.touch :started_at
+      end
+    end
+    
+    around_transition :on => :stop do |session, transaction, block|
+      session.transaction do
+        block.call
+        session.touch :ended_at
       end
     end
   end
@@ -40,10 +53,9 @@ private
   
   def create_surveys_for_managers!
     Project.with_state(:active).each do |project|
-      project.user.user_surveys.scoped.tap do |user_surveys|
-        user_surveys.create! { |us| us.survey = projects_survey }
-        user_surveys.create! { |us| us.survey = counters_survey }
-      end
+      [ proc { |us| us.survey = projects_survey; us.project = project },
+        proc { |us| us.survey = counters_survey; us.project = project }
+      ].each { |b| project.user.user_surveys.create!(&b) }
     end
   end
   
@@ -52,16 +64,6 @@ private
       user.user_surveys.create! do |us|
         us.survey = personal_survey
       end
-    end
-  end
-  
-  def range_validator
-    sessions = Session.all.map do |session|
-      session.start_at..session.end_at
-    end
-    block = proc { |d| sessions.any? { |range| range.include?(d) } }
-    if (start_at..end_at).any?(&block) || (start_at > end_at)
-      errors.add(:base, :date_is_out_of_available_range)
     end
   end
   

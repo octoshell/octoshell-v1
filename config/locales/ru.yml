@@ -580,8 +580,7 @@ ru:
         computing: Касательно вычислительной платформы для Ваших расчетов
         comment: 'Что-то другое, не вошедшее в этот список'
       session:
-        start_at: Начало
-        end_at: Конец
+        description: Описание
       survey/field:
         name: Название
         kind: Тип
