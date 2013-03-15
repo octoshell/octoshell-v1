@@ -15,7 +15,9 @@ $ ->
       false
   
   $('div[data-max-values]').on 'change :checkbox', ->
-    condition = $(':checked', @).length >= Number($(@).data('max-values'))
+    max = Number($(@).data('max-values'))
+    return if max <= 0
+    condition = $(':checked', @).length >= max
     $(':not(:checked)', @).prop 'disabled', condition
   $('div[data-max-values]').each (i, e) ->
     $(':checkbox:first', e).trigger('change')

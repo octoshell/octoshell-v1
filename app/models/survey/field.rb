@@ -18,10 +18,10 @@ class Survey::Field < ActiveRecord::Base
   validates :name, :kind, presence: true
   
   attr_accessible :name, :kind, :collection, :max_values, :weight,
-    :required, :entity, :strict_collection, as: :admin
+    :required, :entity, :strict_collection, :hint, as: :admin
   
   def collection_values
-    collection.each_line.find_all &:present?
+    collection.each_line.find_all(&:present?).map(&:strip)
   end
   
   def entity_source

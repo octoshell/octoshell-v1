@@ -1506,7 +1506,8 @@ CREATE TABLE survey_fields (
     name character varying(255),
     required boolean DEFAULT false,
     entity character varying(255),
-    strict_collection boolean DEFAULT false
+    strict_collection boolean DEFAULT false,
+    hint character varying(255)
 );
 
 
@@ -4252,3 +4253,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130314110526');
 INSERT INTO schema_migrations (version) VALUES ('20130314160909');
 
 INSERT INTO schema_migrations (version) VALUES ('20130314164946');
+
+INSERT INTO schema_migrations (version) VALUES ('20130315104808');
