@@ -64,6 +64,7 @@ html
         div id="extend"
           - @page_extends.each do |extend|
             = load_bar(extend, :header)
+      - if current_user.
       = yield
       - if may? :use, :extends
         div id="extend-footer"

@@ -6,6 +6,7 @@ ru:
     aselect: Ассоциация
     text: Текст
     string: Короткий текст
+    scientometrics: Наукометрия
   survey_field_entities:
     organization: Активная организация
     positions: Должность

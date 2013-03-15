@@ -2,7 +2,7 @@
   = f.input :name, input_html: { class: 'input-xlarge' }
   = f.input :hint, input_html: { class: 'input-xlarge' }
   = f.input :kind, collection: Survey::Field::KINDS_COLLECTION
-  = f.input :collection, input_html: { rows: 5 }, hint: 'Только для Радио, Списка и Множественного списка'
+  = f.input :collection, input_html: { rows: 5 }, hint: 'Только для Радио, Списков и Наукометрии'
   = f.input :entity, collection: Survey::Field::ENTITIES_COLLECTION
   = f.input :strict_collection, hint: 'Не позволяет сохранять значения не из списка'
   = f.input :max_values, hint: 'Только для Множественного списка'

@@ -1,6 +1,6 @@
 # coding: utf-8
 class Survey::Field < ActiveRecord::Base
-  KINDS = [:radio, :select, :mselect, :string, :text, :aselect]
+  KINDS = [:radio, :select, :mselect, :string, :text, :aselect, :scientometrics]
   KINDS_COLLECTION = begin
     Hash[KINDS.map do |kind|
       [I18n.t("survey_field_kinds.#{kind}"), kind]
