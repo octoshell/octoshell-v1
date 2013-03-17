@@ -39,6 +39,14 @@ class Organization < ActiveRecord::Base
       Levenshtein.distance(name, org.name) < 5
     end
   end
+  
+  def self.find_for_survey(value)
+    find_by_name!(value)
+  end
+  
+  def survey_value
+    name
+  end
 
   def sureties
     Surety.joins(:project).where(project_id: project_ids)

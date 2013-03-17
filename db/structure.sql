@@ -1540,7 +1540,8 @@ CREATE TABLE survey_values (
     value text,
     survey_field_id integer,
     user_id integer,
-    reference_id integer
+    reference_id integer,
+    reference_type character varying(255)
 );
 
 
@@ -4261,3 +4262,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130315104808');
 INSERT INTO schema_migrations (version) VALUES ('20130315123712');
 
 INSERT INTO schema_migrations (version) VALUES ('20130317110328');
+
+INSERT INTO schema_migrations (version) VALUES ('20130317123746');

@@ -21,7 +21,7 @@ class UserSurvey < ActiveRecord::Base
   
   def field_value(id)
     value = find_value(id)
-    value.reference || value.value
+    value.reference ? value.reference.survey_value : value.value
   end
   
   def fill_values(fields)

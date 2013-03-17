@@ -64,9 +64,6 @@ $ ->
               window.cache[url][r.text] = true
               r.text
           )
-      updater: (item) ->
-        @$element.addClass('field-valid')
-        item
     if $input.data('strict-collection')
       $input.on 'blur', ->
         if window.cache[url][$input.val()]
