@@ -105,6 +105,12 @@ MSU::Application.routes.draw do
   
   # positions
   resources :positions, only: :index
+  
+  # user surveys
+  resources :user_surveys, path: :surveys, only: [:show, :update] do
+    put :accept
+    put :submit
+  end
 
   namespace :admin do
     # credentials

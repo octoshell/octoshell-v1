@@ -1507,7 +1507,8 @@ CREATE TABLE survey_fields (
     required boolean DEFAULT false,
     entity character varying(255),
     strict_collection boolean DEFAULT false,
-    hint character varying(255)
+    hint character varying(255),
+    reference_type character varying(255)
 );
 
 
@@ -1974,7 +1975,8 @@ CREATE TABLE user_surveys (
     updated_at timestamp without time zone NOT NULL,
     user_id integer,
     survey_id integer,
-    project_id integer
+    project_id integer,
+    state character varying(255)
 );
 
 
@@ -4255,3 +4257,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130314160909');
 INSERT INTO schema_migrations (version) VALUES ('20130314164946');
 
 INSERT INTO schema_migrations (version) VALUES ('20130315104808');
+
+INSERT INTO schema_migrations (version) VALUES ('20130315123712');
+
+INSERT INTO schema_migrations (version) VALUES ('20130317110328');

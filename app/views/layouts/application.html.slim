@@ -32,6 +32,7 @@ html
               li = link_to t('.sign_up'), new_user_path
               li = link_to t('.sign_in'), new_session_path
       div class="noprint"
+        = render partial: 'surveys/teaser'
         - if logged_in?
           - if (menu = render "shared/#{namespace}_menu").present?
             ul class="nav nav-tabs" id="top-menu"
@@ -64,7 +65,6 @@ html
         div id="extend"
           - @page_extends.each do |extend|
             = load_bar(extend, :header)
-      - if current_user.
       = yield
       - if may? :use, :extends
         div id="extend-footer"

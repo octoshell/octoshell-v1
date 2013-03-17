@@ -12,6 +12,10 @@ class Survey::Field < ActiveRecord::Base
       [I18n.t("survey_field_entities.#{entity}"), entity]
     end]
   end
+  ENTITIES_CLASSES = {
+    organization: 'Organization',
+    positions: 'Position'
+  }
   
   scope :sorted, order("#{table_name}.weight asc, #{table_name}.name asc")
   
@@ -31,5 +35,9 @@ class Survey::Field < ActiveRecord::Base
     when :positions then
       '/positions.json'
     end
+  end
+  
+  def entity_class
+    ENTITIES_CLASSES[entity.to_sym].constantize
   end
 end

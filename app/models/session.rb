@@ -44,6 +44,16 @@ class Session < ActiveRecord::Base
     end
   end
   
+  def self.current
+    with_state(:active).first
+  end
+  
+  def survey_ids
+    [ personal_survey_id,
+      projects_survey_id,
+      counters_survey_id ]
+  end
+  
   def create_surveys_for_users!
     create_surveys_for_managers!
     create_surveys_for_sured!

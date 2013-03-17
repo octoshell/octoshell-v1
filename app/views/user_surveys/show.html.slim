@@ -1,0 +1,19 @@
+- title "Опрос ##{@survey.id}"
+
+- fields = @survey.survey.fields.sorted
+- if fields.any?
+  = form_for @survey do |form|
+    - fields.each do |field|
+      div style="margin-bottom: 40px;"
+        h4
+          = field.name
+          - if field.required?
+            abbr title="Обязательное" *
+        div class="control-group"
+          = render partial: 'survey/fields/field', locals: { form: form, field: field }
+    div class="form-actions"
+      = form.submit nil, class: 'btn'
+      |  
+      = form.submit 'Отправить', class: 'btn btn-primary'
+- else
+  p Нет полей

@@ -979,6 +979,11 @@ ru:
             pending: В ожидании
             closing: Закрывается
             closed: Закрыт
+      user_survey:
+        state:
+          states:
+            pending: Не заполнен
+            filling: Заполняется
   history_item:
     registration: "Совершена регистрация"
     create_session: "Осуществлен вход в систему"
