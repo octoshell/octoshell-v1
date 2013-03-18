@@ -724,6 +724,307 @@ ALTER SEQUENCE memberships_id_seq OWNED BY memberships.id;
 
 
 --
+-- Name: old_report_comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE old_report_comments (
+    id integer NOT NULL,
+    message text,
+    user_id integer,
+    report_id integer
+);
+
+
+--
+-- Name: old_report_comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE old_report_comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: old_report_comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE old_report_comments_id_seq OWNED BY old_report_comments.id;
+
+
+--
+-- Name: old_report_organizations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE old_report_organizations (
+    id integer NOT NULL,
+    report_id integer,
+    name character varying(255),
+    subdivision character varying(255),
+    "position" character varying(255),
+    organization_type character varying(255),
+    organization_id integer,
+    other_position character varying(255)
+);
+
+
+--
+-- Name: old_report_organizations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE old_report_organizations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: old_report_organizations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE old_report_organizations_id_seq OWNED BY old_report_organizations.id;
+
+
+--
+-- Name: old_report_personal_data; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE old_report_personal_data (
+    id integer NOT NULL,
+    report_id integer,
+    last_name character varying(255),
+    first_name character varying(255),
+    middle_name character varying(255),
+    email character varying(255),
+    phone character varying(255),
+    confirm_data character varying(255),
+    reason text
+);
+
+
+--
+-- Name: old_report_personal_data_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE old_report_personal_data_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: old_report_personal_data_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE old_report_personal_data_id_seq OWNED BY old_report_personal_data.id;
+
+
+--
+-- Name: old_report_personal_surveys; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE old_report_personal_surveys (
+    id integer NOT NULL,
+    report_id integer,
+    software text,
+    technologies text,
+    compilators text,
+    learning text,
+    wanna_be_speaker text,
+    request_technology text,
+    other_technology text,
+    other_compilator text,
+    other_software text,
+    other_learning text,
+    computing text,
+    comment text,
+    "precision" text
+);
+
+
+--
+-- Name: old_report_personal_surveys_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE old_report_personal_surveys_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: old_report_personal_surveys_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE old_report_personal_surveys_id_seq OWNED BY old_report_personal_surveys.id;
+
+
+--
+-- Name: old_report_projects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE old_report_projects (
+    id integer NOT NULL,
+    report_id integer,
+    ru_title text,
+    ru_author text,
+    emails text,
+    ru_driver text,
+    ru_strategy text,
+    ru_objective text,
+    ru_impact text,
+    ru_usage text,
+    en_title text,
+    en_author text,
+    en_driver text,
+    en_strategy text,
+    en_objective text,
+    en_impact text,
+    en_usage text,
+    directions_of_science text,
+    critical_technologies text,
+    areas text,
+    computing_systems text,
+    lomonosov_logins text,
+    chebyshev_logins text,
+    materials_file_name character varying(255),
+    materials_content_type character varying(255),
+    materials_file_size integer,
+    materials_updated_at timestamp without time zone,
+    books_count integer DEFAULT 0,
+    vacs_count integer DEFAULT 0,
+    lectures_count integer DEFAULT 0,
+    international_conferences_count integer DEFAULT 0,
+    russian_conferences_count integer DEFAULT 0,
+    doctors_dissertations_count integer DEFAULT 0,
+    candidates_dissertations_count integer DEFAULT 0,
+    students_count integer DEFAULT 0,
+    graduates_count integer DEFAULT 0,
+    your_students_count integer DEFAULT 0,
+    rffi_grants_count integer DEFAULT 0,
+    ministry_of_education_grants_count integer DEFAULT 0,
+    rosnano_grants_count integer DEFAULT 0,
+    ministry_of_communications_grants_count integer DEFAULT 0,
+    ministry_of_defence_grants_count integer DEFAULT 0,
+    ran_grants_count integer DEFAULT 0,
+    other_russian_grants_count integer DEFAULT 0,
+    other_intenational_grants_count integer DEFAULT 0,
+    award_names text,
+    lomonosov_intel_hours integer DEFAULT 0,
+    lomonosov_nvidia_hours integer DEFAULT 0,
+    chebyshev_hours integer DEFAULT 0,
+    lomonosov_size integer DEFAULT 0,
+    chebyshev_size integer DEFAULT 0,
+    exclusive_usage text,
+    strict_schedule text,
+    wanna_speak boolean,
+    request_comment text,
+    international_conferences_in_russia_count integer DEFAULT 0,
+    awards_count integer DEFAULT 0,
+    illustrations_points integer DEFAULT 0,
+    statement_points integer DEFAULT 0,
+    summary_points integer DEFAULT 0
+);
+
+
+--
+-- Name: old_report_projects_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE old_report_projects_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: old_report_projects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE old_report_projects_id_seq OWNED BY old_report_projects.id;
+
+
+--
+-- Name: old_report_replies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE old_report_replies (
+    id integer NOT NULL,
+    report_id integer,
+    message text,
+    user_id integer
+);
+
+
+--
+-- Name: old_report_replies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE old_report_replies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: old_report_replies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE old_report_replies_id_seq OWNED BY old_report_replies.id;
+
+
+--
+-- Name: old_reports; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE old_reports (
+    id integer NOT NULL,
+    user_id integer,
+    project_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    state character varying(255),
+    expert_id integer,
+    illustrations_points integer,
+    sent_on_time boolean DEFAULT false,
+    submitted_at timestamp without time zone,
+    allow_state character varying(255),
+    superviser_comment text
+);
+
+
+--
+-- Name: old_reports_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE old_reports_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: old_reports_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE old_reports_id_seq OWNED BY old_reports.id;
+
+
+--
 -- Name: organization_kinds; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1004,307 +1305,6 @@ CREATE SEQUENCE replies_id_seq
 --
 
 ALTER SEQUENCE replies_id_seq OWNED BY replies.id;
-
-
---
--- Name: report_comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE report_comments (
-    id integer NOT NULL,
-    message text,
-    user_id integer,
-    report_id integer
-);
-
-
---
--- Name: report_comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE report_comments_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: report_comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE report_comments_id_seq OWNED BY report_comments.id;
-
-
---
--- Name: report_organizations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE report_organizations (
-    id integer NOT NULL,
-    report_id integer,
-    name character varying(255),
-    subdivision character varying(255),
-    "position" character varying(255),
-    organization_type character varying(255),
-    organization_id integer,
-    other_position character varying(255)
-);
-
-
---
--- Name: report_organizations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE report_organizations_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: report_organizations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE report_organizations_id_seq OWNED BY report_organizations.id;
-
-
---
--- Name: report_personal_data; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE report_personal_data (
-    id integer NOT NULL,
-    report_id integer,
-    last_name character varying(255),
-    first_name character varying(255),
-    middle_name character varying(255),
-    email character varying(255),
-    phone character varying(255),
-    confirm_data character varying(255),
-    reason text
-);
-
-
---
--- Name: report_personal_data_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE report_personal_data_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: report_personal_data_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE report_personal_data_id_seq OWNED BY report_personal_data.id;
-
-
---
--- Name: report_personal_surveys; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE report_personal_surveys (
-    id integer NOT NULL,
-    report_id integer,
-    software text,
-    technologies text,
-    compilators text,
-    learning text,
-    wanna_be_speaker text,
-    request_technology text,
-    other_technology text,
-    other_compilator text,
-    other_software text,
-    other_learning text,
-    computing text,
-    comment text,
-    "precision" text
-);
-
-
---
--- Name: report_personal_surveys_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE report_personal_surveys_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: report_personal_surveys_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE report_personal_surveys_id_seq OWNED BY report_personal_surveys.id;
-
-
---
--- Name: report_projects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE report_projects (
-    id integer NOT NULL,
-    report_id integer,
-    ru_title text,
-    ru_author text,
-    emails text,
-    ru_driver text,
-    ru_strategy text,
-    ru_objective text,
-    ru_impact text,
-    ru_usage text,
-    en_title text,
-    en_author text,
-    en_driver text,
-    en_strategy text,
-    en_objective text,
-    en_impact text,
-    en_usage text,
-    directions_of_science text,
-    critical_technologies text,
-    areas text,
-    computing_systems text,
-    lomonosov_logins text,
-    chebyshev_logins text,
-    materials_file_name character varying(255),
-    materials_content_type character varying(255),
-    materials_file_size integer,
-    materials_updated_at timestamp without time zone,
-    books_count integer DEFAULT 0,
-    vacs_count integer DEFAULT 0,
-    lectures_count integer DEFAULT 0,
-    international_conferences_count integer DEFAULT 0,
-    russian_conferences_count integer DEFAULT 0,
-    doctors_dissertations_count integer DEFAULT 0,
-    candidates_dissertations_count integer DEFAULT 0,
-    students_count integer DEFAULT 0,
-    graduates_count integer DEFAULT 0,
-    your_students_count integer DEFAULT 0,
-    rffi_grants_count integer DEFAULT 0,
-    ministry_of_education_grants_count integer DEFAULT 0,
-    rosnano_grants_count integer DEFAULT 0,
-    ministry_of_communications_grants_count integer DEFAULT 0,
-    ministry_of_defence_grants_count integer DEFAULT 0,
-    ran_grants_count integer DEFAULT 0,
-    other_russian_grants_count integer DEFAULT 0,
-    other_intenational_grants_count integer DEFAULT 0,
-    award_names text,
-    lomonosov_intel_hours integer DEFAULT 0,
-    lomonosov_nvidia_hours integer DEFAULT 0,
-    chebyshev_hours integer DEFAULT 0,
-    lomonosov_size integer DEFAULT 0,
-    chebyshev_size integer DEFAULT 0,
-    exclusive_usage text,
-    strict_schedule text,
-    wanna_speak boolean,
-    request_comment text,
-    international_conferences_in_russia_count integer DEFAULT 0,
-    awards_count integer DEFAULT 0,
-    illustrations_points integer DEFAULT 0,
-    statement_points integer DEFAULT 0,
-    summary_points integer DEFAULT 0
-);
-
-
---
--- Name: report_projects_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE report_projects_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: report_projects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE report_projects_id_seq OWNED BY report_projects.id;
-
-
---
--- Name: report_replies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE report_replies (
-    id integer NOT NULL,
-    report_id integer,
-    message text,
-    user_id integer
-);
-
-
---
--- Name: report_replies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE report_replies_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: report_replies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE report_replies_id_seq OWNED BY report_replies.id;
-
-
---
--- Name: reports; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE reports (
-    id integer NOT NULL,
-    user_id integer,
-    project_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    state character varying(255),
-    expert_id integer,
-    illustrations_points integer,
-    sent_on_time boolean DEFAULT false,
-    submitted_at timestamp without time zone,
-    allow_state character varying(255),
-    superviser_comment text
-);
-
-
---
--- Name: reports_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE reports_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: reports_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE reports_id_seq OWNED BY reports.id;
 
 
 --
@@ -2267,6 +2267,55 @@ ALTER TABLE ONLY memberships ALTER COLUMN id SET DEFAULT nextval('memberships_id
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY old_report_comments ALTER COLUMN id SET DEFAULT nextval('old_report_comments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY old_report_organizations ALTER COLUMN id SET DEFAULT nextval('old_report_organizations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY old_report_personal_data ALTER COLUMN id SET DEFAULT nextval('old_report_personal_data_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY old_report_personal_surveys ALTER COLUMN id SET DEFAULT nextval('old_report_personal_surveys_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY old_report_projects ALTER COLUMN id SET DEFAULT nextval('old_report_projects_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY old_report_replies ALTER COLUMN id SET DEFAULT nextval('old_report_replies_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY old_reports ALTER COLUMN id SET DEFAULT nextval('old_reports_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY organization_kinds ALTER COLUMN id SET DEFAULT nextval('organization_kinds_id_seq'::regclass);
 
 
@@ -2317,55 +2366,6 @@ ALTER TABLE ONLY projects ALTER COLUMN id SET DEFAULT nextval('projects_id_seq':
 --
 
 ALTER TABLE ONLY replies ALTER COLUMN id SET DEFAULT nextval('replies_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY report_comments ALTER COLUMN id SET DEFAULT nextval('report_comments_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY report_organizations ALTER COLUMN id SET DEFAULT nextval('report_organizations_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY report_personal_data ALTER COLUMN id SET DEFAULT nextval('report_personal_data_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY report_personal_surveys ALTER COLUMN id SET DEFAULT nextval('report_personal_surveys_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY report_projects ALTER COLUMN id SET DEFAULT nextval('report_projects_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY report_replies ALTER COLUMN id SET DEFAULT nextval('report_replies_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY reports ALTER COLUMN id SET DEFAULT nextval('reports_id_seq'::regclass);
 
 
 --
@@ -2750,7 +2750,7 @@ ALTER TABLE ONLY replies
 -- Name: report_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY report_comments
+ALTER TABLE ONLY old_report_comments
     ADD CONSTRAINT report_comments_pkey PRIMARY KEY (id);
 
 
@@ -2758,7 +2758,7 @@ ALTER TABLE ONLY report_comments
 -- Name: report_organizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY report_organizations
+ALTER TABLE ONLY old_report_organizations
     ADD CONSTRAINT report_organizations_pkey PRIMARY KEY (id);
 
 
@@ -2766,7 +2766,7 @@ ALTER TABLE ONLY report_organizations
 -- Name: report_personal_data_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY report_personal_data
+ALTER TABLE ONLY old_report_personal_data
     ADD CONSTRAINT report_personal_data_pkey PRIMARY KEY (id);
 
 
@@ -2774,7 +2774,7 @@ ALTER TABLE ONLY report_personal_data
 -- Name: report_personal_surveys_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY report_personal_surveys
+ALTER TABLE ONLY old_report_personal_surveys
     ADD CONSTRAINT report_personal_surveys_pkey PRIMARY KEY (id);
 
 
@@ -2782,7 +2782,7 @@ ALTER TABLE ONLY report_personal_surveys
 -- Name: report_projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY report_projects
+ALTER TABLE ONLY old_report_projects
     ADD CONSTRAINT report_projects_pkey PRIMARY KEY (id);
 
 
@@ -2790,7 +2790,7 @@ ALTER TABLE ONLY report_projects
 -- Name: report_replies_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY report_replies
+ALTER TABLE ONLY old_report_replies
     ADD CONSTRAINT report_replies_pkey PRIMARY KEY (id);
 
 
@@ -2798,7 +2798,7 @@ ALTER TABLE ONLY report_replies
 -- Name: reports_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY reports
+ALTER TABLE ONLY old_reports
     ADD CONSTRAINT reports_pkey PRIMARY KEY (id);
 
 
@@ -3304,35 +3304,35 @@ CREATE INDEX index_replies_on_user_id ON replies USING btree (user_id);
 -- Name: index_report_comments_on_report_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_report_comments_on_report_id ON report_comments USING btree (report_id);
+CREATE INDEX index_report_comments_on_report_id ON old_report_comments USING btree (report_id);
 
 
 --
 -- Name: index_report_comments_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_report_comments_on_user_id ON report_comments USING btree (user_id);
+CREATE INDEX index_report_comments_on_user_id ON old_report_comments USING btree (user_id);
 
 
 --
 -- Name: index_report_replies_on_report_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_report_replies_on_report_id ON report_replies USING btree (report_id);
+CREATE INDEX index_report_replies_on_report_id ON old_report_replies USING btree (report_id);
 
 
 --
 -- Name: index_report_replies_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_report_replies_on_user_id ON report_replies USING btree (user_id);
+CREATE INDEX index_report_replies_on_user_id ON old_report_replies USING btree (user_id);
 
 
 --
 -- Name: index_reports_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_reports_on_user_id ON reports USING btree (user_id);
+CREATE INDEX index_reports_on_user_id ON old_reports USING btree (user_id);
 
 
 --
@@ -4264,3 +4264,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130315123712');
 INSERT INTO schema_migrations (version) VALUES ('20130317110328');
 
 INSERT INTO schema_migrations (version) VALUES ('20130317123746');
+
+INSERT INTO schema_migrations (version) VALUES ('20130318141818');
