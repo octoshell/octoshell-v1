@@ -42,10 +42,13 @@ class UserSurvey < ActiveRecord::Base
     end
   end
   
-  def field_value(id)
-    find_value(id).value
+  def values
+    @values ||= begin
+      conditions = { survey_field_id: survey.field_ids, user_id: user.id }
+      Survey::Value.where(conditions).to_a
+    end
   end
-  
+
   def fill_values(fields)
     failed = false
     transaction do
@@ -63,15 +66,10 @@ class UserSurvey < ActiveRecord::Base
   end
   
   def find_value(field_id)
-    @values_cache ||= {}
-    @values_cache[field_id.to_i] || begin
-      value = begin
-        condition = { survey_field_id: field_id, user_id: user.id }
-        Survey::Value.where(condition).first_or_create! do |s|
-          
-        end
-      end
-      @values_cache[value.survey_field_id] = value
-    end
+    values.find { |v| v.survey_field_id == field_id.to_i }
+  end
+  
+  def field_value(field_id)
+    find_value(field_id).value
   end
 end

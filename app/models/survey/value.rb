@@ -5,7 +5,7 @@ class Survey::Value < ActiveRecord::Base
   
   validates :field, presence: true
   
-  validate :presence_validator
+  validate :presence_validator, on: :update
   
   def value
     reference ? reference.survey_value : self[:value]
