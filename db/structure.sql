@@ -1308,6 +1308,41 @@ ALTER SEQUENCE replies_id_seq OWNED BY replies.id;
 
 
 --
+-- Name: reports; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE reports (
+    id integer NOT NULL,
+    session_id integer,
+    project_id integer,
+    state character varying(255),
+    materials_file_name character varying(255),
+    materials_content_type character varying(255),
+    materials_file_size integer,
+    materials_updated_at timestamp without time zone
+);
+
+
+--
+-- Name: reports_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE reports_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: reports_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE reports_id_seq OWNED BY reports.id;
+
+
+--
 -- Name: request_properties; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1396,7 +1431,8 @@ CREATE TABLE sessions (
     state character varying(255),
     started_at timestamp without time zone,
     ended_at timestamp without time zone,
-    description character varying(255)
+    description character varying(255),
+    motivation character varying(255)
 );
 
 
@@ -2372,6 +2408,13 @@ ALTER TABLE ONLY replies ALTER COLUMN id SET DEFAULT nextval('replies_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY reports ALTER COLUMN id SET DEFAULT nextval('reports_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY request_properties ALTER COLUMN id SET DEFAULT nextval('request_properties_id_seq'::regclass);
 
 
@@ -2800,6 +2843,14 @@ ALTER TABLE ONLY old_report_replies
 
 ALTER TABLE ONLY old_reports
     ADD CONSTRAINT reports_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: reports_pkey1; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY reports
+    ADD CONSTRAINT reports_pkey1 PRIMARY KEY (id);
 
 
 --
@@ -3326,6 +3377,27 @@ CREATE INDEX index_report_replies_on_report_id ON old_report_replies USING btree
 --
 
 CREATE INDEX index_report_replies_on_user_id ON old_report_replies USING btree (user_id);
+
+
+--
+-- Name: index_reports_on_session_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_reports_on_session_id ON reports USING btree (session_id);
+
+
+--
+-- Name: index_reports_on_session_id_and_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_reports_on_session_id_and_project_id ON reports USING btree (session_id, project_id);
+
+
+--
+-- Name: index_reports_on_session_id_and_state; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_reports_on_session_id_and_state ON reports USING btree (session_id, state);
 
 
 --
@@ -4266,3 +4338,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130317110328');
 INSERT INTO schema_migrations (version) VALUES ('20130317123746');
 
 INSERT INTO schema_migrations (version) VALUES ('20130318141818');
+
+INSERT INTO schema_migrations (version) VALUES ('20130318144048');
+
+INSERT INTO schema_migrations (version) VALUES ('20130318154555');

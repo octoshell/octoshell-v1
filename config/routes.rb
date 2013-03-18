@@ -83,15 +83,10 @@ MSU::Application.routes.draw do
   # organizations
   resources :organizations, only: [:new, :create, :index, :show]
 
-  # repliesorts
-  resources :reports, only: [:edit] do
-    resources :projects, module: :reports, only: [:create, :destroy]
-    put :personal
-    put :survey
-    put :projects_survey
-    put :projects
+  # reports
+  resources :reports, only: [:show] do
+    put :accept
     put :submit
-    post :replies
   end
 
   resources :tickets, only: [:new, :create, :index, :show, :edit, :update] do

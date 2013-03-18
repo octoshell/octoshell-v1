@@ -805,7 +805,9 @@ ru:
       report:
         state:
           states:
-            editing: Заполняется
+            declined: Отклонен
+            pending: Не прислан
+            accepted: Не прислан
             submitted: Отправлен
             assessing: Оценивается
             assessed: Оценен

@@ -2,10 +2,11 @@ class Session < ActiveRecord::Base
   belongs_to :personal_survey, class_name: :Survey
   belongs_to :projects_survey, class_name: :Survey
   belongs_to :counters_survey, class_name: :Survey
+  has_many :reports
   
   validates :description, presence: true
   
-  attr_accessible :description, as: :admin
+  attr_accessible :description, :motivation, as: :admin
   
   before_create :create_surveys!
   
@@ -56,6 +57,7 @@ class Session < ActiveRecord::Base
   
   def create_surveys_for_users!
     create_surveys_for_managers!
+    create_reports_for_managers!
     create_surveys_for_sured!
   end
   
@@ -66,6 +68,12 @@ private
       [ proc { |us| us.survey = projects_survey; us.project = project },
         proc { |us| us.survey = counters_survey; us.project = project }
       ].each { |b| project.user.user_surveys.create!(&b) }
+    end
+  end
+  
+  def create_reports_for_managers!
+    Project.with_state(:active).each do |project|
+      reports.create! { |r| r.project = project }
     end
   end
   
