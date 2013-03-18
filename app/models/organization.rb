@@ -44,6 +44,10 @@ class Organization < ActiveRecord::Base
     find_by_name(value)
   end
   
+  def self.find_for_survey!(value)
+    find_by_name!(value)
+  end
+  
   def survey_value
     name
   end
