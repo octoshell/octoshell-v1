@@ -9,8 +9,9 @@
           = field.name
           - if field.required?
             abbr title="Обязательное" *
-        div class="control-group"
-          = render partial: 'survey/fields/field', locals: { form: form, field: field }
+        - value = form.object.find_value(field.id)
+        div class="control-group #{value.errors.any? ? 'error' : ''}"
+          = render partial: 'survey/fields/field', locals: { form: form, field: field, error: value.errors.full_messages.to_sentence }
     div class="form-actions"
       = form.submit nil, class: 'btn'
       |  

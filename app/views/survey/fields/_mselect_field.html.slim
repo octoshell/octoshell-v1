@@ -3,12 +3,14 @@ div class="row" data-max-values="#{field.max_values}"
     div class="span4"
       - field.collection_values.each do |value|
         label class="checkbox"
-          input name="fields[#{field.id}]" type="checkbox" value="#{value}" checked="#{form.object.field_value(field.id) == value ? 'checked' : ''}"
+          = check_box 'fields', field.id, { checked: (form.object.field_value(field.id) == value) }, value, ""
           = value
+      - if error.present?
+        span class="help-block" = error
   - else
     - field.collection_values.in_groups(3, false).each do |collection|
       div class="span3"
         - collection.each do |value|
           label class="checkbox"
-            input name="fields[#{field.id}]" type="checkbox" value="#{value}" checked="#{form.object.field_value(field.id) == value ? 'checked' : ''}"
+            = check_box 'fields', field.id, { checked: (form.object.field_value(field.id) == value) }, value, ""
             = value

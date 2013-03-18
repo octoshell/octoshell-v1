@@ -1,4 +1,8 @@
 ru:
+  user_survey:
+    personal: Персональный отчет
+    projects: 'Отчет по проекту "%{name}"'
+    counters: 'Количественные х-ки проекта "%{name}"'
   survey_field_kinds:
     radio: Радио
     select: Список
@@ -436,6 +440,7 @@ ru:
       ticket_tag: Тег
       task: Задание
       report: Отчет
+      survey/value: Значение
     errors:
       models:
         report/project:

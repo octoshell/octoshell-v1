@@ -8,7 +8,7 @@
         table class="table table-condensed"
           - surveys.each do |us|
             tr
-              td class="span2" Опрос ##{us.id}
+              td class="span5" = us.human_name
               td class="span2"
                 - if us.pending?
                   span class="label label-important" = us.human_state_name

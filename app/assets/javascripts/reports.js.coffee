@@ -55,6 +55,8 @@ $ ->
     $controlGroup = $input.parents('div.control-group:first')
     url = $input.data('entity-source')
     window.cache[url] = {}
+    if $input.val().length > 0
+      window.cache[url][$input.val()] = true
     $input.typeahead
       minLength: 1,
       source: (query, process) ->

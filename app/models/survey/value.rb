@@ -5,12 +5,26 @@ class Survey::Value < ActiveRecord::Base
   
   validates :field, presence: true
   
+  validate :presence_validator
+  
+  def value
+    reference ? reference.survey_value : self[:value]
+  end
+  
   def update_value(value)
     if field.kind == 'aselect'
-      record = field.entity_class.find_for_survey(value)
-      update_attribute(:reference, record)
+      self.reference = field.entity_class.find_for_survey(value)
     else
-      update_attribute(:value, value)
+      self.value = value
+    end
+    save
+  end
+  
+private
+  
+  def presence_validator
+    if !value? && field.required?
+      errors.add(:value, :blank)
     end
   end
 end
