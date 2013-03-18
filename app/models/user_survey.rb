@@ -59,6 +59,12 @@ class UserSurvey < ActiveRecord::Base
     !failed
   end
   
+  def fill_values_and_submit(fields)
+    transaction do
+      (fill_values(fields) && submit) || raise(ActiveRecord::Rollback)
+    end
+  end
+  
   %w(personal projects counters).each do |type|
     define_method "#{type}?" do
       Session.where("#{type}_survey_id" => survey_id).exists?

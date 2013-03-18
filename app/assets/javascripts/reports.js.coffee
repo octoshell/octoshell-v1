@@ -74,3 +74,9 @@ $ ->
           $controlGroup.removeClass('success').addClass('error')
       $input.on 'focus', ->
         $controlGroup.removeClass('error').removeClass('success')
+  
+  $('.submit-survey').on 'click', ->
+    $button = $(@)
+    $form = $button.parents('form:first')
+    $form.prop 'action', $button.data('action')
+    true

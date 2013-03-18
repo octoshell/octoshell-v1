@@ -22,6 +22,16 @@ class UserSurveysController < ApplicationController
     end
   end
   
+  def submit
+    @survey = get_survey(params[:user_survey_id])
+    if @survey.fill_values_and_submit(params[:fields])
+      redirect_to @survey
+    else
+      flash.now[:alert] = @survey.errors.full_messages.to_sentence
+      render :show
+    end
+  end
+  
 private
   
   def get_survey(id)

@@ -1,20 +1,27 @@
-- title "Опрос ##{@survey.id}"
+- title @survey.human_name
 
 - fields = @survey.survey.fields.sorted
 - if fields.any?
-  = form_for @survey do |form|
+  - if @survey.pending?
+    = form_for @survey do |form|
+      - fields.each do |field|
+        div style="margin-bottom: 40px;"
+          h4
+            = field.name
+            - if field.required?
+              abbr title="Обязательное" *
+          - value = form.object.find_value(field.id)
+          div class="control-group #{value.errors.any? ? 'error' : ''}"
+            = render partial: 'survey/fields/field', locals: { form: form, field: field, error: value.errors.full_messages.to_sentence }
+      div class="form-actions"
+        = form.submit nil, class: 'btn'
+        |  
+        = form.submit 'Отправить', class: 'btn btn-primary submit-survey', data: { action: url_for([@survey, :submit]) }
+  - else
     - fields.each do |field|
       div style="margin-bottom: 40px;"
-        h4
-          = field.name
-          - if field.required?
-            abbr title="Обязательное" *
-        - value = form.object.find_value(field.id)
-        div class="control-group #{value.errors.any? ? 'error' : ''}"
-          = render partial: 'survey/fields/field', locals: { form: form, field: field, error: value.errors.full_messages.to_sentence }
-    div class="form-actions"
-      = form.submit nil, class: 'btn'
-      |  
-      = form.submit 'Отправить', class: 'btn btn-primary'
+        h4 = field.name
+        - value = @survey.find_value(field.id)
+        = render partial: 'survey/fields/show_field', locals: { field: field, value: value }
 - else
   p Нет полей
