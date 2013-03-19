@@ -281,27 +281,11 @@ MSU::Application.routes.draw do
 
     # reports
     resources :reports, only: [:show, :index] do
-      collection do
-        get '/assessed'
-        get '/self', action: 'self_assessing'
-        get '/all'
-        get '/latecommers'
-        get '/stats'
-        get '/progress'
-      end
-      get :review
-      post :replies
-      post :comments
-      put :begin_assessing
-      put :decline
+      put :pick
       put :assess
-      get :supervise
-      put :allow
-      put :submit
-      post :ticket
-      resources :report_projects, only: :update
+      put :decline
     end
-    
+        
     # sessions
     resources :sessions, only: [:new, :create, :index, :show] do
       put :start

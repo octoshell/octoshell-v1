@@ -499,6 +499,7 @@ ru:
       report/comment: 
         message: Сообщение
       report:
+        materials: Архив
         state: Состояние
         submitted_at: Отправлен
         superviser_comment: Комментарий

@@ -1319,7 +1319,11 @@ CREATE TABLE reports (
     materials_file_name character varying(255),
     materials_content_type character varying(255),
     materials_file_size integer,
-    materials_updated_at timestamp without time zone
+    materials_updated_at timestamp without time zone,
+    expert_id integer,
+    illustration_points integer,
+    summary_points integer,
+    statement_points integer
 );
 
 
@@ -1432,7 +1436,8 @@ CREATE TABLE sessions (
     started_at timestamp without time zone,
     ended_at timestamp without time zone,
     description character varying(255),
-    motivation character varying(255)
+    motivation character varying(255),
+    receiving_to date
 );
 
 
@@ -4342,3 +4347,9 @@ INSERT INTO schema_migrations (version) VALUES ('20130318141818');
 INSERT INTO schema_migrations (version) VALUES ('20130318144048');
 
 INSERT INTO schema_migrations (version) VALUES ('20130318154555');
+
+INSERT INTO schema_migrations (version) VALUES ('20130319103424');
+
+INSERT INTO schema_migrations (version) VALUES ('20130319115555');
+
+INSERT INTO schema_migrations (version) VALUES ('20130319122504');

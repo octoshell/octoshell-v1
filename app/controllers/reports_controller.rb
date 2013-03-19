@@ -10,6 +10,16 @@ class ReportsController < ApplicationController
   def show
     @report = get_report(params[:id])
   end
+  
+  def submit
+    @report = get_report(params[:report_id])
+    @report.assign_attributes(params[:report])
+    if @report.submitted? || @report.submit
+      redirect_to root_path
+    else
+      render :show
+    end
+  end
 
 private
   

@@ -1,0 +1,40 @@
+- title "Отчеты"
+
+= simple_form_for @search, method: :get, url: admin_reports_path, html: { class: 'form-horizontal' } do |f|
+  = f.input :state_eq, collection: Report.state_names
+  = f.input :illustration_points_in, collection: (0..5), as: :check_boxes, wrapper_html: { class: 'inline-check-boxes' }
+  = f.input :statement_points_in, collection: (0..5), as: :check_boxes, wrapper_html: { class: 'inline-check-boxes' }
+  = f.input :summary_points_in, collection: (0..5), as: :check_boxes, wrapper_html: { class: 'inline-check-boxes' }
+  
+  div class="form-actions"
+    = f.button :submit, 'Показать', class: 'btn-primary btn-small'
+
+p == page_entries_info(@reports)
+
+- if @reports.any?
+  table class="table table-striped"
+    tr
+      th #
+      td class="span4" Проект
+      td class="span3" Статус
+      td class="span3" Эксперт
+      - if may?(:review, :reports) || report.expert
+        td
+    - @reports.each do |report|
+      tr
+        td = report.id
+        td = smart_link_to report.project
+        td
+          label class="label label-#{report.bootstrap_status}" = report.human_state_name
+          - if report.can_pick? && may?(:assess, :reports)
+            |  
+            = link_to 'Оценить', [:admin, report, :pick], method: :put, class: 'btn btn-info btn-mini'
+        td = smart_link_to report.expert if report.expert
+        - if may?(:review, :reports) || report.expert
+          td = smart_link_to report
+- else
+  p Нет отчетов
+
+= safe_paginate @reports
+
+p == page_entries_info(@reports)

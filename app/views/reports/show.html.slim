@@ -1,12 +1,8 @@
 - title "Отчет по проекту #{@report.project.name}"
 
 div class="well"
-  = form_for @report, html: { class: 'form-horizontal' } do |f|
+  = simple_form_for @report, url: [@report, :submit], html: { class: 'form-horizontal' } do |f|
       legend Материалы отчета
-      div class="control-group" 
-        div class="control-label" = f.label :attachment
-        div class="controls"
-          = f.file_field :attachment
-          span class="help-block" Aрхив zip, не более 20Мб, в архиве - помимо текста отчета, минимум один с расширением графического типа файла (минимум одна иллюстрация)
+      = f.input :materials, hint: 'Aрхив zip, не более 20Мб, в архиве - помимо текста отчета, минимум один с расширением графического типа файла (минимум одна иллюстрация)'
       div class="form-actions" style="margin-bottom: 0;"
-        = f.submit 'Загрузить', class: 'btn btn-primary'
+        = f.submit 'Отправить', class: 'btn btn-primary'

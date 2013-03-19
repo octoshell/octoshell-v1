@@ -1,11 +1,21 @@
+# coding: utf-8
 class Report < ActiveRecord::Base
   belongs_to :session
   belongs_to :project
+  belongs_to :expert, class_name: :User
+  
+  has_attached_file :materials,
+    content_type: ['application/zip', 'application/x-zip-compressed'],
+    max_size: 20.megabytes
+  
+  attr_accessible :materials
   
   state_machine :state, initial: :pending do
     state :pending
     state :accepted
-    state :submitted
+    state :submitted do
+      validates :materials, attachment_presence: true
+    end
     state :assessing
     state :assessed
     state :declined
@@ -28,6 +38,23 @@ class Report < ActiveRecord::Base
     
     event :decline do
       transition :assessing => :declined
+    end
+  end
+  
+  def link_name
+    'открыть'
+  end
+  
+  def bootstrap_status
+    case state_name
+    when :pending then
+      :default
+    when :accepted then
+      :warning
+    when :submitted, :assessing then
+      :success
+    when :assessed then
+      :info
     end
   end
 end
