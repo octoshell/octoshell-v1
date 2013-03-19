@@ -11,9 +11,10 @@ table class="table table-bordered table-striped"
     th = Session.human_attribute_name(:ended_at)
     th
   - @sessions.each do |session|
-    tr
-      th = session.id
-      td = session.human_state_name
+    tr class="#{'success' if session.active?}"
+      td = session.id
+      td
+        span class="label" = session.human_state_name
       td = session.started_at || '???'
       td = session.ended_at || '???'
       td = link_to 'открыть', [:admin, session]
