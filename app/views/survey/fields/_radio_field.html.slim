@@ -1,0 +1,4 @@
+- field.collection_values.each do |value|
+  label class="radio"
+    input type="radio" name="fields[#{field.id}]" value="#{value}" checked="#{form.object.field_value(field.id) == value ? 'checked' : ''}"
+    = value

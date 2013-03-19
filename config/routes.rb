@@ -83,15 +83,10 @@ MSU::Application.routes.draw do
   # organizations
   resources :organizations, only: [:new, :create, :index, :show]
 
-  # repliesorts
-  resources :reports, only: [:edit] do
-    resources :projects, module: :reports, only: [:create, :destroy]
-    put :personal
-    put :survey
-    put :projects_survey
-    put :projects
+  # reports
+  resources :reports, only: [:show] do
+    put :accept
     put :submit
-    post :replies
   end
 
   resources :tickets, only: [:new, :create, :index, :show, :edit, :update] do
@@ -102,6 +97,15 @@ MSU::Application.routes.draw do
 
   # replies
   resources :replies, only: :create
+  
+  # positions
+  resources :positions, only: :index
+  
+  # user surveys
+  resources :user_surveys, path: :surveys, only: [:show, :update] do
+    put :accept
+    put :submit
+  end
 
   namespace :admin do
     # credentials
@@ -277,26 +281,24 @@ MSU::Application.routes.draw do
 
     # reports
     resources :reports, only: [:show, :index] do
-      collection do
-        get '/assessed'
-        get '/self', action: 'self_assessing'
-        get '/all'
-        get '/latecommers'
-        get '/stats'
-        get '/progress'
-      end
-      get :review
-      post :replies
-      post :comments
-      put :begin_assessing
-      put :decline
+      put :pick
       put :assess
-      get :supervise
-      put :allow
-      put :submit
-      post :ticket
-      resources :report_projects, only: :update
+      put :decline
     end
+        
+    # sessions
+    resources :sessions, only: [:new, :create, :index, :show] do
+      put :start
+      put :stop
+    end
+    
+    # surveys
+    resources :surveys, only: :show do
+      resources :survey_fields, except: :index, path: :fields
+    end
+    
+    # user surveys
+    resources :user_surveys, only: :show
   end
 
   root to: 'application#dashboard'

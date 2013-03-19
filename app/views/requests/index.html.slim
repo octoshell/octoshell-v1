@@ -1,6 +1,6 @@
 - title t('.title', default: 'Request')
 
-div class="link-actions"
+div class="well"
   = link_to t('.new', default: 'Request'), new_request_path, class: 'btn'
 
 = safe_paginate @requests

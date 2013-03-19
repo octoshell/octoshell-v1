@@ -1,0 +1,20 @@
+- title 'Перерегистрации'
+
+div class="well"
+  = link_to t('.new', default: 'New'), new_admin_session_path, class: 'btn'
+
+table class="table table-bordered table-striped"
+  tr
+    th class="span1" #
+    th = Session.human_attribute_name(:state)
+    th = Session.human_attribute_name(:started_at)
+    th = Session.human_attribute_name(:ended_at)
+    th
+  - @sessions.each do |session|
+    tr class="#{'success' if session.active?}"
+      td = session.id
+      td
+        span class="label" = session.human_state_name
+      td = session.started_at || '???'
+      td = session.ended_at || '???'
+      td = link_to 'открыть', [:admin, session]

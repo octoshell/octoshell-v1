@@ -3,8 +3,8 @@ class Admin::RequestsController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
-    @search = Request.search(params[:search])
-    @requests = show_all? ? @search.all : @search.page(params[:page])
+    @search = Request.search(params[:q])
+    @requests = show_all? ? @search.all : @search.result(distinct: true).page(params[:page])
   end
   
   def edit
@@ -73,6 +73,6 @@ private
   end
 
   def setup_default_filter
-    params[:search] ||= { state_in: ['pending', 'active'] }
+    params[:q] ||= { state_in: ['pending', 'active'] }
   end
 end

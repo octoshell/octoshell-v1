@@ -1,0 +1,4 @@
+= render partial: "admin/survey/fields/#{field.kind}_field", locals: { field: field }
+- if field.hint?
+  div
+    span class="help-inline" = field.hint

@@ -1,6 +1,6 @@
 - title "Тег #{@ticket_tag.name}"
 
-div class="link-actions"
+div class="well"
   = link_to 'Редактировать', [:edit, :admin, @ticket_tag], class: 'btn'
   = " "
   - if @ticket_tag.can__close?

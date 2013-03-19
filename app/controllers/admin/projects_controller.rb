@@ -6,8 +6,8 @@ class Admin::ProjectsController < Admin::ApplicationController
   def index
     respond_to do |format|
       format.html do
-        @search = Project.search(params[:search])
-        @projects = show_all? ? @search.all : @search.page(params[:page])
+        @search = Project.search(params[:q])
+        @projects = show_all? ? @search.all : @search.result(distinct: true).page(params[:page])
       end
       format.json do
         @projects = Project.finder(params[:q]).order('projects.name asc')
@@ -77,7 +77,7 @@ class Admin::ProjectsController < Admin::ApplicationController
 private
 
   def setup_default_filter
-    params[:search] ||= { state_in: ['active'] }
-    params[:search][:meta_sort] ||= 'name.asc'
+    params[:q] ||= { state_in: ['active'] }
+    params[:q][:meta_sort] ||= 'name.asc'
   end
 end

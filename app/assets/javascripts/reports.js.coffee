@@ -15,7 +15,9 @@ $ ->
       false
   
   $('div[data-max-values]').on 'change :checkbox', ->
-    condition = $(':checked', @).length >= Number($(@).data('max-values'))
+    max = Number($(@).data('max-values'))
+    return if max <= 0
+    condition = $(':checked', @).length >= max
     $(':not(:checked)', @).prop 'disabled', condition
   $('div[data-max-values]').each (i, e) ->
     $(':checkbox:first', e).trigger('change')
@@ -44,3 +46,37 @@ $ ->
     $('input@allow-event').val $(@).data('event')
     $('form@allow').submit()
     return false
+
+  
+  
+  window.cache ||= {}
+  $('.typeahead').each (i, html) ->
+    $input = $(html)
+    $controlGroup = $input.parents('div.control-group:first')
+    url = $input.data('entity-source')
+    window.cache[url] = {}
+    if $input.val().length > 0
+      window.cache[url][$input.val()] = true
+    $input.typeahead
+      minLength: 1,
+      source: (query, process) ->
+        $.getJSON url, { q: query }, (data) ->
+          process(
+            data.records.map (r) ->
+              window.cache[url][r.text] = true
+              r.text
+          )
+    if $input.data('strict-collection')
+      $input.on 'blur', ->
+        if window.cache[url][$input.val()]
+          $controlGroup.removeClass('error').addClass('success')
+        else
+          $controlGroup.removeClass('success').addClass('error')
+      $input.on 'focus', ->
+        $controlGroup.removeClass('error').removeClass('success')
+  
+  $('.submit-survey').on 'click', ->
+    $button = $(@)
+    $form = $button.parents('form:first')
+    $form.prop 'action', $button.data('action')
+    true

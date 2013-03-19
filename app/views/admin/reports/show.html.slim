@@ -1,200 +1,44 @@
-- title "Отчет #{@report.id}"
+- title @report.human_name
 
-- if @report.personal_data.reason?
-  h4 Ходатайство о рассмотрении отчёта, подаваемого вне установленного срока
-
-  = @report.personal_data.reason
-
-- @report.projects.each do |project|
-  h2 = project.ru_title
-
-  table class="table table-striped table-bordered table-condensed"
-    - %w(title author).each do |attr|
-      tr
-        th class="span4" = Report::Project.human_attribute_name("ru_#{attr}")
-        td class="span6" = project.send "ru_#{attr}"
-        td class="span6" = project.send "en_#{attr}"
-    tr
-      th class="span4" = Report::Project.human_attribute_name(:emails)
-      td colspan="2" = project.emails
-    - %w(driver strategy objective impact usage).each do |attr|
-      tr
-        th class="span4" = Report::Project.human_attribute_name("ru_#{attr}")
-        td = project.send "ru_#{attr}"
-        td = project.send "en_#{attr}"
-    tr
-      th class="span4" = Report::Project.human_attribute_name(:directions_of_science)
-      td colspan="2" = project.directions_of_science.join(", ")
-    tr
-      th class="span4" = Report::Project.human_attribute_name(:critical_technologies)
-      td colspan="2" = project.critical_technologies.join(", ")
-    tr
-      th class="span4" = Report::Project.human_attribute_name(:areas)
-      td colspan="2" = project.areas.join(", ")
-    tr
-      th class="span4" = Report::Project.human_attribute_name(:computing_systems)
-      td colspan="2" = project.computing_systems.join(', ')
-    tr
-      th class="span4" Логины
-      td colspan="2"
-        = project.lomonosov_logins
-        br
-        = project.chebyshev_logins
-    tr
-      th class="span4" Материалы
-      td colspan="2"
-        = link_to project.materials_file_name, project.materials.url
-        |  (#{number_to_human_size(project.materials_file_size)})
-  
-  h3 Дополнительная информация
-  
-  p = project.request_comment? ? project.request_comment : "Нет"
-  
-  h3 Количественные характеристики
-
-  h5 Число опубликованных научных работ, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
-
-  table class="table table-striped table-bordered table-condensed"
-    tr
-      td class="span5" = Report::Project.human_attribute_name :books_count
-      td = project.books_count
-    tr
-      td = Report::Project.human_attribute_name :vacs_count
-      td = project.vacs_count
-    tr
-      td = Report::Project.human_attribute_name :lectures_count
-      td = project.lectures_count
-
-  h5 Число конференций, на которых были представлены данные, полученные на суперкомпьютерном комплексе МГУ
-
-  table class="table table-striped table-bordered summable"
-    tr
-      th = Report::Project.human_attribute_name :international_conferences_count
-      td = project.international_conferences_count
-    tr
-      th = Report::Project.human_attribute_name :international_conferences_in_russia_count
-      td = project.international_conferences_in_russia_count
-    tr
-      th = Report::Project.human_attribute_name :russian_conferences_count
-      td = project.russian_conferences_count
-  
-  h5 Число защищенных диссертаций, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
-  
-  table class="table table-striped table-bordered table-condensed"
-    tr
-      td class="span5" = Report::Project.human_attribute_name :doctors_dissertations_count
-      td = project.doctors_dissertations_count
-    tr
-      td = Report::Project.human_attribute_name :candidates_dissertations_count
-      td = project.candidates_dissertations_count
-  
-  h5 Число грантов, контрактов, договоров и т.п., при выполнении которых использовался суперкомпьютерный комплекс МГУ в рамках данного проекта
-  
-  table class="table table-striped table-bordered table-condensed"
-    tr
-      td class="span5" = Report::Project.human_attribute_name :rffi_grants_count
-      td = project.rffi_grants_count
-    tr
-      td = Report::Project.human_attribute_name :ministry_of_education_grants_count
-      td = project.ministry_of_education_grants_count
-    tr
-      td = Report::Project.human_attribute_name :rosnano_grants_count
-      td = project.rosnano_grants_count
-    tr
-      td = Report::Project.human_attribute_name :ministry_of_communications_grants_count
-      td = project.ministry_of_communications_grants_count
-    tr
-      td = Report::Project.human_attribute_name :ministry_of_defence_grants_count
-      td = project.ministry_of_defence_grants_count
-    tr
-      td = Report::Project.human_attribute_name :ran_grants_count
-      td = project.ran_grants_count
-    tr
-      td = Report::Project.human_attribute_name :other_russian_grants_count
-      td = project.other_russian_grants_count
-    tr
-      td = Report::Project.human_attribute_name :other_intenational_grants_count
-      td = project.other_intenational_grants_count
-
-  h5 Число премий, наград, медалей и т.п. за работы, в которых использованы данные, полученные на суперкомпьютерном комплексе МГУ
-
-  table class="table table-striped table-bordered table-condensed"
-    tr
-      td class="span5" = Report::Project.human_attribute_name :award_names
-      td = project.award_names
-    tr
-      td = Report::Project.human_attribute_name :awards_count
-      td = project.awards_count
-
-  h3 Оценки
-
-  = simple_form_for [:admin, @report, project], html: { class: 'form-horizontal' } do |f|
-    - %w(illustrations_points statement_points summary_points).each do |attr|
-      div class="control-group"
-        label class="radio_buttons optional control-label"
-          = Report::Project.human_attribute_name attr
-        div class="controls"
-          - { 0 => 'без оценки', 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5 }.each do |v, name|
-            label class="radio inline"
-              = f.radio_button attr, v, disabled: f.object.report.assessed?
-              = name
-              |  
-            |  
-    div class="form-actions"
-      = f.button :submit, 'Сохранить', class: 'btn-primary', disabled: !f.object.report.assessing?
-      p
-        span class="help-block" Вам нужно сохранить оценки перед тем как закончите оценку всего отчета.
-
-  - if project.last_changes.any?
-    h3 Последние изменения
-
-    table class="table table-bordered table-condensed"
-      tr
-        th Атрибут
-        th Было
-        th Стало
-      - project.last_changes.each do |changeset|
-        - changeset.each do |attribute, changes|
-          tr
-            td = Report::Project.human_attribute_name(attribute)
-            td = changes.first.inspect
-            td = changes.last.inspect
-
-h2 id="replies" Переписка с пользователем
-
-- @report.replies.find_all(&:persisted?).each do |reply|
-  blockquote
-    = markdown reply.message
-    small = reply.expert_name
-
-= simple_form_for @reply, url: admin_report_replies_path(@report), html: { class: 'form-horizontal' } do |f|
-  = f.input :message, input_html: { class: 'span6', rows: 4 }
-  div class="form-actions"
-    = f.button :submit, 'Отправить', class: 'btn-primary'
-
-h2 id="support" Поддержка
-
-- if @report.ticket.persisted?
-  p = link_to 'Перейти к заявке', @report.ticket, class: 'btn btn-success'
-- else
-  = simple_form_for @ticket, url: admin_report_ticket_path(@report, anchor: 'support'), html: { class: 'form-horizontal' } do |f|
-    = f.input :message, input_html: { rows: 4, class: 'span6' }
-    
-    div class="form-actions"
-      = f.button :submit, "Создать заявку", class: 'btn btn-success'
-      
-      
-- links = []
-- links << link_to('Закончить оценку', [:admin, @report, :assess], class: 'btn btn-primary', method: :put, data: { confirm: 'Вы уверены?' }) if @report.can_assess?
-- links << link_to('Вернуть отчет пользователю для редактирования', [:admin, @report, :decline], class: 'btn btn-danger', method: :put) if @report.can_decline?
-- if @report.can_submit?
-  - if @report.completely_valid?
-    - links << link_to('Вернуть отчет для оценки', [:admin, @report, :submit], class: "btn btn-danger", method: :put)
+div class="well"
+  - if @report.materials?
+    = link_to 'Скачать материалы', @report.materials.url, class: 'btn btn-large btn-primary'
   - else
-    - links << link_to('Вернуть отчет для оценки', '#', class: "btn btn-danger disabled")
+    = link_to 'Скачать материалы', '', class: 'btn btn-large btn-primary', disabled: true
+  |  
+  span style="margin-left: 20px; position: relative; top: 6px;" class="mute"
+    - if @report.materials?
+      | #{@report.materials_file_name}, #{number_to_human_size(@report.materials_file_size)}. Обновлен: #{@report.materials_updated_at.to_s(:datetime)}
+    - else
+      | Нет материалов
 
-- if links.any?
-  div class="link-actions"
-    - links.each do |link|
-      == link
-      = " "
+legend Оценки
+- if @report.can_assess? && may?(:access, :reports) && current_user = @report.expert
+  = simple_form_for @report, url: [:admin, @report, :assess], html: { class: 'form-horizontal' } do |f|
+    = f.input :illustration_points, collection: (0..5), as: :radio, wrapper_html: { class: 'inline-check-boxes' }
+    = f.input :statement_points, collection: (0..5), as: :radio, wrapper_html: { class: 'inline-check-boxes' }
+    = f.input :summary_points, collection: (0..5), as: :radio, wrapper_html: { class: 'inline-check-boxes' }
+    div class="form-actions"
+      = f.button :submit, 'Оценить', class: 'btn-primary'
+- else
+  table class="table table-striped"
+    tr
+      th class="span3" = Report.human_attribute_name(:illustration_points)
+      td = @report.illustration_points || 'Не оценивалось'
+    tr
+      th = Report.human_attribute_name(:statement_points)
+      td = @report.statement_points || 'Не оценивалось'
+    tr
+      th = Report.human_attribute_name(:summary_points)
+      td = @report.summary_points || 'Не оценивалось'
+
+legend Опросы
+
+- surveys = @report.user.current_session_surveys
+- if surveys.any?
+  ul
+    - surveys.each do |survey|
+      li = link_to survey.human_name, [:admin, survey]
+- else
+  p Нет присланных опросов
+

@@ -58,7 +58,9 @@ class UsersController < ApplicationController
 private
   
   def setup_default_filter
-    params[:search] ||= { state_in: ['sured'] }
-    params[:search][:meta_sort] ||= 'last_name.asc'
+    params[:q] ||= { state_in: ['sured'] }
+    if params[:q].is_a? Hash
+      params[:q][:meta_sort] ||= 'last_name.asc'
+    end
   end  
 end

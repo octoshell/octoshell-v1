@@ -1,0 +1,38 @@
+- title "Перерегистрация ##{@session.id}"
+
+div class="well"
+  - if @session.can_start?
+    = link_to 'Начать', [:admin, @session, :start], class: 'btn btn-large btn-success', method: :put, data: { confirm: 'Вы уверены?' }
+  - else
+    = link_to 'Начать', '#', class: 'btn btn-large btn-success', disabled: true
+  |  
+  - if @session.can_stop?
+    = link_to 'Закончить', [:admin, @session, :stop], class: 'btn btn-large btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
+  - else
+    = link_to 'Закончить', '#', class: 'btn btn-large btn-danger', disabled: true
+
+blockquote class="lead"
+  p
+    strong = @session.description
+  p
+    | началась 
+    em #{@session.started_at || '???'}
+    | , закончилась 
+    em #{@session.ended_at || '???'}
+
+
+h4 Опросы:
+
+ul
+  li
+    strong = link_to 'Персональный опрос', [:admin, @session.personal_survey]
+    |  [#{@session.personal_survey.fields.count}]
+  li
+    strong = link_to 'Опросы по проектам', [:admin, @session.projects_survey]
+    |  [#{@session.projects_survey.fields.count}]
+  li
+    strong = link_to 'Количественные характеристики', [:admin, @session.counters_survey]
+    |  [#{@session.counters_survey.fields.count}]
+
+h4 Статистика:
+

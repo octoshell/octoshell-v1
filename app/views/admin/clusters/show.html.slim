@@ -8,7 +8,7 @@ table class="table table-bordered" id="cluster-#{@cluster.id}-detail"
     th = Cluster.human_attribute_name(:description)
     td = @cluster.description
 
-div class="link-actions"
+div class="well"
   = link_to 'Редактировать', edit_admin_cluster_path(@cluster), class: 'btn'
   - if @cluster.can__close?
     = " "

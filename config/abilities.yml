@@ -71,5 +71,9 @@ reports:
   - review
   - access
   - supervise
+sessions:
+  - manage
 admin:
+  - access
+user_surveys:
   - access

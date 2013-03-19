@@ -1,6 +1,6 @@
 - title t('.title', default: 'Membership')
 
-div class="link-actions"
+div class="well"
   = link_to t('.edit', default: 'Edit'), edit_membership_path(@membership), class: 'btn'
   = " "
   - if @membership.can__close?

@@ -3,7 +3,7 @@
 blockquote
   = @task.description
 
-div class="link-actions"
+div class="well"
   - if @task.can_perform_callbacks?
     = link_to t('call_callbacks'), [:admin, @task, :perform_callbacks], class: 'btn', method: :put
     = " "

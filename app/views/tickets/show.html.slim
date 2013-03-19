@@ -1,6 +1,6 @@
 - title t('.title', default: "Ticket #%{id}", id: @ticket.id)
 
-div class="link-actions"
+div class="well"
   = link_to t('.edit', default: 'Edit'), [:edit, @ticket], class: 'btn'
   = " "
   - if @ticket.can__resolve?

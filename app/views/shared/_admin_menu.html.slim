@@ -20,6 +20,7 @@
 = submenu_item :'admin/project_prefixes', (link_to t('.project_prefixes', default: 'Project Prefixes'), admin_project_prefixes_path), maynot?(:manage, :project_prefixes)
 = submenu_item :'admin/groups', (link_to t('.groups', default: 'Groups'), admin_groups_path), maynot?(:manage, :groups)
 = submenu_item :'admin/pages', (link_to t('.pages', default: 'Pages'), admin_pages_path), maynot?(:manage, :pages)
+= submenu_item :'admin/sessions', (link_to t('.sessions', default: 'Sessions'), admin_sessions_path), maynot?(:manage, :sessions)
 
 li class="dropdown"
   = link_to '#', 'data-toggle' => 'dropdown' do

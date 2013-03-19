@@ -2,7 +2,7 @@
 
 = render 'admin/tickets/menu'
 
-div class="link-actions"
+div class="well"
   = link_to 'Новый шаблон ответа', new_admin_ticket_template_path, class: 'btn'
 
 = simple_form_for [:admin, @search], method: :get, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|

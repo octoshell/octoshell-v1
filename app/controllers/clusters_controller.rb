@@ -3,8 +3,8 @@ class ClustersController < ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
-    @search = Cluster.search(params[:search])
-    @clusters = show_all? ? @search.all : @search.page(params[:page])
+    @search = Cluster.search(params[:q])
+    @clusters = show_all? ? @search.all : @search.result(distinct: true).page(params[:page])
   end
   
   def show
@@ -22,6 +22,6 @@ private
   end
   
   def setup_default_filter
-    params[:search] ||= { state_in: ['active'] }
+    params[:q] ||= { state_in: ['active'] }
   end
 end

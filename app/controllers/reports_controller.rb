@@ -1,89 +1,23 @@
 class ReportsController < ApplicationController
   before_filter :require_login
-  before_filter :setup_form
-
-  def personal
-    @report = Report.find(params[:report_id])
-    @report.validate_part = :personal
-    @report.assign_attributes(params[:report])
-    if @report.save(validate: false)
-      redirect_to edit_report_url(@report, step: 'survey')
-    else
-      @form = 'personal_form'
-      @reply = @report.replies.build
-      render :edit
-    end
-  end
-
-  def survey
-    @report = Report.find(params[:report_id])
-    @report.validate_part = :survey
-    @report.assign_attributes(params[:report])
-    if @report.save(validate: false)
-      redirect_to edit_report_url(@report, step: 'projects')
-    else
-      @form = 'survey_form'
-      @reply = @report.replies.build
-      render :edit
-    end
-  end
-
-  def projects
-    @report = Report.find(params[:report_id])
-    @report.validate_part = :projects
-    @report.assign_attributes(params[:report])
-    if @report.save(validate: false)
-      redirect_to edit_report_url(@report, step: 'projects_survey')
-    else
-      @form = 'projects_form'
-      @reply = @report.replies.build
-      render :edit
-    end
-  end
-
-  def projects_survey
-    @report = Report.find(params[:report_id])
-    @report.validate_part = :projects_survey
-    @report.assign_attributes(params[:report])
-    if @report.save(validate: false)
-      redirect_to edit_report_url(@report)
-    else
-      @form = 'projects_survey_form'
-      @reply = @report.replies.build
-      render :edit
-    end
-  end
-
-  def edit
-    @report = get_report(params[:id])
-    @report.personal_data.valid?(:update)
-    @report.personal_survey.valid?(:update)
-    @report.organizations.each { |o| o.valid?(:update) }
-    @report.projects.each { |p| p.valid?(:update) }
-    @reply = @report.replies.build
-  end
-
-  def replies
+  
+  def accept
     @report = get_report(params[:report_id])
-    @reply = @report.replies.build(params[:report_reply])
-    @reply.user = current_user
-    if @reply.save
-      redirect_to edit_report_path(@report, step: params[:step])
-    else
-      render :edit
-    end
+    @report.accepted? || @report.accept!
+    redirect_to @report
   end
-
+  
+  def show
+    @report = get_report(params[:id])
+  end
+  
   def submit
     @report = get_report(params[:report_id])
-    @report.attributes = params[:report]
-    if @report.completely_valid? && (@report.submitted? || @report.submit!)
-      @report.user.track! :report_submitted, @report, current_user
-      redirect_to projects_path, notice: t('.report_submitted')
+    @report.assign_attributes(params[:report])
+    if @report.submitted? || @report.submit
+      redirect_to root_path
     else
-      flash.now[:alert] = t('.cant_submit_report_because_of_errors')
-      @reply = @report.replies.build
-      render :edit
+      render :show
     end
   end
 
@@ -91,14 +25,5 @@ private
   
   def get_report(id)
     current_user.reports.find(id)
-  end
-
-  def setup_form
-    @form = ({
-      'personal'        => 'personal_form',
-      'survey'          => 'personal_survey_form',
-      'projects'        => 'projects_form',
-      'projects_survey' => 'projects_survey_form'
-    }[params[:step]] || 'personal_form')
   end
 end

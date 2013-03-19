@@ -1,4 +1,19 @@
 ru:
+  user_survey:
+    personal: Персональный опрос
+    projects: 'Опрос по проекту "%{name}"'
+    counters: 'Количественные х-ки проекта "%{name}"'
+  survey_field_kinds:
+    radio: Радио
+    select: Список
+    mselect: Множественный список
+    aselect: Ассоциация
+    text: Текст
+    string: Короткий текст
+    scientometrics: Наукометрия
+  survey_field_entities:
+    organization: Активная организация
+    positions: Должность
   abilities:
     accesses:
       manage: Полный доступ к Ключам на Кластере
@@ -75,6 +90,8 @@ ru:
       manage: Эксперт (по отчетам)
       review: Возможность просматривать отчеты
       supervise: Возможность принимать/отклонять отчеты сданные после срока
+    sessions:
+      manage: Возможность запускать перерегистрацию
   views:
     pagination:
       next: Следующая
@@ -82,6 +99,7 @@ ru:
       last: Конец
       previous: Предыдущая
       truncate: ...
+  
   call_callbacks: 'Вызвать коллбеки'
   tasks:
     description:
@@ -263,13 +281,6 @@ ru:
         many: ! '%{model}: сохранение не удалось из-за %{count} ошибок'
         one: ! '%{model}: сохранение не удалось из-за %{count} ошибки'
         other: ! '%{model}: сохранение не удалось из-за %{count} ошибки'
-  helpers:
-    select:
-      prompt: ! 'Выберите: '
-    submit:
-      create: Создать %{model}
-      submit: Сохранить %{model}
-      update: Сохранить %{model}
   number:
     currency:
       format:
@@ -377,6 +388,14 @@ ru:
       update: Сохранить
       user:
         create: Зарегистрироваться
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "Показано <b>0</b>"
+          one: "Показано <b>1</b>"
+          other: "Показаны <b>все %{count}</b>"
+      more_pages:
+        display_entries: "Показаны <b>%{first}&nbsp;-&nbsp;%{last}</b> из <b>%{total}</b>"
   requests:
     cluster_destroyed: Кластер удален
   steps:
@@ -403,7 +422,7 @@ ru:
       company:
         reverse_name: "Company reverse name-diddly"
       developer:
-        name_contains: "Developer name-diddly contains-aroonie"
+        name_cont: "Developer name-diddly contains-aroonie"
   activerecord:
     models:
       user: Пользователь
@@ -423,6 +442,7 @@ ru:
       ticket_tag: Тег
       task: Задание
       report: Отчет
+      survey/value: Значение
     errors:
       models:
         report/project:
@@ -450,6 +470,10 @@ ru:
               invalid_email: "Не верный формат email: %{email}"
             base:
               not_ready_to_be_activated: Не может быть активирован. Необходимо подтвержденное поручительство и заполенное место работы.
+        session:
+          attributes:
+            base:
+              date_is_out_of_available_range: Не подходящий период
         request:
           attributes:
             base:
@@ -477,6 +501,7 @@ ru:
       report/comment: 
         message: Сообщение
       report:
+        materials: Архив
         state: Состояние
         submitted_at: Отправлен
         superviser_comment: Комментарий
@@ -563,6 +588,17 @@ ru:
         precision: Какой тип вычислений наиболее характерен для Ваших задач?
         computing: Касательно вычислительной платформы для Ваших расчетов
         comment: 'Что-то другое, не вошедшее в этот список'
+      session:
+        description: Описание
+      survey/field:
+        name: Название
+        kind: Тип
+        collection: Значения списка
+        entity: Сущность
+        strict_collection: Строгий список
+        max_values: Максимальное кол-во значений
+        required: Обязательное
+        weight: Вес
       user:
         phone: Номер телефона
         email: Email
@@ -772,7 +808,9 @@ ru:
       report:
         state:
           states:
-            editing: Заполняется
+            declined: Отклонен
+            pending: Не прислан
+            accepted: Не прислан
             submitted: Отправлен
             assessing: Оценивается
             assessed: Оценен
@@ -951,6 +989,12 @@ ru:
             pending: В ожидании
             closing: Закрывается
             closed: Закрыт
+      user_survey:
+        state:
+          states:
+            pending: Не заполнен
+            filling: Заполняется
+            submitted: Отправлен
   history_item:
     registration: "Совершена регистрация"
     create_session: "Осуществлен вход в систему"

@@ -1,11 +1,11 @@
 - title 'Организации'
 
-div class="link-actions"
+div class="well"
   = link_to 'Новая организация', new_admin_organization_path, class: 'btn'
 
 = simple_form_for [:admin, @search], method: :get, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|
   = autocomplete :organization, f, name: :id_eq, label: "Название", role: 'instance-search', url: '/admin/organizations/%s'
-  = f.input :abbreviation_contains, required: false
+  = f.input :abbreviation_cont, required: false
   = f.input :organization_kind_id_eq, collection: OrganizationKind.all, required: false
   = f.input :state_in, collection: Organization.human_state_names, input_html: { multiple: true }, required: false
   div class="form-actions"

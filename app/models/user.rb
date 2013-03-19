@@ -25,8 +25,8 @@ class User < ActiveRecord::Base
   has_many :history_items
   has_many :user_groups
   has_many :groups, through: :user_groups
-  has_many :reports
   has_many :assessing_reports, class_name: :Report, foreign_key: :expert_id
+  has_many :user_surveys
   has_and_belongs_to_many :subscribed_tickets, join_table: :tickets_users, class_name: :Ticket, uniq: true
   
   validates :first_name, :last_name, :middle_name, :email, :phone, presence: true
@@ -60,6 +60,7 @@ class User < ActiveRecord::Base
     end.join (') or (')
     where "(#{condition})"
   end)
+  
   
   state_machine initial: :active do
     state :active
@@ -114,12 +115,16 @@ class User < ActiveRecord::Base
         sum_of_count
     end
   end
-
-  def report
-    reports.first || begin
-      report = reports.create!
-      report.setup_defaults!
-      report
+  
+  def reports
+    Report.where(project_id: owned_project_ids)
+  end
+  
+  def current_session_surveys
+    if session = Session.current
+      user_surveys.where(survey_id: session.survey_ids).with_state(:submitted)
+    else
+      []
     end
   end
 

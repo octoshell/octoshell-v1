@@ -11,7 +11,7 @@ p class="lead" = @project.description
     = @project.errors.full_messages.to_sentence
 
 
-div class="link-actions"
+div class="well"
   = link_to 'Редактировать', [:edit, :admin, @project], class: 'btn'
   |  
   = link_to 'Версии', [@project, :versions], class: 'btn'

@@ -2,8 +2,8 @@ class Admin::OrganizationKindsController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
-    @search = OrganizationKind.search(params[:search])
-    @organization_kinds = show_all? ? @search.all : @search.page(params[:page])
+    @search = OrganizationKind.search(params[:q])
+    @organization_kinds = show_all? ? @search.all : @search.result(distinct: true).page(params[:page])
   end
   
   def show
@@ -49,6 +49,6 @@ private
   end
 
   def setup_default_filter
-    params[:search] ||= { state_in: ['active'] }
+    params[:q] ||= { state_in: ['active'] }
   end
 end

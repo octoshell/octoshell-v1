@@ -5,8 +5,8 @@ class Admin::TicketTemplatesController < Admin::ApplicationController
   end
   
   def index
-    @search = TicketTemplate.search(params[:search])
-    @ticket_templates = show_all? ? @search.all : @search.page(params[:page])
+    @search = TicketTemplate.search(params[:q])
+    @ticket_templates = show_all? ? @search.all : @search.result(distinct: true).page(params[:page])
   end
   
   def show
@@ -52,7 +52,7 @@ private
   end
   
   def setup_default_filter
-    params[:search] ||= { state_in: ['active'] }
+    params[:q] ||= { state_in: ['active'] }
   end
 
   def subnamespace
