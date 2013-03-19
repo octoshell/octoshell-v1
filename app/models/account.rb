@@ -51,14 +51,8 @@ class Account < ActiveRecord::Base
   def activate!
     transaction do
       _activate!
-      
-      project.cluster_projects.each do |cp|
-        cluster_users.where(cluster_project_id: cp.id).first_or_create!
-      end
-      
-      cluster_users.joins(:cluster_project).where(
-        cluster_projects: { state: 'active' }
-      ).includes(:cluster_project).each &:activate!
+      create_cluster_projects!
+      activate_cluster_users!
     end
   end
   
@@ -103,5 +97,17 @@ private
         project.login
       end
     update_attribute :username, username
+  end
+  
+  def create_cluster_projects!
+    project.cluster_projects.each do |cp|
+      cluster_users.where(cluster_project_id: cp.id).first_or_create!
+    end
+  end
+  
+  def activate_cluster_users!
+    cluster_users.joins(:cluster_project).where(
+      cluster_projects: { state: 'active' }
+    ).includes(:cluster_project).each &:activate!
   end
 end
