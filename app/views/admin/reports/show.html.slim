@@ -1,0 +1,44 @@
+- title @report.human_name
+
+div class="well"
+  - if @report.materials?
+    = link_to 'Скачать материалы', @report.materials.url, class: 'btn btn-large btn-primary'
+  - else
+    = link_to 'Скачать материалы', '', class: 'btn btn-large btn-primary', disabled: true
+  |  
+  span style="margin-left: 20px; position: relative; top: 6px;" class="mute"
+    - if @report.materials?
+      | #{@report.materials_file_name}, #{number_to_human_size(@report.materials_file_size)}. Обновлен: #{@report.materials_updated_at.to_s(:datetime)}
+    - else
+      | Нет материалов
+
+legend Оценки
+- if @report.can_assess? && may?(:access, :reports) && current_user = @report.expert
+  = simple_form_for @report, url: [:admin, @report, :assess], html: { class: 'form-horizontal' } do |f|
+    = f.input :illustration_points, collection: (0..5), as: :radio, wrapper_html: { class: 'inline-check-boxes' }
+    = f.input :statement_points, collection: (0..5), as: :radio, wrapper_html: { class: 'inline-check-boxes' }
+    = f.input :summary_points, collection: (0..5), as: :radio, wrapper_html: { class: 'inline-check-boxes' }
+    div class="form-actions"
+      = f.button :submit, 'Оценить', class: 'btn-primary'
+- else
+  table class="table table-striped"
+    tr
+      th class="span3" = Report.human_attribute_name(:illustration_points)
+      td = @report.illustration_points || 'Не оценивалось'
+    tr
+      th = Report.human_attribute_name(:statement_points)
+      td = @report.statement_points || 'Не оценивалось'
+    tr
+      th = Report.human_attribute_name(:summary_points)
+      td = @report.summary_points || 'Не оценивалось'
+
+legend Опросы
+
+- surveys = @report.user.current_session_surveys
+- if surveys.any?
+  ul
+    - surveys.each do |survey|
+      li = link_to survey.human_name, [:admin, survey]
+- else
+  p Нет присланных опросов
+

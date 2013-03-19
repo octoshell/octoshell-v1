@@ -99,6 +99,7 @@ ru:
       last: Конец
       previous: Предыдущая
       truncate: ...
+  
   call_callbacks: 'Вызвать коллбеки'
   tasks:
     description:
@@ -280,13 +281,6 @@ ru:
         many: ! '%{model}: сохранение не удалось из-за %{count} ошибок'
         one: ! '%{model}: сохранение не удалось из-за %{count} ошибки'
         other: ! '%{model}: сохранение не удалось из-за %{count} ошибки'
-  helpers:
-    select:
-      prompt: ! 'Выберите: '
-    submit:
-      create: Создать %{model}
-      submit: Сохранить %{model}
-      update: Сохранить %{model}
   number:
     currency:
       format:
@@ -394,6 +388,14 @@ ru:
       update: Сохранить
       user:
         create: Зарегистрироваться
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "Показано <b>0</b>"
+          one: "Показано <b>1</b>"
+          other: "Показаны <b>все %{count}</b>"
+      more_pages:
+        display_entries: "Показаны <b>%{first}&nbsp;-&nbsp;%{last}</b> из <b>%{total}</b>"
   requests:
     cluster_destroyed: Кластер удален
   steps:

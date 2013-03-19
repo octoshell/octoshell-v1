@@ -1,5 +1,6 @@
 # coding: utf-8
 class Report < ActiveRecord::Base
+  delegate :user, to: :project
   belongs_to :session
   belongs_to :project
   belongs_to :expert, class_name: :User
@@ -9,6 +10,8 @@ class Report < ActiveRecord::Base
     max_size: 20.megabytes
   
   attr_accessible :materials
+  attr_accessible :illustration_points, :statement_points, :summary_points,
+    as: :admin
   
   state_machine :state, initial: :pending do
     state :pending
@@ -43,6 +46,10 @@ class Report < ActiveRecord::Base
   
   def link_name
     'открыть'
+  end
+  
+  def human_name
+    %{Отчет по проекту "#{project.name.truncate(20)}"}
   end
   
   def bootstrap_status

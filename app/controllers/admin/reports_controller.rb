@@ -18,4 +18,20 @@ class Admin::ReportsController < Admin::ApplicationController
         alert: @picker.error
     end
   end
+  
+  def assess
+    authorize! :assess, :reports
+    @report = Report.find(params[:report_id])
+    @assesser = ReportAssesser.new(current_user)
+    if @assesser.assess(@report, params[:report])
+      redirect_to admin_reports_path
+    else
+      redirect_to [:admin, @report], alert: @assesser.error
+    end
+  end
+  
+  def show
+    @report = Report.find(params[:id])
+    raise MayMay::Unauthorized unless may?(:review, :reports) || @report.expert
+  end
 end

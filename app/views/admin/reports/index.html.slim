@@ -9,7 +9,14 @@
   div class="form-actions"
     = f.button :submit, 'Показать', class: 'btn-primary btn-small'
 
-p == page_entries_info(@reports)
+- menu = { 'Неразобранные' => { 'state_eq' => 'submitted' }, 'Свои' => { 'expert_id_eq' => current_user.id.to_s }, 'Оцененные' => { 'state_eq' => 'assessed' } }
+ul class="nav nav-pills"
+  - menu.each do |title, ps|
+    li
+    li class="#{'active' if params[:q] == ps}" = link_to title, admin_reports_path(q: ps)
+
+p
+  em == page_entries_info(@reports)
 
 - if @reports.any?
   table class="table table-striped"
@@ -37,4 +44,5 @@ p == page_entries_info(@reports)
 
 = safe_paginate @reports
 
-p == page_entries_info(@reports)
+p
+  em == page_entries_info(@reports)

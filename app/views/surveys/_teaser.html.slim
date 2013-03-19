@@ -36,9 +36,9 @@
                 td class="span2"
                   - if report.pending? || report.declined? || report.accepted?
                     span class="label label-important" = report.human_state_name
-                  - elsif report.submitted? || report.accessing?
+                  - elsif report.submitted? || report.assessing?
                     span class="label label-warning" = report.human_state_name
-                  - elsif report.accessed?
+                  - elsif report.assessed?
                     span class="label label-success" = report.human_state_name
                   - else
                     span class="label" = report.human_state_name

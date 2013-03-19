@@ -119,6 +119,14 @@ class User < ActiveRecord::Base
   def reports
     Report.where(project_id: owned_project_ids)
   end
+  
+  def current_session_surveys
+    if session = Session.current
+      user_surveys.where(id: session.survey_ids)
+    else
+      []
+    end
+  end
 
   def fio
     [last_name, first_name, middle_name].join(' ')
