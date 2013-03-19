@@ -90,7 +90,7 @@ class Account < ActiveRecord::Base
 private
   
   def assign_username
-    username = 
+    username =
       if project.cluster_user_type == 'account'
         "#{user.username}_#{id}"
       else
