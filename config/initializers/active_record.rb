@@ -42,6 +42,10 @@ module ActiveRecord
     def models_name
       self.class.model_name.pluralize.underscore.to_sym
     end
+    
+    def errors_sentence
+      errors.full_messages.to_sentence
+    end
   end
   
   class RecordInProcess < StandardError

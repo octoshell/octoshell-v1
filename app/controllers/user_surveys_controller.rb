@@ -17,7 +17,7 @@ class UserSurveysController < ApplicationController
     if @survey.fill_values(params[:fields])
       redirect_to @survey
     else
-      flash.now[:alert] = @survey.errors.full_messages.to_sentence
+      flash.now[:alert] = @survey.errors_sentence
       render :show
     end
   end
@@ -27,7 +27,7 @@ class UserSurveysController < ApplicationController
     if @survey.fill_values_and_submit(params[:fields])
       redirect_to @survey
     else
-      flash.now[:alert] = @survey.errors.full_messages.to_sentence
+      flash.now[:alert] = @survey.errors_sentence
       render :show
     end
   end
