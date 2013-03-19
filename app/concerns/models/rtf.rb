@@ -25,7 +25,7 @@ module Models
     def to_rtf
       font = RTF::Font.new(RTF::Font::ROMAN, 'Arial')
 
-      styles = {}
+      styles = {} 
 
       header = RTF::ParagraphStyle.new
       header.justification = :qr
