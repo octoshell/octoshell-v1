@@ -296,6 +296,9 @@ MSU::Application.routes.draw do
     resources :surveys, only: :show do
       resources :survey_fields, except: :index, path: :fields
     end
+    
+    # user surveys
+    resources :user_surveys, only: :show
   end
 
   root to: 'application#dashboard'

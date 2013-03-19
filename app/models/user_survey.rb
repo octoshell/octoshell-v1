@@ -50,6 +50,7 @@ class UserSurvey < ActiveRecord::Base
   end
 
   def fill_values(fields)
+    fields ||= []
     failed = false
     transaction do
       updater = proc { |id, value| find_value(id).update_value(value) }

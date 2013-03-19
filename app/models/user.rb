@@ -122,7 +122,7 @@ class User < ActiveRecord::Base
   
   def current_session_surveys
     if session = Session.current
-      user_surveys.where(id: session.survey_ids)
+      user_surveys.where(survey_id: session.survey_ids).with_state(:submitted)
     else
       []
     end

@@ -75,3 +75,5 @@ sessions:
   - manage
 admin:
   - access
+user_surveys:
+  - access
