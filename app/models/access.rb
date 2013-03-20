@@ -4,6 +4,7 @@ class Access < ActiveRecord::Base
   delegate :state_name, to: :credential, prefix: true, allow_nil: true
   
   include Models::Asynch
+  include Models::MarkableForTask
   has_paper_trail
   
   default_scope order("#{table_name}.id desc")
@@ -25,63 +26,42 @@ class Access < ActiveRecord::Base
     state :active
     state :closing
     
-    event :_activate do
-      transition closed: :activing
+    event :activate do
+      transition :closed => :activing
     end
     
-    event :_complete_activation do
-      transition activing: :active
+    event :complete_activation do
+      transition :activing => :active
     end
     
-    event :_close do
-      transition active: :closing
+    event :close do
+      transition :active => :closing
     end
     
-    event :_complete_closure do
-      transition closing: :closed
+    event :complete_closure do
+      transition :closing => :closed
     end
     
-    event :_force_close do
-      transition active: :closed
+    event :force_close do
+      transition :active => :closed
     end
-  end
-  
-  define_defaults_events :activate, :complete_activation, :close,
-    :complete_closure, :force_close
-  
+    
+    around_transition :on => :activate do |access, _, block|
+      access.transaction do
+        access.check_process!
+        block.call
+        access.mark_for_task!
+      end
+    end
+    
+    around_transition :on => [:close, :force_close] do |access, _, block|
+      access.transaction do
+        access.check_process!
+        block.call
+      end
+    end
+  end  
   define_state_machine_scopes
-  
-  def activate!
-    check_process!
-    
-    transaction do
-      _activate!
-      tasks.setup(:add_openkey)
-    end
-    true
-  end
-  
-  def try_to_activate
-    if cluster_user.account.active?
-      activate!
-    end
-  end
-  
-  def close!
-    check_process!
-    
-    transaction do
-      _close!
-      tasks.setup(:del_openkey)
-    end
-    true
-  end
-  
-  def force_close!
-    check_process!
-    
-    _force_close!
-  end
   
   def available?
     cluster_user.active? && cluster_user.cluster_project.active?

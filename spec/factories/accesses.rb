@@ -13,6 +13,7 @@ FactoryGirl.define do
     factory :active_access do |access|
       after(:create) do |access|
         access.activate!
+        cluster_user.unmark_for_task!
         access.complete_activation!
       end
     end
