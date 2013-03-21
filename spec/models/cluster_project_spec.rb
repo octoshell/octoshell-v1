@@ -18,7 +18,6 @@ describe ClusterProject do
       end
       
       it { should be_activing }
-      it { cluster_project.tasks.first.should be_add_project }
     end
     
     context 'paused' do
@@ -32,7 +31,6 @@ describe ClusterProject do
       end
       
       it { should be_activing }
-      it { cluster_project.tasks.first.should be_unblock_project }
     end
   end
   
@@ -45,7 +43,6 @@ describe ClusterProject do
     end
     
     it { should be_pausing }
-    it { cluster_project.tasks.first.should be_block_project }
   end
   
   describe '#close' do
@@ -57,6 +54,5 @@ describe ClusterProject do
     end
     
     it { should be_closing }
-    it { cluster_project.tasks.first.should be_del_project }
   end
 end

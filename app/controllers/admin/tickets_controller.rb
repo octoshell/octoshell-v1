@@ -56,7 +56,7 @@ private
 
   def setup_default_filter
     params[:q] ||= { state_in: ['active'] }
-    params[:meta_sort] ||= 'id.asc'
+    params[:q][:meta_sort] ||= 'id.asc'
     params[:q][:ticket_tag_relations_ticket_tag_name_in] ||= TicketTag.active.pluck(:name)
   end
 end

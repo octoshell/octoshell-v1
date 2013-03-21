@@ -72,7 +72,8 @@ CREATE TABLE accesses (
     state character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    cluster_user_id integer
+    cluster_user_id integer,
+    task_needed boolean DEFAULT false
 );
 
 
@@ -233,7 +234,8 @@ CREATE TABLE cluster_projects (
     state character varying(255),
     project_id integer,
     cluster_id integer,
-    username character varying(255)
+    username character varying(255),
+    task_needed boolean DEFAULT false
 );
 
 
@@ -267,7 +269,8 @@ CREATE TABLE cluster_users (
     updated_at timestamp without time zone NOT NULL,
     account_id integer,
     cluster_project_id integer,
-    username character varying(255)
+    username character varying(255),
+    task_needed boolean DEFAULT false
 );
 
 
@@ -4353,3 +4356,9 @@ INSERT INTO schema_migrations (version) VALUES ('20130319103424');
 INSERT INTO schema_migrations (version) VALUES ('20130319115555');
 
 INSERT INTO schema_migrations (version) VALUES ('20130319122504');
+
+INSERT INTO schema_migrations (version) VALUES ('20130320110257');
+
+INSERT INTO schema_migrations (version) VALUES ('20130320110313');
+
+INSERT INTO schema_migrations (version) VALUES ('20130320110333');

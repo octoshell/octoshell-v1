@@ -22,95 +22,88 @@ class ClusterUser < ActiveRecord::Base
   before_create :assign_username
   
   state_machine initial: :closed do
-    state :closed
     state :activing
     state :active
+    state :paused
+    state :pausing
     state :closing
+    state :closed
     
-    event :_activate do
-      transition closed: :activing
+    event :activate do
+      transition :closed => :activing
     end
     
-    event :_complete_activation do
-      transition activing: :active
+    event :complete_activation do
+      transition :activing => :active
     end
     
-    event :_close do
-      transition active: :closing
+    event :close do
+      transition :active => :closing
     end
     
-    event :_complete_closure do
-      transition closing: :closed
+    event :complete_closure do
+      transition :closing => :closed
     end
     
-    event :_force_close do
-      transition active: :closed
+    event :force_close do
+      transition :active => :closed
     end
-  end
-  
-  define_defaults_events :activate, :complete_activation, :close,
-    :complete_closure
-  
-  define_state_machine_scopes
-  
-  def activate!
-    check_process!
     
-    transaction do
-      _activate!
-      tasks.setup(:add_user)
+    event :block do
+      transition :active => :pausing
     end
-  end
-  
-  def close!
-    check_process!
     
-    transaction do
-      _close!
-      tasks.setup(:del_user)
+    event :complete_block do
+      transition :pausing => :paused
     end
-  end
-  
-  def force_close!
-    check_process!
     
-    transaction do
-      _force_close!
-      accesses.non_closed.each &:force_close!
-    end
-  end
-  
-  def complete_activation!
-    transaction do
-      _complete_activation!
-      
-      account.user.credentials.active.each do |credential|
-        accesses.where(credential_id: credential.id).first_or_create!
+    around_transition :on => [:activate, :pause, :close] do |cu, _, block|
+      cu.transaction do
+        cu.check_process!
+        block.call
+        procedure = { activing: :add_user, pausing: :block_user, closing: :del_user }[cu.state_name]
+        cu.tasks.setup(procedure)
       end
-      
-      accesses.each &:activate!
+    end
+    
+    around_transition :on => :force_close do |cu, _, block|
+      cu.transaction do
+        block.call
+        cu.accesses.non_closed.each &:force_close!
+      end
+    end
+    
+    around_transition :on => :complete_activation do |cu, _, block|
+      cu.transaction do
+        block.call
+        cu.account.user.credentials.active.each do |credential|
+          cu.accesses.where(credential_id: credential.id).first_or_create!
+        end
+        cu.accesses.each &:activate!
+      end
+    end
+    
+    around_transition :on => :complete_closure do |cu, _, block|
+      cu.transaction do
+        block.call
+        cu.accesses.non_closed.each &:force_close!
+      end
     end
   end
-  
-  def complete_closure!
-    transaction do
-      _complete_closure!
-      accesses.non_closed.each &:force_close!
-    end
-  end
-  
-  def check_process!
-    if [:activing, :closing].include?(state_name)
-      raise ActiveRecord::RecordInProcess
-    end
-  end
-  
+  define_state_machine_scopes
+    
   def has_active_entities?
     !closed? || accesses.any?(&:has_active_entities?)
   end
 
   def link_name
     username
+  end
+  
+  def check_process!
+    if [:activing, :blocking, :closing].include?(state_name)
+      raise ActiveRecord::RecordInProcess
+    end
   end
   
 protected
@@ -121,6 +114,10 @@ protected
   
   def continue_del_user(task)
     complete_closure!
+  end
+  
+  def continue_block_user(task)
+    complete_block!
   end
 
 private

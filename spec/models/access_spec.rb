@@ -12,7 +12,6 @@ describe Access do
     before { access.activate }
     
     it { should be_activing }
-    it { access.tasks.add_openkey.pending.count.should == 1 }
   end
   
   describe '#complete_activation' do
@@ -32,7 +31,6 @@ describe Access do
     end
     
     it { should be_closing }
-    it { access.tasks.del_openkey.pending.count.should == 1 }
   end
   
   describe '#complete_closure' do

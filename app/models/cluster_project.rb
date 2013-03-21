@@ -24,78 +24,65 @@ class ClusterProject < ActiveRecord::Base
     state :paused
     state :closing
     
-    event :_activate do
+    event :activate do
       transition [:closed, :paused] => :activing
     end
     
-    event :_complete_activation do
-      transition activing: :active
+    event :complete_activation do
+      transition :activing => :active
     end
     
-    event :_pause do
-      transition active: :pausing
+    event :pause do
+      transition :active => :pausing
     end
     
-    event :_complete_pausing do
-      transition pausing: :paused
+    event :complete_pausing do
+      transition :pausing => :paused
     end
     
-    event :_close do
+    event :close do
       transition [:active, :paused] => :closing
     end
     
-    event :_complete_closure do
-      transition closing: :closed
+    event :complete_closure do
+      transition :closing => :closed
+    end
+    
+    around_transition :on => :activate do |cp, _, block|
+      cp.transaction do
+        cp.check_process!
+        block.call
+        procedure = cp.closed? ? :add_project : :unblock_project
+        cp.tasks.setup(procedure)
+      end
+    end
+    
+    around_transition :on => :pause do |cp, _, block|
+      cp.transaction do
+        cp.check_process!
+        block.call
+        cp.tasks.setup(:block_project)
+      end
+    end
+    
+    around_transition :on => :close do |cp, _, block|
+      cp.transaction do
+        cp.check_process!
+        block.call
+        cp.cluster_users.non_closed.each &:force_close!
+        cp.tasks.setup(:del_project)
+      end
+    end
+    
+    around_transition :on => :complete_activation do |cp, _, block|
+      cp.transaction do
+        block.call
+        cp.create_possible_accounts!
+        cp.activate_non_active_cluster_users!
+      end
     end
   end
-  
-  define_defaults_events :activate, :complete_activation, :close,
-    :complete_closure, :complete_pausing, :pause
-  
   define_state_machine_scopes
-  
-  def activate!
-    check_process!
-    
-    transaction do
-      procedure = closed? ? :add_project : :unblock_project
-      _activate!
-      tasks.setup(procedure)
-    end
-  end
-  
-  def pause!
-    check_process!
-    
-    transaction do
-      _pause!
-      tasks.setup(:block_project)
-    end
-  end
-  
-  def close!
-    check_process!
-    
-    transaction do
-      _close!
-      cluster_users.non_closed.each &:force_close!
-      tasks.setup(:del_project)
-    end
-  end
-  
-  def complete_activation!
-    transaction do
-      _complete_activation!
-      create_possible_accounts!
-      activate_non_active_cluster_users!
-    end
-  end
-  
-  def complete_pausing!
-    transaction do
-      _complete_pausing!
-    end
-  end
   
   def check_process!
     if [:activing, :pausing, :closing].include?(state_name)
@@ -119,6 +106,18 @@ class ClusterProject < ActiveRecord::Base
     username
   end
   
+  def create_possible_accounts!
+    project.accounts.each do |account|
+      cluster_users.where(account_id: account.id).first_or_create!
+    end
+  end
+  
+  def activate_non_active_cluster_users!
+    cluster_users.non_active.joins(:account).where(
+      accounts: { state: 'active' }
+    ).includes(:account).each &:activate!
+  end
+  
 protected
   
   def continue_add_project(task)
@@ -136,20 +135,8 @@ protected
   def continue_unblock_project(task)
     complete_activation!
   end
-  
+
 private
-  
-  def create_possible_accounts!
-    project.accounts.each do |account|
-      cluster_users.where(account_id: account.id).first_or_create!
-    end
-  end
-  
-  def activate_non_active_cluster_users!
-    cluster_users.non_active.joins(:account).where(
-      accounts: { state: 'active' }
-    ).includes(:account).each &:activate!
-  end
   
   def assign_username
     self.username ||= project.login

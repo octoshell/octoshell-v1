@@ -59,7 +59,7 @@ class Account < ActiveRecord::Base
   def cancel!
     transaction do
       _cancel!
-      cluster_users(true).non_closed.each &:close!
+      cluster_users(true).non_closed.each &:block!
     end
   end
   
@@ -108,6 +108,8 @@ private
   def activate_cluster_users!
     cluster_users.joins(:cluster_project).where(
       cluster_projects: { state: 'active' }
-    ).includes(:cluster_project).each &:activate!
+    ).includes(:cluster_project).each do |cu|
+      cu.closed? ? cu.activate! : cu.unblock!
+    end
   end
 end

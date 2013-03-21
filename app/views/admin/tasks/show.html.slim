@@ -7,11 +7,11 @@ div class="well"
   - if @task.can_perform_callbacks?
     = link_to t('call_callbacks'), [:admin, @task, :perform_callbacks], class: 'btn', method: :put
     = " "
-  - if @task.can__retry?
+  - if @task.can_retry?
     = link_to 'Повторить задание', [:admin, @task, :retry], class: 'btn btn-warning', method: :put
-  - if @task.can__resolve?
+  - if @task.can_resolve?
     = " "
-    = link_to Task.human_state_event_name(:_resolve), [:admin, @task, :resolve], class: 'btn btn-success', method: :put
+    = link_to Task.human_state_event_name(:resolve), [:admin, @task, :resolve], class: 'btn btn-success', method: :put
   = " "
   = link_to 'Версии', [:admin, @task, :versions], class: 'btn'
 
