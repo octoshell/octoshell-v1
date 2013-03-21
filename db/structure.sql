@@ -3388,6 +3388,13 @@ CREATE INDEX index_report_replies_on_user_id ON old_report_replies USING btree (
 
 
 --
+-- Name: index_reports_on_expert_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_reports_on_expert_id ON reports USING btree (expert_id);
+
+
+--
 -- Name: index_reports_on_session_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
