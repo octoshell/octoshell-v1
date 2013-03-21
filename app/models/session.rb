@@ -4,9 +4,9 @@ class Session < ActiveRecord::Base
   belongs_to :counters_survey, class_name: :Survey
   has_many :reports
   
-  validates :description, presence: true
+  validates :description, :receiving_to, presence: true
   
-  attr_accessible :description, :motivation, as: :admin
+  attr_accessible :description, :motivation, :receiving_to, as: :admin
   
   before_create :create_surveys!
   

@@ -48,4 +48,9 @@
                   - else
                     small = link_to "Открыть", report
         div class="alert alert-danger"
-          strong = session.motivation
+          - if session.motivation?
+            strong = session.motivation
+            br
+          | Опросы и отчет нужно сдать 
+          strong не позднее #{session.receiving_to}
+          | . Не прошедшим перерегистрацию закроется доступ на кластеры.

@@ -3,5 +3,6 @@
 = simple_form_for [:admin, @session], html: { class: 'form-horizontal' } do |f|
   = f.input :description
   = f.input :motivation
+  = f.input :receiving_to, as: :string, input_html: { class: 'datepicker' }
   div class="form-actions"
     = f.button :submit

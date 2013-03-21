@@ -1,5 +1,7 @@
 - title "Опрос ##{@survey.id}"
 
+p = link_to 'Вернуться к перерегистрации', [:admin, @survey.session]
+
 div class="well"
   = link_to 'Новое поле', [:new, :admin, @survey, :survey_field], class: 'btn btn-primary'
 
