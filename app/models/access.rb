@@ -49,7 +49,7 @@ class Access < ActiveRecord::Base
       access.transaction do
         access.check_process!
         block.call
-        procedure = { activing: :add_openkey, closing: :del_openkey }
+        procedure = { activing: :add_openkey, closing: :del_openkey }[access.state_name]
         access.tasks.setup(procedure)
       end
     end
