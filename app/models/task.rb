@@ -13,6 +13,8 @@ class Task < ActiveRecord::Base
     del_project
     block_project
     unblock_project
+    block_user
+    unblock_user
   )
   
   belongs_to :resource, polymorphic: true
