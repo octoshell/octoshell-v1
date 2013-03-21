@@ -41,10 +41,10 @@ class Task < ActiveRecord::Base
     event :run do
       transition :pending => :queued
     end
-    event :_retry do
-      transition [:successed, :failed] => :pending
+    event :retry do
+      transition [:successed, :failed] => :queued
     end
-    event :_resolve do
+    event :resolve do
       transition [:pending, :failed] => :successed
     end
     
