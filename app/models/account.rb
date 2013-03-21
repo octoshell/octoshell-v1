@@ -59,7 +59,7 @@ class Account < ActiveRecord::Base
       cluster_users.joins(:cluster_project).where(
         cluster_projects: { state: 'active' }
       ).includes(:cluster_project).each do |cu|
-        cu.closed? cu.activate! : cu.unblock!
+        cu.closed? ? cu.activate! : cu.unblock!
       end
     end
   end
