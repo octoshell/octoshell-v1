@@ -4,7 +4,6 @@ class Access < ActiveRecord::Base
   delegate :state_name, to: :credential, prefix: true, allow_nil: true
   
   include Models::Asynch
-  include Models::MarkableForTask
   has_paper_trail
   
   default_scope order("#{table_name}.id desc")
@@ -46,15 +45,16 @@ class Access < ActiveRecord::Base
       transition :active => :closed
     end
     
-    around_transition :on => :activate do |access, _, block|
+    around_transition :on => [:activate, :close] do |access, _, block|
       access.transaction do
         access.check_process!
         block.call
-        access.mark_for_task!
+        procedure = { activing: :add_openkey, closing: :del_openkey }
+        access.tasks.setup(procedure)
       end
     end
     
-    around_transition :on => [:close, :force_close] do |access, _, block|
+    around_transition :on => :force_close do |access, _, block|
       access.transaction do
         access.check_process!
         block.call

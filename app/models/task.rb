@@ -31,14 +31,26 @@ class Task < ActiveRecord::Base
   end
   
   state_machine initial: :pending do
+    state :queued
     state :successed
     state :failed
     state :pending
+    
+    event :run do
+      transition :pending => :queued
+    end
     event :_retry do
       transition [:successed, :failed] => :pending
     end
     event :_resolve do
       transition [:pending, :failed] => :successed
+    end
+    
+    around_transition :on => [:run, :retry] do |task, _, block|
+      task.transaction do
+        block.call
+        Resque.enqueue(TasksRequestsWorker, task.id)
+      end
     end
   end
   
@@ -51,7 +63,6 @@ class Task < ActiveRecord::Base
         task = scoped.create! do |task|
           task.procedure = procedure
         end
-        Resque.enqueue TasksRequestsWorker, task.id
         task
       end
     end
@@ -61,15 +72,6 @@ class Task < ActiveRecord::Base
         unscoped.select(:resource_type).uniq.map(&:resource_type).map do |klass|
           [klass.constantize.model_name.human, klass]
         end
-    end
-  end
-  
-  def retry
-    if can__retry?
-      _retry!
-      Resque.enqueue(TasksRequestsWorker, id)
-    else
-      false
     end
   end
   

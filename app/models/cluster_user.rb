@@ -2,7 +2,6 @@
 class ClusterUser < ActiveRecord::Base
   has_paper_trail
   include Models::Asynch
-  include Models::MarkableForTask
   
   delegate :state_name, to: :account, allow_nil: true, prefix: true
   
@@ -62,7 +61,8 @@ class ClusterUser < ActiveRecord::Base
       cu.transaction do
         cu.check_process!
         block.call
-        cu.mark_for_task!
+        procedure = { activing: :add_user, pausing: :block_user, closing: :del_user }[cu.state_name]
+        cu.tasks.setup(procedure)
       end
     end
     

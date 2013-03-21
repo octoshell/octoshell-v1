@@ -1,7 +1,6 @@
 class ClusterProject < ActiveRecord::Base
   has_paper_trail
   include Models::Asynch
-  include Models::MarkableForTask
   
   default_scope order("#{table_name}.id desc")
   
@@ -49,11 +48,20 @@ class ClusterProject < ActiveRecord::Base
       transition :closing => :closed
     end
     
-    around_transition :on => [:activate, :pause] do |cp, _, block|
+    around_transition :on => :activate do |cp, _, block|
       cp.transaction do
         cp.check_process!
         block.call
-        cp.mark_for_task!
+        procedure = cp.closed? ? :add_project : :unblock_project
+        cp.tasks.setup(procedure)
+      end
+    end
+    
+    around_transition :on => :pause do |cp, _, block|
+      cp.transaction do
+        cp.check_process!
+        block.call
+        cp.tasks.setup(:block_project)
       end
     end
     
@@ -62,7 +70,7 @@ class ClusterProject < ActiveRecord::Base
         cp.check_process!
         block.call
         cp.cluster_users.non_closed.each &:force_close!
-        cp.mark_for_task!
+        cp.tasks.setup(:del_project)
       end
     end
     
