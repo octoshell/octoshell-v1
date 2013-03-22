@@ -15,7 +15,7 @@ class ReportsController < ApplicationController
     @report = get_report(params[:report_id])
     @report.assign_attributes(params[:report])
     if @report.submitted? || @report.submit
-      redirect_to root_path
+      redirect_to @report
     else
       render :show
     end

@@ -510,6 +510,40 @@ ALTER SEQUENCE extends_id_seq OWNED BY extends.id;
 
 
 --
+-- Name: faults; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE faults (
+    id integer NOT NULL,
+    user_id integer,
+    description text,
+    reference_id integer,
+    state character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: faults_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE faults_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: faults_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE faults_id_seq OWNED BY faults.id;
+
+
+--
 -- Name: fields; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2269,6 +2303,13 @@ ALTER TABLE ONLY extends ALTER COLUMN id SET DEFAULT nextval('extends_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY faults ALTER COLUMN id SET DEFAULT nextval('faults_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY fields ALTER COLUMN id SET DEFAULT nextval('fields_id_seq'::regclass);
 
 
@@ -2683,6 +2724,14 @@ ALTER TABLE ONLY expands
 
 ALTER TABLE ONLY extends
     ADD CONSTRAINT extends_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: faults_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY faults
+    ADD CONSTRAINT faults_pkey PRIMARY KEY (id);
 
 
 --
@@ -4369,3 +4418,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130320110257');
 INSERT INTO schema_migrations (version) VALUES ('20130320110313');
 
 INSERT INTO schema_migrations (version) VALUES ('20130320110333');
+
+INSERT INTO schema_migrations (version) VALUES ('20130321211250');
