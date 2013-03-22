@@ -5,7 +5,7 @@
 div class="well"
   = link_to 'Новый шаблон ответа', new_admin_ticket_template_path, class: 'btn'
 
-= simple_form_for [:admin, @search], method: :get, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|
+= simple_form_for @search, url: admin_ticket_templates_path, method: :get, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|
   = f.input :state_in, collection: TicketTemplate.human_state_names, input_html: { multiple: true }
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'

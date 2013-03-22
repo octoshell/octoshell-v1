@@ -3,7 +3,7 @@ class Admin::ReportsController < Admin::ApplicationController
   before_filter { authorize! :access, :reports }
   
   def index
-    @search = Report.search(params[:q])
+    @search = Report.search(params[:q] || { state_eq: 'submitted' })
     @reports = @search.result(distinct: true).page(params[:page])
   end
   

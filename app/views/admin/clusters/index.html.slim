@@ -3,7 +3,7 @@
 div class="well"
   = link_to t('.new_cluster'), new_admin_cluster_path, class: 'btn'
 
-= simple_form_for [:admin, @search], url: clusters_path, method: :get, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|
+= simple_form_for @search, url: admin_clusters_path, method: :get, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|
   = f.input :state_in, collection: Cluster.human_state_names, input_html: { multiple: true }, required: false
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
