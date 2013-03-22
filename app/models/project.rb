@@ -164,7 +164,7 @@ class Project < ActiveRecord::Base
   
   def notify_about_blocking
     accounts.active.each do |account|
-      Mailer.project_blocked(account).deliver
+      # Mailer.project_blocked(account).deliver
     end
   end
   
