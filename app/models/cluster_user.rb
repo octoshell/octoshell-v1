@@ -57,6 +57,22 @@ class ClusterUser < ActiveRecord::Base
       transition :pausing => :paused
     end
     
+    event :unblock do
+      transition :paused => :activing
+    end
+    
+    event :complete_unblock do
+      transition :activing => :active
+    end
+    
+    around_transition :on => :unblock do |cu, _, block|
+      cu.transaction do
+        cu.check_process!
+        block.call
+        cu.tasks.setup(:unblock_user)
+      end
+    end
+    
     around_transition :on => [:activate, :pause, :close] do |cu, _, block|
       cu.transaction do
         cu.check_process!
@@ -64,6 +80,10 @@ class ClusterUser < ActiveRecord::Base
         procedure = { activing: :add_user, pausing: :block_user, closing: :del_user }[cu.state_name]
         cu.tasks.setup(procedure)
       end
+    end
+    
+    def continue_unblock_user(task)
+      complete_unblock!
     end
     
     around_transition :on => :force_close do |cu, _, block|
