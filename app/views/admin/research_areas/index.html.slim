@@ -1,2 +1,17 @@
 - title 'Области науки'
 
+div class="well"
+  = link_to 'Новая область науки', new_admin_research_area_path, class: 'btn'
+
+- if @research_areas.any?
+  table class="table table-bordered table-striped"
+    - @research_areas.group_by(&:group).sort_by(&:first).each do |group, areas|
+      tr
+        th colspan="3" = group
+      - areas.each do |area|
+        tr
+          td = "##{area.id}"
+          td class="span7" = area.name
+          td = link_to 'Редактировать', [:edit, :admin, area]
+- else
+  p Нет областей наук

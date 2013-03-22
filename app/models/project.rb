@@ -21,7 +21,9 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :research_areas
   
   validates :name, uniqueness: true
-  validates :user, :name, :description, :organization, presence: true
+  validates :user, :organization, :name, :en_name, :driver, :en_driver,
+    :strategy, :en_strategy, :objective, :en_objective, :impact, :en_impact,
+    :usage, :en_usage, presence: true
   # validates :organization, inclusion: { in: proc(&:allowed_organizations) }
   # хз как тут делать
   validates :username, presence: true, on: :update
@@ -29,13 +31,12 @@ class Project < ActiveRecord::Base
   validates :direction_of_science_ids, :critical_technology_ids,
     :research_area_ids, length: { minimum: 1, message: 'выберите не менее %{count}' }
   
-  attr_accessible :name, :description, :organization_id, :sureties_attributes,
+  attr_accessible :organization_id, :sureties_attributes,
     :organization_ids, :direction_of_science_ids, :critical_technology_ids,
-    :project_prefix_id, :confirmation_code
-  attr_accessible :user_id, :organization_id, :organization_ids,
-    :project_prefix_id, :name, :username, :description,
-    :direction_of_science_ids, :critical_technology_ids, :cluster_user_type,
-    :research_area_ids, as: :admin
+    :project_prefix_id, :confirmation_code, :research_area_ids,
+    :name, :en_name, :driver, :en_driver, :strategy, :en_strategy, :objective,
+    :en_objective, :impact, :en_impact, :usage, :en_usage
+  attr_accessible :project_prefix_id, :username, as: :admin
   
   after_create :assign_username
   after_create :create_relations

@@ -1,12 +1,32 @@
 = simple_form_for @project, html: { class: 'form-horizontal surety-form project' } do |f|
+  table
+    tr
+      td = f.input :name
+      td = f.input :en_name
+    tr
+      td = f.input :driver, input_html: { rows: 4 }
+      td = f.input :en_driver, input_html: { rows: 4 }
+    tr
+      td = f.input :strategy, input_html: { rows: 4 }
+      td = f.input :en_strategy, input_html: { rows: 4 }
+    tr
+      td = f.input :objective, input_html: { rows: 4 }
+      td = f.input :en_objective, input_html: { rows: 4 }
+    tr
+      td = f.input :impact, input_html: { rows: 4 }
+      td = f.input :en_impact, input_html: { rows: 4 }
+    tr
+      td = f.input :usage, input_html: { rows: 4 }
+      td = f.input :en_usage, input_html: { rows: 4 }
+  
+  = f.association :direction_of_sciences, as: :check_boxes, required: true
+  = f.association :critical_technologies, as: :check_boxes, required: true
+  = f.association :research_areas, as: :check_boxes, required: true
+  
   = f.association :organization, collection: f.object.allowed_organizations, input_html: { class: 'chosen' }
   = f.association :organizations, input_html: { class: 'chosen' }, collection: Organization.order("name asc")
   = f.association :project_prefix, include_blank: true
   
-  = f.input :name
-  = f.input :description, input_html: { rows: 5 }
-  = f.association :direction_of_sciences, required: true, input_html: { class: 'chosen' } 
-  = f.association :critical_technologies, required: true, input_html: { class: 'chosen' }
   - if f.object.new_record? && !f.object.user.sured?
     legend = t('.surety', default: 'Surety')
     = f.simple_fields_for :sureties do |f|

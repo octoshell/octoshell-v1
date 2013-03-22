@@ -1,0 +1,5 @@
+= simple_form_for [:admin, @research_area], html: { class: 'form-horizontal' } do |f|
+  = f.input :group, input_html: { data: { source: ResearchArea.pluck(:group).uniq.to_json, provide: 'typeahead' }, autocomplete: "off" }
+  = f.input :name
+  div class="form-actions"
+    = f.button :submit, class: 'btn-primary'

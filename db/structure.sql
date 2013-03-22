@@ -1285,7 +1285,7 @@ CREATE TABLE projects (
     cluster_user_type character varying(255) DEFAULT 'account'::character varying,
     username character varying(255),
     project_prefix_id integer,
-    en_title character varying(255),
+    en_name character varying(255),
     driver text,
     en_driver text,
     strategy text,
@@ -1537,6 +1537,38 @@ CREATE SEQUENCE sessions_id_seq
 --
 
 ALTER SEQUENCE sessions_id_seq OWNED BY sessions.id;
+
+
+--
+-- Name: stats; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE stats (
+    id integer NOT NULL,
+    session_id integer,
+    survey_field_id integer,
+    group_by character varying(255),
+    weight integer DEFAULT 0
+);
+
+
+--
+-- Name: stats_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE stats_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: stats_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE stats_id_seq OWNED BY stats.id;
 
 
 --
@@ -2534,6 +2566,13 @@ ALTER TABLE ONLY sessions ALTER COLUMN id SET DEFAULT nextval('sessions_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY stats ALTER COLUMN id SET DEFAULT nextval('stats_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY sureties ALTER COLUMN id SET DEFAULT nextval('sureties_id_seq'::regclass);
 
 
@@ -2989,6 +3028,14 @@ ALTER TABLE ONLY research_areas
 
 ALTER TABLE ONLY sessions
     ADD CONSTRAINT sessions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: stats_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY stats
+    ADD CONSTRAINT stats_pkey PRIMARY KEY (id);
 
 
 --
@@ -3554,6 +3601,13 @@ CREATE INDEX index_requests_on_state ON requests USING btree (state);
 --
 
 CREATE INDEX index_requests_on_user_id ON requests USING btree (user_id);
+
+
+--
+-- Name: index_stats_on_session_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_stats_on_session_id ON stats USING btree (session_id);
 
 
 --
@@ -4483,3 +4537,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130322105101');
 INSERT INTO schema_migrations (version) VALUES ('20130322110354');
 
 INSERT INTO schema_migrations (version) VALUES ('20130322114230');
+
+INSERT INTO schema_migrations (version) VALUES ('20130322175729');
+
+INSERT INTO schema_migrations (version) VALUES ('20130322191037');

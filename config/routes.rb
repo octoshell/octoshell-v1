@@ -302,6 +302,9 @@ MSU::Application.routes.draw do
     
     # research areas
     resources :research_areas, except: :show
+    
+    # stats
+    resources :stats, expect: [:index, :show]
   end
 
   root to: 'application#dashboard'
