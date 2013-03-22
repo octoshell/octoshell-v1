@@ -2,9 +2,28 @@
 
 = simple_form_for @search, method: :get, url: admin_reports_path, html: { class: 'form-horizontal' } do |f|
   = f.input :state_eq, collection: Report.state_names
-  = f.input :illustration_points_in, collection: (0..5), as: :check_boxes, wrapper_html: { class: 'inline-check-boxes' }
-  = f.input :statement_points_in, collection: (0..5), as: :check_boxes, wrapper_html: { class: 'inline-check-boxes' }
-  = f.input :summary_points_in, collection: (0..5), as: :check_boxes, wrapper_html: { class: 'inline-check-boxes' }
+  div class="control-group check_boxes inline-check-boxes"
+    = f.label :illustration_points_in, class: 'control-label'
+    div class="controls"
+      - (0..5).each do |i|
+        label class="checkbox"
+          = check_box 'q[illustration_points_in]', '', checked: (i.in? f.object.illustration_points_in)
+          = i
+  div class="control-group check_boxes inline-check-boxes"
+    = f.label :statement_points_in, class: 'control-label'
+    div class="controls"
+      - (0..5).each do |i|
+        label class="checkbox"
+          = check_box 'q[statement_points_in]', '', checked: (i.in? f.object.statement_points_in)
+          = i
+  
+  div class="control-group check_boxes inline-check-boxes"
+    = f.label :summary_points_in, class: 'control-label'
+    div class="controls"
+      - (0..5).each do |i|
+        label class="checkbox"
+          = check_box 'q[summary_points_in]', '', checked: (i.in? f.object.summary_points_in)
+          = i
   
   div class="form-actions"
     = f.button :submit, 'Показать', class: 'btn-primary btn-small'
