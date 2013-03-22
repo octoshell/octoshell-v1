@@ -139,6 +139,10 @@ protected
   def continue_block_user(task)
     complete_block!
   end
+  
+  def complete_unblock_user(task)
+    complete_unblock!
+  end
 
 private
   
