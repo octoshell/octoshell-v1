@@ -1284,7 +1284,18 @@ CREATE TABLE projects (
     organization_id integer,
     cluster_user_type character varying(255) DEFAULT 'account'::character varying,
     username character varying(255),
-    project_prefix_id integer
+    project_prefix_id integer,
+    en_title character varying(255),
+    driver text,
+    en_driver text,
+    strategy text,
+    en_strategy text,
+    objective text,
+    en_objective text,
+    impact text,
+    en_impact text,
+    usage text,
+    en_usage text
 );
 
 
@@ -1449,6 +1460,37 @@ CREATE SEQUENCE requests_id_seq
 --
 
 ALTER SEQUENCE requests_id_seq OWNED BY requests.id;
+
+
+--
+-- Name: research_areas; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE research_areas (
+    id integer NOT NULL,
+    "group" character varying(255),
+    name character varying(255),
+    weight integer DEFAULT 0
+);
+
+
+--
+-- Name: research_areas_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE research_areas_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: research_areas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE research_areas_id_seq OWNED BY research_areas.id;
 
 
 --
@@ -2478,6 +2520,13 @@ ALTER TABLE ONLY requests ALTER COLUMN id SET DEFAULT nextval('requests_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY research_areas ALTER COLUMN id SET DEFAULT nextval('research_areas_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY sessions ALTER COLUMN id SET DEFAULT nextval('sessions_id_seq'::regclass);
 
 
@@ -2924,6 +2973,14 @@ ALTER TABLE ONLY request_properties
 
 ALTER TABLE ONLY requests
     ADD CONSTRAINT requests_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: research_areas_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY research_areas
+    ADD CONSTRAINT research_areas_pkey PRIMARY KEY (id);
 
 
 --
@@ -4420,3 +4477,9 @@ INSERT INTO schema_migrations (version) VALUES ('20130320110313');
 INSERT INTO schema_migrations (version) VALUES ('20130320110333');
 
 INSERT INTO schema_migrations (version) VALUES ('20130321211250');
+
+INSERT INTO schema_migrations (version) VALUES ('20130322105101');
+
+INSERT INTO schema_migrations (version) VALUES ('20130322110354');
+
+INSERT INTO schema_migrations (version) VALUES ('20130322114230');

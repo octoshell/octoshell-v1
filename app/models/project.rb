@@ -18,6 +18,7 @@ class Project < ActiveRecord::Base
   has_many :sureties, inverse_of: :project
   has_and_belongs_to_many :critical_technologies
   has_and_belongs_to_many :direction_of_sciences
+  has_and_belongs_to_many :research_areas
   
   validates :name, uniqueness: true
   validates :user, :name, :description, :organization, presence: true
@@ -25,8 +26,8 @@ class Project < ActiveRecord::Base
   # хз как тут делать
   validates :username, presence: true, on: :update
   validates :cluster_user_type, inclusion: { in: CLUSTER_USER_TYPES }
-  # validates :direction_of_science_ids, :critical_technology_ids,
-  #   length: { minimum: 1, message: 'выберите не менее %{count}' }
+  validates :direction_of_science_ids, :critical_technology_ids,
+    :research_area_ids, length: { minimum: 1, message: 'выберите не менее %{count}' }
   
   attr_accessible :name, :description, :organization_id, :sureties_attributes,
     :organization_ids, :direction_of_science_ids, :critical_technology_ids,
@@ -34,7 +35,7 @@ class Project < ActiveRecord::Base
   attr_accessible :user_id, :organization_id, :organization_ids,
     :project_prefix_id, :name, :username, :description,
     :direction_of_science_ids, :critical_technology_ids, :cluster_user_type,
-    as: :admin
+    :research_area_ids, as: :admin
   
   after_create :assign_username
   after_create :create_relations

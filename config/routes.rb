@@ -299,6 +299,9 @@ MSU::Application.routes.draw do
     
     # user surveys
     resources :user_surveys, only: :show
+    
+    # research areas
+    resources :research_areas, except: :show
   end
 
   root to: 'application#dashboard'
