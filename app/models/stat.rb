@@ -13,9 +13,11 @@ class Stat < ActiveRecord::Base
   def graph_data
     case group_by.to_sym
     when :count then
-      user_surveys.map do |us|
+      stats = user_surveys.map do |us|
         us.find_value(survey_field_id).value
-      end.group_by(&:to_s).map { |k, v| [k, v.size] }.extend(Chartable)
+      end.group_by(&:to_s).map { |k, v| [k, v.size] }
+      stats = stats * 10
+      stats.extend(Chartable)
     end
   end
   
