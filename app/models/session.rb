@@ -3,6 +3,7 @@ class Session < ActiveRecord::Base
   belongs_to :projects_survey, class_name: :Survey
   belongs_to :counters_survey, class_name: :Survey
   has_many :reports
+  has_many :stats
   
   validates :description, :receiving_to, presence: true
   

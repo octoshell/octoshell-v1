@@ -1,7 +1,6 @@
 window.series = {}
 
 Highcharts.render = function(selector, type, series) {
-  console.log(series)
   var tooltips = series[0].tooltips
   var plotOptions;
   if (type == 'column') {
@@ -72,3 +71,14 @@ Highcharts.render = function(selector, type, series) {
     series: series
   });
 };
+
+
+$(function(){
+  $('a.chartable[data-toggle="tab"]').on('shown', function(e){
+    var div = $(e.target.hash)
+    var id = div.data('chart-container')
+    if ($("#" + id).is(':empty')) {
+      Highcharts.render(id, div.data('chart-type'), window.series[id])
+    }
+  })
+})

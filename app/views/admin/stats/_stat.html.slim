@@ -1,0 +1,10 @@
+div class="well well-small"
+  ul class="nav nav-tabs"
+    li = link_to 'Пирог', "#stat_#{stat.id}_bar_pane", data: { toggle: 'tab' }, class: 'chartable'
+  
+  div class="tab-content"
+    div id="stat_#{stat.id}_bar_pane" class="tab-pane" data-chart-type="bar" data-chart-container="stat_#{stat.id}_bar"
+      div id="stat_#{stat.id}_bar"
+    
+  javascript:
+    window.series.stat_#{stat.id}_bar = #{{stat.graph_data.to_chart(:column)}}
