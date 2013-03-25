@@ -1,23 +1,27 @@
 class Admin::StatsController < Admin::ApplicationController
   def new
-    @stat = Stat.new({ session_id: params[:session_id] }, as: :admin)
+    @session = Session.find(params[:session_id])
+    @stat = @session.stats.build
   end
   
   def create
-    @stat = Stat.new(params[:stat], as: :admin)
+    @session = Session.find(params[:session_id])
+    @stat = @session.stats.build(params[:stat], as: :admin)
     if @stat.save
-      redirect_to [:admin, @stat.session]
+      redirect_to [:admin, @session]
     else
       render :new
     end
   end
   
   def edit
-    @stat = Stat.find(params[:id])
+    @session = Session.find(params[:session_id])
+    @stat = @session.stats.find(params[:id])
   end
   
   def update
-    @stat = Stat.find(params[:id])
+    @session = Session.find(params[:session_id])
+    @stat = @session.stats.find(params[:id])
     if @stat.update_attributes(params[:stat], as: :admin)
       redirect_to [:admin, @stat.session]
     else

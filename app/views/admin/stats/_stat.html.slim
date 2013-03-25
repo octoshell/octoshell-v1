@@ -20,7 +20,7 @@ div class="tab-content"
     div id="stat_#{stat.id}_pie"
 
 p
-  small = link_to 'Редактировать', [:edit, :admin, stat]
+  small = link_to 'Редактировать', [:edit, :admin, stat.session, stat]
 
 hr
 

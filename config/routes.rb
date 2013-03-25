@@ -290,6 +290,7 @@ MSU::Application.routes.draw do
     resources :sessions, only: [:new, :create, :index, :show] do
       put :start
       put :stop
+      resources :stats, expect: [:index, :show]
     end
     
     # surveys
@@ -302,9 +303,6 @@ MSU::Application.routes.draw do
     
     # research areas
     resources :research_areas, except: :show
-    
-    # stats
-    resources :stats, expect: [:index, :show]
   end
 
   root to: 'application#dashboard'

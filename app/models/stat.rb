@@ -1,11 +1,15 @@
 class Stat < ActiveRecord::Base
-  GROUPS_BY = [:count]
+  GROUPS_BY = [:count, :organization_types, :subdivisions]
+  
   belongs_to :session
   belongs_to :survey_field, class_name: :'Survey::Field'
+  belongs_to :organization
   
   validates :session, :survey_field, :group_by, presence: true
+  validates :organization, presence: true, if: proc { |s| s.group_by == 'subdivisions' }
   
-  attr_accessible :group_by, :session_id, :survey_field_id, :weight, as: :admin
+  attr_accessible :group_by, :session_id, :survey_field_id, :organization_id,
+    :weight, as: :admin
   
   scope :sorted, order('stats.weight asc')
   

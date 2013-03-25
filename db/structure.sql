@@ -1548,7 +1548,8 @@ CREATE TABLE stats (
     session_id integer,
     survey_field_id integer,
     group_by character varying(255),
-    weight integer DEFAULT 0
+    weight integer DEFAULT 0,
+    organization_id integer
 );
 
 
@@ -4541,3 +4542,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130322114230');
 INSERT INTO schema_migrations (version) VALUES ('20130322175729');
 
 INSERT INTO schema_migrations (version) VALUES ('20130322191037');
+
+INSERT INTO schema_migrations (version) VALUES ('20130325084633');

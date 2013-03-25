@@ -1,8 +1,8 @@
-= simple_form_for [:admin, @stat], html: { class: 'form-horizontal' } do |f|
-  = f.input :session_id, as: :hidden
+= simple_form_for [:admin, @stat.session, @stat], html: { class: 'form-horizontal' } do |f|
   = f.association :survey_field
   // # todo: group by survey types, select only for this session
   = f.input :group_by, collection: Stat::GROUPS_BY
+  = f.association :organization, hint: 'Для группировки по подразделениям'
   = f.input :weight
   div class="form-actions"
     = f.button :submit

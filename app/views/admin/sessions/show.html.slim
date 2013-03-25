@@ -37,7 +37,7 @@ ul
 h4 Статистика:
 
 div class="well well-small"
-  = link_to 'Добавить график', new_admin_stat_path(session_id: @session.id), class: 'btn btn-mini'
+  = link_to 'Добавить график', new_admin_session_stat_path(@session), class: 'btn btn-mini'
 
 - @session.stats.each do |stat|
   = render stat
