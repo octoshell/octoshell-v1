@@ -4,14 +4,18 @@ class Membership < ActiveRecord::Base
   # default_scope order("#{table_name}.id desc")
   
   delegate :state_name, to: :organization, prefix: true, allow_nil: true
+  delegate :id, to: :subdivision, prefix: true
+  delegate :subdivision_ids, to: :organization
   
   attr_accessor :skip_revalidate_user
   
   belongs_to :user
   belongs_to :organization
+  belongs_to :subdivision
   has_many :positions, inverse_of: :membership
   
   validates :user, :organization, presence: true
+  validates :subdivision_id, inclusion: { in: proc(&:organization_subdivision_ids) }, if: :subdivision
   validates :organization_state_name, exclusion: { in: [:closed] }, on: :create
   
   attr_accessible :organization_id, :positions_attributes

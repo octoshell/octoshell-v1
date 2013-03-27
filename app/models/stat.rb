@@ -18,7 +18,7 @@ class Stat < ActiveRecord::Base
     case group_by.to_sym
     when :subdivisions then
       grouped_organization_memberships.map do |subdivision, memberships|
-        [subdivision || 'blank', memberships.size]
+        [subdivision.try(:graph_name) || 'blank', memberships.size]
       end.extend(Chartable)
     when :count then
       stats = user_surveys.map do |us|
