@@ -16,6 +16,10 @@ class Stat < ActiveRecord::Base
   # returns [[name, count], ...]
   def graph_data
     case group_by.to_sym
+    when :subdivisions then
+      grouped_organization_memberships.map do |subdivision, memberships|
+        [subdivision || 'blank', memberships.size]
+      end.extend(Chartable)
     when :count then
       stats = user_surveys.map do |us|
         us.find_value(survey_field_id).value
@@ -27,5 +31,9 @@ class Stat < ActiveRecord::Base
   
   def user_surveys
     UserSurvey.with_state(:submitted).where(survey_id: survey_field.survey_id)
+  end
+  
+  def grouped_organization_memberships
+    organization.memberships.group_by(&:subdivision)
   end
 end

@@ -737,7 +737,8 @@ CREATE TABLE memberships (
     organization_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    state character varying(255)
+    state character varying(255),
+    subdivision character varying(255)
 );
 
 
@@ -4544,3 +4545,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130322175729');
 INSERT INTO schema_migrations (version) VALUES ('20130322191037');
 
 INSERT INTO schema_migrations (version) VALUES ('20130325084633');
+
+INSERT INTO schema_migrations (version) VALUES ('20130325091221');
