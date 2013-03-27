@@ -189,6 +189,9 @@ MSU::Application.routes.draw do
       put :close
       put :merge
       get :closed, on: :collection
+      resources :subdivisions, except: :show do
+        put :merge
+      end
       resources :versions, only: [:index, :show], resource: 'Organization'
     end
 

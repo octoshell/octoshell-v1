@@ -10,6 +10,7 @@ class Organization < ActiveRecord::Base
   has_many :memberships
   has_and_belongs_to_many :coprojects, class_name: :Project
   belongs_to :organization_kind
+  has_many :subdivisions
   
   validates :name, presence: true, uniqueness: { scope: :organization_kind_id }
   validates :organization_kind, presence: true

@@ -738,7 +738,7 @@ CREATE TABLE memberships (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     state character varying(255),
-    subdivision character varying(255)
+    subdivision_id integer
 );
 
 
@@ -1571,6 +1571,39 @@ CREATE SEQUENCE stats_id_seq
 --
 
 ALTER SEQUENCE stats_id_seq OWNED BY stats.id;
+
+
+--
+-- Name: subdivisions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE subdivisions (
+    id integer NOT NULL,
+    organization_id integer,
+    name character varying(255),
+    short character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: subdivisions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE subdivisions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: subdivisions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE subdivisions_id_seq OWNED BY subdivisions.id;
 
 
 --
@@ -2575,6 +2608,13 @@ ALTER TABLE ONLY stats ALTER COLUMN id SET DEFAULT nextval('stats_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY subdivisions ALTER COLUMN id SET DEFAULT nextval('subdivisions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY sureties ALTER COLUMN id SET DEFAULT nextval('sureties_id_seq'::regclass);
 
 
@@ -3041,6 +3081,14 @@ ALTER TABLE ONLY stats
 
 
 --
+-- Name: subdivisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY subdivisions
+    ADD CONSTRAINT subdivisions_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sureties_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3407,6 +3455,13 @@ CREATE INDEX index_import_items_on_cluster_id ON import_items USING btree (clust
 --
 
 CREATE INDEX index_memberships_on_organization_id ON memberships USING btree (organization_id);
+
+
+--
+-- Name: index_memberships_on_subdivision_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_memberships_on_subdivision_id ON memberships USING btree (subdivision_id);
 
 
 --
@@ -4547,3 +4602,11 @@ INSERT INTO schema_migrations (version) VALUES ('20130322191037');
 INSERT INTO schema_migrations (version) VALUES ('20130325084633');
 
 INSERT INTO schema_migrations (version) VALUES ('20130325091221');
+
+INSERT INTO schema_migrations (version) VALUES ('20130327110703');
+
+INSERT INTO schema_migrations (version) VALUES ('20130327111631');
+
+INSERT INTO schema_migrations (version) VALUES ('20130327111705');
+
+INSERT INTO schema_migrations (version) VALUES ('20130327112053');

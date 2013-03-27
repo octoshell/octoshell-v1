@@ -1,0 +1,9 @@
+- title 'Редактирование подразделения'
+
+= render 'form'
+
+= simple_form_for @subdivision, url: admin_organization_subdivision_merge_path(@organization, @subdivision), html: { class: 'form-horizontal' } do |f|
+  = f.input :merge_id, collection: @organization.subdivisions, label_method: :graph_name
+  div class="form-actions"
+    p = f.button :submit, 'Объединить'
+    p Выбранное подразделение будет объедено с текущим

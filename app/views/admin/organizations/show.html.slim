@@ -3,6 +3,8 @@
 div class="well"
   = link_to 'Редактировать', [:edit, :admin, @organization], class: 'btn'
   = ' '
+  = link_to 'Подразделения', [:admin, @organization, :subdivisions], class: 'btn'
+  = ' '
   = link_to 'Версии', [:admin, @organization, :versions], class: 'btn'
   - if @organization.can__close?
     = ' '
