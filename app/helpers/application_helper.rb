@@ -159,4 +159,15 @@ module ApplicationHelper
         end
     end
   end
+  
+  def teaser_status
+    case current_user.session_status
+    when :not_sent then
+      'alert'
+    when :pending then
+      'warning'
+    when :successed then
+      'success'
+    end
+  end
 end

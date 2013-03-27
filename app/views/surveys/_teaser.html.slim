@@ -47,7 +47,7 @@
                     = link_to "Прислать отчет", [report, :accept], method: :put, class: 'btn btn-mini btn-success'
                   - else
                     small = link_to "Открыть", report
-        div class="alert alert-danger"
+        div class="alert alert-#{teaser_status}"
           - if session.motivation?
             strong = session.motivation
             br

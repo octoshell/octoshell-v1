@@ -62,6 +62,10 @@ class Session < ActiveRecord::Base
     create_surveys_for_sured!
   end
   
+  def not_sent?
+    pending? || filling?
+  end
+  
 private
   
   def create_surveys_for_managers!

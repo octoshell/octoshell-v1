@@ -120,9 +120,29 @@ class User < ActiveRecord::Base
     Report.where(project_id: owned_project_ids)
   end
   
+  def session_status
+    status = :not_sent
+    if current_session_surveys.all?(&:submitted?)
+      if current_session_reports.empty? || current_session_reports.all?(&:assessed?)
+        status = :successed
+      else
+        status = :pending
+      end
+    end
+    status
+  end
+  
   def current_session_surveys
     if session = Session.current
       user_surveys.where(survey_id: session.survey_ids).with_state(:submitted)
+    else
+      []
+    end
+  end
+  
+  def current_session_reports
+    if session = Session.current
+      reports.where(session_id: Session.current.id)
     else
       []
     end
