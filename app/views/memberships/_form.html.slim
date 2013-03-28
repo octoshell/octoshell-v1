@@ -1,5 +1,6 @@
 = simple_form_for @membership, html: { class: 'form-horizontal' } do |f|
   = f.association :organization, hint: link_to(t('.add_organization', default: 'Add organization'), new_organization_path), collection: Organization.active, input_html: { class: 'chosen' }
+  = f.input :subdivision_name, as: :string, input_html: { data: { provide: 'typeahead' }, autocomplete: 'off' }
   = f.simple_fields_for :positions do |f|
     = f.input :name, as: :hidden
     - if f.object.available_values.any?

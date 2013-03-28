@@ -4,7 +4,7 @@ class Membership < ActiveRecord::Base
   # default_scope order("#{table_name}.id desc")
   
   delegate :state_name, to: :organization, prefix: true, allow_nil: true
-  delegate :id, to: :subdivision, prefix: true
+  # delegate :id, to: :subdivision, prefix: true
   delegate :subdivision_ids, to: :organization
   
   attr_accessor :skip_revalidate_user
@@ -15,10 +15,10 @@ class Membership < ActiveRecord::Base
   has_many :positions, inverse_of: :membership
   
   validates :user, :organization, presence: true
-  validates :subdivision_id, inclusion: { in: proc(&:organization_subdivision_ids) }, if: :subdivision
+  # validates :subdivision_id, inclusion: { in: proc(&:organization_subdivision_ids) }, if: :subdivision
   validates :organization_state_name, exclusion: { in: [:closed] }, on: :create
   
-  attr_accessible :organization_id, :positions_attributes
+  attr_accessible :organization_id, :positions_attributes, :subdivision_name
   attr_accessible :organization_id, :positions_attributes, :user_id, as: :admin
   
   accepts_nested_attributes_for :positions, reject_if: proc { |a| a['value'].blank? }
@@ -67,5 +67,14 @@ class Membership < ActiveRecord::Base
   
   def revalidate_user
     user.revalidate!
+  end
+  
+  def subdivision_name
+    subdivision.try(:name)
+  end
+  
+  def subdivision_name=(name)
+    return unless organization
+    self.subdivision = organization.subdivisions.find_or_create_by_name!(name)
   end
 end

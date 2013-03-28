@@ -81,7 +81,9 @@ MSU::Application.routes.draw do
   resources :pages, only: [:index, :show]
 
   # organizations
-  resources :organizations, only: [:new, :create, :index, :show]
+  resources :organizations, only: [:new, :create, :index, :show] do
+    get :subdivisions, only: [:index]
+  end
 
   # reports
   resources :reports, only: [:show] do

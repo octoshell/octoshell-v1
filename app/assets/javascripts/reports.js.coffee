@@ -80,3 +80,10 @@ $ ->
     $form = $button.parents('form:first')
     $form.prop 'action', $button.data('action')
     true
+  
+  $('#membership_organization_id').on 'change', ->
+    return if $(@).val().length == 0
+    $.getJSON '/organizations/' + $(@).val() + '/subdivisions', (data) ->
+      $('#membership_subdivision_name').data 'source', data
+  $('#membership_organization_id').change()
+

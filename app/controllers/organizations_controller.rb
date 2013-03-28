@@ -9,6 +9,11 @@ class OrganizationsController < ApplicationController
     }
     respond_with(json)
   end
+  
+  def subdivisions
+    @organization = Organization.find(params[:organization_id])
+    render json: @organization.subdivisions.pluck(:name)
+  end
 
   def show
     @organization = Organization.find(params[:id])
