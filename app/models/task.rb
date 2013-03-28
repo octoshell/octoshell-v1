@@ -11,6 +11,7 @@ class Task < ActiveRecord::Base
     del_openkey
     add_project
     del_project
+    erase_project
     block_project
     unblock_project
     block_user

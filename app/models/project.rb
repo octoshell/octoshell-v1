@@ -67,6 +67,7 @@ class Project < ActiveRecord::Base
     end
     
     event :erase do
+      transition [:announced, :blocked, :active, :marked_to_close] => :erased
     end
     
     event :activate do
@@ -81,12 +82,19 @@ class Project < ActiveRecord::Base
       project.notify_about_blocking
     end
     
-    around_transition :on => :closed do |project, _, block|
+    around_transition :on => :close do |project, _, block|
       project.transition do
         block.call
         cluster_projects.non_closed.each &:close!
         accounts.non_closed.each &:cancel!
         requests.non_closed.each &:force_close!
+      end
+    end
+    
+    around_transition :on => :erase do |project, _, block|
+      project.transition do
+        block.call
+        cluster_projects.non_closed.each &:erase!
       end
     end
   end

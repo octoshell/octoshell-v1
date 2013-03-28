@@ -23,9 +23,11 @@ class ClusterProject < ActiveRecord::Base
     state :pausing
     state :paused
     state :closing
+    state :erasing
+    state :erased
     
     event :activate do
-      transition [:closed, :paused] => :activing
+      transition [:erased, :closed, :paused] => :activing
     end
     
     event :complete_activation do
@@ -46,6 +48,14 @@ class ClusterProject < ActiveRecord::Base
     
     event :complete_closure do
       transition :closing => :closed
+    end
+    
+    event :erase do
+      transition [:active, :paused] => :erasing
+    end
+    
+    event :complete_erase do
+      transition :erasing => :erased
     end
     
     around_transition :on => :activate do |cp, _, block|
@@ -79,6 +89,14 @@ class ClusterProject < ActiveRecord::Base
         block.call
         cp.create_possible_accounts!
         cp.activate_non_active_cluster_users!
+      end
+    end
+    
+    around_transition :on => :erase do |cp, _, block|
+      cp.transaction do
+        block.call
+        cp.check_process!
+        cp.tasks.setup(:erase_project)
       end
     end
   end
@@ -134,6 +152,10 @@ protected
   
   def continue_unblock_project(task)
     complete_activation!
+  end
+  
+  def complete_erase_project(task)
+    complete_erase!
   end
 
 private

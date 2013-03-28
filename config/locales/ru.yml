@@ -869,7 +869,8 @@ ru:
             blocked: Заблокирован
             closed: Завершен
         events:
-          _close: Завершить
+          close: Завершить
+          erase: Завершить и Стереть данные
       request:
         state:
           states:

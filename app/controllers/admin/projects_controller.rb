@@ -44,7 +44,17 @@ class Admin::ProjectsController < Admin::ApplicationController
       @project.user.track! :close_project, @project, current_user
       redirect_to [:admin, @project]
     else
-      redirect_to [:admin, @project], alert: @full_messages.join(', ')
+      redirect_to [:admin, @project], alert: @project.errors.full_messages.join(', ')
+    end
+  end
+  
+  def erase
+    @project = Project.find(params[:project_id])
+    if @project.erase
+      @project.user.track! :erase_project, @project, current_user
+      redirect_to [:admin, @project]
+    else
+      redirect_to [:admin, @project], alert: @project.errors.full_messages.join(', ')
     end
   end
   
