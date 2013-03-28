@@ -86,4 +86,13 @@ $ ->
     $.getJSON '/organizations/' + $(@).val() + '/subdivisions', (data) ->
       $('#membership_subdivision_name').data 'source', data
   $('#membership_organization_id').change()
-
+  
+  $('code.public-key').on 'click', ->
+    if (document.selection)
+      range = document.body.createTextRange()
+      range.moveToElementText(@)
+    else if window.getSelection
+      range = document.createRange()
+      range.selectNode(@);
+      window.getSelection().addRange(range)
+    false

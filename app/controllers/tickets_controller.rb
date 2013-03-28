@@ -5,7 +5,7 @@ class TicketsController < ApplicationController
   
   def index
     @search = current_user.tickets.search(params[:q])
-    @tickets = @search.relation.uniq.page(params[:page])
+    @tickets = @search.result(distinct: true).page(params[:page])
   end
   
   def new

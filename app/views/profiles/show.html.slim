@@ -12,45 +12,51 @@ div class="row"
       strong = link_to t('.edit', default: 'Edit'), edit_profile_path
 
 h3 = t('.memberships', default: 'Memberships')
-p = link_to t('.new_membership'), new_membership_path
-- memberships = @user.memberships
-- if memberships.any?
-  table class="table table-bordered"
-    tr
-      th = Organization.model_name.human
-      th
-    - memberships.each do |membership|
-      tr id="membership-#{membership.id}"
-        td = membership.organization.name
-        td = link_to_membership membership
-- else
-  p = t('.no_memberships', default: 'There are no memberships')
+p
+  small = link_to t('.new_membership'), new_membership_path
+
+div class="well"
+  - memberships = @user.memberships
+  - if memberships.any?
+    ul class="unstyled"
+      - memberships.each do |m|
+        li
+          | ##{m.id} - 
+          = link_to m.organization.name, m
+  - else
+    p = t('.no_memberships', default: 'There are no memberships')
 
 h3 = t('.sureties', default: 'Sureties')
-= render partial: 'sureties/full_table', locals: { sureties: @user.sureties }
+
+div class="well"
+  - sureties = @user.sureties
+  - if sureties.any?
+    ul class="unstyled"
+      - sureties.each do |surety|
+        li
+          | ##{surety.id} - 
+          = link_to surety.project.name, surety
+          |  
+          span class="label #{'label-success' if surety.active?}" = surety.human_state_name
+  - else
+    p Нет поручительств
 
 h3 = t('.credentials', default: 'Public Keys')
-p = link_to t('.new_credential', default: 'New Public Key'), new_credential_path
-- credentials = @user.credentials.active
-- if credentials.any?
-  table class="table table-bordered"
-    tr
-      th class="span1" #
-      th = Credential.human_attribute_name(:name)
-      th = Credential.human_attribute_name(:public_key)
-      th = Credential.human_attribute_name(:state)
-      th = Credential.human_attribute_name(:created_at)
-      th
-    - credentials.each do |credential|
-      tr
-        td = credential.id
-        td = credential.name
-        td
-          textarea disabled="disabled" class="public-key" rows="10"
-            = credential.public_key
-        td = credential.human_state_name
-        td = credential.created_at.to_formatted_s(:short)
-        td 
-          = link_to Credential.human_state_event_name(:_close), credential_close_path(credential), method: :put, confirm: t('.confirm_destroy', default: 'Confirm Destroy'), class: 'btn btn-danger'
-- else
-  p = t('.no_credentials', default: 'There are no credentials')
+p
+  small = link_to t('.new_credential', default: 'New Public Key'), new_credential_path
+
+div class="well"
+  - credentials = @user.credentials.active
+  - if credentials.any?
+    ul class="unstyled"
+      - credentials.each do |c|
+        li
+          | ##{c.id} - 
+          = c.name
+          |  
+          code class="public-key expanded" = c.public_key
+          |  
+          = link_to "&times;".html_safe, [c, :close], method: :put, confirm: "Вы уверены?", class: 'big-close danger'
+          div class="clearfix"
+  - else
+    p = t('.no_credentials', default: 'There are no credentials')
