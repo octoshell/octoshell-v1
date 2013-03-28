@@ -1035,7 +1035,7 @@ ru:
   report_returned_to_user_for_edit: Отчет передан пользователю для редактирования
   report_successfuly_assessed: Отчет успешно оценен
   user: Пользователь
-  project_successfully_closed: Проект успешно закрыт
+  project_successfully_closed: Проект отправлен на закрытие
   wrong_confirmation_code: Неверный код подтверждения
   
   mailer:

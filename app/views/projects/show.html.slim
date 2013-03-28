@@ -18,7 +18,7 @@ div class="well"
     = link_to t('.new_request', default: 'New Request'), new_request_path(project_id: @project.id), class: "btn"
     |  
   = link_to t('.invite', default: 'Invite'), [@project, :invite], class: 'btn'
-  - if @project.can__close?
+  - if @project.can_mark_to_close?
     = " "
     = link_to t('.close', default: 'Close'), project_close_path(@project), class: "btn btn-danger #{'disabled' if @project.invalid?}"
   = " "
@@ -91,7 +91,8 @@ h3 Доступы
   
 h3 = t('.requests', default: 'Requests')
 
-p = link_to t('.new_request', deafult: 'New Request'), new_request_path
+- if @project.announced? || @project.active? || @project.blocked?
+  p = link_to t('.new_request', deafult: 'New Request'), new_request_path(project_id: @project.id)
 
 - requests = @project.requests
 - if requests.any?

@@ -31,6 +31,11 @@ class Project < ActiveRecord::Base
   validates :direction_of_science_ids, :critical_technology_ids,
     :research_area_ids, length: { minimum: 1, message: 'выберите не менее %{count}' }
   
+  validates :name, :driver, :strategy, :objective, :impact, :usage,
+    format: { with: /[а-яё№\d[:space:][:punct:]\+]+/i, message: "Должно быть на русском" }
+  validates :en_name, :en_driver, :en_strategy, :en_objective, :en_impact,
+    :en_usage, format: { with: /\A[a-z\d[:space:][:punct:]\+]+\z/i, message: "Должно быть на английском" }
+  
   attr_accessible :organization_id, :sureties_attributes,
     :organization_ids, :direction_of_science_ids, :critical_technology_ids,
     :project_prefix_id, :confirmation_code, :research_area_ids,
@@ -49,10 +54,19 @@ class Project < ActiveRecord::Base
     state :announced
     state :active
     state :blocked
+    state :marked_to_close
     state :closed
+    state :erased
     
-    event :_close do
-      transition [:announced, :blocked, :active] => :closed
+    event :mark_to_close do
+      transition [:announced, :blocked, :active] => :marked_to_close
+    end
+    
+    event :close do
+      transition :marked_to_close => :closed
+    end
+    
+    event :erase do
     end
     
     event :activate do
@@ -66,6 +80,15 @@ class Project < ActiveRecord::Base
     after_transition :active => :blocked do |project|
       project.notify_about_blocking
     end
+    
+    around_transition :on => :closed do |project, _, block|
+      project.transition do
+        block.call
+        cluster_projects.non_closed.each &:close!
+        accounts.non_closed.each &:cancel!
+        requests.non_closed.each &:force_close!
+      end
+    end
   end
   
   define_defaults_events :close
@@ -78,15 +101,6 @@ class Project < ActiveRecord::Base
       has_active_request? or block!
     elsif blocked?
       has_active_request? and activate!
-    end
-  end
-  
-  def close!
-    transaction do
-      _close!
-      cluster_projects.non_closed.each &:close!
-      accounts.non_closed.each &:cancel!
-      requests.non_closed.each &:force_close!
     end
   end
   

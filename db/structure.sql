@@ -1320,6 +1320,16 @@ ALTER SEQUENCE projects_id_seq OWNED BY projects.id;
 
 
 --
+-- Name: projects_research_areas; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE projects_research_areas (
+    project_id integer,
+    research_area_id integer
+);
+
+
+--
 -- Name: replies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3556,6 +3566,20 @@ CREATE INDEX index_projects_on_user_id ON projects USING btree (user_id);
 
 
 --
+-- Name: index_projects_research_areas_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_projects_research_areas_on_project_id ON projects_research_areas USING btree (project_id);
+
+
+--
+-- Name: index_projects_research_areas_on_research_area_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_projects_research_areas_on_research_area_id ON projects_research_areas USING btree (research_area_id);
+
+
+--
 -- Name: index_replies_on_ticket_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4071,6 +4095,13 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 --
 
 CREATE UNIQUE INDEX unique_users_with_same_email ON users USING btree (lower((email)::text));
+
+
+--
+-- Name: unqiue_projects_research_areas; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unqiue_projects_research_areas ON projects_research_areas USING btree (project_id, research_area_id);
 
 
 --
@@ -4610,3 +4641,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130327111631');
 INSERT INTO schema_migrations (version) VALUES ('20130327111705');
 
 INSERT INTO schema_migrations (version) VALUES ('20130327112053');
+
+INSERT INTO schema_migrations (version) VALUES ('20130328103003');
