@@ -113,4 +113,9 @@ private
     send("admin_#{page}_path")
   end
   helper_method :admin_start_path
+  
+  def user_agent
+    @user_agent = UserAgent.parse(request.env["HTTP_USER_AGENT"])
+  end
+  helper_method :user_agent
 end

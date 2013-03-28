@@ -170,4 +170,8 @@ module ApplicationHelper
       'success'
     end
   end
+  
+  def copy_combo
+    user_agent.platform == 'Macintosh' ? "⌘+C" : "^+C"
+  end
 end

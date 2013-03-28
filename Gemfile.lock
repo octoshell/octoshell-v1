@@ -417,6 +417,7 @@ DEPENDENCIES
   therubyracer
   uglifier (>= 1.0.3)
   unicorn
+  useragent
   validates_email_format_of
   virtus
   whenever

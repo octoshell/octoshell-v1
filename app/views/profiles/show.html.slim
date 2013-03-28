@@ -54,7 +54,7 @@ div class="well"
           | ##{c.id} - 
           = c.name
           |  
-          code class="public-key expanded" = c.public_key
+          code class="public-key expanded" data-trigger="focus" title="#{copy_combo}" = c.public_key
           |  
           = link_to "&times;".html_safe, [c, :close], method: :put, confirm: "Вы уверены?", class: 'big-close danger'
           div class="clearfix"

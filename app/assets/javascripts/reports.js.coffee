@@ -95,4 +95,8 @@ $ ->
       range = document.createRange()
       range.selectNode(@);
       window.getSelection().addRange(range)
+    $(document).click()
+    $(@).tooltip('show')
+    $(document).one 'click', =>
+      $(@).tooltip('hide')
     false
