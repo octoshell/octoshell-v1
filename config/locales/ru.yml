@@ -409,20 +409,6 @@ ru:
       html: <a href="/memberships/new">Добавить место работы</a>
     credential:
       html: <a href="/credentials/new">Добавить публичный ключ</a>
-  meta_search:
-    or: 'или'
-    predicates:
-      contains: '<em>%{attribute}</em> содержит'
-      equals: '<em>%{attribute}</em>'
-      in: '<em>%{attribute}</em>'
-      is_true: '<em>%{attribute}</em>'
-      greater_than: '%{attribute} Больше чем'
-      less_than: '%{attribute} Меньше чем'
-    attributes:
-      company:
-        reverse_name: "Company reverse name-diddly"
-      developer:
-        name_cont: "Developer name-diddly contains-aroonie"
   activerecord:
     models:
       user: Пользователь
