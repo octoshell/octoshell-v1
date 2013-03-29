@@ -18,7 +18,7 @@ class ProjectMover
     ActiveRecord::Base.transaction do
       @project.requests.update_all user_id: @user.id
       if old = @project.accounts.where(user_id: @project.user_id).first
-        old.active? || old.cancel!
+        old.active? && old.cancel!
       end
       if new = @project.accounts.where(user_id: @user.id).first_or_create!
         new.active? || new.activate!
