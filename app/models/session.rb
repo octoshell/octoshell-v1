@@ -42,6 +42,8 @@ class Session < ActiveRecord::Base
       session.transaction do
         block.call
         session.touch :ended_at
+        stats.each &:cache!
+        User.find_each &:examine!
       end
     end
   end

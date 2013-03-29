@@ -33,11 +33,12 @@ class Request < ActiveRecord::Base
   state_machine initial: :pending do
     state :pending
     state :active
+    state :paused
     state :declined
     state :closed
     
     event :_activate do
-      transition pending: :active
+      transition [:pending, :paused] => :active
     end
 
     event :_decline do
@@ -50,6 +51,10 @@ class Request < ActiveRecord::Base
     
     event :_force_close do
       transition [:pending, :active, :declined] => :closed
+    end
+    
+    event :pause do
+      transition :active => :paused
     end
   end
   

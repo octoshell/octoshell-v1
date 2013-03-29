@@ -32,6 +32,7 @@ html
               li = link_to t('.sign_up'), new_user_path
               li = link_to t('.sign_in'), new_session_path
       div class="noprint"
+        = render partial: 'faults/teaser'
         = render partial: 'surveys/teaser'
         - if logged_in?
           - if (menu = render "shared/#{namespace}_menu").present?

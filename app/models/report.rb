@@ -64,4 +64,10 @@ class Report < ActiveRecord::Base
       :info
     end
   end
+  
+  def passed?
+    [illustration_points, statement_points, summary_points].all? do |p|
+      p.to_i > 2
+    end && assessed?
+  end
 end

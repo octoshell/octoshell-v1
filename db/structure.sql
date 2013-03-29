@@ -520,7 +520,8 @@ CREATE TABLE faults (
     reference_id integer,
     state character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    kind character varying(255)
 );
 
 
@@ -4646,3 +4647,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130327112053');
 INSERT INTO schema_migrations (version) VALUES ('20130328103003');
 
 INSERT INTO schema_migrations (version) VALUES ('20130329092947');
+
+INSERT INTO schema_migrations (version) VALUES ('20130329121747');

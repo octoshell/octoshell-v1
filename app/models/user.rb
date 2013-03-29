@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   has_many :groups, through: :user_groups
   has_many :assessing_reports, class_name: :Report, foreign_key: :expert_id
   has_many :user_surveys
+  has_many :faults
   has_and_belongs_to_many :subscribed_tickets, join_table: :tickets_users, class_name: :Ticket, uniq: true
   
   validates :first_name, :last_name, :middle_name, :email, :phone, presence: true
@@ -114,6 +115,16 @@ class User < ActiveRecord::Base
       [Task.failed, Ticket.active, Surety.pending, Request.pending].
         sum_of_count
     end
+  end
+  
+  def examine!
+    current_session_surveys.each do |s|
+      faults.create_by_kind_and_reference!(:survey, survey) unless s.submitted?
+    end
+    current_session_reports.each do |r|
+      faults.create_by_kind_and_reference!(:report, r) unless r.passed?
+    end
+    nil
   end
   
   def reports

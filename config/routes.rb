@@ -108,6 +108,9 @@ MSU::Application.routes.draw do
     put :accept
     put :submit
   end
+  
+  # faults
+  resources :faults, only: :show
 
   namespace :admin do
     # credentials

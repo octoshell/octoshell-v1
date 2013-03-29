@@ -1,0 +1,9 @@
+- if logged_in?
+  - faults = current_user.faults.with_state(:actual)
+  - if faults.any?
+    div class="alert alert-danger"
+      h4 style="margin-bottom: 20px;" Доступ на кластеры запрещен:
+      ul
+        - faults.each do |fault|
+          li = link_to fault.description, fault
+        
