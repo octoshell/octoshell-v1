@@ -140,7 +140,7 @@ protected
     complete_block!
   end
   
-  def complete_unblock_user(task)
+  def continue_unblock_user(task)
     complete_unblock!
   end
 
