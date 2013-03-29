@@ -1,5 +1,5 @@
 class Stat < ActiveRecord::Base
-  GROUPS_BY = [:count, :organization_types, :subdivisions]
+  GROUPS_BY = [:count, :organization_kinds, :subdivisions]
   
   belongs_to :session
   belongs_to :survey_field, class_name: :'Survey::Field'
@@ -15,17 +15,25 @@ class Stat < ActiveRecord::Base
   
   # returns [[name, count], ...]
   def graph_data
-    case group_by.to_sym
-    when :subdivisions then
-      grouped_organization_memberships.map do |subdivision, memberships|
-        [subdivision.try(:graph_name) || 'blank', memberships.size]
-      end.extend(Chartable)
-    when :count then
-      stats = user_surveys.map do |us|
-        us.find_value(survey_field_id).value
-      end.group_by(&:to_s).map { |k, v| [k, v.size] }
-      stats = stats * 10
-      stats.extend(Chartable)
+    data = send "graph_data_for_#{group_by}"
+    (data * 4).extend(Chartable)
+  end
+  
+  def graph_data_for_count
+    user_surveys.map do |us|
+      us.find_value(survey_field_id).value
+    end.group_by(&:to_s).map { |k, v| [k, v.size] }
+  end
+  
+  def graph_data_for_organization_kinds
+    grouped_organizations_by_kind.map do |kind, organizations|
+      [kind.name, organizations.size]
+    end
+  end
+  
+  def graph_data_for_subdivisions
+    grouped_organization_memberships.map do |subdivision, memberships|
+      [subdivision.try(:graph_name) || 'blank', memberships.size]
     end
   end
   
@@ -35,5 +43,11 @@ class Stat < ActiveRecord::Base
   
   def grouped_organization_memberships
     organization.memberships.group_by(&:subdivision)
+  end
+  
+  def grouped_organizations_by_kind
+    session.reports.map { |r| r.project.organization }.group_by do |org|
+      org.organization_kind
+    end
   end
 end

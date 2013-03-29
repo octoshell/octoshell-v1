@@ -1,6 +1,7 @@
 - title "Отчеты"
 
 = simple_form_for @search, method: :get, url: admin_reports_path, html: { class: 'form-horizontal' } do |f|
+  = f.input :session_id_eq, collection: Session.all, label_method: :description, label: 'Перерегистрация'
   = f.input :state_eq, collection: Report.state_names
   = search_check_boxes(f, :illustration_points_in)
   = search_check_boxes(f, :statement_points_in)
@@ -8,12 +9,6 @@
   
   div class="form-actions"
     = f.button :submit, 'Показать', class: 'btn-primary btn-small'
-
-- menu = { 'Неразобранные' => { 'state_eq' => 'submitted' }, 'Свои' => { 'expert_id_eq' => current_user.id.to_s }, 'Оцененные' => { 'state_eq' => 'assessed' } }
-ul class="nav nav-pills"
-  - menu.each do |title, ps|
-    li
-    li class="#{'active' if params[:q] == ps}" = link_to title, admin_reports_path(q: ps)
 
 p
   em == page_entries_info(@reports)

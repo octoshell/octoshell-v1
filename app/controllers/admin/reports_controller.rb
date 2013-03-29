@@ -3,7 +3,7 @@ class Admin::ReportsController < Admin::ApplicationController
   before_filter { authorize! :access, :reports }
   
   def index
-    @search = Report.search(params[:q] || { state_eq: 'submitted' })
+    @search = Report.search(params[:q] || default_index_params)
     @reports = @search.result(distinct: true).page(params[:page])
   end
   
@@ -33,5 +33,15 @@ class Admin::ReportsController < Admin::ApplicationController
   def show
     @report = Report.find(params[:id])
     raise MayMay::Unauthorized unless may?(:review, :reports) || @report.expert
+  end
+  
+private
+  
+  def default_index_params
+    params = { state_eq: 'submitted' }
+    if s = Session.current
+      params[:session_id_eq] = s.id
+    end
+    params
   end
 end
