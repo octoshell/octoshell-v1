@@ -3,6 +3,8 @@ class Admin::ProjectsController < Admin::ApplicationController
   before_filter :require_login
   before_filter :setup_default_filter, only: :index
   
+  before_filter { authorize! :manage, :projects }
+  
   def index
     respond_to do |format|
       format.html do
@@ -18,6 +20,7 @@ class Admin::ProjectsController < Admin::ApplicationController
   
   def show
     @project = Project.find(params[:id])
+    @project_mover = ProjectMover.new(@project)
     respond_to do |format|
       format.html
       format.json { render json: @project }
@@ -35,6 +38,18 @@ class Admin::ProjectsController < Admin::ApplicationController
       redirect_to [:admin, @project]
     else
       render :edit
+    end
+  end
+  
+  def move
+    @user = User.find(params[:project_mover][:user_id])
+    @project = Project.find(params[:project_id])
+    @project_mover = ProjectMover.new(@project, @user)
+    if @project_mover.move
+      redirect_to [:admin, @project]
+    else
+      flash.now[:alert] = @project_mover.error
+      render :show
     end
   end
   

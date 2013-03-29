@@ -168,6 +168,7 @@ MSU::Application.routes.draw do
 
     # projects
     resources :projects, only: [:index, :show, :edit, :update] do
+      put :move
       put :close
       resources :versions, only: [:index, :show], resource: 'Project'
     end

@@ -103,3 +103,8 @@ h3 Поддержка
 
 = render partial: 'admin/tickets/table', locals: { tickets: @project.tickets }
 
+
+div class="danger"
+  = simple_form_for @project_mover, url: admin_project_move_path(@project), method: :put do |f|
+    = autocomplete :user, f, name: :user_id
+    = f.button :submit, 'Переместить'
