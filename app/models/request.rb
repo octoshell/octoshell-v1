@@ -59,9 +59,11 @@ class Request < ActiveRecord::Base
   
   def close!
     transaction do
+      if active?
+        cluster_project.pause! if cluster_project.active?
+        cluster_project.close! if cluster_project.paused?
+      end
       _close!
-      cluster_project.pause! if cluster_project.active?
-      cluster_project.close! if cluster_project.paused?
     end
     true
   end
