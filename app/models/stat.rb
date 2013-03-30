@@ -13,10 +13,17 @@ class Stat < ActiveRecord::Base
   
   scope :sorted, order('stats.weight asc')
   
+  serialize :cache, Array
+  
   # returns [[name, count], ...]
   def graph_data
-    data = send "graph_data_for_#{group_by}"
-    (data * 4).extend(Chartable)
+    data = cache? ? cache : send("graph_data_for_#{group_by}")
+    data.extend(Chartable)
+  end
+  
+  def cache!
+    self.cache = graph_data
+    save!
   end
   
   def graph_data_for_count

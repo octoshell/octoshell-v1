@@ -1596,7 +1596,8 @@ CREATE TABLE stats (
     group_by character varying(255),
     weight integer DEFAULT 0,
     organization_id integer,
-    cache text
+    cache text DEFAULT '--- {}
+'::text
 );
 
 
@@ -4716,3 +4717,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130329121747');
 INSERT INTO schema_migrations (version) VALUES ('20130330084831');
 
 INSERT INTO schema_migrations (version) VALUES ('20130330114633');
+
+INSERT INTO schema_migrations (version) VALUES ('20130330142056');
