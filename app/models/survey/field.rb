@@ -17,6 +17,8 @@ class Survey::Field < ActiveRecord::Base
     positions: 'Position'
   }
   
+  belongs_to :survey
+  
   scope :sorted, order("#{table_name}.weight asc, #{table_name}.name asc")
   
   validates :name, :kind, presence: true
@@ -39,5 +41,9 @@ class Survey::Field < ActiveRecord::Base
   
   def entity_class
     ENTITIES_CLASSES[entity.to_sym].constantize
+  end
+  
+  def group
+    survey.name
   end
 end

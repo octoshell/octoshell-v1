@@ -52,6 +52,10 @@ class Session < ActiveRecord::Base
     with_state(:active).first
   end
   
+  def survey_fields
+    Survey::Field.where(survey_id: survey_ids)
+  end
+  
   def survey_ids
     [ personal_survey_id,
       projects_survey_id,
