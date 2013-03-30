@@ -21,12 +21,14 @@ class ApplicationController < ActionController::Base
 
   def ability
     @ability ||= begin
-      mm = MayMay::Ability.new(current_user)
-      (logged_in? ? current_user.abilities : Ability.default).each do |ability|
-        method = ability.available ? :may : :maynot
-        mm.send method, ability.action_name, ability.subject_name
-      end
-      mm
+      logged_in? ? current_user.ability : (begin
+        mm = MayMay::Ability.new(current_user)
+        Ability.default.each do |ability|
+          method = ability.available ? :may : :maynot
+          mm.send method, ability.action_name, ability.subject_name
+        end
+        mm
+      end)
     end
   end
   
