@@ -1,5 +1,11 @@
 - title 'Проблема'
 
+= @fault.errors.inspect
+
+- if @fault.can_resolve? && may?(:resolve, :faults)
+  div class="well"
+    = link_to Fault.human_state_event_name(:resolve), [:admin, @fault, :resolve], class: 'btn btn-success', method: :put
+
 blockquote class="lead #{'alert alert-danger' if @fault.actual?}" = @fault.description
 
 legend Переписка
@@ -17,7 +23,8 @@ legend Переписка
 
 div class="row"
   div class="well well-small span6"
-    = simple_form_for [@fault, @reply] do |f|
+    = simple_form_for [:admin, @fault, @reply] do |f|
       = f.input :message, input_html: { rows: 3, class: 'input-block-level' }, label: false, placeholder: 'Сообщение'
       div style="text-align: right"
         = f.button :submit, 'Отправить', class: 'btn-primary btn-small'
+

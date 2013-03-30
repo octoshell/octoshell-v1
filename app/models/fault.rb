@@ -6,11 +6,12 @@ class Fault < ActiveRecord::Base
   has_many :replies
   
   validates :user, presence: true
-  validates :kind, inclusion: { in: KINDS }
+  validates :kind, inclusion: { in: KINDS.map(&:to_s) }
   
   after_create :block_accesses
   
   state_machine initial: :actual do
+    state :actual
     state :resolved
     
     event :resolve do
@@ -23,5 +24,9 @@ class Fault < ActiveRecord::Base
       project.requests.active.each &:pause!
     end
     user.accounts.active.each &:cancel!
+  end
+  
+  def kind
+    self[:kind] ? self[:kind].to_s : nil
   end
 end

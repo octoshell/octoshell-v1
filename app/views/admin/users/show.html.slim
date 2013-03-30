@@ -39,21 +39,40 @@ div class="row"
       p
         strong = link_to t('.edit'), edit_profile_path
 
+h3 Проблемы
+
+- faults = @user.faults.with_state(:actual)
+- if faults.any?
+  div class="well alert alert-danger"
+    ul
+      - faults.each do |fault|
+        li = link_to fault.description, [:admin, fault]
+
+- faults = @user.faults.with_state(:resolved)
+- if faults.any?
+  div class="well alert alert-success"
+    ul
+      - faults.each do |fault|
+        li = link_to fault.description, [:admin, fault]
+
+- if @user.faults.empty?
+  p Нет проблем
+
 h3 Отчеты
 
 h4 Поданные пользователем
 
 - @user.reports.each do |report|
-  p = link_to "Отчет ##{report.id} (#{report.human_state_name})", [:admin, report, :review]
+  p = link_to "Отчет ##{report.id} (#{report.human_state_name})", [:admin, report]
 
-h4 В которых упоминался пользователь
-
-- reports = @user.mentioned_reports
-- if reports.any?
-  - reports.each do |report|
-    p = link_to "Отчет ##{report.id} (#{report.human_state_name})", [:admin, report, :review]
-- else
-  p Нет
+/ h4 В которых упоминался пользователь
+/ 
+/ - reports = @user.mentioned_reports
+/ - if reports.any?
+/   - reports.each do |report|
+/     p = link_to "Отчет ##{report.id} (#{report.human_state_name})", [:admin, report, :review]
+/ - else
+/   p Нет
 
 h3 = t('.sureties')
 = render partial: 'admin/sureties/table', locals: { sureties: @user.sureties }

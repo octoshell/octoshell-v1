@@ -1377,7 +1377,8 @@ CREATE TABLE replies (
     attachment_file_name character varying(255),
     attachment_content_type character varying(255),
     attachment_file_size integer,
-    attachment_updated_at timestamp without time zone
+    attachment_updated_at timestamp without time zone,
+    notice text
 );
 
 
@@ -4713,3 +4714,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130329092947');
 INSERT INTO schema_migrations (version) VALUES ('20130329121747');
 
 INSERT INTO schema_migrations (version) VALUES ('20130330084831');
+
+INSERT INTO schema_migrations (version) VALUES ('20130330114633');

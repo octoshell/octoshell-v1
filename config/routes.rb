@@ -314,6 +314,13 @@ MSU::Application.routes.draw do
     
     # research areas
     resources :research_areas, except: :show
+    
+    # faults
+    resources :faults, only: :show do
+      put :resolve
+      
+      resources :fault_replies, only: [:create]
+    end
   end
 
   root to: 'application#dashboard'
