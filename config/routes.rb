@@ -110,7 +110,9 @@ MSU::Application.routes.draw do
   end
   
   # faults
-  resources :faults, only: :show
+  resources :faults, only: :show do
+    resources :fault_replies, only: :create
+  end
 
   namespace :admin do
     # credentials

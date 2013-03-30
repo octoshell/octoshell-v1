@@ -510,6 +510,39 @@ ALTER SEQUENCE extends_id_seq OWNED BY extends.id;
 
 
 --
+-- Name: fault_replies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE fault_replies (
+    id integer NOT NULL,
+    fault_id integer,
+    message text,
+    user_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: fault_replies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE fault_replies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: fault_replies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE fault_replies_id_seq OWNED BY fault_replies.id;
+
+
+--
 -- Name: faults; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2424,6 +2457,13 @@ ALTER TABLE ONLY extends ALTER COLUMN id SET DEFAULT nextval('extends_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY fault_replies ALTER COLUMN id SET DEFAULT nextval('fault_replies_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY faults ALTER COLUMN id SET DEFAULT nextval('faults_id_seq'::regclass);
 
 
@@ -2866,6 +2906,14 @@ ALTER TABLE ONLY expands
 
 ALTER TABLE ONLY extends
     ADD CONSTRAINT extends_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: fault_replies_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY fault_replies
+    ADD CONSTRAINT fault_replies_pkey PRIMARY KEY (id);
 
 
 --
@@ -3397,6 +3445,20 @@ CREATE INDEX index_direction_of_sciences_projects_on_direction_of_science_id ON 
 --
 
 CREATE INDEX index_direction_of_sciences_projects_on_project_id ON direction_of_sciences_projects USING btree (project_id);
+
+
+--
+-- Name: index_fault_replies_on_fault_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_fault_replies_on_fault_id ON fault_replies USING btree (fault_id);
+
+
+--
+-- Name: index_fault_replies_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_fault_replies_on_user_id ON fault_replies USING btree (user_id);
 
 
 --
@@ -4649,3 +4711,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130328103003');
 INSERT INTO schema_migrations (version) VALUES ('20130329092947');
 
 INSERT INTO schema_migrations (version) VALUES ('20130329121747');
+
+INSERT INTO schema_migrations (version) VALUES ('20130330084831');

@@ -79,3 +79,5 @@ user_surveys:
   - access
 research_areas:
   - manage
+faults:
+  - resolve

@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   include Models::Limitable
   
+  delegate :may?, :maynot?, to: :ability
+  
   has_paper_trail
   
   has_attached_file :avatar
@@ -327,6 +329,17 @@ class User < ActiveRecord::Base
     Report::Project.where("report_projects.emails like '%#{email}%'").map do |p|
       p.report
     end.uniq
+  end
+  
+  def ability
+    @ability ||= begin
+      mm = MayMay::Ability.new(self)
+      abilities.each do |ability|
+        method = ability.available ? :may : :maynot
+        mm.send method, ability.action_name, ability.subject_name
+      end
+      mm
+    end
   end
   
 private

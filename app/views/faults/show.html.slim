@@ -1,0 +1,20 @@
+- title 'Проблема'
+
+blockquote class="lead #{'alert alert-danger' if @fault.actual?}" = @fault.description
+
+legend Переписка
+
+- replies = @fault.replies.find_all(&:persisted?)
+- if replies.any?
+  - replies.each do |r|
+    blockquote
+      small class="reply"
+        = r.user.full_name
+        - if r.user.may? :resolve, :faults
+          |  
+          span class="label label-info" admin
+      = markdown r.message
+
+= simple_form_for [@fault, @reply] do |f|
+  = f.input :message, input_html: { rows: 3, class: 'input-xxlarge' }, label: false, placeholder: 'Сообщение'
+  = f.button :submit, 'Отправить', class: 'btn-primary'

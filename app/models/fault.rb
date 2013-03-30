@@ -3,6 +3,7 @@ class Fault < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :reference, polymorphic: true
+  has_many :replies
   
   validates :user, presence: true
   validates :kind, inclusion: { in: KINDS }
