@@ -109,6 +109,6 @@ $ ->
       $.removeCookie(cookie)
       $well.removeClass klass
     else
-      $.cookie cookie, '1', { expires: 7 }
+      $.cookie cookie, '1', { expires: 7, path: '/' }
       $well.addClass klass
   
