@@ -100,3 +100,15 @@ $ ->
     $(document).one 'click', =>
       $(@).tooltip('hide')
     false
+  
+  $('.well-collapseble').on 'click .well-close', ->
+    klass = 'well-collapsed'
+    cookie = 'hide_session'
+    $well = $(@)
+    if $well.hasClass(klass)
+      $.removeCookie(cookie)
+      $well.removeClass klass
+    else
+      $.cookie cookie, '1', { expires: 7 }
+      $well.addClass klass
+  

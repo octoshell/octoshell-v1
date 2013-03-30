@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require role
+//= require cookie
 //= require underscore
 //= require bootstrap
 //= require raphael
