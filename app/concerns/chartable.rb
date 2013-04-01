@@ -16,11 +16,7 @@ module Chartable
 private
   
   def to_column_chart(options = {})
-    tooltips = options[:tooltips] || begin
-      map do |arr|
-        "#{arr[0]}: #{arr[1]}"
-      end
-    end
+    tooltips = options[:tooltips] || default_tooltips
     [{
       name: 'Количество',
       data: map(&:last),
@@ -30,16 +26,19 @@ private
   end
   
   def to_pie_chart(options = {})
-    tooltips = options[:tooltips] || begin
-      map do |arr|
-        "#{arr[0]}: #{arr[1]}"
-      end
-    end
+    tooltips = options[:tooltips] || default_tooltips
     [{
       type: 'pie',
       data: self,
       name: 'Количество',
       tooltips: tooltips
     }]
+  end
+  
+  def default_tooltips
+    map do |arr|
+      "#{arr[0]}: #{arr[1]}"
+    end
+  end
   end
 end

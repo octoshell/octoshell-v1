@@ -27,26 +27,27 @@ class Organization < ActiveRecord::Base
     state :active
     state :closed
     
-    event :_close do
-      transition active: :closed
+    event :close do
+      transition :active => :closed
     end
+    
+    # todo: validate org for absence of projects and members
   end
   
-  define_defaults_events :close
-  define_state_machine_scopes
-  
-  def self.find_similar(name)
-    active.where("lower(name) != ?", name.downcase).find_all do |org|
-      Levenshtein.distance(name, org.name) < 5
+  class << self
+    def find_similar(name)
+      active.where("lower(name) != ?", name.downcase).find_all do |org|
+        Levenshtein.distance(name, org.name) < 5
+      end
     end
-  end
-  
-  def self.find_for_survey(value)
-    find_by_name(value)
-  end
-  
-  def self.find_for_survey!(value)
-    find_by_name!(value)
+
+    def find_for_survey(value)
+      find_by_name(value)
+    end
+
+    def find_for_survey!(value)
+      find_by_name!(value)
+    end
   end
   
   def survey_value
@@ -55,14 +56,6 @@ class Organization < ActiveRecord::Base
 
   def sureties
     Surety.joins(:project).where(project_id: project_ids)
-  end
-  
-  def close!
-    transaction do
-      _close!
-      memberships.non_closed.each &:close!
-      projects.non_closed.each &:close!
-    end
   end
   
   def surety_name
@@ -77,9 +70,6 @@ class Organization < ActiveRecord::Base
       organization.coprojects.each do |project|
         self.coprojects = (coprojects + projects).uniq
       end
-      Report::Organization.
-        where(organization_id: organization.id).
-        update_all(organization_id: id)
       organization.destroy
     end
   end

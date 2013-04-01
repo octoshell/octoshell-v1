@@ -8,9 +8,6 @@ class User < ActiveRecord::Base
   has_attached_file :avatar
   authenticates_with_sorcery!
   
-  attr_reader :new_organization
-  attr_reader :organization_id
-  
   has_many :accounts, inverse_of: :user
   has_many :credentials
   has_many :requests
@@ -21,7 +18,6 @@ class User < ActiveRecord::Base
   has_many :surety_members, inverse_of: :user
   has_many :sureties, through: :surety_members
   has_many :organizations, through: :sureties
-  has_many :accesses, through: :credentials
   has_many :tickets
   has_many :additional_emails
   has_many :history_items
@@ -180,25 +176,13 @@ class User < ActiveRecord::Base
   def all_projects
     projects.where("accounts.state = 'active' or projects.user_id = ?", id)
   end
-
+  
   def managed_accounts
     Account.where(project_id: owned_project_ids)
   end
   
-  def new_organization=(attributes)
-    if attributes.values.any?(&:present?)
-      @new_organization = organizations.build(attributes)
-    end
-  end
-
   def username
     email.delete(".+_-")[/^(.+)@/, 1]
-  end
-  
-  def organization_id=(id)
-    return if id.blank?
-    raise 'Only for new records' if persisted?
-    self.organizations = [Organization.find(id)]
   end
   
   def password?

@@ -68,20 +68,6 @@ class Project < ActiveRecord::Base
     self[:username] = username
   end
   
-  def tasks
-    tasks = []
-    cluster_projects.each do |cp|
-      tasks += cp.tasks
-      cp.cluster_users.each do |cu|
-        tasks += cu.tasks
-        cu.accesses.each do |a|
-          tasks += a.tasks
-        end
-      end
-    end
-    tasks.sort_by(&:id)
-  end
-  
   def as_json(options)
     { id: id, text: name }
   end
