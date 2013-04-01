@@ -34,7 +34,7 @@ class Request < ActiveRecord::Base
     end
 
     event :decline do
-      transition pending: :declined
+      transition :pending => :declined
     end
     
     event :close do

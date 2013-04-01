@@ -14,7 +14,6 @@ class Project < ActiveRecord::Base
   has_many :accounts, inverse_of: :project
   has_many :account_codes
   has_many :tickets
-  has_many :cluster_projects, autosave: true
   has_many :sureties, inverse_of: :project
   has_and_belongs_to_many :critical_technologies
   has_and_belongs_to_many :direction_of_sciences
@@ -44,7 +43,6 @@ class Project < ActiveRecord::Base
   attr_accessible :project_prefix_id, :username, as: :admin
   
   after_create :assign_username
-  after_create :create_relations
   
   accepts_nested_attributes_for :sureties
   
@@ -68,7 +66,6 @@ class Project < ActiveRecord::Base
   
   def username=(username)
     self[:username] = username
-    cluster_projects.each { |cp| cp.username = username }
   end
   
   def tasks

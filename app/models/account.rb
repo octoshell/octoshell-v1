@@ -10,7 +10,6 @@ class Account < ActiveRecord::Base
   
   belongs_to :user, inverse_of: :accounts
   belongs_to :project, inverse_of: :accounts
-  has_many :cluster_users, autosave: true, dependent: :destroy
   
   validates :user, :project, presence: true
   validates :username, presence: true, on: :update
@@ -26,12 +25,12 @@ class Account < ActiveRecord::Base
     state :closed
     state :active
     
-    event :_activate do
-      transition closed: :active
+    event :activate do
+      transition :closed => :active
     end
     
-    event :_cancel do
-      transition active: :closed
+    event :cancel do
+      transition :active => :closed
     end
   end
   
@@ -39,40 +38,8 @@ class Account < ActiveRecord::Base
   
   define_state_machine_scopes
   
-  def activate
-    if user.ready_to_activate_account?
-      activate!
-    else
-      errors.add(:base, :not_ready_to_be_activated)
-      false
-    end
-  end
-  
-  def activate!
-    transaction do
-      _activate!
-      create_cluster_projects!
-      activate_cluster_users!
-    end
-  end
-  
-  def cancel!
-    transaction do
-      _cancel!
-      cluster_users(true).non_closed.each &:block!
-    end
-  end
-  
-  def accesses
-    Access.where(
-      credential_id:   user.credential_ids,
-      cluster_user_id: cluster_user_ids
-    )
-  end
-  
   def username=(username)
     self[:username] = username
-    cluster_users.each { |cu| cu.username = username }
   end
   
   def to_s
@@ -97,19 +64,5 @@ private
         project.login
       end
     update_attribute :username, username
-  end
-  
-  def create_cluster_projects!
-    project.cluster_projects.each do |cp|
-      cluster_users.where(cluster_project_id: cp.id).first_or_create!
-    end
-  end
-  
-  def activate_cluster_users!
-    cluster_users.joins(:cluster_project).where(
-      cluster_projects: { state: 'active' }
-    ).includes(:cluster_project).each do |cu|
-      cu.closed? ? cu.activate! : cu.unblock!
-    end
   end
 end

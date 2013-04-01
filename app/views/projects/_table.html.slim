@@ -23,18 +23,6 @@
               li
                 small = link_to t('.invite', default: 'Invite'), [project, :invite]
         td
-          - accesses = Access.non_closed.where(credential_id: current_user.credential_ids, cluster_user_id: ClusterUser.where(account_id: current_user.account_ids, cluster_project_id: project.cluster_project_ids))
-          - if accesses.any?
-            ul class="unstyled"
-              - accesses.each do |access|
-                li
-                  small
-                    = access.credential.name
-                    |  
-                  code = "#{access.cluster_user.username}@#{access.cluster_user.cluster_project.cluster.host}"
-                  small class="state-#{access.state}" = " (#{access.human_active_state})"
-          - else
-            p = t('.no_accesses', default: 'There are no Accesses')
         td class="date" = project.created_at.strftime("%Y-%m-%d")
 - else
   p = t('.no_projects', default: 'There are no Projects')

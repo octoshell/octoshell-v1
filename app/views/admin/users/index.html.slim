@@ -5,7 +5,6 @@
   = f.input :last_name_or_first_name_or_middle_name_cont
   = f.input :email_cont
   = autocomplete :organization, f, name: :memberships_organization_id_eq
-  = f.input :accounts_cluster_users_username_eq, label: 'Login (на кластере)', required: false
   = f.input :user_groups_group_name_in, label: 'Группа', required: false, collection: Group.pluck(:name), input_html: { multiple: true }
   = f.input :state_in, collection: User.human_state_names, input_html: { multiple: true }, required: false
   div class="form-actions"

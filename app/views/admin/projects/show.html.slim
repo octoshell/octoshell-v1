@@ -58,38 +58,6 @@ h3 Доступы
   h3 Поручительства
   = render partial: 'admin/sureties/table', locals: { sureties: @project.sureties }
 
-- @project.cluster_projects.each do |cluster_project|
-  - if cluster_project.has_active_entities?
-    h4
-      | Группа пользователей 
-      = smart_link_to cluster_project
-      |  на 
-      = smart_link_to cluster_project.cluster
-    p
-      small Статус: #{cluster_project.human_state_name}
-  
-  - cluster_project.cluster_users.each do |cluster_user|
-    - if cluster_user.has_active_entities?
-      div class="row-fluid"
-        div class="offset1"
-          h5
-            | Пользователь на кластере 
-            = smart_link_to cluster_user
-            |  для 
-            = smart_link_to cluster_user.account.user
-          p
-            small Статус: #{cluster_user.human_state_name}
-    
-    - cluster_user.accesses.each do |access|
-      - if access.has_active_entities?
-        div class="row-fluid"
-          div class="offset2"
-            h6
-              | Публичный ключ 
-              = smart_link_to access, access.credential.name
-            p
-              small Статус: #{access.human_state_name}
-  
 h3 Процедуры
 
 = render partial: 'admin/tasks/table', locals: { tasks: @project.tasks }  

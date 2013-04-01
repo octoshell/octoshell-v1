@@ -16,23 +16,6 @@ div class="well"
   = " "
   = link_to 'Версии', [:admin, @cluster, :versions], class: 'btn'
 
-h3 Проекты на кластере
-
-table class="table table-bordered"
-  tr
-    th class="span4" Всего
-    td = @cluster.cluster_projects.non_closed.count
-  tr
-    th Активных
-    td = @cluster.cluster_projects.active.count
-  tr
-    th Закрытых
-    td = @cluster.cluster_projects.joins(:project).where(projects: { state: 'closed' }).count
-
-= render partial: 'admin/cluster_projects/table', locals: { cluster_projects: @cluster.cluster_projects.non_closed.limit(5) }
-
-= link_to "Все проекты на кластере (#{@cluster.cluster_projects.non_closed.count})", admin_cluster_projects_path(search: { cluster_id_eq: @cluster.id })
-
 h3 Активные заявки
 
 = render partial: 'requests/table', locals: { requests: @cluster.requests.active.limit(5) }

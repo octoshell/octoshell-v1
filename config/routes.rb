@@ -203,20 +203,10 @@ MSU::Application.routes.draw do
       resources :versions, only: [:index, :show], resource: 'Organization'
     end
 
-    # cluster_users
-    resources :cluster_users, only: [:index, :show, :new, :create, :edit, :update] do
-      resources :versions, only: [:index, :show], resource: 'ClusterUser'
-    end
-
     # clusters
     resources :clusters, only: [:new, :create, :index, :show, :edit, :update] do
       put :close
       resources :versions, only: [:index, :show], resource: 'Cluster'
-    end
-
-    # accesses
-    resources :accesses, only: [:index, :show, :new, :create, :edit, :update] do
-      resources :versions, only: [:index, :show], resource: 'Access'
     end
     
     # tasks
@@ -240,11 +230,6 @@ MSU::Application.routes.draw do
 
     # pages
     resources :pages
-
-    # cluster projects
-    resources :cluster_projects, only: [:index, :show, :new, :create, :edit, :update] do
-      resources :versions, only: [:index, :show], resource: 'ClusterProject'
-    end
 
     # critical technologies
     resources :critical_technologies, only: [:index, :new, :create, :edit, :update, :destroy]

@@ -1,14 +1,8 @@
-accesses:
-  - manage
 accounts:
   - manage
 clusters:
   - manage
 cluster_fields:
-  - manage
-cluster_projects:
-  - manage
-cluster_users:
   - manage
 critical_technologies:
   - manage

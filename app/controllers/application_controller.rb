@@ -108,8 +108,8 @@ private
   def admin_start_path
     page = %w(users reports sureties requests projects tickets clusters tasks 
         organizations organization_kinds critical_technologies
-        direction_of_sciences position_names accesses cluster_projects
-        cluster_users extends images project_prefixes groups pages).find do |i|
+        direction_of_sciences position_names
+        extends images project_prefixes groups pages).find do |i|
       may? :manage, i.to_sym
     end
     send("admin_#{page}_path")
