@@ -50,86 +50,20 @@ class Project < ActiveRecord::Base
   
   scope :finder, lambda { |q| where("lower(name) like :q", q: "%#{q.to_s.mb_chars.downcase}%") }
   
-  state_machine initial: :active do
+  state_machine :state, initial: :active do
     state :announced
     state :active
     state :blocked
-    state :marked_to_close
+    state :closing
     state :closed
-    state :erased
-    
-    event :mark_to_close do
-      transition [:announced, :blocked, :active] => :marked_to_close
-    end
-    
-    event :close do
-      transition :marked_to_close => :closed
-    end
-    
-    event :erase do
-      transition [:announced, :blocked, :active, :marked_to_close] => :erased
-    end
-    
-    event :activate do
-      transition [:announced, :blocked] => :active
-    end
-    
-    event :block do
-      transition [:announced, :active] => :blocked
-    end
-    
-    after_transition :active => :blocked do |project|
-      project.notify_about_blocking
-    end
-    
-    around_transition :on => :close do |project, _, block|
-      project.transition do
-        block.call
-        cluster_projects.non_closed.each &:close!
-        accounts.non_closed.each &:cancel!
-        requests.non_closed.each &:force_close!
-      end
-    end
-    
-    around_transition :on => :erase do |project, _, block|
-      project.transition do
-        block.call
-        cluster_projects.non_closed.each &:erase!
-      end
-    end
-  end
-  
-  define_defaults_events :close
-  define_state_machine_scopes
-  
-  def revalidate!
-    if announced?
-      has_requests? and (has_active_request? ? activate! : block!)
-    elsif active?
-      has_active_request? or block!
-    elsif blocked?
-      has_active_request? and activate!
-    end
   end
   
   def name_with_state
     "#{name} [#{human_state_name}]"
   end
   
-  def requests
-    Request.where(cluster_project_id: cluster_project_ids)
-  end
-  
   def allowed_organizations
     memberships = user.memberships.active.map(&:organization).uniq.sort_by(&:name)
-  end
-  
-  def cluster_users
-    ClusterUser.where(cluster_project_id: cluster_project_ids)
-  end
-  
-  def accesses
-    Access.where(cluster_user_id: cluster_users.pluck(:id))
   end
   
   def username=(username)
@@ -198,13 +132,5 @@ private
     name = username? ? username : "project_#{id}"
     update_attribute :username, name
     true
-  end
-  
-  def create_relations
-    a = accounts.where(user_id: user_id).first_or_create!
-    a.activate!
-    Cluster.active.each do |cluster|
-      cluster_projects.where(cluster_id: cluster.id).first_or_create!
-    end
   end
 end

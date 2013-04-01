@@ -1485,7 +1485,8 @@ CREATE TABLE requests (
     size integer,
     comment character varying(255),
     cluster_project_id integer,
-    gpu_hours integer DEFAULT 0
+    gpu_hours integer DEFAULT 0,
+    project_id integer
 );
 
 
@@ -3737,6 +3738,13 @@ CREATE INDEX index_requests_on_cluster_project_id ON requests USING btree (clust
 
 
 --
+-- Name: index_requests_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_requests_on_project_id ON requests USING btree (project_id);
+
+
+--
 -- Name: index_requests_on_state; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4719,3 +4727,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130330084831');
 INSERT INTO schema_migrations (version) VALUES ('20130330114633');
 
 INSERT INTO schema_migrations (version) VALUES ('20130330142056');
+
+INSERT INTO schema_migrations (version) VALUES ('20130401152216');
