@@ -101,7 +101,9 @@ $ ->
       $(@).tooltip('hide')
     false
   
-  $('.well-collapseble').on 'click .well-close', ->
+  $('.well-collapseble').on 'click .well-close', (e) ->
+    return if !$(e.target).hasClass('well-close')
+    
     klass = 'well-collapsed'
     cookie = 'hide_session'
     $well = $(@)

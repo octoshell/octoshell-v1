@@ -3,7 +3,8 @@ div class="row" data-max-values="#{field.max_values}"
     div class="span4"
       - field.collection_values.each do |value|
         label class="checkbox"
-          = check_box "fields[#{field.id}]", '', { checked: form.object.field_value(field.id).include?(value) }, value, ""
+          - v = form.object.field_value(field.id)
+          = check_box "fields[#{field.id}]", '', { checked: v && v.include?(value) }, value, ""
           = value
       - if error.present?
         span class="help-block" = error
@@ -12,5 +13,6 @@ div class="row" data-max-values="#{field.max_values}"
       div class="span3"
         - collection.each do |value|
           label class="checkbox"
-            = check_box "fields[#{field.id}]", '', { checked: form.object.field_value(field.id).include?(value) }, value, ""
+            - v = form.object.field_value(field.id)
+            = check_box "fields[#{field.id}]", '', { checked: v && v.include?(value) }, value, ""
             = value

@@ -1,7 +1,5 @@
 - title 'Проблема'
 
-= @fault.errors.inspect
-
 - if @fault.can_resolve? && may?(:resolve, :faults)
   div class="well"
     = link_to Fault.human_state_event_name(:resolve), [:admin, @fault, :resolve], class: 'btn btn-success', method: :put

@@ -22,7 +22,7 @@ div class="well"
           em
             = link_to 'Редактировать', [:edit, :admin, @survey, field]
             |  / 
-            = link_to 'Удалить', [:admin, @survey, field], class: 'danger', data: { confirm: 'Вы уверены?' }
+            = link_to 'Удалить', [:admin, @survey, field], class: 'danger', data: { confirm: 'Вы уверены?' }, method: :delete
 - else
   p Нет полей
   
