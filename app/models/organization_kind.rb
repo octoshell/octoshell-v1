@@ -13,19 +13,11 @@ class OrganizationKind < ActiveRecord::Base
     state :active
     state :closed
     
-    event :_close do
-      transition active: :closed
+    event :close do
+      transition :active => :closed
     end
-  end
-  
-  define_defaults_events :close
-  define_state_machine_scopes
-  
-  def close!
-    transaction do
-      _close!
-      organizations.non_closed.each &:close!
-    end
+    
+    # todo: validate absence of organizations
   end
 
   def link_name

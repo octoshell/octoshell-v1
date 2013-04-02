@@ -18,14 +18,11 @@ class UserSurvey < ActiveRecord::Base
       transition filling: :submitted
     end
     
-    around_transition :on => :accept do |us, transition, block|
-      us.transaction do
-        block.call
-        us.survey.fields.each do |field|
-          Survey::Value.create! do |v|
-            v.field = field
-            v.user = us.user
-          end
+    inside_transition :on => :accept do |us|
+      us.survey.fields.each do |field|
+        Survey::Value.create! do |v|
+          v.field = field
+          v.user = us.user
         end
       end
     end

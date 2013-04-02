@@ -1,4 +1,7 @@
 class Group < ActiveRecord::Base
+  SUPERADMINS = 'superadmins'
+  AUTHORIZED = 'authorized'
+  
   has_many :users, through: :user_groups
   has_many :user_groups, dependent: :destroy
   has_many :abilities, dependent: :destroy, order: "id"
@@ -11,13 +14,13 @@ class Group < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   def self.superadmin
-    find_or_create_by_name! 'superadmins' do |group|
+    find_or_create_by_name! SUPERADMINS do |group|
       group.system = true
     end
   end
 
   def self.authorized
-    find_or_create_by_name! 'authorized' do |group|
+    find_or_create_by_name! AUTHORIZED do |group|
       group.system = true
     end
   end
@@ -28,7 +31,7 @@ private
     Ability.definitions.each do |definition|
       abilities.create! do |a|
         a.definition = definition
-        a.available = (name == 'superadmins')
+        a.available = (name == SUPERADMINS)
       end
     end
     true

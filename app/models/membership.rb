@@ -29,19 +29,11 @@ class Membership < ActiveRecord::Base
     state :active
     state :closed
     
-    event :_close do
-      transition active: :closed
+    event :close do
+      transition :active => :closed
     end
-  end
-  
-  define_defaults_events :close
-  define_state_machine_scopes
-  
-  def close!
-    transaction do
-      _close!
-      revalidate_user
-    end
+    
+    inside_transition :on => :close, &:revalidate_user
   end
   
   def build_default_positions

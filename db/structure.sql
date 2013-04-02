@@ -1274,6 +1274,47 @@ ALTER SEQUENCE positions_id_seq OWNED BY positions.id;
 
 
 --
+-- Name: project_cards; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE project_cards (
+    id integer NOT NULL,
+    project_id integer,
+    name text,
+    en_name text,
+    driver text,
+    en_driver text,
+    strategy text,
+    en_strategy text,
+    objective text,
+    en_objective text,
+    impact text,
+    en_impact text,
+    usage text,
+    en_usage text
+);
+
+
+--
+-- Name: project_cards_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE project_cards_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: project_cards_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE project_cards_id_seq OWNED BY project_cards.id;
+
+
+--
 -- Name: project_prefixes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1310,7 +1351,7 @@ ALTER SEQUENCE project_prefixes_id_seq OWNED BY project_prefixes.id;
 
 CREATE TABLE projects (
     id integer NOT NULL,
-    name character varying(255),
+    title character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     user_id integer,
@@ -1319,18 +1360,7 @@ CREATE TABLE projects (
     organization_id integer,
     cluster_user_type character varying(255) DEFAULT 'account'::character varying,
     username character varying(255),
-    project_prefix_id integer,
-    en_name character varying(255),
-    driver text,
-    en_driver text,
-    strategy text,
-    en_strategy text,
-    objective text,
-    en_objective text,
-    impact text,
-    en_impact text,
-    usage text,
-    en_usage text
+    project_prefix_id integer
 );
 
 
@@ -2600,6 +2630,13 @@ ALTER TABLE ONLY positions ALTER COLUMN id SET DEFAULT nextval('positions_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY project_cards ALTER COLUMN id SET DEFAULT nextval('project_cards_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY project_prefixes ALTER COLUMN id SET DEFAULT nextval('project_prefixes_id_seq'::regclass);
 
 
@@ -3013,6 +3050,14 @@ ALTER TABLE ONLY position_names
 
 ALTER TABLE ONLY positions
     ADD CONSTRAINT positions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: project_cards_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY project_cards
+    ADD CONSTRAINT project_cards_pkey PRIMARY KEY (id);
 
 
 --
@@ -3602,6 +3647,13 @@ CREATE UNIQUE INDEX index_pages_on_url ON pages USING btree (url);
 --
 
 CREATE INDEX index_positions_on_membership_id ON positions USING btree (membership_id);
+
+
+--
+-- Name: index_project_cards_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_project_cards_on_project_id ON project_cards USING btree (project_id);
 
 
 --
@@ -4729,3 +4781,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130330114633');
 INSERT INTO schema_migrations (version) VALUES ('20130330142056');
 
 INSERT INTO schema_migrations (version) VALUES ('20130401152216');
+
+INSERT INTO schema_migrations (version) VALUES ('20130402085345');

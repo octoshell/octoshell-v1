@@ -34,26 +34,22 @@ class Ticket < ActiveRecord::Base
     state :resolved
     state :closed
     
-    event :_answer do
+    event :answer do
       transition [:active, :resolved, :answered] => :answered
     end
     
-    event :_reply do
+    event :reply do
       transition [:active, :resolved, :answered] => :active
     end
     
-    event :_resolve do
+    event :resolve do
       transition [:active, :answered] => :resolved
     end
     
-    event :_close do
+    event :close do
       transition [:active, :resolved, :answered] => :closed
     end
   end
-  
-  define_defaults_events :reply, :answer, :resolve, :close
-  
-  define_state_machine_scopes
   
   def attachment_image?
     attachment_content_type.to_s =~ /image/

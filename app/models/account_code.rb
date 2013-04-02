@@ -1,6 +1,6 @@
 # coding: utf-8
 class AccountCode < ActiveRecord::Base
-  # has_paper_trail
+  has_paper_trail
   
   attr_accessor :full_name
   
@@ -21,22 +21,21 @@ class AccountCode < ActiveRecord::Base
       validates :user, presence: true
     end
     
-    event :_use do
-      transition pending: :used
+    event :mark_used do
+      transition :pending => :used
     end
+    
+    inside_transition :on => :mark_used, &:activate_account!
   end
   
-  define_defaults_events :use
-  define_state_machine_scopes
-  
   def use(user)
-    if can__use?
+    if can_mark_used?
       transaction do
         self.user = user
         surety_member.user = user
         surety_member.save!
         user.revalidate!
-        use!
+        mark_used!
       end
     else
       self.errors.add(:code, "уже использован")
@@ -44,12 +43,10 @@ class AccountCode < ActiveRecord::Base
     end
   end
   
-  def use!
-    transaction do
-      _use!
-      account = Account.where(project_id: project_id, user_id: user_id).first_or_create!
-      account.active? or account.activate!
-    end
+  def activate_account!
+    condition = { project_id: project_id, user_id: user_id }
+    account = Account.where(condition).first_or_create!
+    account.active? or account.activate!
   end
   
   def obfuscated_email

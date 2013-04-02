@@ -28,19 +28,12 @@ class TicketQuestion < ActiveRecord::Base
     state :active
     state :closed
     
-    event :_close do
+    event :close do
       transition active: :closed
     end
-  end
-  
-  define_defaults_events :close
-  
-  define_state_machine_scopes
-  
-  def close!
-    transaction do
-      _close!
-      ticket_questions.non_closed.each &:close!
+    
+    inside_transition :on => :close do |tq|
+      tq.ticket_questions.without_state(:closed).each &:close!
     end
   end
   

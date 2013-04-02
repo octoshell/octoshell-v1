@@ -1,15 +1,14 @@
 # coding: utf-8
 class Project < ActiveRecord::Base
-  include Models::Limitable
-  
-  attr_accessor :confirmation_code
-  
   CLUSTER_USER_TYPES = %w(account project)
   has_paper_trail
+  
+  include Models::Limitable
   
   belongs_to :user
   belongs_to :organization
   belongs_to :project_prefix
+  has_one :card, class_name: :'Project::Card'
   has_and_belongs_to_many :organizations
   has_many :accounts, inverse_of: :project
   has_many :account_codes
@@ -19,27 +18,15 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :direction_of_sciences
   has_and_belongs_to_many :research_areas
   
-  validates :name, uniqueness: true
-  validates :user, :organization, :name, :en_name, :driver, :en_driver,
-    :strategy, :en_strategy, :objective, :en_objective, :impact, :en_impact,
-    :usage, :en_usage, presence: true
-  # validates :organization, inclusion: { in: proc(&:allowed_organizations) }
-  # хз как тут делать
-  validates :username, presence: true, on: :update
+  validates :user, :organization, presence: true
   validates :cluster_user_type, inclusion: { in: CLUSTER_USER_TYPES }
   validates :direction_of_science_ids, :critical_technology_ids,
     :research_area_ids, length: { minimum: 1, message: 'выберите не менее %{count}' }
   
-  validates :name, :driver, :strategy, :objective, :impact, :usage,
-    format: { with: /[а-яё№\d[:space:][:punct:]\+]+/i, message: "Должно быть на русском" }
-  validates :en_name, :en_driver, :en_strategy, :en_objective, :en_impact,
-    :en_usage, format: { with: /\A[a-z\d[:space:][:punct:]\+]+\z/i, message: "Должно быть на английском" }
-  
   attr_accessible :organization_id, :sureties_attributes,
     :organization_ids, :direction_of_science_ids, :critical_technology_ids,
-    :project_prefix_id, :confirmation_code, :research_area_ids,
-    :name, :en_name, :driver, :en_driver, :strategy, :en_strategy, :objective,
-    :en_objective, :impact, :en_impact, :usage, :en_usage
+    :project_prefix_id, :research_area_ids
+  
   attr_accessible :project_prefix_id, :username, as: :admin
   
   after_create :assign_username
@@ -87,12 +74,6 @@ class Project < ActiveRecord::Base
 
   def link_name
     name
-  end
-  
-  def valid_to_close?(code)
-    valid = name == code
-    errors.add(:confirmation_code, :invalid) unless valid
-    valid
   end
   
   def has_active_request?

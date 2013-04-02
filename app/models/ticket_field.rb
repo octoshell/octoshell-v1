@@ -16,14 +16,10 @@ class TicketField < ActiveRecord::Base
     state :active
     state :closed
     
-    event :_close do
+    event :close do
       transition active: :closed
     end
   end
-  
-  define_defaults_events :close
-  
-  define_state_machine_scopes
   
   def hint
     self[:hint].blank? ? nil : self[:hint]

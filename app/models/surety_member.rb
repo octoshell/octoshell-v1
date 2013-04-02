@@ -8,7 +8,6 @@ class SuretyMember < ActiveRecord::Base
   validates :email, email_format: { message: 'имеет не верный формат' }
   
   attr_accessible :full_name, :email
-  attr_accessible :full_name, :email, as: :admin
   
   before_create :assign_user
   after_create :create_account_code_for_user

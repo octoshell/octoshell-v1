@@ -21,13 +21,10 @@ class TicketTag < ActiveRecord::Base
     state :active
     state :closed
     
-    event :_close do
-      transition active: :closed
+    event :close do
+      transition :active => :closed
     end
   end
-  
-  define_defaults_events :close
-  define_state_machine_scopes
   
   def merge(tag)
     return false if self == tag

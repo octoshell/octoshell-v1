@@ -15,7 +15,6 @@ class Account < ActiveRecord::Base
   validates :username, presence: true, on: :update
   
   attr_accessible :user_id
-  attr_accessible :project_id, :user_id, :username, as: :admin
   
   scope :by_params, proc { |p| where(project_id: p[:project_id], user_id: p[:user_id]) }
   
@@ -33,10 +32,6 @@ class Account < ActiveRecord::Base
       transition :active => :closed
     end
   end
-  
-  define_defaults_events :activate, :cancel
-  
-  define_state_machine_scopes
   
   def username=(username)
     self[:username] = username

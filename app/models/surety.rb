@@ -29,45 +29,31 @@ class Surety < ActiveRecord::Base
     state :declined
     state :closed
     
-    event :_confirm do
-      transition pending: :confirmed
+    event :confirm do
+      transition :pending => :confirmed
     end
     
-    event :_unconfirm do
-      transition confirmed: :pending
+    event :unconfirm do
+      transition :confirmed => :pending
     end
     
-    event :_activate do
+    event :activate do
       transition [:confirmed, :pending] => :active
     end
     
-    event :_decline do
+    event :decline do
       transition [:confirmed, :pending] => :declined
     end
     
-    event :_close do
+    event :close do
       transition [:pending, :confirmed, :active, :declined] => :closed
     end
+    
+    inside_transition :on => [:acivate, :close], &:user_revalidate!
   end
   
-  define_defaults_events :activate, :decline, :close, :confirm, :unconfirm
-  
-  define_state_machine_scopes
-  
-  def activate!
-    transaction do
-      _activate!
-      user.revalidate!
-    end
-  end
-  
-  def close!(message = nil)
-    self.comment = message
-    transaction do
-      _close!
-      user.revalidate!
-    end
-    true
+  def user_revalidate!
+    user.revalidate!
   end
   
   def load_scan(file)
