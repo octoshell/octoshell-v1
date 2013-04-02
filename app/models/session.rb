@@ -30,21 +30,15 @@ class Session < ActiveRecord::Base
       transition :active => :ended
     end
     
-    around_transition :on => :start do |session, transition, block|
-      session.transaction do
-        block.call
-        session.create_surveys_for_users!
-        session.touch :started_at
-      end
+    inside_transition :on => :start do |session|
+      session.create_surveys_for_users!
+      session.touch :started_at
     end
     
-    around_transition :on => :stop do |session, transaction, block|
-      session.transaction do
-        block.call
-        session.touch :ended_at
-        stats.each &:cache!
-        User.find_each &:examine!
-      end
+    inside_transition :on => :stop do |session|
+      session.touch :ended_at
+      stats.each &:cache!
+      User.find_each &:examine!
     end
   end
   
