@@ -15,3 +15,16 @@ module StateMachine
     end
   end
 end
+
+module StateMachineHelpers
+  def inside_transition(*args, &callback)
+    block = proc do |record, _, event|
+      record.transaction do
+        event.call
+        callback.call(record)
+      end
+    end
+    around_transition(*args, &block)
+  end
+end
+StateMachine::Machine.send(:include, StateMachineHelpers)

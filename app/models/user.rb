@@ -66,22 +66,21 @@ class User < ActiveRecord::Base
     state :sured
     state :closed
     
-    event :_sure do
-      transition active: :sured
+    event :sure do
+      transition :active => :sured
     end
     
-    event :_unsure do
-      transition sured: :active
+    event :unsure do
+      transition :sured => :active
     end
     
-    event :_close do
+    event :close do
       transition [:active, :sured] => :closed
     end
+    
+    inside_transition :on => :close, &:close_relations!
+    inside_transition :on => :sure, &:activate_own_accounts!
   end
-  
-  define_defaults_events :close, :sure, :unsure
-  
-  define_state_machine_scopes
   
   class << self
     def initialize_with_auth_errors(email)
@@ -157,10 +156,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def fio
-    [last_name, first_name, middle_name].join(' ')
-  end
-
   def abilities
     sort = %{
       (case when available then 1 when available is null then 2 else 3 end) asc
@@ -215,29 +210,10 @@ class User < ActiveRecord::Base
     end
   end
   
-  def sure!
-    transaction do
-      _sure!
-      accounts.closed.where(project_id: owned_projects.active.map(&:id)).
-        each &:activate!
-    end
-  end
-  
   def unsure!
     transaction do
       _unsure!
       accounts.non_closed.each &:cancel!
-    end
-  end
-  
-  def close!
-    transaction do
-      [ owned_projects,
-        sureties,
-        memberships,
-        tickets,
-        credentials ].each { |relation| relation.non_closed.each &:close! }
-      _close!
     end
   end
   
@@ -309,12 +285,6 @@ class User < ActiveRecord::Base
     owned_projects.map(&:account_ids).flatten.include?(account.id)
   end
   
-  def mentioned_reports
-    Report::Project.where("report_projects.emails like '%#{email}%'").map do |p|
-      p.report
-    end.uniq
-  end
-  
   def ability
     @ability ||= begin
       mm = MayMay::Ability.new(self)
@@ -324,6 +294,16 @@ class User < ActiveRecord::Base
       end
       mm
     end
+  end
+  
+  def activate_own_accounts!
+    ids = owned_projects.active.map(&:id)
+    accounts.with_state(:closed).where(project_id: ids).each &:activate!
+  end
+  
+  def close_relations!
+    %w(owned_projects sureties memberships tickets credentials).
+      each { |r| user.send(r).without_state(:closed).each &:close! }
   end
   
 private

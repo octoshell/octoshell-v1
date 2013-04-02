@@ -32,7 +32,7 @@
               | [
               = user.id
               | ] 
-              = user.fio
+              = [user.last_name, user.first_name, user.middle_name].join(' ')
               |  
               = user.email
               |  
