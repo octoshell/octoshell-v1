@@ -7,10 +7,11 @@ class Request < ActiveRecord::Base
   default_scope order("#{table_name}.id desc")
   
   has_many :request_properties
-  belongs_to :user
+  belongs_to :project
+  belongs_to :cluster
   
   validates :cpu_hours, :gpu_hours, :user, :size, presence: true
-  validates :cluster_id, :project_id, presence: true, unless: :cluster_project
+  validates :cluster, :project, presence: true
   validates :size, :cpu_hours, :gpu_hours, numericality: { greater_than_or_equal_to: 0 }
   
   attr_accessible :cpu_hours, :gpu_hours, :cluster_id, :project_id, :size

@@ -20,17 +20,50 @@ class Account < ActiveRecord::Base
   
   after_create :assign_username
   
-  state_machine initial: :closed do
+  state_machine :cluster_state, initial: :closed do
+    state :active do
+      validates :project_state_name, inclusion: { in: [:active] }
+      validates :access_state_name, inclusion: { in: [:allowed] }
+    end
+    state :blocked do
+      validates :project_state_name, inclusion: { in: [:active, :blocked] }
+    end
     state :closed
-    state :active
     
     event :activate do
       transition :closed => :active
     end
     
-    event :cancel do
-      transition :active => :closed
+    event :block do
+      transition :active => :blocked
     end
+    
+    event :unblock do
+      transition :blocked => :active
+    end
+    
+    event :close do
+      transition [:active, :blocked] => :closed
+    end
+    
+    inside_transition :on => [:block, :unblock, :activate],
+      &:touch_maintain_requested_at
+  end
+  
+  state_machine :access_state, initial: :denied do
+    state :denied
+    state :allowed
+    
+    event :allow do
+      transition :denied => :allowed
+    end
+    
+    event :deny do
+      transition :allowed => :denied
+    end
+    
+    inside_transition :on => :allow, &:activate
+    inside_transition :on => :deny, &:block
   end
   
   def username=(username)
@@ -47,6 +80,10 @@ class Account < ActiveRecord::Base
 
   def link_name
     to_s
+  end
+  
+  def touch_maintain_requested_at
+    project.touch :maintain_requested_at
   end
   
 private

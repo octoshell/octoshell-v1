@@ -28,7 +28,7 @@ private
     if user
       conditions = { user_id: user_id, project_id: surety.project_id }
       account = Account.where(conditions).first_or_create!
-      account.activate! if account.closed? && user.sured?
+      account.push
     else
       create_account_code! do |code|
         code.email = email

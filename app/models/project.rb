@@ -10,7 +10,7 @@ class Project < ActiveRecord::Base
   belongs_to :project_prefix
   has_one :card, class_name: :'Project::Card'
   has_and_belongs_to_many :organizations
-  has_many :accounts, inverse_of: :project
+  has_many :accounts, inverse_of: :project, autosave: true
   has_many :account_codes
   has_many :tickets
   has_many :sureties, inverse_of: :project
@@ -35,12 +35,47 @@ class Project < ActiveRecord::Base
   
   scope :finder, lambda { |q| where("lower(name) like :q", q: "%#{q.to_s.mb_chars.downcase}%") }
   
-  state_machine :state, initial: :active do
+  state_machine :state, initial: :announced do
     state :announced
     state :active
     state :blocked
     state :closing
     state :closed
+    
+    event :activate do
+      transition :announced => :active
+    end
+    
+    event :unblock do
+      transition :blocked => :active
+    end
+    
+    event :close do
+      transition [:announced, :active, :blocked] => :closing
+    end
+    
+    event :erase do
+      transition :closing => :closed
+    end
+    
+    event :block do
+      transition :active => :blocked
+    end
+    
+    inside_transition :on => :block do |p|
+      p.accounts.with_cluster_state(:active).each &:block!
+      p.touch :maintain_requested_at
+    end
+    
+    inside_transition :on => :unblock do |p|
+      p.accounts.with_cluster_state(:blocked).each &:unblock!
+      p.touch :maintain_requested_at
+    end
+    
+    inside_transition :on => :close do |p|
+      p.accounts.without_cluster_state(:closed).each &:close!
+      p.touch :maintain_requested_at
+    end
   end
   
   def name_with_state

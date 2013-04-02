@@ -142,7 +142,10 @@ CREATE TABLE accounts (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     state character varying(255),
-    username character varying(255)
+    username character varying(255),
+    owner boolean DEFAULT false,
+    access_state character varying(255),
+    cluster_state character varying(255)
 );
 
 
@@ -1360,7 +1363,8 @@ CREATE TABLE projects (
     organization_id integer,
     cluster_user_type character varying(255) DEFAULT 'account'::character varying,
     username character varying(255),
-    project_prefix_id integer
+    project_prefix_id integer,
+    maintain_requested_at timestamp without time zone
 );
 
 
@@ -1867,9 +1871,6 @@ CREATE TABLE tasks (
     resource_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    procedure character varying(255),
-    comment text,
-    callbacks_performed boolean DEFAULT false,
     state character varying(255),
     runned_at timestamp without time zone
 );
@@ -3398,6 +3399,20 @@ CREATE INDEX index_account_codes_on_user_id ON account_codes USING btree (user_i
 
 
 --
+-- Name: index_accounts_on_access_state; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_accounts_on_access_state ON accounts USING btree (access_state);
+
+
+--
+-- Name: index_accounts_on_cluster_state; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_accounts_on_cluster_state ON accounts USING btree (cluster_state);
+
+
+--
 -- Name: index_accounts_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4783,3 +4798,15 @@ INSERT INTO schema_migrations (version) VALUES ('20130330142056');
 INSERT INTO schema_migrations (version) VALUES ('20130401152216');
 
 INSERT INTO schema_migrations (version) VALUES ('20130402085345');
+
+INSERT INTO schema_migrations (version) VALUES ('20130402130115');
+
+INSERT INTO schema_migrations (version) VALUES ('20130402131727');
+
+INSERT INTO schema_migrations (version) VALUES ('20130402132017');
+
+INSERT INTO schema_migrations (version) VALUES ('20130402132742');
+
+INSERT INTO schema_migrations (version) VALUES ('20130402143606');
+
+INSERT INTO schema_migrations (version) VALUES ('20130402144113');

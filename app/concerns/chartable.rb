@@ -40,5 +40,4 @@ private
       "#{arr[0]}: #{arr[1]}"
     end
   end
-  end
 end
