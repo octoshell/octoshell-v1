@@ -306,6 +306,10 @@ class User < ActiveRecord::Base
       each { |r| user.send(r).without_state(:closed).each &:close! }
   end
   
+  def active_organizations
+    memberships.with_state(:active).map(&:organization).uniq.sort_by(&:name)
+  end
+  
 private
   
   def step_name(name)

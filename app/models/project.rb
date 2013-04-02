@@ -83,7 +83,7 @@ class Project < ActiveRecord::Base
   end
   
   def allowed_organizations
-    memberships = user.memberships.active.map(&:organization).uniq.sort_by(&:name)
+    user.active_organizations
   end
   
   def username=(username)
