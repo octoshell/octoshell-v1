@@ -25,17 +25,16 @@ private
   end
   
   def create_account_code_for_user
-    if user
-      conditions = { user_id: user_id, project_id: surety.project_id }
-      account = Account.where(conditions).first_or_create!
-      account.push
-    else
-      create_account_code! do |code|
-        code.email = email
-        code.project = surety.project
-        code.surety_member = self
-      end
-    end
+    # if user
+    #   conditions = { user_id: user_id, project_id: surety.project_id }
+    #   account = Account.where(conditions).first_or_create!
+    # else
+    #   create_account_code! do |code|
+    #     code.email = email
+    #     code.project = surety.project
+    #     code.surety_member = self
+    #   end
+    # end
     true
   end
 end

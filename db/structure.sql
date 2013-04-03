@@ -1363,8 +1363,7 @@ CREATE TABLE projects (
     organization_id integer,
     cluster_user_type character varying(255) DEFAULT 'account'::character varying,
     username character varying(255),
-    project_prefix_id integer,
-    maintain_requested_at timestamp without time zone
+    project_prefix_id integer
 );
 
 
@@ -1520,7 +1519,9 @@ CREATE TABLE requests (
     comment character varying(255),
     cluster_project_id integer,
     gpu_hours integer DEFAULT 0,
-    project_id integer
+    project_id integer,
+    cluster_id integer,
+    maintain_requested_at timestamp without time zone
 );
 
 
@@ -3798,6 +3799,13 @@ CREATE INDEX index_request_properties_on_request_id ON request_properties USING 
 
 
 --
+-- Name: index_requests_on_cluster_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_requests_on_cluster_id ON requests USING btree (cluster_id);
+
+
+--
 -- Name: index_requests_on_cluster_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4810,3 +4818,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130402132742');
 INSERT INTO schema_migrations (version) VALUES ('20130402143606');
 
 INSERT INTO schema_migrations (version) VALUES ('20130402144113');
+
+INSERT INTO schema_migrations (version) VALUES ('20130403094201');
+
+INSERT INTO schema_migrations (version) VALUES ('20130403104341');

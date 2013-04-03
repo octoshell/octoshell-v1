@@ -35,7 +35,6 @@ class User < ActiveRecord::Base
   validates_attachment :avatar, size: { in: 0..150.kilobytes }
   
   before_create :assign_token
-  after_create :create_relations
   after_create :create_additional_email
   after_create :setup_default_groups
   
@@ -318,12 +317,6 @@ private
   
   def assign_token
     self.token = Digest::SHA1.hexdigest(rand.to_s)
-  end
-  
-  def create_relations
-    Project.all.each do |project|
-      accounts.where(project_id: project.id).first_or_create!
-    end
   end
   
   def create_additional_email

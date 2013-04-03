@@ -48,14 +48,14 @@ group :test, :development do
   gem 'shoulda-matchers'
   gem 'launchy'
   gem 'guard-rspec'
-  gem 'guard-cucumber'
   gem 'database_cleaner'
   gem 'ci_reporter'
   gem 'lol_dba'
 end
 
 group :test do
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', require: false
+  gem 'guard-cucumber'
 end
 
 group :assets do

@@ -1,5 +1,48 @@
 # coding: utf-8
 FactoryGirl.define do
+  factory :surety do
+    boss_full_name 'Mr. Burns'
+    boss_position 'CEO'
+    project
+  end
+  
+  factory :surety_member do
+    surety
+    email { create(:user).email }
+  end
+  
+  factory :cluster do
+    name 'Cluster'
+    host '0.0.0.0'
+  end
+  
+  factory :request do
+    project
+    cluster { factory(:cluster) }
+    size 0
+    gpu_hours 0
+    cpu_hours 0
+    
+    factory :active_request do
+      after(:create) { |r| r.activate! }
+    end
+    
+    factory :declined_request do
+      after(:create) { |r| r.decline! }
+    end
+    
+    factory :closed_request do
+      after(:create) { |r| r.close! }
+    end
+    
+    factory :blocked_request do
+      after(:create) do |r|
+        r.activate!
+        r.block!
+      end
+    end
+  end
+  
   factory :project_card, class: 'Project::Card' do
     project
     name         'Проект'
@@ -51,28 +94,12 @@ FactoryGirl.define do
     research_areas        { [factory(:research_area)] }
     critical_technologies { [factory(:critical_technology)] }
     
-    factory :active_project do
-      after(:create) { |p| p.activate! }
-    end
-    
-    factory :blocked_project do
-      after(:create) do |p|
-        p.activate!
-        p.block!
-      end
-    end
-    
     factory :closing_project do
-      after(:create) do |p|
-        p.activate!
-        p.block!
-        p.close!
-      end
+      after(:create) { |p| p.close! }
     end
     
     factory :closed_project do
       after(:create) do |p|
-        p.activate!
         p.close!
         p.erase!
       end
@@ -110,8 +137,7 @@ FactoryGirl.define do
       Account.where(project_id: a.project_id, user_id: a.user_id).delete_all
     end
     
-    factory :active_account do
-      association(:project, factory: :active_project)
+    factory :allowed_account do
       after(:create) do |a|
         a.allow!
       end

@@ -23,7 +23,6 @@ class Account < ActiveRecord::Base
   state_machine :cluster_state, initial: :closed do
     state :active do
       validates :project_state_name, inclusion: { in: [:active] }
-      validates :access_state_name, inclusion: { in: [:allowed] }
     end
     state :blocked do
       validates :project_state_name, inclusion: { in: [:active, :blocked] }
@@ -45,9 +44,6 @@ class Account < ActiveRecord::Base
     event :close do
       transition [:active, :blocked] => :closed
     end
-    
-    inside_transition :on => [:block, :unblock, :activate],
-      &:touch_maintain_requested_at
   end
   
   state_machine :access_state, initial: :denied do
@@ -80,10 +76,6 @@ class Account < ActiveRecord::Base
 
   def link_name
     to_s
-  end
-  
-  def touch_maintain_requested_at
-    project.touch :maintain_requested_at
   end
   
 private
