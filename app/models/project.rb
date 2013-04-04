@@ -13,6 +13,7 @@ class Project < ActiveRecord::Base
   has_many :accounts, inverse_of: :project, autosave: true
   has_many :account_codes
   has_many :tickets
+  has_many :requests
   has_many :sureties, inverse_of: :project
   has_and_belongs_to_many :critical_technologies
   has_and_belongs_to_many :direction_of_sciences
@@ -44,8 +45,21 @@ class Project < ActiveRecord::Base
       transition :active => :closing
     end
     
+    event :resurrect do
+      transition :closing => :active
+    end
+    
     event :erase do
       transition :closing => :closed
+    end
+    
+    inside_transition :on => :close do |p|
+      p.requests.with_state(:active).each &:block!
+    end
+    
+    inside_transition :on => :erase do |p|
+      p.requests.with_state(:blocked).each &:close!
+      p.accounts.with_cluster_state(:blocked).each &:close!
     end
   end
   

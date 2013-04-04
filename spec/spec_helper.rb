@@ -11,7 +11,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 def factory(klass, options = {})
   @cache ||= {}
   factory = @cache[klass] ||= factory!(klass, options)
-  factory.dup
+  factory.clone
 end
 
 def factory!(klass, options = {})

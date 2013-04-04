@@ -15,6 +15,8 @@ class Credential < ActiveRecord::Base
   validates :public_key, uniqueness: { scope: [:state, :user_id] }, if: :active?
   validate :public_key_validator
   
+  after_create :maintain_requests!
+  
   state_machine initial: :active do
     state :active
     state :closed
@@ -22,6 +24,8 @@ class Credential < ActiveRecord::Base
     event :close do
       transition :active => :closed
     end
+    
+    inside_transition :on => :close, &:maintain_requests!
   end
   
   def assign_attributes(attributes, options = {})
@@ -40,6 +44,14 @@ class Credential < ActiveRecord::Base
   def public_key_validator
     if public_key =~ /private/i
       errors.add(:public_key, "Указан приватный ключ!")
+    end
+  end
+  
+  def maintain_requests!
+    user.accounts.without_cluster_state(:closed).each do |account|
+      account.project.requests.with_state(:active, :blocked).each do |r|
+        r.request_maintain!
+      end
     end
   end
 end

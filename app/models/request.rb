@@ -80,6 +80,10 @@ class Request < ActiveRecord::Base
     touch :maintain_requested_at
   end
   
+  def complete_maintain!
+    update_column :maintain_requested_at, nil
+  end
+  
 private
   
   def create_request_properties

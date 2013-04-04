@@ -1,5 +1,11 @@
 # coding: utf-8
 FactoryGirl.define do
+  factory :credential do
+    name 'my key'
+    user
+    public_key 'key---'
+  end
+  
   factory :surety do
     boss_full_name 'Mr. Burns'
     boss_position 'CEO'

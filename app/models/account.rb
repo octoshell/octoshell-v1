@@ -25,7 +25,7 @@ class Account < ActiveRecord::Base
       validates :project_state_name, inclusion: { in: [:active] }
     end
     state :blocked do
-      validates :project_state_name, inclusion: { in: [:active, :blocked] }
+      validates :project_state_name, inclusion: { in: [:active, :closing] }
     end
     state :closed
     
