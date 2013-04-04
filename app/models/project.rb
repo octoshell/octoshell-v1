@@ -32,7 +32,7 @@ class Project < ActiveRecord::Base
   
   after_create :assign_username
   
-  accepts_nested_attributes_for :sureties
+  accepts_nested_attributes_for :sureties, :card
   
   scope :finder, lambda { |q| where("lower(name) like :q", q: "%#{q.to_s.mb_chars.downcase}%") }
   

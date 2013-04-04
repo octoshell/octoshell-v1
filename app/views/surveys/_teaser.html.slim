@@ -33,7 +33,7 @@
             table class="table table-condensed"
               - reports.each do |report|
                 tr
-                  td class="span5" = report.project.name
+                  td class="span5" = report.project.title
                   td class="span2"
                     - if report.pending? || report.declined? || report.accepted?
                       span class="label label-important" = report.human_state_name

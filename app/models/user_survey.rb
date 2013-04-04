@@ -33,9 +33,9 @@ class UserSurvey < ActiveRecord::Base
     when personal? then
       I18n.t('user_survey.personal')
     when projects? then
-      I18n.t('user_survey.projects', name: project.name.truncate(10))
+      I18n.t('user_survey.projects', name: project.title.truncate(10))
     when counters? then
-      I18n.t('user_survey.counters', name: project.name.truncate(10))
+      I18n.t('user_survey.counters', name: project.title.truncate(10))
     end
   end
   

@@ -1,31 +1,47 @@
 = simple_form_for @project, html: { class: 'form-horizontal surety-form project' } do |f|
-  table
-    tr
-      td = f.input :name
-      td = f.input :en_name
-    tr
-      td = f.input :driver, input_html: { rows: 4 }
-      td = f.input :en_driver, input_html: { rows: 4 }
-    tr
-      td = f.input :strategy, input_html: { rows: 4 }
-      td = f.input :en_strategy, input_html: { rows: 4 }
-    tr
-      td = f.input :objective, input_html: { rows: 4 }
-      td = f.input :en_objective, input_html: { rows: 4 }
-    tr
-      td = f.input :impact, input_html: { rows: 4 }
-      td = f.input :en_impact, input_html: { rows: 4 }
-    tr
-      td = f.input :usage, input_html: { rows: 4 }
-      td = f.input :en_usage, input_html: { rows: 4 }
-  
-  = f.association :direction_of_sciences, as: :check_boxes, required: true
-  = f.association :critical_technologies, as: :check_boxes, required: true
-  = f.association :research_areas, as: :check_boxes, required: true
-  
+  = f.input :title
   = f.association :organization, collection: f.object.allowed_organizations, input_html: { class: 'chosen' }
   = f.association :organizations, input_html: { class: 'chosen' }, collection: Organization.order("name asc")
   = f.association :project_prefix, include_blank: true
+  
+  = f.simple_fields_for :card do |f|
+    legend Карточка
+    table
+      tr
+        td = f.input :name,         as: :text, input_html: { rows: 2 }, hint: 'Здесь следует ввести реальное название исследовательского проекта'
+        td = f.input :en_name,      as: :text, input_html: { rows: 2 }
+      tr
+        td = f.input :driver,       as: :text, input_html: { rows: 3 }, hint: 'Описание задачи, на решение которой направлен проект'
+        td = f.input :en_driver,    as: :text, input_html: { rows: 3 }
+      tr
+        td = f.input :strategy,     as: :text, input_html: { rows: 3 }, hint: 'Описание идеи подхода к решению задачи'
+        td = f.input :en_strategy,  as: :text, input_html: { rows: 3 }
+      tr
+        td = f.input :objective,    as: :text, input_html: { rows: 3 }, hint: 'Описание цели на которую нацелено решение конкретной задачи'
+        td = f.input :en_objective, as: :text, input_html: { rows: 3 }
+      tr
+        td = f.input :impact,       as: :text, input_html: { rows: 3 }, hint: 'Ожидаемый эффект от успешного решения задачи (научный / коммерческий / социальный)'
+        td = f.input :en_impact,    as: :text, input_html: { rows: 3 }
+      tr
+        td = f.input :usage,        as: :text, input_html: { rows: 3 }, hint: 'Отрасли промышленности, сектора экономики, области науки, где могут быть использованы результаты проекта'
+        td = f.input :en_usage,     as: :text, input_html: { rows: 3 }
+  
+  legend Категории
+  
+  = f.association :direction_of_sciences, as: :check_boxes, required: true
+  = f.association :critical_technologies, as: :check_boxes, required: true
+  div class="control-group"
+    label class="check_boxes required control-label"
+      abbr title="required" *
+      |  
+      = Project.human_attribute_name(:research_areas)
+    div class="controls"
+      - ResearchArea.all.group_by(&:group).each do |group, collection|
+        h6 = group
+        - collection.each do |area|
+          label class="checkbox"
+            = check_box_tag "project[research_area_ids][]", area.id, area.in?(@project.research_areas)
+            = area.name
   
   - if f.object.new_record? && !f.object.user.sured?
     legend = t('.surety', default: 'Surety')

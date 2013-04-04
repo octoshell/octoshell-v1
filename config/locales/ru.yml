@@ -606,6 +606,7 @@ ru:
       group:
         name: Название
       project:
+        title: Короткое название (для себя)
         organization: Главная организация
         organizations: Другие организации-участники
         name: Название
@@ -619,9 +620,23 @@ ru:
         created_at: Создан
         direction_of_sciences: Направления исследований
         direction_of_science_ids: Направления исследований
+        research_areas: Области науки
         critical_technologies: Критические технологии
         project_prefix: Префикс
         confirmation_code: Подтверждение
+      project/card:
+        name: Полное название
+        en_name: Full name
+        driver: Задача
+        en_driver: Driver
+        strategy: Стратегия
+        en_strategy: Strategy
+        objective: Цель
+        en_objective: Objective
+        impact: Эффект
+        en_impact: Impact
+        usage: Использование
+        en_usage: Usage
       organization_kind:
         name: Название
         state: Состояние

@@ -25,6 +25,7 @@ class ProjectsController < ApplicationController
   
   def new
     @project = current_user.owned_projects.build
+    @project.build_card
     @project.sureties.build do |surety|
       surety.surety_members.build do |member|
         member.email = current_user.email

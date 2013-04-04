@@ -108,8 +108,7 @@ class User < ActiveRecord::Base
     end
 
     def admin_notifications_count
-      [Task.failed, Ticket.active, Surety.pending, Request.pending].
-        sum_of_count
+      -1
     end
   end
   
@@ -263,7 +262,7 @@ class User < ActiveRecord::Base
   end
   
   def active_clusters
-    all_projects.active.map do |p|
+    all_projects.with_state(:active).map do |p|
       p.requests.map(&:cluster)
     end.flatten.uniq
   end
