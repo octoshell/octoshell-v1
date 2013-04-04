@@ -53,11 +53,6 @@ group :test, :development do
   gem 'lol_dba'
 end
 
-group :test do
-  gem 'cucumber-rails', require: false
-  gem 'guard-cucumber'
-end
-
 group :assets do
   gem 'less-rails'
   gem 'coffee-rails', '~> 3.2.1'
