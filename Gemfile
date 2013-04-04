@@ -35,6 +35,7 @@ gem 'poltergeist', github: 'brutuscat/poltergeist'
 gem 'therubyracer'
 gem 'breadcrumbs_on_rails'
 gem 'highcharts-rails'
+gem 'delayed_job_active_record'
 
 group :test, :development do
   gem "nyan-cat-formatter"
