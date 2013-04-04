@@ -190,9 +190,8 @@ class User < ActiveRecord::Base
   
   def project_steps
     steps = []
-    return steps if admin?
-    steps << step_name(:membership) unless memberships.active.exists?
-    steps << step_name(:credential) unless credentials.active.exists?
+    steps << step_name(:membership) unless memberships.with_state(:active).exists?
+    steps << step_name(:credential) unless credentials.with_state(:active).exists?
     steps
   end
   
@@ -224,7 +223,7 @@ class User < ActiveRecord::Base
   end
   
   def notifications_count
-    admin? ? admin_notifications_count : user_notifications_count
+    -1
   end
   
   def admin_notifications_count
@@ -232,7 +231,7 @@ class User < ActiveRecord::Base
   end
   
   def user_notifications_count
-    [sureties.pending, requests.pending, tickets.answered].sum_of_count
+    -1
   end
   
   def emails

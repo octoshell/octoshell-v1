@@ -122,6 +122,10 @@ FactoryGirl.define do
     password_confirmation '123456'
     activation_state 'active'
     
+    after(:create) do |u|
+      u.update_attribute :activation_state, 'active'
+    end
+    
     factory :sured_user do
       after(:create) do |u|
         memberships { create(:membership, user: u) }
