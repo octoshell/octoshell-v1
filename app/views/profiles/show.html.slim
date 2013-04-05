@@ -35,7 +35,7 @@ div class="well"
       - sureties.each do |surety|
         li
           | ##{surety.id} - 
-          = link_to surety.project.name, surety
+          = link_to surety.project.title, surety
           |  
           span class="label #{'label-success' if surety.active?}" = surety.human_state_name
   - else
@@ -46,7 +46,7 @@ p
   small = link_to t('.new_credential', default: 'New Public Key'), new_credential_path
 
 div class="well"
-  - credentials = @user.credentials.active
+  - credentials = @user.credentials.with_state(:active)
   - if credentials.any?
     ul class="unstyled"
       - credentials.each do |c|

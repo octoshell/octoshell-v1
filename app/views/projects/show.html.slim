@@ -1,117 +1,79 @@
-- title t('.title', default: "Project: %{name}", name: @project.name)
-
-p class="lead" = @project.description
-
-- if @project.invalid?
-  div class="alert alert-error"
-    | Проект содержит ошибки. 
-    = link_to 'Исправьте их', [:edit, @project]
-    |  перед совершением действий над проектом.
-    br
-    = @project.errors.full_messages.to_sentence
+- title @project.title
 
 div class="well"
   = link_to t('.edit', default: 'Edit'), edit_project_path(@project), class: 'btn'
-  
-  |  
-  - if @project.announced? || @project.active? || @project.blocked?
-    = link_to t('.new_request', default: 'New Request'), new_request_path(project_id: @project.id), class: "btn"
+  - if @project.can_close?
     |  
-  = link_to t('.invite', default: 'Invite'), [@project, :invite], class: 'btn'
-  - if @project.can_mark_to_close?
-    = " "
-    = link_to t('.close', default: 'Close'), project_close_path(@project), class: "btn btn-danger #{'disabled' if @project.invalid?}"
-  = " "
+    = link_to t('.close', default: 'Close'), project_close_path(@project), class: 'btn btn-danger'
 
-table class="table table-bordered"
-  tr
-    th class="span4" = Project.human_attribute_name(:user)
-    td = @project.user.full_name
-  tr
-    th = Project.human_attribute_name(:state)
-    td = @project.human_state_name
+legend Доступы к ресурсам
 
-- if @project.account_codes.any?
-  h3 = t('.invites', default: 'Invites')
-  table class="table table-bordered"
-    tr
-      th = AccountCode.human_attribute_name(:code)
-      th = AccountCode.human_attribute_name(:state)
-      th = AccountCode.human_attribute_name(:email)
-      th = User.model_name.human
-    - @project.account_codes.each do |account_code|
-      tr
-        td = account_code.code
-        td = account_code.human_state_name
-        td = account_code.obfuscated_email
-        td
-          - if account_code.user
-            = account_code.user.full_name
+div class="row"
+  div class="span6"
+    table class="table"
+      - Cluster.with_state(:active).order('name').each_with_index do |cluster, i|
+        - request = @project.requests.without_state(:closed).find_by_cluster_id(cluster.id)
+        tr class="#{'without-top-border' if i == 0} #{(request && request.active?) ? 'success' : 'warning'}"
+          - if request
+            = request.inspect
           - else
-            = t('.nothing', default: 'Nil')
+            td
+              | Не выделены ресурсы на кластер "#{cluster.name}". 
+              = button_tag 'Создать заявку', class: 'btn btn-success btn-mini pull-right inplace-new-request', data: { content: ".request-#{@project.id}-#{cluster.id}", title: 'Новая заявка' }, type: 'button'
+              
+              div class="request-#{@project.id}-#{cluster.id} hidden"
+                - request = Request.new { |r| r.project = @project; r.cluster = cluster }
+                = simple_form_for request, html: { style: 'margin-bottom: 0;' } do |f|
+                  = f.input :project_id, as: :hidden
+                  = f.input :cluster_id, as: :hidden
+                  = f.input :cpu_hours, input_html: { class: 'input-block-level' }
+                  = f.input :gpu_hours, input_html: { class: 'input-block-level' }
+                  = f.input :size, input_html: { class: 'input-block-level' }, hint: 'Более 50ти обговаривается отдельно'
+                  = f.button :submit, class: 'btn-success btn-block'
+                
 
-h3 Доступы
+legend Поручительства
 
-- accounts = @project.accounts.active
-- if accounts.any?
-  table class="table table-bordered"
+div class="row"
+  div class="span6"
+    table class="table"
+      - @project.sureties.without_state(:closed).each_with_index do |surety, i|
+        - state = { active: 'success', pending: 'warning', confirmed: 'warning', declined: 'error' }[surety.state_name]
+        tr class="#{'without-top-border' if i == 0} #{state}"
+          td class="span4" = link_to "Поручительство ##{surety.id}", surety
+          td
+            span class="label label-#{state}" = surety.human_state_name
+
+legend Участники проекта
+
+table class="table"
+  thead
     tr
-      th class="span1" #
-      th class="span5" = User.model_name.human
-      th = Account.human_attribute_name(:state)
-    - accounts.each do |account|
-      tr id="account-#{account.id}"
-        td = account.id
-        td = account.user.full_name
-        td
-          = account.human_state_name
-          - if account.active?
-            |  |  
-            = link_to t('.close', default: 'Закрыть'), [account, :cancel], class: 'btn btn-danger btn-mini', confirm: t('.confirm_close_account', default: 'Are you sure?'), method: :put
-- else
-  p = t('.no_accounts', default: 'There are no accounts')
-
-- if @project.sureties.any?
-  h3 = t('.sureties', default: 'Sureties')
-
-  - sureties = @project.sureties
-  - if sureties.any?
-    table class="table table-bordered"
-      tr
-        th = Organization.model_name.human
-        th = Surety.human_attribute_name(:state)
-        th
-      - sureties.each do |surety|
-        tr id="surety-#{surety.id}" class="js-surety-#{surety.id}"
-          td = surety.organization.name
-          td = surety.human_state_name
-          td = link_to surety.link_name, surety
-  - else
-    p = t('.no_sureties', default: 'There are no sureties')
-  
-h3 = t('.requests', default: 'Requests')
-
-- if @project.announced? || @project.active? || @project.blocked?
-  p = link_to t('.new_request', deafult: 'New Request'), new_request_path(project_id: @project.id)
-
-- requests = @project.requests
-- if requests.any?
-  table class="table table-bordered"
-    tr
-      th = Cluster.model_name.human
-      th = Request.human_attribute_name(:state)
-      th = Request.human_attribute_name(:created_at)
+      th Пользователь
+      th Логин
+      th Доступ на кластеры
+      th Доступ к проекту
       th
-    - requests.each do |request|
-      tr id="request-#{request.id}" class="js-request-#{request.id}"
-        td = request.cluster.name
-        td = request.human_state_name
-        td class="date" = request.created_at.strftime("%Y-%m-%d")
-        td = link_to t('.open'), request
-- else
-  p = t('.no_requests', default: 'There are no requests')
-
-h3 = t('.support', default: 'Support')
-
-= render partial: 'tickets/table', locals: { tickets: @project.tickets }
-
+  - @project.accounts.without_access_state(:denied).each_with_index do |account|
+    tr class="#{account.allowed? && account.active? ? 'success' : 'warning'}"
+      td class="span4" = account.user.full_name
+      td
+        code = account.username
+      td
+        - if account.closed?
+          span class="label label-important" = account.human_cluster_state_name
+          |  
+          small (Нет активной заявки)
+      td
+        - if account.pending?
+          span class="label label-warning"= account.human_access_state_name
+          |  
+          small (Нет активного поручительства)
+        - if account.allowed?
+          span class="label label-success"= account.human_access_state_name
+      td
+        strong = link_to '&times;'.html_safe, account, class: 'danger'
+  tfoot
+    tr
+      td colspan="5"
+        small = link_to 'Добавить участника'

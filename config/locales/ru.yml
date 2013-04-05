@@ -606,7 +606,7 @@ ru:
       group:
         name: Название
       project:
-        title: Короткое название (для себя)
+        title: Короткое название
         organization: Главная организация
         organizations: Другие организации-участники
         name: Название

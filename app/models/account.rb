@@ -46,16 +46,17 @@ class Account < ActiveRecord::Base
     end
   end
   
-  state_machine :access_state, initial: :denied do
+  state_machine :access_state, initial: :pending do
+    state :pending
     state :denied
     state :allowed
     
     event :allow do
-      transition :denied => :allowed
+      transition [:pending, :denied] => :allowed
     end
     
     event :deny do
-      transition :allowed => :denied
+      transition [:pending, :allowed] => :denied
     end
     
     inside_transition :on => :allow, &:activate

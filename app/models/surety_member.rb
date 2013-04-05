@@ -10,7 +10,8 @@ class SuretyMember < ActiveRecord::Base
   attr_accessible :full_name, :email
   
   before_create :assign_user
-  after_create :create_account_code_for_user
+  after_create :create_account_for_user, if: :user
+  after_create :create_account_code_for_user, unless: :user
   
   def email=(email)
     self[:email] = email.to_s.downcase
@@ -24,17 +25,16 @@ private
     true
   end
   
+  def create_account_for_user
+    conditions = { user_id: user_id, project_id: surety.project_id }
+    Account.where(conditions).first_or_create!
+  end
+  
   def create_account_code_for_user
-    # if user
-    #   conditions = { user_id: user_id, project_id: surety.project_id }
-    #   account = Account.where(conditions).first_or_create!
-    # else
-    #   create_account_code! do |code|
-    #     code.email = email
-    #     code.project = surety.project
-    #     code.surety_member = self
-    #   end
-    # end
-    true
+    create_account_code! do |code|
+      code.email = email
+      code.project = surety.project
+      code.surety_member = self
+    end
   end
 end

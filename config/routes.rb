@@ -61,15 +61,12 @@ MSU::Application.routes.draw do
   resources :project_joiners, only: [:new, :create], path: 'joins'
 
   # requests
-  resources :requests, only: [:new, :create, :index, :show] do
+  resources :requests, only: [:create, :index, :show] do
     put :close
   end
 
   # accounts
-  resources :accounts, only: [] do
-    put :cancel
-    resources :versions, only: [:index, :show], resource: 'Account'
-  end
+  resources :accounts, only: [:destroy]
 
   # clusters
   resources :clusters, only: :index

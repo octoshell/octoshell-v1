@@ -8,7 +8,7 @@ class Project::Card < ActiveRecord::Base
   EN_FIELDS = [:en_name, :en_driver, :en_strategy, :en_objective, :en_impact,
     :en_usage]
   
-  belongs_to :project
+  belongs_to :project, inverse_of: :card
   
   validates *(ALL_FIELDS + [:project]), presence: true
   validates *RU_FIELDS, format: { with: /[а-яё№\d[:space:][:punct:]\+]+/i, message: "Должно быть на русском" }

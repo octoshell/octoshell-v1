@@ -6,9 +6,9 @@ div class="well"
   = link_to t('.history'), [:admin, @user, :history], class: 'btn'
   = " "
   = link_to t('.versions'), [:admin, @user, :versions], class: 'btn'
-  - if @user.can__close?
+  - if @user.can_close?
     = " "
-    = link_to User.human_state_event_name(:_close), [:admin, @user, :close], class: 'btn btn-danger', method: :put, data: { confirm: t('.confirm_close') }
+    = link_to User.human_state_event_name(:close), [:admin, @user, :close], class: 'btn btn-danger', method: :put, data: { confirm: t('.confirm_close') }
 
 table class="table table-bordered"
   tr
@@ -84,12 +84,12 @@ h3 = t('.projects')
 = render partial: 'admin/projects/table', locals: { projects: @user.projects.where(accounts: { state: 'active' }) }
 
 h3 = t('.accounts')
-= render partial: 'admin/accounts/table', locals: { accounts: @user.accounts.non_closed }
+/ = render partial: 'admin/accounts/table', locals: { accounts: @user.accounts.without_state(:closed) }
 
 h3 = t('.requests')
-= render partial: 'admin/requests/table', locals: { requests: @user.requests }
+/ = render partial: 'admin/requests/table', locals: { requests: @user.requests }
 
 h3 = t('.credentials')
 
-= render partial: 'admin/credentials/table', locals: { credentials: @user.credentials.active }
+= render partial: 'admin/credentials/table', locals: { credentials: @user.credentials.with_state(:active) }
 p = link_to t('.all_credentials', count: @user.credentials.count), credentials_path(search: { state_in: Credential.state_names, user_id_eq: @user.id })

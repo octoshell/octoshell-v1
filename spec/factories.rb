@@ -1,5 +1,10 @@
 # coding: utf-8
 FactoryGirl.define do
+  factory :membership do
+    user
+    organization
+  end
+  
   factory :credential do
     name 'my key'
     user
@@ -79,16 +84,16 @@ FactoryGirl.define do
   end
   
   factory :direction_of_science do
-    name 'direction'
+    sequence(:name) { |n| "direction #{n}" }
   end
   
   factory :research_area do
-    name 'area'
+    sequence(:name) { |n| "area #{n}" }
     group 'all'
   end
   
   factory :critical_technology do
-    name 'technology'
+    sequence(:name) { |n| "technology #{n}" }
   end
   
   factory :project do
@@ -128,7 +133,7 @@ FactoryGirl.define do
     
     factory :sured_user do
       after(:create) do |u|
-        memberships { create(:membership, user: u) }
+        create(:membership, user: u)
         s = create(:surety)
         create(:surety_member, user: u, surety: s)
       end

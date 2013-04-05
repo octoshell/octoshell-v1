@@ -16,9 +16,9 @@ div class="link-actions noprint"
   = link_to 'Загрузить скан', [@surety, :scan], class: 'btn'
   |  
   = link_to t('.print_members_list', default: 'Print Members List'), '#', class: 'btn printable', data: { print: '#surety-members' }
-  - if @surety.can__close?
+  - if @surety.can_close?
     = " "
-    = link_to Surety.human_state_event_name(:_close), surety_close_path(@surety), class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
+    = link_to Surety.human_state_event_name(:close), surety_close_path(@surety), class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
 
 blockquote class="noprint"
   p

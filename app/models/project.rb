@@ -8,7 +8,7 @@ class Project < ActiveRecord::Base
   belongs_to :user
   belongs_to :organization
   belongs_to :project_prefix
-  has_one :card, class_name: :'Project::Card'
+  has_one :card, class_name: :'Project::Card', inverse_of: :project
   has_and_belongs_to_many :organizations
   has_many :accounts, inverse_of: :project, autosave: true
   has_many :account_codes
@@ -26,7 +26,7 @@ class Project < ActiveRecord::Base
   
   attr_accessible :organization_id, :sureties_attributes,
     :organization_ids, :direction_of_science_ids, :critical_technology_ids,
-    :project_prefix_id, :research_area_ids
+    :project_prefix_id, :research_area_ids, :title, :card_attributes
   
   attr_accessible :project_prefix_id, :username, as: :admin
   
@@ -93,7 +93,7 @@ class Project < ActiveRecord::Base
   end
 
   def link_name
-    name
+    title
   end
   
   def has_active_request?

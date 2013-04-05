@@ -10,7 +10,7 @@ module Models
         'boss_full_name'         => boss_full_name,
         'boss_position'          => boss_position,
         'members'                => surety_members.map(&:full_name),
-        'project_name'           => project.name,
+        'project_name'           => project.title,
         'direction_of_sciences'  => direction_of_sciences.map(&:name),
         'critical_technologies'  => critical_technologies.map(&:name),
         'project_description'    => project.description,

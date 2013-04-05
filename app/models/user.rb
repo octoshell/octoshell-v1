@@ -167,7 +167,10 @@ class User < ActiveRecord::Base
   end
   
   def all_projects
-    projects.where("accounts.state = 'active' or projects.user_id = ?", id)
+    condition = "(accounts.access_state = 'allow' and accounts.user_id = 
+      :id) or projects.user_id = :id"
+    Project.joins("left join accounts on accounts.project_id = projects.id").
+      where(condition, id: id).uniq
   end
   
   def managed_accounts
@@ -200,7 +203,7 @@ class User < ActiveRecord::Base
   end
   
   def revalidate!
-    if sureties.active.any? && memberships.active.any?
+    if sureties.with_state(:active).any? && memberships.with_state(:active).any?
       sured? || sure!
     else
       active? || unsure!

@@ -1549,12 +1549,12 @@ ALTER SEQUENCE request_properties_id_seq OWNED BY request_properties.id;
 
 CREATE TABLE requests (
     id integer NOT NULL,
-    cpu_hours integer,
+    cpu_hours integer DEFAULT 0,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     user_id integer,
     state character varying(255),
-    size integer,
+    size integer DEFAULT 0,
     comment character varying(255),
     cluster_project_id integer,
     gpu_hours integer DEFAULT 0,
@@ -4885,3 +4885,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130403094201');
 INSERT INTO schema_migrations (version) VALUES ('20130403104341');
 
 INSERT INTO schema_migrations (version) VALUES ('20130404092852');
+
+INSERT INTO schema_migrations (version) VALUES ('20130405095915');
+
+INSERT INTO schema_migrations (version) VALUES ('20130405100052');

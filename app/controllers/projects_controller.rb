@@ -38,7 +38,7 @@ class ProjectsController < ApplicationController
     @project = current_user.owned_projects.build(params[:project])
     if @project.save
       @project.user.track! :create_project, @project, current_user
-      redirect_to @project
+      redirect_to @project, notice: %(Проект "#{@project.title}" создан)
     else
       render :new
     end

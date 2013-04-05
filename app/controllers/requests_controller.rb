@@ -6,17 +6,25 @@ class RequestsController < ApplicationController
   end
   
   def new
-    @request = current_user.requests.build(project_id: params[:project_id])
-    @projects = @request.allowed_projects
+    @project = current_user.owned_projects.find(params[:project_id])
+    @cluster = Cluster.find(params[:cluster_id])
+    @request = current_user.requests.build do |request|
+      request.project = @project
+      request.cluster = @cluster
+    end
   end
   
   def create
-    @request = current_user.requests.build(params[:request])
+    @project = current_user.owned_projects.find(params[:project_id])
+    @cluster = Cluster.find(params[:cluster_id])
+    @request = current_user.requests.build(params[:request]) do |request|
+      request.project = @project
+      request.cluster = @cluster
+    end
     if @request.save
       @request.user.track! :create_request, @request, current_user
       redirect_to @request, notice: t('.request_created', default: 'Request successfuly created')
     else
-      @projects = @request.allowed_projects
       flash.now[:error] = t('.failed_create_request', default: "You can't create a new request until active one exists")
       render :new
     end
