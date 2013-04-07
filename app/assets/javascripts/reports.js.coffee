@@ -114,11 +114,11 @@ $ ->
       $.cookie cookie, '1', { expires: 7, path: '/' }
       $well.addClass klass
   
-  $('.inplace-new-request').each (i, link) ->
-    $link = $(link)
-    content = $($link.data('content')).html()
-    $link.popover(
-      content: content,
+  $('@popoverable').each (i, link) ->
+    $(link).popover(
+      content: ( ->
+        $($(@).data('content')).html()
+      ),
       html: true
     )
   

@@ -2,7 +2,7 @@
 class Request < ActiveRecord::Base
   include Models::Limitable
   
-  delegate :accounts, to: :project
+  delegate :accounts, :user, to: :project
   
   has_paper_trail
   

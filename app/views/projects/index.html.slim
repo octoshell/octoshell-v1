@@ -1,12 +1,23 @@
 - title t('.title')
 
+= safe_paginate @projects
+
 div class="well"
-  = link_to t('.new_project'), new_project_path, class: "btn"
+  = link_to 'Создать проект', new_project_path, class: 'btn btn-small btn-success'
   |  
-  = link_to t('.use_code'), new_project_joiner_path, class: 'btn'
+  = button_tag 'Ввести код приглашения', class: 'btn btn-small', role: 'popoverable', data: { content: ".join-project-form" }, type: 'button'
+
+div class="join-project-form hidden"
+  = simple_form_for @project_joiner, html: { style: 'margin-bottom: 0;' } do |f|
+    = f.input :code, autofocus: true, input_html: { class: 'input-block-level' }, label: 'Секретный код'
+    = f.button :submit, 'Отправить', class: 'btn-success btn-block'
+
+ul
+  - @projects.each do |project|
+    li class="lead"
+      = link_to project.title, project
+      |  
+      small class="muted" (##{project.id})
 
 = safe_paginate @projects
 
-= render partial: 'table', locals: { projects: @projects }
-
-= safe_paginate @projects

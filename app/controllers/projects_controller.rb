@@ -4,6 +4,8 @@ class ProjectsController < ApplicationController
   
   def index
     @projects = current_user.all_projects.reorder('projects.id desc')
+    @project_joiner = ProjectJoiner.new
+    @project_joiner.user_id = current_user.id
     respond_to do |format|
       format.html
       format.json do

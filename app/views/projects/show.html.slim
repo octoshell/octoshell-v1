@@ -14,13 +14,16 @@ div class="row"
       - Cluster.with_state(:active).order('name').each_with_index do |cluster, i|
         - request = @project.requests.without_state(:closed).find_by_cluster_id(cluster.id)
         tr class="#{'without-top-border' if i == 0} #{(request && request.active?) ? 'success' : 'warning'}"
-          - if request
-            = request.inspect
-          - else
-            td
+          td
+            - if request
+              | Кластер "#{cluster.name}": 
+              = link_to "Заявка ##{request.id}", request
+              |  
+              small class="muted" (#{request.human_state_name})
+            - else
               | Не выделены ресурсы на кластер "#{cluster.name}". 
-              = button_tag 'Создать заявку', class: 'btn btn-success btn-mini pull-right inplace-new-request', data: { content: ".request-#{@project.id}-#{cluster.id}", title: 'Новая заявка' }, type: 'button'
-              
+              = button_tag 'Создать заявку', class: 'btn btn-success btn-mini pull-right inplace-new-request', data: { content: ".request-#{@project.id}-#{cluster.id}", title: 'Новая заявка' }, type: 'button', role: 'popoverable'
+            
               div class="request-#{@project.id}-#{cluster.id} hidden"
                 - request = Request.new { |r| r.project = @project; r.cluster = cluster }
                 = simple_form_for request, html: { style: 'margin-bottom: 0;' } do |f|
@@ -60,6 +63,10 @@ table class="table"
       td
         code = account.username
       td
+        - if account.active?
+          span class="label label-success" = account.human_cluster_state_name
+        - if account.blocked?
+          span class="label" = account.human_cluster_state_name
         - if account.closed?
           span class="label label-important" = account.human_cluster_state_name
           |  

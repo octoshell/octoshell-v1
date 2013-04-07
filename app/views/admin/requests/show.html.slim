@@ -3,14 +3,14 @@
 div class="well"
   = link_to 'Редактировать', [:edit, :admin, @request], class: 'btn'
   = " "
-  - if @request.can__activate?
-    = link_to Request.human_state_event_name(:_activate), admin_request_activate_path(@request), class: 'btn btn-success', method: :put
+  - if @request.can_activate?
+    = link_to Request.human_state_event_name(:activate), admin_request_activate_path(@request), class: 'btn btn-success', method: :put
     = " "
-  - if @request.can__decline?
-    = link_to Request.human_state_event_name(:_decline), admin_request_decline_path(@request), class: 'btn', method: :put
-  - if @request.can__close?
+  - if @request.can_decline?
+    = link_to Request.human_state_event_name(:decline), admin_request_decline_path(@request), class: 'btn', method: :put
+  - if @request.can_close?
     = " "
-    = link_to Request.human_state_event_name(:_close), admin_request_close_path(@request), class: 'btn btn-danger', method: :put
+    = link_to Request.human_state_event_name(:close), admin_request_close_path(@request), class: 'btn btn-danger', method: :put
   = " "
   = link_to 'Версии', [:admin, @request, :versions], class: 'btn'
 
@@ -53,7 +53,7 @@ div class="request"
             td = smart_link_to @request.project.organization
           tr
             th Пользователей
-            td = @request.project.organization.memberships.active.count
+            td = @request.project.organization.memberships.with_state(:active).count
           tr
             th Проектов
             td = @request.project.organization.projects.count
@@ -78,7 +78,7 @@ div class="request"
         td = request_property.value
 
 
-- @request.project.sureties.active.each do |surety|
+- @request.project.sureties.with_state(:active).each do |surety|
   h4 Поручительство ##{surety.id}
 
   table class="table table-bordered table-condensed"

@@ -3,8 +3,8 @@
 div class="well"
   = link_to 'Редактировать', [:edit, :admin, @ticket_tag], class: 'btn'
   = " "
-  - if @ticket_tag.can__close?
-    = link_to TicketTag.human_state_event_name(:_close), [:admin, @ticket_tag, :close], method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
+  - if @ticket_tag.can_close?
+    = link_to TicketTag.human_state_event_name(:close), [:admin, @ticket_tag, :close], method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
     = " "
   = link_to 'Версии', [:admin, @ticket_tag, :versions], class: 'btn'
 

@@ -8,32 +8,32 @@ table class="table table-bordered noprint"
     th = User.model_name.human
     td
       = smart_link_to @surety.user
-      = render partial: 'admin/memberships/summary', locals: { memberships: @surety.user.memberships.active }
+      = render partial: 'admin/memberships/summary', locals: { memberships: @surety.user.memberships.with_state(:active) }
   tr
     th = Surety.human_attribute_name(:state)
     td id="surety-#{@surety.id}-status" = @surety.human_state_name
 
 div class="link-actions noprint"
   = link_to 'Версии', [:admin, @surety, :versions], class: 'btn'
-  - if @surety.can__activate?
+  - if @surety.can_activate?
     = " "
-    = link_to Surety.human_state_event_name(:_activate), admin_surety_activate_path(@surety), class: 'btn btn-success', method: :put
+    = link_to Surety.human_state_event_name(:activate), admin_surety_activate_path(@surety), class: 'btn btn-success', method: :put
   
-  - if @surety.can__decline?
+  - if @surety.can_decline?
     = " "
-    = link_to Surety.human_state_event_name(:_decline), admin_surety_decline_path(@surety), class: 'btn', method: :put
+    = link_to Surety.human_state_event_name(:decline), admin_surety_decline_path(@surety), class: 'btn', method: :put
     
-  - if @surety.can__confirm?
+  - if @surety.can_confirm?
     = " "
-    = link_to Surety.human_state_event_name(:_confirm), admin_surety_confirm_path(@surety), class: 'btn', method: :put
+    = link_to Surety.human_state_event_name(:confirm), admin_surety_confirm_path(@surety), class: 'btn', method: :put
   
-  - if @surety.can__unconfirm?
+  - if @surety.can_unconfirm?
     = " "
-    = link_to Surety.human_state_event_name(:_unconfirm), admin_surety_unconfirm_path(@surety), class: 'btn', method: :put
+    = link_to Surety.human_state_event_name(:unconfirm), admin_surety_unconfirm_path(@surety), class: 'btn', method: :put
     
-  - if @surety.can__close?
+  - if @surety.can_close?
     = " "
-    = link_to Surety.human_state_event_name(:_close), admin_surety_close_path(@surety), class: 'btn btn-danger', method: :put, data: { confirm: t('.confirm_close', default: 'Are you sure?') }
+    = link_to Surety.human_state_event_name(:close), admin_surety_close_path(@surety), class: 'btn btn-danger', method: :put, data: { confirm: t('.confirm_close', default: 'Are you sure?') }
 
 blockquote class="noprint"
   p

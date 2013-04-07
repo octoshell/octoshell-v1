@@ -1,8 +1,8 @@
 - title t('.title', default: "Request #%{id}", id: @request.id)
 
 div class="well"
-  - if @request.can__close?
-    = link_to Request.human_state_event_name(:_close), request_close_path(@request), class: 'btn btn-danger', method: :put
+  - if @request.can_close?
+    = link_to Request.human_state_event_name(:close), request_close_path(@request), class: 'btn btn-danger', method: :put
 
 div class="request"
   table class="table table-bordered"

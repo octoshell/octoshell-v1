@@ -6,9 +6,9 @@ div class="well"
   = link_to 'Подразделения', [:admin, @organization, :subdivisions], class: 'btn'
   = ' '
   = link_to 'Версии', [:admin, @organization, :versions], class: 'btn'
-  - if @organization.can__close?
+  - if @organization.can_close?
     = ' '
-    = link_to Organization.human_state_event_name(:_close), [:admin, @organization, :close], class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
+    = link_to Organization.human_state_event_name(:close), [:admin, @organization, :close], class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
 
 table class="table table-bordered"
   tr

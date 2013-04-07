@@ -10,9 +10,9 @@ table class="table table-bordered" id="cluster-#{@cluster.id}-detail"
 
 div class="well"
   = link_to 'Редактировать', edit_admin_cluster_path(@cluster), class: 'btn'
-  - if @cluster.can__close?
+  - if @cluster.can_close?
     = " "
-    = link_to Cluster.human_state_event_name(:_close), [:admin, @cluster], method: :put, data: { confirm: 'Вы действительно хотите закрыть кластер? Все заявки автоматически отменятся.' }, class: 'btn btn-danger'
+    = link_to Cluster.human_state_event_name(:close), [:admin, @cluster], method: :put, data: { confirm: 'Вы действительно хотите закрыть кластер? Все заявки автоматически отменятся.' }, class: 'btn btn-danger'
   = " "
   = link_to 'Версии', [:admin, @cluster, :versions], class: 'btn'
 

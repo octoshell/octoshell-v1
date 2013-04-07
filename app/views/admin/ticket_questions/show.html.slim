@@ -7,9 +7,9 @@ div class="well"
   = link_to 'Редактировать', edit_admin_ticket_question_path(@ticket_question), class: 'btn'
   = " "
   = link_to 'Новый вопрос', new_admin_ticket_question_path(ticket_question: { ticket_question_id: @ticket_question.id }), class: 'btn'
-  - if @ticket_question.can__close?
+  - if @ticket_question.can_close?
     = " "
-    = link_to TicketQuestion.human_state_event_name(:_close), [:admin, @ticket_question, :close], method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
+    = link_to TicketQuestion.human_state_event_name(:close), [:admin, @ticket_question, :close], method: :put, class: 'btn btn-danger', data: { confirm: 'Вы уверены?' }
   = " "
   = link_to 'Версии', [:admin, @ticket_question, :versions], class: 'btn'
 

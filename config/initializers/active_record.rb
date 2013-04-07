@@ -17,7 +17,7 @@ module ActiveRecord
       
       def define_safe_state_event_method(event)
         define_method event do
-          return false unless send("can__#{event}?")
+          return false unless send("can_#{event}?")
           send "#{event}!"
         end
       end

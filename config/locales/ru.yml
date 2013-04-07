@@ -898,16 +898,16 @@ ru:
           _decline: Отказать
           _close: Закрыть
       account:
-        state:
+        access_state:
           states:
-            pending: Ожидает подтверждения
+            pending: Запрещен
+            denied: Запрещен
+            allowed: Разрешен
+        cluster_state:
+          states:
+            active: Открыт
+            blocked: Заблокирован
             closed: Закрыт
-            active: Активен
-          events:
-            _activate: Активировать
-            _decline: Отказать
-            _cancel: Закрыть
-            _close: Закрыть
       account_code:
         state:
           states:
