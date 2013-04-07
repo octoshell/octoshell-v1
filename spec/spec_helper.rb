@@ -4,6 +4,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/poltergeist'
+require 'nc' if RUBY_PLATFORM =~ /darwin/
 
 Capybara.javascript_driver = :poltergeist
 
