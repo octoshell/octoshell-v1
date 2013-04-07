@@ -44,7 +44,7 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'rspec-rails'
-  gem 'rspec-nc'
+  gem 'rspec-nc' if RUBY_PLATFORM =~ /darwin/
   gem 'shoulda-matchers'
   gem 'launchy'
   gem 'guard-rspec'
