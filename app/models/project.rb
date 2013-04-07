@@ -31,6 +31,7 @@ class Project < ActiveRecord::Base
   attr_accessible :project_prefix_id, :username, as: :admin
   
   after_create :assign_username
+  after_create :create_account_for_owner
   
   accepts_nested_attributes_for :sureties, :card
   
@@ -115,6 +116,13 @@ private
   def assign_username
     name = username? ? username : "project_#{id}"
     update_attribute :username, name
+    true
+  end
+  
+  def create_account_for_owner
+    conditions = { project_id: id, user_id: user_id }
+    account = Account.where(conditions).first_or_create!
+    account.allow! unless account.allowed?
     true
   end
 end
