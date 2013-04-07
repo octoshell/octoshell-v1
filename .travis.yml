@@ -1,3 +1,5 @@
+env:
+  - I_AM_ON_CI=1
 rvm: 
   - 2.0.0
 before_script: 
