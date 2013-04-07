@@ -44,7 +44,6 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'rspec-rails'
-  gem 'rspec-nc', require: false
   gem 'shoulda-matchers'
   gem 'launchy'
   gem 'guard-rspec'
