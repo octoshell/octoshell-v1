@@ -1778,7 +1778,10 @@ CREATE TABLE surety_members (
     user_id integer,
     email character varying(255),
     full_name character varying(255),
-    account_code_id integer
+    account_code_id integer,
+    first_name character varying(255),
+    last_name character varying(255),
+    middle_name character varying(255)
 );
 
 
@@ -4889,3 +4892,9 @@ INSERT INTO schema_migrations (version) VALUES ('20130404092852');
 INSERT INTO schema_migrations (version) VALUES ('20130405095915');
 
 INSERT INTO schema_migrations (version) VALUES ('20130405100052');
+
+INSERT INTO schema_migrations (version) VALUES ('20130408162625');
+
+INSERT INTO schema_migrations (version) VALUES ('20130408162636');
+
+INSERT INTO schema_migrations (version) VALUES ('20130408162647');

@@ -123,50 +123,62 @@ $ ->
     )
   
   
-  $('@super-typeahead').each (i, html) ->
+  $('@add-member-to-project').on 'click', ->
+    $('@add-project-members').removeClass('hidden')
+    $(@).addClass('hidden')
+    false
+  
+  $('@project-members-collapse').on 'click', ->
+    $('@add-project-members').addClass('hidden')
+    $('@add-member-to-project').removeClass('hidden')
+    false
+  
+  $('@project-members-controller').each (i, html) ->
     $input = $(html)
     url = $input.data('entity-source')
     
     db = {}
+    n = 0
+    
     $template = _.template('
       <tr>
         <td>
           <% if (state == "sured") { %>
-            ✓
+            <abbr title="Есть поручительство" class="text-success">✓</abbr>
           <% } else { %>
-            _
+            <abbr title="Нет поручительства">_</abbr>
           <% } %>
           </td>
         <td>
-          <input type="hidden" value="<%= id %>">
+          <input name="members[<%= n %>][user_id]" type="hidden" value="<%= id %>">
           <% if (id) { %>
             <span class="input-block-level uneditable-input"><%= last_name %></span>
           <% } else { %>
-            <input class="input-block-level" type="text" value="<%= last_name %>">
+            <input name="members[<%= n %>][last_name]" class="input-block-level" type="text" value="<%= last_name %>">
           <% } %>
         </td>
         <td>
           <% if (id) { %>
             <span class="input-block-level uneditable-input"><%= first_name %></span>
           <% } else { %>
-            <input class="input-block-level" type="text" value="" autofocus="true">
+            <input name="members[<%= n %>][first_name]" class="input-block-level" type="text" value="" autofocus="true">
           <% } %>
         </td>
         <td>
           <% if (id) { %>
             <span class="input-block-level uneditable-input"><%= middle_name %></span>
           <% } else { %>
-            <input class="input-block-level" type="text" value="">
+            <input name="members[<%= n %>][middle_name]" class="input-block-level" type="text" value="">
           <% } %>
         </td>
         <td>
           <% if (id) { %>
             <span class="input-block-level uneditable-input"><%= email %></span>
           <% } else { %>
-            <input class="input-block-level" type="text" value="">
+            <input name="members[<%= n %>][email]" class="input-block-level" type="text" value="">
           <% } %>
         </td>
-        <td><a style="vertical-align: middle; font-weight: bold;" class="danger" role="remove-member" href="#">&times;</a></td>
+        <td><big><a style="vertical-align: middle; font-weight: bold;" class="danger" role="remove-member" href="#">&times;</a></big></td>
       </tr>')
     $members = $('@project-members')
     
@@ -191,19 +203,23 @@ $ ->
     
     $input.on 'change', (e) ->
       last_name = @.value
+      id = ''
       if record = db[last_name]
         last_name = record.last_name
+        id = record.id
       else
         record =  {}
       $members.removeClass('hidden')
       $members.append $template(
-        id: record.id
+        id: id
         last_name: last_name
         first_name: record.first_name
         middle_name: record.middle_name
         email: record.email
         state: record.state
+        n: n
       )
+      n = n + 1
       
       $input.val('')
       

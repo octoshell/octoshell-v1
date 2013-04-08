@@ -4,24 +4,20 @@ class SuretyMember < ActiveRecord::Base
   belongs_to :user, inverse_of: :surety_members
   belongs_to :account_code, inverse_of: :surety_member
   
-  validates :surety, :email, :full_name, presence: true
-  validates :email, email_format: { message: 'имеет не верный формат' }
+  validates :surety, :email, :full_name, presence: true, unless: :user
+  validates :email, email_format: { message: 'имеет не верный формат' }, unless: :user
   
-  attr_accessible :full_name, :email
-  
-  before_create :assign_user
+  before_create :refill_from_user, if: :user
   after_create :create_account_for_user, if: :user
   after_create :create_account_code_for_user, unless: :user
   
-  def email=(email)
-    self[:email] = email.to_s.downcase
-    self.full_name ||= User.find_by_email(email).try(:full_name)
-  end
-  
 private
   
-  def assign_user
-    self.user ||= User.find_by_email(email)
+  def refill_from_user
+    self.last_name   = user.last_name
+    self.first_name  = user.first_name
+    self.middle_name = user.middle_name
+    self.email       = user.email
     true
   end
   

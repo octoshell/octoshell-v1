@@ -46,6 +46,16 @@ class ProjectsController < ApplicationController
     end
   end
   
+  def members
+    @project = current_user.owned_projects.find(params[:project_id])
+    @inviter = ProjectInviter.new(@project, params[:members])
+    if @inviter.invite
+      redirect_to @project, notice: 'Участники добавлены'
+    else
+      redirect_to @project, alert: 'Не верно заполнены поля'
+    end
+  end
+  
   def edit
     @project = find_project(params[:id])
   end

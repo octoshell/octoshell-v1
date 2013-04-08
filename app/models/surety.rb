@@ -14,7 +14,7 @@ class Surety < ActiveRecord::Base
   has_many :tickets
   has_many :surety_members, inverse_of: :surety
   
-  validates :boss_full_name, :boss_position, :project, presence: true
+  validates :project, presence: true
   validates :cpu_hours, :gpu_hours, :size, numericality: { greater_than_or_equal_to: 0 }
   
   attr_accessible :boss_full_name, :boss_position, :surety_members_attributes,

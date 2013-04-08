@@ -49,6 +49,7 @@ MSU::Application.routes.draw do
 
   # projects
   resources :projects, only: [:index, :new, :create, :show, :edit, :update] do
+    post :members
     get :invite
     post :sureties
     post :accounts

@@ -84,23 +84,41 @@ table class="table"
   tfoot
     tr
       td colspan="5"
-        h6 = link_to 'Добавить участников', '#', role: 'add-member-to-project'
-        div role="add-project-members"
+        small = link_to 'Добавить участников', '#', role: 'add-member-to-project'
+        div role="add-project-members" class="hidden"
           h6
             | Добавление участников 
             small
               | (
-              = link_to 'Отменить', '#'
+              = link_to 'Отменить', '#', role: 'project-members-collapse'
               | )
           div class="clearfix"
-          input type="text" autofocus="true" role="super-typeahead" data-entity-source="/users.json" placeholder="Введите фамилию"
-  
-          table class="table table-condensed hidden" role="project-members"
-            thead
-              tr
-                th
-                  abbr title="Поручительство" ✓
-                th Фамилия
-                th Имя
-                th Отчество
-                th Email
+          input type="text" autofocus="true" role="project-members-controller" data-entity-source="/users.json" placeholder="Введите фамилию"
+          
+          = form_tag project_members_path(@project) do
+            table class="table table-condensed hidden" role="project-members"
+              thead
+                tr
+                  th
+                    abbr title="Поручительство" ✓
+                  th
+                    | Фамилия 
+                    abbr title="Обязательно для заполнения" *
+                  th
+                    | Имя 
+                    abbr title="Обязательно для заполнения" *
+                  th
+                    | Отчество 
+                    abbr title="Обязательно для заполнения" *
+                  th
+                    | Email 
+                    abbr title="Обязательно для заполнения" *
+              tfoot
+                tr
+                  td colspan="5"
+                    p 
+                      em
+                        | Для участников без поручительств создастся новое поручительство от 
+                        strong #{@project.organization.name}
+                    = submit_tag 'Добавить участников', class: 'btn btn-small btn-success'
+          
