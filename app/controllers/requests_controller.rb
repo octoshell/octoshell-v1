@@ -1,3 +1,4 @@
+# coding: utf-8
 class RequestsController < ApplicationController
   before_filter :require_login
   
@@ -9,7 +10,7 @@ class RequestsController < ApplicationController
     @request = current_user.requests.build(params[:request])
     if @request.save
       @request.project.user.track! :create_request, @request, current_user
-      redirect_to @request.project, notice: t('.request_created', default: 'Request successfuly created')
+      redirect_to @request.project, notice: 'Заявка создана'
     else
       redirect_to @request.project, alert: @request.errors.full_messages.to_sentence
     end

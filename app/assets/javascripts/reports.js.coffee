@@ -122,3 +122,89 @@ $ ->
       html: true
     )
   
+  
+  $('@super-typeahead').each (i, html) ->
+    $input = $(html)
+    url = $input.data('entity-source')
+    
+    db = {}
+    $template = _.template('
+      <tr>
+        <td>
+          <% if (state == "sured") { %>
+            ✓
+          <% } else { %>
+            _
+          <% } %>
+          </td>
+        <td>
+          <input type="hidden" value="<%= id %>">
+          <% if (id) { %>
+            <span class="input-block-level uneditable-input"><%= last_name %></span>
+          <% } else { %>
+            <input class="input-block-level" type="text" value="<%= last_name %>">
+          <% } %>
+        </td>
+        <td>
+          <% if (id) { %>
+            <span class="input-block-level uneditable-input"><%= first_name %></span>
+          <% } else { %>
+            <input class="input-block-level" type="text" value="" autofocus="true">
+          <% } %>
+        </td>
+        <td>
+          <% if (id) { %>
+            <span class="input-block-level uneditable-input"><%= middle_name %></span>
+          <% } else { %>
+            <input class="input-block-level" type="text" value="">
+          <% } %>
+        </td>
+        <td>
+          <% if (id) { %>
+            <span class="input-block-level uneditable-input"><%= email %></span>
+          <% } else { %>
+            <input class="input-block-level" type="text" value="">
+          <% } %>
+        </td>
+        <td><a style="vertical-align: middle; font-weight: bold;" class="danger" role="remove-member" href="#">&times;</a></td>
+      </tr>')
+    $members = $('@project-members')
+    
+    $members.on 'click @remove-member', (e) ->
+      $link = $(e.target)
+      if $link.is('@remove-member')
+        table = $link.parents('table:first')
+        $link.parents('tr:first').remove()
+        if $('td', table).length == 0
+          table.addClass('hidden')
+        false
+    
+    $input.typeahead
+      minLength: 1,
+      source: (query, process) ->
+        $.getJSON url, { q: query }, (data) ->
+          process(
+            data.records.map (r) ->
+              db[r.text] = r
+              r.text
+          )
+    
+    $input.on 'change', (e) ->
+      last_name = @.value
+      if record = db[last_name]
+        last_name = record.last_name
+      else
+        record =  {}
+      $members.removeClass('hidden')
+      $members.append $template(
+        id: record.id
+        last_name: last_name
+        first_name: record.first_name
+        middle_name: record.middle_name
+        email: record.email
+        state: record.state
+      )
+      
+      $input.val('')
+      
+  

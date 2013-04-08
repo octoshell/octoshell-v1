@@ -79,8 +79,28 @@ table class="table"
         - if account.allowed?
           span class="label label-success"= account.human_access_state_name
       td
-        strong = link_to '&times;'.html_safe, account, class: 'danger'
+        - unless account.user == @project.user
+          strong = link_to '&times;'.html_safe, account, class: 'danger'
   tfoot
     tr
       td colspan="5"
-        small = link_to 'Добавить участника'
+        h6 = link_to 'Добавить участников', '#', role: 'add-member-to-project'
+        div role="add-project-members"
+          h6
+            | Добавление участников 
+            small
+              | (
+              = link_to 'Отменить', '#'
+              | )
+          div class="clearfix"
+          input type="text" autofocus="true" role="super-typeahead" data-entity-source="/users.json" placeholder="Введите фамилию"
+  
+          table class="table table-condensed hidden" role="project-members"
+            thead
+              tr
+                th
+                  abbr title="Поручительство" ✓
+                th Фамилия
+                th Имя
+                th Отчество
+                th Email

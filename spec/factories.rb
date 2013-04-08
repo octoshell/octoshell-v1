@@ -118,10 +118,12 @@ FactoryGirl.define do
   end
   
   factory :user do
-    first_name 'Richard'
+    sequence(:first_name) do |n|
+      name = %w(Homer Marge Bart Lisa Meggy Abraham)[n.pred] || "Name_#{n}"
+    end
+    last_name 'Simpson'
     middle_name '-'
     phone '12345'
-    sequence(:last_name) { |n| "Nixon #{n}" }
     sequence(:email) { |n| "user_#{n}@example.com" }
     password '123456'
     password_confirmation '123456'

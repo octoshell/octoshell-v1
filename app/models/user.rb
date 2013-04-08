@@ -186,7 +186,7 @@ class User < ActiveRecord::Base
   end
   
   def full_name
-    [first_name, middle_name, last_name].find_all do |i|
+    [last_name, middle_name, first_name].find_all do |i|
       i.present? && i != '-'
     end.join(' ')
   end
@@ -257,7 +257,13 @@ class User < ActiveRecord::Base
   
   def as_json(options)
     if options[:for] == :ajax
-      { id: id, text: "#{full_name} #{email}" }
+      { id: id,
+        text: "#{full_name} #{email}",
+        email: email,
+        first_name: first_name,
+        last_name: last_name,
+        middle_name: middle_name,
+        state: state_name }
     else
       super(options)
     end
