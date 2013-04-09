@@ -198,18 +198,6 @@ class User < ActiveRecord::Base
     emails.flatten.compact.uniq
   end
   
-  def avatar_url
-    if avatar?
-      avatar.url
-    else
-      host = Rails.application.config.action_mailer.default_url_options[:host]
-      Gravatar.new(email).image_url + '?' + {
-        s: '116',
-        d: "http://#{host}/assets/default_avatar.png"
-      }.to_param
-    end
-  end
-  
   def as_json(options)
     if options[:for] == :ajax
       { id: id,

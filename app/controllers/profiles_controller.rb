@@ -3,6 +3,7 @@ class ProfilesController < ApplicationController
   
   def show
     @user = find_user
+    @user.extend(Avatarable)
   end
   
   def edit
