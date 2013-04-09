@@ -174,4 +174,9 @@ module ApplicationHelper
   def copy_combo
     user_agent.platform == 'Macintosh' ? "⌘+C" : "^+C"
   end
+  
+  def render_status_icon(bool)
+    klass = bool ? 'ok' : 'ban-circle'
+    %(<i class="icon-#{klass} status-icon"></i> ).html_safe
+  end
 end
