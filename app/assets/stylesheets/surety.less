@@ -46,12 +46,17 @@ div.avatar {
 
 
 #surety {
-	width: 600px;
-	.right {
-  	text-align: right;
+  margin: 40px;
+  width: 600px;
+  padding: 30px;
+  box-shadow: 0 0 10px #eee;
+  position: relative;
+  
+  .right {
+    text-align: right;
   }
   .center {
-  	text-align: center;
+    text-align: center;
   }
   
   > div {
@@ -85,6 +90,14 @@ div.avatar {
     right: 0;
     text-align: center;
     padding-top: 1em;
+  }
+  
+  .surety-print {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    padding: 0;
+    font-size: 72px;
   }
 }
 
@@ -434,4 +447,74 @@ small .label, .badge {
 
 .center {
   text-align: center !important;
+}
+
+a.printable:not(.btn) {
+  border-bottom: 1px dashed;
+  
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.deliver-surety {
+  font-size: 18px;
+  line-height: 35px;
+  
+  .step {
+    margin-bottom: 5px;
+  }
+  
+  .step-content {
+    margin-left: 38px;
+  }
+  
+  i {
+    font-size: 26px;
+    line-height: 35px;
+    float: left;
+    position: relative;
+    top: 2px;
+  }
+}
+
+.filling-surety {
+  padding-left: 15px;
+  border-left: 5px solid #eee;
+  
+  label {
+    font-size: 13px;
+    margin-bottom: 0;
+  }
+  
+  h4 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  input.string {
+    font-size: 12px;
+    padding: 2px 3px;
+  }
+  input.string, select {
+    margin-bottom: 0;
+  }
+  
+  h5 {
+    margin-bottom: 0px;
+  }
+  
+  ul {
+    margin: 0 0 10px 10px;
+  }
+  
+  li {
+    font-size: 13px;
+    list-style: none;
+    
+    &:before {
+      content: '–';
+      margin-right: 5px;
+    }
+  }
 }

@@ -43,30 +43,5 @@
           label class="checkbox"
             = check_box_tag "project[research_area_ids][]", area.id, area.in?(@project.research_areas)
             = area.name
-  
-  - if f.object.new_record? && !f.object.user.sured?
-    legend = t('.surety', default: 'Surety')
-    = f.simple_fields_for :sureties do |f|
-      = f.input :boss_full_name
-      = f.input :boss_position
-      = f.input :cpu_hours
-      = f.input :gpu_hours
-      = f.input :size
-      legend = t('.members', default: 'Members')
-      div class="members"
-        = f.simple_fields_for :surety_members do |f|
-          div class="control-group members-form #{'error' if f.object.errors.any?}"
-            label class="control-label"
-              = t('.user', default: 'User')
-            div class="controls"
-              = f.text_field :email, placeholder: 'user@example.com', class: 'email', id: nil
-              |  
-              = f.text_field :full_name, placeholder: 'Иванов Иван Иванович', class: 'full-name', id: nil
-              |  
-              = link_to '✗', '#', class: 'remove-member danger'
-              - if f.object.errors.any?
-                p class="help-inline" = f.object.errors.full_messages.join(', ')
-      div class="controls"
-        p = link_to t('.add_member'), "#", class: 'add-member-row'
   div class="form-actions"
     = f.button :submit, class: 'btn-primary'

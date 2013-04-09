@@ -19,7 +19,7 @@ FactoryGirl.define do
   
   factory :surety_member do
     surety
-    email { create(:user).email }
+    user
   end
   
   factory :cluster do

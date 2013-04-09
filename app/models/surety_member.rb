@@ -11,6 +11,11 @@ class SuretyMember < ActiveRecord::Base
   after_create :create_account_for_user, if: :user
   after_create :create_account_code_for_user, unless: :user
   
+  def full_name
+    u = user || User.new { |user| user.first_name = first_name; user.last_name = last_name; user.middle_name = middle_name }
+    u.full_name
+  end
+  
 private
   
   def refill_from_user

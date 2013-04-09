@@ -20,7 +20,8 @@ MSU::Application.routes.draw do
   end
 
   # sureties
-  resources :sureties, only: [:index, :show] do
+  resources :sureties, only: :show do
+    put :generate
     put :close
     get :scan, action: :new_scan
     post :scan, action: :load_scan

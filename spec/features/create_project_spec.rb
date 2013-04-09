@@ -32,8 +32,8 @@ feature 'Create project', js: true do
     check critical_technology.name
     check research_area.name
     
-    fill_in 'ФИО руководителя организации', with: 'Palpatine'
-    fill_in 'Должность руководителя организации', with: 'Emperor'
+    # fill_in 'ФИО руководителя организации', with: 'Palpatine'
+    # fill_in 'Должность руководителя организации', with: 'Emperor'
     
     click_on 'Создать'
     

@@ -795,11 +795,12 @@ ru:
       surety:
         state:
           states:
-            pending: Ожидает подтверждения
+            filling: Заполняется
+            generated: Создано
             closed: Удалено
             declined: Отказано
             active: Активно
-            confirmed: Предварительно одобрена
+            confirmed: Предварительно одобрено
           events:
             _activate: Активировать
             _decline: Отказать

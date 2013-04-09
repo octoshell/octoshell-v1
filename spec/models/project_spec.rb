@@ -16,10 +16,10 @@ describe Project do
         surety.boss_full_name = 'Mr. Burns'
         surety.boss_position = 'CEO'
         surety.surety_members.build do |sm|
-          sm.email = project.user.email
+          sm.user = project.user
         end
         surety.surety_members.build do |sm|
-          sm.email = user.email
+          sm.user = user
         end
       end
       project.save!

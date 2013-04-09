@@ -7,9 +7,10 @@ class Surety < ActiveRecord::Base
   
   default_scope order("#{table_name}.id desc")
   
-  delegate :user, :organization, :direction_of_sciences, :critical_technologies,
+  delegate :user, :direction_of_sciences, :critical_technologies,
     to: :project, allow_nil: true
   
+  belongs_to :organization
   belongs_to :project, inverse_of: :sureties
   has_many :tickets
   has_many :surety_members, inverse_of: :surety
@@ -18,42 +19,51 @@ class Surety < ActiveRecord::Base
   validates :cpu_hours, :gpu_hours, :size, numericality: { greater_than_or_equal_to: 0 }
   
   attr_accessible :boss_full_name, :boss_position, :surety_members_attributes,
-    :cpu_hours, :gpu_hours, :size, :project_id
+    :cpu_hours, :gpu_hours, :size, :project_id, :organization_id
   
   accepts_nested_attributes_for :surety_members
   
-  state_machine initial: :pending do
-    state :pending
+  state_machine initial: :filling do
+    state :filling
+    state :generated
     state :confirmed
     state :active
     state :declined
     state :closed
     
+    event :generate do
+      transition :filling => :generated
+    end
+    
     event :confirm do
-      transition :pending => :confirmed
+      transition :generated => :confirmed
     end
     
     event :unconfirm do
-      transition :confirmed => :pending
+      transition :confirmed => :generated
     end
     
     event :activate do
-      transition [:confirmed, :pending] => :active
+      transition [:confirmed, :generated] => :active
     end
     
     event :decline do
-      transition [:confirmed, :pending] => :declined
+      transition [:confirmed, :generated] => :declined
     end
     
     event :close do
-      transition [:pending, :confirmed, :active, :declined] => :closed
+      transition [:filling, :generated, :confirmed, :active, :declined] => :closed
     end
     
-    inside_transition :on => [:acivate, :close], &:user_revalidate!
+    inside_transition :on => [:activate, :close], &:user_revalidate!
   end
   
   def user_revalidate!
     user.revalidate!
+  end
+  
+  def has_loaded_scan?
+    tickets.any?
   end
   
   def load_scan(file)

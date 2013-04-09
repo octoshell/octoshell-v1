@@ -1,34 +1,28 @@
 - title "#{Surety.model_name.human} ##{@surety.id}"
 
-table class="table table-bordered noprint"
-  tr
-    th = Organization.model_name.human
-    td = @surety.organization.name
-  tr
-    th = Surety.human_attribute_name(:state)
-    td id="surety-#{@surety.id}-status" = @surety.human_state_name
-
-div class="link-actions noprint"
-  = link_to t('.print', default: 'Print'), '#', class: 'btn btn-primary  printable', data: { print: '#surety' }
-  |  
-  = link_to 'Скачать RTF', surety_path(@surety, format: :rtf), class: 'btn'
-  |  
-  = link_to 'Загрузить скан', [@surety, :scan], class: 'btn'
-  |  
-  = link_to t('.print_members_list', default: 'Print Members List'), '#', class: 'btn printable', data: { print: '#surety-members' }
-  - if @surety.can_close?
-    = " "
-    = link_to Surety.human_state_event_name(:close), surety_close_path(@surety), class: 'btn btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
-
-blockquote class="noprint"
-  p
-    | Вы должны 
-    strong распечатать поручительтво, поставить подпись и печать.
-  p
-    | После этого отослать по адресу: 
-    strong 119991 Москва, Ленинские горы, 1, стр.4
+div class="deliver-surety"
+  div class="step clearfix"
+    i class="icon-print"
+    div class="step-content"
+      = link_to 'Рапечатайте поручительство', '#', class: 'printable', data: { print: '#surety' }
+      | , подпишите и поставьте печать
+  
+  
+  div class="step clearfix"
+    i class="icon-envelope"
+    div class="step-content"
+      span Отправьте по адресу: 119991 Москва, Ленинские горы, 1, стр.4, Канцелярия НИВЦ МГУ
+  
+  div class="step clearfix"
+    i class="icon-upload-alt"
+    div class="step-content"
+      = link_to 'Загрузите скан', [@surety, :scan]
+      |  чтобы быстрее получить доступ.
 
 div id="surety"
+  div class="surety-print noprint"
+    = link_to '#', class: 'printable', data: { print: '#surety' } do
+      i class="icon-print"
   == @surety.html_template 
 
 - if @surety.tickets.any?
@@ -42,13 +36,3 @@ div id="surety"
         div class="span6"
           p
             strong = link_to 'Перейти к заявке', ticket
-
-div id="surety-members" class="hidden"
-  table class="table table-bordered table-condensed"
-    tr
-      th ФИО
-      td Код приглашения
-    - @surety.surety_members.each do |member|
-      tr
-        td = member.full_name
-        td = member.account_code.try(:code)
