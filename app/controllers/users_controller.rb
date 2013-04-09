@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   def index
     respond_to do |format|
       format.json do
+        User.extend(UserScopable)
         @users = User.use_scope(params[:scope]).order('last_name asc, first_name asc').finder(params[:q])
         render json: { records: @users.page(params[:page]).per(params[:per]).as_json(for: :ajax), total: @users.count }
       end

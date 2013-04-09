@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
       @user.track! :create_session, @user, current_user
       redirect_back_or_to(root_url)
     else
+      User.extend(UserWithAuthErrors)
       @user = User.initialize_with_auth_errors(email)
       flash.now[:alert] = @user.errors.full_messages.join(', ')
       render :new

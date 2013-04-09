@@ -81,35 +81,8 @@ class User < ActiveRecord::Base
     inside_transition :on => :sure, &:activate_own_accounts!
   end
   
-  class << self
-    def initialize_with_auth_errors(email)
-      auth = User.new(email: email)
-      if user = User.find_by_email(email)
-        if user.closed?
-          auth.errors.add :base, :closed
-        elsif user.activation_pending?
-          auth.errors.add :base, :user_is_not_activated
-        else
-          auth.errors.add :base, :wrong_password
-        end
-      else
-        auth.errors.add :base, :user_is_not_registered
-      end
-      auth
-    end
-    
-    def use_scope(scope)
-      s = scoped
-      case scope
-      when 'sured' then
-        s = s.sured
-      end
-      s
-    end
-
-    def admin_notifications_count
-      -1
-    end
+  def self.admin_notifications_count
+    -1
   end
   
   def examine!
@@ -198,10 +171,6 @@ class User < ActiveRecord::Base
     steps
   end
   
-  def ready_to_activate_account?
-    sured? && memberships.any?
-  end
-  
   def revalidate!
     if sureties.with_state(:active).any? && memberships.with_state(:active).any?
       sured? || sure!
@@ -215,10 +184,6 @@ class User < ActiveRecord::Base
       _unsure!
       accounts.non_closed.each &:cancel!
     end
-  end
-  
-  def activation_pending?
-    activation_state == 'pending'
   end
   
   def activation_active?
@@ -285,10 +250,6 @@ class User < ActiveRecord::Base
 
   def link_name
     full_name
-  end
-
-  def can_cancel_account?(account)
-    owned_projects.map(&:account_ids).flatten.include?(account.id)
   end
   
   def ability
