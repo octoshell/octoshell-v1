@@ -1,4 +1,4 @@
-- title "Отчет по проекту #{@report.project.name}"
+- title "Отчет по проекту #{@report.project.title}"
 
 div class="well"
   = simple_form_for @report, url: [@report, :submit], html: { class: 'form-horizontal' } do |f|

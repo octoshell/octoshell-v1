@@ -13,6 +13,7 @@ describe Project do
     
     before do
       project.sureties.build do |surety|
+        surety.organization = project.organization
         surety.boss_full_name = 'Mr. Burns'
         surety.boss_position = 'CEO'
         surety.surety_members.build do |sm|

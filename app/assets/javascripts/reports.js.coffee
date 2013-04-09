@@ -143,13 +143,6 @@ $ ->
     $template = _.template('
       <tr>
         <td>
-          <% if (state == "sured") { %>
-            <abbr title="Есть поручительство" class="text-success">✓</abbr>
-          <% } else { %>
-            <abbr title="Нет поручительства">_</abbr>
-          <% } %>
-          </td>
-        <td>
           <input name="members[<%= n %>][user_id]" type="hidden" value="<%= id %>">
           <% if (id) { %>
             <span class="input-block-level uneditable-input"><%= last_name %></span>
@@ -222,5 +215,13 @@ $ ->
       n = n + 1
       
       $input.val('')
-      
+  
+  $('@project-invite-code-viewer').each (i, html) ->
+    $link = $(html)
+    $link.popover(
+      html: true
+    )
+    $link.on 'click', (e) ->
+      false
+
   

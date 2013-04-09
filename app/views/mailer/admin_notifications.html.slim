@@ -6,7 +6,7 @@ ul style="margin: 0 20px 0 0"
   - @tasks.each do |task|
     li style="margin: 0 0 5" = link_to %(Процедура [##{task.id}] (#{task.human_state_name})), admin_task_url(task)
   - @sureties.each do |surety|
-    li style="margin: 0 0 5" = link_to %(Поручительство [##{surety.id}] [#{surety.project.name}] (#{surety.human_state_name})), admin_surety_url(surety)
+    li style="margin: 0 0 5" = link_to %(Поручительство [##{surety.id}] [#{surety.project.title}] (#{surety.human_state_name})), admin_surety_url(surety)
   - @tickets.each do |ticket|
     li style="margin: 0 0 5" = link_to %(Тикет [##{ticket.id}] [#{ticket.user.full_name}] [#{ticket.subject}] (#{ticket.human_state_name})), admin_ticket_url(ticket)
 

@@ -19,7 +19,7 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :direction_of_sciences
   has_and_belongs_to_many :research_areas
   
-  validates :user, :organization, presence: true
+  validates :user, :organization, :title, presence: true
   validates :cluster_user_type, inclusion: { in: CLUSTER_USER_TYPES }
   validates :direction_of_science_ids, :critical_technology_ids,
     :research_area_ids, length: { minimum: 1, message: 'выберите не менее %{count}' }
@@ -62,6 +62,12 @@ class Project < ActiveRecord::Base
       p.requests.with_state(:blocked).each &:close!
       p.accounts.with_cluster_state(:blocked).each &:close!
     end
+  end
+  
+  def unregistered_members
+    sureties.without_state(:closed).map do |surety|
+      surety.surety_members.where(user_id: nil)
+    end.flatten
   end
   
   def name_with_state

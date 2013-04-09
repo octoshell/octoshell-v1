@@ -15,6 +15,7 @@ FactoryGirl.define do
     boss_full_name 'Mr. Burns'
     boss_position 'CEO'
     project
+    organization { project.organization }
     
     factory :generated_surety do
       after(:create) do |s|
@@ -130,6 +131,7 @@ FactoryGirl.define do
   end
   
   factory :project do
+    sequence(:title) { |n| %w(ACME Arkham )[n.pred] || "Project #{n}" }
     user
     organization { factory(:organization) }
     project_prefix { factory(:project_prefix) }

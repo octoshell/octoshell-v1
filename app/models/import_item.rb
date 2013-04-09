@@ -191,7 +191,7 @@ private
     project = @user.projects.find_by_name(project_name) || begin
       p = Project.to_generic_model.create! do |project|
         project.user_id = @user.id
-        project.name = project_name
+        project.title = project_name
         project.description = project_name
         project.state = 'active'
         project.organization_id = @org.id

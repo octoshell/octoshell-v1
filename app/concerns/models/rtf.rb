@@ -77,7 +77,7 @@ module Models
         text.gsub! %r{\{\{ members \}\}}, begin
           surety_members.map(&:full_name).join(', ')
         end
-        text.gsub! %r{\{\{ project_name \}\}},      project.name
+        text.gsub! %r{\{\{ project_name \}\}},      project.title
         text.gsub! %r{\{\{ direction_of_sciences \}\}}, begin
           direction_of_sciences.map(&:name).join(', ')
         end

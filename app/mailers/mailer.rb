@@ -34,7 +34,7 @@ class Mailer < ActionMailer::Base
     @account_code = account_code
     @project = @account_code.project
     @user = User.find_by_email(@account_code.email)
-    mail to: @account_code.email, subject: %{Вас приглашают в работать над проектом "#{@project.name}"}
+    mail to: @account_code.email, subject: %{Вас приглашают в работать над проектом "#{@project.title}"}
   end
   
   def new_ticket_answer(ticket)
@@ -46,20 +46,20 @@ class Mailer < ActionMailer::Base
   def request_changed(request)
     @request = request
     @user = @request.project.owner
-    mail to: @user.emails, subject: %{Статус заявки на доступы к для проекта #{@request.project.name} изменен}
+    mail to: @user.emails, subject: %{Статус заявки на доступы к для проекта #{@request.project.title} изменен}
   end
   
   def account_activated(account)
     @user = account.user
     @project = account.project
-    mail to: @user.emails, subject: %{Получен доступ к проекту #{@project.name}}
+    mail to: @user.emails, subject: %{Получен доступ к проекту #{@project.title}}
   end
   
   def account_canceled(account)
     @user = account.project.user
     @requester = account.user
     @project = account.project
-    mail to: @user.emails, subject: %{Доступ к проекту #{@project.name} закрыт}
+    mail to: @user.emails, subject: %{Доступ к проекту #{@project.title} закрыт}
   end
 
   def admin_notifications
@@ -91,7 +91,7 @@ class Mailer < ActionMailer::Base
   def project_blocked(account)
     @project = account.project
     @user = account.user
-    mail to: @user.email, subject: subject(name: @project.name)
+    mail to: @user.email, subject: subject(name: @project.title)
   end
   
   def failed_email(user)

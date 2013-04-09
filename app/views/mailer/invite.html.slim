@@ -1,6 +1,6 @@
 = render 'header'
 
-p Вас пригласили в #{link_to 'Octoshell', root_url} в проект #{@project.name}.
+p Вас пригласили в #{link_to 'Octoshell', root_url} в проект #{@project.title}.
 
 - if @user
   - join_path = new_project_joiner_url(code: @account_code.code, token: @user.token)

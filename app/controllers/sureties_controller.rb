@@ -4,6 +4,8 @@ class SuretiesController < ApplicationController
   
   def show
     @surety = find_surety(params[:id])
+    add_breadcrumb "Проект: #{@surety.project.title}", @surety.project
+    add_breadcrumb "Поручительство ##{@surety.id}"
     respond_to do |format|
       format.html
       format.rtf do

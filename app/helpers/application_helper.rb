@@ -29,7 +29,7 @@ module ApplicationHelper
   end
   
   def link_to_project(project)
-    link_to project.name, project
+    link_to project.title, project
   end
   
   def link_to_surety(surety)

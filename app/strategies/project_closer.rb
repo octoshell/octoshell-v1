@@ -5,7 +5,7 @@ class ProjectCloser
   end
   
   def close
-    if @project.name == @code
+    if @project.title == @code
       @project.close
     else
       false
