@@ -10,11 +10,10 @@ describe Request do
   end
   
   describe 'events' do
-    subject(:request)    { factory!(:request) }
-    let!(:project)       { request.project }
-    let!(:surety)        { factory!(:surety, project: project) }
-    let!(:surety_member) { factory!(:surety_member, surety: surety) }
-    let!(:account)       { factory!(:account, project: project, user: project.user) }
+    let!(:user)          { factory!(:sured_user) }
+    let!(:project)       { factory!(:project, user: user) }
+    subject(:request)    { factory!(:request, project: project) }
+    let!(:account)       { project.accounts.find_by_user_id(user.id) }
     
     describe '#activate' do
       before do

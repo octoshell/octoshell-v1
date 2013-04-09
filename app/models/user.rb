@@ -303,8 +303,8 @@ class User < ActiveRecord::Base
   end
   
   def activate_own_accounts!
-    ids = owned_projects.active.map(&:id)
-    accounts.with_state(:closed).where(project_id: ids).each &:activate!
+    ids = owned_projects.with_state(:active).map(&:id)
+    accounts.without_cluster_state(:active).where(project_id: ids).each &:activate!
   end
   
   def close_relations!

@@ -20,9 +20,11 @@ class Account < ActiveRecord::Base
   
   after_create :assign_username
   
+  # доступ к кластеру. выполнил ли пользователь необходимые условия для доступа
   state_machine :cluster_state, initial: :closed do
     state :active do
       validates :project_state_name, inclusion: { in: [:active] }
+      validates :user_state_name, inclusion: { in: [:sured] }
     end
     state :blocked do
       validates :project_state_name, inclusion: { in: [:active, :closing] }
@@ -46,17 +48,17 @@ class Account < ActiveRecord::Base
     end
   end
   
-  state_machine :access_state, initial: :pending do
-    state :pending
+  # доступ к проекту. разрешил ли руководитель доступ
+  state_machine :access_state, initial: :denied do
     state :denied
     state :allowed
     
     event :allow do
-      transition [:pending, :denied] => :allowed
+      transition :denied => :allowed
     end
     
     event :deny do
-      transition [:pending, :allowed] => :denied
+      transition :allowed => :denied
     end
     
     inside_transition :on => :allow, &:activate

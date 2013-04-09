@@ -52,7 +52,7 @@ class Request < ActiveRecord::Base
     end
     
     inside_transition :on => :activate do |r|
-      r.accounts.without_cluster_state(:active).each &:activate!
+      r.accounts.without_cluster_state(:active).each &:activate
     end
     
     inside_transition :on => :block do |r|

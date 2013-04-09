@@ -15,6 +15,39 @@ FactoryGirl.define do
     boss_full_name 'Mr. Burns'
     boss_position 'CEO'
     project
+    
+    factory :generated_surety do
+      after(:create) do |s|
+        s.generate!
+      end
+    end
+    
+    factory :confirmed_surety do
+      after(:create) do |s|
+        s.generate!
+        s.confirm!
+      end
+    end
+    
+    factory :active_surety do
+      after(:create) do |s|
+        s.generate!
+        s.activate!
+      end
+    end
+    
+    factory :declined_surety do
+      after(:create) do |s|
+        s.generate!
+        s.decline!
+      end
+    end
+    
+    factory :closed_surety do
+      after(:create) do |s|
+        s.close!
+      end
+    end
   end
   
   factory :surety_member do
@@ -128,6 +161,7 @@ FactoryGirl.define do
     password '123456'
     password_confirmation '123456'
     activation_state 'active'
+    organizations { [factory(:organization)] }
     
     after(:create) do |u|
       u.update_attribute :activation_state, 'active'
@@ -136,9 +170,9 @@ FactoryGirl.define do
     factory :sured_user do
       after(:create) do |u|
         create(:membership, user: u)
-        s = create(:surety)
+        s = create(:generated_surety)
         create(:surety_member, user: u, surety: s)
-        u.revalidate!
+        s.activate!
       end
     end
     

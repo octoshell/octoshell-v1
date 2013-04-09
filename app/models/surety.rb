@@ -14,6 +14,7 @@ class Surety < ActiveRecord::Base
   belongs_to :project, inverse_of: :sureties
   has_many :tickets
   has_many :surety_members, inverse_of: :surety
+  has_many :users, through: :surety_members
   
   validates :project, presence: true
   validates :cpu_hours, :gpu_hours, :size, numericality: { greater_than_or_equal_to: 0 }
@@ -28,7 +29,6 @@ class Surety < ActiveRecord::Base
     state :generated
     state :confirmed
     state :active
-    state :declined
     state :closed
     
     event :generate do
@@ -47,19 +47,15 @@ class Surety < ActiveRecord::Base
       transition [:confirmed, :generated] => :active
     end
     
-    event :decline do
-      transition [:confirmed, :generated] => :declined
-    end
-    
     event :close do
       transition [:filling, :generated, :confirmed, :active, :declined] => :closed
     end
     
-    inside_transition :on => [:activate, :close], &:user_revalidate!
+    inside_transition :on => [:activate, :close], &:revalidate_users!
   end
   
-  def user_revalidate!
-    user.revalidate!
+  def revalidate_users!
+    users.each &:revalidate!
   end
   
   def has_loaded_scan?

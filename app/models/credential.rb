@@ -48,7 +48,7 @@ class Credential < ActiveRecord::Base
   end
   
   def maintain_requests!
-    user.accounts.without_cluster_state(:closed).each do |account|
+    user.accounts.with_cluster_state(:active).each do |account|
       account.project.requests.with_state(:active, :blocked).each do |r|
         r.request_maintain!
       end

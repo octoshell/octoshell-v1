@@ -1,10 +1,8 @@
 - title @project.title
 
-div class="well"
-  = link_to t('.edit', default: 'Edit'), edit_project_path(@project), class: 'btn'
-  - if @project.can_close?
-    |  
-    = link_to t('.close', default: 'Close'), project_close_path(@project), class: 'btn btn-danger'
+legend Профиль проекта
+
+p = link_to 'Редактировать', edit_project_path(@project)
 
 legend Доступы к ресурсам
 
@@ -42,9 +40,8 @@ table class="table"
   thead
     tr
       th Пользователь
-      th Логин
+      th Логины
       th Доступ на кластеры
-      th Доступ к проекту
       th
   - @project.accounts.without_access_state(:denied).each_with_index do |account|
     tr class="#{account.allowed? && account.active? ? 'success' : 'warning'}"
@@ -62,13 +59,6 @@ table class="table"
           span class="label label-important" = account.human_cluster_state_name
           |  
           small (Нет активной заявки)
-      td
-        - if account.pending?
-          span class="label label-warning"= account.human_access_state_name
-          |  
-          small (Нет активного поручительства)
-        - if account.allowed?
-          span class="label label-success"= account.human_access_state_name
       td
         - unless account.user == @project.user
           strong = link_to '&times;'.html_safe, account, class: 'danger'
@@ -144,3 +134,8 @@ div class="row"
             - surety.surety_members.each do |member|
               li = member.full_name
           = f.button :submit, 'Сгенерировать', class: 'btn btn-small btn-success'
+
+legend Закрытие проекта
+
+- if @project.can_close?
+  = link_to 'Закрыть проект', project_close_path(@project), class: 'btn btn-danger btn-small'
