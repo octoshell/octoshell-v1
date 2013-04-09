@@ -10,6 +10,7 @@ legend Переписка
     blockquote
       small class="reply"
         = r.user.full_name
+        - r.user.extend(UserAbilities)
         - if r.user.may? :resolve, :faults
           |  
           span class="label label-info" admin

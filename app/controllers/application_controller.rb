@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
 
   def ability
     @ability ||= begin
+      current_user and current_user.extend(UserAbilities)
       logged_in? ? current_user.ability : (begin
         mm = MayMay::Ability.new(current_user)
         Ability.default.each do |ability|

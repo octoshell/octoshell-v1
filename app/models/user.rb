@@ -1,8 +1,6 @@
 class User < ActiveRecord::Base
   include Models::Limitable
   
-  delegate :may?, :maynot?, to: :ability
-  
   has_paper_trail
   
   has_attached_file :avatar
@@ -127,14 +125,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def abilities
-    sort = %{
-      (case when available then 1 when available is null then 2 else 3 end) asc
-    }
-    abilities = Ability.where(group_id: group_ids).order(sort).uniq_by(&:to_definition)
-    abilities.any? ? abilities : Ability.default
-  end
-
   def all_sureties
     Surety.where("id in (?) or project_id in (?)", surety_ids, owned_project_ids)
   end
@@ -250,17 +240,6 @@ class User < ActiveRecord::Base
 
   def link_name
     full_name
-  end
-  
-  def ability
-    @ability ||= begin
-      mm = MayMay::Ability.new(self)
-      abilities.each do |ability|
-        method = ability.available ? :may : :maynot
-        mm.send method, ability.action_name, ability.subject_name
-      end
-      mm
-    end
   end
   
   def activate_own_accounts!
