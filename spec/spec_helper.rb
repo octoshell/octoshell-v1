@@ -6,6 +6,9 @@ require 'rspec/autorun'
 require 'capybara/poltergeist'
 
 Capybara.javascript_driver = :poltergeist
+Capybara.add_selector(:role) do
+  css { |role| "[role='#{role}']" }
+end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

@@ -1,12 +1,12 @@
 class AccountsController < ApplicationController
   before_filter :require_login
 
-  def cancel
+  def deny
     @account = find_account(params[:account_id])
-    if @account.cancel
-      redirect_to :back
+    if @account.denied? || @account.deny
+      redirect_to @account.project
     else
-      redirect_to_account_with_alert(@account)
+      redirect_to @account.project, alert: @account.errors.full_messages.to_sentence
     end
   end
   

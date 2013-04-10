@@ -1,9 +1,12 @@
 - title t('.title', default: 'Close Project')
 
-p class="lead" = t('.info.html', default: 'Are you sure?')
+blockquote class="lead"
+  | Завершение проекта удалит все данные и закроет доступы на кластеры.
+  br
+  | "Открыть" проект после завершения невозможно.
+  br
+  | Вы уверены что хотите завершить проект 
+  strong = @project.title
+  | ?
 
-= simple_form_for @project, url: project_close_path(@project), html: { class: 'form-horizontal alert alert-error' } do |f|
-  legend = t('.enter_confirmation_code', default: 'Enter the project name for confirm destroying.')
-  = f.input :confirmation_code
-  div class="form-actions"
-    = f.button :submit, t('.close', default: 'Close'), class: 'btn-danger', disabled: @project.invalid?
+= link_to "Я действительно хочу завершить проект #{@project.title}", project_close_path(@project), method: :put, data: { confirm: 'Завершить проект?' }, class: 'btn btn-danger'

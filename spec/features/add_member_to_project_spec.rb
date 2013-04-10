@@ -1,10 +1,6 @@
 # coding: utf-8
 require 'spec_helper'
 
-Capybara.add_selector(:role) do
-  css { |role| "[role='#{role}']" }
-end
-
 feature 'Add member to Project', js: true do
   let!(:project) { create(:project) }
   let!(:new_user) { create(:sured_user) }

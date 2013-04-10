@@ -72,10 +72,9 @@ class ProjectsController < ApplicationController
   
   def close
     @project = find_project(params[:project_id])
-    code = params[:project][:confirmation_code]
-    if @project.valid_to_close?(code) && @project.mark_to_close
+    if @project.close
       @project.user.track! :mark_to_close_project, @project, current_user
-      redirect_to @project, notice: t('.project_successfully_closed', default: 'Project successfully closed')
+      redirect_to @project
     else
       flash.now[:alert] = t('.wrong_confirmation_code', default: 'Wrong confirmation code')
     end

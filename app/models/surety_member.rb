@@ -28,7 +28,8 @@ private
   
   def create_account_for_user
     conditions = { user_id: user_id, project_id: surety.project_id }
-    Account.where(conditions).first_or_create!
+    a = Account.where(conditions).first_or_create!
+    a.allowed? || a.allow!
   end
   
   def create_account_code_for_user

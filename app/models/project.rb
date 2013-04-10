@@ -66,7 +66,9 @@ class Project < ActiveRecord::Base
   
   def unregistered_members
     sureties.without_state(:closed).map do |surety|
-      surety.surety_members.where(user_id: nil)
+      surety.surety_members.where(user_id: nil).find_all do |sm|
+        sm.account_code
+      end
     end.flatten
   end
   
@@ -115,6 +117,13 @@ class Project < ActiveRecord::Base
     accounts.active.each do |account|
       Mailer.project_blocked(account).deliver
     end
+  end
+  
+  def ok?
+    requests.with_state(:active).empty? || 
+      requests.with_state(:pending, :blocked).any? || 
+      sureties.with_state(:filling, :generated, :confirmed).any? || 
+      accounts.with_access_state(:allowed).with_cluster_state(:closed, :blocked).any?
   end
   
 private

@@ -1,5 +1,14 @@
 - title @project.title
 
+- if @project.closing?
+  div class="well"
+    h4 Проект помечен для завершения
+    p class="text-error"
+      em
+        span class="label label-important" Ожидает подтвержения администратором
+        |  
+        small = link_to 'Отменить завершение'
+
 legend Профиль проекта
 
 p = link_to 'Редактировать', edit_project_path(@project)
@@ -34,7 +43,7 @@ div class="row"
                   = f.input :size, input_html: { class: 'input-block-level' }, hint: 'Более 50ти обговаривается отдельно'
                   = f.button :submit, class: 'btn-success btn-block'
 
-legend Участники проекта
+legend id="members" Участники проекта
 
 table class="table"
   thead
@@ -61,7 +70,7 @@ table class="table"
           small (Нет активной заявки)
       td
         - unless account.user == @project.user
-          strong = link_to '&times;'.html_safe, account, class: 'danger'
+          strong = link_to '&times;'.html_safe, [account, :deny], method: :put, class: 'danger', role: 'remove-member'
   - @project.unregistered_members.each do |sm|
     tr class="striped"
       td colspan="2"
@@ -76,6 +85,7 @@ table class="table"
         |  
         small (Не зарегистрирован)
       td
+        strong = link_to '&times;'.html_safe, [@project, sm.account_code], method: :delete, class: 'danger', role: 'remove-member'
   tfoot
     tr
       td colspan="5"
@@ -146,8 +156,19 @@ div class="row"
             - surety.surety_members.each do |member|
               li = member.full_name
           = f.button :submit, 'Сгенерировать', class: 'btn btn-small btn-success'
+          span class="muted"
+            |  или 
+            = link_to 'Добавить еще участников', '#members'
 
-legend Закрытие проекта
+legend Завершение проекта
 
 - if @project.can_close?
-  = link_to 'Закрыть проект', project_close_path(@project), class: 'btn btn-danger btn-small'
+  p
+    | Закончили проект? Вы можете его 
+    strong = link_to 'завершить', project_close_path(@project), class: 'danger'
+- else
+  p class="text-error"
+    em
+      span class="label label-important" Ожидает подтвержения администратором
+      |  
+      small = link_to 'Отменить завершение'

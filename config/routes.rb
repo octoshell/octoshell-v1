@@ -56,6 +56,7 @@ MSU::Application.routes.draw do
     post :accounts
     get :close, action: :close_confirmation
     put :close
+    resources :account_codes, only: :destroy
     resources :versions, only: [:index, :show], resource: 'Project'
   end
 
@@ -68,7 +69,7 @@ MSU::Application.routes.draw do
   end
 
   # accounts
-  resources :accounts, only: [:destroy]
+  put '/accounts/:account_id/deny' => 'accounts#deny', as: :account_deny
 
   # clusters
   resources :clusters, only: :index

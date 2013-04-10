@@ -54,6 +54,14 @@ FactoryGirl.define do
   factory :surety_member do
     surety
     user
+    
+    factory :new_surety_member do
+      user nil
+      last_name 'Simpson'
+      first_name 'Hank'
+      middle_name '-'
+      email 'eatmyshorts@example.com'
+    end
   end
   
   factory :cluster do
@@ -171,7 +179,6 @@ FactoryGirl.define do
     
     factory :sured_user do
       after(:create) do |u|
-        create(:membership, user: u)
         s = create(:generated_surety)
         create(:surety_member, user: u, surety: s)
         s.activate!
