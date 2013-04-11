@@ -1045,7 +1045,8 @@ CREATE TABLE old_report_projects (
     awards_count integer DEFAULT 0,
     illustrations_points integer DEFAULT 0,
     statement_points integer DEFAULT 0,
-    summary_points integer DEFAULT 0
+    summary_points integer DEFAULT 0,
+    project_id integer
 );
 
 
@@ -1671,8 +1672,7 @@ CREATE TABLE stats (
     group_by character varying(255),
     weight integer DEFAULT 0,
     organization_id integer,
-    cache text DEFAULT '--- {}
-'::text
+    cache text
 );
 
 
@@ -4865,8 +4865,6 @@ INSERT INTO schema_migrations (version) VALUES ('20130330084831');
 
 INSERT INTO schema_migrations (version) VALUES ('20130330114633');
 
-INSERT INTO schema_migrations (version) VALUES ('20130330142056');
-
 INSERT INTO schema_migrations (version) VALUES ('20130401152216');
 
 INSERT INTO schema_migrations (version) VALUES ('20130402085345');
@@ -4898,3 +4896,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130408162625');
 INSERT INTO schema_migrations (version) VALUES ('20130408162636');
 
 INSERT INTO schema_migrations (version) VALUES ('20130408162647');
+
+INSERT INTO schema_migrations (version) VALUES ('20130411141030');

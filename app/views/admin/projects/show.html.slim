@@ -52,16 +52,12 @@ table class="table table-bordered"
 
 h3 Доступы
 
-= render partial: 'admin/accounts/table', locals: { accounts: @project.accounts.active }
+/ = render partial: 'admin/accounts/table', locals: { accounts: @project.accounts.with_state(:active) }
 
 - if @project.sureties.any?
   h3 Поручительства
   = render partial: 'admin/sureties/table', locals: { sureties: @project.sureties }
 
-h3 Процедуры
-
-= render partial: 'admin/tasks/table', locals: { tasks: @project.tasks }  
-  
 h3 Заявки
 
 = render partial: 'admin/requests/table', locals: { requests: @project.requests }

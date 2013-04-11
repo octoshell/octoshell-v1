@@ -70,7 +70,7 @@ class Ticket < ActiveRecord::Base
     if ticket_question
       ticket_question.ticket_questions
     else
-      TicketQuestion.root.active
+      TicketQuestion.root.with_state(:active)
     end
   end
   

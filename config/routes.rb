@@ -6,6 +6,8 @@ MSU::Application.routes.draw do
     get :confirmation, on: :collection
   end
   resources :users, only: [:index, :show], as: :json
+  
+  resource :reports_migrator, only: [:show, :update]
 
   # notifications
   resources :notifications, only: :index

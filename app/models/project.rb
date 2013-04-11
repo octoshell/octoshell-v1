@@ -73,7 +73,7 @@ class Project < ActiveRecord::Base
   end
   
   def name_with_state
-    "#{name} [#{human_state_name}]"
+    "#{title} [#{human_state_name}]"
   end
   
   def allowed_organizations
