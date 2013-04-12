@@ -11,8 +11,14 @@ class Project::Card < ActiveRecord::Base
   belongs_to :project, inverse_of: :card
   
   validates *(ALL_FIELDS + [:project]), presence: true
-  validates *RU_FIELDS, format: { with: /[а-яё№\d[:space:][:punct:]\+]+/i, message: "Должно быть на русском" }
+  validates *RU_FIELDS.map { |f| "#{f}_for_validation".to_sym }, format: { with: /[а-яё№\d[:space:][:punct:]\+]+/i, message: "Должно быть на русском" }
   validates *EN_FIELDS, format: { with: /\A[a-z\d[:space:][:punct:]\+]+\z/i, message: "Должно быть на английском" }
   
   attr_accessible *ALL_FIELDS
+  
+  RU_FIELDS.each do |f|
+    define_method "#{f}_for_validation" do
+      "#{self[f]} "
+    end
+  end
 end

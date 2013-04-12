@@ -95,4 +95,40 @@ namespace :migration_helpers do
       end
     end
   end
+  
+  task :migrate_reports => :environment do
+    class OldReportProject < ActiveRecord::Base
+      serialize :critical_technologies
+      serialize :directions_of_science
+      serialize :areas
+      def project
+        Project.find(project_id)
+      end
+    end
+    
+    ActiveRecord::Base.transaction do
+      OldReportProject.where("project_id is not null").each do |rp|
+        project = rp.project
+        card = project.create_card do |card|
+          card.name         = rp.ru_title
+          card.en_name      = rp.en_title
+          card.driver       = rp.ru_driver
+          card.en_driver    = rp.en_driver
+          card.strategy     = rp.ru_strategy
+          card.en_strategy  = rp.en_strategy
+          card.objective    = rp.ru_objective
+          card.en_objective = rp.en_objective
+          card.impact       = rp.ru_impact
+          card.en_impact    = rp.en_impact
+          card.usage        = rp.ru_usage
+          card.en_usage     = rp.en_usage
+        end
+        card.persisted? or raise card.errors.inspect
+        project.critical_technologies = rp.critical_technologies.map { |n| CriticalTechnology.find_by_name!(n) }
+        project.direction_of_sciences = rp.directions_of_science.map { |n| DirectionOfScience.find_or_create_by_name!(n) }
+        project.research_areas = rp.areas.map { |n| ResearchArea.find_by_name!(n) }
+        project.save or raise project.errors.inspect
+      end
+    end
+  end
 end

@@ -19,4 +19,8 @@ class OldReportProject < ActiveRecord::Base
   def report
     OldReport.find(report_id)
   end
+  
+  def project
+    Project.find(project_id)
+  end
 end
