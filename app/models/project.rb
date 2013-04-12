@@ -128,10 +128,10 @@ class Project < ActiveRecord::Base
   end
   
   def ok?
-    requests.with_state(:active).empty? || 
-      requests.with_state(:pending, :blocked).any? || 
-      sureties.with_state(:filling, :generated, :confirmed).any? || 
-      accounts.with_access_state(:allowed).with_cluster_state(:closed, :blocked).any?
+    requests.with_state(:active).any? &&
+      requests.with_state(:pending, :blocked).empty? && 
+      sureties.with_state(:filling, :generated, :confirmed).empty? && 
+      accounts.with_access_state(:allowed).with_cluster_state(:closed, :blocked).empty?
   end
   
 private

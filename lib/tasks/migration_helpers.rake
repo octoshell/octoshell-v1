@@ -77,6 +77,10 @@ namespace :migration_helpers do
       Account.where(state: 'active').update_all(access_state: 'allowed')
       Account.where(access_state: 'denied', cluster_state: 'closed').delete_all
       
+      Account.with_access_state(:allowed).with_cluster_state(:closed).each do |account|
+        account.activate! if account.project.active? && account.user.sured?
+      end
+      
       Request.where(project_id: nil).each do |r|
         r.project_id = ClusterProject.find(r.cluster_project_id).project_id
         r.cluster_id = ClusterProject.find(r.cluster_project_id).cluster_id
@@ -105,6 +109,8 @@ namespace :migration_helpers do
       end
       
       # subdivisions ?
+      
+      Ability.redefine!
     end
   end
   

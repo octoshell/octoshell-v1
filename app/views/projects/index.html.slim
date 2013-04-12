@@ -21,7 +21,7 @@ table class="table table-striped"
     - klass = 'success'
     - if project.closing?
       - klass = 'error'
-    - else project.active? && !project.ok?
+    - elsif project.active? && !project.ok?
       - klass = 'warning'
     tr class="#{klass}"
       td class="muted span1" ##{project.id}

@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   before_filter :require_login
   
   def index
-    @projects = current_user.all_projects.reorder('projects.id desc')
+    @projects = current_user.all_projects.without_state(:closed).reorder('projects.id desc')
     @project_joiner = ProjectJoiner.new
     @project_joiner.user_id = current_user.id
     respond_to do |format|
