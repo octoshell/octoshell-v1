@@ -692,6 +692,7 @@ ru:
         user: Пользователь
         user_id: Пользователь
         state: Состояние
+        subdivision_name: Подразделение
       account_code:
         code: Секретный код
         state: Состояние

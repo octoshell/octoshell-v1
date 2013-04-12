@@ -1184,7 +1184,8 @@ CREATE TABLE organizations (
     state character varying(255),
     abbreviation character varying(255),
     organization_kind_id integer,
-    active_projects_count integer DEFAULT 0
+    active_projects_count integer DEFAULT 0,
+    subdivision_required boolean DEFAULT false
 );
 
 
@@ -4901,3 +4902,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130408162647');
 INSERT INTO schema_migrations (version) VALUES ('20130411141030');
 
 INSERT INTO schema_migrations (version) VALUES ('20130412065947');
+
+INSERT INTO schema_migrations (version) VALUES ('20130412133953');

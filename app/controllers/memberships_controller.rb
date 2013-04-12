@@ -2,7 +2,14 @@ class MembershipsController < ApplicationController
   before_filter :require_login
   
   def new
-    @membership = current_user.memberships.build
+    add_breadcrumb 'Профиль', profile_path
+    @membership = current_user.memberships.build do |m|
+      if hash = params.delete(:membership)
+        add_breadcrumb 'Новое место работы', new_membership_path
+        add_breadcrumb 'Дополнительная информация'
+        m.organization = Organization.find(hash[:organization_id])
+      end
+    end
     @membership.build_default_positions
   end
   
