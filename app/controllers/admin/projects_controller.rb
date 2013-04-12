@@ -87,7 +87,7 @@ class Admin::ProjectsController < Admin::ApplicationController
 private
 
   def setup_default_filter
-    params[:q] ||= { state_in: ['active'] }
+    params[:q] ||= { state_in: ['active'], disabled_eq: false }
     params[:q][:meta_sort] ||= 'name.asc'
   end
 end

@@ -119,7 +119,7 @@ class ProjectsController < ApplicationController
 private
 
   def find_project(id)
-    current_user.all_projects.find(id)
+    current_user.all_projects.enabled.find(id)
   end
   
   def setup_default_filter

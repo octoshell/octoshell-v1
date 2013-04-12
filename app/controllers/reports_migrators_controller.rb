@@ -1,4 +1,4 @@
-class ReportsMigratorsController < ApplicationController
+class ReportsMigratorsController < Admin::ApplicationController
   def show
     ids = OldReport.where(state: 'assessed')
     @report_project = OldReportProject.where(report_id: ids, project_id: nil).order('id').first

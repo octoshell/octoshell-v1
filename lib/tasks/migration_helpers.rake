@@ -82,11 +82,34 @@ namespace :migration_helpers do
         r.cluster_id = ClusterProject.find(r.cluster_project_id).cluster_id
         r.save!
       end
+      
+      Surety.order('id').each do |s|
+        s.update_column :organization_id, s.project.organization_id
+      end
+      
+      SuretyMember.where(first_name: nil).each do |sm|
+        first, middle, last = sm.full_name.split(' ')
+        sm.first_name = first || 'Имя'
+        sm.middle_name = middle || '-'
+        sm.last_name = last || 'Фамилия'
+        sm.save or raise sm.errors.inspect
+      end
+      
+      Credential.unscoped.where("state = 'active'").select('public_key'). 
+        group('public_key').having('COUNT("credentials"."public_key") > 1').
+        count.each do |key, _|
+        
+        credentials = Credential.where(public_key: key).to_a
+        credentials.pop # save one
+        credentials.each &:destroy
+      end
+      
+      # subdivisions ?
     end
   end
   
   task :show_invalids => :environment do
-    [User, Account, Project, Surety, SuretyMember, Credential].each do |model|
+    [User, Account, Project, Surety, SuretyMember, Credential, Request].each do |model|
       model.find_each do |record|
         if record.invalid?
           p record
@@ -128,6 +151,14 @@ namespace :migration_helpers do
         project.direction_of_sciences = rp.directions_of_science.map { |n| DirectionOfScience.find_or_create_by_name!(n) }
         project.research_areas = rp.areas.map { |n| ResearchArea.find_by_name!(n) }
         project.save or raise project.errors.inspect
+      end
+    end
+  end
+  
+  task :disable_invalid_projects => :environment do
+    ActiveRecord::Base.transaction do
+      Project.all.each do |p|
+        p.disable! if p.invalid?
       end
     end
   end

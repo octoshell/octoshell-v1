@@ -19,10 +19,6 @@ div class="link-actions noprint"
     = " "
     = link_to Surety.human_state_event_name(:activate), admin_surety_activate_path(@surety), class: 'btn btn-success', method: :put
   
-  - if @surety.can_decline?
-    = " "
-    = link_to Surety.human_state_event_name(:decline), admin_surety_decline_path(@surety), class: 'btn', method: :put
-    
   - if @surety.can_confirm?
     = " "
     = link_to Surety.human_state_event_name(:confirm), admin_surety_confirm_path(@surety), class: 'btn', method: :put

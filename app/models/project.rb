@@ -19,10 +19,12 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :direction_of_sciences
   has_and_belongs_to_many :research_areas
   
-  validates :user, :organization, :title, presence: true
-  validates :cluster_user_type, inclusion: { in: CLUSTER_USER_TYPES }
-  validates :direction_of_science_ids, :critical_technology_ids,
-    :research_area_ids, length: { minimum: 1, message: 'выберите не менее %{count}' }
+  with_options unless: :disabled? do |enabled|
+    enabled.validates :user, :organization, :title, presence: true
+    enabled.validates :cluster_user_type, inclusion: { in: CLUSTER_USER_TYPES }
+    enabled.validates :direction_of_science_ids, :critical_technology_ids,
+      :research_area_ids, length: { minimum: 1, message: 'выберите не менее %{count}' }
+  end
   
   attr_accessible :organization_id, :sureties_attributes,
     :organization_ids, :direction_of_science_ids, :critical_technology_ids,
@@ -36,6 +38,7 @@ class Project < ActiveRecord::Base
   accepts_nested_attributes_for :sureties, :card
   
   scope :finder, lambda { |q| where("lower(name) like :q", q: "%#{q.to_s.mb_chars.downcase}%") }
+  scope :enabled, where(disabled: false)
   
   state_machine :state, initial: :active do
     state :active
@@ -62,6 +65,11 @@ class Project < ActiveRecord::Base
       p.requests.with_state(:blocked).each &:close!
       p.accounts.with_cluster_state(:blocked).each &:close!
     end
+  end
+  
+  def disable!
+    self.disabled = true
+    save!
   end
   
   def unregistered_members
