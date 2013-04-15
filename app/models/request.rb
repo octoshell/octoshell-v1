@@ -21,6 +21,7 @@ class Request < ActiveRecord::Base
   accepts_nested_attributes_for :request_properties
   
   after_create :create_request_properties
+  after_create :set_default_username, unless: :username?
   
   scope :last_pending, where(state: 'pending').order('id desc')
   
@@ -85,6 +86,10 @@ class Request < ActiveRecord::Base
   end
   
 private
+  
+  def set_default_username
+    update_column :username, "project_#{project_id}"
+  end
   
   def create_request_properties
     cluster.cluster_fields.each do |cluster_field|

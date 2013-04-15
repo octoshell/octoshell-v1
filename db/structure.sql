@@ -1563,7 +1563,8 @@ CREATE TABLE requests (
     gpu_hours integer DEFAULT 0,
     project_id integer,
     cluster_id integer,
-    maintain_requested_at timestamp without time zone
+    maintain_requested_at timestamp without time zone,
+    group_name character varying(255)
 );
 
 
@@ -4904,3 +4905,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130411141030');
 INSERT INTO schema_migrations (version) VALUES ('20130412065947');
 
 INSERT INTO schema_migrations (version) VALUES ('20130412133953');
+
+INSERT INTO schema_migrations (version) VALUES ('20130415131042');
