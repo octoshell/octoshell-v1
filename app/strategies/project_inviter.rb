@@ -55,7 +55,7 @@ private
   def sured_users
     @sured_users ||= begin
       @members.values.map do |user|
-        User.find(user[:user_id]) if user[:user_id]
+        User.find(user[:user_id]) if user[:user_id].present?
       end.compact
     end
   end
@@ -65,6 +65,7 @@ private
       account = @project.accounts.where(user_id: user.id).first_or_create!
       account.allowed? || account.allow!
     end
+    true
   end
   
   def send_welcome_emails!
