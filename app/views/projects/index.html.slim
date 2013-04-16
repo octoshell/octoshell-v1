@@ -12,20 +12,25 @@ div class="join-project-form hidden"
     = f.input :code, autofocus: true, input_html: { class: 'input-block-level' }, label: 'Секретный код'
     = f.button :submit, 'Отправить', class: 'btn-success btn-block'
 
-table class="table table-striped"
-  thead
-    tr
-      th #
-      th Название
-  - @projects.each do |project|
-    - klass = 'success'
-    - if project.closing?
-      - klass = 'error'
-    - elsif project.active? && !project.ok?
-      - klass = 'warning'
-    tr class="#{klass}"
-      td class="muted span1" ##{project.id}
-      td = link_to project.title, project
+- if @projects.any?
+  table class="table table-striped"
+    thead
+      tr
+        th #
+        th Название
+    - @projects.each do |project|
+      - klass = 'success'
+      - if project.closing?
+        - klass = 'error'
+      - elsif project.active? && !project.ok?
+        - klass = 'warning'
+      tr class="#{klass}"
+        td class="muted span1" ##{project.id}
+        td = link_to project.title, project
 
-= safe_paginate @projects
+  = safe_paginate @projects
 
+- else
+  p
+    | Нет проектов. 
+    = link_to 'Создать проект', new_project_path

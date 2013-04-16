@@ -93,5 +93,37 @@ describe Project do
       end
     end
   end
+
+  describe '#merge' do
+    let!(:project) { factory(:project) }
+    let!(:old_project) { factory(:project) }
+    let!(:surety) { factory(:surety, project: old_project) }
+    let!(:request) { factory(:request, project: old_project) }
+    
+    before { project.merge(old_project) }
+    
+    it 'merges organization' do
+      project.organization.should == old_project.organization
+    end
+    
+    it 'imports accounts' do
+      old_project.accounts.with_access_state(:allowed).each do |account|
+        ids = project.accounts.with_access_state(:allowed).pluck(:user_id)
+        ids.should include(account.user_id)
+      end
+    end
+    
+    it 'imports sureties' do
+      project.sureties.should include(surety)
+    end
+    
+    it 'imports requests' do
+      project.requests.should include(request)
+    end
+    
+    it 'disables old project' do
+      old_project.should be_disabled
+    end
+  end
 end
 

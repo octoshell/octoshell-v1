@@ -82,10 +82,14 @@ namespace :migration_helpers do
       end
       
       Request.where(project_id: nil).each do |r|
-        r.project_id = ClusterProject.find(r.cluster_project_id).project_id
-        r.cluster_id = ClusterProject.find(r.cluster_project_id).cluster_id
+        ClusterProject.find(r.cluster_project_id).tap do |cp|
+          r.project_id = cp.project_id
+          r.cluster_id = cp.cluster_id
+          r.group_name = cp.username
+        end
         r.save!
       end
+      Request.where(group_name: nil).each { |r| r.send :set_default_group_name }
       
       Surety.order('id').each do |s|
         s.update_column :organization_id, s.project.organization_id
