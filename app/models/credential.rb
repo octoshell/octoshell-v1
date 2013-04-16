@@ -12,7 +12,7 @@ class Credential < ActiveRecord::Base
   attr_accessible :public_key, :name, :public_key_file
   
   validates :user, :public_key, :name, presence: true
-  validates :public_key, uniqueness: { scope: [:state, :user_id] }, if: :active?
+  validates :public_key, uniqueness: { scope: [:user_id] }
   validate :public_key_validator
   
   after_create :maintain_requests!
@@ -21,11 +21,23 @@ class Credential < ActiveRecord::Base
     state :active
     state :closed
     
+    event :activate do
+      transition :closed => :active
+    end
+    
     event :close do
       transition :active => :closed
     end
     
-    inside_transition :on => :close, &:maintain_requests!
+    inside_transition :on => [:close, :activate], &:maintain_requests!
+  end
+  
+  def activate_or_create
+    if c = user.credentials.find_by_public_key(public_key)
+      c.active? || c.activate!
+    else
+      save
+    end
   end
   
   def assign_attributes(attributes, options = {})

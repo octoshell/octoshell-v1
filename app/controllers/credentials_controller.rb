@@ -7,7 +7,7 @@ class CredentialsController < ApplicationController
     
   def create
     @credential = current_user.credentials.build(params[:credential])
-    if @credential.save
+    if @credential.activate_or_create
       @credential.user.track! :create_credential, @credential, current_user
       redirect_to profile_path
     else
@@ -19,7 +19,7 @@ class CredentialsController < ApplicationController
     @credential = Credential.find(params[:credential_id])
     if @credential.close
       @credential.user.track! :close_credential, @credential, current_user
-      redirect_to credentials_path
+      redirect_to profile_path
     else
       flash.now[:alert] = @credential.errors.full_messages.join(', ')
       render :show

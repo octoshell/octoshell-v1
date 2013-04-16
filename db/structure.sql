@@ -3544,17 +3544,17 @@ CREATE INDEX index_clusters_on_state ON clusters USING btree (state);
 
 
 --
--- Name: index_credentials_on_public_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_credentials_on_public_key ON credentials USING btree (public_key);
-
-
---
 -- Name: index_credentials_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_credentials_on_user_id ON credentials USING btree (user_id);
+
+
+--
+-- Name: index_credentials_on_user_id_and_public_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_credentials_on_user_id_and_public_key ON credentials USING btree (user_id, public_key);
 
 
 --
@@ -4907,3 +4907,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130412065947');
 INSERT INTO schema_migrations (version) VALUES ('20130412133953');
 
 INSERT INTO schema_migrations (version) VALUES ('20130415131042');
+
+INSERT INTO schema_migrations (version) VALUES ('20130416073906');
+
+INSERT INTO schema_migrations (version) VALUES ('20130416081754');

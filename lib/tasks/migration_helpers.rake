@@ -99,12 +99,13 @@ namespace :migration_helpers do
         sm.save or raise sm.errors.inspect
       end
       
-      Credential.unscoped.where("state = 'active'").select('public_key'). 
+      Credential.unscoped.select('public_key'). 
         group('public_key').having('COUNT("credentials"."public_key") > 1').
         count.each do |key, _|
         
         credentials = Credential.where(public_key: key).to_a
-        credentials.pop # save one
+        credentials.sort_by! { |c| c.active? ? 1 : 0 }
+        credentials.shift # save one
         credentials.each &:destroy
       end
       
