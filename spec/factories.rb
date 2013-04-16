@@ -11,6 +11,16 @@ FactoryGirl.define do
     public_key 'key---'
   end
   
+  factory :session do
+    sequence(:description) { |n| "Session ##{n}" }
+    sequence(:receiving_to) { |n| n.week.from_now }
+  end
+  
+  factory :report do
+    session
+    project
+  end
+  
   factory :surety do
     boss_full_name 'Mr. Burns'
     boss_position 'CEO'

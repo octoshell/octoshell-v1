@@ -95,16 +95,13 @@ describe Project do
   end
 
   describe '#merge' do
-    let!(:project) { factory(:project) }
+    let!(:project)     { factory(:project) }
     let!(:old_project) { factory(:project) }
-    let!(:surety) { factory(:surety, project: old_project) }
-    let!(:request) { factory(:request, project: old_project) }
+    let!(:surety)      { factory(:surety, project: old_project) }
+    let!(:request)     { factory(:request, project: old_project) }
+    let!(:report)      { factory(:report, project: old_project) }
     
     before { project.merge(old_project) }
-    
-    it 'merges organization' do
-      project.organization.should == old_project.organization
-    end
     
     it 'imports accounts' do
       old_project.accounts.with_access_state(:allowed).each do |account|
@@ -119,6 +116,10 @@ describe Project do
     
     it 'imports requests' do
       project.requests.should include(request)
+    end
+    
+    it 'imports reports' do
+      project.reports.should include(report)
     end
     
     it 'disables old project' do

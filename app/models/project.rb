@@ -15,6 +15,7 @@ class Project < ActiveRecord::Base
   has_many :tickets
   has_many :requests
   has_many :sureties, inverse_of: :project
+  has_many :reports
   has_and_belongs_to_many :critical_technologies
   has_and_belongs_to_many :direction_of_sciences
   has_and_belongs_to_many :research_areas
@@ -132,6 +133,27 @@ class Project < ActiveRecord::Base
       requests.with_state(:pending, :blocked).empty? && 
       sureties.with_state(:filling, :generated, :confirmed).empty? && 
       accounts.with_access_state(:allowed).with_cluster_state(:closed, :blocked).empty?
+  end
+  
+  def merge(project)
+    transaction do
+      self.organization_ids = organization_ids + project.organization_ids - [organization_id]
+      project.accounts.each do |account|
+        a = accounts.where(user_id: account.user_id).first_or_create!
+        a.allow! if account.allowed? && a.denied?
+      end
+      to_a = proc { |m| project.send(m) }
+      %i(sureties requests reports).map(&to_a).flatten.each do |record|
+        record.project = self
+        record.save!
+      end
+      project.requests.each do |request|
+        request.project = self
+        request.save!
+      end
+      
+      project.disable!
+    end
   end
   
 private
