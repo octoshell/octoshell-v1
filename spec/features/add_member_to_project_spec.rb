@@ -14,7 +14,7 @@ feature 'Add member to Project', js: true do
     click_link 'Добавить участников'
     page.execute_script %{
       var controller = $('@project-members-controller');
-      controller.val('#{new_user.last_name.first(3)}');
+      controller.val('#{new_user.full_name}');
       controller.keyup();
     }
     sleep 0.5
@@ -27,6 +27,7 @@ feature 'Add member to Project', js: true do
     sleep 0.5
     click_button 'Добавить участников'
     expect(page).to have_content('Участники добавлены')
+    expect(page).to have_content(new_user.full_name)
   end
   
   scenario 'without surety' do

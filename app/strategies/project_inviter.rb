@@ -52,8 +52,19 @@ private
     true
   end
   
+  def sured_users
+    @sured_users ||= begin
+      @members.values.map do |user|
+        User.find(user[:user_id]) if user[:user_id]
+      end.compact
+    end
+  end
+  
   def provide_access_for_sured!
-    true
+    sured_users.each do |user|
+      account = @project.accounts.where(user_id: user.id).first_or_create!
+      account.allowed? || account.allow!
+    end
   end
   
   def send_welcome_emails!

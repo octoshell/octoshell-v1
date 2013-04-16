@@ -21,7 +21,7 @@ class Request < ActiveRecord::Base
   accepts_nested_attributes_for :request_properties
   
   after_create :create_request_properties
-  after_create :set_default_username, unless: :username?
+  after_create :set_default_group_name, unless: :group_name?
   
   scope :last_pending, where(state: 'pending').order('id desc')
   
@@ -87,8 +87,8 @@ class Request < ActiveRecord::Base
   
 private
   
-  def set_default_username
-    update_column :username, "project_#{project_id}"
+  def set_default_group_name
+    update_column :group_name, "project_#{project_id}"
   end
   
   def create_request_properties

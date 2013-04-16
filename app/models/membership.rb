@@ -14,7 +14,7 @@ class Membership < ActiveRecord::Base
   belongs_to :subdivision
   has_many :positions, inverse_of: :membership
   
-  validates :subdivision, presence: true, if: :organization_subdivision_required?
+  validates :subdivision, presence: true, if: :subdivision_required?
   validates :user, :organization, presence: true
   # validates :subdivision_id, inclusion: { in: proc(&:organization_subdivision_ids) }, if: :subdivision
   validates :organization_state_name, exclusion: { in: [:closed] }, on: :create
