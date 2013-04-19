@@ -1,26 +1,28 @@
-dl
-  dt Title
-  dd = @report_project.ru_title
-  
-  dt Other Titles
-  dd
-    ul
-      - OldReportProject.where(report_id: @report_project.report_id).each do |rp|
-        li = rp.ru_title
-  
-  dt Points
-  dd #{@report_project.illustrations_points} / #{@report_project.summary_points} / #{@report_project.statement_points}
-  
-  dt User
-  dd = @report_project.report.user.full_name
-  
-  dt Projects
-  dd
-    ul
-      - @report_project.report.user.owned_projects.each do |p|
-        li
-          = link_to p.title, [:admin, p]
+p class="lead" = "##{@report.id}"
+
+p
+  code = OldReport.where(state: 'assessed').count
+
+= form_tag do
+  table class="table"
+    tr
+      th ReportProject
+      th Project (#{@user.owned_projects.enabled.count})
+    - @report.projects.each do |p|
+      tr
+        td class="span6"
+          = p.ru_title
+          br
+          = p.lomonosov_logins
           |  
-          = link_to 'ok', reports_migrator_path(id: @report_project.id, project_id: p.id), method: :put, class: 'btn btn-success'
+          = p.chebyshev_logins
+          br
+          = link_to 'Create project for report', create_project_reports_migrator_path(rp_id: p.id), method: :post
+        td class="span6" = collection_select "rp", p.id, @user.owned_projects.enabled, :id, :desc, {}, class: 'span6'
+  
+  = submit_tag 'Link', class: 'btn'
 
-
+h4 Projects
+- projects = @user.owned_projects.enabled
+- projects.combination(2).each do |p1, p2|
+  p = link_to "Merge #{p1.title} with #{p2.title}", merge_projects_reports_migrator_path(p1: p1.id, p2: p2.id), method: :post, class: 'btn btn-primary'

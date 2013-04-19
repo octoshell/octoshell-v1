@@ -130,7 +130,7 @@ class User < ActiveRecord::Base
   end
   
   def all_projects
-    condition = "(accounts.access_state = 'allow' and accounts.user_id = 
+    condition = "(accounts.access_state = 'allowed' and accounts.user_id = 
       :id) or projects.user_id = :id"
     ids = Project.joins("left join accounts on accounts.project_id = projects.id").
       where(condition, id: id).uniq.pluck(:id)

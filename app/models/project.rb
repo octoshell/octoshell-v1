@@ -38,7 +38,7 @@ class Project < ActiveRecord::Base
   
   accepts_nested_attributes_for :sureties, :card
   
-  scope :finder, lambda { |q| where("lower(name) like :q", q: "%#{q.to_s.mb_chars.downcase}%") }
+  scope :finder, lambda { |q| where("lower(title) like :q", q: "%#{q.to_s.mb_chars.downcase}%") }
   scope :enabled, where(disabled: false)
   
   state_machine :state, initial: :active do
@@ -94,7 +94,7 @@ class Project < ActiveRecord::Base
   end
   
   def as_json(options)
-    { id: id, text: name }
+    { id: id, text: title }
   end
   
   def build_additional_surety
@@ -129,7 +129,8 @@ class Project < ActiveRecord::Base
   end
   
   def ok?
-    requests.with_state(:active).any? &&
+    active? && 
+      requests.with_state(:active).any? &&
       requests.with_state(:pending, :blocked).empty? && 
       sureties.with_state(:filling, :generated, :confirmed).empty? && 
       accounts.with_access_state(:allowed).with_cluster_state(:closed, :blocked).empty?
@@ -143,17 +144,26 @@ class Project < ActiveRecord::Base
         a.allow! if account.allowed? && a.denied?
       end
       to_a = proc { |m| project.send(m) }
-      %i(sureties requests reports).map(&to_a).flatten.each do |record|
+      %i(sureties reports).map(&to_a).flatten.each do |record|
         record.project = self
         record.save!
       end
+      
       project.requests.each do |request|
         request.project = self
-        request.save!
+        if requests.with_state(:active).where(cluster_id: request.cluster_id).any?
+          request.destroy
+        else
+          request.save!
+        end
       end
       
       project.disable!
     end
+  end
+  
+  def desc
+    "#{title} ( #{requests.with_state(:active).map { |r| r.cluster.name }.join(', ')} )  #{accounts.pluck(:username)}"
   end
   
 private

@@ -3509,6 +3509,13 @@ CREATE UNIQUE INDEX index_accounts_on_user_id_and_project_id ON accounts USING b
 
 
 --
+-- Name: index_accounts_on_username; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_accounts_on_username ON accounts USING btree (username);
+
+
+--
 -- Name: index_additional_emails_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3736,7 +3743,7 @@ CREATE INDEX index_positions_on_membership_id ON positions USING btree (membersh
 -- Name: index_project_cards_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_project_cards_on_project_id ON project_cards USING btree (project_id);
+CREATE UNIQUE INDEX index_project_cards_on_project_id ON project_cards USING btree (project_id);
 
 
 --
@@ -4290,6 +4297,13 @@ CREATE UNIQUE INDEX uniq ON critical_technologies_projects USING btree (critical
 --
 
 CREATE UNIQUE INDEX uniq_dir_proj ON direction_of_sciences_projects USING btree (direction_of_science_id, project_id);
+
+
+--
+-- Name: unique_active_request_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_active_request_idx ON requests USING btree (project_id, cluster_id) WHERE ((state)::text = 'active'::text);
 
 
 --
@@ -4911,3 +4925,9 @@ INSERT INTO schema_migrations (version) VALUES ('20130415131042');
 INSERT INTO schema_migrations (version) VALUES ('20130416073906');
 
 INSERT INTO schema_migrations (version) VALUES ('20130416081754');
+
+INSERT INTO schema_migrations (version) VALUES ('20130417122820');
+
+INSERT INTO schema_migrations (version) VALUES ('20130418075121');
+
+INSERT INTO schema_migrations (version) VALUES ('20130419081505');

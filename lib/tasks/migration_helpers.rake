@@ -90,6 +90,16 @@ namespace :migration_helpers do
         r.save!
       end
       Request.where(group_name: nil).each { |r| r.send :set_default_group_name }
+      clusters = Cluster.all
+      Project.find_each do |p|
+        clusters.each do |cluster|
+          requests = p.requests.where(cluster_id: cluster.id, state: 'active')
+          if requests.size > 1
+            requests.shift
+            requests.each &:destroy
+          end
+        end
+      end
       
       Surety.order('id').each do |s|
         s.update_column :organization_id, s.project.organization_id
@@ -111,6 +121,12 @@ namespace :migration_helpers do
         credentials.sort_by! { |c| c.active? ? 1 : 0 }
         credentials.shift # save one
         credentials.each &:destroy
+      end
+      
+      Account.unscoped.group("username").having("count(username) > 1").count.each do |username, _|
+        accounts = Account.where(username: username)
+        accounts.shift
+        accounts.each { |a| a.send :assign_username }
       end
       
       # subdivisions ?
@@ -143,6 +159,7 @@ namespace :migration_helpers do
     ActiveRecord::Base.transaction do
       OldReportProject.where("project_id is not null").each do |rp|
         project = rp.project
+        Project::Card.where(project_id: project.id).each &:destroy
         card = project.create_card do |card|
           card.name         = rp.ru_title
           card.en_name      = rp.en_title
@@ -163,12 +180,17 @@ namespace :migration_helpers do
         project.research_areas = rp.areas.map { |n| ResearchArea.find_by_name!(n) }
         project.save or raise project.errors.inspect
       end
+      Project::Card.group(:project_id).having("count(project_id) > 1").count.each do |project_id, _|
+        cards = Project::Card.where(project_id: project_id)
+        cards.shift
+        cards.each &:destroy
+      end
     end
   end
   
   task :disable_invalid_projects => :environment do
     ActiveRecord::Base.transaction do
-      Project.all.each do |p|
+      Project.where("created_at < ?", Date.new(2013, 3, 1)).each do |p|
         p.disable! if p.invalid?
       end
     end

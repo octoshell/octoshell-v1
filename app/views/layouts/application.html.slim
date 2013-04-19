@@ -11,7 +11,7 @@ html
     javascript:
       window.env = '#{Rails.env}'
       window.locale = '#{I18n.locale}'
-  body data-spy="scroll" data-target="#left-menu"
+  body
     div id="print-me"
     div class="container"
       - if session[:soul_id]
@@ -42,7 +42,7 @@ html
         - flash.each do |type, message|
           - context = type == :alert ? 'alert-error' : 'alert-info'
           = content_tag :div, message, class: "alert #{context}"
-        - if logged_in? && current_user.project_steps.any?
+        - if logged_in? && current_user.project_steps.any? && namespace != :admin
           = render partial: 'shared/steps', locals: { steps: current_user.project_steps, title: t('.start_steps_title', default: 'In order to get started you need to:') }
         - if content_for?(:submenu)
           = yield(:submenu)

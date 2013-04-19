@@ -84,12 +84,6 @@ class Account < ActiveRecord::Base
 private
   
   def assign_username
-    username =
-      if project.cluster_user_type == 'account'
-        "#{user.username}_#{id}"
-      else
-        project.login
-      end
-    update_attribute :username, username
+    update_attribute :username, "#{user.username}_#{id}"
   end
 end

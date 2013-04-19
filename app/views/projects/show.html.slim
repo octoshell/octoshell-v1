@@ -3,15 +3,27 @@
 - if @project.closing?
   div class="well"
     h4 Проект помечен для завершения
-    p class="text-error"
-      em
-        span class="label label-important" Ожидает подтвержения администратором
-        |  
-        small = link_to 'Отменить завершение'
+    - if current_user == @project.user
+      p class="text-error"
+        em
+          span class="label label-important" Ожидает подтвержения администратором
+          |  
+          small = link_to 'Отменить завершение'
 
-legend Профиль проекта
+- if current_user == @project.user
+  legend Профиль проекта
 
-p = link_to 'Редактировать', edit_project_path(@project)
+  p = link_to 'Редактировать', edit_project_path(@project)
+
+legend Мои доступы на кластеры
+
+table class="table"
+  - @project.requests.with_state(:active).each do |r|
+    tr class="success"
+      td style="vertical-align: middle" = r.cluster.name
+      td
+        - a = @project.accounts.where(user_id: current_user.id).first
+        code class="public-key expanded" data-trigger="focus" title="#{copy_combo}" #{a.username}@#{r.cluster.host}
 
 legend Доступы к ресурсам
 
@@ -25,23 +37,24 @@ div class="row"
             - if request
               = render_status_icon request.active?
               | Кластер "#{cluster.name}": 
-              = link_to "Заявка ##{request.id}", request
+              = link_to_if current_user == @project.user, "Заявка ##{request.id}", request
               |  
               small class="muted" (#{request.human_state_name})
             - else
               = render_status_icon false
               |  Не выделены ресурсы на кластер "#{cluster.name}". 
-              = button_tag 'Создать заявку', class: 'btn btn-success btn-mini pull-right inplace-new-request', data: { content: ".request-#{@project.id}-#{cluster.id}", title: 'Новая заявка' }, type: 'button', role: 'popoverable'
+              - if current_user == @project.user
+                = button_tag 'Создать заявку', class: 'btn btn-success btn-mini pull-right inplace-new-request', data: { content: ".request-#{@project.id}-#{cluster.id}", title: 'Новая заявка' }, type: 'button', role: 'popoverable'
             
-              div class="request-#{@project.id}-#{cluster.id} hidden"
-                - request = Request.new { |r| r.project = @project; r.cluster = cluster }
-                = simple_form_for request, html: { style: 'margin-bottom: 0;' } do |f|
-                  = f.input :project_id, as: :hidden
-                  = f.input :cluster_id, as: :hidden
-                  = f.input :cpu_hours, input_html: { class: 'input-block-level' }
-                  = f.input :gpu_hours, input_html: { class: 'input-block-level' }
-                  = f.input :size, input_html: { class: 'input-block-level' }, hint: 'Более 50ти обговаривается отдельно'
-                  = f.button :submit, class: 'btn-success btn-block'
+                div class="request-#{@project.id}-#{cluster.id} hidden"
+                  - request = Request.new { |r| r.project = @project; r.cluster = cluster }
+                  = simple_form_for request, html: { style: 'margin-bottom: 0;' } do |f|
+                    = f.input :project_id, as: :hidden
+                    = f.input :cluster_id, as: :hidden
+                    = f.input :cpu_hours, input_html: { class: 'input-block-level' }
+                    = f.input :gpu_hours, input_html: { class: 'input-block-level' }
+                    = f.input :size, input_html: { class: 'input-block-level' }, hint: 'Более 50ти обговаривается отдельно'
+                    = f.button :submit, class: 'btn-success btn-block'
 
 legend id="members" Участники проекта
 
@@ -51,12 +64,16 @@ table class="table"
       th Пользователь
       th Логины
       th Доступ на кластеры
-      th
+      - if current_user == @project.user
+        th
   - @project.accounts.without_access_state(:denied).each_with_index do |account|
     tr class="#{account.allowed? && account.active? ? 'success' : 'warning'}"
       td class="span4"
         = render_status_icon(account.allowed? && account.active?)
         = account.user.full_name
+        - if account.user == @project.user
+          |  
+          i class="icon-flag muted"
       td
         code = account.username
       td
@@ -68,61 +85,65 @@ table class="table"
           span class="label label-important" = account.human_cluster_state_name
           |  
           small (Нет активной заявки)
-      td
-        - unless account.user == @project.user
-          strong = link_to '&times;'.html_safe, [account, :deny], method: :put, class: 'danger', role: 'remove-member'
+      - if current_user == @project.user
+        td
+          - unless account.user == @project.user
+            strong = link_to '&times;'.html_safe, [account, :deny], method: :put, class: 'danger', role: 'remove-member'
   - @project.unregistered_members.each do |sm|
     tr class="striped"
       td colspan="2"
         = render_status_icon false
         = sm.full_name
-        br
-        small
-          = link_to 'Код приглашения', '#', data: { content: "<code>#{sm.account_code.code}</code>" }, role: 'project-invite-code-viewer'
-          |  отправлен на #{sm.email}
+        - if current_user == @project.user
+          br
+          small
+            = link_to 'Код приглашения', '#', data: { content: "<code>#{sm.account_code.code}</code>" }, role: 'project-invite-code-viewer'
+            |  отправлен на #{sm.email}
       td
         span class="label label-important" Закрыт
         |  
         small (Не зарегистрирован)
-      td
-        strong = link_to '&times;'.html_safe, [@project, sm.account_code], method: :delete, class: 'danger', role: 'remove-member'
-  tfoot
-    tr
-      td colspan="5"
-        small = link_to 'Добавить участников', '#', role: 'add-member-to-project'
-        div role="add-project-members" class="hidden"
-          h6
-            | Добавление участников 
-            small
-              | (
-              = link_to 'Отменить', '#', role: 'project-members-collapse'
-              | )
-          div class="clearfix"
-          input type="text" autofocus="true" role="project-members-controller" data-entity-source="/users.json" placeholder="Введите фамилию"
+      - if current_user == @project.user
+        td
+          strong = link_to '&times;'.html_safe, [@project, sm.account_code], method: :delete, class: 'danger', role: 'remove-member'
+  - if current_user == @project.user
+    tfoot
+      tr
+        td colspan="5"
+          small = link_to 'Добавить участников', '#', role: 'add-member-to-project'
+          div role="add-project-members" class="hidden"
+            h6
+              | Добавление участников 
+              small
+                | (
+                = link_to 'Отменить', '#', role: 'project-members-collapse'
+                | )
+            div class="clearfix"
+            input type="text" autofocus="true" role="project-members-controller" data-entity-source="/users.json" placeholder="Введите фамилию"
           
-          = form_tag project_members_path(@project) do
-            table class="table table-condensed hidden" role="project-members"
-              thead
-                tr
-                  th
-                    | Фамилия 
-                    abbr title="Обязательно для заполнения" *
-                  th
-                    | Имя 
-                    abbr title="Обязательно для заполнения" *
-                  th
-                    | Отчество 
-                    abbr title="Обязательно для заполнения" *
-                  th
-                    | Email 
-                    abbr title="Обязательно для заполнения" *
-              tfoot
-                tr
-                  td colspan="5"
-                    p 
-                      em
-                        | Для участников без поручительств создастся новое поручительство
-                    = submit_tag 'Добавить участников', class: 'btn btn-small btn-success'
+            = form_tag project_members_path(@project) do
+              table class="table table-condensed hidden" role="project-members"
+                thead
+                  tr
+                    th
+                      | Фамилия 
+                      abbr title="Обязательно для заполнения" *
+                    th
+                      | Имя 
+                      abbr title="Обязательно для заполнения" *
+                    th
+                      | Отчество 
+                      abbr title="Обязательно для заполнения" *
+                    th
+                      | Email 
+                      abbr title="Обязательно для заполнения" *
+                tfoot
+                  tr
+                    td colspan="5"
+                      p 
+                        em
+                          | Для участников без поручительств создастся новое поручительство
+                      = submit_tag 'Добавить участников', class: 'btn btn-small btn-success'
 
 legend Поручительства
 
@@ -134,7 +155,7 @@ div class="row"
         tr class="#{'without-top-border' if i == 0} #{state}"
           td class="span4" style="padding-bottom: 0;"
             = render_status_icon surety.active?
-            = link_to "Поручительство ##{surety.id}", surety
+            = link_to_if current_user == @project.user, "Поручительство ##{surety.id}", surety
           td style="padding-bottom: 0;"
             span class="label label-#{state}" = surety.human_state_name
         tr class="without-top-border #{state}"
@@ -160,15 +181,16 @@ div class="row"
             |  или 
             = link_to 'Добавить еще участников', '#members'
 
-legend Завершение проекта
+- if current_user == @project.user
+  legend Завершение проекта
 
-- if @project.can_close?
-  p
-    | Закончили проект? Вы можете его 
-    strong = link_to 'завершить', project_close_path(@project), class: 'danger'
-- else
-  p class="text-error"
-    em
-      span class="label label-important" Ожидает подтвержения администратором
-      |  
-      small = link_to 'Отменить завершение'
+  - if @project.can_close?
+    p
+      | Закончили проект? Вы можете его 
+      strong = link_to 'завершить', project_close_path(@project), class: 'danger'
+  - else
+    p class="text-error"
+      em
+        span class="label label-important" Ожидает подтвержения администратором
+        |  
+        small = link_to 'Отменить завершение'
