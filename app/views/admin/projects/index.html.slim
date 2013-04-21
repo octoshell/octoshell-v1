@@ -4,7 +4,7 @@
   = autocomplete :project, f, label: "Название", name: :id_eq, role: 'instance-search', url: '/admin/projects/%s'
   = autocomplete :user, f, label: "Руководитель"
   = autocomplete :organization, f, label: "Главная организация"
-  = f.input :requests_group_name_cont
+  = f.input :requests_group_name_cont, label: 'Группа'
   = f.input :state_in, collection: Project.human_state_names, input_html: { multiple: true }, required: false, label: 'Состояние'
   = f.input :disabled_eq, as: :boolean, label: 'Не актуальные', hint: '(Ошибочные)'
   div class="form-actions"

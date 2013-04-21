@@ -2,11 +2,11 @@
 
 = simple_form_for @search, method: :get, url: admin_users_path, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|
   = autocomplete :user, f, label: "ФИО или email", name: :id_eq, role: 'instance-search', url: '/admin/users/%s'
-  = f.input :last_name_or_first_name_or_middle_name_cont
-  = f.input :email_cont
+  = f.input :last_name_or_first_name_or_middle_name_cont, label: 'ФИО содержит'
+  = f.input :email_cont, label: 'Email содержит'
   = autocomplete :organization, f, name: :memberships_organization_id_eq
   = f.input :user_groups_group_name_in, label: 'Группа', required: false, collection: Group.pluck(:name), input_html: { multiple: true }
-  = f.input :state_in, collection: User.human_state_names, input_html: { multiple: true }, required: false
+  = f.input :state_in, collection: User.human_state_names, input_html: { multiple: true }, required: false, label: 'Состояние'
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
 

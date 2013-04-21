@@ -2,9 +2,9 @@
 
 = simple_form_for @search, url: admin_requests_path, method: :get, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|
   = autocomplete :user, f
-  = f.input :state_in, collection: Request.human_state_names, input_html: { multiple: true }, required: false
+  = f.input :state_in, collection: Request.human_state_names, input_html: { multiple: true }, required: false, label: 'Состояние'
   div class="form-actions"
-    = f.button :submit, t('.search', default: 'Find'), class: 'btn-primary'
+    = f.button :submit, 'Найти', class: 'btn-primary'
 
 = safe_paginate @requests
 = render partial: 'table', locals: { requests: @requests }
