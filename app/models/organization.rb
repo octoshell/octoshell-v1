@@ -83,7 +83,11 @@ class Organization < ActiveRecord::Base
   end
 
   def link_name
-    name
+    short_name
+  end
+  
+  def short_name
+    abbreviation? ? abbreviation : name
   end
   
 private
