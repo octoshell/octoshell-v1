@@ -35,7 +35,7 @@ class SuretiesController < ApplicationController
   end
   
   def new_scan
-    @surety = Surety.find(params[:surety_id])
+    @surety = find_surety(params[:surety_id])
   end
   
 private

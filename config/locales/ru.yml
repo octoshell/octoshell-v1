@@ -916,7 +916,7 @@ ru:
             pending: Не использован
             used: Использован
           events:
-            _use: Использовать
+            use: Использовать
       ticket:
         state:
           states:
@@ -925,66 +925,57 @@ ru:
             resolved: Решено
             closed: Закрыт
           events:
-            _resolve: Проблема решена
-            _close: Закрыть
+            resolve: Проблема решена
+            close: Закрыть
       organization_kind:
         state:
           states:
             active: Активный
             closed: Удален
           events:
-            _close: Удалить
+            close: Удалить
       ticket_question:
         state:
           states:
             active: Активный
             closed: Закрытый
           events:
-            _close: Закрыть
+            close: Закрыть
       membership:
         state:
           states:
             active: Активно
             closed: Удалено
           events:
-            _close: Удалить
+            close: Удалить
       ticket_field:
         state:
           states:
             active: Активный
             closed: Закрытый
           events:
-            _close: Закрыть
+            close: Закрыть
       ticket_template:
         state:
           states:
             active: Активный
             closed: Закрытый
           events:
-            _close: Закрыть
+            close: Закрыть
       ticket_tag:
         state:
           states:
             active: Активный
             closed: Закрытый
           events:
-            _close: Закрыть
+            close: Закрыть
       organization:
         state:
           states:
             active: Активная
             closed: Удалена
           events:
-            _close: Удалить
-      task:
-        state:
-          states:
-            pending: В очереди
-            successed: Выполнено
-            failed: Ошибка
-          events:
-            _force_success: Пропустить процедуру
-            _resolve: Пометить выполненой
+            close: Удалить
       access:
         state:
           states:

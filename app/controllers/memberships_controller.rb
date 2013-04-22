@@ -17,7 +17,7 @@ class MembershipsController < ApplicationController
     @membership = current_user.memberships.build(params[:membership])
     if @membership.save
       @membership.user.track! :create_membership, @membership, current_user
-      redirect_to @membership
+      redirect_to profile_path
     else
       @membership.build_default_positions
       render :new
@@ -33,7 +33,7 @@ class MembershipsController < ApplicationController
     @membership = find_membership(params[:id])
     if @membership.update_attributes(params[:membership])
       @membership.user.track! :update_membership, @membership, current_user
-      redirect_to @membership
+      redirect_to profile_path
     else
       @membership.build_default_positions
       render :show

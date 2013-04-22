@@ -64,7 +64,7 @@ class Surety < ActiveRecord::Base
   
   def load_scan(file)
     if file.blank?
-      errors.add(:base, "Не приложен файл")
+      errors.add(:base, "Не прикреплен файл")
       return false
     end
     

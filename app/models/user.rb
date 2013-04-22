@@ -150,7 +150,7 @@ class User < ActiveRecord::Base
   end
   
   def full_name
-    [last_name, middle_name, first_name].find_all do |i|
+    [last_name, first_name, middle_name].find_all do |i|
       i.present? && i != '-'
     end.join(' ')
   end
