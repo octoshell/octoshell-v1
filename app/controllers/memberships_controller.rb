@@ -26,10 +26,6 @@ class MembershipsController < ApplicationController
 
   def show
     @membership = current_user.memberships.find(params[:id])
-  end
-    
-  def edit
-    @membership = find_membership(params[:id])
     @membership.build_default_positions
   end
   
@@ -40,7 +36,7 @@ class MembershipsController < ApplicationController
       redirect_to @membership
     else
       @membership.build_default_positions
-      render :edit
+      render :show
     end
   end
   
@@ -48,16 +44,16 @@ class MembershipsController < ApplicationController
     @membership = find_membership(params[:membership_id])
     @membership.close
     @membership.user.track! :close_membership, @membership, current_user
-    redirect_to @membership
+    redirect_to profile_path
   end
   
 private
   
-  def find_membership(id)
-    current_user.memberships.find(id)
+  def namespace
+    :profile
   end
   
-  def setup_default_filter
-    params[:q] ||= { state_in: ['active'] }
+  def find_membership(id)
+    current_user.memberships.find(id)
   end
 end

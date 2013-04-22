@@ -406,9 +406,9 @@ ru:
     send_and_wait_approve:
       html: <a href="tickets/new">Прислать скан поручительства</a> и дождаться его подтверждения
     membership:
-      html: <a href="/memberships/new">Добавить место работы</a>
+      html: <a href="/memberships/new">Укажите место работы</a>
     credential:
-      html: <a href="/credentials/new">Добавить публичный ключ</a>
+      html: <a href="/credentials/new">Добавьте публичный ключ</a>
   activerecord:
     models:
       user: Пользователь

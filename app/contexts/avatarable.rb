@@ -3,7 +3,8 @@ module Avatarable
     if avatar?
       avatar.url
     else
-      Gravatar.new(email).image_url + '?' + {
+      hash = Digest::MD5.hexdigest(email.downcase.strip)
+      "https://secure.gravatar.com/avatar/#{hash}" + '?' + {
         s: '116',
         d: "http://#{website_host}/assets/default_avatar.png"
       }.to_param

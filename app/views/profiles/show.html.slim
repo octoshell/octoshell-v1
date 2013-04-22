@@ -5,32 +5,34 @@ div class="row"
     div class="avatar"
       = image_tag @user.avatar_url
   div class="span10"
-    div class="page-header" style="margin-bottom: 10px"
-      h1 = @user.full_name
-
+    h3 = @user.full_name
     p
       strong = link_to 'Редактировать', edit_profile_path
 
 div class="row"
   div class="offset2"
     h4 Работа
-    - memberships = @user.memberships
+    - memberships = @user.memberships.with_state(:active)
     
     div class="row"
       span class="span5"
         table class="table table-condensed"
-          - memberships.each do |m|
-            tr
-              td class="span4"
-                = link_to m.organization.name, m
-                - if m.subdivision
-                  | , 
-                  = m.subdivision.name
-              td
-                small
-                  = link_to m, class: 'muted' do
-                    i class="icon-pencil"
-                    |  изменить
+          - if memberships.any?
+            - memberships.each do |m|
+              tr
+                td class="span4"
+                  = link_to m.organization.name, m
+                  - if m.subdivision
+                    | , 
+                    = m.subdivision.name
+                td
+                  small
+                    = link_to m, class: 'muted' do
+                      i class="icon-pencil"
+                      |  изменить
+          - else
+            tr class="warning"
+              td colspan="2" Добавьте место работы
           tr
             td colspan="2"
               strong
@@ -54,12 +56,16 @@ div class="row"
     div class="row"
       span class="span9"
         table class="table table-condensed"
-          - credentials.each do |c|
-            tr
-              td class="span3" = c.name
-              td class="span6"
-                code class="public-key expanded" data-trigger="focus" title="#{copy_combo}" = c.public_key
-              td = link_to "&times;".html_safe, [c, :close], method: :put, confirm: "Вы уверены?", class: 'big-close danger'
+          - if credentials.any?
+            - credentials.each do |c|
+              tr
+                td class="span3" = c.name
+                td class="span6"
+                  code class="public-key expanded" data-trigger="focus" title="#{copy_combo}" = c.public_key
+                td = link_to "&times;".html_safe, [c, :close], method: :put, confirm: "Вы уверены?", class: 'big-close danger'
+          - else
+            tr class="warning"
+              td colspan="3" Добавьте свой публичный ключ
           tr
             td colspan="3"
               strong

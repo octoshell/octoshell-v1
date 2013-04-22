@@ -122,8 +122,7 @@ private
     current_user.all_projects.enabled.find(id)
   end
   
-  def setup_default_filter
-    params[:q] ||= { state_in: ['active'] }
-    params[:q][:meta_sort] ||= 'name.asc'
+  def namespace
+    :projects
   end
 end

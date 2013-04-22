@@ -1,32 +1,10 @@
 - title t('.title', default: 'Membership')
 
-div class="well"
-  = link_to t('.edit', default: 'Edit'), edit_membership_path(@membership), class: 'btn'
-  = " "
-  - if @membership.can_close?
-    = link_to Membership.human_state_event_name(:close), membership_close_path(@membership), class: 'btn btn-danger', method: :put, data: { confirm: t('.confirm_destroy', default: 'Are you sure?') }
-    = " "
+= render 'form'
 
-table class="table table-bordered" id="membership-#{@membership.id}-detail"
-  tr
-    th = Organization.model_name.human
-    td = smart_link_to @membership.organization
-  tr
-    th = User.model_name.human
-    td = smart_link_to @membership.user
-  tr
-    th = Membership.human_attribute_name(:state)
-    td = @membership.human_state_name
+legend Удаление
 
-h2 = t('.positions', default: 'Positions')
-
-div class="row"
-  div class="span6"
-    - if @membership.positions.any?
-      table class="table table-bordered"
-        - @membership.positions.each do |position|
-          tr
-            th = position.name
-            td = position.value
-    - else
-      p = t('.no_positions', default: 'There are no memberships')
+- if @membership.can_close?
+  = link_to membership_close_path(@membership), class: 'danger', method: :put, data: { confirm: 'Вы уверены?' } do
+    i class="icon-remove"
+    |  Удалить место работы

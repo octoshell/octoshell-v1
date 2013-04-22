@@ -84,6 +84,10 @@ private
     current_user.tickets.find(id)
   end
   
+  def namespace
+    :tickets
+  end
+  
   def setup_default_filter
     params[:q] ||= { state_in: ['active', 'answered', 'resolved'] }
     params[:meta_sort] ||= 'id.asc'

@@ -35,7 +35,7 @@ html
         = render partial: 'faults/teaser'
         = render partial: 'surveys/teaser'
         - if logged_in?
-          - if (menu = render "shared/#{namespace}_menu").present?
+          - if (menu = render "shared/#{namespace}_menu" rescue nil).present?
             ul class="nav nav-tabs" id="top-menu"
               = menu
           = render_breadcrumbs builder: BootstrapBreadcrumbs

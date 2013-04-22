@@ -1,4 +1,13 @@
-li class="#{active_menu?(:dashboard)}" = link_to t('.dashboard', default: 'Dashboard'), projects_path
 - if may? :access, :admin
+  li class="#{active_menu?(:dashboard)}" = link_to t('.dashboard', default: 'Dashboard'), projects_path
   li class="#{active_menu?(:admin)}" = link_to t('.admin', default: 'Admin'), admin_start_path
-li class="#{active_menu?(:notifications)}" = link_to t('.notifications', default: "Notifications (%{count})", count: current_user.notifications_count), notifications_path
+  li class="#{active_menu?(:notifications)}" = link_to t('.notifications', default: "Notifications (%{count})", count: current_user.notifications_count), notifications_path
+- else
+  li class="#{active_menu?(:projects)}"
+    = link_to '<i class="icon-cloud"></i> Проекты'.html_safe, projects_path
+  li class="#{active_menu?(:profile)}"
+    = link_to '<i class="icon-user"></i> Профиль'.html_safe, profile_path
+  li class="#{active_menu?(:tickets)}"
+    = link_to '<i class="icon-question-sign"></i> Поддержка'.html_safe, tickets_path
+  li class="#{active_menu?(:pages)}"
+    = link_to '<i class="icon-info-sign"></i> Справка'.html_safe, pages_path

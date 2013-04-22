@@ -93,7 +93,7 @@ ru:
       sign_out: Выход
       sign_in: Вход
       sign_up: Регистрация
-      start_steps_title: Для того чтобы начать работу вам нужно
+      start_steps_title: "Заполните профиль:"
   notifications:
     index:
       new_ticket: Создать заявку в Поддержке
@@ -235,7 +235,7 @@ ru:
       title: Профиль
       edit: Редактировать
       memberships: Места работы
-      new_membership: Добавить место работы
+      new_membership: Укажите место работы
       sureties: Поручительства
       credentials: Публичные ключи
       new_credential: Добавить публичный ключ

@@ -9,6 +9,10 @@ class PagesController < ApplicationController
   end
   
 private
+
+  def namespace
+    :pages
+  end
   
   def find_page(id)
     Page.find_by_url!(id)

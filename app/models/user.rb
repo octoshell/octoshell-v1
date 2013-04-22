@@ -170,13 +170,6 @@ class User < ActiveRecord::Base
     end
   end
   
-  def unsure!
-    transaction do
-      _unsure!
-      accounts.non_closed.each &:cancel!
-    end
-  end
-  
   def activation_active?
     activation_state == 'active'
   end

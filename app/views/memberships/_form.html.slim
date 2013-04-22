@@ -1,5 +1,9 @@
 - if @membership.organization
-  = simple_form_for @membership, url: new_membership_path, html: { class: 'form-horizontal' }, method: :get do |f|
+  = simple_form_for @membership, html: { class: 'form-horizontal' } do |f|
+    div class="control-group"
+      label class="string control-label" Организация
+      div class="controls"
+        span class="uneditable-input" = @membership.organization.short_name
     = f.input :organization_id, as: :hidden
     - if @membership.organization.subdivision_required?
       = f.input :subdivision_name, as: :string, input_html: { data: { provide: 'typeahead', source: @membership.organization.subdivisions.pluck(:name) }, autocomplete: 'off' }
