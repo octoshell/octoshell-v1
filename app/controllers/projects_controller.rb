@@ -80,37 +80,6 @@ class ProjectsController < ApplicationController
     end
   end
   
-  def invite
-    @project = find_project(params[:project_id])
-    @account = @project.accounts.build
-    @surety = @project.build_additional_surety
-    @surety.surety_members.build
-  end
-  
-  def sureties
-    @project = find_project(params[:project_id])
-    @surety = @project.sureties.build(params[:surety])
-    if @surety.save
-      redirect_to @project, notice: t('.surety_created', default: "Surety has been created")
-    else
-      @account = @project.accounts.build
-      render :invite
-    end
-  end
-  
-  def accounts
-    @project = find_project(params[:project_id])
-    if params[:account][:user_id].present?
-      conditions = { user_id: params[:account][:user_id] }
-      @account = @project.accounts.where(conditions).first_or_create!
-      redirect_to(@project, notice: t('.user_invited', default: "%{name} invited to the project", name: @account.user.full_name)) and return if @account.active? || @account.activate!
-    end
-    
-    @account = @project.accounts.build
-    @surety = @project.build_additional_surety
-    render :invite
-  end
-  
   def close_confirmation
     @project = find_project(params[:project_id])
     render :close
@@ -123,6 +92,6 @@ private
   end
   
   def namespace
-    :projects
+    may?(:access, :admin) ? :dashboard : :projects
   end
 end

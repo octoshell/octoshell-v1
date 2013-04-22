@@ -16,10 +16,4 @@ class ProjectJoinersController < ApplicationController
       render :new
     end
   end
-
-private
-  
-  def namespace
-    :dashboard
-  end
 end

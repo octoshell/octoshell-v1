@@ -13,10 +13,4 @@ class RepliesController < ApplicationController
       render 'tickets/show'
     end
   end
-
-private
-
-  def namespace
-    :dashboard
-  end
 end

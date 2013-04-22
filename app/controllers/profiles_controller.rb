@@ -27,6 +27,6 @@ private
   end
   
   def namespace
-    :profile
+    may?(:access, :admin) ? :dashboard : :profile
   end
 end

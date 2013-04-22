@@ -50,7 +50,7 @@ class MembershipsController < ApplicationController
 private
   
   def namespace
-    :profile
+    may?(:access, :admin) ? :dashboard : :profile
   end
   
   def find_membership(id)

@@ -1,4 +1,6 @@
 class FaultRepliesController < ApplicationController
+  before_filter :require_login
+  
   def create
     @fault = current_user.faults.find(params[:fault_id])
     @reply = @fault.replies.build(params[:fault_reply]) do |f|

@@ -7,7 +7,7 @@
   
   = f.simple_fields_for :card do |f|
     legend Карточка
-    table
+    table class="vtop"
       tr
         td = f.input :name,         as: :text, input_html: { rows: 2 }, hint: 'Здесь следует ввести реальное название исследовательского проекта'
         td = f.input :en_name,      as: :text, input_html: { rows: 2 }

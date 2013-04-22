@@ -25,14 +25,4 @@ class CredentialsController < ApplicationController
       render :show
     end
   end
-  
-private
-  
-  def namespace
-    :dashboard
-  end
-  
-  def setup_default_filter
-    params[:q] ||= { state_in: ['active'] }
-  end
 end

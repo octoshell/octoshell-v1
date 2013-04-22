@@ -11,7 +11,7 @@ class PagesController < ApplicationController
 private
 
   def namespace
-    :pages
+    may?(:access, :admin) ? :dashboard : :pages
   end
   
   def find_page(id)

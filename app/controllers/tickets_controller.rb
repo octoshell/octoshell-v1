@@ -85,7 +85,7 @@ private
   end
   
   def namespace
-    :tickets
+    may?(:access, :admin) ? :dashboard : :tickets
   end
   
   def setup_default_filter
