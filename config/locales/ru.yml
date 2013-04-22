@@ -907,7 +907,7 @@ ru:
             allowed: Разрешен
         cluster_state:
           states:
-            active: Открыт
+            active: Разрешен
             blocked: Заблокирован
             closed: Закрыт
       account_code:

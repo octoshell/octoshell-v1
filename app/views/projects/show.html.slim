@@ -15,15 +15,17 @@
 
   p = link_to 'Редактировать', edit_project_path(@project)
 
-legend Мои доступы на кластеры
+- requests = @project.requests.with_state(:active)
+- if requests.any?
+  legend Мои доступы на кластеры
 
-table class="table"
-  - @project.requests.with_state(:active).each do |r|
-    tr class="success"
-      td style="vertical-align: middle" = r.cluster.name
-      td
-        - a = @project.accounts.where(user_id: current_user.id).first
-        code class="public-key expanded" data-trigger="focus" title="#{copy_combo}" #{a.username}@#{r.cluster.host}
+  table class="table"
+    - @project.requests.with_state(:active).each do |r|
+      tr class="success"
+        td style="vertical-align: middle" = r.cluster.name
+        td
+          - a = @project.accounts.where(user_id: current_user.id).first
+          code class="public-key expanded" data-trigger="focus" title="#{copy_combo}" #{a.username}@#{r.cluster.host}
 
 legend Доступы к ресурсам
 
@@ -66,6 +68,7 @@ table class="table"
       th Доступ на кластеры
       - if current_user == @project.user
         th
+  - have_requests = @project.requests.with_state(:active).any?
   - @project.accounts.without_access_state(:denied).each_with_index do |account|
     tr class="#{account.allowed? && account.active? ? 'success' : 'warning'}"
       td class="span4"
@@ -83,8 +86,9 @@ table class="table"
           span class="label" = account.human_cluster_state_name
         - if account.closed?
           span class="label label-important" = account.human_cluster_state_name
+        - unless have_requests
           |  
-          small (Нет активной заявки)
+          small (Нет доступных ресурсов)
       - if current_user == @project.user
         td
           - unless account.user == @project.user
@@ -145,41 +149,42 @@ table class="table"
                           | Для участников без поручительств создастся новое поручительство
                       = submit_tag 'Добавить участников', class: 'btn btn-small btn-success'
 
-legend Поручительства
+- sureties = @project.sureties.without_states(:filling, :closed)
+- if sureties.any?
+  legend Поручительства
+  div class="row"
+    div class="span6"
+      table class="table"
+        - sureties.each_with_index do |surety, i|
+          - state = { active: 'success', confirmed: 'warning', declined: 'error', generated: 'warning' }[surety.state_name]
+          tr class="#{'without-top-border' if i == 0} #{state}"
+            td class="span4" style="padding-bottom: 0;"
+              = render_status_icon surety.active?
+              = link_to_if current_user == @project.user, "Поручительство ##{surety.id}", surety
+            td style="padding-bottom: 0;"
+              span class="label label-#{state}" = surety.human_state_name
+          tr class="without-top-border #{state}"
+            td colspan="2" style="padding-top: 0;"
+              - if surety.filling? && !surety.has_loaded_scan?
+                small class="muted"
+                  | Добавьте всех участников, затем 
+                  = link_to 'распечатайте и пришлите', surety
 
-div class="row"
-  div class="span6"
-    table class="table"
-      - @project.sureties.without_states(:filling, :closed).each_with_index do |surety, i|
-        - state = { active: 'success', confirmed: 'warning', declined: 'error', generated: 'warning' }[surety.state_name]
-        tr class="#{'without-top-border' if i == 0} #{state}"
-          td class="span4" style="padding-bottom: 0;"
-            = render_status_icon surety.active?
-            = link_to_if current_user == @project.user, "Поручительство ##{surety.id}", surety
-          td style="padding-bottom: 0;"
-            span class="label label-#{state}" = surety.human_state_name
-        tr class="without-top-border #{state}"
-          td colspan="2" style="padding-top: 0;"
-            - if surety.filling? && !surety.has_loaded_scan?
-              small class="muted"
-                | Добавьте всех участников, затем 
-                = link_to 'распечатайте и пришлите', surety
-
-    - if surety = @project.sureties.with_state(:filling).first
-      div class="filling-surety"
-        h4 Поручительство ##{surety.id}
-        = simple_form_for surety, url: [surety, :generate] do |f|
-          = f.association :organization, input_html: { class: 'chosen' }
-          = f.input :boss_full_name
-          = f.input :boss_position
-          h5 Участники:
-          ul
-            - surety.surety_members.each do |member|
-              li = member.full_name
-          = f.button :submit, 'Сгенерировать', class: 'btn btn-small btn-success'
-          span class="muted"
-            |  или 
-            = link_to 'Добавить еще участников', '#members'
+      - if surety = @project.sureties.with_state(:filling).first
+        div class="filling-surety"
+          h4 Поручительство ##{surety.id}
+          = simple_form_for surety, url: [surety, :generate] do |f|
+            = f.association :organization, input_html: { class: 'chosen' }
+            = f.input :boss_full_name
+            = f.input :boss_position
+            h5 Участники:
+            ul
+              - surety.surety_members.each do |member|
+                li = member.full_name
+            = f.button :submit, 'Сгенерировать', class: 'btn btn-small btn-success'
+            span class="muted"
+              |  или 
+              = link_to 'Добавить еще участников', '#members'
 
 - if current_user == @project.user
   legend Завершение проекта
