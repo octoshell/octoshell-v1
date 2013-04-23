@@ -176,7 +176,7 @@ module ApplicationHelper
   end
   
   def render_status_icon(bool)
-    klass = bool ? 'ok' : 'ban-circle'
-    %(<i class="icon-#{klass} status-icon"></i> ).html_safe
+    klass, title = bool ? ['ok', 'OK'] : ['ban-circle', '']
+    %(<i class="icon-#{klass} status-icon" title="#{title}"></i> ).html_safe
   end
 end

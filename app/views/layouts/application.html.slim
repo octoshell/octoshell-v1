@@ -52,8 +52,10 @@ html
           - if @wikis.any?
             div id="help" class="group"
               div class="alert alert-info"
+                i class="icon-info-sign"
+                |  
                 p data-toggle="collapse" data-target="#help-list" class="collapse-header"
-                  strong = t('.help')
+                  strong Справка
                 ul class="unstyled collapse" id="help-list"
                   - @wikis.each do |wiki|
                     li = link_to wiki.name, page_path(wiki.url)

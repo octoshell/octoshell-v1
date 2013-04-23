@@ -896,9 +896,9 @@ ru:
             declined: Отказано
             closed: Закрыта
         events:
-          _activate: Активировать
-          _decline: Отказать
-          _close: Закрыть
+          activate: Активировать
+          decline: Отказать
+          close: Закрыть
       account:
         access_state:
           states:
