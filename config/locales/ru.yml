@@ -803,11 +803,11 @@ ru:
             active: Активно
             confirmed: Предварительно одобрено
           events:
-            _activate: Активировать
-            _decline: Отказать
-            _close: Удалить
-            _confirm: Предварительно одобрить
-            _unconfirm: Отменить предварительное одобрение
+            activate: Активировать
+            decline: Отказать
+            close: Удалить
+            confirm: Предварительно одобрить
+            unconfirm: Отменить предварительное одобрение
       report:
         state:
           states:
@@ -829,14 +829,14 @@ ru:
             sured: Доверенный
             closed: Удален
           events:
-            _close: Удалить
+            close: Удалить
       credential:
         state:
           states:
             active: Активный
             closed: Удалено
           events:
-            _close: Удалить
+            close: Удалить
       cluster_user:
         state:
           states:
@@ -877,7 +877,7 @@ ru:
             active: Активен
             closed: Удален
           events:
-            _close: Удалить
+            close: Удалить
       project:
         state:
           states:

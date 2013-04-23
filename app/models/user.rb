@@ -79,8 +79,11 @@ class User < ActiveRecord::Base
     inside_transition :on => :sure, &:activate_own_accounts!
   end
   
-  def self.admin_notifications_count
-    -1
+  def self.notifications_count
+    [ Task.with_state(:failed),
+      Ticket.with_state(:active),
+      Surety.with_state(:generated),
+      Request.with_state(:pending) ].map(&:count).sum
   end
   
   def examine!
@@ -175,15 +178,7 @@ class User < ActiveRecord::Base
   end
   
   def notifications_count
-    -1
-  end
-  
-  def admin_notifications_count
-    self.class.admin_notifications_count
-  end
-  
-  def user_notifications_count
-    -1
+    self.class.notifications_count
   end
   
   def emails

@@ -27,10 +27,10 @@ html
           ul class="nav pull-right"
             - if logged_in?
               li id="user" = link_to current_user.email, profile_path
-              li = link_to t('.sign_out'), session_path, method: :delete
+              li = link_to 'Выход', session_path, method: :delete
             - else
-              li = link_to t('.sign_up'), new_user_path
-              li = link_to t('.sign_in'), new_session_path
+              li = link_to 'Регистрация', new_user_path
+              li = link_to 'Вход', new_session_path
       div class="noprint"
         = render partial: 'faults/teaser'
         = render partial: 'surveys/teaser'
