@@ -2,6 +2,8 @@ class CredentialsController < ApplicationController
   before_filter :require_login
   
   def new
+    add_breadcrumb 'Профиль', profile_path
+    add_breadcrumb 'Новый публичный ключ'
     @credential = current_user.credentials.build
   end
     
@@ -11,6 +13,8 @@ class CredentialsController < ApplicationController
       @credential.user.track! :create_credential, @credential, current_user
       redirect_to profile_path
     else
+      add_breadcrumb 'Профиль', profile_path
+      add_breadcrumb 'Новый публичный ключ'
       render :new
     end
   end
@@ -24,5 +28,10 @@ class CredentialsController < ApplicationController
       flash.now[:alert] = @credential.errors.full_messages.join(', ')
       render :show
     end
+  end
+  
+  private
+  def namespace
+    :profile
   end
 end

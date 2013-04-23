@@ -82,6 +82,8 @@ class ProjectsController < ApplicationController
   
   def close_confirmation
     @project = find_project(params[:project_id])
+    add_breadcrumb @project.title, @project
+    add_breadcrumb 'Завершение проекта'
     render :close
   end
   

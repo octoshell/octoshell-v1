@@ -29,9 +29,9 @@
   
   legend Категории
   
-  = f.association :direction_of_sciences, as: :check_boxes, required: true
-  = f.association :critical_technologies, as: :check_boxes, required: true
-  div class="control-group"
+  = f.association :direction_of_sciences, as: :check_boxes, required: true, wrapper_html: { class: 'limited-height' }
+  = f.association :critical_technologies, as: :check_boxes, required: true, wrapper_html: { class: 'limited-height' }
+  div class="control-group limited-height"
     label class="check_boxes required control-label"
       abbr title="required" *
       |  

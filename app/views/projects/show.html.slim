@@ -11,9 +11,10 @@
           small = link_to 'Отменить завершение'
 
 - if current_user == @project.user
-  legend Профиль проекта
-
-  p = link_to 'Редактировать', edit_project_path(@project)
+  p
+    = link_to edit_project_path(@project), class: 'muted' do
+      i class="icon-pencil"
+      |  Редактировать профиль проекта
 
 - requests = @project.requests.with_state(:active)
 - if requests.any?

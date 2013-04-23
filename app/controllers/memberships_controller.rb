@@ -4,10 +4,13 @@ class MembershipsController < ApplicationController
   def new
     add_breadcrumb 'Профиль', profile_path
     @membership = current_user.memberships.build do |m|
-      if hash = params.delete(:membership)
+      hash = params.delete(:membership)
+      if hash && hash[:organization_id].present?
         add_breadcrumb 'Новое место работы', new_membership_path
         add_breadcrumb 'Дополнительная информация'
         m.organization = Organization.find(hash[:organization_id])
+      else
+        add_breadcrumb 'Новое место работы'
       end
     end
     @membership.build_default_positions

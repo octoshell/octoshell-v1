@@ -9,4 +9,4 @@ blockquote class="lead"
   strong = @project.title
   | ?
 
-= link_to "Я действительно хочу завершить проект #{@project.title}", project_close_path(@project), method: :put, data: { confirm: 'Завершить проект?' }, class: 'btn btn-danger'
+= link_to "Да, я действительно хочу завершить проект #{@project.title}", project_close_path(@project), method: :put, data: { confirm: 'Завершить проект?' }, class: 'btn btn-danger'

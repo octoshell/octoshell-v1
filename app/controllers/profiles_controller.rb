@@ -7,6 +7,8 @@ class ProfilesController < ApplicationController
   end
   
   def edit
+    add_breadcrumb 'Профиль', profile_path
+    add_breadcrumb 'Редактирование'
     @user = find_user
     @user.additional_emails.build
   end

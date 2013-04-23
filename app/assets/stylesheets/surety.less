@@ -540,3 +540,23 @@ table.vtop {
     vertical-align: top;
   }
 }
+
+
+.control-group.limited-height .controls {
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+.control-group.limited-height .controls::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 8px;
+}
+
+.control-group.limited-height .controls::-webkit-scrollbar-track {
+  background-color: #eee;
+  border-radius: 8px;
+}
+.control-group.limited-height .controls::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #666;
+}
