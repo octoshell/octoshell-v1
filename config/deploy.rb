@@ -11,7 +11,7 @@ require "cocaine"
 
 set :application, "msu"
 set :rails_env, "production"
-set :domain, "evrone@v1.parallel.ru"
+set :domain, "evrone@v2.parallel.ru"
 set :repository,  "git@github.com:evrone/octoshell.git"
 set :branch, "production"
 set :use_sudo, false
