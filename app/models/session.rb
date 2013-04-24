@@ -37,7 +37,7 @@ class Session < ActiveRecord::Base
     
     inside_transition :on => :stop do |session|
       session.touch :ended_at
-      stats.each &:cache!
+      session.stats.each &:cache!
       User.find_each &:examine!
     end
   end
