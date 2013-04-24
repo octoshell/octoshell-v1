@@ -5,8 +5,10 @@ div class="deliver-surety"
     i class="icon-print"
     div class="step-content"
       = link_to 'Распечатайте поручительство', '#', class: 'printable', data: { print: '#surety' }
-      | , подпишите и поставьте печать
-  
+      | , подпишите и поставьте печать. 
+      = link_to surety_path(@surety, format: :rtf), style: 'margin-left: 20px;' do
+        span class="icon-download-alt"
+        |  surety_#{@surety.id}.rtf
   
   div class="step clearfix"
     i class="icon-envelope"

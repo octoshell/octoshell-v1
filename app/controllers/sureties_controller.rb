@@ -9,7 +9,7 @@ class SuretiesController < ApplicationController
     respond_to do |format|
       format.html
       format.rtf do
-        send_data @surety.to_rtf
+        send_data @surety.to_rtf, filename: "surety_#{@surety.id}.rtf", type: 'application/rtf'
       end
     end
   end

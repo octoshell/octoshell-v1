@@ -23,36 +23,36 @@ module Models
     end
 
     def to_rtf
-      font = RTF::Font.new(RTF::Font::ROMAN, 'Arial')
+      font = ::RTF::Font.new(::RTF::Font::ROMAN, 'Arial')
 
       styles = {} 
 
-      header = RTF::ParagraphStyle.new
+      header = ::RTF::ParagraphStyle.new
       header.justification = :qr
       header.space_before = 300
       header.space_after = 300
       styles['header'] = header
 
-      title = RTF::ParagraphStyle.new
+      title = ::RTF::ParagraphStyle.new
       title.space_before = 1000
       title.space_after = 1000
       title.justification = :qc
       styles['title'] = title
 
-      body = RTF::ParagraphStyle.new
+      body = ::RTF::ParagraphStyle.new
       body.space_after = 300
       styles['body'] = body
 
-      dl = RTF::ParagraphStyle.new
+      dl = ::RTF::ParagraphStyle.new
       dl.space_after = 300
       dl.left_indent = 100
       styles['dl'] = dl
 
-      footer = RTF::ParagraphStyle.new
+      footer = ::RTF::ParagraphStyle.new
       footer.space_before = 300
       styles['footer'] = footer
 
-      document = RTF::Document.new(font)
+      document = ::RTF::Document.new(font)
 
       template = YAML.load_file("#{Rails.root}/config/surety.rtf")
       unless project.organizations.any?
