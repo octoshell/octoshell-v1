@@ -40,7 +40,7 @@ html
               = menu
           = render_breadcrumbs builder: BootstrapBreadcrumbs
         - flash.each do |type, message|
-          - context = type == :alert ? 'alert-error' : 'alert-info'
+          - context = type == :alert ? 'alert-error' : 'alert-success'
           = content_tag :div, message, class: "alert #{context}"
         - if logged_in? && current_user.project_steps.any? && namespace != :admin
           = render partial: 'shared/steps', locals: { steps: current_user.project_steps, title: t('.start_steps_title', default: 'In order to get started you need to:') }

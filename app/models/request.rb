@@ -52,22 +52,6 @@ class Request < ActiveRecord::Base
       transition :blocked => :active
     end
     
-    inside_transition :on => :activate do |r|
-      r.accounts.without_cluster_state(:active).each &:activate
-    end
-    
-    inside_transition :on => :block do |r|
-      r.accounts.with_cluster_state(:active).each &:block!
-    end
-    
-    inside_transition :on => :unblock do |r|
-      r.accounts.with_cluster_state(:blocked).each &:unblock!
-    end
-    
-    inside_transition :on => :close do |r|
-      r.accounts.without_cluster_states(:blocked, :closed).each &:block!
-    end
-    
     inside_transition :on => [:activate, :block, :unblock, :close] do |r|
       r.request_maintain!
     end

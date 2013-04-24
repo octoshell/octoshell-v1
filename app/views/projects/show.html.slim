@@ -156,7 +156,7 @@ table class="table"
                           | Для участников без поручительств создастся новое поручительство
                       = submit_tag 'Добавить участников', class: 'btn btn-small btn-success'
 
-- sureties = @project.sureties.without_states(:filling, :closed)
+- sureties = @project.sureties.without_states(:generated, :closed)
 - if sureties.any?
   legend Поручительства
   div class="row"

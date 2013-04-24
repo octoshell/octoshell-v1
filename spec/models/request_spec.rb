@@ -45,10 +45,6 @@ describe Request do
         should be_blocked
       end
     
-      it 'sets related accounts cluster state to blocked' do
-        account.should be_blocked
-      end
-    
       it 'requests maintain' do
         request.maintain_requested_at.should be
       end
@@ -66,10 +62,6 @@ describe Request do
         should be_active
       end
       
-      it 'sets related accounts cluster state to active' do
-        account.should be_active
-      end
-      
       it 'requests maintain' do
         request.maintain_requested_at.should be
       end
@@ -85,10 +77,6 @@ describe Request do
       
       it 'sets status to closed' do
         should be_closed
-      end
-      
-      it 'sets related accounts cluster state to blocked' do
-        account.should be_blocked
       end
       
       it 'requests maintain' do

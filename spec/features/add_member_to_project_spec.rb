@@ -48,7 +48,6 @@ feature 'Add member to Project', js: true do
     fill_in 'members[0][email]', with: 'ned@example.com'
     click_button 'Добавить участников'
     expect(page).to have_content('Участники добавлены')
-    
     fill_in 'ФИО руководителя организации', with: 'Burns Montgomery'
     fill_in 'Должность руководителя организации', with: 'CEO'
     

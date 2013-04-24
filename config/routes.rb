@@ -69,7 +69,7 @@ MSU::Application.routes.draw do
   resources :project_joiners, only: [:new, :create], path: 'joins'
 
   # requests
-  resources :requests, only: [:create, :index, :show] do
+  resources :requests, only: [:create, :show, :update] do
     put :close
   end
 

@@ -1,30 +1,35 @@
-- title t('.title', default: "Request #%{id}", id: @request.id)
+- title "Заявка ##{@request.id}"
 
-div class="well"
-  - if @request.can_close?
-    = link_to Request.human_state_event_name(:close), request_close_path(@request), class: 'btn btn-danger', method: :put
+table class="table"
+  tr
+    th class="span3" = Request.human_attribute_name(:state)
+    td
+      - if @request.pending?
+        span class="label label-warning" = @request.human_state_name
+      - elsif @request.active?
+        span class="label label-success" = @request.human_state_name
+      - elsif @request.blocked?
+        span class="label" = @request.human_state_name
+      - else
+        span class="label label-error" = @request.human_state_name
+  tr
+     th = Cluster.model_name.human
+     td = @request.cluster.name
+  tr
+    th class="span3" = Project.model_name.human
+    td = link_to @request.project.title, @request.project
+  tr
+    th = Request.human_attribute_name(:cpu_hours)
+    td = @request.cpu_hours
+  tr
+    th = Request.human_attribute_name(:gpu_hours)
+    td = @request.gpu_hours
+  tr
+    th = Request.human_attribute_name(:size)
+    td = @request.size
 
-div class="request"
-  table class="table table-bordered"
-    tr
-      th class="span4" = Project.model_name.human
-      td
-        strong = smart_link_to @request.project
-    tr
-      th = Project.human_attribute_name(:description)
-      td = @request.project.description
-    tr
-      th = Organization.model_name.human
-      td = @request.project.organization.name
-    tr
-      th = Cluster.model_name.human
-      td = @request.cluster.name
-    tr
-      th = Request.human_attribute_name(:hours)
-      td = @request.cpu_hours
-    tr
-      th = Request.human_attribute_name(:gpu_hours)
-      td = @request.gpu_hours
-    tr
-      th = Request.human_attribute_name(:state)
-      td id="request-#{@request.id}-status" = @request.human_state_name
+- if @request.can_close?
+  legend Закрытие заявки
+  
+  | Не нужны ресурсы кластера #{@request.cluster.name}? Можете  
+  strong = link_to 'закрыть заявку', request_close_path(@request), class: 'danger', method: :put

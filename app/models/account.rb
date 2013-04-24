@@ -23,24 +23,12 @@ class Account < ActiveRecord::Base
   # доступ к кластеру. выполнил ли пользователь необходимые условия для доступа
   state_machine :cluster_state, initial: :closed do
     state :active do
-      validates :project_state_name, inclusion: { in: [:active] }
       validates :user_state_name, inclusion: { in: [:sured] }
-    end
-    state :blocked do
-      validates :project_state_name, inclusion: { in: [:active, :closing] }
     end
     state :closed
     
     event :activate do
       transition :closed => :active
-    end
-    
-    event :block do
-      transition :active => :blocked
-    end
-    
-    event :unblock do
-      transition :blocked => :active
     end
     
     event :close do
@@ -62,7 +50,7 @@ class Account < ActiveRecord::Base
     end
     
     inside_transition :on => :allow, &:activate
-    inside_transition :on => :deny, &:block
+    inside_transition :on => :deny, &:close
   end
   
   def username=(username)
