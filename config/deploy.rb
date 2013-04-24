@@ -1,4 +1,4 @@
-set :rbenv_ruby_version, "1.9.3-p327"
+set :rbenv_ruby_version, "2.0.0-p0"
 set :default_environment, {
   'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH",
   'RBENV_VERSION' => rbenv_ruby_version
@@ -25,21 +25,12 @@ role :web, domain
 role :db,  domain, :primary => true
 
 set :whenever_command, "bundle exec whenever"
-require "whenever/capistrano"
-
-namespace :db do
-  task :copy do
-    run "cd #{deploy_to}/current && RAILS_ENV=production bundle exec rake db:dump"
-    Cocaine::CommandLine.new("rm", File.expand_path("db/data.yml")).run
-    Cocaine::CommandLine.new("scp", "#{domain}:#{deploy_to}/current/db/data.yml #{File.expand_path("db")}").run
-    Cocaine::CommandLine.new("bundle", "exec rake db:load").run
-  end
-end
+# require "whenever/capistrano"
 
 namespace :app do
   desc "Open the rails console on one of the remote servers"
   task :console, :roles => :app do
-    exec %{ssh #{domain} -t "#{default_shell} -c 'cd #{current_path} && bundle exec rails c #{rails_env}'"}
+    exec %{ssh #{domain} -t "#{default_shell} -c 'cd #{current_path} && bin/rails c #{rails_env}'"}
   end
 end
 

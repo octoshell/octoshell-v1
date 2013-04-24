@@ -20,11 +20,11 @@ pid "/tmp/unicorn.octoshell.pid"
 
 # Help ensure your application will always spawn in the symlinked
 # "current" directory that Capistrano sets up.
-working_directory "/var/www/msu/current"
+working_directory "/var/www/octoshell/current"
 
 # feel free to point this anywhere accessible on the filesystem
 user 'evrone'
-shared_path = "/var/www/msu/shared"
+shared_path = "/var/www/octoshell/shared"
 
 stderr_path "#{shared_path}/log/unicorn.stderr.log"
 stdout_path "#{shared_path}/log/unicorn.stdout.log"
