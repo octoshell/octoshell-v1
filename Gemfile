@@ -23,7 +23,6 @@ gem 'virtus'
 gem 'maymay', github: 'redstonelabs/maymay'
 gem 'rubyzip'
 gem 'breadcrumbs_on_rails'
-gem 'highcharts-rails'
 gem 'delayed_job_active_record'
 
 group :development do
