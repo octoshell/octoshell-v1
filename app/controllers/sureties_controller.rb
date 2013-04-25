@@ -28,7 +28,7 @@ class SuretiesController < ApplicationController
     @surety = find_surety(params[:surety_id])
     if @surety.load_scan(params[:file])
       @surety.user.track! :create_scan, @surety, current_user
-      redirect_to @surety
+      redirect_to @surety.project
     else
       redirect_to [@surety, :scan], alert: @surety.errors.full_messages.join(', ')
     end
