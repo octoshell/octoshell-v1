@@ -203,8 +203,10 @@ $ ->
     $input.on 'change', (e) ->
       last_name = @.value
       id = ''
+      email = ''
       if record = db[last_name]
         last_name = record.last_name
+        email = record.email.replace(/@(.*)/, "@...")
         id = record.id
       else
         record =  {}
@@ -214,7 +216,7 @@ $ ->
         last_name: last_name
         first_name: record.first_name
         middle_name: record.middle_name
-        email: record.email
+        email: email
         state: record.state
         n: n
       )
