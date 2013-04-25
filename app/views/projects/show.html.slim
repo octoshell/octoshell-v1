@@ -100,7 +100,8 @@ table class="table"
         td
           - unless account.user == @project.user
             strong = link_to '&times;'.html_safe, [account, :deny], method: :put, class: 'danger', role: 'remove-member'
-  - @project.unregistered_members.each do |sm|
+  - unregistered_members = @project.unregistered_members
+  - unregistered_members.each do |sm|
     tr class="striped"
       td colspan="2"
         = render_status_icon false
@@ -117,6 +118,22 @@ table class="table"
       - if current_user == @project.user
         td
           strong = link_to '&times;'.html_safe, [@project, sm.account_code], method: :delete, class: 'danger', role: 'remove-member'
+  - if current_user == @project.user && unregistered_members.any?
+    tr class="striped"
+      td colspan="4" style="padding: 0 8px;"
+        small
+          = link_to '#', class: 'muted printable', data: { print: '#member-codes' }, style: 'border: none;' do
+            i class="icon-print"
+            |  Распечатать коды приглашения участников
+        div id="member-codes" class="hidden"
+          table class="table table-stripped"
+            tr
+              th ФИО
+              td Код
+            - unregistered_members.each do |m|
+              tr
+                td = m.full_name
+                td = m.account_code.code
   - if current_user == @project.user
     tfoot
       tr

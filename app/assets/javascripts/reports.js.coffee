@@ -185,7 +185,7 @@ $ ->
         false
     
     $input.typeahead
-      minLength: 1,
+      minLength: 1
       source: (query, process) ->
         $.getJSON url, { q: query }, (data) ->
           process(
@@ -193,6 +193,12 @@ $ ->
               db[r.text] = r
               r.text
           )
+      highlighter: (item) ->
+        item = item.replace(/@(.*)/, "@...")
+        query = this.query.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&')
+        item.replace(new RegExp('(' + query + ')', 'ig'), ($1, match) ->
+          '<strong>' + match + '</strong>'
+        )
     
     $input.on 'change', (e) ->
       last_name = @.value
