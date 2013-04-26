@@ -114,12 +114,18 @@ module ApplicationHelper
     return if options[:admin] && maynot?(:access, :admin)
     
     content_tag(:div, class: "control-group select") do
-      content_tag(:div, class: "select control-label") do
-        content_tag :label, options[:label]
-      end + 
-        content_tag(:div, class: "controls") do
-          form.hidden_field options[:name], class: 'chosen ajax', data: { source: options[:source], url: options[:url] }, role: options[:role]
-        end
+      label = if options[:label]
+                content_tag(:div, class: "select control-label") do
+                  content_tag :label, options[:label]
+                end
+              else
+                ""
+              end
+      (label + content_tag(:div, class: "controls") do
+        data = { source: options[:source], url: options[:url] }
+        data[:placeholder] = options[:placeholder] if options[:placeholder]
+        form.hidden_field options[:name], class: 'chosen ajax', data: data, role: options[:role]
+      end).html_safe
     end
   end
   

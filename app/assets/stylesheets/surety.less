@@ -247,10 +247,6 @@ div.soul-box {
   background: none;
 }
 
-.select2-container {
-  min-width: 320px;
-}
-
 .select-all {
   display: block;
   font-size: 12px;
@@ -560,4 +556,34 @@ table.vtop {
 .control-group.limited-height .controls::-webkit-scrollbar-thumb {
     border-radius: 8px;
     background-color: #666;
+}
+
+.filter {
+  background: #eee;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: -30px;
+}
+.filter-item {
+  width: 220px;
+  float: left;
+  margin-left: 10px;
+  .control-group {
+    margin-bottom: 0;
+  }
+  &:first-child {
+    margin-left: 0;
+  }
+}
+.filter-item select, .select2-container {
+  font-size: 12px;
+  width: 220px;
+  margin-bottom: 0;
+}
+.filter-item .select2-container {
+  position: relative;
+  top: 1px;
+}
+.filter-item option {
+  padding: 0;
 }
