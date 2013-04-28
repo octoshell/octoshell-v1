@@ -7,11 +7,6 @@ MSU::Application.routes.draw do
   end
   resources :users, only: [:index, :show], as: :json
   
-  resource :reports_migrator, only: [:show, :create] do
-    post 'merge_projects', on: :collection
-    post 'create_project', on: :collection
-  end
-
   # notifications
   resources :notifications, only: :index
 

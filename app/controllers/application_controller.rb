@@ -2,13 +2,6 @@
 class ApplicationController < ActionController::Base
   before_filter :block_closed_users
   before_filter :get_extends, :get_wikis
-  before_filter :authenticate
-
-  def authenticate
-    authenticate_or_request_with_http_basic do |username, password|
-      username == "octoshell" && password == "jb"
-    end
-  end
   
   protect_from_forgery
   
