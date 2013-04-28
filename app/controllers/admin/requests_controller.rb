@@ -4,7 +4,7 @@ class Admin::RequestsController < Admin::ApplicationController
   
   def index
     @search = Request.search(params[:q])
-    @requests = show_all? ? @search.all : @search.result(distinct: true).page(params[:page])
+    @requests = show_all? ? @search.result : @search.result(distinct: true).page(params[:page])
   end
   
   def edit

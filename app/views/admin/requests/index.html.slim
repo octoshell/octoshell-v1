@@ -1,10 +1,10 @@
 - title t('.title', default: 'Requests')
 
-= simple_form_for @search, url: admin_requests_path, method: :get, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|
-  = autocomplete :user, f
-  = f.input :state_in, collection: Request.human_state_names, input_html: { multiple: true }, required: false, label: 'Состояние'
-  div class="form-actions"
-    = f.button :submit, 'Найти', class: 'btn-primary'
+= simple_form_for @search, url: admin_requests_path, method: :get, html: { role: 'autosubmit' } do |f|
+  div class="filter"
+    div class="filter-item" = autocomplete :user, f, label: false, placeholder: 'Пользователь'
+    div class="filter-item" = f.input :state_in, collection: Request.human_state_names, input_html: { class: 'chosen', placeholder: 'Состояние' }, required: false, label: false
+    div class="clearfix"
 
 = safe_paginate @requests
 = render partial: 'table', locals: { requests: @requests }
