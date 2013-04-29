@@ -1564,7 +1564,8 @@ CREATE TABLE requests (
     project_id integer,
     cluster_id integer,
     maintain_requested_at timestamp without time zone,
-    group_name character varying(255)
+    group_name character varying(255),
+    log text
 );
 
 
@@ -4931,3 +4932,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130417122820');
 INSERT INTO schema_migrations (version) VALUES ('20130418075121');
 
 INSERT INTO schema_migrations (version) VALUES ('20130419081505');
+
+INSERT INTO schema_migrations (version) VALUES ('20130429134315');

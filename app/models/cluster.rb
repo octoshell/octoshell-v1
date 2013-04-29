@@ -28,4 +28,8 @@ class Cluster < ActiveRecord::Base
   def link_name
     name
   end
+  
+  def log
+    requests.maintaining.order('maintain_requested_at asc').map(&:log).join
+  end
 end

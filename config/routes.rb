@@ -124,6 +124,8 @@ MSU::Application.routes.draw do
       put :close
       resources :versions, only: [:index, :show], resource: 'User'
     end
+    
+    resource :console, only: [:show]
 
     # cluster fields
     resources :cluster_fields, only: [:create, :update, :destroy]

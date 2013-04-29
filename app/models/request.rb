@@ -6,8 +6,6 @@ class Request < ActiveRecord::Base
   
   has_paper_trail
   
-  default_scope order("#{table_name}.id desc")
-  
   has_many :request_properties
   belongs_to :project
   belongs_to :cluster
@@ -24,6 +22,7 @@ class Request < ActiveRecord::Base
   after_create :set_default_group_name, unless: :group_name?
   
   scope :last_pending, where(state: 'pending').order('id desc')
+  scope :maintaining, where("#{table_name}.maintain_requested_at is not null")
   
   state_machine initial: :pending do
     state :pending
