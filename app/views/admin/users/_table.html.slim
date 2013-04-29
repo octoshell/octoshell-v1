@@ -6,11 +6,6 @@ table class="table table-bordered table-striped"
         = sort_link @search, :last_name, User.human_attribute_name(:full_name), :default_order => :asc
       - else
         = User.human_attribute_name(:full_name)
-    th
-      - if @search
-        = sort_link @search, :email, User.human_attribute_name(:email), :default_order => :asc
-      - else
-        = User.human_attribute_name(:email)
     th = Organization.model_name.human
     th = Cluster.model_name.human
     th class="date"
@@ -24,8 +19,9 @@ table class="table table-bordered table-striped"
       td
         = smart_link_to user
         br
+        = user.email
+        br
         span class="label" = user.human_state_name
-      td = user.email
       td
         ul class="unstyled"
           - user.membershiped_organizations.to_a.uniq.each do |organization|
