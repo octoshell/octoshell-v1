@@ -8,8 +8,7 @@ ul class="thumbnails"
           h4 style="margin-top: 0;" = cluster.name
           p Queue: #{cluster.requests.maintaining.count}
           pre
-            code
-              - cluster.logs.order('id desc').first(50).each do |l|
+            - cluster.logs.order('id desc').first(50).each do |l|
+              code title="#{l.created_at}"
                 = l.message
-                i class="icon-time" title="#{l.created_at}"
-                = "\n"
+              br
