@@ -1,13 +1,16 @@
 - title "Пользователи"
 
-= simple_form_for @search, method: :get, url: admin_users_path, html: { role: "autosubmit" } do |f|
-  div class="filter"
-    div class="filter-item" = autocomplete :user, f, label: false, name: :id_eq, role: "instance-search", url: "/admin/users/%s", placeholder: 'Поиск по ФИО или email'
-    div class="filter-item" = autocomplete :organization, f, name: :memberships_organization_id_eq, label: false, placeholder: 'Поиск по организации'
-    div class="filter-item" = f.input :user_groups_group_name_in, label: false, required: false, collection: Group.pluck(:name), input_html: { class: 'chosen clearable', data: { placeholder: 'Группа' } }
-    div class="filter-item" = f.input :state_in, collection: User.human_state_names, required: false, label: false, input_html: { class: 'chosen clearable', data: { placeholder: 'Статус' } }
-    div class="clearfix"
-
 = safe_paginate @users
-= render partial: "table", locals: { users: @users }
+div class="row"
+  div class="span9"
+    = render partial: "table", locals: { users: @users }
+  div class="span3"
+    = simple_form_for @search, method: :get, url: admin_users_path, html: { role: "autosubmit" } do |f|
+      = autocomplete :user, f, label: false, name: :id_eq, role: "instance-search", url: "/admin/users/%s", placeholder: 'Поиск по ФИО или email'
+      = autocomplete :organization, f, name: :memberships_organization_id_eq, label: false, placeholder: 'Поиск по организации'
+      = f.input :user_groups_group_name_in, label: false, required: false, collection: Group.pluck(:name), input_html: { class: 'chosen clearable', data: { placeholder: 'Группа' } }
+      = f.input :state_in, collection: User.human_state_names, required: false, label: false, input_html: { class: 'chosen clearable', data: { placeholder: 'Статус' } }
+      = f.input :accounts_username_eq, collection: Account.pluck(:username).uniq, required: false, label: false, input_html: { class: 'chosen clearable', data: { placeholder: 'Логин' } }
+      div class="form-actions"
+        = f.button :submit, 'Отфильтровать', class: 'btn-block'
 = safe_paginate @users

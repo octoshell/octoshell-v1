@@ -13,7 +13,6 @@ table class="table table-bordered table-striped"
         = User.human_attribute_name(:email)
     th = Organization.model_name.human
     th = Cluster.model_name.human
-    th = User.human_attribute_name(:state)
     th class="date"
       - if @search
         = sort_link @search, :id, User.human_attribute_name(:created_at), :default_order => :asc
@@ -22,7 +21,10 @@ table class="table table-bordered table-striped"
   - users.each do |user|
     tr
       td = user.id
-      td = smart_link_to user
+      td
+        = smart_link_to user
+        br
+        span class="label" = user.human_state_name
       td = user.email
       td
         ul class="unstyled"
@@ -32,5 +34,4 @@ table class="table table-bordered table-striped"
         ul class="unstyled"
           - user.active_clusters.each do |cluster|
             li = smart_link_to(cluster)
-      td = user.human_state_name
       td class="date" = user.created_at.strftime("%Y-%m-%d")
