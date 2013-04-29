@@ -31,6 +31,6 @@ class Cluster < ActiveRecord::Base
   end
   
   def log
-    logs.order('id desc').first(50).join("\n")
+    logs.order('id desc').first(50).map(&:message).join("\n")
   end
 end

@@ -235,7 +235,8 @@ ALTER SEQUENCE cluster_fields_id_seq OWNED BY cluster_fields.id;
 CREATE TABLE cluster_logs (
     id integer NOT NULL,
     cluster_id integer,
-    message character varying(255)
+    message character varying(255),
+    created_at timestamp without time zone
 );
 
 
@@ -4989,3 +4990,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130429134315');
 INSERT INTO schema_migrations (version) VALUES ('20130429161044');
 
 INSERT INTO schema_migrations (version) VALUES ('20130429161136');
+
+INSERT INTO schema_migrations (version) VALUES ('20130429163325');
