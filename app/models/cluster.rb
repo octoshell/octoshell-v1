@@ -29,8 +29,4 @@ class Cluster < ActiveRecord::Base
   def link_name
     name
   end
-  
-  def log
-    logs.order('id desc').first(50).map(&:message).join("\n")
-  end
 end
