@@ -30,7 +30,7 @@ require "whenever/capistrano"
 namespace :app do
   desc "Open the rails console on one of the remote servers"
   task :console, :roles => :app do
-    exec %{ssh #{domain} -t "#{default_shell} -c 'cd #{current_path} && bin/rails c #{rails_env}'"}
+    exec %{ssh #{domain} -t -c 'cd #{current_path} && bin/rails c #{rails_env}'"}
   end
 end
 

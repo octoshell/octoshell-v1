@@ -177,6 +177,10 @@ class User < ActiveRecord::Base
     activation_state == 'active'
   end
   
+  def activation_pending?
+    activation_state == 'pending'
+  end
+  
   def notifications_count
     self.class.notifications_count
   end
