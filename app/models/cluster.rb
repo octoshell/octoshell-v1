@@ -8,6 +8,7 @@ class Cluster < ActiveRecord::Base
   has_many :tickets
   has_many :cluster_fields
   has_many :requests
+  has_many :logs
   
   validates :name, :host, presence: true
   
@@ -30,6 +31,6 @@ class Cluster < ActiveRecord::Base
   end
   
   def log
-    requests.maintaining.order('maintain_requested_at asc').map(&:log).join
+    logs.order('id desc').first(50).join("\n")
   end
 end

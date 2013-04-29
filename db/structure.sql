@@ -229,6 +229,36 @@ ALTER SEQUENCE cluster_fields_id_seq OWNED BY cluster_fields.id;
 
 
 --
+-- Name: cluster_logs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cluster_logs (
+    id integer NOT NULL,
+    cluster_id integer,
+    message character varying(255)
+);
+
+
+--
+-- Name: cluster_logs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE cluster_logs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cluster_logs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE cluster_logs_id_seq OWNED BY cluster_logs.id;
+
+
+--
 -- Name: cluster_projects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1564,8 +1594,7 @@ CREATE TABLE requests (
     project_id integer,
     cluster_id integer,
     maintain_requested_at timestamp without time zone,
-    group_name character varying(255),
-    log text
+    group_name character varying(255)
 );
 
 
@@ -2482,6 +2511,13 @@ ALTER TABLE ONLY cluster_fields ALTER COLUMN id SET DEFAULT nextval('cluster_fie
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY cluster_logs ALTER COLUMN id SET DEFAULT nextval('cluster_logs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY cluster_projects ALTER COLUMN id SET DEFAULT nextval('cluster_projects_id_seq'::regclass);
 
 
@@ -2937,6 +2973,14 @@ ALTER TABLE ONLY additional_emails
 
 ALTER TABLE ONLY cluster_fields
     ADD CONSTRAINT cluster_fields_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cluster_logs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cluster_logs
+    ADD CONSTRAINT cluster_logs_pkey PRIMARY KEY (id);
 
 
 --
@@ -3528,6 +3572,13 @@ CREATE INDEX index_additional_emails_on_user_id ON additional_emails USING btree
 --
 
 CREATE INDEX index_cluster_fields_on_cluster_id ON cluster_fields USING btree (cluster_id);
+
+
+--
+-- Name: index_cluster_logs_on_cluster_id_and_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_cluster_logs_on_cluster_id_and_id ON cluster_logs USING btree (cluster_id, id);
 
 
 --
@@ -4934,3 +4985,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130418075121');
 INSERT INTO schema_migrations (version) VALUES ('20130419081505');
 
 INSERT INTO schema_migrations (version) VALUES ('20130429134315');
+
+INSERT INTO schema_migrations (version) VALUES ('20130429161044');
+
+INSERT INTO schema_migrations (version) VALUES ('20130429161136');

@@ -3,10 +3,12 @@
 ul class="thumbnails"
   - Cluster.order('id').each do |cluster|
     li class="span4"
-      h4 = cluster.name
-      p Queue: #{cluster.requests.maintaining.count}
-      pre
-        code
-          strong log:
-          = "\n"
-          = cluster.log.last(30)
+      div class="thumbnail"
+        div class="caption"
+          h4 style="margin-top: 0;" = cluster.name
+          p Queue: #{cluster.requests.maintaining.count}
+          pre
+            code
+              strong log:
+              = "\n"
+              = cluster.log
