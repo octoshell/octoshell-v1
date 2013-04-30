@@ -1,19 +1,4 @@
 $ ->
-  $('@project-name-autocompleter').on 'blur', ->
-    input = $(@)
-    title = input.parents('.row:first').prev().find('h2 span:first')
-    title.html input.val()
-  
-  $('form.report-form').on 'click @report-button]', (e) ->
-    link = $(e.target)
-    if link.is('@report-button')
-      $('input[name="_method"]', @).val link.data('method')
-      if link.hasClass('remove-project')
-        link.parents('project:first').remove()
-      @.action = link.attr('href')
-      @.submit()
-      false
-  
   $('div[data-max-values]').on 'change :checkbox', ->
     max = Number($(@).data('max-values'))
     return if max <= 0
@@ -41,13 +26,6 @@ $ ->
 
     table.recalc()
     table.append(row)
-  
-  $('a@report-allower').on 'click', ->
-    $('input@allow-event').val $(@).data('event')
-    $('form@allow').submit()
-    return false
-
-  
   
   window.cache ||= {}
   $('.typeahead').each (i, html) ->
@@ -247,3 +225,38 @@ $ ->
       if id
         document.location = '/admin/users/' + id
       item
+  
+  $('.graph-pie').each (i, html) ->
+    $graph = $(html)
+    
+    width = 400
+    height = 400
+    radius = 140
+    color = d3.scale.ordinal().range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"])
+    arc = d3.svg.arc().outerRadius(radius - 10).innerRadius(0)
+    pie = d3.layout.pie().sort(null).value((d) ->
+      d.population
+    )
+    svg = d3.select(html).append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+    
+    data = []
+    _($graph.data('source')).each (item) ->
+      data.push
+        name: item[0]
+        count: item[1]
+    
+    console.log(pie(data))
+    
+    # d3.csv "/data.csv", (error, data) ->
+    #   console.log(pie(data))
+    #   g = svg.selectAll(".arc").data(pie(data)).enter().append("g").attr("class", "arc")
+    #   
+    #   g.append("path").attr("d", arc).style "fill", (d) ->
+    #     color d.data.age
+    # 
+    #   g.append("text").attr("transform", (d) ->
+    #     c = arc.centroid(d)
+    #     "translate(" + c + ")"
+    #   ).style("text-anchor", "middle").text (d) ->
+    #     d.data.age
+    # 

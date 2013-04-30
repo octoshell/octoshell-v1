@@ -46,6 +46,26 @@ class Session < ActiveRecord::Base
     with_state(:active).first
   end
   
+  def user_surveys
+    UserSurvey.where(survey_id: survey_ids)
+  end
+  
+  def organizations_count_by_kind
+    project_ids = reports.pluck(:project_id)
+    organization_ids = Project.where(id: project_ids).pluck(:organization_id).uniq
+    Organization.where(id: organization_ids).group(:organization_kind_id).count.map do |id, count|
+      [OrganizationKind.find(id).name, count]
+    end
+  end
+  
+  def projects_count_by_kind
+    # grouped = organizations_count_by_kind.group_by do |id, _|
+    #   # Organization.find(id).organization_kind_id
+    # end
+    # raise grouped.inspect
+    {}
+  end
+  
   def survey_fields
     Survey::Field.where(survey_id: survey_ids)
   end

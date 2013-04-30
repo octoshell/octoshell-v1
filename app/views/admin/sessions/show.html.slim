@@ -28,75 +28,8 @@ css:
   path {
     stroke: white;
   }
-javascript:
-  $(document).ready(function(){
-    var width = 400,
-        height = 400,
-        radius = 140
 
-    var color = d3.scale.ordinal()
-        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-
-    var arc = d3.svg.arc()
-        .outerRadius(radius - 10)
-        .innerRadius(0);
-
-    var pie = d3.layout.pie()
-        .sort(null)
-        .value(function(d) { return d.population; });
-
-    var svg = d3.select("body").append("svg")
-        .attr("width", width)
-        .attr("height", height)
-      .append("g")
-        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-    d3.csv("/data.csv", function(error, data) {
-
-      data.forEach(function(d) {
-        d.population = +d.population;
-      });
-
-      var g = svg.selectAll(".arc")
-          .data(pie(data))
-        .enter().append("g")
-          .attr("class", "arc");
-
-      g.append("path")
-          .attr("d", arc)
-          .style("fill", function(d) { return color(d.data.age); });
-
-      g.append("text")
-          .attr("transform", function(d) {
-            var c = arc.centroid(d),
-              text_radius = 150,
-              x = c[0],
-              y = c[1],
-              j,
-              k
-            j = Math.sqrt(
-              Math.pow(text_radius, 2) * Math.pow(y, 2) / (Math.pow(x, 2) + Math.pow(y, 2))
-            )
-            k = x * j / y
-            return "translate(" + [j, k] + ")";
-          })
-          .style("text-anchor", "middle")
-          .text(function(d) { return d.data.age; });
-
-    });
-  })
-/ 
-/ x ^ 2 + y ^ 2 = r ^ 2
-/ x ^ 2 + y ^ 2 = 150 ^ 2
-/ x/y = c[0] / c[1]
-/ x = c[0] * y / c[1]
-/ (c[0] * y / c[1]) ^ 2 + y ^ 2 = 150 ^ 2
-/ c[0] ^ 2 * y ^ 2/ c[1] ^ 2 + y ^ 2 = 150 ^ 2
-/ c[0] ^ 2 * y ^ 2 + c[1] ^ 2 * y ^ 2 = 150 ^ 2 * c[1] ^ 2
-/ y ^ 2 (c[0] ^ 2 + c[1] ^ 2) = 150 ^ 2 * c[1] ^ 2
-
-j ^ 2 + 
-h4 Опросы:
+h3 Опросы:
 
 ul
   li
@@ -109,10 +42,38 @@ ul
     strong = link_to 'Количественные характеристики', [:admin, @session.counters_survey]
     |  [#{@session.counters_survey.fields.count}]
 
-h4 Статистика:
+h3 Статистика:
 
-/ div class="well well-small"
-/   = link_to 'Добавить график', new_admin_session_stat_path(@session), class: 'btn btn-mini'
-/ 
-/ - @session.stats.each do |stat|
-/   = render stat
+h4 Число организаций по типам
+div class="row"
+  div class="span6"
+    div class="graph graph-pie" data-source="#{@session.organizations_count_by_kind.to_a.to_json}"
+  div class="span6"
+    div class="graph graph-bar" data-source="#{@session.organizations_count_by_kind.to_a.to_json}"
+  div class="span6"
+    table class="table table-condensed table-striped"
+      - @session.organizations_count_by_kind.each do |name, count|
+        tr
+          td class="span5" = name
+          td = count
+    
+h4 Число проектов по типам организаций
+div class="row"
+  div class="span6"
+    table class="table table-condensed table-striped"
+      - @session.projects_count_by_kind.each do |name, count|
+        tr
+          td = name
+          td = count
+h5 Проекты по подразделениям МГУ
+h4 Число пользователей по типам организаций
+h5 Пользователи по подразделениям МГУ
+h4 Приоритетные направления
+h5 Приоритетные направления по подразделениям МГУ
+h4 Области исследований
+h5 Области исследований по подразделениям МГУ
+h4 Критические технологии
+h5 Критические технологии по подразделениям МГУ
+
+div class="well well-small"
+  = link_to 'Добавить график', new_admin_session_stat_path(@session), class: 'btn btn-mini'
