@@ -1,7 +1,7 @@
 - title 'Процедуры'
 
 ul class="thumbnails"
-  - Cluster.order('id desc').each do |cluster|
+  - Cluster.all.sort_by(&:priority).reverse_each do |cluster|
     li class="span6"
       div class="thumbnail"
         div class="caption"
