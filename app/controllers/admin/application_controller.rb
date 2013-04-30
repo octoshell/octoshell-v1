@@ -3,11 +3,11 @@ class Admin::ApplicationController < ApplicationController
   before_filter :require_login
   before_filter :authorize_admins!
 
-  before_filter do
+  before_filter if: :default_breadcrumb do
     add_breadcrumb "Список", url_for(action: :index) rescue nil
   end
 
-  before_filter only: :show do
+  before_filter only: :show, if: :default_breadcrumb do
     add_breadcrumb "Детальная информация"
   end
 
@@ -24,6 +24,10 @@ class Admin::ApplicationController < ApplicationController
   end
 
 private
+  
+  def default_breadcrumb
+    true
+  end
 
   def namespace
     :admin

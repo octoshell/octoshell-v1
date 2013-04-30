@@ -57,7 +57,7 @@ class UsersController < ApplicationController
   end
   
 private
-  
+
   def setup_default_filter
     params[:q] ||= { state_in: ['sured'] }
     if params[:q].is_a? Hash

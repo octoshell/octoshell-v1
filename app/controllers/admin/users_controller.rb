@@ -11,6 +11,8 @@ class Admin::UsersController < Admin::ApplicationController
   def show
     @user = User.find(params[:id])
     @user.extend(Avatarable)
+    add_breadcrumb "Список", admin_users_path
+    add_breadcrumb @user.full_name
   end
     
   def edit
@@ -39,6 +41,10 @@ class Admin::UsersController < Admin::ApplicationController
   end
   
 private
+  
+  def default_breadcrumb
+    false
+  end
   
   def setup_default_filter
     params[:q] ||= {
