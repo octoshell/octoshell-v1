@@ -1,12 +1,21 @@
 - title "Пользователи"
 
-= safe_paginate @users
+= simple_form_for @search, method: :get, url: admin_users_path do |f|
+  div class="input-append"
+    div class="hidden"
+      = f.input :memberships_organization_id_eq, as: :hidden
+      = f.input :user_groups_group_name_in, label: false, required: false, collection: Group.pluck(:name), input_html: { class: 'chosen clearable', data: { placeholder: 'Группа' } }
+      = f.input :state_in, collection: User.human_state_names, required: false, label: false, input_html: { class: 'chosen clearable', data: { placeholder: 'Статус' } }
+      = f.input :accounts_username_eq, collection: Account.pluck(:username).uniq, required: false, label: false, input_html: { class: 'chosen clearable', data: { placeholder: 'Логин на кластере' } }
+    
+    = f.text_field :first_name_or_middle_name_or_last_name_or_email_cont, type: 'search', placeholder: 'ФИО или email', role: 'user-finder', label: false
+    button class="btn" type="submit"
+      i class="icon-search"
 div class="row"
   div class="span9"
     = render partial: "table", locals: { users: @users }
   div class="span3"
-    = simple_form_for @search, method: :get, url: admin_users_path, html: { role: "autosubmit" } do |f|
-      = autocomplete :user, f, label: false, name: :id_eq, role: "instance-search", url: "/admin/users/%s", placeholder: 'ФИО или email'
+    = simple_form_for @search, method: :get, url: admin_users_path do |f|
       = autocomplete :organization, f, name: :memberships_organization_id_eq, label: false, placeholder: 'Организация'
       = f.input :user_groups_group_name_in, label: false, required: false, collection: Group.pluck(:name), input_html: { class: 'chosen clearable', data: { placeholder: 'Группа' } }
       = f.input :state_in, collection: User.human_state_names, required: false, label: false, input_html: { class: 'chosen clearable', data: { placeholder: 'Статус' } }

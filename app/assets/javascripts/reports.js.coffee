@@ -231,5 +231,19 @@ $ ->
     )
     $link.on 'click', (e) ->
       false
-
   
+  users_db = {}
+  $('@user-finder').typeahead
+    source: (query, process) ->
+      console.log(1)
+      $.getJSON '/users', { q: query }, (data) ->
+        process(
+          data.records.map (r) ->
+            users_db[r.text] = r.id
+            r.text
+        )
+    updater: (item) ->
+      id = users_db[item]
+      if id
+        document.location = '/admin/users/' + id
+      item
