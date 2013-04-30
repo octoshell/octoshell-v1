@@ -10,4 +10,3 @@ ul class="thumbnails"
           pre class="log"
             - cluster.logs.order('id desc').first(50).each do |l|
               code title="#{l.created_at}" = l.message
-              br
