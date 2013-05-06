@@ -1,5 +1,8 @@
 - title "Перерегистрация ##{@session.id}"
 
+javascript:
+  google.load('visualization', '1.0', {'packages':['corechart']})
+
 div class="well"
   - if @session.can_start?
     = link_to 'Начать', [:admin, @session, :start], class: 'btn btn-large btn-success', method: :put, data: { confirm: 'Вы уверены?' }
@@ -20,15 +23,6 @@ blockquote class="lead"
     | , закончилась 
     em #{@session.ended_at || '???'}
 
-css:
-  text {
-    fill: blue;
-    background: white;
-  }
-  path {
-    stroke: white;
-  }
-
 h3 Опросы:
 
 ul
@@ -44,28 +38,9 @@ ul
 
 h3 Статистика:
 
-h4 Число организаций по типам
-div class="row"
-  div class="span6"
-    div class="graph graph-pie" data-source="#{@session.organizations_count_by_kind.to_a.to_json}"
-  div class="span6"
-    div class="graph graph-bar" data-source="#{@session.organizations_count_by_kind.to_a.to_json}"
-  div class="span6"
-    table class="table table-condensed table-striped"
-      - @session.organizations_count_by_kind.each do |name, count|
-        tr
-          td class="span5" = name
-          td = count
-    
-h4 Число проектов по типам организаций
-div class="row"
-  div class="span6"
-    table class="table table-condensed table-striped"
-      - @session.projects_count_by_kind.each do |name, count|
-        tr
-          td = name
-          td = count
-h5 Проекты по подразделениям МГУ
+= graph "organizations-count-by-kind", source: @session.organizations_count_by_kind, title: "Число организаций по типам"
+= graph "projects-count-by-kind", source: @session.projects_count_by_kind, title: "Число проектов по типам организаций"
+= graph "projects-count-by-msu-subdivisions", source: @session.projects_count_by_msu_subdivisions, title: "Число проектов по подразделениям МГУ"
 h4 Число пользователей по типам организаций
 h5 Пользователи по подразделениям МГУ
 h4 Приоритетные направления

@@ -55,15 +55,28 @@ class Session < ActiveRecord::Base
     organization_ids = Project.where(id: project_ids).pluck(:organization_id).uniq
     Organization.where(id: organization_ids).group(:organization_kind_id).count.map do |id, count|
       [OrganizationKind.find(id).name, count]
-    end
+    end.sort_by(&:first)
   end
   
   def projects_count_by_kind
-    # grouped = organizations_count_by_kind.group_by do |id, _|
-    #   # Organization.find(id).organization_kind_id
-    # end
-    # raise grouped.inspect
-    {}
+    project_ids = reports.pluck(:project_id)
+    includes = { organization: :organization_kind }
+    Project.where(id: project_ids).includes(includes).group_by do |p|
+      p.organization.organization_kind.name
+    end.map do |kind, projects|
+      [kind, projects.size]
+    end.sort_by(&:first)
+  end
+  
+  def projects_count_by_msu_subdivisions
+    msu = Organization.find(497)
+    Project.find(reports.pluck(:project_id)).group_by do |p|
+      if m = p.user.memberships.where(organization_id: p.organization_id).first
+        m.subdivision.try(:graph_name)
+      end
+    end.find_all { |p| p[0].present? } .map do |name, projects|
+      [name, projects.size]
+    end.sort_by(&:first)
   end
   
   def survey_fields

@@ -21,7 +21,6 @@
 //= require select2
 //= require tablesorter
 //= require datepicker
-//= require d3
 //= require_tree .
 
 $(document).ready(function(){
