@@ -13,7 +13,7 @@ set :application, "octoshell"
 set :rails_env, "production"
 set :domain, "evrone@v2.parallel.ru"
 set :repository,  "git@github.com:evrone/octoshell.git"
-set :branch, "master"
+set :branch, "reports"
 set :use_sudo, false
 set :deploy_to, "/var/www/#{application}"
 set :keep_releases, 3
