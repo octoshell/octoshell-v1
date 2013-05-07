@@ -35,6 +35,7 @@ class Project < ActiveRecord::Base
   
   after_create :assign_username
   after_create :create_account_for_owner
+  after_create :create_surety_for_owner
   
   accepts_nested_attributes_for :sureties, :card
   
@@ -178,6 +179,20 @@ private
     conditions = { project_id: id, user_id: user_id }
     account = Account.where(conditions).first_or_create!
     account.allow! unless account.allowed?
+    true
+  end
+  
+  def create_surety_for_owner
+    user.revalidate!
+    unless user.sured?
+      s = sureties.create do |surety|
+        surety.organization = organization
+        surety.surety_members.build do |sm|
+          sm.user = user
+        end
+      end
+      s.errors.any? && raise(s.errors.inspect)
+    end
     true
   end
 end
