@@ -1,5 +1,5 @@
 class Stat < ActiveRecord::Base
-  GROUPS_BY = [:count, :organization_kinds, :subdivisions]
+  GROUPS_BY = [:count]
   
   belongs_to :session
   belongs_to :survey_field, class_name: :'Survey::Field'

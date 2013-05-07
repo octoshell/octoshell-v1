@@ -90,7 +90,51 @@ class Session < ActiveRecord::Base
   end
   
   def users_by_msu_subdivisions
-    
+    project_ids = reports.pluck(:project_id)
+    user_ids = Account.with_cluster_state(:active).with_access_state(:allowed).where(project_id: project_ids).pluck(:user_id)
+    Membership.where("subdivision_id is not null").where(user_id: user_ids, organization_id: 497).group_by do |member|
+      member.subdivision.name
+    end.map do |name, array|
+      [name, array.size]
+    end.sort_by(&:first)
+  end
+  
+  def direction_of_science_by_count
+    project_ids = reports.pluck(:project_id)
+    stack = []
+    Project.find(project_ids).each do |p|
+      p.direction_of_sciences.map do |d|
+        stack << d.name
+      end
+    end
+    stack.group_by do |e|
+      e
+    end.map do |name, array|
+      [name, array.size]
+    end.sort_by(&:first)
+  end
+  
+  def direction_of_sciences_by_msu_subdivisions
+    msu = Organization.find(497)
+    projects = msu.projects.where(id: reports.pluck(:project_id)).includes(:direction_of_sciences)
+    memberships = Membership.joins(user: { owned_projects: :direction_of_sciences }).
+      where(subdivision_id: Subdivision.where(organization_id: 497).pluck(:id)).
+      select("\"memberships\".*, direction_of_sciences_projects.direction_of_science_id").
+      includes(:subdivision)
+    directions = DirectionOfScience.order("name").to_a
+    rows = []
+    rows << ["Subdivision", directions.map(&:name)].flatten
+    memberships.group_by do |member|
+      direction = directions.find { |d| d.id == member.direction_of_science_id.to_i }
+      [direction.name, member.subdivision.graph_name]
+    end.each do |group, array|
+      row = [group[1]]
+      directions.each do |direction|
+        row << (group[0] == direction.name ? array.size : 0)
+      end
+      rows << row
+    end
+    rows
   end
   
   def survey_fields

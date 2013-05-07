@@ -234,30 +234,37 @@ $ ->
     
     $('.graph-pie').each (i, html) ->
       $graph = $(html)
-
-      data = new google.visualization.DataTable();
-      data.addColumn 'string', 'Name'
-      data.addColumn 'number', 'Count'
-      data.addRows($graph.data('source'))
       
-      options =
-        title: $graph.data("title")
-        titleTextStyle: titleTextStyle
-        width: width
-        height: height
+      source = $graph.data('source')
+      if source[0].length == 2
+        data = new google.visualization.DataTable();
+        data.addColumn 'string', 'Name'
+        data.addColumn 'number', 'Count'
+        data.addRows(source)
       
-      chart = new google.visualization.PieChart($graph[0])
-      chart.draw data, options
+        options =
+          title: $graph.data("title")
+          titleTextStyle: titleTextStyle
+          width: width
+          height: height
+      
+        chart = new google.visualization.PieChart($graph[0])
+        chart.draw data, options
     
     $('.graph-bar').each (i, html) ->
       $graph = $(html)
       
       table = []
       
-      data = new google.visualization.DataTable();
-      data.addColumn 'string', 'Название'
-      data.addColumn 'number', 'Количество'
-      data.addRows($graph.data('source'))
+      source = $graph.data('source')
+      
+      if source[0].length == 2
+        data = new google.visualization.DataTable();
+        data.addColumn 'string', 'Название'
+        data.addColumn 'number', 'Количество'
+        data.addRows($graph.data('source'))
+      else
+        data = google.visualization.arrayToDataTable(source)
 
       options =
         title: $graph.data("title")
