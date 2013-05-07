@@ -79,6 +79,20 @@ class Session < ActiveRecord::Base
     end.sort_by(&:first)
   end
   
+  def users_by_organization_kind
+    project_ids = reports.pluck(:project_id)
+    user_ids = Account.with_cluster_state(:active).with_access_state(:allowed).where(project_id: project_ids).pluck(:user_id)
+    Membership.where(user_id: user_ids).group_by do |member|
+      member.organization.organization_kind.name
+    end.map do |name, array|
+      [name, array.size]
+    end.sort_by(&:first)
+  end
+  
+  def users_by_msu_subdivisions
+    
+  end
+  
   def survey_fields
     Survey::Field.where(survey_id: survey_ids)
   end

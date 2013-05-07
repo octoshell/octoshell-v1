@@ -186,7 +186,8 @@ module ApplicationHelper
     %(<i class="icon-#{klass} status-icon" title="#{title}"></i> ).html_safe
   end
   
-  def graph(type, options)
-    render partial: "lib/graph", locals: { type: type, options: options }
+  def graph(method, options)
+    type = method.to_s.gsub('_', '-')
+    render partial: "lib/graph", locals: { type: type, data: options[:source].send(method), title: options[:title] }
   end
 end

@@ -224,8 +224,7 @@ class User < ActiveRecord::Base
   end
   
   def activate_own_accounts!
-    ids = owned_projects.with_state(:active).map(&:id)
-    accounts.without_cluster_state(:active).where(project_id: ids).each &:activate!
+    accounts.without_cluster_state(:active).each &:activate!
   end
   
   def close_relations!

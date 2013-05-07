@@ -38,10 +38,11 @@ ul
 
 h3 Статистика:
 
-= graph "organizations-count-by-kind", source: @session.organizations_count_by_kind, title: "Число организаций по типам"
-= graph "projects-count-by-kind", source: @session.projects_count_by_kind, title: "Число проектов по типам организаций"
-= graph "projects-count-by-msu-subdivisions", source: @session.projects_count_by_msu_subdivisions, title: "Число проектов по подразделениям МГУ"
-h4 Число пользователей по типам организаций
+= graph :organizations_count_by_kind, source: @session, title: "Число организаций по типам"
+= graph :projects_count_by_kind, source: @session, title: "Число проектов по типам организаций"
+= graph :projects_count_by_msu_subdivisions, source: @session, title: "Число проектов по подразделениям МГУ"
+= graph :users_by_organization_kind, source: @session, title: "Число пользователей по типам организаций"
+
 h5 Пользователи по подразделениям МГУ
 h4 Приоритетные направления
 h5 Приоритетные направления по подразделениям МГУ

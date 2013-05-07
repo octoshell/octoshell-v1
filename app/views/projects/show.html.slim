@@ -193,7 +193,7 @@ table class="table"
                 small class="muted"
                   | Распечатайте и пришлите поручительство
 
-- if surety = @project.sureties.with_state(:filling).first
+- if current_user == @project.user && surety = @project.sureties.with_state(:filling).first
   div class="filling-surety"
     h4 Поручительство ##{surety.id}
     = simple_form_for surety, url: [surety, :generate] do |f|

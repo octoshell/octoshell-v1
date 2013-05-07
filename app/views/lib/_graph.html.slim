@@ -7,13 +7,13 @@ div class="row"
         a href="#graph-#{type}-column" data-toggle="tab" Колонки
     div class="tab-content"
       div class="tab-pane active" id="graph-#{type}-pie"
-        div class="graph graph-pie" data-source="#{options[:source].to_json}" data-title="#{options[:title]}"
+        div class="graph graph-pie" data-source="#{data.to_json}" data-title="#{title}"
       div class="tab-pane" id="graph-#{type}-column"
-        div class="graph graph-bar" data-source="#{options[:source].to_json}" data-title="#{options[:title]}"
+        div class="graph graph-bar" data-source="#{data.to_json}" data-title="#{title}"
   div class="span4"
     div class="graph-table"
       table class="table table-condensed table-striped"
-        - options[:source].each do |name, count|
+        - data.each do |name, count|
           tr
             td = name
             td class="span1" = count
