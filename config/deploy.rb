@@ -11,7 +11,7 @@ require "cocaine"
 
 set :application, "octoshell"
 set :rails_env, "production"
-set :domain, "evrone@v1.parallel.ru"
+set :domain, "evrone@v2.parallel.ru"
 set :repository,  "git@github.com:evrone/octoshell.git"
 set :branch, "master"
 set :use_sudo, false
@@ -24,8 +24,8 @@ role :app, domain
 role :web, domain
 role :db,  domain, :primary => true
 
-set :whenever_command, "bundle exec whenever"
-require "whenever/capistrano"
+# set :whenever_command, "bundle exec whenever"
+# require "whenever/capistrano"
 
 namespace :app do
   desc "Open the rails console on one of the remote servers"
