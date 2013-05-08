@@ -24,6 +24,12 @@ class Admin::ProjectsController < Admin::ApplicationController
     end
   end
   
+  def synch
+    @project = Project.find(params[:project_id])
+    @project.requests.with_state(:active).each &:request_maintain!
+    redirect_to [:admin, @project]
+  end
+  
   def edit
     @project = Project.find(params[:id])
   end

@@ -9,7 +9,7 @@
           span class="label label-important" Ожидает подтвержения администратором
           |  
           small = link_to 'Отменить завершение'
-
+    
 - if current_user == @project.user
   p
     = link_to edit_project_path(@project), class: 'muted' do

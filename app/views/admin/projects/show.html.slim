@@ -1,17 +1,13 @@
 - title "Проект: #{@project.title}"
 
-p class="lead" = @project.description
-
-- if @project.invalid?
-  div class="alert alert-error"
-    | Проект содержит ошибки. 
-    = link_to 'Исправьте их', [:edit, :admin, @project]
-    |  перед совершением действий над проектом.
-    br
-    = @project.errors.full_messages.to_sentence
-
+blockquote = @project.description
 
 div class="well"
+  - if @project.active?
+    = link_to [:admin, @project, :synch], class: 'btn btn-success', method: :put do
+      i class="icon-refresh"
+      |  Синхронизировать
+    |  
   = link_to 'Редактировать', [:edit, :admin, @project], class: 'btn'
   |  
   = link_to 'Версии', [@project, :versions], class: 'btn'

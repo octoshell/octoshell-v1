@@ -19,7 +19,11 @@
           i class="icon-flag muted"
           |  
           = smart_link_to request.user, nil, class: 'muted'
-        td = smart_link_to request.cluster
+        td
+          = smart_link_to request.cluster
+          - if request.maintain_requested_at?
+            |  
+            i class="icon-refresh icon-spin muted"
         td = request.human_state_name
         td class="date" = request.created_at.strftime("%Y-%m-%d")
         td = link_to t('.open'), [:admin, request]
