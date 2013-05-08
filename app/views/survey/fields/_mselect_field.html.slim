@@ -1,18 +1,30 @@
 div class="row" data-max-values="#{field.max_values}"
   - if field.collection_values.size < 10
     div class="span4"
+      - v = form.object.field_value(field.id)
       - field.collection_values.each do |value|
         label class="checkbox"
-          - v = form.object.field_value(field.id)
           = check_box "fields[#{field.id}]", '', { checked: v && v.include?(value) }, value, ""
           = value
       - if error.present?
         span class="help-block" = error
+      - unless field.strict_collection?
+        - custom_value = (v - field.collection_values).keep_if(&:present?)
+        - custom_value = custom_value.empty? ? nil : custom_value.first
+        div class="custom-answer"
+          = text_field_tag "fields[#{field.id}][]", custom_value, placeholder: "Свой вариант"
   - else
+    - size, i = field.collection_values.size, 0
     - field.collection_values.in_groups(3, false).each do |collection|
       div class="span3"
+        - v = form.object.field_value(field.id)
         - collection.each do |value|
+          - i = i + 1
           label class="checkbox"
-            - v = form.object.field_value(field.id)
             = check_box "fields[#{field.id}]", '', { checked: v && v.include?(value) }, value, ""
             = value
+          - if !field.strict_collection? && size == i
+            - custom_value = (v - field.collection_values).keep_if(&:present?)
+            - custom_value = custom_value.empty? ? nil : custom_value.first
+            div class="custom-answer"
+              = text_field_tag "fields[#{field.id}][]", custom_value, placeholder: "Свой вариант"
