@@ -1,6 +1,4 @@
-- title "Проект: #{@project.title}"
-
-blockquote = @project.description
+- title @project.title
 
 div class="well"
   - if @project.active?
@@ -16,49 +14,98 @@ div class="well"
   |  
   = link_to Project.human_state_event_name(:erase), admin_project_erase_path(@project), method: :put, class: "btn btn-danger #{'disabled' unless @project.can_erase?}", data: { confirm: 'Вы уверены?' }
 
-table class="table table-bordered"
-  tr
-    th class="span4" = Project.human_attribute_name(:user)
-    td = smart_link_to @project.user
-  tr
-    th = Project.human_attribute_name(:state)
-    td = @project.human_state_name
-  tr
-    th = Project.human_attribute_name(:username)
-    td = @project.username
 
-- if @project.account_codes.any?
-  h3 Приглашения
-  table class="table table-bordered"
+legend Доступы к ресурсам
+
+div class="row"
+  div class="span6"
+    table class="table"
+      - Cluster.with_state(:active).order('name').each_with_index do |cluster, i|
+        - request = @project.requests.without_state(:closed).find_by_cluster_id(cluster.id)
+        tr class="#{'without-top-border' if i == 0} #{(request && request.active?) ? 'success' : 'warning'}"
+          td
+            = cluster.name
+            br
+            - if request
+              = request.inspect
+
+legend Участники проекта
+
+table class="table"
+  thead
     tr
-      th = AccountCode.human_attribute_name(:code)
-      th = AccountCode.human_attribute_name(:state)
-      th = AccountCode.human_attribute_name(:email)
-      th = User.model_name.human
-    - @project.account_codes.each do |account_code|
-      tr
-        td = account_code.code
-        td = account_code.human_state_name
-        td = mail_to account_code.email
+      th Пользователь
+      th Логины
+      th Доступ на кластеры
+  tbody
+    - have_requests = @project.requests.with_state(:active).any?
+    - @project.accounts.without_access_state(:denied).each do |account|
+      tr class="#{account.allowed? && account.active? ? 'success' : 'warning'}"
+        td class="span4"
+          = render_status_icon(account.allowed? && account.active?)
+          = account.user.full_name
+          - if account.user == @project.user
+            |  
+            i class="icon-flag muted" title="Руководитель проекта"
         td
-          - if account_code.user
-            = smart_link_to account_code.user
-          - else
-            | Нет
+          code = account.username
+        td
+          - if account.active?
+            span class="label label-success" = account.human_cluster_state_name
+          - if account.blocked?
+            span class="label" = account.human_cluster_state_name
+          - if account.closed?
+            span class="label label-important" = account.human_cluster_state_name
+          - unless have_requests
+            |  
+            small (Нет доступных ресурсов)
+    - unregistered_members = @project.unregistered_members
+    - unregistered_members.each do |sm|
+      tr class="striped"
+        td colspan="2"
+          = render_status_icon false
+          = sm.full_name
+          br
+          small
+            = link_to 'Код приглашения', '#', data: { content: "<code>#{sm.account_code.code}</code>" }, role: 'project-invite-code-viewer'
+            |  отправлен на #{sm.email}
+        td
+          span class="label label-important" Закрыт
+          |  
+          small (Не зарегистрирован)
 
-h3 Доступы
+- sureties = @project.sureties.without_states(:filling).reorder('id asc')
+- if sureties.any?
+  legend Поручительства
+  div class="row"
+    div class="span6"
+      table class="table"
+        - sureties.each_with_index do |surety, i|
+          - state = { active: 'success', confirmed: 'warning', declined: 'error', generated: 'warning' }[surety.state_name]
+          tr class="#{'without-top-border' if i == 0} #{state}"
+            td class="span4" style="padding-bottom: 0;"
+              = render_status_icon surety.active?
+              = link_to_if current_user == @project.user, "Поручительство ##{surety.id}", surety
+            td style="#{'padding-bottom: 0;' unless surety.generated? && surety.has_loaded_scan?}"
+              span class="label label-#{state}" = surety.human_state_name
+          - unless surety.generated? && surety.has_loaded_scan?
+            tr class="without-top-border #{state}"
+              td colspan="2" style="padding-top: 0;"
+                small class="muted"
+                  | Распечатайте и пришлите поручительство
 
-/ = render partial: 'admin/accounts/table', locals: { accounts: @project.accounts.with_state(:active) }
+- if surety = @project.sureties.with_state(:filling).first
+  div class="filling-surety"
+    h4 Поручительство ##{surety.id}
+    = simple_form_for surety, url: [surety, :generate] do |f|
+      = f.association :organization, input_html: { class: 'chosen' }
+      = f.input :boss_full_name
+      = f.input :boss_position
+      h5 Участники:
+      ul
+        - surety.surety_members.each do |member|
+          li = member.full_name
 
-- if @project.sureties.any?
-  h3 Поручительства
-  = render partial: 'admin/sureties/table', locals: { sureties: @project.sureties }
-
-h3 Заявки
-
-= render partial: 'admin/requests/table', locals: { requests: @project.requests }
-
-h3 Поддержка
-
+legend Поддержка
 = render partial: 'admin/tickets/table', locals: { tickets: @project.tickets }
 
