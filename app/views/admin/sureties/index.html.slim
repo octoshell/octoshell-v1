@@ -4,12 +4,22 @@ div class="well"
     = link_to 'Шаблон', template_admin_sureties_path, class: 'btn'
 
 = simple_form_for @search, method: :get, url: admin_sureties_path, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|
-  = f.input :id_eq, label: 'ID'
-  = autocomplete :organization, f
-  = f.input :state_in, collection: Surety.human_state_names, input_html: { multiple: true }, label: 'Состояние'
-  div class="form-actions"
-    = f.button :submit, 'Найти', class: 'btn-primary'
+  div class="input-append"
+    div class="hidden"
+      = autocomplete :organization, f
+      = f.input :state_in, collection: Surety.human_state_names, input_html: { multiple: true }, label: 'Состояние'
+    
+    = f.text_field :id_eq, placeholer: 'ID', class: 'input-xlarge', autofocus: true
+    button class="btn" type="submit"
+      i class="icon-search"
 
-= safe_paginate @sureties
-= render partial: 'admin/sureties/table', locals: { sureties: @sureties }
+div class="row"
+  div class="span9"
+    = render partial: 'admin/sureties/table', locals: { sureties: @sureties }
+  div class="span3"
+    = simple_form_for @search, method: :get, url: admin_sureties_path do |f|
+      = autocomplete :organization, f, label: false, placeholder: "Организация"
+      = f.input :state_in, collection: Surety.human_state_names, input_html: { multiple: true }, placeholer: 'Состояние', label: false
+      = f.button :submit, 'Отфильтровать', class: 'btn-block'
+
 = safe_paginate @sureties

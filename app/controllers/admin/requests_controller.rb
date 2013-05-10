@@ -26,6 +26,8 @@ class Admin::RequestsController < Admin::ApplicationController
   
   def show
     @request = find_request(params[:id])
+    add_breadcrumb "Список", admin_requests_path
+    add_breadcrumb "Заявка ##{@request.id}"
   end
   
   def activate
@@ -59,6 +61,10 @@ class Admin::RequestsController < Admin::ApplicationController
   end
   
 private
+
+  def default_breadcrumb
+    false
+  end
   
   def redirect_to_request(request)
     redirect_to [:admin, request]

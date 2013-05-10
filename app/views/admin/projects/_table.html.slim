@@ -7,10 +7,8 @@
           = sort_link @search, :name, Project.human_attribute_name(:title), default_order: :asc
         - else
           = Project.human_attribute_name(:name)
-      th Заявки
-      th Участники
-      th = Project.human_attribute_name(:state)
-      th
+      th class="span2" Участники
+      th class="span1"
         - if @search
           = sort_link @search, :id, Project.human_attribute_name(:created_at), default_order: :asc
         - else
@@ -18,22 +16,30 @@
     - projects.each do |project|
       tr
         td = project.id
-        td = smart_link_to project
         td
-          ul class="unstyled"
-            - project.requests.without_state(:closed).each do |r|
-              li style="white-space: nowrap"
-                = r.cluster.name
-                |  
-                span class="label" = r.human_state_name
-        td
+          = smart_link_to project
+          |  
+          - color = { active: 'success' }[project.state_name] || 'default'
+          span class="label label-#{color}" = project.human_state_name
+          br
+          - requests = project.requests.without_state(:closed)
+          - if requests.any?
+            strong class="muted" Заявки:
+            ul class="unstyled"
+              - requests.each do |r|
+                li style="white-space: nowrap"
+                  small = link_to r.cluster.name, [:admin, r]
+                  |  
+                  - color = { active: 'success' }[r.state_name] || 'default'
+                  span class="label label-#{color}" = r.human_state_name
+        td class="span2"
           ul class="unstyled"
             - project.accounts.with_access_state(:allowed).each do |a|
               li style="white-space: nowrap;"
                 = smart_link_to a.user, a.username
                 |  
-                span class="label" = a.human_cluster_state_name
-        td = project.human_state_name
+                - color = { active: 'success' }[a.cluster_state_name] || 'default'
+                span class="label label-#{color}" = a.human_cluster_state_name
         td class="date" = project.created_at.strftime("%Y-%m-%d")
 - else
   p Нет проектов

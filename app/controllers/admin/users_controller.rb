@@ -14,7 +14,7 @@ class Admin::UsersController < Admin::ApplicationController
     add_breadcrumb "Список", admin_users_path
     add_breadcrumb @user.full_name
   end
-    
+  
   def edit
     @user = User.find(params[:id])
     @user.additional_emails.build

@@ -1,5 +1,5 @@
 = submenu_item :'admin/users', (link_to t('.users', default: 'Users'), admin_users_path), maynot?(:manage, :users)
-= submenu_item :'admin/reports', (link_to t('.reports', default: 'Reports'), admin_reports_path), maynot?(:manage, :reports)
+/ = submenu_item :'admin/reports', (link_to t('.reports', default: 'Reports'), admin_reports_path), maynot?(:manage, :reports)
 = submenu_item :'admin/sureties', (link_to "#{t('.sureties', default: 'Sureties')} (#{Surety.with_state(:generated).count})", admin_sureties_path), maynot?(:manage, :sureties)
 = submenu_item :'admin/requests', (link_to "#{t('.requests', default: 'Requests')} (#{Request.with_state(:pending).count})", admin_requests_path), maynot?(:manage, :requests)
 = submenu_item :'admin/projects', (link_to t('.projects', default: 'Projects'), admin_projects_path, class: 'js-menu-projects'), maynot?(:manage, :projects)

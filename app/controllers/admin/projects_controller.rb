@@ -90,7 +90,10 @@ class Admin::ProjectsController < Admin::ApplicationController
     render :invite
   end
   
-private
+  private
+  def default_breadcrumb
+    false
+  end
 
   def setup_default_filter
     params[:q] ||= { state_in: ['active'], disabled_eq: false }
