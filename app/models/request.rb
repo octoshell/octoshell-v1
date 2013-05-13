@@ -68,6 +68,10 @@ class Request < ActiveRecord::Base
     update_column :maintain_requested_at, nil
   end
   
+  def link_name
+    "Заявка ##{id}"
+  end
+  
 private
   
   def set_default_group_name
@@ -80,9 +84,5 @@ private
         request_property.name = cluster_field.name
       end
     end
-  end
-
-  def link_name
-    "Request #{id}"
   end
 end

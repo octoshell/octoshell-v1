@@ -29,9 +29,8 @@ div class="row"
         tr class="#{'without-top-border' if i == 0} #{(request && request.active?) ? 'success' : 'warning'}"
           td
             = cluster.name
-            br
             - if request
-              = request.inspect
+              = smart_link_to request, nil, class: "pull-right"
 
 legend Участники проекта
 
