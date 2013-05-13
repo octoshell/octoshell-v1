@@ -1260,7 +1260,8 @@ CREATE TABLE pages (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     locator text,
-    publicized boolean DEFAULT false
+    publicized boolean DEFAULT false,
+    content text
 );
 
 
@@ -4992,3 +4993,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130429161044');
 INSERT INTO schema_migrations (version) VALUES ('20130429161136');
 
 INSERT INTO schema_migrations (version) VALUES ('20130429163325');
+
+INSERT INTO schema_migrations (version) VALUES ('20130513134924');
