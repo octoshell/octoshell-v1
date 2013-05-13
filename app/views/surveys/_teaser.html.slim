@@ -1,4 +1,4 @@
-- if logged_in? && namespace == :dashboard
+- if logged_in?
   - if session = Session.current
     - surveys = current_user.user_surveys.where(survey_id: session.survey_ids).order('id')
     - reports = Report.where(project_id: current_user.owned_project_ids)
