@@ -1,7 +1,7 @@
 div class="row" data-max-values="#{field.max_values}"
   - if field.collection_values.size < 10
     div class="span4"
-      - v = form.object.field_value(field.id)
+      - v = form.object.field_value(field.id).to_a
       - field.collection_values.each do |value|
         label class="checkbox"
           = check_box "fields[#{field.id}]", '', { checked: v && v.include?(value) }, value, ""
@@ -17,7 +17,7 @@ div class="row" data-max-values="#{field.max_values}"
     - size, i = field.collection_values.size, 0
     - field.collection_values.in_groups(3, false).each do |collection|
       div class="span3"
-        - v = form.object.field_value(field.id)
+        - v = form.object.field_value(field.id).to_a
         - collection.each do |value|
           - i = i + 1
           label class="checkbox"
