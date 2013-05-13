@@ -53,6 +53,12 @@ class Admin::ClustersController < Admin::ApplicationController
     @clusters = Cluster.closed
   end
   
+  def logs
+    @cluster = Cluster.find(params[:cluster_id])
+    @search = @cluster.logs.search(params[:q])
+    @logs = @search.result(distinct: true).limit(2000).order("id desc")
+  end
+  
 private
   
   def redirect_to_cluster(cluster)

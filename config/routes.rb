@@ -207,6 +207,7 @@ MSU::Application.routes.draw do
 
     # clusters
     resources :clusters, only: [:new, :create, :index, :show, :edit, :update] do
+      get :logs
       put :close
       resources :versions, only: [:index, :show], resource: 'Cluster'
     end
