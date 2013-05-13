@@ -26,7 +26,7 @@
                     - if us.can_accept?
                       = link_to "Пройти", [us, :accept], method: :put, class: 'btn btn-mini btn-success'
                     - else
-                      small = link_to "Открыть", us
+                      small = link_to "Открыть", user_survey_path(us, anchor: 'start-page')
           - if reports.any?
             p
               strong Вам нужно прислать отчет по вашим проектам:
