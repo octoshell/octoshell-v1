@@ -90,7 +90,7 @@ private
     project.requests.with_states(:active, :blocked).all? do |request|
       res, cmd = "", "sudo /usr/octo/check_user #{login} #{request.group_name}"
       Timeout::timeout(1) do
-        ::Net::SSH.start(request.cluster.host, "octo", keys: ["/var/www/octoshell-extend/shared/keys/private"]) do |ssh|
+        ::Net::SSH.start(request.cluster.host, "octo", keys: ["/var/www/octoshell-extend/shared/keys/private"], config: false) do |ssh|
           ssh.open_channel do |channel|
             channel.request_pty do |ch, success|
               ch.exec cmd
