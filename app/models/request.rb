@@ -15,6 +15,7 @@ class Request < ActiveRecord::Base
   validates :size, :cpu_hours, :gpu_hours, numericality: { greater_than_or_equal_to: 0 }
   
   attr_accessible :cpu_hours, :gpu_hours, :size, :project_id, :cluster_id
+  attr_accessible :cpu_hours, :gpu_hours, :size, :group_name, :request_properties_attributes, as: :admin
   
   accepts_nested_attributes_for :request_properties
   
@@ -57,7 +58,7 @@ class Request < ActiveRecord::Base
   end
   
   def allowed_projects
-    user ? user.owned_projects.with_states(:active, :blocked, :announced) : []
+    user ? user.owned_projects.with_states(:active) : []
   end
   
   def request_maintain!

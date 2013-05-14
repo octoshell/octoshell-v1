@@ -30,7 +30,7 @@ div class="row"
           td
             = cluster.name
             - if request
-              strong = smart_link_to request, nil, class: "pull-right"
+              = smart_link_to request, nil, class: "pull-right"
 
 legend Участники проекта
 
@@ -46,12 +46,15 @@ table class="table"
       tr class="#{account.allowed? && account.active? ? 'success' : 'warning'}"
         td class="span4"
           = render_status_icon(account.allowed? && account.active?)
-          = account.user.full_name
+          = link_to account.user.full_name, [:admin, account.user]
           - if account.user == @project.user
             |  
             i class="icon-flag muted" title="Руководитель проекта"
         td
           code = account.username
+          |  
+          = link_to "#", class: "muted" do
+            i class="icon-pencil"
         td
           - if account.active?
             span class="label label-success" = account.human_cluster_state_name
