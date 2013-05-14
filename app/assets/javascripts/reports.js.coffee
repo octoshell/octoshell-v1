@@ -279,3 +279,10 @@ $ ->
 
       chart = new google.visualization.ColumnChart($graph[0])
       chart.draw data, options
+  
+  $("@login-changer").on "click", ->
+    $link = $(@)
+    $container = $link.parents("td:first")
+    $container.find("@login-changer-current").hide()
+    $container.find("@login-changer-form").removeClass("hidden")
+    false

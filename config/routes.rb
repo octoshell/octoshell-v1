@@ -186,6 +186,10 @@ MSU::Application.routes.draw do
       put :erase
       resources :versions, only: [:index, :show], resource: 'Project'
     end
+    
+    resources :accounts, only: [] do
+      put :change
+    end
 
     # requests
     resources :requests, only: [:index, :show, :edit, :update] do
