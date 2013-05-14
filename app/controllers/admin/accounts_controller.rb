@@ -3,7 +3,7 @@ class Admin::AccountsController < Admin::ApplicationController
   
   def change
     @account = Account.find(params[:account_id])
-    if @account.change_login(params[:login])
+    if @account.change_login(params[:username])
       redirect_to [:admin, @account.project], notice: "Логин изменен"
     else
       redirect_to [:admin, @account.project], alert: @account.errors.full_messages.to_sentence
