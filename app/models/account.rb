@@ -83,7 +83,7 @@ class Account < ActiveRecord::Base
 private
 
   def login_available?(login)
-    unless login =~ /([a-z_][a-z0-9_]{0,30})/) == 0
+    unless (login =~ /([a-z_][a-z0-9_]{0,30})/) == 0
       errors.add :username, "Не правильный формат"
       return false
     end
