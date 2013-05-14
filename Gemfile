@@ -23,6 +23,7 @@ gem 'maymay', github: 'redstonelabs/maymay'
 gem 'rubyzip'
 gem 'breadcrumbs_on_rails'
 gem 'delayed_job_active_record'
+gem 'net-ssh'
 
 group :development do
   gem 'capistrano'

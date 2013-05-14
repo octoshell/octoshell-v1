@@ -292,6 +292,7 @@ DEPENDENCIES
   liquid
   mailgun-rails
   maymay!
+  net-ssh
   paper_trail
   paperclip
   pg
