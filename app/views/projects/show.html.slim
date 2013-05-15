@@ -193,12 +193,12 @@ table class="table"
                 td colspan="2" style="padding-top: 0;"
                   small class="muted"
                     | Распечатайте и пришлите поручительство
-          - if @project.need_new_surety?
+          - if @project.need_new_surety? && @project.user == current_user
             tfoot
               tr
                 td colspan="2"
                   small = link_to "Добавить поручительство", [@project, :sureties], method: :post
-      - elsif @project.need_new_surety?
+      - elsif @project.need_new_surety? && @project.user == current_user
           p
             small = link_to "Добавить новое поручительство", [@project, :sureties], method: :post
 
