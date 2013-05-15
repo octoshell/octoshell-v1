@@ -36,6 +36,7 @@ class Project < ActiveRecord::Base
   after_create :assign_username
   after_create :create_account_for_owner
   after_create :create_surety_for_owner
+  before_update :mark_filled, unless: :filled?
   
   accepts_nested_attributes_for :sureties, :card
   
@@ -190,6 +191,10 @@ class Project < ActiveRecord::Base
   end
   
 private
+  
+  def mark_filled
+    self.filled = true
+  end
   
   def assign_username
     name = username? ? username : "project_#{id}"

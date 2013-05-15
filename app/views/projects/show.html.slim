@@ -15,6 +15,10 @@
     = link_to edit_project_path(@project), class: 'muted' do
       i class="icon-pencil"
       |  Редактировать профиль проекта
+    
+    - unless @project.filled?
+      |  
+      i class="icon-arrow-left text-error"
 
 - requests = @project.requests.with_state(:active)
 - if requests.any?
