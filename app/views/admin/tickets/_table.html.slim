@@ -3,8 +3,6 @@
     tr
       th class="span1" #
       th = Ticket.human_attribute_name(:subject)
-      th = Ticket.human_attribute_name(:user)
-      th = Ticket.human_attribute_name(:state)
       th = Ticket.human_attribute_name(:project)
       th = Ticket.human_attribute_name(:cluster)
       th
@@ -12,14 +10,25 @@
           = sort_link @search, :id, Ticket.human_attribute_name(:created_at), default_order: :asc
         - else
           = Ticket.human_attribute_name(:created_at)
+        
+        |  / 
+        = Ticket.human_attribute_name(:updated_at)
     - tickets.each do |ticket|
       tr id="ticket-#{ticket.id}"
         td = ticket.id
-        td = smart_link_to(ticket)
-        td = smart_link_to(ticket.user)
-        td = ticket.human_state_name
-        td = smart_link_to ticket.project
-        td = smart_link_to ticket.cluster
-        td = ticket.created_at.strftime("%Y-%m-%d")
+        td class="span4"
+          strong = smart_link_to(ticket)
+          |  
+          - state = { active: "important", answered: "warning", resolved: "success", closed: "default" }[ticket.state_name]
+          span class="label label-#{state}" = ticket.human_state_name
+          br
+          = smart_link_to(ticket.user, nil, class: "muted")
+        td class="span3" = smart_link_to ticket.project
+        td class="span1" = smart_link_to ticket.cluster
+        td class="span1"
+          = ticket.created_at.strftime("%Y-%m-%d")
+          |  / 
+          br
+          span class="muted" = ticket.updated_at.strftime("%Y-%m-%d")
 - else
   p Нет заявок

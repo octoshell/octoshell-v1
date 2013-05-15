@@ -758,7 +758,7 @@ ru:
         cluster_user_id: Пользователь на кластере
       ticket:
         created_at: Дата создания
-        updated_at: Дата изменения
+        updated_at: Дата обновления
         subject: Тема
         message: Сообщение
         state: Состояние

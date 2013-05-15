@@ -147,6 +147,6 @@ private
   end
   
   def setup_default_filter
-    params[:q] ||= { state_in: ['pending', 'active', 'confirmed'] }
+    params[:q] ||= { state_in: ['generated'] }
   end
 end

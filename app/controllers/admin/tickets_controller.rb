@@ -54,9 +54,13 @@ class Admin::TicketsController < Admin::ApplicationController
   
 private
 
+  def default_breadcrumb
+    false
+  end
+
   def setup_default_filter
     params[:q] ||= { state_in: ['active'] }
-    params[:q][:meta_sort] ||= 'id.asc'
+    params[:q][:meta_sort] ||= 'updated_at desc'
     params[:q][:ticket_tag_relations_ticket_tag_name_in] ||= TicketTag.with_state(:active).pluck(:name)
   end
 end
