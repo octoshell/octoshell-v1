@@ -181,6 +181,7 @@ MSU::Application.routes.draw do
     resources :projects, only: [:index, :show, :edit, :update] do
       put :synch
       put :close
+      put :enable
       put :erase
       resources :versions, only: [:index, :show], resource: 'Project'
     end

@@ -64,6 +64,12 @@ class Admin::ProjectsController < Admin::ApplicationController
     end
   end
   
+  def enable
+    @project = Project.find(params[:project_id])
+    @project.update_column :disabled, false
+    redirect_to [:admin, @project]
+  end
+  
   def sureties
     @project = Project.find(params[:project_id])
     
