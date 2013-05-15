@@ -1437,7 +1437,8 @@ CREATE TABLE projects (
     cluster_user_type character varying(255) DEFAULT 'account'::character varying,
     username character varying(255),
     project_prefix_id integer,
-    disabled boolean DEFAULT false
+    disabled boolean DEFAULT false,
+    filled boolean DEFAULT true
 );
 
 
@@ -4995,3 +4996,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130429161136');
 INSERT INTO schema_migrations (version) VALUES ('20130429163325');
 
 INSERT INTO schema_migrations (version) VALUES ('20130513134924');
+
+INSERT INTO schema_migrations (version) VALUES ('20130515104749');

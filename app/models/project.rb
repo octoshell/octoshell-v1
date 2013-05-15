@@ -8,7 +8,7 @@ class Project < ActiveRecord::Base
   belongs_to :user
   belongs_to :organization
   belongs_to :project_prefix
-  has_one :card, class_name: :'Project::Card', inverse_of: :project
+  has_one :card, class_name: :'Project::Card', inverse_of: :project, validate: true
   has_and_belongs_to_many :organizations
   has_many :accounts, inverse_of: :project, autosave: true
   has_many :account_codes
