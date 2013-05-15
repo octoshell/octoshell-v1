@@ -167,6 +167,28 @@ class Project < ActiveRecord::Base
     "#{title} ( #{requests.with_state(:active).map { |r| r.cluster.name }.join(', ')} )  #{accounts.pluck(:username)}"
   end
   
+  def users_without_surety
+    finder = proc { |a| a.user.sureties.where(project_id: id).with_state(:generated, :active).empty? }
+    accounts.with_access_state(:allowed).find_all(&finder).map(&:user)
+  end
+  
+  def need_new_surety?
+    users_without_surety.any? && sureties.with_state(:filling).empty?
+  end
+  
+  def generate_surety_for_unsured_members
+    unsured = users_without_surety
+    return if unsured.empty?
+    sureties.create! do |surety|
+      surety.organization = organization
+      unsured.each do |user|
+        surety.surety_members.build do |sm|
+          sm.user = user
+        end
+      end
+    end
+  end
+  
 private
   
   def assign_username

@@ -87,6 +87,12 @@ class ProjectsController < ApplicationController
     render :close
   end
   
+  def sureties
+    @project = find_project(params[:project_id])
+    @project.generate_surety_for_unsured_members
+    redirect_to @project
+  end
+  
 private
 
   def find_project(id)

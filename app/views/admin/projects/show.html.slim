@@ -8,7 +8,7 @@ div class="well"
     |  
   = link_to 'Редактировать', [:edit, :admin, @project], class: 'btn'
   |  
-  = link_to 'Версии', [@project, :versions], class: 'btn'
+  = link_to 'Версии', [:admin, @project, :versions], class: 'btn'
   |  
   = link_to Project.human_state_event_name(:close), admin_project_close_path(@project), method: :put, class: "btn btn-warning #{'disabled' unless @project.can_close?}", data: { confirm: 'Вы уверены?' }
   |  
@@ -86,7 +86,7 @@ table class="table"
           |  
           small (Не зарегистрирован)
 
-- sureties = @project.sureties.without_states(:filling).reorder('id asc')
+- sureties = @project.sureties.reorder('id asc')
 - if sureties.any?
   legend Поручительства
   div class="row"
@@ -103,20 +103,6 @@ table class="table"
           - unless surety.generated? && surety.has_loaded_scan?
             tr class="without-top-border #{state}"
               td colspan="2" style="padding-top: 0;"
-                small class="muted"
-                  | Распечатайте и пришлите поручительство
-
-- if surety = @project.sureties.with_state(:filling).first
-  div class="filling-surety"
-    h4 Поручительство ##{surety.id}
-    = simple_form_for surety, url: [surety, :generate] do |f|
-      = f.association :organization, input_html: { class: 'chosen' }
-      = f.input :boss_full_name
-      = f.input :boss_position
-      h5 Участники:
-      ul
-        - surety.surety_members.each do |member|
-          li = member.full_name
 
 legend Поддержка
 = render partial: 'admin/tickets/table', locals: { tickets: @project.tickets }
