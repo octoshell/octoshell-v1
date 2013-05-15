@@ -6,25 +6,27 @@
         = Project.model_name.human
         = " / "
         = User.model_name.human
-      th = Cluster.model_name.human
       th = Request.human_attribute_name(:state)
       th = Request.human_attribute_name(:created_at)
       th
     - requests.each do |request|
-      tr id="request-#{request.id}" class="#{{ active: "success", pending: "warning", blocked: "warning" }[request.state_name]}"
+      - state = { active: "success", pending: "warning", blocked: "warning" }[request.state_name]
+      tr id="request-#{request.id}"
         td = request.id
         td
-          = smart_link_to request.project
+          = smart_link_to request.project, nil
           br
           i class="icon-flag muted"
           |  
           = smart_link_to request.user, nil, class: 'muted'
-        td
-          = smart_link_to request.cluster
+          br
+          | Кластер: 
+          strong = smart_link_to request.cluster
           - if request.maintain_requested_at?
             |  
             i class="icon-refresh icon-spin muted"
-        td = request.human_state_name
+        td
+          label class="label label-#{state}"= request.human_state_name
         td class="date" = request.created_at.strftime("%Y-%m-%d")
         td = link_to t('.open'), [:admin, request]
 - else
