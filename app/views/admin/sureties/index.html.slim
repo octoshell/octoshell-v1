@@ -4,12 +4,9 @@ div class="well"
     = link_to 'Шаблон', template_admin_sureties_path, class: 'btn'
 
 = simple_form_for @search, method: :get, url: admin_sureties_path, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|
-  div class="input-append"
-    div class="hidden"
-      = autocomplete :organization, f
-      = f.input :state_in, collection: Surety.human_state_names, input_html: { multiple: true }, label: 'Состояние'
-    
-    = f.text_field :id_eq, placeholer: 'ID', class: 'input-xlarge', autofocus: true
+  div class="input-prepend input-append"
+    span class="add-on" #
+    = f.text_field :id_eq, class: 'input-xlarge', autofocus: true
     button class="btn" type="submit"
       i class="icon-search"
 

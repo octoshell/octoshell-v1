@@ -25,17 +25,17 @@ table class="table table-bordered"
     td = smart_link_to @organization.organization_kind
 
 h3 Активные проекты
-= render partial: 'admin/projects/table', locals: { projects: @organization.projects.active.limit(10) }
-p = link_to "Все проекты (#{@organization.projects.count})", projects_path(search: { state_in: Project.state_names, organization_id_eq: @organization.id })
+= render partial: 'admin/projects/table', locals: { projects: @organization.projects.with_state(:active).limit(10) }
+p = link_to "Все проекты (#{@organization.projects.count})", admin_projects_path(search: { state_in: Project.state_names, organization_id_eq: @organization.id })
 
 h3 Активные поручительства
-= render partial: 'admin/sureties/table', locals: { sureties: @organization.sureties.active.limit(10) }
-p = link_to "Все поручительства (#{@organization.sureties.count})", sureties_path(search: { state_in: Surety.state_names, organization_id_eq: @organization.id })
+= render partial: 'admin/sureties/table', locals: { sureties: @organization.sureties.with_state(:active).limit(10) }
+p = link_to "Все поручительства (#{@organization.sureties.count})", admin_sureties_path(search: { state_in: Surety.state_names, organization_id_eq: @organization.id })
 
 h3 Активные сотрудники
 p
   | Активных сотрудников: 
-  strong #{@organization.memberships.active.count}
+  strong #{@organization.memberships.with_state(:active).count}
 = render partial: 'admin/memberships/table', locals: { memberships: @organization.memberships.limit(10) }
 p = link_to "Все сотрудники (#{@organization.memberships.count})", admin_memberships_path(search: { state_in: Membership.state_names, organization_id_eq: @organization.id })
 
