@@ -1,5 +1,5 @@
 - if requests.any?
-  table class="table table-bordered table-striped"
+  table class="table table-bordered"
     tr
       th class="span1" #
       th
@@ -11,7 +11,7 @@
       th = Request.human_attribute_name(:created_at)
       th
     - requests.each do |request|
-      tr id="request-#{request.id}" class="js-request-#{request.id}"
+      tr id="request-#{request.id}" class="#{{ active: "success", pending: "warning", blocked: "warning" }[request.state_name]}"
         td = request.id
         td
           = smart_link_to request.project

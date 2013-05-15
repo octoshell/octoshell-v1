@@ -15,6 +15,10 @@ div class="well"
   = link_to Project.human_state_event_name(:erase), admin_project_erase_path(@project), method: :put, class: "btn btn-danger #{'disabled' unless @project.can_erase?}", data: { confirm: 'Вы уверены?' }
 
 
+- if @project.closed?
+  div class="lead well text-error"
+    strong Проект закрыт
+
 - if @project.disabled?
   div class="lead well text-error"
     strong Проект отключен. (Не прошли перерегистрацию)
