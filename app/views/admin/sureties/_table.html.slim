@@ -1,19 +1,26 @@
 - if sureties.any?
-  table class="table table-bordered"
+  table class="table table-bordered table-striped"
     tr
       th class="span1" #
-      th = Organization.model_name.human
       th = User.model_name.human
-      th = Project.model_name.human
+      th
+        = Organization.model_name.human
+        |  / 
+        br
+        = Project.model_name.human
       th = Surety.human_attribute_name(:state)
       th
     - sureties.each do |surety|
       tr id="surety-#{surety.id}" class="js-surety-#{surety.id}"
         td = surety.id
-        td = smart_link_to surety.organization
         td = smart_link_to surety.user
-        td = smart_link_to surety.project
-        td = surety.human_state_name
+        td
+          = smart_link_to surety.organization
+          |  / 
+          = smart_link_to surety.project, nil, class: "muted"
+        td
+          - state = { generated: "warning", filling: "default", active: "success", closed: "default" }[surety.state_name]
+          span class="label label-#{state}" = surety.human_state_name
         td = smart_link_to surety
 - else
   p = t('.no_sureties')

@@ -3,17 +3,19 @@
 = render 'admin/tickets/menu'
 
 = simple_form_for @search, url: admin_tickets_path, method: :get, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|
-  = autocomplete :project, f
-  = autocomplete :user, f
-  = f.input :cluster_id_eq, collection: Cluster.all, required: false, label: 'Кластер'
-  = f.input :state_in, collection: Ticket.human_state_names, input_html: { multiple: true }, required: false, label: 'Состояние'
-  = f.input :ticket_tag_relations_ticket_tag_name_in, collection: TicketTag.with_state(:active).pluck(:name), required: false, input_html: { multiple: true }, label: 'Тег'
-
-  - options = { required: false, include_blank: true, start_year: 2012, end_year: Date.current.year, input_html: { class: 'datepicker' } }
-  = f.input :created_at_gt, options.merge(label: 'Создан после')
-  = f.input :created_at_lt, options.merge(label: 'Создан до')
-  = f.input :updated_at_gt, options.merge(label: 'Обновлен после')
-  = f.input :updated_at_lt, options.merge(label: 'Обновлен до')
+  div class="row"
+    div class="span5"
+      = autocomplete :project, f
+      = autocomplete :user, f
+      = f.input :cluster_id_eq, collection: Cluster.all, required: false, label: 'Кластер'
+      = f.input :state_in, collection: Ticket.human_state_names, input_html: { multiple: true }, required: false, label: 'Состояние'
+      = f.input :ticket_tag_relations_ticket_tag_name_in, collection: TicketTag.with_state(:active).pluck(:name), required: false, input_html: { multiple: true }, label: 'Тег'
+    div class="span6"
+      - options = { required: false, include_blank: true, start_year: 2012, end_year: Date.current.year, input_html: { class: 'datepicker' } }
+      = f.input :created_at_gt, options.merge(label: 'Создан после')
+      = f.input :created_at_lt, options.merge(label: 'Создан до')
+      = f.input :updated_at_gt, options.merge(label: 'Обновлен после')
+      = f.input :updated_at_lt, options.merge(label: 'Обновлен до')
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
 

@@ -62,8 +62,16 @@ h3 Отчеты
 
 h4 Поданные пользователем
 
-- @user.reports.each do |report|
-  p = link_to "Отчет ##{report.id} (#{report.human_state_name})", [:admin, report]
+ul
+- @user.old_reports.each do |report|
+  li
+    = "Отчет ##{report.id} (#{report.state})"
+    ul
+      - report.projects.each do |project|
+        li
+          = project.ru_title
+          |  
+          = "#{project.illustrations_points} / #{project.statement_points} / #{project.summary_points}"
 
 / h4 В которых упоминался пользователь
 / 

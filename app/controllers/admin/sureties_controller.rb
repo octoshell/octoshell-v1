@@ -10,6 +10,8 @@ class Admin::SuretiesController < Admin::ApplicationController
   
   def show
     @surety = find_surety(params[:id])
+    add_breadcrumb "Список", admin_sureties_path
+    add_breadcrumb "Поручительство ##{@surety.id}"
     respond_to do |format|
       format.html
       format.rtf do
@@ -140,7 +142,11 @@ private
     redirect_to [:admin, surety], options
   end
   
+  def default_breadcrumb
+    false
+  end
+  
   def setup_default_filter
-    params[:q] ||= { state_in: ['pending', 'active', 'confirmed'] }
+    params[:q] ||= { state_in: ['generated'] }
   end
 end

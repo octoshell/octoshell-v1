@@ -15,6 +15,7 @@ class Request < ActiveRecord::Base
   validates :size, :cpu_hours, :gpu_hours, numericality: { greater_than_or_equal_to: 0 }
   
   attr_accessible :cpu_hours, :gpu_hours, :size, :project_id, :cluster_id
+  attr_accessible :cpu_hours, :gpu_hours, :size, :group_name, :request_properties_attributes, as: :admin
   
   accepts_nested_attributes_for :request_properties
   
@@ -26,7 +27,9 @@ class Request < ActiveRecord::Base
   
   state_machine initial: :pending do
     state :pending
-    state :active
+    state :active do
+      validates :project_id, uniqueness: { scope: [:cluster_id] }
+    end
     state :blocked
     state :declined
     state :closed
@@ -57,7 +60,7 @@ class Request < ActiveRecord::Base
   end
   
   def allowed_projects
-    user ? user.owned_projects.with_states(:active, :blocked, :announced) : []
+    user ? user.owned_projects.with_states(:active) : []
   end
   
   def request_maintain!
@@ -66,6 +69,10 @@ class Request < ActiveRecord::Base
   
   def complete_maintain!
     update_column :maintain_requested_at, nil
+  end
+  
+  def link_name
+    "Заявка ##{id}"
   end
   
 private
@@ -80,9 +87,5 @@ private
         request_property.name = cluster_field.name
       end
     end
-  end
-
-  def link_name
-    "Request #{id}"
   end
 end

@@ -24,6 +24,12 @@ class Admin::ProjectsController < Admin::ApplicationController
     end
   end
   
+  def synch
+    @project = Project.find(params[:project_id])
+    @project.requests.with_state(:active).each &:request_maintain!
+    redirect_to [:admin, @project]
+  end
+  
   def edit
     @project = Project.find(params[:id])
   end
@@ -58,6 +64,12 @@ class Admin::ProjectsController < Admin::ApplicationController
     end
   end
   
+  def enable
+    @project = Project.find(params[:project_id])
+    @project.update_column :disabled, false
+    redirect_to [:admin, @project]
+  end
+  
   def sureties
     @project = Project.find(params[:project_id])
     
@@ -84,7 +96,10 @@ class Admin::ProjectsController < Admin::ApplicationController
     render :invite
   end
   
-private
+  private
+  def default_breadcrumb
+    false
+  end
 
   def setup_default_filter
     params[:q] ||= { state_in: ['active'], disabled_eq: false }

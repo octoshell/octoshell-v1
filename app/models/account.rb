@@ -1,5 +1,5 @@
-# coding: utf-8
-# Модель доступа человека к проекту
+require 'timeout'
+
 class Account < ActiveRecord::Base
   has_paper_trail
   
@@ -69,7 +69,47 @@ class Account < ActiveRecord::Base
     to_s
   end
   
+  def change_login(new_login)
+    if login_available?(new_login)
+      transaction do
+        update_attribute(:username, new_login)
+        project.requests.with_states(:active, :blocked).each(&:request_maintain!)
+      end
+    else
+      false
+    end
+  end
+  
 private
+
+  def login_available?(login)
+    unless (login =~ /([a-z_][a-z0-9_]{0,30})/) == 0
+      errors.add :username, "Не правильный формат"
+      return false
+    end
+    project.requests.with_states(:active, :blocked).all? do |request|
+      res, cmd = "", "sudo /usr/octo/check_user #{login} #{request.group_name}"
+      Timeout::timeout(1) do
+        ::Net::SSH.start(request.cluster.host, "octo", keys: ["/var/www/octoshell-extend/shared/keys/private"]) do |ssh|
+          ssh.open_channel do |channel|
+            channel.request_pty do |ch, success|
+              ch.exec cmd
+            end
+            channel.on_data do |ch, data|
+              res = data.chomp
+            end
+          end
+        end
+      end
+      
+      if res != "closed"
+        errors.add :username, "Уже используется на кластере #{request.cluster.name}"
+        false
+      else
+        true
+      end
+    end
+  end
   
   def assign_username
     update_attribute :username, "#{user.username}_#{id}"

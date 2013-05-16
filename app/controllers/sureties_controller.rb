@@ -38,8 +38,7 @@ class SuretiesController < ApplicationController
     @surety = find_surety(params[:surety_id])
   end
   
-private
-  
+  private
   def find_surety(id)
     Surety.where(project_id: current_user.owned_project_ids).find(id)
   end

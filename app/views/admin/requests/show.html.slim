@@ -21,6 +21,9 @@ div class="request"
       th = Project.model_name.human
       td
         strong = smart_link_to @request.project
+        |  
+        - state = { active: "success", closed: "important", closing: "important"}[@request.project.state_name]
+        span class="label label-#{state}" = @request.project.human_state_name
     tr
       th = Project.human_attribute_name(:description)
       td = @request.project.description

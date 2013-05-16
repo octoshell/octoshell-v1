@@ -1260,7 +1260,8 @@ CREATE TABLE pages (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     locator text,
-    publicized boolean DEFAULT false
+    publicized boolean DEFAULT false,
+    content text
 );
 
 
@@ -1436,7 +1437,8 @@ CREATE TABLE projects (
     cluster_user_type character varying(255) DEFAULT 'account'::character varying,
     username character varying(255),
     project_prefix_id integer,
-    disabled boolean DEFAULT false
+    disabled boolean DEFAULT false,
+    filled boolean DEFAULT true
 );
 
 
@@ -4361,10 +4363,10 @@ CREATE UNIQUE INDEX uniq_dir_proj ON direction_of_sciences_projects USING btree 
 
 
 --
--- Name: unique_active_request_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: unique_pending_request_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX unique_active_request_idx ON requests USING btree (project_id, cluster_id) WHERE ((state)::text = 'active'::text);
+CREATE UNIQUE INDEX unique_pending_request_idx ON requests USING btree (project_id, cluster_id) WHERE ((state)::text = ANY ((ARRAY['pending'::character varying, 'active'::character varying])::text[]));
 
 
 --
@@ -5004,3 +5006,9 @@ INSERT INTO schema_migrations (version) VALUES ('20130429163325');
 INSERT INTO schema_migrations (version) VALUES ('20130514135111');
 
 INSERT INTO schema_migrations (version) VALUES ('20130514161451');
+
+INSERT INTO schema_migrations (version) VALUES ('20130513134924');
+
+INSERT INTO schema_migrations (version) VALUES ('20130515104749');
+
+INSERT INTO schema_migrations (version) VALUES ('20130516130553');

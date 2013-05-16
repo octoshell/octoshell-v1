@@ -53,11 +53,9 @@ MSU::Application.routes.draw do
     post :members
     get :invite
     post :sureties
-    post :accounts
     get :close, action: :close_confirmation
     put :close
     resources :account_codes, only: :destroy
-    resources :versions, only: [:index, :show], resource: 'Project'
   end
 
   # project joiners
@@ -181,9 +179,15 @@ MSU::Application.routes.draw do
 
     # projects
     resources :projects, only: [:index, :show, :edit, :update] do
+      put :synch
       put :close
+      put :enable
       put :erase
       resources :versions, only: [:index, :show], resource: 'Project'
+    end
+    
+    resources :accounts, only: [] do
+      put :change
     end
 
     # requests

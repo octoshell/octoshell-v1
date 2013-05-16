@@ -3,7 +3,7 @@ class Admin::RequestsController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
-    @search = Request.search(params[:q])
+    @search = Request.order("id desc").search(params[:q])
     @requests = show_all? ? @search.result : @search.result(distinct: true).page(params[:page])
   end
   
@@ -26,6 +26,8 @@ class Admin::RequestsController < Admin::ApplicationController
   
   def show
     @request = find_request(params[:id])
+    add_breadcrumb "Список", admin_requests_path
+    add_breadcrumb "Заявка ##{@request.id}"
   end
   
   def activate
@@ -59,6 +61,10 @@ class Admin::RequestsController < Admin::ApplicationController
   end
   
 private
+
+  def default_breadcrumb
+    false
+  end
   
   def redirect_to_request(request)
     redirect_to [:admin, request]
@@ -73,6 +79,6 @@ private
   end
 
   def setup_default_filter
-    params[:q] ||= { state_in: ['pending', 'active'] }
+    params[:q] ||= { state_in: ['pending'] }
   end
 end

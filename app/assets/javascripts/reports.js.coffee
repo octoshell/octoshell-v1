@@ -210,21 +210,22 @@ $ ->
     $link.on 'click', (e) ->
       false
   
-  users_db = {}
-  $('@user-finder').typeahead
-    source: (query, process) ->
-      console.log(1)
-      $.getJSON '/users', { q: query }, (data) ->
-        process(
-          data.records.map (r) ->
-            users_db[r.text] = r.id
-            r.text
-        )
-    updater: (item) ->
-      id = users_db[item]
-      if id
-        document.location = '/admin/users/' + id
-      item
+  $('@instant-finder').each (i, html) ->
+    db = {}
+    $finder = $(html)
+    $finder.typeahead
+      source: (query, process) ->
+        $.getJSON $finder.data('source-url'), { q: query }, (data) ->
+          process(
+            data.records.map (r) ->
+              db[r.text] = r.id
+              r.text
+          )
+      updater: (item) ->
+        id = db[item]
+        if id
+          document.location = $finder.data('redirect-to').replace('%s', id)
+        item
   
   google.setOnLoadCallback ->
     width = 720
@@ -278,3 +279,10 @@ $ ->
 
       chart = new google.visualization.ColumnChart($graph[0])
       chart.draw data, options
+  
+  $("@login-changer").on "click", ->
+    $link = $(@)
+    $container = $link.parents("td:first")
+    $container.find("@login-changer-current").hide()
+    $container.find("@login-changer-form").removeClass("hidden")
+    false
