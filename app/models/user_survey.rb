@@ -2,6 +2,7 @@ class UserSurvey < ActiveRecord::Base
   belongs_to :user
   belongs_to :survey
   belongs_to :project
+  has_many :survey_values, class_name: "Survey::Value"
   
   validates :user, :survey, presence: true
   
@@ -20,9 +21,8 @@ class UserSurvey < ActiveRecord::Base
     
     inside_transition :on => :accept do |us|
       us.survey.fields.each do |field|
-        Survey::Value.create! do |v|
+        us.survey_values.create! do |v|
           v.field = field
-          v.user = us.user
         end
       end
     end
@@ -38,23 +38,16 @@ class UserSurvey < ActiveRecord::Base
       I18n.t('user_survey.counters', name: project.title.truncate(10))
     end
   end
-  
-  def values
-    @values ||= begin
-      conditions = { survey_field_id: survey.field_ids, user_id: user.id }
-      Survey::Value.where(conditions).to_a
-    end
-  end
 
   def fill_values(fields)
-    fields ||= []
-    failed = false
     transaction do
-      updater = proc { |id, value| find_value(id).update_value(value) }
-      failed = fields.map(&updater).any? { |r| !r }
-      raise ActiveRecord::Rollback if failed
+      saves = fields.map do |field_id, value|
+        record = survey_values.find { |v| v.survey_field_id == field_id.to_i }
+        record.value = value
+        record.save
+      end
+      saves.all? || (raise ActiveRecord::Rollback)
     end
-    !failed
   end
   
   def fill_values_and_submit(fields)
@@ -67,13 +60,5 @@ class UserSurvey < ActiveRecord::Base
     define_method "#{type}?" do
       Session.where("#{type}_survey_id" => survey_id).exists?
     end
-  end
-  
-  def find_value(field_id)
-    values.find { |v| v.survey_field_id == field_id.to_i }
-  end
-  
-  def field_value(field_id)
-    find_value(field_id).value
   end
 end

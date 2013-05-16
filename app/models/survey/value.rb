@@ -1,6 +1,6 @@
 class Survey::Value < ActiveRecord::Base
   belongs_to :field, foreign_key: :survey_field_id
-  belongs_to :user
+  belongs_to :user_survey
   belongs_to :reference, polymorphic: true
   
   validates :field, presence: true
@@ -10,6 +10,8 @@ class Survey::Value < ActiveRecord::Base
     opt.validates :value, inclusion: { in: proc(&:allowed_values) },
       if: :has_inclusion_validator?
     opt.validate :values_matcher, if: :multiple_values?
+    opt.validates :value, numericality: { greater_than_or_equal_to: 0 },
+      if: :number_field?
   end
   
   serialize :value
@@ -50,5 +52,9 @@ class Survey::Value < ActiveRecord::Base
     value.all? do |v|
       v.in? allowed_values
     end
+  end
+  
+  def number_field?
+    field.kind == 'number'
   end
 end

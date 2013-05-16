@@ -1,6 +1,6 @@
 table class="table table-striped summable"
-  - field.collection_values.each do |value|
+  - field.collection_values.each_with_index do |title, i|
     tr
-      th class="span4" = value
+      th class="span4" = title
       td
-        input type="number" class="input-small" value="0"
+        input name="fields[#{field.id}][]" type="number" class="input-small" value="#{(value && value[i].present?) ? value[i] : 0}"
