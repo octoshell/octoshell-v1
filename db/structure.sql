@@ -4355,10 +4355,10 @@ CREATE UNIQUE INDEX uniq_dir_proj ON direction_of_sciences_projects USING btree 
 
 
 --
--- Name: unique_active_request_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: unique_pending_request_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX unique_active_request_idx ON requests USING btree (project_id, cluster_id) WHERE ((state)::text = 'active'::text);
+CREATE UNIQUE INDEX unique_pending_request_idx ON requests USING btree (project_id, cluster_id) WHERE ((state)::text = ANY ((ARRAY['pending'::character varying, 'active'::character varying])::text[]));
 
 
 --
@@ -4998,3 +4998,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130429163325');
 INSERT INTO schema_migrations (version) VALUES ('20130513134924');
 
 INSERT INTO schema_migrations (version) VALUES ('20130515104749');
+
+INSERT INTO schema_migrations (version) VALUES ('20130516130553');

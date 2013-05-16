@@ -27,7 +27,9 @@ class Request < ActiveRecord::Base
   
   state_machine initial: :pending do
     state :pending
-    state :active
+    state :active do
+      validates :project_id, uniqueness: { scope: [:cluster_id] }
+    end
     state :blocked
     state :declined
     state :closed
