@@ -2015,7 +2015,7 @@ ALTER SEQUENCE ticket_field_relations_id_seq OWNED BY ticket_field_relations.id;
 
 CREATE TABLE ticket_field_values (
     id integer NOT NULL,
-    value character varying(255),
+    value text,
     ticket_field_relation_id integer,
     ticket_id integer,
     created_at timestamp without time zone NOT NULL,
@@ -5005,3 +5005,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130514161451');
 INSERT INTO schema_migrations (version) VALUES ('20130515104749');
 
 INSERT INTO schema_migrations (version) VALUES ('20130516130553');
+
+INSERT INTO schema_migrations (version) VALUES ('20130517082758');
+
+INSERT INTO schema_migrations (version) VALUES ('20130517112429');
