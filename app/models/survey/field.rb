@@ -1,4 +1,6 @@
 class Survey::Field < ActiveRecord::Base
+  has_paper_trail
+  
   include ActionView::Helpers::JavaScriptHelper
   
   KINDS = [:radio, :select, :mselect, :string, :text, :number, :aselect,

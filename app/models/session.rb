@@ -1,4 +1,6 @@
 class Session < ActiveRecord::Base
+  has_paper_trail
+  
   belongs_to :personal_survey, class_name: :Survey
   belongs_to :projects_survey, class_name: :Survey
   belongs_to :counters_survey, class_name: :Survey
