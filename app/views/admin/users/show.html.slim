@@ -64,7 +64,8 @@ h3 Перерегистрации
   h4
     = session.description
     |  
-    span class="label" = session.state_name
+    - state = { pending: "warning", active: "success", ended: "default" }[session.state_name]
+    span class="label label-#{state}" = session.state_name
   
   - reports = @user.reports.where(session_id: session.id)
   - if reports.any?
@@ -72,20 +73,25 @@ h3 Перерегистрации
       - reports.each do |report|
         li
           = link_to report.human_name
-          |  [ 
-          span title="Иллюстрации" = report.illustration_points || "?"
-          |  / 
-          span title="Повествование" = report.statement_points || "?"
-          |  / 
-          span title="Общая оценка" = report.summary_points || "?"
-          |  ]
+          span class="muted"
+            |  [ 
+            span title="Иллюстрации" = report.illustration_points || "?"
+            |  / 
+            span title="Повествование" = report.statement_points || "?"
+            |  / 
+            span title="Общая оценка" = report.summary_points || "?"
+            |  ]
+          |  
+          - state = { pending: "warning", accepted: "warning", submitted: "success", assessing: "warning", assessed: "success", declined: "important" }[report.state_name]
+          span class="label label-#{state}" = report.state_name
   
   ul
     - surveys.each do |us|
       li
         = link_to us.human_name, [:admin, us]
         |  
-        span class="label" = us.state_name
+        - state = { pending: "warning", filling: "warning", submitted: "success" }[us.state_name]
+        span class="label label-#{state}" = us.state_name
 
 ul
 - @user.old_reports.each do |report|
