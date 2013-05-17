@@ -58,17 +58,42 @@ h3 Проблемы
 - if @user.faults.empty?
   p Нет проблем
 
-h3 Отчеты
+h3 Перерегистрации
 
-h4 Поданные пользователем
+- @user.user_surveys.group_by(&:session).sort_by { |session, _| session.id }.each do |session, surveys|
+  h4
+    = session.description
+    |  
+    span class="label" = session.state_name
+  
+  - reports = @user.reports.where(session_id: session.id)
+  - if reports.any?
+    ul
+      - reports.each do |report|
+        li
+          = link_to report.human_name
+          |  [ 
+          span title="Иллюстрации" = report.illustration_points || "?"
+          |  / 
+          span title="Повествование" = report.statement_points || "?"
+          |  / 
+          span title="Общая оценка" = report.summary_points || "?"
+          |  ]
+  
+  ul
+    - surveys.each do |us|
+      li
+        = link_to us.human_name, [:admin, us]
+        |  
+        span class="label" = us.state_name
 
 ul
 - @user.old_reports.each do |report|
-  li
+  li class="muted"
     = "Отчет ##{report.id} (#{report.state})"
     ul
       - report.projects.each do |project|
-        li
+        li class="muted"
           = project.ru_title
           |  
           = "#{project.illustrations_points} / #{project.statement_points} / #{project.summary_points}"

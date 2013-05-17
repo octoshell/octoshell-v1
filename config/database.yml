@@ -1,6 +1,6 @@
 development:
   adapter: postgresql
-  database: octoshell_reports
+  database: octoshell_developement
   username: octoshell
   host: 0.0.0.0
   pool: 5

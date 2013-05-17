@@ -1,4 +1,6 @@
 class UserSurvey < ActiveRecord::Base
+  delegate :session, to: :survey
+  
   belongs_to :user
   belongs_to :survey
   belongs_to :project

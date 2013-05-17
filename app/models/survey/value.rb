@@ -17,7 +17,7 @@ class Survey::Value < ActiveRecord::Base
   serialize :value
   
   def value
-    reference ? reference.survey_value : self[:value]
+    multiple_values? ? Array(self[:value]) : self[:value]
   end
   
   def update_value(value)
