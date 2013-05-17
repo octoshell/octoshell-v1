@@ -1,6 +1,8 @@
-# coding: utf-8
 class Survey::Field < ActiveRecord::Base
-  KINDS = [:radio, :select, :mselect, :string, :text, :aselect, :scientometrics]
+  include ActionView::Helpers::JavaScriptHelper
+  
+  KINDS = [:radio, :select, :mselect, :string, :text, :number, :aselect,
+    :scientometrics]
   KINDS_COLLECTION = begin
     Hash[KINDS.map do |kind|
       [I18n.t("survey_field_kinds.#{kind}"), kind]
@@ -25,6 +27,10 @@ class Survey::Field < ActiveRecord::Base
   
   attr_accessible :name, :kind, :collection, :max_values, :weight,
     :required, :entity, :strict_collection, :hint, as: :admin
+  
+  def name
+    self[:name].to_s.html_safe
+  end
   
   def collection_values
     collection.each_line.find_all(&:present?).map(&:strip)

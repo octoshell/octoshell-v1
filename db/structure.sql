@@ -1889,7 +1889,8 @@ CREATE TABLE survey_values (
     survey_field_id integer,
     user_id integer,
     reference_id integer,
-    reference_type character varying(255)
+    reference_type character varying(255),
+    user_survey_id integer
 );
 
 
@@ -4040,10 +4041,17 @@ CREATE INDEX index_survey_values_on_survey_field_id_and_reference_id ON survey_v
 
 
 --
--- Name: index_survey_values_on_survey_field_id_and_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_survey_values_on_user_survey_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_survey_values_on_survey_field_id_and_user_id ON survey_values USING btree (survey_field_id, user_id);
+CREATE INDEX index_survey_values_on_user_survey_id ON survey_values USING btree (user_survey_id);
+
+
+--
+-- Name: index_survey_values_on_user_survey_id_and_survey_field_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_survey_values_on_user_survey_id_and_survey_field_id ON survey_values USING btree (user_survey_id, survey_field_id);
 
 
 --
@@ -4994,6 +5002,10 @@ INSERT INTO schema_migrations (version) VALUES ('20130429161044');
 INSERT INTO schema_migrations (version) VALUES ('20130429161136');
 
 INSERT INTO schema_migrations (version) VALUES ('20130429163325');
+
+INSERT INTO schema_migrations (version) VALUES ('20130514135111');
+
+INSERT INTO schema_migrations (version) VALUES ('20130514161451');
 
 INSERT INTO schema_migrations (version) VALUES ('20130513134924');
 

@@ -2,6 +2,7 @@
 - if values.any?
   ul
     - value.value.each do |value|
-      li = value
+      - if value.present?
+        li = value
 - else
   p Нет
