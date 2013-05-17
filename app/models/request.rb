@@ -1,4 +1,3 @@
-# coding: utf-8
 class Request < ActiveRecord::Base
   include Models::Limitable
   
@@ -27,9 +26,7 @@ class Request < ActiveRecord::Base
   
   state_machine initial: :pending do
     state :pending
-    state :active do
-      validates :project_id, uniqueness: { scope: [:cluster_id] }
-    end
+    state :active
     state :blocked
     state :declined
     state :closed
