@@ -21,7 +21,8 @@ table class="table table-bordered table-striped"
         br
         = user.email
         br
-        span class="label" = user.human_state_name
+        - state = { active: "default", sured: "success", closed: "important" }[user.state_name]
+        span class="label label-#{state}" = user.human_state_name
       td
         ul class="unstyled"
           - user.membershiped_organizations.to_a.uniq.each do |organization|
