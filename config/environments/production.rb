@@ -50,7 +50,18 @@ MSU::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   config.action_mailer.default_url_options = { host: 'users.parallel.ru', protocol: 'https' }
-  config.action_mailer.delivery_method = :smtp
+  if ENV["STAGE"]
+    ActionMailer::Base.delivery_method = :smtp
+    ActionMailer::Base.smtp_settings = {
+      :user_name => 'releu-5a39f94f6e7e49b6',
+      :password => '0eb3fc59c72fe799',
+      :address => 'mailtrap.io',
+      :port => '2525',
+      :authentication => :plain,
+    }
+  else
+    config.action_mailer.delivery_method = :smtp
+  end
   # config.action_mailer.delivery_method = :mailgun
   # config.action_mailer.mailgun_settings = {
   #   api_key:  'key-2bbtwydaex8px6vvl7twssc1puchy2m7',

@@ -11,7 +11,11 @@ require "cocaine"
 
 set :application, "octoshell"
 set :rails_env, "production"
-set :domain, "evrone@v1.parallel.ru"
+if ENV["STAGE"]
+  set :domain, "evrone@v2.parallel.ru"
+else
+  set :domain, "evrone@v1.parallel.ru"
+end
 set :repository,  "git@github.com:evrone/octoshell.git"
 set :branch, "master"
 set :use_sudo, false
