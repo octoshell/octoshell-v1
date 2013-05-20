@@ -34,7 +34,7 @@ legend Оценки
 
 legend Опросы
 
-- surveys = @report.user.current_session_surveys
+- surveys = @report.user.user_surveys.where(survey_id: @report.session.survey_ids)
 - if surveys.any?
   ul
     - surveys.each do |survey|

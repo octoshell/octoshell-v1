@@ -1,4 +1,3 @@
-# coding: utf-8
 class Admin::ReportsController < Admin::ApplicationController
   before_filter { authorize! :access, :reports }
   
@@ -32,10 +31,15 @@ class Admin::ReportsController < Admin::ApplicationController
   
   def show
     @report = Report.find(params[:id])
+    add_breadcrumb "Проект", [:admin, @report.project]
+    add_breadcrumb "Отчет по проекту"
     raise MayMay::Unauthorized unless may?(:review, :reports) || @report.expert
   end
   
-private
+  private
+  def default_breadcrumb
+    false
+  end
   
   def default_index_params
     params = { state_eq: 'submitted' }

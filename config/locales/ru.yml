@@ -493,6 +493,12 @@ ru:
         submitted_at: Отправлен
         superviser_comment: Комментарий
         allow_state: Разрешение
+        illustration_points: Иллюстрации
+        statement_points: Изложение
+        summary_points: Общая оценка
+        materials_file_name: Материалы (название файла)
+        materials_file_size: Материалы (размер файла)
+        materials_updated_at: Материалы (обновлено в)
       report/personal_data:
         first_name: Имя
         last_name: Фамилия
@@ -551,12 +557,7 @@ ru:
         chebyshev_hours: 'Чебышев'
         request_comment: 'В этом поле следует описать имеющие место актуальные потребности, связанные с работой на системах СКЦ МГУ и любыe другие необходимые пояснения'
         wanna_speak: Да
-        illustrations_points: Иллюстрации
-        statement_points: Изложение
-        summary_points: Общая оценка
-        materials_file_name: Материалы (название файла)
-        materials_file_size: Материалы (размер файла)
-        materials_updated_at: Материалы (обновлено в)
+        
       report/organization:
         name: Название
         subdivision: Подразделение
@@ -985,6 +986,18 @@ ru:
             pending: В ожидании
             closing: Закрывается
             closed: Закрыт
+      session:
+        state:
+          states:
+            active: Активна
+            ended: Завершена
+            pending: Создана
+      user_survey:
+        state:
+          states:
+            pending: Создан
+            filling: Заполняется
+            submitted: Отправлен
       user_survey:
         state:
           states:

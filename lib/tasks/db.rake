@@ -9,7 +9,6 @@ namespace :db do
     tar = "/var/www/msu/shared/backups/#{time.to_i}.tar"
     system "pg_dump -f #{tar} -F tar octoshell"
     system "gzip #{tar}"
-    system "rm #{tar}"
   end
   
   task :create_old_history_items => :environment do
