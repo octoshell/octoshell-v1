@@ -6,7 +6,10 @@ namespace :db do
   
   task :backup => :environment do
     time = Time.current
-    system "pg_dump -f /var/www/msu/shared/backups/#{time.to_i} -F tar octoshell"
+    tar = "/var/www/msu/shared/backups/#{time.to_i}.tar"
+    system "pg_dump -f #{tar} -F tar octoshell"
+    system "gzip #{tar}"
+    system "rm #{tar}"
   end
   
   task :create_old_history_items => :environment do
