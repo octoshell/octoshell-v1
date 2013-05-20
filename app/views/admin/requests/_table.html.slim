@@ -28,6 +28,6 @@
         td
           label class="label label-#{state}"= request.human_state_name
         td class="date" = request.created_at.strftime("%Y-%m-%d")
-        td = link_to t('.open'), [:admin, request]
+        td = link_to "открыть", [:admin, request]
 - else
   p Нет заявок

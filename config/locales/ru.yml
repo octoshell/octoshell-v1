@@ -950,6 +950,13 @@ ru:
             closed: Удалено
           events:
             close: Удалить
+      fault:
+        state:
+          states:
+            actual: Актуальная
+            resolved: Решенная
+          events:
+            resolve: Пометить решенной
       ticket_field:
         state:
           states:

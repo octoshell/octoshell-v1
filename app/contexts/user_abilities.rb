@@ -1,10 +1,10 @@
 module UserAbilities
-  def may?
-    ability.may?
+  def may?(*args)
+    ability.may? *args
   end
   
-  def maynot?
-    ability.maynot?
+  def maynot?(*args)
+    ability.maynot? *args
   end
   
   def abilities

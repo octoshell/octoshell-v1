@@ -167,7 +167,12 @@ class User < ActiveRecord::Base
   end
   
   def revalidate!
-    if sureties.with_state(:active).any? && memberships.with_state(:active).any?
+    conditions = [
+      proc { sureties.with_state(:active).any? },
+      proc { memberships.with_state(:active).any? },
+      proc { faults.with_state(:actual).empty? }
+    ]
+    if conditions.all?(&:call)
       sured? || sure!
     else
       active? || unsure!

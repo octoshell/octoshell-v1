@@ -20,10 +20,10 @@ class Fault < ActiveRecord::Base
   end
   
   def block_accesses
-    user.owned_projects.active.each do |project|
-      project.requests.active.each &:pause!
+    user.owned_projects.with_state(:active).each do |project|
+      project.requests.with_state(:active).each &:block!
     end
-    user.accounts.active.each &:cancel!
+    user.revalidate!
   end
   
   def kind
