@@ -1,1 +1,6 @@
-= value.inspect
+table class="table table-striped"
+  - value.field.collection_values.each_with_index do |title, i|
+    tr
+      th class="span4" = title
+      td
+        = value.value[i] || 0
