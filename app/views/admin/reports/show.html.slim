@@ -31,7 +31,7 @@ legend Оценки
     tr
       th = Report.human_attribute_name(:summary_points)
       td = @report.summary_points || 'Не оценивалось'
-    - if may?(:admin, :reports) || @report.expert == current_user
+    - if (may?(:admin, :reports) || @report.expert == current_user) && @report.assessed?
       tr
         td colspan="2" = link_to "Редактировать", [:admin, @report, :edit], method: :put, class: "muted"
 
