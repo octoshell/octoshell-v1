@@ -6,6 +6,4 @@ class Fault::Reply < ActiveRecord::Base
   
   attr_accessible :message
   attr_accessible :message, as: :admin
-  
-  
 end

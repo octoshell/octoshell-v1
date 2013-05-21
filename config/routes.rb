@@ -87,6 +87,7 @@ MSU::Application.routes.draw do
   resources :reports, only: [:show] do
     put :accept
     put :submit
+    post :replies
   end
 
   resources :tickets, only: [:new, :create, :index, :show, :edit, :update] do
@@ -288,6 +289,7 @@ MSU::Application.routes.draw do
       put :assess
       put :decline
       put :edit
+      post :replies
     end
         
     # sessions

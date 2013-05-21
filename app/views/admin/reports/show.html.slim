@@ -35,6 +35,28 @@ legend Оценки
       tr
         td colspan="2" = link_to "Редактировать", [:admin, @report, :edit], method: :put, class: "muted"
 
+legend Переписка
+
+- replies = @report.replies.find_all(&:persisted?)
+- if replies.any?
+  - replies.each do |r|
+    blockquote
+      small class="reply"
+        - if @report.user == r.user
+          = r.user.full_name
+        - else
+          = r.user.full_name
+          |  
+          span class="label label-info" Эксперт
+      = markdown r.message
+
+div class="row"
+  div class="well well-small span6"
+    = simple_form_for @reply, url: admin_report_replies_path(@report) do |f|
+      = f.input :message, input_html: { rows: 3, class: 'input-block-level' }, label: false, placeholder: 'Сообщение'
+      div class="text-right"
+        = f.button :submit, 'Отправить', class: 'btn-primary btn-small'
+
 legend Опросы
 
 - surveys = @report.user.user_surveys.where(survey_id: @report.session.survey_ids)

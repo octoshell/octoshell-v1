@@ -1510,6 +1510,39 @@ ALTER SEQUENCE replies_id_seq OWNED BY replies.id;
 
 
 --
+-- Name: report_replies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE report_replies (
+    id integer NOT NULL,
+    report_id integer,
+    message text,
+    user_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: report_replies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE report_replies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: report_replies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE report_replies_id_seq OWNED BY report_replies.id;
+
+
+--
 -- Name: reports; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2753,6 +2786,13 @@ ALTER TABLE ONLY replies ALTER COLUMN id SET DEFAULT nextval('replies_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY report_replies ALTER COLUMN id SET DEFAULT nextval('report_replies_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY reports ALTER COLUMN id SET DEFAULT nextval('reports_id_seq'::regclass);
 
 
@@ -3241,6 +3281,14 @@ ALTER TABLE ONLY old_report_projects
 
 ALTER TABLE ONLY old_report_replies
     ADD CONSTRAINT report_replies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: report_replies_pkey1; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY report_replies
+    ADD CONSTRAINT report_replies_pkey1 PRIMARY KEY (id);
 
 
 --
@@ -4363,6 +4411,13 @@ CREATE UNIQUE INDEX uniq_dir_proj ON direction_of_sciences_projects USING btree 
 
 
 --
+-- Name: unique_pending_request_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_pending_request_idx ON requests USING btree (project_id, cluster_id) WHERE ((state)::text = ANY (ARRAY[('pending'::character varying)::text, ('active'::character varying)::text]));
+
+
+--
 -- Name: unique_question_tag_relation; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -5009,3 +5064,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130516130553');
 INSERT INTO schema_migrations (version) VALUES ('20130517082758');
 
 INSERT INTO schema_migrations (version) VALUES ('20130517112429');
+
+INSERT INTO schema_migrations (version) VALUES ('20130521134717');

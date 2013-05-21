@@ -9,6 +9,18 @@ class ReportsController < ApplicationController
   
   def show
     @report = get_report(params[:id])
+    @reply = @report.replies.build do |reply|
+      reply.user = current_user
+    end
+  end
+  
+  def replies
+    @report = get_report(params[:report_id])
+    @reply = @report.replies.build(params[:report_reply]) do |reply|
+      reply.user = current_user
+    end
+    @reply.save
+    redirect_to report_path(@report, anchor: "start-page")
   end
   
   def submit

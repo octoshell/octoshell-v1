@@ -41,6 +41,19 @@ class Admin::ReportsController < Admin::ApplicationController
     add_breadcrumb "Проект", [:admin, @report.project]
     add_breadcrumb "Отчет по проекту"
     raise MayMay::Unauthorized unless may?(:review, :reports) || @report.expert
+    
+    @reply = @report.replies.build do |reply|
+      reply.user = current_user
+    end
+  end
+  
+  def replies
+    @report = Report.find(params[:report_id])
+    @reply = @report.replies.build(params[:report_reply]) do |reply|
+      reply.user = current_user
+    end
+    @reply.save
+    redirect_to admin_report_path(@report, anchor: "start-page")
   end
   
   private

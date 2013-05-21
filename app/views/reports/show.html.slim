@@ -11,3 +11,24 @@ div class="well"
             strong = link_to @report.materials_file_name, @report.materials.url
       div class="form-actions" style="margin-bottom: 0;"
         = f.submit 'Отправить', class: 'btn btn-primary', disabled: !@report.accepted?
+
+legend Переписка
+
+- replies = @report.replies.find_all(&:persisted?)
+- if replies.any?
+  - replies.each do |r|
+    blockquote
+      small class="reply"
+        - if @report.user == r.user
+          = r.user.full_name
+        - else
+          span class="label label-info" Эксперт
+      = markdown r.message
+
+div class="row"
+  div class="well well-small span6"
+    = simple_form_for @reply, url: report_replies_path(@report) do |f|
+      = f.input :message, input_html: { rows: 3, class: 'input-block-level' }, label: false, placeholder: 'Сообщение'
+      div class="text-right"
+        = f.button :submit, 'Отправить', class: 'btn-primary btn-small'
+

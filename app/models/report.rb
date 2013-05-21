@@ -4,6 +4,7 @@ class Report < ActiveRecord::Base
   belongs_to :session
   belongs_to :project
   belongs_to :expert, class_name: :User
+  has_many :replies, class_name: :"Report::Reply"
   
   has_attached_file :materials,
     content_type: ['application/zip', 'application/x-zip-compressed'],
