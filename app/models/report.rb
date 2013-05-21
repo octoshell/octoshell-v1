@@ -1,6 +1,7 @@
 # coding: utf-8
 class Report < ActiveRecord::Base
   delegate :user, to: :project
+  
   belongs_to :session
   belongs_to :project
   belongs_to :expert, class_name: :User
