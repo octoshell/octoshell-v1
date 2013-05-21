@@ -42,7 +42,7 @@ class Admin::ReportsController < Admin::ApplicationController
   end
   
   def default_index_params
-    params = { state_eq: 'submitted' }
+    params = { state_in: ['submitted'] }
     if s = Session.current
       params[:session_id_eq] = s.id
     end

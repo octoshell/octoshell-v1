@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
   def accept
     @report = get_report(params[:report_id])
     @report.accepted? || @report.accept!
-    redirect_to @report
+    redirect_to report_path(@report, anchor: "start-page")
   end
   
   def show

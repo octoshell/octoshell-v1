@@ -1,4 +1,4 @@
-- if logged_in?
+- if logged_in? && !(request.path =~ /admin/)
   - if session = Session.current
     - surveys = current_user.user_surveys.where(survey_id: session.survey_ids).order('id')
     - reports = Report.where(project_id: current_user.owned_project_ids)
@@ -47,7 +47,7 @@
                     - if report.can_accept?
                       = link_to "Прислать отчет", [report, :accept], method: :put, class: 'btn btn-mini btn-success'
                     - else
-                      small = link_to "Открыть", report
+                      small = link_to "Открыть", report_path(report, anchor: "start-page")
           div class="alert alert-#{teaser_status}"
             - if session.motivation?
               strong = session.motivation

@@ -14,6 +14,7 @@ class Survey::Value < ActiveRecord::Base
     opt.validate :values_matcher, if: :multiple_values?
     opt.validates :value, numericality: { greater_than_or_equal_to: 0 },
       if: :number_field?
+    opt.validate :scientometric_validator, if: :scientometric_field?
   end
   
   serialize :value
@@ -43,11 +44,11 @@ class Survey::Value < ActiveRecord::Base
   end
   
   def has_inclusion_validator?
-    field.strict_collection? && !field.kind.in?(%w(aselect mselect))
+    field.strict_collection? && field.kind.in?(%w(mselect radio select))
   end
   
   def multiple_values?
-    field.kind == 'mselect'
+    field.kind.in? %w(mselect scientometrics)
   end
   
   def values_matcher
@@ -58,5 +59,15 @@ class Survey::Value < ActiveRecord::Base
   
   def number_field?
     field.kind == 'number'
+  end
+  
+  def scientometric_field?
+    field.kind == "scientometrics"
+  end
+  
+  def scientometric_validator
+    value.all? do |v|
+      v.to_i >= 0
+    end || errors.add(:value, "Должено быть больше или равное нулю")
   end
 end

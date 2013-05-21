@@ -151,9 +151,9 @@ module ApplicationHelper
   end
   
   
-  def search_check_boxes(form, field)
+  def search_check_boxes(form, field, name)
     content_tag :div, class: 'control-group check_boxes inline-check-boxes' do
-      form.label(field, class: 'control-label') +
+      form.label(field, name, class: 'control-label') +
         content_tag(:div, class: 'controls') do
           values = form.object.send(field)
           values.compact! if values.respond_to?(:compact!)
