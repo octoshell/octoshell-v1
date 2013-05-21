@@ -287,6 +287,7 @@ MSU::Application.routes.draw do
       put :pick
       put :assess
       put :decline
+      put :edit
     end
         
     # sessions

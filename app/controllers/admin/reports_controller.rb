@@ -6,6 +6,13 @@ class Admin::ReportsController < Admin::ApplicationController
     @reports = @search.result(distinct: true).page(params[:page])
   end
   
+  def edit
+    authorize! :admin, :reports
+    @report = Report.find(params[:report_id])
+    @report.edit
+    redirect_to [:admin, @report]
+  end
+  
   def pick
     authorize! :assess, :reports
     @report = Report.find(params[:report_id])

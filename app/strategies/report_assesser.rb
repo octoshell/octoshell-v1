@@ -6,7 +6,7 @@ class ReportAssesser
   end
   
   def assess(report, attributes)
-    if @user == report.expert
+    if @user == report.expert || @user.may?(:manage, :reports)
       report.assign_attributes(attributes, as: :admin)
       report.assess!
     else

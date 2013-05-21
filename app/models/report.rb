@@ -42,6 +42,10 @@ class Report < ActiveRecord::Base
     event :decline do
       transition :assessing => :declined
     end
+    
+    event :edit do
+      transition :assessed => :assessing
+    end
   end
   
   def link_name
