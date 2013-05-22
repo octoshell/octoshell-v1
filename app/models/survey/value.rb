@@ -11,7 +11,7 @@ class Survey::Value < ActiveRecord::Base
     opt.validates :value, presence: true, if: :has_presence_validator?
     opt.validates :value, inclusion: { in: proc(&:allowed_values) },
       if: :has_inclusion_validator?
-    opt.validate :values_matcher, if: :multiple_values?
+    opt.validate :values_matcher, if: proc { |v| v.multiple_values? && v.field.strict_collection?  }
     opt.validates :value, numericality: { greater_than_or_equal_to: 0 },
       if: :number_field?
     opt.validate :scientometric_validator, if: :scientometric_field?
@@ -38,13 +38,12 @@ class Survey::Value < ActiveRecord::Base
     field.collection_values
   end
   
-  private
   def has_presence_validator?
     field.required?
   end
   
   def has_inclusion_validator?
-    field.strict_collection? && field.kind.in?(%w(mselect radio select))
+    field.strict_collection? && field.kind.in?(%w(radio select))
   end
   
   def multiple_values?
@@ -52,9 +51,9 @@ class Survey::Value < ActiveRecord::Base
   end
   
   def values_matcher
-    value.all? do |v|
+    value.find_all(&:present?).all? do |v|
       v.in? allowed_values
-    end
+    end || errors.add(:value, "Не предусмотренное значение")
   end
   
   def number_field?
