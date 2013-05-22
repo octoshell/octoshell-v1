@@ -1,4 +1,8 @@
 class OldReportProject < ActiveRecord::Base
+  has_attached_file :materials, {
+    hash_data: "report_project/:attachment/:id/:style/:updated_at",
+    url: "/system/report_project/:attachment/:id_partition/:style/:filename"
+  }
   serialize :exclusive_usage
   serialize :strict_schedule
   

@@ -76,9 +76,4 @@ class Report < ActiveRecord::Base
       p.to_i > 2
     end && assessed?
   end
-  
-  class Report::Project < ActiveRecord::Base
-    self.table_name = "old_report_projects"
-    has_attached_file :materials
-  end
 end
