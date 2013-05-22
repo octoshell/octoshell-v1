@@ -80,35 +80,35 @@ class Account < ActiveRecord::Base
     end
   end
   
-private
-
-  def login_available?(login)
+  def on_clusters(login = username)
+    @on_clusters ||=
+      Cluster.with_state(:active).find_all do |cluster|
+        res, cmd = "", "sudo /usr/octo/check_user #{login}"
+        Timeout::timeout(1) do
+          ::Net::SSH.start(cluster.host, "octo", keys: ["/var/www/octoshell-extend/shared/keys/private"]) do |ssh|
+            ssh.open_channel do |channel|
+              channel.request_pty do |ch, success|
+                ch.exec cmd
+              end
+              channel.on_data do |ch, data|
+                res = data.chomp
+              end
+            end
+          end
+        end
+      
+        res != "closed"
+      end
+  end
+  
+  def login_available?(login = username)
     unless (login =~ /([a-z_][a-z0-9_]{0,30})/) == 0
       errors.add :username, "Не правильный формат"
       return false
     end
-    Cluster.with_state(:active).each do |cluster|
-      res, cmd = "", "sudo /usr/octo/check_user #{login}"
-      Timeout::timeout(1) do
-        ::Net::SSH.start(cluster.host, "octo", keys: ["/var/www/octoshell-extend/shared/keys/private"]) do |ssh|
-          ssh.open_channel do |channel|
-            channel.request_pty do |ch, success|
-              ch.exec cmd
-            end
-            channel.on_data do |ch, data|
-              res = data.chomp
-            end
-          end
-        end
-      end
-      
-      if res != "closed"
-        errors.add :username, "Уже используется на кластере #{cluster.name}"
-        false
-      else
-        true
-      end
-    end
+    
+    Account.where("id != ?", id).where(username: login).empty? &&
+      on_clusters.empty?
   end
   
   def assign_username

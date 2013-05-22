@@ -188,7 +188,9 @@ MSU::Application.routes.draw do
     end
     
     resources :accounts, only: [] do
-      put :change
+      get :change
+      put :change_check
+      put :change_confirmation
     end
 
     # requests
