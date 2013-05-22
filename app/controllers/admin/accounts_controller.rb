@@ -8,6 +8,7 @@ class Admin::AccountsController < Admin::ApplicationController
   def change_check
     @account = Account.find(params[:account_id])
     @account.username = params[:username]
+    render :change
   end
   
   def change_confirmation
