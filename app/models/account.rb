@@ -87,10 +87,10 @@ private
       errors.add :username, "Не правильный формат"
       return false
     end
-    project.requests.with_states(:active, :blocked).all? do |request|
+    Cluster.with_state(:active).each do |cluster|
       res, cmd = "", "sudo /usr/octo/check_user #{login} #{request.group_name}"
       Timeout::timeout(1) do
-        ::Net::SSH.start(request.cluster.host, "octo", keys: ["/var/www/octoshell-extend/shared/keys/private"]) do |ssh|
+        ::Net::SSH.start(cluster.host, "octo", keys: ["/var/www/octoshell-extend/shared/keys/private"]) do |ssh|
           ssh.open_channel do |channel|
             channel.request_pty do |ch, success|
               ch.exec cmd
@@ -103,7 +103,7 @@ private
       end
       
       if res != "closed"
-        errors.add :username, "Уже используется на кластере #{request.cluster.name}"
+        errors.add :username, "Уже используется на кластере #{cluster.name}"
         false
       else
         true
