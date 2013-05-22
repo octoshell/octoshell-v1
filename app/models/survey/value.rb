@@ -47,7 +47,7 @@ class Survey::Value < ActiveRecord::Base
   end
   
   def multiple_values?
-    field.kind.in? %w(mselect scientometrics)
+    field.kind.in? %w(mselect)
   end
   
   def values_matcher

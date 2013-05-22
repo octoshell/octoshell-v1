@@ -180,12 +180,12 @@ class Project < ActiveRecord::Base
   def generate_surety_for_unsured_members
     unsured = users_without_surety
     return if unsured.empty?
-    sureties.create! do |surety|
+    surety = sureties.with_state(:filling).first || sureties.create! do |surety|
       surety.organization = organization
-      unsured.each do |user|
-        surety.surety_members.build do |sm|
-          sm.user = user
-        end
+    end
+    unsured.each do |user|
+      surety.surety_members.create! do |sm|
+        sm.user = user
       end
     end
   end

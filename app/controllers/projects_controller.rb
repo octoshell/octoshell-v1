@@ -17,7 +17,10 @@ class ProjectsController < ApplicationController
   
   def show
     respond_to do |format|
-      format.html { @project = find_project(params[:id]) }
+      format.html do
+        @project = find_project(params[:id])
+        @project.generate_surety_for_unsured_members
+      end
       format.json do
         @project = Project.find(params[:id])
         render json: @project
