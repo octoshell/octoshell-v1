@@ -16,7 +16,7 @@ class Admin::AccountsController < Admin::ApplicationController
     if @account.change_login(params[:username])
       redirect_to [:admin, @account.project], notice: "Логин изменен"
     else
-      redirect_to [:admin, @account.project], alert: @account.errors.full_messages.to_sentence
+      redirect_to [:admin, @account.project]
     end
   end
 end
