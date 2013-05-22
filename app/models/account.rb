@@ -88,7 +88,7 @@ private
       return false
     end
     Cluster.with_state(:active).each do |cluster|
-      res, cmd = "", "sudo /usr/octo/check_user #{login} #{request.group_name}"
+      res, cmd = "", "sudo /usr/octo/check_user #{login}"
       Timeout::timeout(1) do
         ::Net::SSH.start(cluster.host, "octo", keys: ["/var/www/octoshell-extend/shared/keys/private"]) do |ssh|
           ssh.open_channel do |channel|
