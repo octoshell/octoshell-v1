@@ -1,7 +1,7 @@
 class OldReportProject < ActiveRecord::Base
   has_attached_file :materials, {
-    hash_data: "report_project/:attachment/:id/:style/:updated_at",
-    url: "/system/report_project/:attachment/:id_partition/:style/:filename"
+    hash_data: "report/projects/:attachment/:id/:style/:updated_at",
+    url: "/system/report/projects/:attachment/:id_partition/:style/:filename"
   }
   serialize :exclusive_usage
   serialize :strict_schedule
@@ -46,7 +46,8 @@ class OldReportProject < ActiveRecord::Base
         value.value = send(m)
         value.save || raise(value.errors.inspect)
       end
-      projects.update_attribute(:value, wanna_speak? ? "Да" : "Нет")
+      value = projects.survey_values.find_by_survey_field_id!(16)
+      value.update_attribute(:value, wanna_speak? ? "Да" : "Нет")
       
       # scientometrics
       sc = user.user_surveys.where(survey_id: 3, project_id: project.id).first
@@ -90,7 +91,7 @@ class OldReportProject < ActiveRecord::Base
   end
   
   def logins
-    [chebyshev_logins, lomonosov_logins].each do |logins|
+    [chebyshev_logins, lomonosov_logins].map do |logins|
       logins.to_s.split(",").map(&:strip)
     end.flatten.uniq
   end
