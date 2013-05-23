@@ -6,7 +6,7 @@
     | Логин занят на кластерах
     ul
       - clusters.each do |cluster|
-        = cluster.name
+        li = cluster.name
 
 = form_tag "#", method: :put do
   div class="input-append"
