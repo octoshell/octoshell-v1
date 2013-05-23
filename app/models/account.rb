@@ -84,7 +84,7 @@ class Account < ActiveRecord::Base
     @on_clusters ||=
       Cluster.with_state(:active).find_all do |cluster|
         res, cmd = "", "sudo /usr/octo/check_user #{login}"
-        Timeout::timeout(1) do
+        Timeout::timeout(3) do
           ::Net::SSH.start(cluster.host, "octo", keys: ["/var/www/octoshell-extend/shared/keys/private"]) do |ssh|
             ssh.open_channel do |channel|
               channel.request_pty do |ch, success|
