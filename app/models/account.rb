@@ -107,8 +107,7 @@ class Account < ActiveRecord::Base
       return false
     end
     
-    Account.where("id != ?", id).where(username: login).empty? &&
-      on_clusters(login).empty?
+    Account.where("id != ?", id).where(username: login).empty?
   end
   
   def assign_username
