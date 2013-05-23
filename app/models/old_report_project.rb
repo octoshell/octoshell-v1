@@ -9,12 +9,11 @@ class OldReportProject < ActiveRecord::Base
   def fill_to(user)
     transaction do
       # report
-      rp = Report::Project.find(id)
       report = user.reports.where(project_id: project.id).first
-      report.illustration_points = rp.illustrations_points
-      report.statement_points = rp.statement_points
-      report.summary_points = rp.summary_points
-      # report.materials = rp.materials
+      report.illustration_points = illustrations_points
+      report.statement_points = statement_points
+      report.summary_points = summary_points
+      report.materials = materials
       report.save!
       
       # personal survey
@@ -47,8 +46,7 @@ class OldReportProject < ActiveRecord::Base
         value.value = send(m)
         value.save || raise(value.errors.inspect)
       end
-      
-      # wanna speak
+      projects.update_attribute(:value, wanna_speak? ? "Да" : "Нет")
       
       # scientometrics
       sc = user.user_surveys.where(survey_id: 3, project_id: project.id).first
