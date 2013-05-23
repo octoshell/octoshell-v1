@@ -279,3 +279,10 @@ $ ->
 
       chart = new google.visualization.ColumnChart($graph[0])
       chart.draw data, options
+  
+  $("@btn-urled").on "click", ->
+    $button = $(@)
+    $form = $button.parents("form:first")
+    $form.prop("action", $button.data("url"))
+    $form.submit()
+    false
