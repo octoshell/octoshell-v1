@@ -5,6 +5,9 @@ class OldReportProject < ActiveRecord::Base
   }
   serialize :exclusive_usage
   serialize :strict_schedule
+  serialize :critical_technologies
+  serialize :direction_of_sciences
+  serialize :areas
   
   def fill_to(user)
     transaction do
