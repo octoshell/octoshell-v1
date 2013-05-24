@@ -169,7 +169,7 @@ class Project < ActiveRecord::Base
   end
   
   def users_without_surety
-    finder = proc { |a| a.user.sureties.where(project_id: id).with_state(:generated, :active).empty? }
+    finder = proc { |a| a.user.sureties.where(project_id: id).with_state(:filling, :generated, :active).empty? }
     accounts.with_access_state(:allowed).find_all(&finder).map(&:user)
   end
   
@@ -184,9 +184,7 @@ class Project < ActiveRecord::Base
       surety.organization = organization
     end
     unsured.each do |user|
-      surety.surety_members.create! do |sm|
-        sm.user = user
-      end
+      surety.surety_members.where(user_id: user.id).first_or_create!
     end
   end
   
