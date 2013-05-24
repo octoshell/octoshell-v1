@@ -120,7 +120,7 @@ h3 = t('.memberships')
 = render partial: 'admin/memberships/table', locals: { memberships: @user.memberships }
 
 h3 = t('.projects')
-= render partial: 'admin/projects/table', locals: { projects: @user.projects.where(accounts: { state: 'active' }) }
+= render partial: 'admin/projects/table', locals: { projects: @user.all_projects }
 
 h3 = t('.accounts')
 / = render partial: 'admin/accounts/table', locals: { accounts: @user.accounts.without_state(:closed) }
