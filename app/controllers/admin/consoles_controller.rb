@@ -3,4 +3,9 @@ class Admin::ConsolesController < Admin::ApplicationController
   
   def show
   end
+  
+  private
+  def default_breadcrumb
+    false
+  end
 end
