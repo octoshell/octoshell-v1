@@ -286,3 +286,9 @@ $ ->
     $form.prop("action", $button.data("url"))
     $form.submit()
     false
+  
+  $("@show-disabled-projects").on "click", ->
+    $link = $(@)
+    $link.parents("table:first").find("tr.hidden").removeClass("hidden")
+    $link.parents("tr:first").remove()
+    false

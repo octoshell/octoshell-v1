@@ -13,12 +13,12 @@ div class="join-project-form hidden"
     = f.button :submit, 'Отправить', class: 'btn-success btn-block'
 
 - if @projects.any?
-  table class="table table-striped"
+  table class="table"
     thead
       tr
         th #
         th Название
-    - @projects.each do |project|
+    - @projects.find_all(&:enabled?).each do |project|
       - klass = 'success'
       - if project.closing?
         - klass = 'error'
@@ -27,6 +27,15 @@ div class="join-project-form hidden"
       tr class="#{klass}"
         td class="muted span1" ##{project.id}
         td = link_to project.title, project
+    - disabled = @projects.find_all(&:disabled?)
+    - if disabled.any?
+      tr class="link"
+        td colspan="2"
+          small = link_to "Показать деактивированные", "#", role: "show-disabled-projects"
+      - disabled.each do |project|
+        tr class="hidden"
+          td class="muted span1" ##{project.id}
+          td = project.title
 
   = safe_paginate @projects
 

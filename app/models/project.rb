@@ -75,6 +75,10 @@ class Project < ActiveRecord::Base
     save!
   end
   
+  def enabled?
+    !disabled?
+  end
+  
   def unregistered_members
     sureties.without_state(:closed).map do |surety|
       surety.surety_members.where(user_id: nil).find_all do |sm|
