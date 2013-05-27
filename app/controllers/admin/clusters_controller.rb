@@ -57,9 +57,15 @@ class Admin::ClustersController < Admin::ApplicationController
     @cluster = Cluster.find(params[:cluster_id])
     @search = @cluster.logs.search(params[:q])
     @logs = @search.result(distinct: true).limit(2000).order("id desc")
+    add_breadcrumb "Консоль", admin_console_path
+    add_breadcrumb @cluster.name
   end
   
 private
+  
+  def default_breadcrumb
+    false
+  end
   
   def redirect_to_cluster(cluster)
     redirect_to [:admin, cluster]
