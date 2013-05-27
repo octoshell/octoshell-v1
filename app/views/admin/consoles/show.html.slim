@@ -11,7 +11,24 @@ ul class="thumbnails"
               = link_to [:admin, cluster, :logs], class: "muted" do
                 | открыть  
                 i class="icon-external-link-sign"
-          p Queue: #{cluster.requests.maintaining.count}
+          ul class="breadcrumb"
+            li role="log-active"
+              small Лог
+              span class="divider" = "|"
+            li role="log-inactive" class="hidden"
+              small = link_to "Лог", "#", role: "log-shower"
+              span class="divider" = "|"
+            li role="queue-inactive"
+              small = link_to "Очередь (#{cluster.requests.maintaining.count})", "#", role: "queue-shower"
+            li role="queue-active" class="hidden"
+              small = "Очередь (#{cluster.requests.maintaining.count})"
           pre class="log"
             - cluster.logs.order('id desc').first(50).each do |l|
               code title="#{l.created_at}" = l.message
+          pre class="queue" style="display: none;"
+            - cluster.requests.maintaining.each_with_index do |request, i|
+              code
+                = link_to request.group_name, [:admin, request.project]
+                |  
+                = link_to "Заявка ##{request.id}", [:admin, request], class: "muted"
+                = "\n"

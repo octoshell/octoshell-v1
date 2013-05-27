@@ -292,3 +292,27 @@ $ ->
     $link.parents("table:first").find("tr.hidden").removeClass("hidden")
     $link.parents("tr:first").remove()
     false
+  
+  $("@queue-shower").on "click", ->
+    $link = $(@)
+    $ul = $link.parents("ul:first")
+    $container = $link.parents("div.thumbnail:first")
+    $ul.find("@queue-active").removeClass("hidden")
+    $ul.find("@queue-inactive").addClass("hidden")
+    $ul.find("@log-active").addClass("hidden")
+    $ul.find("@log-inactive").removeClass("hidden")
+    $container.find("pre.log").hide()
+    $container.find("pre.queue").show()
+    false
+  
+  $("@log-shower").on "click", ->
+    $link = $(@)
+    $ul = $link.parents("ul:first")
+    $container = $link.parents("div.thumbnail:first")
+    $ul.find("@log-active").removeClass("hidden")
+    $ul.find("@log-inactive").addClass("hidden")
+    $ul.find("@queue-active").addClass("hidden")
+    $ul.find("@queue-inactive").removeClass("hidden")
+    $container.find("pre.queue").hide()
+    $container.find("pre.log").show()
+    false

@@ -539,24 +539,24 @@ table.vtop {
   padding: 0;
 }
 
-.log {
+pre.log, pre.queue {
   max-height: 300px;
   overflow-y: scroll;
   &.log-expaned {
     max-height: none;
   }
 }
-pre.log {
+pre.log, pre.queue {
   padding: 9px 0;
 }
-.log code {
+pre.log code, pre.queue code {
   white-space: pre;
   display: block;
   padding: 2px 9px;
   border-radius: 0;
 }
-.log code:nth-child(odd) {
-  background: #ddd;
+pre.log code:nth-child(odd), pre.queue code:nth-child(odd) {
+  background: #eee;
 }
 
 .graph {
