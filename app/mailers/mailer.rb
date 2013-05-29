@@ -2,7 +2,15 @@
 class Mailer < ActionMailer::Base
   default from: 'Octoshell Notifier <service@users.parallel.ru>',
           reply_to: 'service@users.parallel.ru'
-
+          
+  
+  def notify_about_changing_project(login, project, user)
+    @login = login
+    @project = project
+    @user = user
+    mail to: user.email, subject: 'Изменения в проекте на суперкомпьютере "Ломоносов"'
+  end
+  
   def welcome(user)
     @user = user
     mail to: user.email, subject: 'Данные для пререгистрации на суперкомпьютерном комплексе МГУ'
