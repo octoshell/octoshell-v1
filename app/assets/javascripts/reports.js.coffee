@@ -227,6 +227,23 @@ $ ->
           document.location = $finder.data('redirect-to').replace('%s', id)
         item
   
+  $("@instant-submit").each (i, html) ->
+    db = {}
+    $finder = $(html)
+    $finder.typeahead
+      source: (query, process) ->
+        $.getJSON $finder.data('source-url'), { q: query }, (data) ->
+          process(
+            data.records.map (r) ->
+              db[r.text] = r.id
+              r.text
+          )
+      updater: (item) ->
+        id = db[item]
+        $finder.val(id)
+        $finder.parents("form:first").submit()
+        id
+  
   google.setOnLoadCallback ->
     width = 720
     height = 300

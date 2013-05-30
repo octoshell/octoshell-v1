@@ -7,7 +7,16 @@ div class="well"
   table class="table table-striped"
     - @notifications.each do |notification|
       tr
-        td = notification.id
-        td = link_to [:admin, notification]
-        td = link_to "&times;".html_safe, [:admin, notification], class: "danger", data: { alert: "Вы уверены?" }, method: :delete
+        td class="span1" = notification.id
+        td = link_to notification.title, [:admin, notification]
+        td class="span4"
+          div class="progress progress-striped #{"active" if notification.delivering?}" style="margin: 0;"
+            - if notification.pending?
+              span
+                | 0 / #{notification.recipients.count}
+            - else
+              div class="bar" style="width:100%"
+        td class="span1"
+          div class="text-center"
+            strong = link_to "&times;".html_safe, [:admin, notification], class: "danger", data: { alert: "Вы уверены?" }, method: :delete
 

@@ -31,7 +31,12 @@ p
     span class="muted" | 
     |  
     small = link_to "Удалить всех", [:admin, @notification, :remove_all_recipients], method: :put
-    |  
+
+= form_tag admin_notification_notification_recipients_path(@notification) do
+  div class="input-append"
+    = text_field_tag :user_id, nil, data: { "source-url" => users_url }, placeholder: "ФИО или email", role: 'instant-submit', type: 'search', class: 'input-xlarge'
+    = submit_tag "Добавить", class: "btn"
+
 table class="table table-striped table-condensed table-bordered"
   - groups = recipients.in_groups(3)
   - groups[0].size.times do |i|
@@ -41,5 +46,5 @@ table class="table table-striped table-condensed table-bordered"
             - if r = groups[j][i]
               = r.user.email
               |  
-              strong = link_to "&times;".html_safe, [:admin, r], method: :delete, class: "danger"
+              strong = link_to "&times;".html_safe, [:admin, @notification, r], method: :delete, class: "danger"
 

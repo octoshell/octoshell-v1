@@ -150,9 +150,10 @@ MSU::Application.routes.draw do
       put :deliver
       put :remove_all_recipients
       put :add_all_recipients
+      
+      # notification_recipients
+      resources :notification_recipients, only: [:create, :destroy]
     end
-    
-    resources :notification_recipients, only: [:destroy]
 
     # groups
     resources :groups, only: [:index, :new, :create, :edit, :update, :show, :destroy]
