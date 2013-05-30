@@ -7,9 +7,6 @@ MSU::Application.routes.draw do
   end
   resources :users, only: [:index, :show], as: :json
   
-  # notifications
-  resources :notifications, only: :index
-
   # activations
   resources :activations, only: [:new, :create]
 
@@ -148,7 +145,14 @@ MSU::Application.routes.draw do
     resources :project_prefixes, only: [:new, :create, :index, :edit, :update, :destroy]
 
     # notifications
-    resources :notifications, only: :index
+    resources :notifications do
+      put :test
+      put :deliver
+      put :remove_all_recipients
+      put :add_all_recipients
+    end
+    
+    resources :notification_recipients, only: [:destroy]
 
     # groups
     resources :groups, only: [:index, :new, :create, :edit, :update, :show, :destroy]

@@ -121,8 +121,9 @@ class Mailer < ActionMailer::Base
   end
   
   def notification(recipient)
+    @user = recipient.user
     @body = recipient.notification.body
-    mail to: recipient.user.emails, subject: recipient.notification.title
+    mail to: @user.emails, subject: recipient.notification.title
   end
 
 private

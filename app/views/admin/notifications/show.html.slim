@@ -1,0 +1,45 @@
+- title "Рассылка ##{@notification.id}"
+
+- recipients = @notification.recipients
+
+div class="row"
+  div class="span8"
+    div class="well"
+      h3 = @notification.title
+      p = markdown(@notification.body)
+      
+      p class="text-right"
+        strong
+          = link_to [:edit, :admin, @notification] do
+            i class="icon-pencil"
+            |  Изменить
+
+= form_tag [:admin, @notification, :test], method: :put do
+  div class="input-append"
+    span class="uneditable-input" = current_user.email
+    = submit_tag "Протестировать", class: "btn"
+
+p = link_to "Отправить письмо #{recipients.size} пользователям", [:admin, @notification, :deliver], class: "btn btn-success"
+
+h2 style="margin-top: 60px;" Кому
+
+p
+  code Выбрано: #{recipients.size}
+  span style="margin-left: 20px"
+    small = link_to "Добавить всех", [:admin, @notification, :add_all_recipients], method: :put
+    |  
+    span class="muted" | 
+    |  
+    small = link_to "Удалить всех", [:admin, @notification, :remove_all_recipients], method: :put
+    |  
+table class="table table-striped table-condensed table-bordered"
+  - groups = recipients.in_groups(3)
+  - groups[0].size.times do |i|
+      tr
+        - 3.times do |j|
+          td
+            - if r = groups[j][i]
+              = r.user.email
+              |  
+              strong = link_to "&times;".html_safe, [:admin, r], method: :delete, class: "danger"
+

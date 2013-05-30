@@ -1,19 +1,13 @@
-- title 'Оповещения'
-- if @requests.any?
-  h3 Заявки
-  = render partial: 'requests/table', locals: { requests: @requests }
+- title "Рассылка"
 
-- if @tasks.any?
-  h3 Процедуры
-  = render partial: 'tasks/table', locals: { tasks: @tasks }
+div class="well"
+  = link_to "Новая рассылка", new_admin_notification_path, class: "btn"
 
-- if @sureties.any?
-  h3 Поручительства
-  = render partial: 'sureties/table', locals: { sureties: @sureties }
+- if @notifications.any?
+  table class="table table-striped"
+    - @notifications.each do |notification|
+      tr
+        td = notification.id
+        td = link_to [:admin, notification]
+        td = link_to "&times;".html_safe, [:admin, notification], class: "danger", data: { alert: "Вы уверены?" }, method: :delete
 
-- if @tickets.any?
-  h3 Заявки в саппорт
-  = render partial: 'tickets/table', locals: { tickets: @tickets }
-
-- if current_user.notifications_count.zero?
-  p Нет задач. Все хорошо.

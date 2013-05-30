@@ -2,7 +2,11 @@ class Notification < ActiveRecord::Base
   include Models::Limitable
   has_paper_trail
   
-  has_many :receipents
+  validates :title, :body, presence: true
+  
+  attr_accessible :title, :body, as: :admin
+  
+  has_many :recipients, dependent: :destroy
   
   state_machine initial: :pending do
     state :pending
@@ -16,7 +20,27 @@ class Notification < ActiveRecord::Base
     inside_transition on: :deliver, &:send_emails
   end
   
+  def add_all_recipients
+    transaction do
+      User.without_state(:closed).each do |u|
+        recipients.where(user_id: u.id).first_or_create!
+      end
+    end
+  end
+  
+  def test_send(user)
+    rec = Recipient.new do |r|
+      r.user = user
+      r.notification = self
+    end
+    Mailer.notification(rec).deliver!
+  end
+  
+  def remove_all_recipients
+    recipients.delete_all
+  end
+  
   def send_emails
-    receipents.each &:send_email
+    recipients.each &:send_email
   end
 end
