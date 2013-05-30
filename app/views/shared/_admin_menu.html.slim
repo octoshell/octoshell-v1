@@ -19,6 +19,8 @@
 = submenu_item :'admin/groups', (link_to "Группы и права", admin_groups_path), maynot?(:manage, :groups)
 = submenu_item :'admin/pages', (link_to t('.pages', default: 'Pages'), admin_pages_path), maynot?(:manage, :pages)
 = submenu_item :'admin/sessions', (link_to t('.sessions', default: 'Sessions'), admin_sessions_path), maynot?(:manage, :sessions)
+= submenu_item :'admin/notifications', (link_to "Рассылка", admin_notifications_path), maynot?(:manage, :notifications)
+
 
 li class="dropdown"
   = link_to '#', 'data-toggle' => 'dropdown' do

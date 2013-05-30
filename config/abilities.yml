@@ -78,3 +78,5 @@ faults:
   - resolve
 console:
   - access
+notifications:
+  - manage

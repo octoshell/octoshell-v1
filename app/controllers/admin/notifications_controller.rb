@@ -1,14 +1,29 @@
 class Admin::NotificationsController < Admin::ApplicationController
   def index
-    @requests = Request.pending
-    @tasks = Task.failed
-    @sureties = Surety.pending
-    @tickets = Ticket.active
+    @notifications = Notification.order("id desc")
   end
   
-private
+  def new
+    @notification = Notification.new
+  end
   
-  def namespace
-    :notifications
+  def create
+    @notification = Notification.new(params[:notification], as: :admin)
+    if @notification.save
+      redirect_to admin_notifications_path
+    else
+      render :new
+    end
+  end
+  
+  def deliver
+    @notification = Notification.find(params[:id])
+    
+  end
+  
+  def destroy
+    @notification = Notification.find(params[:id])
+    @notification.destroy
+    redirect_to admin_notifications_path
   end
 end

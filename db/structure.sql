@@ -869,6 +869,72 @@ ALTER SEQUENCE memberships_id_seq OWNED BY memberships.id;
 
 
 --
+-- Name: notification_recipients; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE notification_recipients (
+    id integer NOT NULL,
+    notification_id integer,
+    user_id integer,
+    state character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: notification_recipients_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE notification_recipients_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: notification_recipients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE notification_recipients_id_seq OWNED BY notification_recipients.id;
+
+
+--
+-- Name: notifications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE notifications (
+    id integer NOT NULL,
+    title character varying(255),
+    body character varying(255),
+    state character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: notifications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE notifications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: notifications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
+
+
+--
 -- Name: old_report_comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2674,6 +2740,20 @@ ALTER TABLE ONLY memberships ALTER COLUMN id SET DEFAULT nextval('memberships_id
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY notification_recipients ALTER COLUMN id SET DEFAULT nextval('notification_recipients_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notifications_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY old_report_comments ALTER COLUMN id SET DEFAULT nextval('old_report_comments_id_seq'::regclass);
 
 
@@ -3161,6 +3241,22 @@ ALTER TABLE ONLY import_items
 
 ALTER TABLE ONLY memberships
     ADD CONSTRAINT memberships_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: notification_recipients_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY notification_recipients
+    ADD CONSTRAINT notification_recipients_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY notifications
+    ADD CONSTRAINT notifications_pkey PRIMARY KEY (id);
 
 
 --
@@ -3785,6 +3881,20 @@ CREATE INDEX index_memberships_on_subdivision_id ON memberships USING btree (sub
 --
 
 CREATE INDEX index_memberships_on_user_id ON memberships USING btree (user_id);
+
+
+--
+-- Name: index_notification_recipients_on_notification_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_notification_recipients_on_notification_id ON notification_recipients USING btree (notification_id);
+
+
+--
+-- Name: index_notification_recipients_on_notification_id_and_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_notification_recipients_on_notification_id_and_user_id ON notification_recipients USING btree (notification_id, user_id);
 
 
 --
@@ -5066,3 +5176,9 @@ INSERT INTO schema_migrations (version) VALUES ('20130517082758');
 INSERT INTO schema_migrations (version) VALUES ('20130517112429');
 
 INSERT INTO schema_migrations (version) VALUES ('20130521134717');
+
+INSERT INTO schema_migrations (version) VALUES ('20130529145727');
+
+INSERT INTO schema_migrations (version) VALUES ('20130529145750');
+
+INSERT INTO schema_migrations (version) VALUES ('20130529152449');
