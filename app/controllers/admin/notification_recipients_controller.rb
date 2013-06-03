@@ -1,4 +1,4 @@
-class NotificationRecipientsController < ApplicationController
+class Admin::NotificationRecipientsController < Admin::ApplicationController
   before_filter { authorize! :manage, :notifications }
   
   def create
