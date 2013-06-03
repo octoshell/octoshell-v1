@@ -39,7 +39,7 @@ p
 
 = form_tag admin_notification_notification_recipients_path(@notification) do
   div class="input-append"
-    = text_field_tag :user_id, nil, data: { "source-url" => users_url }, placeholder: "ФИО или email", role: 'instant-submit', type: 'search', class: 'input-xlarge'
+    = text_field_tag :user_id, nil, data: { "source-url" => users_path }, placeholder: "ФИО или email", role: 'instant-submit', type: 'search', class: 'input-xlarge'
     = submit_tag "Добавить", class: "btn"
 
 table class="table table-striped table-condensed table-bordered"
