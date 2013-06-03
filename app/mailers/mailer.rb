@@ -125,6 +125,11 @@ class Mailer < ActionMailer::Base
     @body = recipient.notification.body
     mail to: @user.emails, subject: recipient.notification.title
   end
+  
+  def notify_about_crash(user)
+    @user = user
+    mail to: @user.emails, subject: "Cроки открытия доступа на СК Ломоносов"
+  end
 
 private
 
