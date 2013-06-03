@@ -10,7 +10,7 @@ div class="well"
         td class="span1" = notification.id
         td = link_to notification.title, [:admin, notification]
         td class="span4"
-          div class="progress progress-striped #{"active" if notification.delivering?}" style="margin: 0;"
+          div class="progress progress #{"progress progress-striped active" if notification.delivering?}" style="margin: 0;"
             - if notification.pending?
               span
                 | 0 / #{notification.recipients.count}

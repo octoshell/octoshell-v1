@@ -14,6 +14,7 @@ class Notification::Recipient < ActiveRecord::Base
   end
   
   def send_email
-    Mailer.delay.notification(self)
+    Mailer.notification(self).deliver!
+    notification.complete_delivering
   end
 end

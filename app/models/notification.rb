@@ -11,10 +11,20 @@ class Notification < ActiveRecord::Base
   state_machine initial: :pending do
     state :pending
     state :delivering
-    state :delivered
+    state :delivered do
+      validate do
+        if recipients.with_state(:pending).any?
+          errors.add(:base, "Не все письма разосланы")
+        end
+      end
+    end
     
     event :deliver do
       transition :pending => :delivering
+    end
+    
+    event :complete_delivering do
+      transition :delivering => :delivered
     end
     
     inside_transition on: :deliver, &:send_emails
@@ -49,7 +59,9 @@ class Notification < ActiveRecord::Base
   end
   
   def send_emails
-    recipients.each &:send_email
+    recipients.each do |rec|
+      Delayed::Job.enqueue NotificationsSender.new(rec.id)
+    end
   end
   
   def add_with_projects
