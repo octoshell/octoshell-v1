@@ -19,7 +19,7 @@ div class="row"
     span class="uneditable-input" = current_user.email
     = submit_tag "Протестировать", class: "btn"
 
-p = link_to "Отправить письмо #{recipients.size} пользователям", [:admin, @notification, :deliver], class: "btn btn-success"
+p = link_to "Отправить письмо #{recipients.size} пользователям", [:admin, @notification, :deliver], class: "btn btn-success", method: :put
 
 h2 style="margin-top: 60px;" Кому
 
@@ -28,6 +28,11 @@ p
   span style="margin-left: 20px"
     small = link_to "Добавить всех", [:admin, @notification, :add_all_recipients], method: :put
     |  
+    - Cluster.with_state(:active).each do |cluster|
+      span class="muted" | 
+      |  
+      small = link_to "+ #{cluster.name}", admin_notification_add_from_cluster_path(@notification, id: cluster.id), method: :put
+      |  
     span class="muted" | 
     |  
     small = link_to "Удалить всех", [:admin, @notification, :remove_all_recipients], method: :put

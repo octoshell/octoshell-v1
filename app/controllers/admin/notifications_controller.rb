@@ -36,7 +36,7 @@ class Admin::NotificationsController < Admin::ApplicationController
   end
   
   def deliver
-    @notification = Notification.find(params[:id])
+    @notification = Notification.find(params[:notification_id])
     @notification.deliver
     redirect_to admin_notifications_path
   end
@@ -62,6 +62,12 @@ class Admin::NotificationsController < Admin::ApplicationController
   def remove_all_recipients
     @notification = Notification.find(params[:notification_id])
     @notification.remove_all_recipients
+    redirect_to [:admin, @notification]
+  end
+  
+  def add_from_cluster
+    @notification = Notification.find(params[:notification_id])
+    @notification.add_from_cluster(params[:id])
     redirect_to [:admin, @notification]
   end
   

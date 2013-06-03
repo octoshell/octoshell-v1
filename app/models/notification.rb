@@ -28,6 +28,14 @@ class Notification < ActiveRecord::Base
     end
   end
   
+  def add_from_cluster(id)
+    User.without_state(:closed).each do |u|
+      if u.all_projects.any? { |p| p.requests.where(cluster_id: id).with_state(:active).any? }
+        recipients.where(user_id: u.id).first_or_create!
+      end
+    end
+  end
+  
   def test_send(user)
     rec = Recipient.new do |r|
       r.user = user
