@@ -119,6 +119,11 @@ class Mailer < ActionMailer::Base
     subject = @report.allowed? ? "Вам дали разрешение на подачу отчёта" : "Вам отказали в разрешении на подачу отчёта"
     mail to: @user.email, subject: subject
   end
+  
+  def notify_about_crash(user)
+    @user = user
+    mail to: @user.emails, subject: subject
+  end
 
 private
 
