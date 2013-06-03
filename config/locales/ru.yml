@@ -505,6 +505,9 @@ ru:
         middle_name: Отчество
         phone: Номер телефона
         reason: Ходатайство
+      notification:
+        title: Тема
+        body: Сообщение
       report/project:
         areas: Область исследований
         ru_title: Название проекта
