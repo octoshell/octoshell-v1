@@ -29,23 +29,45 @@ h2 style="margin-top: 60px;" Кому
 - if @notification.pending?
   p
     code Выбрано: #{recipients.size}
-    span style="margin-left: 20px"
-      small = link_to "Добавить всех", [:admin, @notification, :add_all_recipients], method: :put
+  
+  ul class="unstyled add-recipients"
+    li
+      i class="icon-plus"
       |  
-      - Cluster.with_state(:active).each do |cluster|
-        span class="muted" | 
+      = link_to "Добавить всех", [:admin, @notification, :add_all_recipients], method: :put
+    - Cluster.with_state(:active).each do |cluster|
+      li
+        i class="icon-plus"
         |  
-        small = link_to "+ #{cluster.name}", admin_notification_add_from_cluster_path(@notification, id: cluster.id), method: :put
-        |  
-      span class="muted" | 
+        = link_to "Добавить с активными заявками на #{cluster.name}", admin_notification_add_from_cluster_path(@notification, id: cluster.id), method: :put
+    li
+      i class="icon-plus"
       |  
-      small = link_to "Удалить всех", [:admin, @notification, :remove_all_recipients], method: :put
-
-
-  = form_tag admin_notification_notification_recipients_path(@notification) do
-    div class="input-append"
-      = text_field_tag :user_id, nil, data: { "source-url" => users_path }, placeholder: "ФИО или email", role: 'instant-submit', type: 'search', class: 'input-xlarge'
-      = submit_tag "Добавить", class: "btn"
+      = link_to "Добавить с проектами", [:admin, @notification, :add_with_projects], method: :put
+    li
+      i class="icon-plus"
+      |  
+      = link_to "Добавить с доступами", [:admin, @notification, :add_with_accounts], method: :put
+    li
+      i class="icon-plus"
+      |  
+      = link_to "Добавить с заблокированными доступами", [:admin, @notification, :add_with_refused_accounts], method: :put
+    - Session.all.each do |session|
+      li
+        i class="icon-plus"
+        |  
+        = link_to "Добавить не прошедших перерегистрацию #{session.description}", admin_notification_add_from_session_path(@notification, id: session.id), method: :put
+    li
+      i class="icon-plus"
+      |  
+      = form_tag admin_notification_notification_recipients_path(@notification) do
+        div class="input-append"
+          = text_field_tag :user_id, nil, data: { "source-url" => users_path }, placeholder: "ФИО или email", role: 'instant-submit', type: 'search', class: 'input-xlarge'
+          = submit_tag "Добавить", class: "btn"
+    li
+      i class="icon-minus"
+      |  
+      = link_to "Удалить всех", [:admin, @notification, :remove_all_recipients], method: :put
 
 table class="table table-striped table-condensed table-bordered"
   - groups = recipients.in_groups(3)

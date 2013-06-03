@@ -71,6 +71,30 @@ class Admin::NotificationsController < Admin::ApplicationController
     redirect_to [:admin, @notification]
   end
   
+  def add_with_projects
+    @notification = Notification.find(params[:notification_id])
+    @notification.add_with_projects
+    redirect_to [:admin, @notification]
+  end
+  
+  def add_with_accounts
+    @notification = Notification.find(params[:notification_id])
+    @notification.add_with_accounts
+    redirect_to [:admin, @notification]
+  end
+  
+  def add_with_refused_accounts
+    @notification = Notification.find(params[:notification_id])
+    @notification.add_with_refused_accounts
+    redirect_to [:admin, @notification]
+  end
+  
+  def add_from_session
+    @notification = Notification.find(params[:notification_id])
+    @notification.add_from_session(params[:id])
+    redirect_to [:admin, @notification]
+  end
+  
   private
   def default_breadcrumb
     false

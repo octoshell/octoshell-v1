@@ -151,6 +151,10 @@ MSU::Application.routes.draw do
       put :remove_all_recipients
       put :add_all_recipients
       put :add_from_cluster
+      put :add_with_projects
+      put :add_with_accounts
+      put :add_with_refused_accounts
+      put :add_from_session
       
       # notification_recipients
       resources :notification_recipients, only: [:create, :destroy]
