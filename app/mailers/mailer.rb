@@ -122,7 +122,7 @@ class Mailer < ActionMailer::Base
   
   def notify_about_crash(user)
     @user = user
-    mail to: @user.emails, subject: subject
+    mail to: @user.emails, subject: "Cроки открытия доступа на СК Ломоносов"
   end
 
 private
