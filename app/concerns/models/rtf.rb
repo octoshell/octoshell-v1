@@ -84,7 +84,7 @@ module Models
         text.gsub! %r{\{\{ critical_technologies \}\}}, begin
           critical_technologies.map(&:name).join(', ')
         end
-        text.gsub! %r{\{\{ project_description \}\}}, project.description
+        text.gsub! %r{\{\{ project_description \}\}}, project.card.driver
         text.gsub! %r{\{\{ cpu_hours \}\}}, cpu_hours.to_s
         text.gsub! %r{\{\{ gpu_hours \}\}}, gpu_hours.to_s
         text.gsub! %r{\{\{ size \}\}}, size.to_s
