@@ -10,7 +10,3 @@ end
 every 1.hour do
   rake "db:backup"
 end
-
-every 3.hours do
-  rake "notifications:send_to_admins"
-end
