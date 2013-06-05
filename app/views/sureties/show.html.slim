@@ -25,6 +25,7 @@ div id="surety"
   div class="surety-print noprint"
     = link_to '#', class: 'printable', data: { print: '#surety' } do
       i class="icon-print"
+  div class="surety-notice" На бланке организации
   == @surety.html_template 
 
 - if @surety.tickets.any?
