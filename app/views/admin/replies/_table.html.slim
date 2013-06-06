@@ -9,6 +9,8 @@
       div class="span8"
         blockquote class="#{reply.user_id == reply.ticket.user_id ? 'admin' : 'user'}"
           = markdown reply.message
+          div class="reply-raw" = reply.message
+          div class="reply-show-raw" = link_to "показать как текст", "#"
           - if reply.attachment?
             small
               | Приложено: 

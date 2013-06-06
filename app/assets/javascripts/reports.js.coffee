@@ -333,3 +333,9 @@ $ ->
     $container.find("pre.queue").hide()
     $container.find("pre.log").show()
     false
+
+  $(".reply-show-raw a").on "click", (e) ->
+    $shower = $(@).parents(".reply-show-raw")
+    $shower.prev().show()
+    $shower.remove()
+    false
