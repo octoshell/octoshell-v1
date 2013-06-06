@@ -213,6 +213,9 @@ table class="table"
       = f.association :organization, input_html: { class: 'chosen' }
       = f.input :boss_full_name
       = f.input :boss_position
+      = f.input :cpu_hours
+      = f.input :gpu_hours
+      = f.input :size
       h5 Участники:
       ul
         - surety.surety_members.each do |member|
