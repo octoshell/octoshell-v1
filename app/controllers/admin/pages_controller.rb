@@ -1,8 +1,6 @@
 class Admin::PagesController < Admin::ApplicationController
   def index
-    @pages = Page.all.find_all do |p|
-      may? :show_all, :pages unless p.publicized
-    end
+    @pages = Page.all
   end
   
   def new
