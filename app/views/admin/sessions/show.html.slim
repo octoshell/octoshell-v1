@@ -13,10 +13,6 @@ div class="well"
     = link_to 'Закончить', [:admin, @session, :stop], class: 'btn btn-large btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
   - else
     = link_to 'Закончить', '#', class: 'btn btn-large btn-danger', disabled: true
-  
-  = link_to [:admin, @session, :download], class: "btn pull-right", style: "position: relative; top: 6px;" do
-    i class="icon-download"
-    |  Скачать отчеты и опросы
 
 blockquote class="lead"
   p
@@ -26,6 +22,12 @@ blockquote class="lead"
     em #{@session.started_at || '???'}
     | , закончилась 
     em #{@session.ended_at || '???'}
+
+div class="input-append"
+  span class="uneditable-input" = current_user.email
+  = link_to [:admin, @session, :download], class: "btn btn-info", method: :put do
+    | Создать архив (ссылка на загрузку придет на email)
+
 
 h3 Опросы:
 
@@ -42,18 +44,18 @@ ul
 
 h3 Статистика:
 
-= graph :organizations_count_by_kind, source: @session, title: "Число организаций по типам"
-= graph :projects_count_by_kind, source: @session, title: "Число проектов по типам организаций"
-= graph :projects_count_by_msu_subdivisions, source: @session, title: "Число проектов по подразделениям МГУ"
-= graph :users_by_organization_kind, source: @session, title: "Число пользователей по типам организаций"
-= graph :users_by_msu_subdivisions, source: @session, title: "Пользователи по подразделениям МГУ"
-= graph :direction_of_science_by_count, source: @session, title: "Приоритетные направления"
-= graph :direction_of_sciences_by_msu_subdivisions, source: @session, title: "Приоритетные направления по подразделениям МГУ"
-
-h4 Области исследований
-h5 Области исследований по подразделениям МГУ
-h4 Критические технологии
-h5 Критические технологии по подразделениям МГУ
+/ = graph :organizations_count_by_kind, source: @session, title: "Число организаций по типам"
+/ = graph :projects_count_by_kind, source: @session, title: "Число проектов по типам организаций"
+/ = graph :projects_count_by_msu_subdivisions, source: @session, title: "Число проектов по подразделениям МГУ"
+/ = graph :users_by_organization_kind, source: @session, title: "Число пользователей по типам организаций"
+/ = graph :users_by_msu_subdivisions, source: @session, title: "Пользователи по подразделениям МГУ"
+/ = graph :direction_of_science_by_count, source: @session, title: "Приоритетные направления"
+/ = graph :direction_of_sciences_by_msu_subdivisions, source: @session, title: "Приоритетные направления по подразделениям МГУ"
+/ 
+/ h4 Области исследований
+/ h5 Области исследований по подразделениям МГУ
+/ h4 Критические технологии
+/ h5 Критические технологии по подразделениям МГУ
 
 div class="well well-small"
   = link_to 'Добавить график', new_admin_session_stat_path(@session), class: 'btn btn-mini'

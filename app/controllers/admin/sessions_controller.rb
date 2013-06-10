@@ -41,8 +41,8 @@ class Admin::SessionsController < Admin::ApplicationController
   
   def download
     @session = get_session(params[:session_id])
-    path = @session.create_archive!
-    send_file path, type: 'application/zip'
+    Delayed::Job.enqueue SessionDataSender.new(@session.id, current_user.email)
+    redirect_to [:admin, @session], notice: "Дождитесь письма со ссылкой на загрузку"
   end
   
 private

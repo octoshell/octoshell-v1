@@ -130,6 +130,11 @@ class Mailer < ActionMailer::Base
     @user = user
     mail to: @user.emails, subject: "Cроки открытия доступа на СК Ломоносов"
   end
+  
+  def session_archive_is_ready(email, path)
+    @url = root_url + path
+    mail to: email, subject: "Архив перерегистрации подготовлен к загрузке"
+  end
 
 private
 

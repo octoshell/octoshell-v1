@@ -308,7 +308,7 @@ MSU::Application.routes.draw do
     resources :sessions, only: [:new, :create, :index, :show] do
       put :start
       put :stop
-      get :download
+      put :download
       resources :stats, expect: [:index, :show]
     end
     

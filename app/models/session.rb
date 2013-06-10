@@ -45,7 +45,7 @@ class Session < ActiveRecord::Base
   end
   
   def create_archive!
-    path = "/tmp/archive-#{SecureRandom.hex(4)}.zip"
+    path = "#{Rails.root}/public/archive-#{SecureRandom.hex(8)}.zip"
     
     Zip::ZipFile.open(path, Zip::ZipFile::CREATE) do |z|
       users.each do |user|
