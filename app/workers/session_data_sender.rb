@@ -2,7 +2,8 @@ class SessionDataSender < Struct.new(:id, :email)
   def perform
     @session = Session.find(id)
     path = create_archive!
-    Mailer.session_archive_is_ready(email, path).deliver!
+    zip = path[/\/(\-\w+\.zip)/, 1]
+    Mailer.session_archive_is_ready(email, zip).deliver!
   end
   
   private
