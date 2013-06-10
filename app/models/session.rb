@@ -44,25 +44,6 @@ class Session < ActiveRecord::Base
     end
   end
   
-  def create_archive!
-    path = "#{Rails.root}/public/archive-#{SecureRandom.hex(8)}.zip"
-    
-    Zip::ZipFile.open(path, Zip::ZipFile::CREATE) do |z|
-      users.each do |user|
-        dir = "#{I18n.transliterate(user.full_name)} (##{user.id})"
-        if report = user.reports.where(session_id: id).first
-          if report.materials.path
-            z.add "#{dir}/report.zip", report.materials.path
-          end
-        end
-        user.user_surveys.where(survey_id: survey_ids).each do |us|
-          z.add "#{dir}/survey_#{us.id}.zip", us.save_as_html
-        end
-      end
-    end
-    path
-  end
-  
   def users
     users = user_surveys.select(:user_id).uniq.to_sql
     reports = Report.joins(:project).select("projects.user_id").

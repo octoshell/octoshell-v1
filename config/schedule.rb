@@ -10,3 +10,7 @@ end
 every 1.hour do
   rake "db:backup"
 end
+
+every 1.hour do
+  rake "cleanup:session_archives"
+end
