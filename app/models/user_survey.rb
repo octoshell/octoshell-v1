@@ -67,7 +67,20 @@ class UserSurvey < ActiveRecord::Base
   end
   
   def to_html
-    "foo"
+    controller = Class.new(AbstractController::Base) do
+      include AbstractController::Rendering
+
+      self.view_paths = "app/views"
+
+      def initialize(us)
+        @us = us
+      end
+
+      def show
+        render "admin/user_surveys/show"
+      end
+    end
+    controller.new(self).show
   end
   
   %w(personal projects counters).each do |type|

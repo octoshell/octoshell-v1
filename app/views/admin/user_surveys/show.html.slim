@@ -1,4 +1,4 @@
-- title @us.human_name
+- title @us.human_name if respond_to?(:title)
 
 - fields = @us.survey.fields.sorted
 - fields.each do |field|
