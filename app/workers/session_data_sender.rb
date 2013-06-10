@@ -18,7 +18,7 @@ class SessionDataSender < Struct.new(:id, :email)
           end
         end
         user.user_surveys.where(survey_id: @session.survey_ids).each do |us|
-          z.add "#{dir}/survey_#{us.id}.zip", us.save_as_html
+          z.add "#{dir}/survey_#{us.id}.html", us.save_as_html
         end
       end
     end
