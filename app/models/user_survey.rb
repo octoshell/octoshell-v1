@@ -58,6 +58,18 @@ class UserSurvey < ActiveRecord::Base
     end
   end
   
+  def save_as_html
+    path = "/tmp/us-#{SecureRandom.hex(4)}.html"
+    File.open(path, "wb") do |f|
+      f.write to_html
+    end
+    path
+  end
+  
+  def to_html
+    "foo"
+  end
+  
   %w(personal projects counters).each do |type|
     define_method "#{type}?" do
       Session.where("#{type}_survey_id" => survey_id).exists?

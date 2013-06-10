@@ -226,6 +226,8 @@ GEM
       rspec-mocks (~> 2.13.0)
     rtf (0.3.3)
     rubyzip (0.9.9)
+    russian (0.6.0)
+      i18n (>= 0.5.0)
     selenium-webdriver (2.31.0)
       childprocess (>= 0.2.5)
       multi_json (~> 1.0)
@@ -304,6 +306,7 @@ DEPENDENCIES
   rspec-rails
   rtf
   rubyzip
+  russian
   simple_form
   slim
   sorcery!

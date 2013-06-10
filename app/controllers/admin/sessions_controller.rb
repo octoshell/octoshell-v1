@@ -39,6 +39,12 @@ class Admin::SessionsController < Admin::ApplicationController
     end
   end
   
+  def download
+    @session = get_session(params[:session_id])
+    path = @session.create_archive!
+    send_file path, type: 'application/zip'
+  end
+  
 private
   
   def get_session(id)

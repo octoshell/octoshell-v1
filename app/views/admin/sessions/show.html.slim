@@ -13,6 +13,10 @@ div class="well"
     = link_to 'Закончить', [:admin, @session, :stop], class: 'btn btn-large btn-danger', method: :put, data: { confirm: 'Вы уверены?' }
   - else
     = link_to 'Закончить', '#', class: 'btn btn-large btn-danger', disabled: true
+  
+  = link_to [:admin, @session, :download], class: "btn pull-right", style: "position: relative; top: 6px;" do
+    i class="icon-download"
+    |  Скачать отчеты и опросы
 
 blockquote class="lead"
   p
