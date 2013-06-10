@@ -77,7 +77,7 @@ class UserSurvey < ActiveRecord::Base
       end
 
       def show
-        render "admin/user_surveys/show"
+        render "admin/user_surveys/show", layout: "layouts/mini"
       end
     end
     controller.new(self).show
