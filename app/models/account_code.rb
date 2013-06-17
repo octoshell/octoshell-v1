@@ -46,7 +46,7 @@ class AccountCode < ActiveRecord::Base
   def activate_account!
     condition = { project_id: project_id, user_id: user_id }
     account = Account.where(condition).first_or_create!
-    account.active? or account.activate!
+    account.allowed? or account.allow!
   end
   
   def obfuscated_email
