@@ -235,7 +235,7 @@ class User < ActiveRecord::Base
   
   def close_relations!
     %w(owned_projects sureties memberships tickets credentials).
-      each { |r| user.send(r).without_state(:closed).each &:close! }
+      each { |r| send(r).without_state(:closed).each &:close! }
   end
   
   def active_organizations
