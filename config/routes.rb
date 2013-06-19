@@ -48,6 +48,8 @@ MSU::Application.routes.draw do
   # projects
   resources :projects, only: [:index, :new, :create, :show, :edit, :update] do
     post :members
+    get "members/csv", action: :new_members_csv
+    post "members/csv", action: :members_csv
     get :invite
     post :sureties
     get :close, action: :close_confirmation

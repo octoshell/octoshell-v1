@@ -143,6 +143,10 @@ table class="table"
       tr
         td colspan="5"
           small = link_to 'Добавить участников', '#', role: 'add-member-to-project'
+          |  
+          span class="muted" |
+          |  
+          small = link_to 'Добавить через .csv', project_members_csv_path(@project)
           div role="add-project-members" class="hidden"
             h6
               | Добавление участников 

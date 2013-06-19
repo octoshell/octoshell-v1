@@ -1,7 +1,22 @@
+require "csv"
+
 class ProjectInviter
   def initialize(project, members)
     @project = project
     @members = members
+  end
+  
+  def self.csv(project, members)
+    members = Hash[CSV.parse(members).map do |member|
+      h = HashWithIndifferentAccess.new
+      h[:email] = member[0].to_s.downcase.strip
+      h[:user_id] = User.find_by_email(h[:email]).try(:id)
+      h[:last_name] = member[1]
+      h[:first_name] = member[2]
+      h[:middle_name] = member[3]
+      h
+    end.each_with_index.to_a.map(&:reverse)]
+    new project, members
   end
   
   def invite

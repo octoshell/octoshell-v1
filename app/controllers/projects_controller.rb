@@ -1,4 +1,3 @@
-# coding: utf-8
 class ProjectsController < ApplicationController
   before_filter :require_login
   
@@ -56,6 +55,19 @@ class ProjectsController < ApplicationController
       redirect_to @project, notice: 'Участники добавлены'
     else
       redirect_to @project, alert: 'Не верно заполнены поля'
+    end
+  end
+  
+  def new_members_csv
+  end
+  
+  def members_csv
+    @project = current_user.owned_projects.find(params[:project_id])
+    @inviter = ProjectInviter.csv(@project, params[:members].read)
+    if @inviter.invite
+      redirect_to @project, notice: 'Участники добавлены'
+    else
+      redirect_to project_members_csv_path(@project), alert: 'Не верно заполнены поля'
     end
   end
   
