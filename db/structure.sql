@@ -908,7 +908,7 @@ ALTER SEQUENCE notification_recipients_id_seq OWNED BY notification_recipients.i
 CREATE TABLE notifications (
     id integer NOT NULL,
     title character varying(255),
-    body character varying(255),
+    body text,
     state character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
