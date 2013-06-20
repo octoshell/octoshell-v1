@@ -8,7 +8,7 @@
       = f.input :state_in, collection: User.human_state_names, required: false, label: false, input_html: { class: 'chosen clearable', data: { placeholder: 'Статус' } }
       = f.input :accounts_username_eq, collection: Account.pluck(:username).uniq, required: false, label: false, input_html: { class: 'chosen clearable', data: { placeholder: 'Логин на кластере' } }
       = f.check_box :avatar_file_name_not_null
-    = f.text_field :first_name_or_middle_name_or_last_name_or_email_cont, data: { "source-url" => users_url(format: :json), "redirect-to" => "/admin/users/%s" }, placeholder: "ФИО или email", role: 'instant-finder', autofocus: true, type: 'search', class: 'input-xlarge'
+    = f.text_field :first_name_or_middle_name_or_last_name_or_email_cont, data: { "source-url" => users_path(format: :json), "redirect-to" => "/admin/users/%s" }, placeholder: "ФИО или email", role: 'instant-finder', autofocus: true, type: 'search', class: 'input-xlarge'
     button class="btn" type="submit"
       i class="icon-search"
 div class="row"

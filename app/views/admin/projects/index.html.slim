@@ -9,7 +9,7 @@
     = f.input :disabled_eq, as: :boolean, label: 'Не актуальные', hint: '(Ошибочные)'
   
   div class="input-append"
-    = f.text_field :title_cont, data: { "source-url" => projects_url(format: :json), "redirect-to" => "/admin/projects/%s" }, placeholder: "Название", role: 'instant-finder', autofocus: true, class: 'input-xlarge'
+    = f.text_field :title_cont, data: { "source-url" => projects_path(format: :json), "redirect-to" => "/admin/projects/%s" }, placeholder: "Название", role: 'instant-finder', autofocus: true, class: 'input-xlarge'
     button class="btn" type="submit"
       i class="icon-search"
 
