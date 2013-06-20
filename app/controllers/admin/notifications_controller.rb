@@ -95,6 +95,12 @@ class Admin::NotificationsController < Admin::ApplicationController
     redirect_to [:admin, @notification]
   end
   
+  def add_unsuccessful_of_current_session
+    @notification = Notification.find(params[:notification_id])
+    @notification.add_unsuccessful_of_current_session
+    redirect_to [:admin, @notification]
+  end
+  
   private
   def default_breadcrumb
     false

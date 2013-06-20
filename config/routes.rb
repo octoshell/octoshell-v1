@@ -157,6 +157,7 @@ MSU::Application.routes.draw do
       put :add_with_accounts
       put :add_with_refused_accounts
       put :add_from_session
+      put :add_unsuccessful_of_current_session
       
       # notification_recipients
       resources :notification_recipients, only: [:create, :destroy]

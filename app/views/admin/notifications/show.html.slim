@@ -57,6 +57,11 @@ h2 style="margin-top: 60px;" Кому
         i class="icon-plus"
         |  
         = link_to "Добавить не прошедших перерегистрацию #{session.description}", admin_notification_add_from_session_path(@notification, id: session.id), method: :put
+    - if Session.current
+      li
+        i class="icon-plus"
+        |  
+        strong = link_to "Добавить не прошедших текущую перерегистрацию", [:admin, @notification, :add_unsuccessful_of_current_session], method: :put
     li
       i class="icon-plus"
       |  
