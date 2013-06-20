@@ -13,7 +13,7 @@ table class="table table-bordered table-striped"
         = sort_link @search, :id, User.human_attribute_name(:created_at), :default_order => :asc
       - else
         = User.human_attribute_name(:created_at)
-  - users.each do |user|
+  - users.uniq_by(&:id).each do |user|
     tr
       td = user.id
       td
