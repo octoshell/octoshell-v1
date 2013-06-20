@@ -12,7 +12,7 @@ class OldReportProject < ActiveRecord::Base
   def fill_to(user)
     transaction do
       # report
-      report = user.reports.where(project_id: project.id).first
+      report = user.reports.where(project_id: project_id).first
       report.illustration_points = illustrations_points
       report.statement_points = statement_points
       report.summary_points = summary_points
