@@ -23,9 +23,16 @@ p
       tr
         td = report.id
         td
-          = link_to_if (may?(:review, :reports) || report.expert), report.project.title, [:admin, report]
-          |  
-          label class="label label-#{report.bootstrap_status}" = report.human_state_name
+          div
+            strong = link_to_if (may?(:review, :reports) || report.expert), "Отчет ##{report.id}", [:admin, report]
+            |  
+            label class="label label-#{report.bootstrap_status}" = report.human_state_name
+          div
+            = link_to_if may?(:manage, :projects), report.project.title, [:admin, report.project]
+          div
+            = link_to_if may?(:manage, :users), report.project.user.full_name, [:admin, report.project.user], class: "muted"
+            |  
+            i class="icon-flag muted"
         td
           - if report.expert
             = smart_link_to report.expert
