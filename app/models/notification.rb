@@ -104,9 +104,10 @@ class Notification < ActiveRecord::Base
   def add_unsuccessful_of_current_session
     if session = Session.current
       User.without_state(:closed).each do |u|
-        has_unsubmitted_surveys = u.user_surveys.where(survey_id: session.survey_ids).without_state(:submitted).any?
-        has_unassessed_reports = Report.where(session_id: session.id, project_id: u.owned_project_ids).any?
-        if has_unsubmitted_surveys || has_unassessed_reports
+        has_unsubmitted_surveys = proc { u.user_surveys.where(survey_id: session.survey_ids).without_state(:submitted).any? }
+        has_unassessed_reports = proc { Report.where(session_id: session.id, project_id: u.owned_project_ids).without_state(:assessed).any? }
+        has_failed_reports = proc { Report.where(session_id: session.id, project_id: u.owned_project_ids).with_state(:assessed).where("illustration_points < 3 or summary_points < 3 or statement_points < 3").any? }
+        if has_unsubmitted_surveys.call || has_unassessed_reports.call || has_failed_reports.call
           recipients.where(user_id: u.id).first_or_create!
         end
       end
