@@ -35,7 +35,7 @@ class OldReportProject < ActiveRecord::Base
       end
       
       # projects survey
-      projects = user.user_surveys.where(survey_id: 2, project_id: project.id).first
+      projects = user.user_surveys.where(survey_id: 2, project_id: project_id).first
       { lomonosov_intel_hours: 12,
         lomonosov_nvidia_hours: 8,
         chebyshev_hours: 11,
@@ -53,7 +53,7 @@ class OldReportProject < ActiveRecord::Base
       value.update_attribute(:value, wanna_speak? ? "Да" : "Нет")
       
       # scientometrics
-      sc = user.user_surveys.where(survey_id: 3, project_id: project.id).first
+      sc = user.user_surveys.where(survey_id: 3, project_id: project_id).first
       { books_count: [20, 0],
         vacs_count: [20, 1],
         lectures_count: [20, 2],
