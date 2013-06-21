@@ -36,7 +36,7 @@
           = r.cluster.name
         td
           - a = @project.accounts.where(user_id: current_user.id).first
-          code class="public-key expanded" data-trigger="focus" title="#{copy_combo}" ssh #{a.username}@#{r.cluster.host}
+          code class="public-key expanded" data-trigger="focus" title="#{copy_combo}" ssh #{a.login}@#{r.cluster.host}
 
 legend Доступы к ресурсам
 
@@ -89,7 +89,7 @@ table class="table"
           |  
           i class="icon-flag muted" title="Руководитель проекта"
       td
-        code = account.username
+        code = account.login
       td
         - if account.active?
           span class="label label-success" = account.human_cluster_state_name
