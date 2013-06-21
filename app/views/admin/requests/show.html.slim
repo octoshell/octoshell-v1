@@ -8,9 +8,6 @@ div class="well"
     = " "
   - if @request.can_decline?
     = link_to Request.human_state_event_name(:decline), admin_request_decline_path(@request), class: 'btn', method: :put
-  - if @request.can_close?
-    = " "
-    = link_to Request.human_state_event_name(:close), admin_request_close_path(@request), class: 'btn btn-danger', method: :put
   = " "
   = link_to 'Версии', [:admin, @request, :versions], class: 'btn'
 
@@ -100,4 +97,8 @@ div class="request"
           div = link_to "Текст поручительства", "#surety_#{surety.id}", data: { toggle: "collapse",parent: "#surety_#{surety.id}" }
           div id="surety_#{surety.id}" class="collapse"
             == surety.html_template
+
+- if @request.can_close?
+  = " "
+  = link_to "Закрыть заявку", admin_request_close_path(@request), class: 'btn btn-danger btn-small', method: :put, data: { confirm: "Вы уверены?" }
 
