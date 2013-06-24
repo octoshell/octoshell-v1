@@ -1,0 +1,19 @@
+= render "header"
+
+p
+  strong = "Новое сообщение в #{@fault.description}"
+
+- @fault.replies.last(3).each do |reply|
+  blockquote
+    p
+      strong
+        = reply.user.full_name
+    
+    = markdown reply.message
+
+- if @user == @fault.user
+  p = link_to @fault.description, fault_url(@fault)
+- else
+  p = link_to @fault.description, admin_fault_url(@fault)
+
+= render "signature"

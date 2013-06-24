@@ -58,7 +58,6 @@ class User < ActiveRecord::Base
     where "(#{condition})"
   end)
   
-  
   state_machine initial: :active do
     state :active
     state :sured

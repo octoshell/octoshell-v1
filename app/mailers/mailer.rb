@@ -79,6 +79,13 @@ class Mailer < ActionMailer::Base
     @tickets = Ticket.active
     mail to: emails, subject: %{В Octoshell есть не обработанные оповещения}
   end
+  
+  def fault_reply(user, reply)
+    @user = user
+    @reply = reply
+    @fault = reply.fault
+    mail to: @user.emails, subject: %{Новое сообщение в #{@fault.description}}
+  end
 
   def report_reply(user, reply)
     @user = user
