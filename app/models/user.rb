@@ -92,12 +92,14 @@ class User < ActiveRecord::Base
       faults.create! do |fault|
         fault.kind = :survey
         fault.reference = s
+        fault.description = "Не отправлен опрос ##{s.id}"
       end unless s.submitted?
     end
     current_session_reports.each do |r|
       faults.create! do |fault|
         fault.kind = :report
         fault.reference = r
+        fault.description = "Не отправлен отчет ##{r.id}"
       end unless r.passed?
     end
     nil
@@ -246,6 +248,13 @@ class User < ActiveRecord::Base
   
   def active_organizations
     memberships.with_state(:active).map(&:organization).uniq.sort_by(&:name)
+  end
+  
+  def unsuccessful_sessions
+    Session.all.find_all do |s|
+      reports.where(session_id: s.id).without_state(:assessed).any? || 
+        user_surveys.where(survey_id: s.survey_ids).without_state(:submitted).any?
+    end
   end
   
 private

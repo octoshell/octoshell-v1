@@ -17,13 +17,32 @@ class Fault < ActiveRecord::Base
     event :resolve do
       transition :actual => :resolved
     end
+    
+    inside_transition :on => :resolve, &:try_unblock_accesses
   end
   
   def block_accesses
-    user.owned_projects.with_state(:active).each do |project|
+    related_projects.each do |project|
       project.requests.with_state(:active).each &:block!
     end
     user.revalidate!
+  end
+  
+  def related_projects
+    user.owned_projects.with_state(:active)
+  end
+  
+  def try_unblock_accesses
+    if only_fault?
+      related_projects.each do |project|
+        project.requests.with_state(:blocked).each &:unblock!
+      end
+      user.revalidate!
+    end
+  end
+  
+  def only_fault?
+    user.faults.with_state(:actual).count == 0
   end
   
   def kind
