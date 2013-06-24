@@ -1,6 +1,6 @@
 class Admin::FaultRepliesController < Admin::ApplicationController
   def create
-    @fault = current_user.faults.find(params[:fault_id])
+    @fault = Fault.find(params[:fault_id])
     @reply = @fault.replies.build(params[:fault_reply]) do |f|
       f.user = current_user
     end

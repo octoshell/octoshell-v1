@@ -89,10 +89,16 @@ class User < ActiveRecord::Base
   
   def examine!
     current_session_surveys.each do |s|
-      faults.create_by_kind_and_reference!(:survey, survey) unless s.submitted?
+      faults.create! do |fault|
+        fault.kind = :survey
+        fault.reference = s
+      end unless s.submitted?
     end
     current_session_reports.each do |r|
-      faults.create_by_kind_and_reference!(:report, r) unless r.passed?
+      faults.create! do |fault|
+        fault.kind = :report
+        fault.reference = r
+      end unless r.passed?
     end
     nil
   end
@@ -115,7 +121,7 @@ class User < ActiveRecord::Base
   
   def current_session_surveys
     if session = Session.current
-      user_surveys.where(survey_id: session.survey_ids).with_state(:submitted)
+      user_surveys.where(survey_id: session.survey_ids)
     else
       []
     end

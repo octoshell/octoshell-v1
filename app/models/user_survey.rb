@@ -1,10 +1,12 @@
 class UserSurvey < ActiveRecord::Base
   delegate :session, to: :survey
   
+  has_paper_trail
+  
   belongs_to :user
   belongs_to :survey
   belongs_to :project
-  has_many :survey_values, class_name: "Survey::Value"
+  has_many :survey_values, class_name: "Survey::Value", dependent: :destroy
   
   validates :user, :survey, presence: true
   

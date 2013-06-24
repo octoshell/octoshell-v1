@@ -1,5 +1,8 @@
-# coding: utf-8
 class Report < ActiveRecord::Base
+  include Models::Limitable
+  
+  has_paper_trail
+  
   delegate :user, to: :project
   
   belongs_to :session
@@ -72,8 +75,8 @@ class Report < ActiveRecord::Base
   end
   
   def passed?
-    [illustration_points, statement_points, summary_points].all? do |p|
+    ([illustration_points, statement_points, summary_points].all? do |p|
       p.to_i > 2
-    end && assessed?
+    end && assessed?) || assessing? || submitted?
   end
 end
