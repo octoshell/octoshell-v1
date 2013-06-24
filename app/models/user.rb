@@ -251,7 +251,7 @@ class User < ActiveRecord::Base
   
   def unsuccessful_sessions
     Session.all.find_all do |s|
-      reports.where(session_id: s.id).without_state(:assessed).any? || 
+      (reports.where(session_id: s.id).any? && reports.where(session_id: s.id).any? { |r| !r.passed? }) || 
         user_surveys.where(survey_id: s.survey_ids).without_state(:submitted).any?
     end
   end
