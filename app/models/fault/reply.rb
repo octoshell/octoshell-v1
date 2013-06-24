@@ -10,12 +10,12 @@ class Fault::Reply < ActiveRecord::Base
   
   private
   def notify_users
-    if user == fault.user
-      Mailer.delay.fault_reply(user, self)
-    else
+    if user == fault.user # to admin
       Group.faults_managers.users.each do |user|
         Mailer.delay.fault_reply(user, self)
       end
+    else
+      Mailer.delay.fault_reply(user, self)
     end
   end
 end
