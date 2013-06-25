@@ -13,7 +13,7 @@ class AccountCode < ActiveRecord::Base
   attr_accessible :email, :project_id
   
   before_create :assign_code
-  after_create :send_invite, if: :email?
+  after_commit :send_invite, if: :email?, on: :create
   
   state_machine initial: :pending do
     state :pending
