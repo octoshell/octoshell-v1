@@ -1,6 +1,8 @@
 class Survey::Value < ActiveRecord::Base
   has_paper_trail
   
+  delegate :user, to: :user_survey
+  
   belongs_to :field, foreign_key: :survey_field_id
   belongs_to :user_survey
   belongs_to :reference, polymorphic: true

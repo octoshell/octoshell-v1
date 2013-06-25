@@ -1,5 +1,4 @@
 require "csv"
-
 class Stat < ActiveRecord::Base
   GROUPS_BY = [:count]
   
@@ -35,9 +34,23 @@ class Stat < ActiveRecord::Base
   
   def survey_values
     user_surveys = UserSurvey.select(:id).with_state(:submitted).where(survey_id: session.survey_ids).to_sql
+    raw_survey_values.map(&:value).flatten.find_all(&:present?)
+  end
+  
+  def users_with_value(value)
+    raw_survey_values.find_all do |sv|
+      Array(sv.value).flatten.map(&:to_s).include?(value)
+    end.map(&:user).uniq.sort_by(&:full_name)
+  end
+  
+  def raw_survey_values
+    user_surveys = UserSurvey.select(:id).with_state(:submitted).where(survey_id: session.survey_ids).to_sql
     Survey::Value.includes(:field).where("user_survey_id in (#{user_surveys})").
-      where(survey_field_id: survey_field_id).map(&:value).
-        flatten.find_all(&:present?)
+      where(survey_field_id: survey_field_id)
+  end
+  
+  def title
+    "#{survey_field.name} по количеству"
   end
   
   def to_csv

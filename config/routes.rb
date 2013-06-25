@@ -316,6 +316,7 @@ MSU::Application.routes.draw do
     end
     
     get "/stats/:stat_id/download" => "stats#download", as: :stat_download
+    get "/stats/:stat_id/detail" => "stats#detail", as: :stat_detail
     
     # surveys
     resources :surveys, only: :show do

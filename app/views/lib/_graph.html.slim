@@ -1,4 +1,5 @@
 - type = SecureRandom.hex(4)
+h4 = source.title
 div class="row"
   div class="span8"
     ul class="nav nav-tabs"
@@ -30,3 +31,5 @@ div class="row"
           tr
             - array.each do |item|
               td = item
+            td style="width: 10px"
+              small = link_to "раскрыть", admin_stat_detail_path(source, value: array.first), class: "muted"

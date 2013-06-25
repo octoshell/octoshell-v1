@@ -1,0 +1,8 @@
+- title params[:value]
+
+div class="row"
+  - @users.in_groups(3, false).each do |users|
+    div class="span4"
+      ul class="unstyled"
+        - users.each do |user|
+          li = link_to user.full_name, [:admin, user]
