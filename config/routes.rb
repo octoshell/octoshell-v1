@@ -315,6 +315,8 @@ MSU::Application.routes.draw do
       resources :stats, expect: [:index, :show]
     end
     
+    get "/stats/:stat_id/download" => "stats#download", as: :stat_download
+    
     # surveys
     resources :surveys, only: :show do
       resources :survey_fields, except: :index, path: :fields

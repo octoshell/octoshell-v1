@@ -59,3 +59,6 @@ h3 Статистика:
 
 div class="well well-small"
   = link_to 'Добавить график', new_admin_session_stat_path(@session), class: 'btn btn-mini'
+
+- @session.stats.each do |stat|
+  = render stat

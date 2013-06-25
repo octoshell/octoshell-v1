@@ -1,3 +1,5 @@
+require "csv"
+
 class Stat < ActiveRecord::Base
   GROUPS_BY = [:count]
   
@@ -27,34 +29,22 @@ class Stat < ActiveRecord::Base
   end
   
   def graph_data_for_count
-    user_surveys.map do |us|
-      us.find_value(survey_field_id).value
-    end.group_by(&:to_s).map { |k, v| [k, v.size] }
+    survey_values.group_by(&:to_s).map { |k, v| [k, v.size] }.
+      sort_by(&:last).reverse
   end
   
-  def graph_data_for_organization_kinds
-    grouped_organizations_by_kind.map do |kind, organizations|
-      [kind.name, organizations.size]
-    end
+  def survey_values
+    user_surveys = UserSurvey.select(:id).with_state(:submitted).where(survey_id: session.survey_ids).to_sql
+    Survey::Value.includes(:field).where("user_survey_id in (#{user_surveys})").
+      where(survey_field_id: survey_field_id).map(&:value).
+        flatten.find_all(&:present?)
   end
   
-  def graph_data_for_subdivisions
-    grouped_organization_memberships.map do |subdivision, memberships|
-      [subdivision.try(:graph_name) || 'blank', memberships.size]
-    end
-  end
-  
-  def user_surveys
-    UserSurvey.with_state(:submitted).where(survey_id: survey_field.survey_id)
-  end
-  
-  def grouped_organization_memberships
-    organization.memberships.group_by(&:subdivision)
-  end
-  
-  def grouped_organizations_by_kind
-    session.reports.map { |r| r.project.organization }.group_by do |org|
-      org.organization_kind
+  def to_csv
+    CSV.generate(col_sep: ";") do |csv|
+      graph_data.each do |row|
+        csv << row
+      end
     end
   end
 end

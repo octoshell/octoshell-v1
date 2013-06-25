@@ -14,6 +14,11 @@ class Admin::StatsController < Admin::ApplicationController
     end
   end
   
+  def download
+    @stat = Stat.find(params[:stat_id])
+    send_data @stat.to_csv, filename: "stats_#{@stat.id}.csv"
+  end
+  
   def edit
     @session = Session.find(params[:session_id])
     @stat = @session.stats.find(params[:id])

@@ -188,7 +188,7 @@ module ApplicationHelper
   
   def graph(method, options)
     type = method.to_s.gsub('_', '-')
-    render partial: "lib/graph", locals: { type: type, data: options[:source].send(method), title: options[:title] }
+    render partial: "lib/graph", locals: { type: type, data: options[:source].send(method), title: options[:title], source: options[:source] }
   rescue => e
     "Failed: #{e.to_s}"
   end
