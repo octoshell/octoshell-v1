@@ -1804,7 +1804,7 @@ CREATE TABLE stats (
     id integer NOT NULL,
     session_id integer,
     survey_field_id integer,
-    group_by character varying(255),
+    group_by character varying(255) DEFAULT 'count'::character varying,
     weight integer DEFAULT 0,
     organization_id integer,
     cache text
@@ -5182,3 +5182,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130529145727');
 INSERT INTO schema_migrations (version) VALUES ('20130529145750');
 
 INSERT INTO schema_migrations (version) VALUES ('20130529152449');
+
+INSERT INTO schema_migrations (version) VALUES ('20130625114816');

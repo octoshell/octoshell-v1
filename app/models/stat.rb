@@ -16,12 +16,6 @@ class Stat < ActiveRecord::Base
   
   serialize :cache, Array
   
-  # returns [[name, count], ...]
-  def graph_data
-    data = cache? ? cache : send("graph_data_for_#{group_by}")
-    data.extend(Chartable)
-  end
-  
   def cache!
     self.cache = graph_data
     save!
@@ -32,8 +26,26 @@ class Stat < ActiveRecord::Base
       sort_by(&:last).reverse
   end
   
+  def graph_data_for_count_in_org
+    hash = {}
+    organization.subdivisions.each do |subdivision|
+      user_surveys = UserSurvey.select(:id).with_state(:submitted).where(survey_id: session.survey_ids).to_sql
+      raw_survey_values = Survey::Value.includes(:field).
+        joins(user_survey: { user: :memberships }).
+        where("user_survey_id in (#{user_surveys})").
+        where(memberships: { subdivision_id: subdivision.id }).
+        where(survey_field_id: survey_field_id)
+      
+      values = raw_survey_values.map(&:value).flatten.find_all(&:present?)
+      group = values.group_by(&:to_s).map { |k, v| [k, v.size] }.
+        sort_by(&:last).reverse
+      
+      hash[subdivision.name] = group
+    end
+    hash
+  end
+  
   def survey_values
-    user_surveys = UserSurvey.select(:id).with_state(:submitted).where(survey_id: session.survey_ids).to_sql
     raw_survey_values.map(&:value).flatten.find_all(&:present?)
   end
   
@@ -44,13 +56,16 @@ class Stat < ActiveRecord::Base
   end
   
   def raw_survey_values
-    user_surveys = UserSurvey.select(:id).with_state(:submitted).where(survey_id: session.survey_ids).to_sql
-    Survey::Value.includes(:field).where("user_survey_id in (#{user_surveys})").
-      where(survey_field_id: survey_field_id)
+    @raw_survey_values ||= begin
+      user_surveys = UserSurvey.select(:id).with_state(:submitted).where(survey_id: session.survey_ids).to_sql
+      Survey::Value.includes(:field).where("user_survey_id in (#{user_surveys})").
+        where(survey_field_id: survey_field_id)
+    end
   end
   
   def title
-    "#{survey_field.name} по количеству"
+    by = organization ? "по количеству в #{organization.short_name}" : "по количеству"
+    "#{survey_field.name} #{by}"
   end
   
   def to_csv

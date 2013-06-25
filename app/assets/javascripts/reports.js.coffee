@@ -254,20 +254,19 @@ $ ->
       $graph = $(html)
       
       source = $graph.data('source')
-      if source[0].length == 2
-        data = new google.visualization.DataTable();
-        data.addColumn 'string', 'Name'
-        data.addColumn 'number', 'Count'
-        data.addRows(source)
-      
-        options =
-          title: $graph.data("title")
-          titleTextStyle: titleTextStyle
-          width: width
-          height: height
-      
-        chart = new google.visualization.PieChart($graph[0])
-        chart.draw data, options
+      data = new google.visualization.DataTable();
+      data.addColumn 'string', 'Name'
+      data.addColumn 'number', 'Count'
+      data.addRows(source)
+    
+      options =
+        title: ""
+        titleTextStyle: titleTextStyle
+        width: width
+        height: height
+    
+      chart = new google.visualization.PieChart($graph[0])
+      chart.draw data, options
     
     $('.graph-bar').each (i, html) ->
       $graph = $(html)
@@ -276,16 +275,13 @@ $ ->
       
       source = $graph.data('source')
       
-      if source[0].length == 2
-        data = new google.visualization.DataTable();
-        data.addColumn 'string', 'Название'
-        data.addColumn 'number', 'Количество'
-        data.addRows($graph.data('source'))
-      else
-        data = google.visualization.arrayToDataTable(source)
+      data = new google.visualization.DataTable();
+      data.addColumn 'string', 'Название'
+      data.addColumn 'number', 'Количество'
+      data.addRows($graph.data('source'))
 
       options =
-        title: $graph.data("title")
+        title: ""
         titleTextStyle: titleTextStyle
         width: width
         height: height

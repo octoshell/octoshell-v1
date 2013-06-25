@@ -508,6 +508,10 @@ ru:
       notification:
         title: Тема
         body: Сообщение
+      stat:
+        survey_field_id: Поле опроса
+        organization: Организация
+        weight: Вес
       report/project:
         areas: Область исследований
         ru_title: Название проекта

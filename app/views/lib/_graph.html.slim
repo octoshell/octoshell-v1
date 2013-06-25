@@ -1,28 +1,24 @@
 - type = SecureRandom.hex(4)
-h4 = source.title
+h4
+  == stat.title
+  - if subdivision.present?
+    |  
+    span class="muted" = subdivision
 div class="row"
   div class="span8"
     ul class="nav nav-tabs"
-      - if data[0].size == 2
-        li class="active"
-          a href="#graph-#{type}-pie" data-toggle="tab" Пирог
-        li
-          a href="#graph-#{type}-column" data-toggle="tab" Колонки
-      - else
-        li class="active"
-          a href="#graph-#{type}-column" data-toggle="tab" Колонки
+      li class="active"
+        a href="#graph-#{type}-pie" data-toggle="tab" Пирог
+      li
+        a href="#graph-#{type}-column" data-toggle="tab" Колонки
     div class="tab-content"
-      - if data[0].size == 2
-        div class="tab-pane active" id="graph-#{type}-pie"
-          div class="graph graph-pie" data-source="#{data.to_json}" data-title="#{title}"
-        div class="tab-pane" id="graph-#{type}-column"
-          div class="graph graph-bar" data-source="#{data.to_json}" data-title="#{title}"
-      - else
-        div class="tab-pane active" id="graph-#{type}-column"
-          div class="graph graph-bar" data-source="#{data.to_json}" data-title="#{title}"
+      div class="tab-pane active" id="graph-#{type}-pie"
+        div class="graph graph-pie" data-source="#{data.to_json}" data-title="#{stat.title}"
+      div class="tab-pane" id="graph-#{type}-column"
+        div class="graph graph-bar" data-source="#{data.to_json}" data-title="#{stat.title}"
   div class="span4"
     div class="graph-table-download text-center"
-      = link_to [:admin, source, :download] do
+      = link_to [:admin, stat, :download] do
         i class="icon-cloud-download"
         |  Загрузить .csv
     div class="graph-table"
@@ -32,4 +28,4 @@ div class="row"
             - array.each do |item|
               td = item
             td style="width: 10px"
-              small = link_to "раскрыть", admin_stat_detail_path(source, value: array.first), class: "muted"
+              small = link_to "раскрыть", admin_stat_detail_path(stat, value: array.first), class: "muted"

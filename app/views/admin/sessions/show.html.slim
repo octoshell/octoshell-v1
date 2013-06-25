@@ -44,19 +44,6 @@ ul
 
 h3 Статистика:
 
-/ = graph :organizations_count_by_kind, source: @session, title: "Число организаций по типам"
-/ = graph :projects_count_by_kind, source: @session, title: "Число проектов по типам организаций"
-/ = graph :projects_count_by_msu_subdivisions, source: @session, title: "Число проектов по подразделениям МГУ"
-/ = graph :users_by_organization_kind, source: @session, title: "Число пользователей по типам организаций"
-/ = graph :users_by_msu_subdivisions, source: @session, title: "Пользователи по подразделениям МГУ"
-/ = graph :direction_of_science_by_count, source: @session, title: "Приоритетные направления"
-/ = graph :direction_of_sciences_by_msu_subdivisions, source: @session, title: "Приоритетные направления по подразделениям МГУ"
-/ 
-/ h4 Области исследований
-/ h5 Области исследований по подразделениям МГУ
-/ h4 Критические технологии
-/ h5 Критические технологии по подразделениям МГУ
-
 div class="well well-small"
   = link_to 'Добавить график', new_admin_session_stat_path(@session), class: 'btn btn-mini'
 
