@@ -57,6 +57,9 @@ class Credential < ActiveRecord::Base
     if public_key =~ /private/i
       errors.add(:public_key, "Указан приватный ключ!")
     end
+    unless OpenSSHKeyChecker.new(public_key).valid?
+      errors.add(:public_key, "Не правильный ключ")
+    end
   end
   
   def maintain_requests!

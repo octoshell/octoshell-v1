@@ -1,4 +1,10 @@
 GIT
+  remote: git://gist.github.com/5865109.git
+  revision: e4e50ce310db39285d53f210d8b7aee0a87eb37f
+  specs:
+    openssh-key-checker (0.1.0)
+
+GIT
   remote: git://github.com/brutuscat/poltergeist.git
   revision: 09edc918c1b0e926692e694d42b3e5d874f795db
   specs:
@@ -300,6 +306,7 @@ DEPENDENCIES
   mailgun-rails
   maymay!
   net-ssh
+  openssh-key-checker!
   paper_trail
   paperclip
   pg
