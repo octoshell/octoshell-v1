@@ -142,7 +142,14 @@ class Mailer < ActionMailer::Base
     @url = root_url + path
     mail to: email, subject: "Архив перерегистрации подготовлен к загрузке"
   end
-
+  
+  def notify_about_closing(user, project)
+    @project = project
+    @account = user.accounts.find_by_project_id!(project.id)
+    @user = user
+    mail to: @user.emails, subject: "Ваш проект #{project.title} веорятно является не используемым"
+  end
+  
 private
 
   def markdown(text)

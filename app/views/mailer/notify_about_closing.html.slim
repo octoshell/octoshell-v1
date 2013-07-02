@@ -1,0 +1,7 @@
+= render "header"
+
+p Ваш проект "#{@project.title}" (#{link_to project_url(@project), project_url(@project)}), вероятно, является неиспользуемым.
+
+p Если это не так - просим сообщить нам об этом до 16.07.2013. В противном случае 16-го июля проект будет автоматически закрыт вместе с логином #{@account.login}.
+
+= render "signature"
