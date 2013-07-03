@@ -1,0 +1,11 @@
+- title "Когорты"
+
+javascript:
+  google.load('visualization', '1', {'packages':['corechart']})
+
+- Cohort::KINDS.each do |kind|
+  - data = Cohort.send(kind)
+  h3 = Cohort.human_kind_name(kind)
+  div class="cohort" data-chart="#{data.to_chart}"
+
+  

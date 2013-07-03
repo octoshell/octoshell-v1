@@ -1,7 +1,7 @@
 - title "Перерегистрация ##{@session.id}"
 
 javascript:
-  google.load('visualization', '1.0', {'packages':['corechart']})
+  google.load('visualization', '1', {'packages':['corechart']})
 
 div class="well"
   - if @session.can_start?

@@ -113,6 +113,8 @@ MSU::Application.routes.draw do
   end
 
   namespace :admin do
+    resources :cohortes, only: :index
+    
     # credentials
     resources :credentials, only: :destroy
     

@@ -365,6 +365,37 @@ ALTER SEQUENCE clusters_id_seq OWNED BY clusters.id;
 
 
 --
+-- Name: cohorts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cohorts (
+    id integer NOT NULL,
+    kind character varying(255),
+    data text,
+    date date
+);
+
+
+--
+-- Name: cohorts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE cohorts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cohorts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE cohorts_id_seq OWNED BY cohorts.id;
+
+
+--
 -- Name: credentials; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2642,6 +2673,13 @@ ALTER TABLE ONLY clusters ALTER COLUMN id SET DEFAULT nextval('clusters_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY cohorts ALTER COLUMN id SET DEFAULT nextval('cohorts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY credentials ALTER COLUMN id SET DEFAULT nextval('credentials_id_seq'::regclass);
 
 
@@ -3129,6 +3167,14 @@ ALTER TABLE ONLY cluster_users
 
 ALTER TABLE ONLY clusters
     ADD CONSTRAINT clusters_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cohorts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cohorts
+    ADD CONSTRAINT cohorts_pkey PRIMARY KEY (id);
 
 
 --
@@ -5184,3 +5230,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130529145750');
 INSERT INTO schema_migrations (version) VALUES ('20130529152449');
 
 INSERT INTO schema_migrations (version) VALUES ('20130625114816');
+
+INSERT INTO schema_migrations (version) VALUES ('20130703084717');

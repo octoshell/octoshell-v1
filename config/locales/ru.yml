@@ -1078,3 +1078,6 @@ ru:
   mailer:
     project_blocked:
       subject: "Доступ к проекту %{name} заблокирован"
+  
+  cohorts:
+    organizations_by_kind: Количество организаций по типу

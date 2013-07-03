@@ -23,4 +23,8 @@ class OrganizationKind < ActiveRecord::Base
   def link_name
     name
   end
+  
+  def self.stats
+    
+  end
 end

@@ -292,6 +292,19 @@ $ ->
 
       chart = new google.visualization.ColumnChart($graph[0])
       chart.draw data, options
+    
+    $('.cohort').each (i, html) ->
+      $graph = $(html)
+      data = google.visualization.arrayToDataTable($graph.data("chart"))
+      chart = new google.visualization.ColumnChart($graph[0])
+      width = (data.getNumberOfRows() * data.getNumberOfColumns() * 12)
+      options = 
+        height: height
+        width: width
+        chartArea: { width: width - 100, height: '61%' }
+        legend:
+          position: 'top'
+      chart.draw(data, options)
   
   $("@btn-urled").on "click", ->
     $button = $(@)
