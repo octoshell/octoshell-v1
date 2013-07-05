@@ -14,3 +14,7 @@ end
 every 1.hour do
   rake "cleanup:session_archives"
 end
+
+every 2.month do
+  rake "cohortes:dump"
+end

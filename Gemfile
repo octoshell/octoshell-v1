@@ -26,6 +26,7 @@ gem 'breadcrumbs_on_rails'
 gem 'delayed_job_active_record'
 gem 'net-ssh'
 gem "openssh-key-checker", git: "git://gist.github.com/5865109.git"
+gem "delorean"
 
 group :development do
   gem 'capistrano'
