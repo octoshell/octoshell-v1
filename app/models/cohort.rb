@@ -3,9 +3,13 @@ class Cohort < ActiveRecord::Base
             :projects_by_organization_kind,
             :projects_by_msu_subdivisions,
             :users_by_organization_kind,
+            :users_by_msu_subdivisions,
             :directions_of_science,
+            :directions_of_science_by_msu_subdivisions,
             :research_areas,
-            :critical_technologies ]
+            :research_areas_by_msu_subdivisions,
+            :critical_technologies,
+            :critical_technologies_by_msu_subdivisions ]
   
   KINDS.each do |kind|
     scope kind, where(kind: kind).order("date desc")
@@ -37,10 +41,26 @@ class Cohort < ActiveRecord::Base
     if head = scoped.first
       chart << ["Дата"].push(*head.data.map { |c| c[1] })
       scoped.map do |c|
-        chart << [c.date.strftime("%b %Y")].push(*c.to_row)
+        chart << [c.pub_date].push(*c.to_row)
       end
     end
     chart
+  end
+  
+  def self.to_charts
+    charts = {}
+    scoped.each do |cohort|
+      cohort.data.each do |group|
+        charts[group[1]] ||= [["Дата"].push(*group[2].map { |d| d[1] })]
+        datas = group[2].map { |d| d[2] }
+        charts[group[1]] << [cohort.pub_date].push(*datas)
+      end
+    end
+    charts
+  end
+  
+  def pub_date
+    date.strftime("%b %Y")
   end
   
   def to_row
