@@ -1081,3 +1081,9 @@ ru:
   
   cohorts:
     organizations_by_kind: Количество организаций по типу
+    projects_by_organization_kind: Количество проектов по типу организаций
+    projects_by_msu_subdivisions: Количество проектов по подразделениям МГУ
+    users_by_organization_kind: Количество пользователей по типу организаций
+    directions_of_science: Количество проектов по направлениям науки
+    critical_technologies: Количество проектов по критическим технологиям
+    research_areas: Количество проектов по областям исследований

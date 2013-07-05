@@ -298,6 +298,8 @@ $ ->
       data = google.visualization.arrayToDataTable($graph.data("chart"))
       chart = new google.visualization.ColumnChart($graph[0])
       width = (data.getNumberOfRows() * data.getNumberOfColumns() * 12)
+      unless width > 940
+        width = 940
       options = 
         height: height
         width: width
