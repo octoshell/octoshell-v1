@@ -11,11 +11,13 @@ javascript:
       h4 = title
       - rand = SecureRandom.hex(4)
       ul class="nav nav-tabs"
-        li class="active" = link_to "Таблица", "#graph-#{rand}-table", data: { toggle: "tab" }
-        li = link_to "График", "#graph-#{rand}-column", data: { toggle: "tab" }
+        li class="active" = link_to "График", "#graph-#{rand}-column", data: { toggle: "tab" }
+        li = link_to "Таблица", "#graph-#{rand}-table", data: { toggle: "tab" }
       
       div class="tab-content"
-        div class="tab-pane active" id="graph-#{rand}-table"
+        div class="tab-pane active" id="graph-#{rand}-column"
+          div class="cohort" data-chart="#{chart}"
+        div class="tab-pane" id="graph-#{rand}-table"
           table class="table table-condensed table-striped"
             - head = chart.shift
             thead
@@ -27,18 +29,18 @@ javascript:
                 tr
                   - row.each do |val|
                     td class="#{"date" if valid_date?(val)}" = val
-        div class="tab-pane" id="graph-#{rand}-column"
-          div class="cohort" data-chart="#{chart}"
               
   - else
     - rand = SecureRandom.hex(4)
     ul class="nav nav-tabs"
-      li class="active" = link_to "Таблица", "#graph-#{rand}-table", data: { toggle: "tab" }
-      li = link_to "График", "#graph-#{rand}-column", data: { toggle: "tab" }
+      li class="active" = link_to "График", "#graph-#{rand}-column", data: { toggle: "tab" }
+      li = link_to "Таблица", "#graph-#{rand}-table", data: { toggle: "tab" }
     
     div class="tab-content"
-      div class="tab-pane active" id="graph-#{rand}-table"
-        - chart = cohorts.to_chart
+      - chart = cohorts.to_chart
+      div class="tab-pane active" id="graph-#{rand}-column"
+        div class="cohort" data-chart="#{chart}"
+      div class="tab-pane" id="graph-#{rand}-table"
         table class="table table-condensed table-striped"
           - head = chart.shift
           thead
@@ -50,6 +52,4 @@ javascript:
               tr
                 - row.each do |val|
                   td class="#{"date span2" if valid_date?(val)}" = val
-      div class="tab-pane" id="graph-#{rand}-column"
-        div class="cohort" data-chart="#{chart}"
         
