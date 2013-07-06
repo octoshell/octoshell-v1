@@ -3,6 +3,12 @@
 javascript:
   google.load('visualization', '1', {'packages':['corechart']})
 
+
+div class="well"
+  blockquote
+    p Данные обновляются каждые 3 месяца
+  = link_to "Посчитать сейчас", [:calc, :admin, :cohortes], class: "btn btn-info", method: :post
+
 - Cohort::KINDS.each do |kind|
   - cohorts = Cohort.send(kind)
   h3 = Cohort.human_kind_name(kind)
