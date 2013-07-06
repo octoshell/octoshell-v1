@@ -12,7 +12,7 @@ class Cohort < ActiveRecord::Base
             :critical_technologies_by_msu_subdivisions ]
   
   KINDS.each do |kind|
-    scope kind, where(kind: kind).order("date desc").limit(6)
+    scope kind, where(kind: kind).order("date desc, id desc").limit(6)
   end
   
   before_create :set_date
