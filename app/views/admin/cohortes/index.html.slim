@@ -6,7 +6,7 @@
 - Cohort::KINDS.each do |kind|
   - cohorts = Cohort.send(kind)
   h3 = Cohort.human_kind_name(kind)
-  - if cohorts.any? && cohorts.first.to_row[2].is_a?(Array)
+  - if cohorts.any? && cohorts.first.data.first[2].is_a?(Array)
     - cohorts.to_charts.each do |title, chart|
       h4 = title
       div class="cohort" data-chart="#{chart}"
@@ -35,5 +35,5 @@
         - chart.each do |row|
           tr
             - row.each do |val|
-              td class="#{"date" if valid_date?(val)}" = val
+              td class="#{"date span2" if valid_date?(val)}" = val
         

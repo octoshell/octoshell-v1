@@ -39,9 +39,10 @@ class Cohort < ActiveRecord::Base
   def self.to_chart
     chart = []
     if head = scoped.first
+      ids = head.data.map { |c| c[0] }
       chart << ["Дата"].push(*head.data.map { |c| c[1] })
       scoped.map do |c|
-        chart << [c.pub_date].push(*c.to_row)
+        chart << [c.pub_date].push(*c.to_row(ids))
       end
     end
     chart
@@ -50,9 +51,14 @@ class Cohort < ActiveRecord::Base
   def self.to_charts
     charts = {}
     scoped.each do |cohort|
+      ids = cohort.data.first[2].map(&:first)
       cohort.data.each do |group|
         charts[group[1]] ||= [["Дата"].push(*group[2].map { |d| d[1] })]
-        datas = group[2].map { |d| d[2] }
+        datas = ids.map do |id|
+          if val = group[2].find { |c| c[0] == id }
+            val[2]
+          end
+        end
         charts[group[1]] << [cohort.pub_date].push(*datas)
       end
     end
@@ -63,8 +69,12 @@ class Cohort < ActiveRecord::Base
     date.strftime("%b %Y")
   end
   
-  def to_row
-    data.map { |row| row[2] }
+  def to_row(ids)
+    ids.map do |id|
+      if val = data.find { |c| c[0] == id }
+        val[2]
+      end
+    end
   end
   
   private
