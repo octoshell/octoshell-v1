@@ -185,4 +185,10 @@ module ApplicationHelper
     klass, title = bool ? ['ok', 'OK'] : ['ban-circle', '']
     %(<i class="icon-#{klass} status-icon" title="#{title}"></i> ).html_safe
   end
+  
+  def valid_date?(date)
+    Date.parse(date)
+  rescue
+    false
+  end
 end

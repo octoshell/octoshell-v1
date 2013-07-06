@@ -1,7 +1,7 @@
 - title "Когорты"
 
-javascript:
-  google.load('visualization', '1', {'packages':['corechart']})
+/ javascript:
+/   google.load('visualization', '1', {'packages':['corechart']})
 
 - Cohort::KINDS.each do |kind|
   - cohorts = Cohort.send(kind)
@@ -10,7 +10,30 @@ javascript:
     - cohorts.to_charts.each do |title, chart|
       h4 = title
       div class="cohort" data-chart="#{chart}"
+      table class="table table-condensed table-striped"
+        - head = chart.shift
+        thead
+          tr
+            - head.each do |title|
+              th = title
+        tbody
+          - chart.each do |row|
+            tr
+              - row.each do |val|
+                td class="#{"date" if valid_date?(val)}" = val
+              
   - else
     div class="cohort" data-chart="#{cohorts.to_chart}"
-
-  
+    - chart = cohorts.to_chart
+    table class="table table-condensed table-striped"
+      - head = chart.shift
+      thead
+        tr
+          - head.each do |title|
+            th = title
+      tbody
+        - chart.each do |row|
+          tr
+            - row.each do |val|
+              td class="#{"date" if valid_date?(val)}" = val
+        

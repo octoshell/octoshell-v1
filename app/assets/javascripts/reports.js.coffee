@@ -305,7 +305,18 @@ $ ->
           height: height
           width: width
           chartArea: { width: width - 100, height: '61%' }
+          hAxis:
+            textStyle:
+              fontSize: 14
+          vAxis:
+            textStyle:
+              fontSize: 14
+          tooltip:
+            textStyle:
+              fontSize: 14
           legend:
+            textStyle:
+              fontSize: 14
             position: 'top'
         chart.draw(data, options)
       , 500 * i)
