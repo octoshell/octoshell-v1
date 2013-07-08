@@ -70,6 +70,14 @@ class Project < ActiveRecord::Base
     end
   end
   
+  def move_to(user)
+    transaction do
+      self.user = user
+      save!
+      create_account_for_owner
+    end
+  end
+  
   def disable!
     self.disabled = true
     save!
