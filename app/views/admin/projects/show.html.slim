@@ -110,3 +110,15 @@ table class="table"
 legend Поддержка
 = render partial: 'admin/tickets/table', locals: { tickets: @project.tickets }
 
+legend Смена руководителя
+
+= form_tag [:admin, @project, :move_to], method: :put do
+  div class="input-append"
+    = text_field_tag :user_id, nil, data: { "source-url" => users_path(format: :json) }, placeholder: "ФИО или email", role: 'instant-submit', type: 'search', class: 'input-xlarge'
+    button class="btn" type="submit"
+      i class="icon-arrow-right"
+
+  p class="muted"
+    | Создается доступ выбранному пользователю и он становится руководителем.
+    br
+    | Прошлый руководитель становится обычным участником проекта.

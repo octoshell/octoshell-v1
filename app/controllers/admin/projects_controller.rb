@@ -96,6 +96,13 @@ class Admin::ProjectsController < Admin::ApplicationController
     render :invite
   end
   
+  def move_to
+    @project = Project.find(params[:project_id])
+    @user = User.find(params[:user_id])
+    @project.move_to(@user)
+    redirect_to [:admin, @project]
+  end
+  
   private
   def default_breadcrumb
     false
