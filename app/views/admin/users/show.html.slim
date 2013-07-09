@@ -132,3 +132,7 @@ h3 = t('.credentials')
 
 = render partial: 'admin/credentials/table', locals: { credentials: @user.credentials.with_state(:active) }
 p = link_to t('.all_credentials', count: @user.credentials.count), credentials_path(search: { state_in: Credential.state_names, user_id_eq: @user.id })
+
+h3 Отправленные письма
+
+p = link_to "Посмотреть список", [:admin, @user, :delivered_mails]

@@ -40,6 +40,14 @@ class Admin::UsersController < Admin::ApplicationController
     @history_items = @user.history_items.order(:created_at)
   end
   
+  def delivered_mails
+    @user = User.find(params[:user_id])
+    @delivered_mails = @user.delivered_mails.order("id desc")
+    add_breadcrumb "Список", admin_users_path
+    add_breadcrumb @user.full_name, [:admin, @user]
+    add_breadcrumb "Отправленные письма"
+  end
+  
 private
   
   def default_breadcrumb

@@ -1,0 +1,13 @@
+- title "Отправленные письма"
+
+div class="accordion"
+  - @delivered_mails.each do |dm|
+    div class="accordion-group"
+      div class="accordion-heading"
+        = link_to "#dm#{dm.id}", class: "accordion-toggle", data: { toggle: "collapse" } do
+          span class="muted" = dm.created_at.to_s(:short)
+          |  
+          = dm.subject
+      div class="accordion-body collapse" id="dm#{dm.id}"
+        div class="accordion-inner"
+          == dm.body

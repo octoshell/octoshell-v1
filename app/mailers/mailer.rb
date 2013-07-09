@@ -1,8 +1,10 @@
-# coding: utf-8
 class Mailer < ActionMailer::Base
+  include AbstractController::Callbacks
+  
   default from: 'Octoshell Notifier <service@users.parallel.ru>',
           reply_to: 'service@users.parallel.ru'
-          
+  
+  after_filter :log_sending
   
   def notify_about_changing_project(login, project, user)
     @login = login
@@ -160,5 +162,11 @@ private
   def subject(options = {})
     mail = caller[0][/`.*'/][1..-2]
     t("mailer.#{mail}.subject", options)
+  end
+  
+  def log_sending
+    if @user
+      @user.delivered_mails.create_by_mail!(mail)
+    end
   end
 end

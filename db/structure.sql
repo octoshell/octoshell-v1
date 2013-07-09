@@ -510,6 +510,38 @@ ALTER SEQUENCE delayed_jobs_id_seq OWNED BY delayed_jobs.id;
 
 
 --
+-- Name: delivered_mails; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE delivered_mails (
+    id integer NOT NULL,
+    user_id integer,
+    subject character varying(255),
+    body text,
+    created_at timestamp without time zone
+);
+
+
+--
+-- Name: delivered_mails_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE delivered_mails_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: delivered_mails_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE delivered_mails_id_seq OWNED BY delivered_mails.id;
+
+
+--
 -- Name: direction_of_sciences; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2701,6 +2733,13 @@ ALTER TABLE ONLY delayed_jobs ALTER COLUMN id SET DEFAULT nextval('delayed_jobs_
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY delivered_mails ALTER COLUMN id SET DEFAULT nextval('delivered_mails_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY direction_of_sciences ALTER COLUMN id SET DEFAULT nextval('direction_of_sciences_id_seq'::regclass);
 
 
@@ -3199,6 +3238,14 @@ ALTER TABLE ONLY critical_technologies
 
 ALTER TABLE ONLY delayed_jobs
     ADD CONSTRAINT delayed_jobs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: delivered_mails_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY delivered_mails
+    ADD CONSTRAINT delivered_mails_pkey PRIMARY KEY (id);
 
 
 --
@@ -3815,6 +3862,13 @@ CREATE UNIQUE INDEX index_credentials_on_user_id_and_public_key ON credentials U
 --
 
 CREATE INDEX index_credentials_on_user_id_and_state ON credentials USING btree (user_id, state);
+
+
+--
+-- Name: index_delivered_mails_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_delivered_mails_on_user_id ON delivered_mails USING btree (user_id);
 
 
 --
@@ -5232,3 +5286,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130529152449');
 INSERT INTO schema_migrations (version) VALUES ('20130625114816');
 
 INSERT INTO schema_migrations (version) VALUES ('20130703084717');
+
+INSERT INTO schema_migrations (version) VALUES ('20130708170253');

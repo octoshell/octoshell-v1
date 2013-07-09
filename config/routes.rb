@@ -122,6 +122,7 @@ MSU::Application.routes.draw do
     
     # users
     resources :users, only: [:index, :show, :edit, :update] do
+      get :delivered_mails
       get :history
       put :close
       resources :versions, only: [:index, :show], resource: 'User'
