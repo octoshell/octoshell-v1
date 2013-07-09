@@ -20,4 +20,11 @@ class Admin::AccountsController < Admin::ApplicationController
       redirect_to [:admin, @account.project]
     end
   end
+  
+  def block
+    @account = Account.find(params[:account_id])
+    @project = @account.project
+    @account.block(params[:description])
+    redirect_to [:admin, @project]
+  end
 end

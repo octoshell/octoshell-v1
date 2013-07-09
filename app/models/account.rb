@@ -24,6 +24,7 @@ class Account < ActiveRecord::Base
   state_machine :cluster_state, initial: :closed do
     state :active do
       validates :user_state_name, inclusion: { in: [:sured] }
+      validate :user_faults_validator
     end
     state :closed
     
@@ -112,5 +113,21 @@ class Account < ActiveRecord::Base
   
   def assign_username
     update_attribute :username, "#{user.username}_#{id}"
+  end
+  
+  def user_faults_validator
+    if user.faults.with_state(:actual).where(kind_of_block: :account).any?
+      errors.add(:base, "Пользователь заблокирован")
+    end
+  end
+  
+  def block(desc)
+    Fault.create! do |f|
+      f.user = user
+      f.kind = :account
+      f.kind_of_block = :account
+      f.reference_id = id
+      f.description = desc
+    end
   end
 end

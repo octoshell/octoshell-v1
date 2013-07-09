@@ -200,6 +200,16 @@ class Project < ActiveRecord::Base
     end
   end
   
+  def block(desc)
+    Fault.create! do |f|
+      f.user = user
+      f.kind = :project
+      f.kind_of_block = :project
+      f.reference_id = id
+      f.description = desc
+    end
+  end
+  
 private
   
   def mark_filled

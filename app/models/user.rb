@@ -178,7 +178,7 @@ class User < ActiveRecord::Base
     conditions = [
       proc { sureties.with_state(:active).any? },
       proc { memberships.with_state(:active).any? },
-      proc { faults.with_state(:actual).empty? }
+      proc { faults.where(kind_of_block: "user").with_state(:actual).empty? }
     ]
     if conditions.all?(&:call)
       sured? || sure!

@@ -203,11 +203,13 @@ MSU::Application.routes.draw do
       put :enable
       put :erase
       put :move_to
+      post :block
       resources :versions, only: [:index, :show], resource: 'Project'
     end
     
     resources :accounts, only: [] do
       get :change
+      post :block
       put :change_check
       put :change_confirmation
     end

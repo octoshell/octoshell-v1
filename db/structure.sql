@@ -690,7 +690,8 @@ CREATE TABLE faults (
     state character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    kind character varying(255)
+    kind character varying(255),
+    kind_of_block character varying(255)
 );
 
 
@@ -5288,3 +5289,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130625114816');
 INSERT INTO schema_migrations (version) VALUES ('20130703084717');
 
 INSERT INTO schema_migrations (version) VALUES ('20130708170253');
+
+INSERT INTO schema_migrations (version) VALUES ('20130709130810');

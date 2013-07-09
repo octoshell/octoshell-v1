@@ -103,6 +103,12 @@ class Admin::ProjectsController < Admin::ApplicationController
     redirect_to [:admin, @project]
   end
   
+  def block
+    @project = Project.find(params[:project_id])
+    @project.block(params[:description])
+    redirect_to [:admin, @project]
+  end
+  
   private
   def default_breadcrumb
     false

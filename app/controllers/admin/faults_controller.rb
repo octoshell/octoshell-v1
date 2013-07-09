@@ -15,7 +15,11 @@ class Admin::FaultsController < Admin::ApplicationController
     authorize! :resolve, :faults
     @fault = Fault.find(params[:fault_id])
     if @fault.resolved? || @fault.resolve
-      redirect_to [:admin, @fault.user]
+      if @fault.kind_of_block == "user"
+        redirect_to [:admin, @fault.user]
+      else
+        redirect_to [:admin, @fault.reference.is_a?(Project) ? @fault.reference : @fault.reference.project]
+      end
     else
       @reply = @fault.replies.build do |r|
         r.user = current_user

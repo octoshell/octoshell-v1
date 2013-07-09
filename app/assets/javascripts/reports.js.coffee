@@ -363,3 +363,10 @@ $ ->
     $shower.prev().show()
     $shower.remove()
     false
+  
+  $("@block-account-form-opener").on "click", ->
+    $link = $(@)
+    $link.parents("td:first").find(".block-account-form").show()
+    $link.remove()
+    false
+  

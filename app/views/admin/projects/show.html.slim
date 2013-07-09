@@ -65,6 +65,9 @@ table class="table"
             = link_to [:admin, account, :change], class: "muted" do
               i class="icon-pencil"
         td
+          div class="block-account-form-opener"
+            small = link_to "заблокировать", "#", role: "block-account-form-opener"
+          
           - if account.active?
             span class="label label-success" = account.human_cluster_state_name
           - if account.blocked?
@@ -74,6 +77,22 @@ table class="table"
           - unless have_requests
             |  
             small (Нет доступных ресурсов)
+          
+          - faults = Fault.where(reference_id: account.id, kind_of_block: :account).order("id")
+          - if faults.any?
+            ul class="unstyled"
+              - faults.each do |f|
+                li
+                  = link_to f.description, [:admin, f], target: "_blank"
+                  |  
+                  span class="label #{f.actual? ? "label-important" : "label-success"}" = f.human_state_name
+          
+          div class="block-account-form"
+            = form_tag [:admin, account, :block], method: :post do
+              div = text_area_tag :description, nil, placeholder: "Описание проблемы", rows: 2, class: "input-xlarge"
+              button class="btn btn-mini btn-danger" type="submit" data-confirm="Вы уверены?"
+                | Заблокировать
+          
     - unregistered_members = @project.unregistered_members
     - unregistered_members.each do |sm|
       tr class="striped"
@@ -109,6 +128,22 @@ table class="table"
 
 legend Поддержка
 = render partial: 'admin/tickets/table', locals: { tickets: @project.tickets }
+
+legend Блокировка проекта
+
+- faults = Fault.where(reference_id: @project.id, kind_of_block: :project).order("id")
+- if faults.any?
+  ul class="unstyled"
+    - faults.each do |f|
+      li
+        = link_to f.description, [:admin, f], target: "_blank"
+        |  
+        span class="label #{f.actual? ? "label-important" : "label-success"}" = f.human_state_name
+
+= form_tag [:admin, @project, :block], method: :post do
+  div = text_area_tag :description, nil, class: "input-xlarge", rows: 2, placeholder: "Причина блокировки"
+  button class="btn btn-small btn-danger" type="submit" data-confirm="Вы уверены?"
+    | Заблокировать
 
 legend Смена руководителя
 
