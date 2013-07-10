@@ -62,7 +62,7 @@ class Mailer < ActionMailer::Base
   def project_blocked(account)
     @project = account.project
     @user = account.user
-    mail to: @user.email, subject: subject(name: @project.title)
+    mail to: @user.email, subject: "Проект #{@project.title} заблокирован"
   end
   
   def notification(recipient)
