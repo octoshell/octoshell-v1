@@ -18,6 +18,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html do
         @project = find_project(params[:id])
+        redirect_to projects_path if @project.closed?
         @project.generate_surety_for_unsured_members
       end
       format.json do
@@ -52,6 +53,7 @@ class ProjectsController < ApplicationController
     @project = current_user.owned_projects.find(params[:project_id])
     @inviter = ProjectInviter.new(@project, params[:members])
     if @inviter.invite
+      @project.user.track! :invite_members, params[:members], current_user
       redirect_to @project, notice: 'Участники добавлены'
     else
       redirect_to @project, alert: 'Не верно заполнены поля'

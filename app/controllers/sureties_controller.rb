@@ -18,6 +18,7 @@ class SuretiesController < ApplicationController
     @surety = find_surety(params[:surety_id])
     @surety.assign_attributes(params[:surety])
     if @surety.generated? || @surety.generate
+      @surety.project.user.track! :generate_surety, @surety, current_user
       redirect_to @surety
     else
       redirect_to @project

@@ -37,6 +37,7 @@ class UsersController < ApplicationController
     @user = User.load_from_activation_token(params[:token])
     if @user
       @user.activate!
+      @user.track! :activation, @user, @user
       auto_login @user
       flash[:notice] = t('flash.user_is_activated')
       redirect_to after_login_path

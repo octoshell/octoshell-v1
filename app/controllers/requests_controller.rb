@@ -20,6 +20,7 @@ class RequestsController < ApplicationController
   def close
     @request = current_user.requests.find(params[:request_id])
     if @request.closed? || @request.close
+      @request.project.user.track! :close_request, @request, current_user
       redirect_to @request.project, notice: "Заявка на ресурсы кластера #{@request.cluster.name} закрыта"
     else
       redirect_to @request, alert: @request.errors.full_messages.to_sentence
