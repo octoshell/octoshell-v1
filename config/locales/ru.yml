@@ -1075,10 +1075,6 @@ ru:
   project_successfully_closed: Проект отправлен на закрытие
   wrong_confirmation_code: Неверный код подтверждения
   
-  mailer:
-    project_blocked:
-      subject: "Доступ к проекту %{name} заблокирован"
-  
   cohorts:
     organizations_by_kind: Количество организаций по типу
     projects_by_organization_kind: Количество проектов по типу организаций

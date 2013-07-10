@@ -1,29 +1,22 @@
+ActionMailer::Base.register_observer MailLogger
+
 class Mailer < ActionMailer::Base
-  include AbstractController::Callbacks
-  
   default from: 'Octoshell Notifier <service@users.parallel.ru>',
           reply_to: 'service@users.parallel.ru'
   
-  after_filter :log_sending
-  
-  def welcome(user)
-    @user = user
-    mail to: user.email, subject: 'Данные для пререгистрации на суперкомпьютерном комплексе МГУ'
-  end
-  
   def activation_needed_email(user)
     @user = user
-    mail to: @user.emails, subject: 'Активация аккаунта'
+    m = mail to: @user.emails, subject: 'Активация аккаунта', user_id: @user.id
   end
   
   def activation_success_email(user)
     @user = user
-    mail to: @user.emails, subject: 'Активация в прошла успешно'
+    mail to: @user.emails, subject: 'Активация в прошла успешно', user_id: @user.id
   end
   
   def reset_password_email(user)
     @user = user
-    mail to: @user.emails, subject: 'Восстановление пароля'
+    mail to: @user.emails, subject: 'Восстановление пароля', user_id: @user.id
   end
   
   def notify_new_organization(organization)
@@ -37,38 +30,38 @@ class Mailer < ActionMailer::Base
     @account_code = account_code
     @project = @account_code.project
     @user = User.find_by_email(@account_code.email)
-    mail to: @account_code.email, subject: %{Вас приглашают в работать над проектом "#{@project.title}"}
+    mail to: @account_code.email, subject: %{Вас приглашают в работать над проектом "#{@project.title}"}, user_id: @user.id
   end
   
   def new_ticket_answer(ticket)
     @ticket = ticket
     @user = @ticket.user
-    mail to: @user.emails, subject: %{Новое сообщение от поддержки в заявке "#{@ticket.subject}"}
+    mail to: @user.emails, subject: %{Новое сообщение от поддержки в заявке "#{@ticket.subject}"}, user_id: @user.id
   end
   
   def fault_reply(user, reply)
     @user = user
     @reply = reply
     @fault = reply.fault
-    mail to: @user.emails, subject: %{Новое сообщение в #{@fault.description}}
+    mail to: @user.emails, subject: %{Новое сообщение в #{@fault.description}}, user_id: @user.id
   end
 
   def report_reply(user, reply)
     @user = user
     @reply = reply
-    mail to: @user.email, subject: %{Новое сообщение в отчете ##{reply.report_id}}
+    mail to: @user.email, subject: %{Новое сообщение в отчете ##{reply.report_id}}, user_id: @user.id
   end
 
   def project_blocked(account)
     @project = account.project
     @user = account.user
-    mail to: @user.email, subject: "Проект #{@project.title} заблокирован"
+    mail to: @user.email, subject: "Проект #{@project.title} заблокирован", user_id: @user.id
   end
   
   def notification(recipient)
     @user = recipient.user
     @body = recipient.notification.body
-    mail to: @user.emails, subject: recipient.notification.title
+    mail to: @user.emails, subject: recipient.notification.title, user_id: @user.id
   end
   
   def session_archive_is_ready(email, path)
@@ -82,10 +75,4 @@ private
     Redcarpet.new(text, :smart, :filter_html, :hard_wrap).to_html.html_safe
   end
   helper_method :markdown
-  
-  def log_sending
-    if @user
-      @user.delivered_mails.create_by_mail!(mail)
-    end
-  end
 end
