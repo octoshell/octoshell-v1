@@ -1,8 +1,8 @@
-# coding: utf-8
 require 'csv'
 class ImportItem < ActiveRecord::Base
   CSV_ATTRIBUTES = [ :fio, :email, :organization_name, :project_name, :group,
-    :login, :phone, :jsoned_directions, :jsoned_technologies, :jsoned_keys ]
+    :login, :phone, :jsoned_directions, :jsoned_technologies, :jsoned_areas,
+    :jsoned_keys ]
   
   belongs_to :cluster
   
@@ -17,6 +17,7 @@ class ImportItem < ActiveRecord::Base
   serialize :keys
   serialize :directions
   serialize :technologies
+  serialize :areas
 
   def self.create_by_file_and_cluster(attributes)
     cluster = Cluster.find(attributes[:cluster_id])
@@ -47,7 +48,6 @@ class ImportItem < ActiveRecord::Base
         @group         = create_cluster_project!
         @login         = create_cluster_user!
         @keys          = create_credentials!
-        @accesses      = create_accesses!
         @request       = create_request!
         destroy
       end
@@ -79,6 +79,10 @@ class ImportItem < ActiveRecord::Base
 
   def jsoned_technologies=(json)
     self.technologies = JSON.parse(json).map(&:strip).uniq
+  end
+  
+  def jsoned_areas=(json)
+    self.areas = JSON.parse(json).map(&:strip).uniq
   end
   
   def user_in_json(options)
@@ -165,6 +169,7 @@ private
   
   def create_surety!
     s = Surety.to_generic_model.create! do |surety|
+      surety.organization_id = @org.id
       surety.boss_full_name = "Руководитель. И. О."
       surety.boss_position = "Должность"
       surety.project_id = @project.id
@@ -188,7 +193,7 @@ private
   end
   
   def create_project!
-    project = @user.projects.find_by_name(project_name) || begin
+    project = @user.projects.find_by_title(project_name) || begin
       p = Project.to_generic_model.create! do |project|
         project.user_id = @user.id
         project.title = project_name
@@ -200,6 +205,11 @@ private
       project = Project.find(p.id)
       project.direction_of_sciences = directions.map { |d| DirectionOfScience.find_or_create_by_name!(d) }
       project.critical_technologies = technologies.map { |t| CriticalTechnology.find_or_create_by_name!(t) }
+      project.research_areas = areas.map do |a|
+        ResearchArea.find_or_create_by_name!(a) do |ra|
+          ra.group = "Без группы"
+        end
+      end
       project
     end
     project.valid? or raise project.errors.inspect
@@ -212,7 +222,8 @@ private
       a = Account.to_generic_model.create! do |account|
         account.user_id = @user.id
         account.project_id = @project.id
-        account.state = 'active'
+        account.access_state = 'allowed'
+        account.cluster_state = 'active'
         account.username = login
       end
       a = Account.find(a.id)
@@ -268,21 +279,6 @@ private
     end
   end
   
-  def create_accesses!
-    @keys.map do |key|
-      access = @login.accesses.where(credential_id: key.id).first || begin
-        a = Access.to_generic_model.create! do |a|
-          a.cluster_user_id = @login.id
-          a.credential_id = key.id
-          a.state = 'active'
-        end
-        Access.find(a.id)
-      end
-      access.valid? or raise access.errors.inspect
-      access
-    end
-  end
-
   def create_request!
     @request = begin
       r = Request.to_generic_model.create! do |r|

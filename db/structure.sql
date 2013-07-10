@@ -875,7 +875,8 @@ CREATE TABLE import_items (
     cluster_id integer,
     technologies text,
     directions text,
-    phone character varying(255)
+    phone character varying(255),
+    areas text
 );
 
 
@@ -5291,3 +5292,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130703084717');
 INSERT INTO schema_migrations (version) VALUES ('20130708170253');
 
 INSERT INTO schema_migrations (version) VALUES ('20130709130810');
+
+INSERT INTO schema_migrations (version) VALUES ('20130710083644');

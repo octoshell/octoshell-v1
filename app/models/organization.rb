@@ -36,7 +36,7 @@ class Organization < ActiveRecord::Base
   
   class << self
     def find_similar(name)
-      active.where("lower(name) != ?", name.downcase).find_all do |org|
+      with_state(:active).where("lower(name) != ?", name.downcase).find_all do |org|
         Levenshtein.distance(name, org.name) < 5
       end
     end

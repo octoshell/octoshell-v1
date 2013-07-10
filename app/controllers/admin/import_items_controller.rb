@@ -14,7 +14,7 @@ class Admin::ImportItemsController < Admin::ApplicationController
       redirect_to new_admin_import_item_path
     end
   rescue => e
-    notify_airbrake(e)
+    notify_airbrake(e) if Rails.env.production?
     flash.now[:alert] = e.message
     @import = ImportItem.new
     render :new
@@ -33,7 +33,7 @@ class Admin::ImportItemsController < Admin::ApplicationController
       render :step
     end
   rescue => e
-    notify_airbrake(e)
+    notify_airbrake(e) if Rails.env.production?
     flash.now[:alert] = e.message
     render :step
   end
