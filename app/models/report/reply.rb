@@ -11,7 +11,7 @@ class Report::Reply < ActiveRecord::Base
   
   def notify_user
     ([report.user] + report.replies.map(&:user)).uniq.each do |u|
-      Mailer.delay.report_reply(u, self).deliver
+      Mailer.delay.report_reply(u, self)
     end
   end
 end

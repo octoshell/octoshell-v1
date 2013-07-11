@@ -3,7 +3,7 @@ class SessionDataSender < Struct.new(:id, :email)
     @session = Session.find(id)
     path = create_archive!
     zip = path[/\/([\-\w]+\.zip)/, 1]
-    Mailer.delay.session_archive_is_ready(email, zip).deliver
+    Mailer.delay.session_archive_is_ready(email, zip)
   end
   
   private

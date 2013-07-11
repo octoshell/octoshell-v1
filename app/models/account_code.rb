@@ -61,6 +61,6 @@ private
   end
   
   def send_invite
-    Mailer.delay.invite(self).deliver
+    Mailer.delay.invite(self)
   end
 end
