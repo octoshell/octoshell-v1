@@ -26,13 +26,14 @@ class SessionsController < ApplicationController
   def become
     user = User.find(params[:user_id])
     session[:soul_id] = current_user.id
+    session[:soul_location] = request.env["HTTP_REFERER"]
     auto_login(user)
     redirect_to root_path
   end
   
   def revert
     auto_login(User.find(session.delete(:soul_id)))
-    redirect_to root_path
+    redirect_to session[:soul_location].present? ? session[:soul_location] : root_path
   end
   
 private
