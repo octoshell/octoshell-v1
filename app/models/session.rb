@@ -157,9 +157,9 @@ class Session < ActiveRecord::Base
   end
   
   def create_surveys_for_users!
-    create_surveys_for_managers!
-    create_reports_for_managers!
-    create_surveys_for_sured!
+    delay.create_surveys_for_managers!
+    delay.create_reports_for_managers!
+    delay.create_surveys_for_sured!
   end
   
   def not_sent?

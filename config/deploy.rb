@@ -28,8 +28,10 @@ role :app, domain
 role :web, domain
 role :db,  domain, :primary => true
 
-set :whenever_command, "bundle exec whenever"
-require "whenever/capistrano"
+unless ENV["STAGE"]
+  set :whenever_command, "bundle exec whenever"
+  require "whenever/capistrano"
+end
 
 namespace :app do
   desc "Open the rails console on one of the remote servers"

@@ -53,8 +53,8 @@ MSU::Application.configure do
   if ENV["STAGE"]
     ActionMailer::Base.delivery_method = :smtp
     ActionMailer::Base.smtp_settings = {
-      :user_name => 'releu-5a39f94f6e7e49b6',
-      :password => '0eb3fc59c72fe799',
+      :user_name => 'octoshell-stage-eda43647574f0194',
+      :password => 'ca6dc7be33bb0a80',
       :address => 'mailtrap.io',
       :port => '2525',
       :authentication => :plain,

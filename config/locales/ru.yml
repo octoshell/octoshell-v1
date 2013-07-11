@@ -584,10 +584,16 @@ ru:
         computing: Касательно вычислительной платформы для Ваших расчетов
         comment: 'Что-то другое, не вошедшее в этот список'
       session:
-        description: Описание
+        description: Название
+        motivation: Описание
+        receiving_to: Сдать до
+        started_at: Начало
+        ended_at: Конец
+        state: Состояние
       survey/field:
         name: Название
         kind: Тип
+        hint: Подсказка
         collection: Значения списка
         entity: Сущность
         strict_collection: Строгий список
