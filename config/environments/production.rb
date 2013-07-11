@@ -49,7 +49,10 @@ MSU::Application.configure do
   config.assets.precompile += %w( print.css )
 
   # Disable delivery errors, bad email addresses will be ignored
-  config.action_mailer.default_url_options = { host: 'users.parallel.ru', protocol: 'https' }
+  config.action_mailer.default_url_options = {
+    host: ENV["STAGE"] ? 'v2.parallel.ru' : 'users.parallel.ru',
+    protocol: 'https'
+  }
   if ENV["STAGE"]
     ActionMailer::Base.delivery_method = :smtp
     ActionMailer::Base.smtp_settings = {
