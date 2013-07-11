@@ -51,7 +51,7 @@ class Notification < ActiveRecord::Base
       r.user = user
       r.notification = self
     end
-    Mailer.notification(rec).deliver!
+    Mailer.delay.notification(rec).deliver
   end
   
   def remove_all_recipients

@@ -31,7 +31,7 @@ class Reply < ActiveRecord::Base
 private
   
   def notify_user
-    Mailer.new_ticket_answer(ticket).deliver
+    Mailer.delay.new_ticket_answer(ticket).deliver
   end
 
   def link_name
