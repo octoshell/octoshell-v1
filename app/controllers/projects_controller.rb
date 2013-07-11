@@ -19,7 +19,6 @@ class ProjectsController < ApplicationController
       format.html do
         @project = find_project(params[:id])
         redirect_to projects_path if @project.closed?
-        @project.generate_surety_for_unsured_members
       end
       format.json do
         @project = Project.find(params[:id])
@@ -106,8 +105,8 @@ class ProjectsController < ApplicationController
   
   def sureties
     @project = find_project(params[:project_id])
-    @project.generate_surety_for_unsured_members
-    redirect_to @project
+    @project.generate_surety
+    redirect_to project_path(@project, anchor: "new-surety")
   end
   
 private

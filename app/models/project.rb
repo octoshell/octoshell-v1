@@ -200,6 +200,15 @@ class Project < ActiveRecord::Base
     end
   end
   
+  def generate_surety
+    surety = sureties.with_state(:filling).first || sureties.create! do |surety|
+      surety.organization = organization
+    end
+    accounts.with_access_state(:allowed).map(&:user).each do |user|
+      surety.surety_members.where(user_id: user.id).first_or_create!
+    end
+  end
+  
   def block(desc)
     Fault.create! do |f|
       f.user = user

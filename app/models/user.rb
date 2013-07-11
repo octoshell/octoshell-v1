@@ -228,7 +228,7 @@ class User < ActiveRecord::Base
   def track!(kind, record, user)
     history_items.create! do |item|
       item.kind = kind
-      item.data = record.attributes
+      item.data = record.respond_to?(:attributes) ? record.attributes : record
       item.author_id = user ? user.id : nil
     end
   end

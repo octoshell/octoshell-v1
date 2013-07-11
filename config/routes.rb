@@ -67,7 +67,9 @@ MSU::Application.routes.draw do
 
   # accounts
   put '/accounts/:account_id/deny' => 'accounts#deny', as: :account_deny
-
+  
+  delete '/surety_members/:id' => 'surety_members#destroy', as: :surety_member
+  
   # clusters
   resources :clusters, only: :index
 

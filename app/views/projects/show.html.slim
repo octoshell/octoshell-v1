@@ -211,7 +211,7 @@ table class="table"
             small = link_to "Добавить новое поручительство", [@project, :sureties], method: :post
 
 - if current_user == @project.user && surety = @project.sureties.with_state(:filling).first
-  div class="filling-surety"
+  div class="filling-surety" id="new-surety"
     h4 Поручительство ##{surety.id}
     = simple_form_for surety, url: [surety, :generate] do |f|
       = f.association :organization, input_html: { class: 'chosen' }
@@ -223,7 +223,10 @@ table class="table"
       h5 Участники:
       ul
         - surety.surety_members.each do |member|
-          li = member.full_name
+          li
+            = member.full_name
+            |  
+            strong = link_to "&times;".html_safe, member, method: :delete, class: "danger"
       = f.button :submit, 'Сгенерировать', class: 'btn btn-small btn-success'
       span class="muted"
         |  или 
