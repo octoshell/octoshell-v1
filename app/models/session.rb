@@ -1,3 +1,4 @@
+# Перерегистрация
 class Session < ActiveRecord::Base
   has_paper_trail
   

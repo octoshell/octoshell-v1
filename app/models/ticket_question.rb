@@ -1,3 +1,4 @@
+# Вопрос в тикете
 class TicketQuestion < ActiveRecord::Base
   include Models::Limitable
   

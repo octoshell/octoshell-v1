@@ -1,4 +1,4 @@
-# coding: utf-8
+# Участник поручительства
 class SuretyMember < ActiveRecord::Base
   belongs_to :surety, inverse_of: :surety_members
   belongs_to :user, inverse_of: :surety_members

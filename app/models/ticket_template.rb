@@ -1,3 +1,4 @@
+# Шаблон ответа на тикет
 class TicketTemplate < ActiveRecord::Base
   has_paper_trail
   

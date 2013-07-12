@@ -1,5 +1,6 @@
-# coding: utf-8
 require 'rtf'
+
+# Поручительство
 class Surety < ActiveRecord::Base
   include Models::RTF
   

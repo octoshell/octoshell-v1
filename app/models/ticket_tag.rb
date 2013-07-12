@@ -1,3 +1,4 @@
+# Тег тикета
 class TicketTag < ActiveRecord::Base
   include Models::Limitable
   

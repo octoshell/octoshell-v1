@@ -1,3 +1,4 @@
+# Подразделение организации
 class Subdivision < ActiveRecord::Base
   attr_accessor :merge_id
   belongs_to :organization

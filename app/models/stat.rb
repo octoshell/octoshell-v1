@@ -1,4 +1,6 @@
 require "csv"
+
+# Статистика по перерегистрации
 class Stat < ActiveRecord::Base
   GROUPS_BY = [:count]
   

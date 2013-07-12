@@ -1,3 +1,4 @@
+# Оцениватель отчетов
 class ReportAssesser
   attr_reader :error
   

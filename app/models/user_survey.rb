@@ -1,3 +1,4 @@
+# Опрос, который заполняет пользователь
 class UserSurvey < ActiveRecord::Base
   delegate :session, to: :survey
   

@@ -1,5 +1,6 @@
 require "csv"
 
+# Приглашатель пользователей в проект
 class ProjectInviter
   def initialize(project, members)
     @project = project

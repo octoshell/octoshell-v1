@@ -32,6 +32,7 @@ gem "json", "1.7.7"
 group :development do
   gem 'capistrano'
   gem 'quiet_assets'
+  gem 'yard-rails-plugin', github: 'ogeidix/yard-rails-plugin', tag: 'v0.0.1'
 end
 
 group :development, :production do

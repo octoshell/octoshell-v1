@@ -1,3 +1,4 @@
+# Дополнительное поле в тикете
 class TicketField < ActiveRecord::Base
   has_paper_trail
   

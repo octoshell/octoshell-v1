@@ -1,3 +1,4 @@
+# Логгер отправленных сообщений
 class MailLogger
   def self.delivered_email(mail)
     if mail[:user_id]

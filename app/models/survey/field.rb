@@ -1,3 +1,4 @@
+# Поле опроса
 class Survey::Field < ActiveRecord::Base
   has_paper_trail
   

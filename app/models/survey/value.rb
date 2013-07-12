@@ -1,3 +1,4 @@
+# Значение опроса
 class Survey::Value < ActiveRecord::Base
   has_paper_trail
   

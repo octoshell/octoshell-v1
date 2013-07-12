@@ -1,3 +1,4 @@
+# Настройки
 class Settings
   include ActiveSupport::Configurable
   include ActiveModel::Validations

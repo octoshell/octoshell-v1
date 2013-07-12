@@ -1,3 +1,4 @@
+# Дополнительное поле заявки
 class RequestProperty < ActiveRecord::Base
   include Models::Limitable
   

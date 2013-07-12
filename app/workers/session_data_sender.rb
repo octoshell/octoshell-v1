@@ -1,3 +1,4 @@
+# DJ воркер. Создает и отправляет архив перерегистрации на email
 class SessionDataSender < Struct.new(:id, :email)
   def perform
     @session = Session.find(id)

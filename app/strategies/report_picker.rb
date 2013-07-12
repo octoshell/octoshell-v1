@@ -1,4 +1,4 @@
-# coding: utf-8
+# Класс для взятия отчета на оценку
 class ReportPicker
   attr_reader :error
   

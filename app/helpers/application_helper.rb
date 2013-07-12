@@ -1,4 +1,3 @@
-# coding: utf-8
 module ApplicationHelper
   def markdown(text)
     Redcarpet.new(text, :smart, :filter_html, :hard_wrap).to_html.html_safe

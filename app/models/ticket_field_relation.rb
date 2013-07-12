@@ -1,3 +1,4 @@
+# Связь тикета и дополнительного поля
 class TicketFieldRelation < ActiveRecord::Base
   has_paper_trail
   

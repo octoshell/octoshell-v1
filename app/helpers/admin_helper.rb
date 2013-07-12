@@ -1,4 +1,3 @@
-# coding: utf-8
 module AdminHelper
   def link_to_attribute(record, attribute, value)
     if attribute.to_s =~ /_id$/

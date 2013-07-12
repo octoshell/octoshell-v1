@@ -1,3 +1,4 @@
+# Пользователь
 class User < ActiveRecord::Base
   include Models::Limitable
   

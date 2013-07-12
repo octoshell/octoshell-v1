@@ -1,3 +1,4 @@
+# Опрос
 class Survey < ActiveRecord::Base
   belongs_to :session
   has_many :fields

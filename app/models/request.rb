@@ -1,3 +1,4 @@
+# Заявка на ресурсы
 class Request < ActiveRecord::Base
   include Models::Limitable
   

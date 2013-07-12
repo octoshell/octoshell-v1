@@ -1,3 +1,4 @@
+# Тикет (Заявка в ТП)
 class Ticket < ActiveRecord::Base
   include Models::Limitable
   

@@ -1,3 +1,4 @@
+# Значение дополнительного поля тикета
 class TicketFieldValue < ActiveRecord::Base
   has_paper_trail
   

@@ -1,3 +1,4 @@
+# Добавлятор пользователь в проект через секретный код
 class ProjectJoiner
   include Virtus
 
