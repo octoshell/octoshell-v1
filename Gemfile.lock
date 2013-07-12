@@ -25,14 +25,6 @@ GIT
       polyamorous (~> 0.6.0)
 
 GIT
-  remote: git://github.com/ogeidix/yard-rails-plugin.git
-  revision: fcfc8809971334132519dffdb3ba4d125aaf212f
-  tag: v0.0.1
-  specs:
-    yard-rails-plugin (0.0.1)
-      yard (> 0.7)
-
-GIT
   remote: git://github.com/redstonelabs/maymay.git
   revision: 63bc381560f75568636f2d6f9e75cfbb0235a19e
   specs:
@@ -292,7 +284,6 @@ GEM
       chronic (~> 0.6.3)
     xpath (1.0.0)
       nokogiri (~> 1.3)
-    yard (0.8.6.2)
 
 PLATFORMS
   ruby
@@ -343,4 +334,3 @@ DEPENDENCIES
   validates_email_format_of
   virtus
   whenever
-  yard-rails-plugin!
