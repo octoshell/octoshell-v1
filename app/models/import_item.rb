@@ -1,4 +1,6 @@
 require 'csv'
+
+# Строка данных для импорта
 class ImportItem < ActiveRecord::Base
   CSV_ATTRIBUTES = [ :fio, :email, :organization_name, :project_name, :group,
     :login, :phone, :jsoned_directions, :jsoned_technologies, :jsoned_areas,
@@ -45,8 +47,6 @@ class ImportItem < ActiveRecord::Base
         @surety        = create_surety!
         @surety_member = create_surety_member!
         @account       = create_account!
-        @group         = create_cluster_project!
-        @login         = create_cluster_user!
         @keys          = create_credentials!
         @request       = create_request!
         destroy
@@ -230,36 +230,6 @@ private
     end
     account.valid? or raise account.errors.inspect
     account
-  end
-  
-  def create_cluster_project!
-    conditions = { cluster_id: cluster_id, project_id: @project.id }
-    cluster_project = ClusterProject.where(conditions).first || begin
-      cp = ClusterProject.to_generic_model.create! do |cp|
-        cp.cluster_id = cluster_id
-        cp.project_id = @project.id
-        cp.state = 'active'
-        cp.username = group
-      end
-      ClusterProject.find(cp.id)
-    end
-    cluster_project.valid? or raise cluster_project.errors.inspect
-    cluster_project
-  end
-  
-  def create_cluster_user!
-    conditions = { cluster_project_id: @group.id, account_id: @account.id }
-    cluster_user = ClusterUser.where(conditions).first || begin
-      cu = ClusterUser.to_generic_model.create! do |cu|
-        cu.cluster_project_id = @group.id
-        cu.account_id = @account.id
-        cu.username = login
-        cu.state = 'active'
-      end
-      ClusterUser.find(cu.id)
-    end
-    cluster_user.valid? or raise cluster_user.errors.inspect
-    cluster_user
   end
   
   def create_credentials!

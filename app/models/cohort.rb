@@ -1,3 +1,4 @@
+# Модель статистики не связанных с перерегистрацией данных
 class Cohort < ActiveRecord::Base
   KINDS = [ :organizations_by_kind,
             :projects_by_organization_kind,

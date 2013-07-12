@@ -1,3 +1,4 @@
+# Ответ в тикете
 class Reply < ActiveRecord::Base
   has_paper_trail
   

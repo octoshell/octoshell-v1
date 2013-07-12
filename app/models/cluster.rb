@@ -1,3 +1,4 @@
+# Модель кластера
 class Cluster < ActiveRecord::Base
   include Models::Limitable
   

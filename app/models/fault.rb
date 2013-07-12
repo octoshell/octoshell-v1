@@ -1,3 +1,4 @@
+# Проблема у пользователя
 class Fault < ActiveRecord::Base
   KINDS = [:report, :survey, :custom, :project, :account]
   KINDS_OF_BLOCK = [:user, :account, :project]

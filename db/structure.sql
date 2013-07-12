@@ -63,40 +63,6 @@ ALTER SEQUENCE abilities_id_seq OWNED BY abilities.id;
 
 
 --
--- Name: accesses; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE accesses (
-    id integer NOT NULL,
-    credential_id integer,
-    state character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    cluster_user_id integer,
-    task_needed boolean DEFAULT false
-);
-
-
---
--- Name: accesses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE accesses_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: accesses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE accesses_id_seq OWNED BY accesses.id;
-
-
---
 -- Name: account_codes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -141,7 +107,6 @@ CREATE TABLE accounts (
     project_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    state character varying(255),
     username character varying(255),
     owner boolean DEFAULT false,
     access_state character varying(255),
@@ -257,74 +222,6 @@ CREATE SEQUENCE cluster_logs_id_seq
 --
 
 ALTER SEQUENCE cluster_logs_id_seq OWNED BY cluster_logs.id;
-
-
---
--- Name: cluster_projects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE cluster_projects (
-    id integer NOT NULL,
-    state character varying(255),
-    project_id integer,
-    cluster_id integer,
-    username character varying(255),
-    task_needed boolean DEFAULT false
-);
-
-
---
--- Name: cluster_projects_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE cluster_projects_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: cluster_projects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE cluster_projects_id_seq OWNED BY cluster_projects.id;
-
-
---
--- Name: cluster_users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE cluster_users (
-    id integer NOT NULL,
-    state character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    account_id integer,
-    cluster_project_id integer,
-    username character varying(255),
-    task_needed boolean DEFAULT false
-);
-
-
---
--- Name: cluster_users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE cluster_users_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: cluster_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE cluster_users_id_seq OWNED BY cluster_users.id;
 
 
 --
@@ -583,36 +480,6 @@ CREATE TABLE direction_of_sciences_projects (
 
 
 --
--- Name: expands; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE expands (
-    id integer NOT NULL,
-    url character varying(255),
-    script character varying(255)
-);
-
-
---
--- Name: expands_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE expands_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: expands_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE expands_id_seq OWNED BY expands.id;
-
-
---
 -- Name: extends; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -712,72 +579,6 @@ CREATE SEQUENCE faults_id_seq
 --
 
 ALTER SEQUENCE faults_id_seq OWNED BY faults.id;
-
-
---
--- Name: fields; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE fields (
-    id integer NOT NULL,
-    name character varying(255),
-    code character varying(255),
-    model_type character varying(255),
-    "position" integer DEFAULT 1,
-    deleted_at timestamp without time zone,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: fields_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE fields_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: fields_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE fields_id_seq OWNED BY fields.id;
-
-
---
--- Name: group_abilities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE group_abilities (
-    id integer NOT NULL,
-    group_id integer,
-    ability_id integer,
-    available boolean
-);
-
-
---
--- Name: group_abilities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE group_abilities_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: group_abilities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE group_abilities_id_seq OWNED BY group_abilities.id;
 
 
 --
@@ -997,308 +798,6 @@ CREATE SEQUENCE notifications_id_seq
 --
 
 ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
-
-
---
--- Name: old_report_comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE old_report_comments (
-    id integer NOT NULL,
-    message text,
-    user_id integer,
-    report_id integer
-);
-
-
---
--- Name: old_report_comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE old_report_comments_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: old_report_comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE old_report_comments_id_seq OWNED BY old_report_comments.id;
-
-
---
--- Name: old_report_organizations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE old_report_organizations (
-    id integer NOT NULL,
-    report_id integer,
-    name character varying(255),
-    subdivision character varying(255),
-    "position" character varying(255),
-    organization_type character varying(255),
-    organization_id integer,
-    other_position character varying(255)
-);
-
-
---
--- Name: old_report_organizations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE old_report_organizations_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: old_report_organizations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE old_report_organizations_id_seq OWNED BY old_report_organizations.id;
-
-
---
--- Name: old_report_personal_data; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE old_report_personal_data (
-    id integer NOT NULL,
-    report_id integer,
-    last_name character varying(255),
-    first_name character varying(255),
-    middle_name character varying(255),
-    email character varying(255),
-    phone character varying(255),
-    confirm_data character varying(255),
-    reason text
-);
-
-
---
--- Name: old_report_personal_data_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE old_report_personal_data_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: old_report_personal_data_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE old_report_personal_data_id_seq OWNED BY old_report_personal_data.id;
-
-
---
--- Name: old_report_personal_surveys; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE old_report_personal_surveys (
-    id integer NOT NULL,
-    report_id integer,
-    software text,
-    technologies text,
-    compilators text,
-    learning text,
-    wanna_be_speaker text,
-    request_technology text,
-    other_technology text,
-    other_compilator text,
-    other_software text,
-    other_learning text,
-    computing text,
-    comment text,
-    "precision" text
-);
-
-
---
--- Name: old_report_personal_surveys_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE old_report_personal_surveys_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: old_report_personal_surveys_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE old_report_personal_surveys_id_seq OWNED BY old_report_personal_surveys.id;
-
-
---
--- Name: old_report_projects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE old_report_projects (
-    id integer NOT NULL,
-    report_id integer,
-    ru_title text,
-    ru_author text,
-    emails text,
-    ru_driver text,
-    ru_strategy text,
-    ru_objective text,
-    ru_impact text,
-    ru_usage text,
-    en_title text,
-    en_author text,
-    en_driver text,
-    en_strategy text,
-    en_objective text,
-    en_impact text,
-    en_usage text,
-    directions_of_science text,
-    critical_technologies text,
-    areas text,
-    computing_systems text,
-    lomonosov_logins text,
-    chebyshev_logins text,
-    materials_file_name character varying(255),
-    materials_content_type character varying(255),
-    materials_file_size integer,
-    materials_updated_at timestamp without time zone,
-    books_count integer DEFAULT 0,
-    vacs_count integer DEFAULT 0,
-    lectures_count integer DEFAULT 0,
-    international_conferences_count integer DEFAULT 0,
-    russian_conferences_count integer DEFAULT 0,
-    doctors_dissertations_count integer DEFAULT 0,
-    candidates_dissertations_count integer DEFAULT 0,
-    students_count integer DEFAULT 0,
-    graduates_count integer DEFAULT 0,
-    your_students_count integer DEFAULT 0,
-    rffi_grants_count integer DEFAULT 0,
-    ministry_of_education_grants_count integer DEFAULT 0,
-    rosnano_grants_count integer DEFAULT 0,
-    ministry_of_communications_grants_count integer DEFAULT 0,
-    ministry_of_defence_grants_count integer DEFAULT 0,
-    ran_grants_count integer DEFAULT 0,
-    other_russian_grants_count integer DEFAULT 0,
-    other_intenational_grants_count integer DEFAULT 0,
-    award_names text,
-    lomonosov_intel_hours integer DEFAULT 0,
-    lomonosov_nvidia_hours integer DEFAULT 0,
-    chebyshev_hours integer DEFAULT 0,
-    lomonosov_size integer DEFAULT 0,
-    chebyshev_size integer DEFAULT 0,
-    exclusive_usage text,
-    strict_schedule text,
-    wanna_speak boolean,
-    request_comment text,
-    international_conferences_in_russia_count integer DEFAULT 0,
-    awards_count integer DEFAULT 0,
-    illustrations_points integer DEFAULT 0,
-    statement_points integer DEFAULT 0,
-    summary_points integer DEFAULT 0,
-    project_id integer
-);
-
-
---
--- Name: old_report_projects_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE old_report_projects_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: old_report_projects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE old_report_projects_id_seq OWNED BY old_report_projects.id;
-
-
---
--- Name: old_report_replies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE old_report_replies (
-    id integer NOT NULL,
-    report_id integer,
-    message text,
-    user_id integer
-);
-
-
---
--- Name: old_report_replies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE old_report_replies_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: old_report_replies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE old_report_replies_id_seq OWNED BY old_report_replies.id;
-
-
---
--- Name: old_reports; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE old_reports (
-    id integer NOT NULL,
-    user_id integer,
-    project_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    state character varying(255),
-    expert_id integer,
-    illustrations_points integer,
-    sent_on_time boolean DEFAULT false,
-    submitted_at timestamp without time zone,
-    allow_state character varying(255),
-    superviser_comment text
-);
-
-
---
--- Name: old_reports_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE old_reports_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: old_reports_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE old_reports_id_seq OWNED BY old_reports.id;
 
 
 --
@@ -1756,7 +1255,6 @@ CREATE TABLE requests (
     state character varying(255),
     size integer DEFAULT 0,
     comment character varying(255),
-    cluster_project_id integer,
     gpu_hours integer DEFAULT 0,
     project_id integer,
     cluster_id integer,
@@ -2106,40 +1604,6 @@ ALTER SEQUENCE surveys_id_seq OWNED BY surveys.id;
 
 
 --
--- Name: tasks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE tasks (
-    id integer NOT NULL,
-    resource_type character varying(255),
-    resource_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    state character varying(255),
-    runned_at timestamp without time zone
-);
-
-
---
--- Name: tasks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE tasks_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: tasks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE tasks_id_seq OWNED BY tasks.id;
-
-
---
 -- Name: ticket_field_relations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2412,8 +1876,7 @@ CREATE TABLE tickets (
     ticket_question_id integer,
     project_id integer,
     cluster_id integer,
-    surety_id integer,
-    report_id integer
+    surety_id integer
 );
 
 
@@ -2533,7 +1996,6 @@ CREATE TABLE users (
     deleted_at timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    admin boolean DEFAULT false,
     state character varying(255),
     token character varying(255),
     avatar_file_name character varying(255),
@@ -2561,41 +2023,6 @@ CREATE SEQUENCE users_id_seq
 --
 
 ALTER SEQUENCE users_id_seq OWNED BY users.id;
-
-
---
--- Name: values; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE "values" (
-    id integer NOT NULL,
-    field_id integer,
-    model_id integer,
-    model_type integer,
-    value text,
-    deleted_at timestamp without time zone,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: values_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE values_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: values_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE values_id_seq OWNED BY "values".id;
 
 
 --
@@ -2644,13 +2071,6 @@ ALTER TABLE ONLY abilities ALTER COLUMN id SET DEFAULT nextval('abilities_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY accesses ALTER COLUMN id SET DEFAULT nextval('accesses_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY account_codes ALTER COLUMN id SET DEFAULT nextval('account_codes_id_seq'::regclass);
 
 
@@ -2680,20 +2100,6 @@ ALTER TABLE ONLY cluster_fields ALTER COLUMN id SET DEFAULT nextval('cluster_fie
 --
 
 ALTER TABLE ONLY cluster_logs ALTER COLUMN id SET DEFAULT nextval('cluster_logs_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY cluster_projects ALTER COLUMN id SET DEFAULT nextval('cluster_projects_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY cluster_users ALTER COLUMN id SET DEFAULT nextval('cluster_users_id_seq'::regclass);
 
 
 --
@@ -2749,13 +2155,6 @@ ALTER TABLE ONLY direction_of_sciences ALTER COLUMN id SET DEFAULT nextval('dire
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY expands ALTER COLUMN id SET DEFAULT nextval('expands_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY extends ALTER COLUMN id SET DEFAULT nextval('extends_id_seq'::regclass);
 
 
@@ -2771,20 +2170,6 @@ ALTER TABLE ONLY fault_replies ALTER COLUMN id SET DEFAULT nextval('fault_replie
 --
 
 ALTER TABLE ONLY faults ALTER COLUMN id SET DEFAULT nextval('faults_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY fields ALTER COLUMN id SET DEFAULT nextval('fields_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY group_abilities ALTER COLUMN id SET DEFAULT nextval('group_abilities_id_seq'::regclass);
 
 
 --
@@ -2827,55 +2212,6 @@ ALTER TABLE ONLY notification_recipients ALTER COLUMN id SET DEFAULT nextval('no
 --
 
 ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notifications_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY old_report_comments ALTER COLUMN id SET DEFAULT nextval('old_report_comments_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY old_report_organizations ALTER COLUMN id SET DEFAULT nextval('old_report_organizations_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY old_report_personal_data ALTER COLUMN id SET DEFAULT nextval('old_report_personal_data_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY old_report_personal_surveys ALTER COLUMN id SET DEFAULT nextval('old_report_personal_surveys_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY old_report_projects ALTER COLUMN id SET DEFAULT nextval('old_report_projects_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY old_report_replies ALTER COLUMN id SET DEFAULT nextval('old_report_replies_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY old_reports ALTER COLUMN id SET DEFAULT nextval('old_reports_id_seq'::regclass);
 
 
 --
@@ -3036,13 +2372,6 @@ ALTER TABLE ONLY surveys ALTER COLUMN id SET DEFAULT nextval('surveys_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY tasks ALTER COLUMN id SET DEFAULT nextval('tasks_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY ticket_field_relations ALTER COLUMN id SET DEFAULT nextval('ticket_field_relations_id_seq'::regclass);
 
 
@@ -3120,13 +2449,6 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY "values" ALTER COLUMN id SET DEFAULT nextval('values_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY versions ALTER COLUMN id SET DEFAULT nextval('versions_id_seq'::regclass);
 
 
@@ -3136,14 +2458,6 @@ ALTER TABLE ONLY versions ALTER COLUMN id SET DEFAULT nextval('versions_id_seq':
 
 ALTER TABLE ONLY abilities
     ADD CONSTRAINT abilities_pkey PRIMARY KEY (id);
-
-
---
--- Name: accesses_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY accesses
-    ADD CONSTRAINT accesses_pkey PRIMARY KEY (id);
 
 
 --
@@ -3184,22 +2498,6 @@ ALTER TABLE ONLY cluster_fields
 
 ALTER TABLE ONLY cluster_logs
     ADD CONSTRAINT cluster_logs_pkey PRIMARY KEY (id);
-
-
---
--- Name: cluster_projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY cluster_projects
-    ADD CONSTRAINT cluster_projects_pkey PRIMARY KEY (id);
-
-
---
--- Name: cluster_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY cluster_users
-    ADD CONSTRAINT cluster_users_pkey PRIMARY KEY (id);
 
 
 --
@@ -3259,14 +2557,6 @@ ALTER TABLE ONLY direction_of_sciences
 
 
 --
--- Name: expands_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY expands
-    ADD CONSTRAINT expands_pkey PRIMARY KEY (id);
-
-
---
 -- Name: extends_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3288,22 +2578,6 @@ ALTER TABLE ONLY fault_replies
 
 ALTER TABLE ONLY faults
     ADD CONSTRAINT faults_pkey PRIMARY KEY (id);
-
-
---
--- Name: fields_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY fields
-    ADD CONSTRAINT fields_pkey PRIMARY KEY (id);
-
-
---
--- Name: group_abilities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY group_abilities
-    ADD CONSTRAINT group_abilities_pkey PRIMARY KEY (id);
 
 
 --
@@ -3427,67 +2701,11 @@ ALTER TABLE ONLY replies
 
 
 --
--- Name: report_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY old_report_comments
-    ADD CONSTRAINT report_comments_pkey PRIMARY KEY (id);
-
-
---
--- Name: report_organizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY old_report_organizations
-    ADD CONSTRAINT report_organizations_pkey PRIMARY KEY (id);
-
-
---
--- Name: report_personal_data_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY old_report_personal_data
-    ADD CONSTRAINT report_personal_data_pkey PRIMARY KEY (id);
-
-
---
--- Name: report_personal_surveys_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY old_report_personal_surveys
-    ADD CONSTRAINT report_personal_surveys_pkey PRIMARY KEY (id);
-
-
---
--- Name: report_projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY old_report_projects
-    ADD CONSTRAINT report_projects_pkey PRIMARY KEY (id);
-
-
---
--- Name: report_replies_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY old_report_replies
-    ADD CONSTRAINT report_replies_pkey PRIMARY KEY (id);
-
-
---
 -- Name: report_replies_pkey1; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY report_replies
     ADD CONSTRAINT report_replies_pkey1 PRIMARY KEY (id);
-
-
---
--- Name: reports_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY old_reports
-    ADD CONSTRAINT reports_pkey PRIMARY KEY (id);
 
 
 --
@@ -3587,14 +2805,6 @@ ALTER TABLE ONLY surveys
 
 
 --
--- Name: tasks_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY tasks
-    ADD CONSTRAINT tasks_pkey PRIMARY KEY (id);
-
-
---
 -- Name: ticket_field_relations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3683,14 +2893,6 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: values_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY "values"
-    ADD CONSTRAINT values_pkey PRIMARY KEY (id);
-
-
---
 -- Name: versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3717,27 +2919,6 @@ CREATE INDEX index_abilities_on_group_id ON abilities USING btree (group_id);
 --
 
 CREATE UNIQUE INDEX index_abilities_on_group_id_and_subject_and_action ON abilities USING btree (group_id, subject, action);
-
-
---
--- Name: index_accesses_on_credential_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_accesses_on_credential_id ON accesses USING btree (credential_id);
-
-
---
--- Name: index_accesses_on_credential_id_and_cluster_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_accesses_on_credential_id_and_cluster_user_id ON accesses USING btree (credential_id, cluster_user_id);
-
-
---
--- Name: index_accesses_on_state; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_accesses_on_state ON accesses USING btree (state);
 
 
 --
@@ -3773,13 +2954,6 @@ CREATE INDEX index_accounts_on_cluster_state ON accounts USING btree (cluster_st
 --
 
 CREATE INDEX index_accounts_on_project_id ON accounts USING btree (project_id);
-
-
---
--- Name: index_accounts_on_state; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_accounts_on_state ON accounts USING btree (state);
 
 
 --
@@ -3822,20 +2996,6 @@ CREATE INDEX index_cluster_fields_on_cluster_id ON cluster_fields USING btree (c
 --
 
 CREATE INDEX index_cluster_logs_on_cluster_id_and_id ON cluster_logs USING btree (cluster_id, id);
-
-
---
--- Name: index_cluster_projects_on_cluster_id_and_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_cluster_projects_on_cluster_id_and_project_id ON cluster_projects USING btree (cluster_id, project_id);
-
-
---
--- Name: index_cluster_users_on_cluster_project_id_and_account_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_cluster_users_on_cluster_project_id_and_account_id ON cluster_users USING btree (cluster_project_id, account_id);
 
 
 --
@@ -3899,27 +3059,6 @@ CREATE INDEX index_fault_replies_on_fault_id ON fault_replies USING btree (fault
 --
 
 CREATE INDEX index_fault_replies_on_user_id ON fault_replies USING btree (user_id);
-
-
---
--- Name: index_group_abilities_on_ability_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_group_abilities_on_ability_id ON group_abilities USING btree (ability_id);
-
-
---
--- Name: index_group_abilities_on_group_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_group_abilities_on_group_id ON group_abilities USING btree (group_id);
-
-
---
--- Name: index_group_abilities_on_group_id_and_ability_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_group_abilities_on_group_id_and_ability_id ON group_abilities USING btree (group_id, ability_id);
 
 
 --
@@ -4119,34 +3258,6 @@ CREATE INDEX index_replies_on_user_id ON replies USING btree (user_id);
 
 
 --
--- Name: index_report_comments_on_report_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_report_comments_on_report_id ON old_report_comments USING btree (report_id);
-
-
---
--- Name: index_report_comments_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_report_comments_on_user_id ON old_report_comments USING btree (user_id);
-
-
---
--- Name: index_report_replies_on_report_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_report_replies_on_report_id ON old_report_replies USING btree (report_id);
-
-
---
--- Name: index_report_replies_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_report_replies_on_user_id ON old_report_replies USING btree (user_id);
-
-
---
 -- Name: index_reports_on_expert_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4175,13 +3286,6 @@ CREATE INDEX index_reports_on_session_id_and_state ON reports USING btree (sessi
 
 
 --
--- Name: index_reports_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_reports_on_user_id ON old_reports USING btree (user_id);
-
-
---
 -- Name: index_request_properties_on_request_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4193,13 +3297,6 @@ CREATE INDEX index_request_properties_on_request_id ON request_properties USING 
 --
 
 CREATE INDEX index_requests_on_cluster_id ON requests USING btree (cluster_id);
-
-
---
--- Name: index_requests_on_cluster_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_requests_on_cluster_project_id ON requests USING btree (cluster_project_id);
 
 
 --
@@ -4312,13 +3409,6 @@ CREATE INDEX index_survey_values_on_user_survey_id ON survey_values USING btree 
 --
 
 CREATE UNIQUE INDEX index_survey_values_on_user_survey_id_and_survey_field_id ON survey_values USING btree (user_survey_id, survey_field_id);
-
-
---
--- Name: index_tasks_on_resource_id_and_resource_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_tasks_on_resource_id_and_resource_type ON tasks USING btree (resource_id, resource_type);
 
 
 --
@@ -4455,13 +3545,6 @@ CREATE INDEX index_tickets_on_project_id ON tickets USING btree (project_id);
 
 
 --
--- Name: index_tickets_on_report_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_tickets_on_report_id ON tickets USING btree (report_id);
-
-
---
 -- Name: index_tickets_on_state; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4592,13 +3675,6 @@ CREATE INDEX index_users_on_state ON users USING btree (state);
 --
 
 CREATE UNIQUE INDEX index_users_on_token ON users USING btree (token);
-
-
---
--- Name: index_values_on_field_id_and_model_id_and_model_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_values_on_field_id_and_model_id_and_model_type ON "values" USING btree (field_id, model_id, model_type);
 
 
 --
@@ -5294,3 +4370,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130708170253');
 INSERT INTO schema_migrations (version) VALUES ('20130709130810');
 
 INSERT INTO schema_migrations (version) VALUES ('20130710083644');
+
+INSERT INTO schema_migrations (version) VALUES ('20130711142829');

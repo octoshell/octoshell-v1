@@ -1,3 +1,4 @@
+# Модель доступа к действию для группы пользователей
 class Ability < ActiveRecord::Base
   Definition = Struct.new(:action, :subject)
 

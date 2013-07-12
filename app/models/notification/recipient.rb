@@ -1,3 +1,4 @@
+# Получатель нотификации
 class Notification::Recipient < ActiveRecord::Base
   belongs_to :notification
   belongs_to :user

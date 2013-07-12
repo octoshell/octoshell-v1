@@ -1,5 +1,6 @@
 require 'timeout'
 
+# Модель доступа пользователя к проекту. Имеет 2 независимых состояния: Доступ к проекту (access_state: “allowed” или “denied”) и Доступ к кластеру (cluster_state: “active” или “closed”)
 class Account < ActiveRecord::Base
   has_paper_trail
   

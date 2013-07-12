@@ -1,4 +1,4 @@
-# coding: utf-8
+# Название позиции в организации
 class PositionName < ActiveRecord::Base
   include Models::Limitable
   

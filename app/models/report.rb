@@ -1,3 +1,4 @@
+# Отчет о проекте
 class Report < ActiveRecord::Base
   include Models::Limitable
   

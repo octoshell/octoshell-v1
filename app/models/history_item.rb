@@ -1,3 +1,4 @@
+# Запись истории действия пользователя
 class HistoryItem < ActiveRecord::Base
   serialize :data
   

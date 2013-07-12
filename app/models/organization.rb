@@ -1,3 +1,4 @@
+# Организация
 class Organization < ActiveRecord::Base
   has_paper_trail
   
@@ -97,7 +98,7 @@ class Organization < ActiveRecord::Base
 private
   
   def notify_admins
-    Mailer.delay.notify_new_organization(self) if User.admins.exists?
+    Mailer.delay.notify_new_organization(self) if User.superadmins.exists?
     true
   end
 end

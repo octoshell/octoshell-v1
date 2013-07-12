@@ -1,3 +1,4 @@
+# Модель дополнительного поле у кластера
 class ClusterField < ActiveRecord::Base
   belongs_to :cluster
   

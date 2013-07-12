@@ -1,3 +1,4 @@
+# Модель группы пользователей
 class Group < ActiveRecord::Base
   SUPERADMINS = 'superadmins'
   AUTHORIZED = 'authorized'

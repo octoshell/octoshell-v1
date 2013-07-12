@@ -1,4 +1,4 @@
-# coding: utf-8
+# Проект
 class Project < ActiveRecord::Base
   CLUSTER_USER_TYPES = %w(account project)
   has_paper_trail

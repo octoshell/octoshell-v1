@@ -1,3 +1,4 @@
+# Модель дополнительного email-а
 class AdditionalEmail < ActiveRecord::Base
   include Models::Limitable
   

@@ -1,3 +1,4 @@
+# Позиция в организации
 class Position < ActiveRecord::Base
   include Models::Limitable
   

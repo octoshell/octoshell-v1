@@ -1,4 +1,4 @@
-# coding: utf-8
+# Модель секретного кода приглашения в проект
 class AccountCode < ActiveRecord::Base
   has_paper_trail
   

@@ -1,3 +1,4 @@
+# Модель отправленного письма
 class DeliveredMail < ActiveRecord::Base
   def self.create_by_mail!(mail)
     scoped.create! do |dm|

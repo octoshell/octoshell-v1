@@ -43,12 +43,11 @@ class User < ActiveRecord::Base
     :avatar, :additional_emails_attributes, :phone
   attr_accessible :first_name, :last_name, :middle_name, :email, :password,
     :password_confirmation, :remember_me, :new_organization, :organization_id,
-    :admin, :avatar, :additional_emails_attributes, :phone, :group_ids, as: :admin
+    :avatar, :additional_emails_attributes, :phone, :group_ids, as: :admin
   
   accepts_nested_attributes_for :additional_emails, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :groups
   
-  scope :admins, where(admin: true).where("users.state != 'closed'")
   scope :finder, (lambda do |q|
     return scoped if q.blank?
     condition = q.split(/\s/).map do |word|
@@ -85,6 +84,10 @@ class User < ActiveRecord::Base
       Ticket.with_state(:active),
       Surety.with_state(:generated),
       Request.with_state(:pending) ].map(&:count).sum
+  end
+  
+  def self.superadmins
+    Group.superadmin.users
   end
   
   def examine!

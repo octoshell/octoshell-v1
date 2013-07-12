@@ -1,3 +1,4 @@
+# Тип организации
 class OrganizationKind < ActiveRecord::Base
   has_paper_trail
   

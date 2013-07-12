@@ -1,3 +1,4 @@
+# Ответ на отчет
 class Report::Reply < ActiveRecord::Base
   belongs_to :report
   belongs_to :user

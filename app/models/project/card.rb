@@ -1,4 +1,4 @@
-# coding: utf-8
+# Карточка проекта
 class Project::Card < ActiveRecord::Base
   ALL_FIELDS = [:name, :en_name, :driver, :en_driver, :strategy,
     :en_strategy, :objective, :en_objective, :impact, :en_impact, :usage,

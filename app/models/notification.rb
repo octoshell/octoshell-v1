@@ -1,3 +1,4 @@
+# Нотификация
 class Notification < ActiveRecord::Base
   include Models::Limitable
   has_paper_trail
