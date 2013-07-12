@@ -10,7 +10,7 @@ class Admin::ExtendsController < Admin::ApplicationController
   def create
     @extend = Extend.new(params[:extend], as: :admin)
     if @extend.save
-      redirect_to extends_path
+      redirect_to admin_extends_path
     else
       render :new
     end
@@ -23,7 +23,7 @@ class Admin::ExtendsController < Admin::ApplicationController
   def update
     @extend = Extend.find(params[:id])
     if @extend.update_attributes(params[:extend], as: :admin)
-      redirect_to extends_path
+      redirect_to admin_extends_path
     else
       render :edit
     end
@@ -32,6 +32,6 @@ class Admin::ExtendsController < Admin::ApplicationController
   def destroy
     @extend = Extend.find(params[:id])
     @extend.destroy
-    redirect_to extends_path
+    redirect_to admin_extends_path
   end
 end

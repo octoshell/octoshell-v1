@@ -78,7 +78,7 @@ private
   
   def get_extends
     @page_extends = Extend.order('weight desc').find_all do |extend|
-      request.path =~ %r{#{extend.url}}
+      request.path =~ (%r{#{extend.url}} rescue /1/)
     end
   end
   

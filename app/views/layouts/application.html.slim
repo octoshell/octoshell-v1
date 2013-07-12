@@ -63,7 +63,7 @@ html
       - if may? :use, :extends
         javascript:
           $(document).ready(function(){
-            #{@page_extends.map { |extend| "$.getScript('/run/#{extend.script}?page=#{URI.escape(request.path)}')" }.join(';').html_safe}
+            #{@page_extends.map { |extend| "$.getScript('/run/#{extend.script}?page=#{URI.escape(request.path)}&div=#{extend.div}')" }.join(';').html_safe}
           })
       - if may? :use, :extends
         div id="extend"
