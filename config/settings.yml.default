@@ -1,0 +1,3 @@
+---
+:settings:
+  octokey: "/var/www/octoshell-extend/shared/keys/private"

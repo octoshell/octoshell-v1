@@ -41,13 +41,19 @@ namespace :app do
 end
 
 namespace :deploy do
-  desc "Restart Unicorn and Resque"
   task :restart do
     run "sv restart ~/services/octoshell_unicorn"
     run "sv restart ~/services/octoshell_delayed_job"
   end
   
-  desc "Make symlinks"
+  task :make_defaults do
+    run "mkdir -p #{deploy_to}/configs"
+    top.upload "config/database.yml.default",  "#{deploy_to}/configs/database.yml"
+    top.upload "config/surety.liquid.default", "#{deploy_to}/configs/surety.liquid"
+    top.upload "config/surety.rtf.default",    "#{deploy_to}/configs/surety.rtf"
+    top.upload "config/settings.yml.default",  "#{deploy_to}/configs/settings.yml"
+  end
+  
   task :make_symlinks, :roles => :app, :except => { :no_release => true } do
     # Ставим симлинк на конфиги и загрузки
     run "rm -f #{latest_release}/config/database.yml"
@@ -73,3 +79,4 @@ namespace :deploy do
 end
 
 after 'deploy:finalize_update', 'deploy:make_symlinks'
+after 'deploy:setup', 'deploy:make_defaults'

@@ -1,6 +1,7 @@
-- title 'Редактирование настроек'
+- title 'Настройки'
 
-= simple_form_for [:admin, @settings], url: settings_path do |f|
+= simple_form_for [:admin, @settings] do |f|
   = f.input :surety_ticket_question_id, collection: TicketQuestion.with_state(:active), label: 'Вопрос тикета "Загрузка скана поручительства"', label_method: :question
+  = f.input :octokey, label: "Приватный ключ от серверов"
   div class="form-actions"
     = f.button :submit

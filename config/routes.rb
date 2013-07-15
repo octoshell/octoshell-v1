@@ -143,7 +143,7 @@ MSU::Application.routes.draw do
     resources :images, only: [:index, :new, :create, :destroy]
     
     # settings
-    resource :settings, only: [:edit, :update]
+    resource :settings, only: [:show, :update]
     
     # import
     resources :import_items, only: [:new, :create, :index, :update, :destroy], path: 'import' do

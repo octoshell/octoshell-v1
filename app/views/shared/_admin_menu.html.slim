@@ -21,6 +21,7 @@
 = submenu_item :'admin/sessions', (link_to "Перерегистрации", admin_sessions_path), maynot?(:manage, :sessions)
 = submenu_item :'admin/cohortes', (link_to "Когорты", admin_cohortes_path)
 = submenu_item :'admin/notifications', (link_to "Рассылка", admin_notifications_path), maynot?(:manage, :notifications)
+= submenu_item :'admin/settings', (link_to "Системные настройки", admin_settings_path), maynot?(:manage, :settings)
 
 
 li class="dropdown"
