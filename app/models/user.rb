@@ -26,7 +26,6 @@ class User < ActiveRecord::Base
   has_many :user_surveys
   has_many :faults
   has_and_belongs_to_many :subscribed_tickets, join_table: :tickets_users, class_name: :Ticket, uniq: true
-  has_many :old_reports
   has_many :delivered_mails
   
   validates :first_name, :last_name, :middle_name, :email, :phone, presence: true

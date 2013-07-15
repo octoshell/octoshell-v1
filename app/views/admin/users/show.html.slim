@@ -93,26 +93,6 @@ h3 Перерегистрации
         - state = { pending: "warning", filling: "warning", submitted: "success" }[us.state_name]
         span class="label label-#{state}" = us.human_state_name
 
-ul
-- @user.old_reports.each do |report|
-  li class="muted"
-    = "Отчет ##{report.id} (#{report.state})"
-    ul
-      - report.projects.each do |project|
-        li class="muted"
-          = project.ru_title
-          |  
-          = "#{project.illustrations_points} / #{project.statement_points} / #{project.summary_points}"
-
-/ h4 В которых упоминался пользователь
-/ 
-/ - reports = @user.mentioned_reports
-/ - if reports.any?
-/   - reports.each do |report|
-/     p = link_to "Отчет ##{report.id} (#{report.human_state_name})", [:admin, report, :review]
-/ - else
-/   p Нет
-
 h3 = t('.sureties')
 = render partial: 'admin/sureties/table', locals: { sureties: @user.sureties }
 
