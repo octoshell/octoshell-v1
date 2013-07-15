@@ -1,7 +1,9 @@
 - title "Изменение логина"
 
-- clusters = @account.on_clusters
-- if clusters.any?
+- error, clusters = safe_accounts_on_clusters(@account)
+- if error
+  p class="alert alert-error" = error
+- elsif clusters.any?
   blockquote
     | Логин занят на кластерах
     ul

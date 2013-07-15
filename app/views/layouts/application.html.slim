@@ -17,7 +17,7 @@ html
     div class="container"
       - if session[:soul_id]
         div class="soul-box"
-          = link_to t('.get_back_to_your_session', default: 'Get back to your session'), revert_session_path, method: :put
+          = link_to "Вернуться в свою сессию", revert_session_path, method: :put
       div class="navbar noprint"
         div class="navbar-inner"
           = link_to root_path, class: "brand" do

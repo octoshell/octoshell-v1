@@ -190,4 +190,11 @@ module ApplicationHelper
   rescue
     false
   end
+  
+  def safe_accounts_on_clusters(account)
+    clusters = account.on_clusters
+    [nil, clusters]
+  rescue => e
+    [e.class.to_s, []]
+  end
 end
