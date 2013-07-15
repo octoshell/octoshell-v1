@@ -32,6 +32,16 @@ class ReportsController < ApplicationController
       render :show
     end
   end
+  
+  def resubmit
+    @report = get_report(params[:report_id])
+    @report.assign_attributes(params[:report])
+    if @report.assessing? || @report.resubmit
+      redirect_to @report
+    else
+      render :show
+    end
+  end
 
 private
   

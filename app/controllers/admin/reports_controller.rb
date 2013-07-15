@@ -56,6 +56,13 @@ class Admin::ReportsController < Admin::ApplicationController
     redirect_to admin_report_path(@report, anchor: "start-page")
   end
   
+  def reject
+    authorize! :assess, :reports
+    @report = Report.find(params[:report_id])
+    @report.reject
+    redirect_to admin_report_path(@report, anchor: "start-page")
+  end
+  
   private
   def default_breadcrumb
     false

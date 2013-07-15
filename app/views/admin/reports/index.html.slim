@@ -3,6 +3,7 @@
 = simple_form_for @search, method: :get, url: admin_reports_path, html: { class: 'form-horizontal' } do |f|
   = f.input :session_id_eq, collection: Session.all, label_method: :description, label: 'Перерегистрация'
   = f.input :state_in, collection: Report.state_names.map { |n| [Report.human_state_name(n), n] }, input_html: { multiple: true }, label: "Состояние"
+  = f.input :expert_id_eq, collection: User.experts, priority: [current_user], label_method: :full_name, label: "Эксперт", required: false
   = search_check_boxes(f, :illustration_points_in, "Иллюстрации")
   = search_check_boxes(f, :statement_points_in, "Изложение")
   = search_check_boxes(f, :summary_points_in, "Общая оценка")

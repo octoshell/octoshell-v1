@@ -1,0 +1,10 @@
+= render 'header'
+
+p
+  | Пользователь обновил 
+  = link_to "отчет ##{@report.id}", admin_report_url(@report)
+  | .
+
+p = link_to admin_report_url(@report), admin_report_url(@report)
+
+= render 'signature'

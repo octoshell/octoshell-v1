@@ -69,6 +69,24 @@ class Mailer < ActionMailer::Base
     mail to: email, subject: "Архив перерегистрации подготовлен к загрузке"
   end
   
+  def report_assessed(report)
+    @user = report.user
+    @report = report
+    mail to: @user.emails, subject: "Эксперт оценил ваш отчет ##{report.id}"
+  end
+  
+  def report_rejected(report)
+    @user = report.user
+    @report = report
+    mail to: @user.emails, subject: "Эсперт вернул вам отчет ##{report.id}"
+  end
+  
+  def report_resubmitted(report)
+    @user = report.expert
+    @report = report
+    mail to: @user.emails, subject: "Обновлен архив в отчете ##{report.id}"
+  end
+  
 private
 
   def markdown(text)

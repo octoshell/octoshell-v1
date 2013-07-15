@@ -27,10 +27,10 @@ class Report < ActiveRecord::Base
     end
     state :assessing
     state :assessed
-    state :declined
+    state :rejected
     
     event :accept do
-      transition [:pending, :declined] => :accepted
+      transition :pending => :accepted
     end
     
     event :submit do
@@ -45,13 +45,21 @@ class Report < ActiveRecord::Base
       transition :assessing => :assessed
     end
     
-    event :decline do
-      transition :assessing => :declined
+    event :reject do
+      transition :assessing => :rejected
     end
     
     event :edit do
       transition :assessed => :assessing
     end
+    
+    event :resubmit do
+      transition :rejected => :assessing
+    end
+    
+    inside_transition on: :assess, &:notify_about_assesses
+    inside_transition on: :reject, &:notify_about_reject
+    inside_transition on: :resubmit, &:notify_about_resubmit
   end
   
   def link_name
@@ -79,5 +87,17 @@ class Report < ActiveRecord::Base
     ([illustration_points, statement_points, summary_points].all? do |p|
       p.to_i > 2
     end && assessed?) || assessing? || submitted?
+  end
+  
+  def notify_about_reject
+    Mailer.delay.report_rejected(self)
+  end
+  
+  def notify_about_assesses
+    Mailer.delay.report_assessed(self)
+  end
+  
+  def notify_about_resubmit
+    Mailer.delay.report_resubmitted(self)
   end
 end

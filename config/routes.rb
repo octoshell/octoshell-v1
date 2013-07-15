@@ -88,6 +88,7 @@ MSU::Application.routes.draw do
   resources :reports, only: [:show] do
     put :accept
     put :submit
+    put :resubmit
     post :replies
   end
 
@@ -312,7 +313,7 @@ MSU::Application.routes.draw do
     resources :reports, only: [:show, :index] do
       put :pick
       put :assess
-      put :decline
+      put :reject
       put :edit
       post :replies
     end

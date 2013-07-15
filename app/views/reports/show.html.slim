@@ -1,16 +1,16 @@
 - title "Отчет по проекту #{@report.project.title}"
 
 div class="well"
-  = simple_form_for @report, url: [@report, :submit], html: { class: 'form-horizontal' } do |f|
+  = simple_form_for @report, url: [@report, @report.accepted? ? :submit : :resubmit], html: { class: 'form-horizontal' } do |f|
       legend Материалы отчета
-      = f.input :materials, hint: 'Aрхив zip, не более 20Мб, в архиве - помимо текста отчета, минимум один с расширением графического типа файла (минимум одна иллюстрация)', disabled: !@report.accepted?
+      = f.input :materials, hint: 'Aрхив zip, не более 20Мб, в архиве - помимо текста отчета, минимум один с расширением графического типа файла (минимум одна иллюстрация)', disabled: (!@report.accepted? && !@report.rejected?)
       - if @report.materials?
         div class="controls"
           span class="help-block"
             | Скачать: 
             strong = link_to @report.materials_file_name, @report.materials.url
       div class="form-actions" style="margin-bottom: 0;"
-        = f.submit 'Отправить', class: 'btn btn-primary', disabled: !@report.accepted?
+        = f.submit 'Отправить', class: 'btn btn-primary', disabled: (!@report.accepted? && !@report.rejected?)
 
 legend Переписка
 

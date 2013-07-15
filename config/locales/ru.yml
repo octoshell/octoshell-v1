@@ -826,17 +826,12 @@ ru:
       report:
         state:
           states:
-            declined: Отклонен
+            rejected: Отклонен
             pending: Не начат
             accepted: Не прислан
             submitted: Отправлен
             assessing: Оценивается
             assessed: Оценен
-        allow_state:
-          states:
-            pending: Ожидает решения
-            allowed: Разрешено
-            disallowed: Запрещено
       user:
         state:
           states:

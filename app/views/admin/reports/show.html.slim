@@ -20,6 +20,9 @@ legend Оценки
     = f.input :summary_points, collection: (0..5), as: :radio, wrapper_html: { class: 'inline-check-boxes' }
     div class="form-actions"
       = f.button :submit, 'Оценить', class: 'btn-primary'
+      |  
+      = link_to "Вернуть пользователю", [:admin, @report, :reject], class: "#{"disabled" if !@report.assessing?} btn btn-danger", data: { confirm: "Вы уверены?" }, method: :put
+        
 - else
   table class="table table-striped"
     tr

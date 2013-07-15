@@ -35,7 +35,7 @@
                 tr
                   td class="span5" = report.project.title
                   td class="span2"
-                    - if report.pending? || report.declined? || report.accepted?
+                    - if report.pending? || report.rejected? || report.accepted?
                       span class="label label-important" = report.human_state_name
                     - elsif report.submitted? || report.assessing?
                       span class="label label-warning" = report.human_state_name

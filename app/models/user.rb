@@ -90,6 +90,10 @@ class User < ActiveRecord::Base
     Group.superadmin.users
   end
   
+  def self.experts
+    Group.experts.users
+  end
+  
   def examine!
     current_session_surveys.each do |s|
       faults.create! do |fault|

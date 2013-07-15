@@ -3,6 +3,7 @@ class Group < ActiveRecord::Base
   SUPERADMINS = 'superadmins'
   AUTHORIZED = 'authorized'
   FAULTS_MANAGERS = 'faults_managers'
+  EXPERTS = 'experts'
   
   has_many :users, through: :user_groups
   has_many :user_groups, dependent: :destroy
@@ -17,6 +18,12 @@ class Group < ActiveRecord::Base
 
   def self.superadmin
     find_or_create_by_name! SUPERADMINS do |group|
+      group.system = true
+    end
+  end
+  
+  def self.experts
+    find_or_create_by_name! EXPERTS do |group|
       group.system = true
     end
   end

@@ -1,0 +1,12 @@
+= render 'header'
+
+p
+  | Эксперт вернул вам 
+  = link_to "отчет ##{@report.id}", report_url(@report)
+  | .
+
+p Вам нужно доделать отчет и снова загрузить на экспертизу.
+
+p = link_to admin_report_url(@report), report_url(@report)
+
+= render 'signature'
