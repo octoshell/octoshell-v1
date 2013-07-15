@@ -46,7 +46,12 @@ class Credential < ActiveRecord::Base
   end
   
   def public_key_file=(file)
-    self[:public_key] = file.read
+    self.public_key = file.read
+  end
+  
+  def public_key=(key)
+    key.delete!("^\u{0000}-\u{007F}")
+    self[:public_key] = key
   end
 
   def link_name
