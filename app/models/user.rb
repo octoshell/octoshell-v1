@@ -182,6 +182,7 @@ class User < ActiveRecord::Base
   end
   
   def revalidate!
+    return if closed?
     conditions = [
       proc { sureties.with_state(:active).any? },
       proc { memberships.with_state(:active).any? },
