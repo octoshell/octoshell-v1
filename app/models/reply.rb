@@ -7,7 +7,6 @@ class Reply < ActiveRecord::Base
   has_attached_file :attachment
   
   delegate :answer!, :reply!, to: :ticket
-  delegate :admin?, to: :user, prefix: true
   delegate :state_name, to: :ticket, prefix: true
   
   default_scope order(:id)
@@ -23,19 +22,31 @@ class Reply < ActiveRecord::Base
   
   after_create :answer!, if: :user_admin?
   after_create :reply!, unless: :user_admin?
-  after_create :notify_user, if: :user_admin?
+  after_create :notify_users
+  after_create :add_recepient
   
   def attachment_image?
     attachment_content_type.to_s =~ /image/
   end
   
+  def user_admin?
+    Group.support.in? user.groups
+  end
+  
 private
   
-  def notify_user
-    Mailer.delay.new_ticket_answer(ticket)
+  def notify_users
+    (ticket.users - [user]).each do |user|
+      Mailer.delay.new_ticket_answer(user, ticket)
+    end
   end
 
   def link_name
     I18n.t('.reply')
+  end
+  
+  def add_recepient
+    ticket.users << user unless user.in?(ticket.users)
+    true
   end
 end

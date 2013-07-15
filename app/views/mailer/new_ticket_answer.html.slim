@@ -6,6 +6,9 @@
       strong = reply.user.full_name
     p = reply.message
 
-p = link_to 'Перейти к заявке', ticket_url(@ticket)
+- if Group.support.in?(@user.groups)
+  p = link_to 'Перейти к заявке', admin_ticket_url(@ticket)
+- else
+  p = link_to 'Перейти к заявке', ticket_url(@ticket)
 
 = render 'signature'

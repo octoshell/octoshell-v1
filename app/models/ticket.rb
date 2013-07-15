@@ -28,6 +28,7 @@ class Ticket < ActiveRecord::Base
     :ticket_tag_relations_attributes, :user_ids, as: :admin
 
   after_create :create_ticket_tag_relations
+  after_create :add_user_to_receipients
   
   state_machine :state, initial: :active do
     state :active
@@ -91,6 +92,15 @@ class Ticket < ActiveRecord::Base
     ticket_tags.where(ticket_tag_relations: { active: true })
   end
   
+  def available_users
+    users = []
+    users << user
+    Group.support.users.each do |user|
+      users << user
+    end
+    users
+  end
+  
 private
   
   def create_ticket_tag_relations
@@ -100,5 +110,9 @@ private
         relation.active = ticket_question.ticket_tags.include?(tag)
       end
     end
+  end
+  
+  def add_user_to_receipients
+    users << user
   end
 end

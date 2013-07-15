@@ -4,6 +4,7 @@ class Group < ActiveRecord::Base
   AUTHORIZED = 'authorized'
   FAULTS_MANAGERS = 'faults_managers'
   EXPERTS = 'experts'
+  SUPPORT = 'support'
   
   has_many :users, through: :user_groups
   has_many :user_groups, dependent: :destroy
@@ -15,28 +16,14 @@ class Group < ActiveRecord::Base
   after_create :create_abilities
 
   validates :name, presence: true, uniqueness: true
-
-  def self.superadmin
-    find_or_create_by_name! SUPERADMINS do |group|
-      group.system = true
-    end
-  end
   
-  def self.experts
-    find_or_create_by_name! EXPERTS do |group|
-      group.system = true
-    end
-  end
-
-  def self.authorized
-    find_or_create_by_name! AUTHORIZED do |group|
-      group.system = true
-    end
-  end
-  
-  def self.faults_managers
-    find_or_create_by_name! FAULTS_MANAGERS do |group|
-      group.system = true
+  class << self
+    [SUPERADMINS, AUTHORIZED, FAULTS_MANAGERS, EXPERTS, SUPPORT].each do |name|
+      define_method name do
+        find_or_create_by_name! name do |group|
+          group.system = true
+        end
+      end
     end
   end
 

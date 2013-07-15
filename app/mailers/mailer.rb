@@ -33,9 +33,9 @@ class Mailer < ActionMailer::Base
     mail to: @account_code.email, subject: %{Вас приглашают в работать над проектом "#{@project.title}"}, user_id: @user.id
   end
   
-  def new_ticket_answer(ticket)
+  def new_ticket_answer(user, ticket)
     @ticket = ticket
-    @user = @ticket.user
+    @user = user
     mail to: @user.emails, subject: %{Новое сообщение от поддержки в заявке "#{@ticket.subject}"}, user_id: @user.id
   end
   
