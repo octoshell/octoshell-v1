@@ -67,7 +67,7 @@ class TicketQuestion < ActiveRecord::Base
     if ticket_question_id_was && ticket_question_id_changed?
       self.class.find(ticket_question_id_was).assign_leaf!
     end
-    self.class.where(id: id).update_all(leaf: !ticket_questions.active.exists?)
+    self.class.where(id: id).update_all(leaf: !ticket_questions.with_state(:active).exists?)
     true
   end
 
@@ -78,7 +78,7 @@ class TicketQuestion < ActiveRecord::Base
 private
   
   def create_ticket_relations
-    TicketField.active.each do |ticket_field|
+    TicketField.with_state(:active).each do |ticket_field|
       ticket_field_relations.create! do |ticket_field_relation|
         ticket_field_relation.ticket_field = ticket_field
       end

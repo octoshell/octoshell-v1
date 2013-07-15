@@ -4,6 +4,6 @@ p = "Проект #{@project.title} заблокирован."
 
 p = "Руководитель проекта: #{@project.user.full_name}."
 
-p = "Заблокированные логины: #{@project.accounts.active.pluck(:username).to_sentence}."
+p = "Заблокированные логины: #{@project.accounts.with_cluster_state(:active).pluck(:username).to_sentence}."
 
 = render 'signature'

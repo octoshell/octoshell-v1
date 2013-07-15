@@ -1,7 +1,7 @@
 - title @ticket_question.question
 
 - if @ticket_question.active?
-  = render partial: 'list', locals: { ticket_questions: TicketQuestion.root.active, highlight: @ticket_question.id }
+  = render partial: 'list', locals: { ticket_questions: TicketQuestion.root.with_state(:active), highlight: @ticket_question.id }
 
 div class="well"
   = link_to 'Редактировать', edit_admin_ticket_question_path(@ticket_question), class: 'btn'

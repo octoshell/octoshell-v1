@@ -137,7 +137,7 @@ class Project < ActiveRecord::Base
   end
   
   def notify_about_blocking
-    accounts.active.each do |account|
+    accounts.with_cluster_state(:active).each do |account|
       Mailer.delay.project_blocked(account)
     end
   end
