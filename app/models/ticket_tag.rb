@@ -31,7 +31,7 @@ class TicketTag < ActiveRecord::Base
     return false if self == tag
     
     transaction do
-      active_ticket_ids = tag.ticket_tag_relations.with_state(:active).pluck(:ticket_id)
+      active_ticket_ids = tag.ticket_tag_relations.active.pluck(:ticket_id)
       ticket_tag_relations.where(ticket_id: active_ticket_ids).
         update_all(active: true)
       tag.destroy

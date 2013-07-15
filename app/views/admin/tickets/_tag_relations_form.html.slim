@@ -1,6 +1,6 @@
 = form_for [:admin, ticket], html: { id: 'tag_relations', class: 'form-inline', data: { 'reload-url' => admin_ticket_tag_relations_form_path(ticket) } } do |f|
   legend Теги
-  = f.fields_for :ticket_tag_relations, ticket.ticket_tag_relations.with_state(:active) do |f|
+  = f.fields_for :ticket_tag_relations, ticket.ticket_tag_relations.active do |f|
       = f.label :active, class: 'checkbox' do
         = f.object.ticket_tag.name
         = f.check_box(:active)
