@@ -18,7 +18,7 @@ div class="well"
 
 h3 Активные заявки
 
-= render partial: 'requests/table', locals: { requests: @cluster.requests.with_state(:active).limit(5) }
+= render partial: 'admin/requests/table', locals: { requests: @cluster.requests.with_state(:active).limit(5) }
 
 p = link_to "Все заявки (#{@cluster.requests.count})", requests_path(search: { state_in: Request.state_names, cluster_project_cluster_id_eq: @cluster.id })
 
@@ -38,7 +38,7 @@ table class="table table-bordered"
     th Пользователей в поддержке
     td = @cluster.tickets.select('distinct tickets.user_id').count
 
-h3 Активные заявки
+h3 Активные заявки в поддержку
 
 = render partial: 'admin/tickets/table', locals: { tickets: @cluster.tickets.with_state(:active) }
 
