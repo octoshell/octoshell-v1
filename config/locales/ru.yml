@@ -895,6 +895,7 @@ ru:
             announced: Анонсирован
             blocked: Заблокирован
             closed: Завершен
+            closing: Помечен на закрытие
         events:
           close: Завершить
           erase: Завершить и Стереть данные
