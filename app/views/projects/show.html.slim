@@ -93,8 +93,6 @@ table class="table"
       td
         - if account.active?
           span class="label label-success" = account.human_cluster_state_name
-        - if account.blocked?
-          span class="label" = account.human_cluster_state_name
         - if account.closed?
           span class="label label-important" = account.human_cluster_state_name
         - unless have_requests

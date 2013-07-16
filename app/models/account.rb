@@ -34,7 +34,7 @@ class Account < ActiveRecord::Base
     end
     
     event :close do
-      transition [:active, :blocked] => :closed
+      transition :active => :closed
     end
   end
   

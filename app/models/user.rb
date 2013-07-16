@@ -77,6 +77,7 @@ class User < ActiveRecord::Base
     
     inside_transition :on => :close, &:close_relations!
     inside_transition :on => :sure, &:activate_own_accounts!
+    inside_transition :on => :unsure, &:deactivate_own_accounts!
   end
   
   def self.notifications_count
@@ -247,6 +248,10 @@ class User < ActiveRecord::Base
   
   def activate_own_accounts!
     accounts.without_cluster_state(:active).each &:activate!
+  end
+  
+  def deactivate_own_accounts!
+    accounts.with_cluster_state(:active).each &:close!
   end
   
   def close_relations!
