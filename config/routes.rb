@@ -118,22 +118,22 @@ MSU::Application.routes.draw do
   end
   
   namespace :api do
-    get    "/projects"                                              => "projects#index"
-    get    "/projects/:id"                                          => "projects#show"
-    post   "/notifications"                                         => "notifications#create"
-    put    "/notifications/:id/deliver"                             => "notifications#deliver"
-    delete "/notifications/:id/recipients"                          => "notifications#destroy_recipients"
-    put    "/notifications/:id/add_all_users"                       => "notifications#add_all_users"
-    put    "/notifications/:id/add_from_cluster"                    => "notifications#add_from_cluster"
-    put    "/notifications/:id/add_from_organization_kind"          => "notifications#add_from_organization_kind"
-    put    "/notifications/:id/add_from_organization"               => "notifications#add_from_organization"
-    put    "/notifications/:id/add_from_project"                    => "notifications#add_from_project"
-    put    "/notifications/:id/add_with_projects"                   => "notifications#add_with_projects"
-    put    "/notifications/:id/add_with_accounts"                   => "notifications#add_with_accounts"
-    put    "/notifications/:id/add_with_refused_accounts"           => "notifications#add_with_refused_accounts"
-    put    "/notifications/:id/add_from_session"                    => "notifications#add_from_session"
-    put    "/notifications/:id/add_unsuccessful_of_current_session" => "notifications#add_unsuccessful_of_current_session"
-    put    "/notifications/:id/add_user"                            => "notifications#add_user"
+    get    "/projects"                                              => "projects#index", as: :json
+    get    "/projects/:id"                                          => "projects#show", as: :json
+    post   "/notifications"                                         => "notifications#create", as: :json
+    put    "/notifications/:id/deliver"                             => "notifications#deliver", as: :json
+    delete "/notifications/:id/recipients"                          => "notifications#destroy_recipients", as: :json
+    put    "/notifications/:id/add_all_users"                       => "notifications#add_all_users", as: :json
+    put    "/notifications/:id/add_from_cluster"                    => "notifications#add_from_cluster", as: :json
+    put    "/notifications/:id/add_from_organization_kind"          => "notifications#add_from_organization_kind", as: :json
+    put    "/notifications/:id/add_from_organization"               => "notifications#add_from_organization", as: :json
+    put    "/notifications/:id/add_from_project"                    => "notifications#add_from_project", as: :json
+    put    "/notifications/:id/add_with_projects"                   => "notifications#add_with_projects", as: :json
+    put    "/notifications/:id/add_with_accounts"                   => "notifications#add_with_accounts", as: :json
+    put    "/notifications/:id/add_with_refused_accounts"           => "notifications#add_with_refused_accounts", as: :json
+    put    "/notifications/:id/add_from_session"                    => "notifications#add_from_session", as: :json
+    put    "/notifications/:id/add_unsuccessful_of_current_session" => "notifications#add_unsuccessful_of_current_session", as: :json
+    put    "/notifications/:id/add_user"                            => "notifications#add_user", as: :json
   end
 
   namespace :admin do
