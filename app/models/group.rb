@@ -37,8 +37,9 @@ class Group < ActiveRecord::Base
     superadmins.abilities.update_all available: true
     defaults = YAML.load_file "#{Rails.root}/config/groups.yml.default"
     defaults.each do |group, abilities|
-      abilities.each do |ability|
-        send(group)
+      abilities.each do |subject, actions|
+        send(group).abilities.where(subject: subject, action: actions).
+          update_all(available: true)
       end
     end
   end

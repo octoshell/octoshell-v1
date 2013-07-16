@@ -25,4 +25,9 @@ class Admin::GroupsController < Admin::ApplicationController
     @group.update_attributes(params[:group], as: :admin)
     redirect_to admin_groups_path
   end
+  
+  def default
+    Group.default!
+    redirect_to admin_groups_path
+  end
 end

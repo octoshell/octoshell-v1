@@ -2,6 +2,8 @@
 
 div class="well"
   = link_to t('.new_group'), new_admin_group_path, class: 'btn'
+  |  
+  = link_to "Восстановить права по умолчанию", default_admin_groups_path, class: 'btn btn-info pull-right', data: { confirm: "Вы уверены?" }, method: :put
 
 table class="table table-bordered"
   tr
