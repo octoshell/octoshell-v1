@@ -116,6 +116,25 @@ MSU::Application.routes.draw do
   resources :faults, only: :show do
     resources :fault_replies, only: :create
   end
+  
+  namespace :api do
+    get    "/projects"                                              => "projects#index"
+    get    "/projects/:id"                                          => "projects#show"
+    post   "/notifications"                                         => "notifications#create"
+    put    "/notifications/:id/deliver"                             => "notifications#deliver"
+    delete "/notifications/:id/recipients"                          => "notifications#destroy_recipients"
+    put    "/notifications/:id/add_all_recipients"                  => "notifications#add_all_recipients"
+    put    "/notifications/:id/add_from_cluster"                    => "notifications#add_from_cluster"
+    put    "/notifications/:id/add_from_organization_kind"          => "notifications#add_from_organization_kind"
+    put    "/notifications/:id/add_from_organization"               => "notifications#add_from_organization"
+    put    "/notifications/:id/add_from_project"                    => "notifications#add_from_project"
+    put    "/notifications/:id/add_with_projects"                   => "notifications#add_with_projects"
+    put    "/notifications/:id/add_with_accounts"                   => "notifications#add_with_accounts"
+    put    "/notifications/:id/add_with_refused_accounts"           => "notifications#add_with_refused_accounts"
+    put    "/notifications/:id/add_from_session"                    => "notifications#add_from_session"
+    put    "/notifications/:id/add_unsuccessful_of_current_session" => "notifications#add_unsuccessful_of_current_session"
+    put    "/notifications/:id/add_user"                            => "notifications#add_user"
+  end
 
   namespace :admin do
     resources :cohortes, only: :index do

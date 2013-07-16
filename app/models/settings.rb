@@ -5,7 +5,7 @@ class Settings
   include ActiveModel::Conversion
   extend ActiveModel::Naming
   
-  attr_accessor :surety_ticket_question_id, :octokey
+  attr_accessor :surety_ticket_question_id, :octokey, :api_token
   
   @@settings = YAML.load_file("#{Rails.root}/config/settings.yml")[:settings]
   @@settings.each do |key, value|

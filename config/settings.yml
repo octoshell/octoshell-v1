@@ -2,3 +2,4 @@
 :settings:
   surety_ticket_question_id: '6'
   octokey: /var/www/octoshell-extend/shared/keys/private
+  api_token: xxx
