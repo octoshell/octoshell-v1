@@ -102,6 +102,9 @@ h3 = t('.memberships')
 h3 = t('.projects')
 = render partial: 'admin/projects/table', locals: { projects: @user.all_projects }
 
+h5 Проекты из которых исключен пользователь
+= render partial: 'admin/projects/table', locals: { projects: @user.accounts.with_access_state(:denied).map(&:project) }
+
 h3 = t('.accounts')
 / = render partial: 'admin/accounts/table', locals: { accounts: @user.accounts.without_state(:closed) }
 
