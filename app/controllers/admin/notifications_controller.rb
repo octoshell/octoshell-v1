@@ -101,6 +101,24 @@ class Admin::NotificationsController < Admin::ApplicationController
     redirect_to [:admin, @notification]
   end
   
+  def add_from_project
+    @notification = Notification.find(params[:notification_id])
+    @notification.add_from_project(params[:project_id])
+    redirect_to [:admin, @notification]
+  end
+  
+  def add_from_organization
+    @notification = Notification.find(params[:notification_id])
+    @notification.add_from_organization(params[:organization_id])
+    redirect_to [:admin, @notification]
+  end
+  
+  def add_from_organization_kind
+    @notification = Notification.find(params[:notification_id])
+    @notification.add_from_organization_kind(params[:organization_kind_id])
+    redirect_to [:admin, @notification]
+  end
+  
   private
   def default_breadcrumb
     false

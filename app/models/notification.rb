@@ -47,6 +47,26 @@ class Notification < ActiveRecord::Base
     end
   end
   
+  def add_from_project(id)
+    Project.find(id).accounts.with_access_state(:allowed).each do |account|
+      recipients.where(user_id: account.user_id).first_or_create!
+    end
+  end
+  
+  def add_from_organization(id)
+    Organization.find(id).memberships.with_state(:active).each do |mem|
+      recipients.where(user_id: mem.user_id).first_or_create!
+    end
+  end
+  
+  def add_from_organization_kind(id)
+    OrganizationKind.find(id).organizations.with_state(:active).each do |organization|
+      organization.memberships.with_state(:active).each do |mem|
+        recipients.where(user_id: mem.user_id).first_or_create!
+      end
+    end
+  end
+  
   def test_send(user)
     rec = Recipient.new do |r|
       r.user = user

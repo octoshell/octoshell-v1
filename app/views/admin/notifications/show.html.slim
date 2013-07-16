@@ -70,6 +70,27 @@ h2 style="margin-top: 60px;" Кому
           = text_field_tag :user_id, nil, data: { "source-url" => users_path(format: :json) }, placeholder: "ФИО или email", role: 'instant-submit', type: 'search', class: 'input-xlarge'
           = submit_tag "Добавить", class: "btn"
     li
+      i class="icon-plus"
+      |  
+      = form_tag admin_notification_add_from_organization_path(@notification), method: :put do
+        div class="input-append"
+          = text_field_tag :organization_id, nil, data: { "source-url" => organizations_path(format: :json) }, placeholder: "Организация", role: 'instant-submit', type: 'search', class: 'input-xlarge'
+          = submit_tag "Добавить", class: "btn"
+    li
+      i class="icon-plus"
+      |  
+      = form_tag admin_notification_add_from_organization_kind_path(@notification), method: :put do
+        div class="input-append"
+          = text_field_tag :organization_kind_id, nil, data: { "source-url" => organization_kinds_path(format: :json) }, placeholder: "Тип организации", role: 'instant-submit', type: 'search', class: 'input-xlarge'
+          = submit_tag "Добавить", class: "btn"
+    li
+      i class="icon-plus"
+      |  
+      = form_tag admin_notification_add_from_project_path(@notification), method: :put do
+        div class="input-append"
+          = text_field_tag :project_id, nil, data: { "source-url" => projects_path(format: :json) }, placeholder: "Проект", role: 'instant-submit', type: 'search', class: 'input-xlarge'
+          = submit_tag "Добавить", class: "btn"
+    li
       i class="icon-minus"
       |  
       = link_to "Удалить всех", [:admin, @notification, :remove_all_recipients], method: :put
