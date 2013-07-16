@@ -1,0 +1,20 @@
+authorized:
+  pages:
+    - show_all
+experts:
+  reports:
+    - manage
+    - access
+  admin:
+    - access
+support:
+  tickets:
+    - manage
+  ticket_fields:
+    - manage
+  ticket_questions:
+    - manage
+  ticket_tags:
+    - manage
+  ticket_templates:
+    - manage

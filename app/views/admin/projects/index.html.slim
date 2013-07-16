@@ -21,6 +21,7 @@ div class="row"
       = autocomplete :user, f, label: false, placeholder: "Руководитель"
       = autocomplete :organization, f, label: false, placeholder: "Главная организация"
       = f.input :requests_group_name_cont, label: false, placeholder: 'Группа пользователей'
+      = f.input :accounts_username_cont, label: false, placeholder: 'Имя пользователя'
       = f.input :state_in, collection: Project.human_state_names, input_html: { multiple: true }, required: false, label: false
       = f.input :disabled_eq, as: :boolean, label: 'Не актуальные'
       = f.button :submit, 'Отфильтровать', class: 'btn-block'

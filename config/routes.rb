@@ -172,7 +172,9 @@ MSU::Application.routes.draw do
     end
 
     # groups
-    resources :groups, only: [:index, :new, :create, :edit, :update, :show, :destroy]
+    resources :groups do
+      put :default, on: :collection
+    end
 
     # sureties
     resources :sureties, only: [:index, :show] do

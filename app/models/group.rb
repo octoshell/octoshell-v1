@@ -5,6 +5,7 @@ class Group < ActiveRecord::Base
   FAULTS_MANAGERS = 'faults_managers'
   EXPERTS = 'experts'
   SUPPORT = 'support'
+  DEFAULTS = [SUPERADMINS, AUTHORIZED, FAULTS_MANAGERS, EXPERTS, SUPPORT]
   
   has_many :users, through: :user_groups
   has_many :user_groups, dependent: :destroy
@@ -23,6 +24,21 @@ class Group < ActiveRecord::Base
         find_or_create_by_name! name do |group|
           group.system = true
         end
+      end
+    end
+  end
+  
+  def self.default!
+    transaction do
+      DEFAULTS.each do |group|
+        self.send(group).abilities.update_all available: false
+      end
+    end
+    superadmins.abilities.update_all available: true
+    defaults = YAML.load_file "#{Rails.root}/config/groups.yml.default"
+    defaults.each do |group, abilities|
+      abilities.each do |ability|
+        send(group)
       end
     end
   end
