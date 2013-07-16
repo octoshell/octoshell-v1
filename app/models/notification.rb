@@ -39,6 +39,10 @@ class Notification < ActiveRecord::Base
     end
   end
   
+  def add_user(id)
+    recipients.where(user_id: id).first_or_create!
+  end
+  
   def add_from_cluster(id)
     User.without_state(:closed).each do |u|
       if u.all_projects.any? { |p| p.requests.where(cluster_id: id).with_state(:active).any? }
