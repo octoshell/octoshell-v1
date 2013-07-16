@@ -66,7 +66,6 @@ class Project < ActiveRecord::Base
     
     inside_transition :on => :erase do |p|
       p.requests.with_state(:blocked).each &:close!
-      p.accounts.with_cluster_state(:blocked).each &:close!
     end
   end
   
@@ -147,7 +146,7 @@ class Project < ActiveRecord::Base
       requests.with_state(:active).any? &&
       requests.with_state(:pending, :blocked).empty? && 
       sureties.with_state(:filling, :generated, :confirmed).empty? && 
-      accounts.with_access_state(:allowed).with_cluster_state(:closed, :blocked).empty?
+      accounts.with_access_state(:allowed).with_cluster_state(:closed).empty?
   end
   
   def merge(project)
