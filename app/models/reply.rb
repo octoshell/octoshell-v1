@@ -30,7 +30,7 @@ class Reply < ActiveRecord::Base
   end
   
   def user_admin?
-    Group.support.in? user.groups
+    user != ticket.user
   end
   
 private
