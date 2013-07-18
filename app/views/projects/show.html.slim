@@ -9,13 +9,13 @@
           span class="label label-important" Ожидает подтвержения администратором
           |  
           small = link_to 'Отменить завершение'
-    
+  
 - if current_user == @project.user
   p
     = link_to edit_project_path(@project), class: 'muted' do
       i class="icon-pencil"
       |  Редактировать профиль проекта
-    
+  
     - unless @project.filled?
       |  
       i class="icon-arrow-left text-error"
@@ -58,7 +58,7 @@ div class="row"
               |  Не выделены ресурсы на кластер "#{cluster.name}". 
               - if current_user == @project.user
                 = button_tag 'Создать заявку', class: 'btn btn-success btn-mini pull-right inplace-new-request', data: { content: ".request-#{@project.id}-#{cluster.id}", title: 'Новая заявка' }, type: 'button', role: 'popoverable'
-            
+          
                 div class="request-#{@project.id}-#{cluster.id} hidden"
                   - request = Request.new { |r| r.project = @project; r.cluster = cluster }
                   = simple_form_for request, html: { style: 'margin-bottom: 0;' } do |f|
@@ -154,7 +154,7 @@ table class="table"
                 | )
             div class="clearfix"
             input type="text" autofocus="true" role="project-members-controller" data-entity-source="/users.json" placeholder="Введите фамилию"
-          
+        
             = form_tag project_members_path(@project) do
               table class="table table-condensed hidden" role="project-members"
                 thead

@@ -18,6 +18,10 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html do
         @project = find_project(params[:id])
+        if @project.invalid?
+          flash[:alert] = "Заполните профиль проекта"
+          redirect_to [:edit, @project]
+        end
         redirect_to projects_path if @project.closed?
       end
       format.json do
