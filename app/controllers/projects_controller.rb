@@ -88,11 +88,9 @@ class ProjectsController < ApplicationController
   
   def close
     @project = find_project(params[:project_id])
-    if @project.close
+    if @project.closing? || @project.close!
       @project.user.track! :mark_to_close_project, @project, current_user
       redirect_to @project
-    else
-      flash.now[:alert] = t('.wrong_confirmation_code', default: 'Wrong confirmation code')
     end
   end
   
