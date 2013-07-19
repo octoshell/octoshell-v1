@@ -1,9 +1,0 @@
-- title t('.title', default: 'help')
-
-- if @pages.any?
-  ul
-    - @pages.each do |page|
-      li
-        = link_to page.name, page
-- else
-  p = t('.no_pages', default: 'There are no pages')

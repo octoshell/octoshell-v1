@@ -1,5 +1,0 @@
-- title t('.title', default: 'Send activation instructions')
-= simple_form_for @user, html: { class: 'form-horizontal' }, url: activations_path do |f|
-  = f.input :email
-  div class="form-actions"
-    = f.button :submit, t('.send', default: 'Send'), class: 'btn-primary'

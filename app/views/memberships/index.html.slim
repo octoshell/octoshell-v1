@@ -1,8 +1,0 @@
-- title t('.title', default: 'Memberships')
-
-div class="well"
-  = link_to t('.new', default: 'New'), new_membership_path, class: 'btn'
-
-= safe_paginate @memberships
-= render partial: 'table', locals: { memberships: @memberships }
-= safe_paginate @memberships

@@ -1,6 +1,0 @@
-- title t('.title', default: 'Reset password')
-
-= simple_form_for @user, url: password_path, html: { class: 'form-horizontal' } do |f|
-  = f.input :email
-  div class="form-actions"
-    = f.button :submit, t('.send', default: 'Send'), id: 'reset_password', class: 'btn-primary'

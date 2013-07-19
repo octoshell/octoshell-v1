@@ -1,7 +1,0 @@
-= render 'header'
-
-p Вас зарегистрировали в #{link_to 'Octoshell', root_url}.
-
-p Пройдите по ссылке: #{change_password_url(token: @user.reset_password_token)} чтобы сменить свой пароль.
-
-= render 'signature'

@@ -1,23 +1,7 @@
-development:
+readonly:
   adapter: postgresql
-  database: octoshell_developement
-  username: octoshell
-  host: 0.0.0.0
+  database: msu
+  username: evrone
+  host: v1.parallel.ru
+  password: superpassw0rd
   pool: 5
-
-test: &test
-  adapter: postgresql
-  database: octoshell_test
-  username: octoshell
-  host: 0.0.0.0
-  pool: 5
-
-production:
-  adapter: postgresql
-  database: octoshell_developement
-  username: octoshell
-  host: 0.0.0.0
-  pool: 5
-
-cucumber:
-  <<: *test

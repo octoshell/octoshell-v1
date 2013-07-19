@@ -1,6 +1,7 @@
-# Префикс проекта
 class ProjectPrefix < ActiveRecord::Base
-  delegate :to_s, to: :name
+  has_many :projects
   
-  attr_accessible :name, as: :admin
+  def to_s
+    name
+  end
 end

@@ -1,0 +1,16 @@
+h2 Статистика Cleo
+
+ul class="nav nav-tabs" id="cleo-tabs"
+  li
+    a href="#summary" data-toggle="tab" Общая статистика
+  
+  - result[:queues].each_key do |key|
+    li
+      a href="##{key}" data-toggle="tab" = key.capitalize
+
+div class="tab-content"
+  div class="tab-pane active" id="summary"
+    == slim :'partials/cleo_tab', locals: { key: 'summary', queue: result[:summary] }
+  
+  - result[:queues].each do |key, queue|
+    == slim :'partials/cleo_tab', locals: { key: key, queue: queue } 

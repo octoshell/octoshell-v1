@@ -1,5 +1,0 @@
-# Связть пользователя и группы
-class UserGroup < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :group
-end
