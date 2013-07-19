@@ -3,17 +3,17 @@
 Для установки потребуется руби 2.0:
 
 ```bash
-$ rbenv shell 2.0.0-p0
-$ ruby -v 
-$ 2.0.0-p0
+rbenv shell 2.0.0-p0
+ruby -v 
+2.0.0-p0
 ```
 
 Убедившись, что руби нужный установим сам гем [backup](/meskyanichi/backup) и гем [whenever](/javan/whenever).
 
 ```bash
-$ gem install backup
-$ gem install whenever
-$ rbenv rehash
+gem install backup
+gem install whenever
+rbenv rehash
 ```
 
 Теперь склонируем конфиг
