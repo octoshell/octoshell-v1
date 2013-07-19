@@ -31,5 +31,5 @@ whenever -w config/shedule.rb
 
 Настройки находятся в файлах:
 
-* https://github.com/evrone/octoshell/blob/backups/models/octoshell_db.rb
-* https://github.com/evrone/octoshell/blob/backups/models/octoshell_files.rb
+* [models/octoshell_db.rb](https://github.com/evrone/octoshell/blob/backups/models/octoshell_db.rb)
+* [models/octoshell_files.rb](https://github.com/evrone/octoshell/blob/backups/models/octoshell_files.rb)
