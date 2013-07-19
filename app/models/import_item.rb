@@ -51,6 +51,9 @@ class ImportItem < ActiveRecord::Base
         @request       = create_request!
         destroy
       end
+      if @new_user
+        Mailer.welcome_imported_user(@user.id).deliver
+      end
       true
     end
   end
@@ -125,7 +128,11 @@ private
         user.activation_state = 'active'
         user.token            = Digest::SHA1.hexdigest(rand.to_s)
         user.phone            = phone
+        user.reset_password_token = SecureRandom.hex(16)
+        user.reset_password_email_sent_at = Time.now.in_time_zone
+        user.reset_password_token_expires_at = Time.now.in_time_zone + 1.year
       end
+      @new_user = true
       User.find(u.id)
     end
     user.valid? or raise user.errors.inspect # ActiveRecord::RecordInvalid.new(user)

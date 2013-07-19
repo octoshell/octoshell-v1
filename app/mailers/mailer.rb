@@ -87,6 +87,11 @@ class Mailer < ActionMailer::Base
     mail to: @user.emails, subject: "Обновлен архив в отчете ##{report.id}"
   end
   
+  def welcome_imported_user(id)
+    @user = User.find(id)
+    mail to: @user.emails, subject: "Вас зарегистрировали в Octoshell"
+  end
+  
 private
 
   def markdown(text)
