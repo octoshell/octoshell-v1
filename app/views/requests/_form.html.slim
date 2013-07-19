@@ -1,6 +1,0 @@
-= simple_form_for @request, html: { class: 'form-horizontal' } do |f|
-  = f.input :cpu_hours
-  = f.input :gpu_hours
-  = f.input :size, hint: t('.size_hint', default: 'More than 50 must have already been discussed')
-  div class="form-actions"
-    = f.button :submit, class: 'btn-primary'

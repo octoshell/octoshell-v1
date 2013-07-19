@@ -1,3 +1,0 @@
-select name="fields[#{field.id}]"
-  - field.collection_values.each do |value|
-    option selected="#{form.object.field_value(field.id) == value ? 'selected' : ''}" = value

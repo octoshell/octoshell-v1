@@ -1,8 +1,0 @@
-- title 'Настройки'
-
-= simple_form_for [:admin, @settings] do |f|
-  = f.input :surety_ticket_question_id, collection: TicketQuestion.with_state(:active), label: 'Вопрос тикета "Загрузка скана поручительства"', label_method: :question
-  = f.input :octokey, label: "Приватный ключ от серверов"
-  = f.input :api_token, label: "АПИ токен"
-  div class="form-actions"
-    = f.button :submit

@@ -1,6 +1,0 @@
-- content_for(:submenu) do
-  ul class="nav nav-pills"
-    li class="#{active_menu?(:ticket_templates, true)}" = link_to t('.templates'), [:admin, :ticket_templates]
-    li class="#{active_menu?(:ticket_tags, true)}" = link_to t('.tags'), [:admin, :ticket_tags]
-    li class="#{active_menu?(:ticket_questions, true)}" = link_to t('.questions'), [:admin, :ticket_questions]
-    li class="#{active_menu?(:ticket_fields, true)}" = link_to t('.fields'), [:admin, :ticket_fields]
