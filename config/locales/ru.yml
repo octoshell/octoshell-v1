@@ -103,7 +103,9 @@ ru:
     console:
       access: Доступ в консоль
     notifications:
-      manage: Полный доступ к нотификациям
+      manage: Полный доступ к рассылкам
+    notices:
+      manage: Полный доступ к объявлениям
   views:
     pagination:
       next: Следующая
