@@ -519,6 +519,12 @@ ru:
       notification:
         title: Тема
         body: Сообщение
+      notice:
+        subject: Тема
+        body: Сообщение
+        url: Страницы для показа
+        start_at: Показывать с
+        end_at: Показывать до
       stat:
         survey_field_id: Поле опроса
         organization: Организация

@@ -7,6 +7,8 @@ MSU::Application.routes.draw do
   end
   resources :users, only: [:index, :show], as: :json
   
+  get "/notices/:token/view" => "notices#view", as: :view_notice
+  
   # activations
   resources :activations, only: [:new, :create]
 
@@ -193,6 +195,23 @@ MSU::Application.routes.draw do
       
       # notification_recipients
       resources :notification_recipients, only: [:create, :destroy]
+    end
+    
+    resources :notices do
+      put :deliver
+      put :remove_all_recipients
+      post :add_user
+      delete :remove_user
+      put :add_all_recipients
+      put :add_from_cluster
+      put :add_from_organization_kind
+      put :add_from_organization
+      put :add_from_project
+      put :add_with_projects
+      put :add_with_accounts
+      put :add_with_refused_accounts
+      put :add_from_session
+      put :add_unsuccessful_of_current_session
     end
 
     # groups

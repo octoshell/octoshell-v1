@@ -70,3 +70,17 @@ div class="row"
             td colspan="3"
               strong
                 small = link_to 'Добавить', new_credential_path
+    
+    - if @user.notices.any?
+      h4 Прочитанные объявления
+      
+      div class="row"
+        span class="span9"
+          table class="table table-condensed"
+            - @user.notices.with_state(:viewed).each do |n|
+              tr
+                td
+                  = link_to n.notice.subject, "#", class: "muted", role: "notice-shower", data: { id: n.notice_id }
+                  div class="hidden" data-id="#{n.notice_id}" role="notice-body"
+                    = markdown n.notice.body
+    

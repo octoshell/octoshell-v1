@@ -18,6 +18,21 @@ html
       - if session[:soul_id]
         div class="soul-box"
           = link_to "Вернуться в свою сессию", revert_session_path, method: :put
+      - if @user_notice
+        div id="notice-popup" class="modal hide fade" role="dialog" aria-hidden="true"
+          div class="modal-header"
+            h3 = @user_notice.notice.subject
+          div class="modal-body"
+            = markdown @user_notice.notice.body
+          div class="modal-footer"
+            = link_to "Я прочитал(а) это объявление", view_notice_path(token: @user_notice.token), class: "btn btn-success", rel: "no-follow"
+        javascript:
+          $(document).ready(function(){
+            $('#notice-popup').modal({
+              keyboard: false,
+              show: true
+            })
+          })
       div class="navbar noprint"
         div class="navbar-inner"
           = link_to root_path, class: "brand" do

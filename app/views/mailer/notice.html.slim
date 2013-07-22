@@ -1,0 +1,9 @@
+= render "header"
+
+= markdown @notice.body
+
+p
+  | Подтвердите прочтение объявления пройдя по ссылке  
+  = view_notice_url(token: @un.token)
+
+= render "signature"

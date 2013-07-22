@@ -92,6 +92,13 @@ class Mailer < ActionMailer::Base
     mail to: @user.emails, subject: "Вас зарегистрировали в Octoshell"
   end
   
+  def notice(un)
+    @user = un.user
+    @un = un
+    @notice = un.notice
+    mail to: @user.emails, subject: @notice.subject
+  end
+  
 private
 
   def markdown(text)

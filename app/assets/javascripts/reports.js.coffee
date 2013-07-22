@@ -370,3 +370,7 @@ $ ->
     $link.remove()
     false
   
+  $("@notice-shower").on "click", ->
+    $notice = $("@notice-body[data-id='" + $(@).data("id") + "']")
+    $notice.toggleClass("hidden")
+    false

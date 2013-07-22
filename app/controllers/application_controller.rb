@@ -1,11 +1,11 @@
 # coding: utf-8
 class ApplicationController < ActionController::Base
   before_filter :block_closed_users
+  before_filter :get_notice, if: :logged_in?
   before_filter :get_extends, :get_wikis
   
   protect_from_forgery
   
-  # rescue_from CanCan::Unauthorized, with: :not_authorized
   rescue_from ActiveRecord::RecordInProcess, with: :record_in_process
   rescue_from MayMay::Unauthorized, with: :not_authorized
   
@@ -121,4 +121,8 @@ private
     @user_agent = UserAgent.parse(request.env["HTTP_USER_AGENT"])
   end
   helper_method :user_agent
+  
+  def get_notice
+    @user_notice = current_user.new_notice(request.path)
+  end
 end

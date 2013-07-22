@@ -1,4 +1,6 @@
 class UserSurveysController < ApplicationController
+  before_filter :require_login
+  
   def accept
     us = get_survey(params[:user_survey_id])
     if us.accept

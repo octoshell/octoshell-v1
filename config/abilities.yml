@@ -80,3 +80,5 @@ console:
   - access
 notifications:
   - manage
+notices:
+  - manage

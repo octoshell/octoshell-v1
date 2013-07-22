@@ -1,0 +1,17 @@
+- title "Объявления"
+
+div class="well"
+  = link_to "Новая рассылка", new_admin_notice_path, class: "btn"
+
+- if @notices.any?
+  table class="table table-striped"
+    - @notices.each do |notice|
+      tr
+        td class="span1" = notice.id
+        td = link_to notice.subject, [:admin, notice]
+        td class="span4"
+          div class="progress progress-info #{"progress-striped active" if notice.active?}" style="margin: 0;"
+            div class="bar" style="width:#{notice.percentage}%"
+        td class="span1"
+          div class="text-center"
+            strong = link_to "&times;".html_safe, [:admin, notice], class: "danger", data: { alert: "Вы уверены?" }, method: :delete

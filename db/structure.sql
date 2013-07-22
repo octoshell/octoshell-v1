@@ -735,6 +735,41 @@ ALTER SEQUENCE memberships_id_seq OWNED BY memberships.id;
 
 
 --
+-- Name: notices; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE notices (
+    id integer NOT NULL,
+    subject character varying(255),
+    body text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    start_at timestamp without time zone,
+    end_at timestamp without time zone,
+    url text
+);
+
+
+--
+-- Name: notices_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE notices_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: notices_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE notices_id_seq OWNED BY notices.id;
+
+
+--
 -- Name: notification_recipients; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1940,6 +1975,41 @@ ALTER SEQUENCE user_groups_id_seq OWNED BY user_groups.id;
 
 
 --
+-- Name: user_notices; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE user_notices (
+    id integer NOT NULL,
+    user_id integer,
+    notice_id integer,
+    state character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    deliver_state character varying(255),
+    token character varying(255)
+);
+
+
+--
+-- Name: user_notices_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE user_notices_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: user_notices_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE user_notices_id_seq OWNED BY user_notices.id;
+
+
+--
 -- Name: user_surveys; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2204,6 +2274,13 @@ ALTER TABLE ONLY memberships ALTER COLUMN id SET DEFAULT nextval('memberships_id
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY notices ALTER COLUMN id SET DEFAULT nextval('notices_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY notification_recipients ALTER COLUMN id SET DEFAULT nextval('notification_recipients_id_seq'::regclass);
 
 
@@ -2435,6 +2512,13 @@ ALTER TABLE ONLY user_groups ALTER COLUMN id SET DEFAULT nextval('user_groups_id
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY user_notices ALTER COLUMN id SET DEFAULT nextval('user_notices_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY user_surveys ALTER COLUMN id SET DEFAULT nextval('user_surveys_id_seq'::regclass);
 
 
@@ -2610,6 +2694,14 @@ ALTER TABLE ONLY import_items
 
 ALTER TABLE ONLY memberships
     ADD CONSTRAINT memberships_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: notices_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY notices
+    ADD CONSTRAINT notices_pkey PRIMARY KEY (id);
 
 
 --
@@ -2877,6 +2969,14 @@ ALTER TABLE ONLY user_groups
 
 
 --
+-- Name: user_notices_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY user_notices
+    ADD CONSTRAINT user_notices_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: user_surveys_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3122,6 +3222,13 @@ CREATE INDEX index_memberships_on_subdivision_id ON memberships USING btree (sub
 --
 
 CREATE INDEX index_memberships_on_user_id ON memberships USING btree (user_id);
+
+
+--
+-- Name: index_notices_on_start_at_and_end_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_notices_on_start_at_and_end_at ON notices USING btree (start_at, end_at);
 
 
 --
@@ -3612,6 +3719,41 @@ CREATE INDEX index_user_groups_on_user_id ON user_groups USING btree (user_id);
 --
 
 CREATE UNIQUE INDEX index_user_groups_on_user_id_and_group_id ON user_groups USING btree (user_id, group_id);
+
+
+--
+-- Name: index_user_notices_on_notice_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_notices_on_notice_id ON user_notices USING btree (notice_id);
+
+
+--
+-- Name: index_user_notices_on_notice_id_and_state; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_notices_on_notice_id_and_state ON user_notices USING btree (notice_id, state);
+
+
+--
+-- Name: index_user_notices_on_notice_id_and_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_user_notices_on_notice_id_and_user_id ON user_notices USING btree (notice_id, user_id);
+
+
+--
+-- Name: index_user_notices_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_notices_on_user_id ON user_notices USING btree (user_id);
+
+
+--
+-- Name: index_user_notices_on_user_id_and_state; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_notices_on_user_id_and_state ON user_notices USING btree (user_id, state);
 
 
 --
@@ -4372,3 +4514,17 @@ INSERT INTO schema_migrations (version) VALUES ('20130709130810');
 INSERT INTO schema_migrations (version) VALUES ('20130710083644');
 
 INSERT INTO schema_migrations (version) VALUES ('20130711142829');
+
+INSERT INTO schema_migrations (version) VALUES ('20130722075959');
+
+INSERT INTO schema_migrations (version) VALUES ('20130722082419');
+
+INSERT INTO schema_migrations (version) VALUES ('20130722082731');
+
+INSERT INTO schema_migrations (version) VALUES ('20130722084639');
+
+INSERT INTO schema_migrations (version) VALUES ('20130722085212');
+
+INSERT INTO schema_migrations (version) VALUES ('20130722093531');
+
+INSERT INTO schema_migrations (version) VALUES ('20130722151531');
