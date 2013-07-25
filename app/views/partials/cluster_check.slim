@@ -1,7 +1,9 @@
-h2 Проверка скриптов
+div class="well"
+  h2 Проверка скриптов
 
-table class="table table-stripped"
-  - script.result.each do |cmd, output|
-    tr
-      th class="span4" = cmd
-      td = output
+  table class="table table-stripped"
+    - script.result.each do |cmd, output|
+      tr
+        th class="span4" = cmd
+        td 
+          code output
