@@ -14,8 +14,9 @@ set :rails_env, "production"
 if ENV["STAGE"]
   set :domain, "evrone@v2.parallel.ru"
 else
-  set :domain, "evrone@v1.parallel.ru"
+  set :domain, "evrone@users.parallel.ru"
 end
+# set :port, 22199
 set :repository,  "git@github.com:evrone/octoshell.git"
 set :branch, "master"
 set :use_sudo, false
@@ -23,6 +24,7 @@ set :deploy_to, "/var/www/#{application}"
 set :keep_releases, 3
 set :normalize_asset_timestamps, false
 set :scm, :git
+set :ssh_options, { forward_agent: true }
 
 role :app, domain
 role :web, domain
@@ -46,12 +48,16 @@ namespace :deploy do
     run "sv restart ~/services/octoshell_delayed_job"
   end
   
+  task :load_default_db do
+    run "psql -d octoshell -a -f #{deploy_to}/current/db/structure.sql"
+  end
+  
   task :make_defaults do
-    run "mkdir -p #{deploy_to}/configs"
-    top.upload "config/database.yml.default",  "#{deploy_to}/configs/database.yml"
-    top.upload "config/surety.liquid.default", "#{deploy_to}/configs/surety.liquid"
-    top.upload "config/surety.rtf.default",    "#{deploy_to}/configs/surety.rtf"
-    top.upload "config/settings.yml.default",  "#{deploy_to}/configs/settings.yml"
+    run "mkdir -p #{deploy_to}/shared/configs"
+    top.upload "config/database.yml.default",  "#{deploy_to}/shared/configs/database.yml"
+    top.upload "config/surety.liquid.default", "#{deploy_to}/shared/configs/surety.liquid"
+    top.upload "config/surety.rtf.default",    "#{deploy_to}/shared/configs/surety.rtf"
+    top.upload "config/settings.yml.default",  "#{deploy_to}/shared/configs/settings.yml"
   end
   
   task :make_symlinks, :roles => :app, :except => { :no_release => true } do
