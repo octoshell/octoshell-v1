@@ -2,8 +2,15 @@ div class="well"
   h4 Проверка скриптов
 
   table class="table table-stripped table-condensed"
-    - script.result.each do |cmd, output|
+    tr
+      th Команда
+      th Ответ
+      th Правильный ответ
+    - script.result.each do |cmd, hash|
       tr
-        th class="span4" = cmd
+        td
+          code = hash[:cmd]
         td 
-          code = output
+          code = hash[:out]
+        td
+          code = hash[:expected]
