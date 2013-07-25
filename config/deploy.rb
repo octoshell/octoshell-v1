@@ -42,6 +42,10 @@ namespace :app do
   end
 end
 
+task :make_admin do
+  run "cd #{deploy_to}/current && RAILS_ENV=production EMAIL=#{ENV["EMAIL"]} bin/rake admin:make_admin"
+end
+
 namespace :deploy do
   task :restart do
     run "sv restart ~/services/octoshell_unicorn"
@@ -50,6 +54,10 @@ namespace :deploy do
   
   task :load_default_db do
     run "psql -d octoshell -a -f #{deploy_to}/current/db/structure.sql"
+  end
+  
+  task :rebuild_abilities do
+    "cd #{deploy_to}/current && RAILS_ENV=production bin/rake admin:rebuild_abilities"
   end
   
   task :make_defaults do
@@ -85,4 +93,5 @@ namespace :deploy do
 end
 
 after 'deploy:finalize_update', 'deploy:make_symlinks'
+after 'deploy:finalize_update', 'deploy:rebuild_abilities'
 after 'deploy:setup', 'deploy:make_defaults'
