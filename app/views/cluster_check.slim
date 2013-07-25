@@ -1,2 +1,2 @@
-- template = escape_javascript(slim(:'partials/statistic', locals: { script: @script }))
+- template = escape_javascript(slim(:'partials/cluster_check', locals: { script: @script }))
 | $("##{@script.div}").html('#{{template}}');
