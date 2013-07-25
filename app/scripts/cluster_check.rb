@@ -21,7 +21,7 @@ class ClusterCheck
         expected: "ok"
       },
       check_user: {
-        cmd: "sudo /usr/octo/check_user octouser-#{rand} octogroup-#{rand}",
+        cmd: "sudo /usr/octo/check_user octouser-#{rand} octogroup-test",
         expected: "active"
       },
       block_user: {
