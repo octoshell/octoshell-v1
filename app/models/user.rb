@@ -9,4 +9,11 @@ class User < ActiveRecord::Base
   has_many :organizations, through: :sureties
   has_many :accesses, through: :credentials
   has_many :tickets
+  has_many :user_groups
+  
+  def admin?
+    user_groups.any? do |ug|
+      ug.group.name == "superadmins"
+    end
+  end
 end

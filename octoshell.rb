@@ -71,7 +71,7 @@ class Octoshell < Sinatra::Base
     
     if production?
       user = User.find_by_id(session[:user_id])
-      if user && user.admin
+      if user && user.admin?
         render.call
       else
         status 401
