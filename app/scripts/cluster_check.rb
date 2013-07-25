@@ -12,55 +12,29 @@ class ClusterCheck
     @keypath = "/tmp/octo-#{SecureRandom.hex}"
     
     @result = {
-      add_group:    false,
-      add_user:     false,
-      check_user:   false,
-      block_user:   false,
-      unblock_user: false,
-      add_key:      false,
-      check_key:    false,
-      remove_key:   false,
-      remove_user:  false
+      add_group:    nil,
+      add_user:     nil,
+      check_user:   nil,
+      block_user:   nil,
+      unblock_user: nil,
+      add_key:      nil,
+      check_key:    nil,
+      remove_key:   nil,
+      remove_user:  nil
     }
     
-    if @connection.run("sudo /usr/octo/add_group octogroup-test") == "ok"
-      @result[:add_group] = true
-    end
-    
-    if @connection.run("sudo /usr/octo/add_user octouser-#{rand} octogroup-test") == "ok"
-      @result[:add_user] = true
-    end
-    
-    if @connection.run("sudo /usr/octo/check_user octouser-#{rand} octogroup-#{rand}") == "active"
-      @result[:check_user] = true
-    end
-    
-    if @connection.run("sudo /usr/octo/block_user octouser-#{rand}") == "ok"
-      @result[:block_user] = true
-    end
-    
-    if @connection.run("sudo /usr/octo/unblock_user octouser-#{rand}") == "ok"
-      @result[:unblock_user] = true
-    end
-    
+    @result[:add_group] = @connection.run("sudo /usr/octo/add_group octogroup-test")
+    @result[:add_user] = @connection.run("sudo /usr/octo/add_user octouser-#{rand} octogroup-test")
+    @result[:check_user] = @connection.run("sudo /usr/octo/check_user octouser-#{rand} octogroup-#{rand}")
+    @result[:block_user] = @connection.run("sudo /usr/octo/block_user octouser-#{rand}")
+    @result[:unblock_user] = @connection.run("sudo /usr/octo/unblock_user octouser-#{rand}")
     load_key!
-    if @connection.run("sudo /usr/octo/add_openkey octouser-#{rand} #{@keypath}") == "ok"
-      @result[:add_key] = true
-    end
-    
+    @result[:add_key] = @connection.run("sudo /usr/octo/add_openkey octouser-#{rand} #{@keypath}")
     load_key!
-    if @connection.run("sudo /usr/octo/check_openkey octouser-#{rand} #{@keypath}") == "found"
-      @result[:check_key] = true
-    end
-    
+    @result[:check_key] = @connection.run("sudo /usr/octo/check_openkey octouser-#{rand} #{@keypath}")
     load_key!
-    if @connection.run("sudo /usr/octo/del_openkey octouser-#{rand} #{@keypath}") == "ok"
-      @result[:remove_key] = true
-    end
-    
-    if @connection.run("sudo /usr/octo/del_user octouser-#{rand}") == "ok"
-      @result[:remove_user] = true
-    end
+    @result[:remove_key] = @connection.run("sudo /usr/octo/del_openkey octouser-#{rand} #{@keypath}")
+    @result[:remove_user] = @connection.run("sudo /usr/octo/del_user octouser-#{rand}")
   end
   
   private
