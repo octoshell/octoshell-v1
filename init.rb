@@ -20,6 +20,7 @@ require 'active_support/core_ext/numeric/bytes.rb'
   Dir["#{File.dirname(__FILE__)}/app/#{dir}/*.rb"].each { |f| require f }
 end
 
+CONFIG_PATH = File.expand_path('config')
 SSH_KEY_PATH = File.expand_path('config/keys/private')
 
 Time.zone = 'Moscow'
