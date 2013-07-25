@@ -26,7 +26,9 @@ module Server
     end
     
     def log(msg)
-      Thread.current[:cluster].log(msg)
+      if Thread.current[:cluster].respond_to?(:log)
+        Thread.current[:cluster].log(msg)
+      end
     end
     
     def run(cmd)

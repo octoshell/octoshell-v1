@@ -4,11 +4,11 @@ class ClusterCheck
   attr_reader :result, :div
   
   def run(params)
-    id = params[:page].to_s[/\(d+)$/]
+    id = params[:page].to_s[/\/(\d+)$/, 1]
     @div = params[:div]
-    cluster = Cluster.find(id)
+    @cluster = Cluster.find(id)
     rand = SecureRandom.hex(4)
-    @connection = Server::Connection.new(cluster.host)
+    @connection = Server::Connection.new(@cluster.host)
     @keypath = "/tmp/octo-#{SecureRandom.hex}"
     
     @result = {
@@ -65,6 +65,6 @@ class ClusterCheck
   
   private
   def load_key!
-    Cocaine::CommandLine.new('scp', "-i #{SSH_KEY_PATH} #{CONFIG_PATH}/keys/test octo@#{cluster.host}:#{@keypath}").run
+    Cocaine::CommandLine.new('scp', "-i #{SSH_KEY_PATH} #{CONFIG_PATH}/keys/test octo@#{@cluster.host}:#{@keypath}").run
   end
 end
