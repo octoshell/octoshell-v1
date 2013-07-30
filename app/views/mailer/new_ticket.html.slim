@@ -1,0 +1,10 @@
+= render 'header'
+
+p Пользователь #{@ticket.user.full_name} создал заявку в поддержку:
+
+p
+  strong = @ticket.subject
+
+p = link_to 'Перейти к заявке', admin_ticket_url(@ticket)
+
+= render 'signature'

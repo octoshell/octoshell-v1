@@ -29,6 +29,7 @@ class Ticket < ActiveRecord::Base
 
   after_create :create_ticket_tag_relations
   after_create :add_user_to_receipients
+  after_create :notify_support
   
   state_machine :state, initial: :active do
     state :active
@@ -114,5 +115,12 @@ private
   
   def add_user_to_receipients
     users << user
+  end
+  
+  def notify_support
+    Group.support.users.without_state(:closed).each do |user|
+      Mailer.delay.new_ticket(self, user)
+    end
+    true
   end
 end

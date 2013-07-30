@@ -29,7 +29,7 @@ class TicketsController < ApplicationController
     @ticket = current_user.tickets.build(params[:ticket])
     if @ticket.save
       @ticket.user.track! :create_ticket, @ticket, current_user
-      redirect_to @ticket, notice: t('.ticket_created')
+      redirect_to @ticket
     else
       render :new
     end

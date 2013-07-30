@@ -39,6 +39,12 @@ class Mailer < ActionMailer::Base
     mail to: @user.emails, subject: %{Новое сообщение от поддержки в заявке "#{@ticket.subject}"}, user_id: @user.id
   end
   
+  def new_ticket(ticket, user)
+    @ticket = ticket
+    @user = user
+    mail to: @user.emails, subject: %{Новый заявка в поддержку}, user_id: @user.id
+  end
+  
   def fault_reply(user, reply)
     @user = user
     @reply = reply
