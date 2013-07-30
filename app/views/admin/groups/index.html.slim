@@ -13,7 +13,7 @@ table class="table table-bordered"
   - @groups.each do |group|
     tr class="js-group-#{group.id}"
       td = group.name
-      td = link_to 'пользователи', admin_users_path(search: { user_groups_group_name_in: [group.name]})
+      td = link_to 'пользователи', admin_users_path(q: { user_groups_group_name_in: [group.name]})
       td
         = link_to t('.edit'), [:edit, :admin, group]
         |  / 
