@@ -42,7 +42,7 @@ class Mailer < ActionMailer::Base
   def new_ticket(ticket, user)
     @ticket = ticket
     @user = user
-    mail to: @user.emails, subject: %{Новый заявка в поддержку}, user_id: @user.id
+    mail to: @user.emails, subject: %{Новая заявка в поддержку}, user_id: @user.id
   end
   
   def fault_reply(user, reply)
