@@ -89,7 +89,7 @@ class User < ActiveRecord::Base
   end
   
   def self.superadmins
-    Group.superadmin.users
+    Group.superadmins.users
   end
   
   def self.experts
