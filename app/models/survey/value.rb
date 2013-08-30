@@ -70,6 +70,6 @@ class Survey::Value < ActiveRecord::Base
   def scientometric_validator
     Array(value).all? do |v|
       v.to_i >= 0
-    end || errors.add(:value, "Должено быть больше или равное нулю")
+    end || errors.add(:value, "Должно быть больше или равное нулю")
   end
 end

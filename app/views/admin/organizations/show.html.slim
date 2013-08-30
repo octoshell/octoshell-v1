@@ -42,7 +42,7 @@ p = link_to "Все сотрудники (#{@organization.memberships.count})", 
 h2 Объединение
 = simple_form_for @organization, url: admin_organization_merge_path(@organization), method: :put, html: { class: 'form-horizontal' } do |f|
   = autocomplete :organization, f, name: :merge_id, label: "Организация"
-  p Выбранная организация будет объедина с текущей.
+  p Выбранная организация будет объедeна с текущей.
 
   div class="form-actions"
     = f.button :submit, 'Объединить'

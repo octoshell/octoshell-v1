@@ -17,7 +17,7 @@ table class="table table-bordered"
     td = @ticket_tag.human_state_name
 
 = simple_form_for @ticket_tag, url: admin_ticket_tag_merge_path(@ticket_tag), method: :put, html: { class: 'form-horizontal' } do |f|
-  legend Объединие
+  legend Объедeние
   = f.input :merge_id, collection: TicketTag.all, hint: 'Выбранный тег будет объединен с текущим.'
 
   div class="form-actions"

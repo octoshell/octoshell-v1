@@ -84,7 +84,7 @@ class Mailer < ActionMailer::Base
   def report_rejected(report)
     @user = report.user
     @report = report
-    mail to: @user.emails, subject: "Эсперт вернул вам отчет ##{report.id}"
+    mail to: @user.emails, subject: "Эксперт вернул вам отчет ##{report.id}"
   end
   
   def report_resubmitted(report)
