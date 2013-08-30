@@ -779,7 +779,7 @@ ru:
         resource_type: Тип создателя
         procedure: Процедура
         state: Состояние
-        command: Комманда
+        command: Команда
         stdout: StdOut
         stderr: StdErr
         callbacks_performed: Вызваны коллбеки?
