@@ -27,6 +27,27 @@ div class="well"
   div class="lead well text-error"
     strong Профиль проекта на заполнен
 
+legend Карточка
+
+blockquote
+  h4 = Project::Card.human_attribute_name :name
+  p = @project.card.name
+
+  h4 = Project::Card.human_attribute_name :driver
+  p = @project.card.driver
+
+  h4 = Project::Card.human_attribute_name :strategy
+  p = @project.card.strategy
+
+  h4 = Project::Card.human_attribute_name :objective
+  p = @project.card.objective
+
+  h4 = Project::Card.human_attribute_name :impact
+  p  = @project.card.impact
+
+  h4 = Project::Card.human_attribute_name :usage
+  p  = @project.card.usage
+
 legend Доступы к ресурсам
 
 div class="row"
