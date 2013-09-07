@@ -1041,6 +1041,8 @@ ru:
             filling: Заполняется
             submitted: Отправлен
   history_item:
+    activation: "Подтвердил email"
+    generate_survey: "Сгеренировал поручительство"
     registration: "Совершена регистрация"
     create_session: "Осуществлен вход в систему"
     create_surety: "Создано <a href='/sureties/%{id}'>поручительство #%{id}</a>"
