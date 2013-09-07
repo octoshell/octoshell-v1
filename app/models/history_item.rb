@@ -7,14 +7,12 @@ class HistoryItem < ActiveRecord::Base
   end
   
   def author
-    
     I18n.t("history_item.author.#{author_sym}")
   end
   
   def author_sym
     if author_id?
-      user = User.find(author_id)
-      user.admin? ? :admin : :self
+      :self
     else
       :system
     end
