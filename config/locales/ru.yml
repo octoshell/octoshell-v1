@@ -1042,7 +1042,7 @@ ru:
             submitted: Отправлен
   history_item:
     activation: "Подтвердил email"
-    generate_survey: "Сгеренировал поручительство"
+    generate_surety: "Сгеренировал поручительство"
     registration: "Совершена регистрация"
     create_session: "Осуществлен вход в систему"
     create_surety: "Создано <a href='/sureties/%{id}'>поручительство #%{id}</a>"
