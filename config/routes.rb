@@ -58,6 +58,7 @@ MSU::Application.routes.draw do
     post :sureties
     get :close, action: :close_confirmation
     put :close
+    put :resurrect
     resources :account_codes, only: :destroy
   end
 

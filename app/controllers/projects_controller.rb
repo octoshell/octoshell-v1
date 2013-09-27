@@ -111,6 +111,12 @@ class ProjectsController < ApplicationController
     redirect_to project_path(@project, anchor: "new-surety")
   end
   
+  def resurrect
+    @project = find_project(params[:project_id])
+    @project.resurrect
+    redirect_to @project
+  end
+  
 private
 
   def find_project(id)
