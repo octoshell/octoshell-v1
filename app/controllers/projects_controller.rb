@@ -74,8 +74,6 @@ class ProjectsController < ApplicationController
     else
       redirect_to project_members_csv_path(@project), alert: 'Не верно заполнены поля'
     end
-  rescue => e
-    redirect_to project_members_csv_path(@project), alert: 'Не верно заполнены поля'
   end
   
   def edit

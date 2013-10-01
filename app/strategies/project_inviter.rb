@@ -8,6 +8,7 @@ class ProjectInviter
   end
   
   def self.csv(project, members)
+    members.delete("\xEF\xBB\xBF")
     members = Hash[CSV.parse(members).map do |member|
       h = HashWithIndifferentAccess.new
       h[:email] = member[0].to_s.downcase.strip
