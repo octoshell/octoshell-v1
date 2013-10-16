@@ -393,6 +393,8 @@ MSU::Application.routes.draw do
       resources :fault_replies, only: [:create]
     end
   end
+  
+  match "/dj", to: DelayedJobWeb, anchor: false
 
   root to: 'application#dashboard'
 end
