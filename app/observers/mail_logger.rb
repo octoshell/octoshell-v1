@@ -1,7 +1,7 @@
 # Логгер отправленных сообщений
 class MailLogger
   def self.delivered_email(mail)
-    if mail[:user_id]
+    if mail[:user_id].present?
       user = User.find(mail[:user_id].value)
       user.delivered_mails.create_by_mail!(mail)
     end
