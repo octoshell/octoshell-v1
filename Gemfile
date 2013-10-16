@@ -24,6 +24,7 @@ gem 'rubyzip', require: 'zip/zip'
 gem 'russian'
 gem 'breadcrumbs_on_rails'
 gem 'delayed_job_active_record'
+gem 'delayed_job_web'
 gem 'net-ssh'
 gem "openssh-key-checker", git: "git://gist.github.com/5865109.git"
 gem "delorean"
