@@ -30,7 +30,7 @@ class Mailer < ActionMailer::Base
     @account_code = account_code
     @project = @account_code.project
     @user = User.find_by_email(@account_code.email)
-    mail to: @account_code.email, subject: %{Вас приглашают в работать над проектом "#{@project.title}"}, user_id: @user.id
+    mail to: @account_code.email, subject: %{Вас приглашают в работать над проектом "#{@project.title}"}, user_id: @user.try(:id)
   end
   
   def new_ticket_answer(user, ticket)
