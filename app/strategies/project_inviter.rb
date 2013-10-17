@@ -10,6 +10,7 @@ class ProjectInviter
   def self.csv(project, members)
     arr = members.each_byte.to_a
     if arr.first(3) == [239, 187, 191]
+      arr.shift(3)
       members = arr.map(&:chr).join
     end
     members = Hash[CSV.parse(members.force_encoding("utf-8")).map do |member|
