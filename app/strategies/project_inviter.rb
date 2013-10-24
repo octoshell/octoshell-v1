@@ -63,8 +63,8 @@ private
     end
     members_for_new_surety.each do |member|
       if member[:user_id] && 
-          surety.surety_members.where(user_id: member[:user_id]).exists?
-        
+          ( surety.surety_members.where(user_id: member[:user_id]).exists? || 
+              surety.surety_members.where("lower(email) = ? "), member[:email].downcase).exists? )
         next
       end
       surety.surety_members.create! do |sm|
