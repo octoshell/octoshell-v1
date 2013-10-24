@@ -62,6 +62,11 @@ private
       end
     end
     members_for_new_surety.each do |member|
+      if member[:user_id] && 
+          surety.surety_members.where(user_id: member[:user_id]).exists?
+        
+        next
+      end
       surety.surety_members.create! do |sm|
         sm.last_name   = member[:last_name]
         sm.first_name  = member[:first_name]
