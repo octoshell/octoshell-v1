@@ -72,6 +72,9 @@ class Organization < ActiveRecord::Base
     transaction do
       organization.memberships.update_all(organization_id: id)
       organization.projects.update_all(organization_id: id)
+      organization.sureties.each do |surety|
+        surety.update_attribute(:organization_id, id)
+      end
       organization.coprojects.each do |project|
         self.coprojects = (coprojects + projects).uniq
       end
