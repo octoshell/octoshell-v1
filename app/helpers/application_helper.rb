@@ -1,6 +1,6 @@
 module ApplicationHelper
   def markdown(text)
-    Redcarpet.new(text, :smart, :filter_html, :hard_wrap).to_html.html_safe
+    Redcarpet.new(text, :smart, :tables, :filter_html, :hard_wrap).to_html.html_safe
   end
 
   def title title
