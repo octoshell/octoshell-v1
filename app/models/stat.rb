@@ -72,6 +72,7 @@ class Stat < ActiveRecord::Base
   
   def to_csv
     CSV.generate(col_sep: ";") do |csv|
+      graph_data = (group_by == 'subdivisions') ? graph_data_for_count_in_org : graph_data_for_count
       graph_data.each do |row|
         csv << row
       end
