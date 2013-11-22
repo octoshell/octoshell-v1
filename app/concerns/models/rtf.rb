@@ -6,7 +6,7 @@ module Models
       t = Liquid::Template.parse(File.read("#{Rails.root}/config/surety.liquid"))
       t.render({
         'id'                     => id,
-        'organization_name'      => organization.surety_name,
+        'organization_name'      => organization ? organization.surety_name : "unknown",
         'boss_full_name'         => boss_full_name,
         'boss_position'          => boss_position,
         'members'                => surety_members.map(&:full_name),
