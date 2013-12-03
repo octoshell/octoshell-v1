@@ -113,7 +113,7 @@ class Account < ActiveRecord::Base
   end
   
   def assign_username
-    username = user.username.to_s.downcase.first(16)
+    username = user.username.to_s.downcase.first(12)
     update_attribute :username, "#{username}_#{id}"
   end
   
