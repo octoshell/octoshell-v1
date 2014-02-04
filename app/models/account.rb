@@ -53,6 +53,13 @@ class Account < ActiveRecord::Base
     
     inside_transition :on => :allow, &:activate
     inside_transition :on => :deny, &:close
+    
+    around_transition on: :deny do |account, _, block|
+      account.transaction do
+        account.close
+        block.call
+      end
+    end
   end
   
   def username=(username)
