@@ -40,7 +40,7 @@ class Session < ActiveRecord::Base
     
     inside_transition :on => :stop do |session|
       session.touch :ended_at
-      User.delay.find_each &:examine!
+      User.find_each &:examine!
     end
   end
   
