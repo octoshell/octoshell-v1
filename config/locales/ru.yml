@@ -408,6 +408,7 @@ ru:
           zero: "Показано <b>0</b>"
           one: "Показано <b>1</b>"
           few: "Показано <b>%{count}</b>"
+          many: "Показаны <b>%{count}</b>"
           other: "Показаны <b>все %{count}</b>"
       more_pages:
         display_entries: "Показаны <b>%{first}&nbsp;-&nbsp;%{last}</b> из <b>%{total}</b>"
