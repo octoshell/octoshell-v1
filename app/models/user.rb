@@ -108,18 +108,19 @@ class User < ActiveRecord::Base
     res && un
   end
   
-  def examine!
-    current_session_surveys.each do |s|
+  def examine!(id)
+    session = Session.find(id)
+    user_surveys.where(survey_id: session.survey_ids).each do |s|
       faults.create! do |fault|
-        fault.kind = :survey
-        fault.reference = s
+        fault.kind = "custom"
+        fault.kind_of_block = "user"
         fault.description = "Не отправлен опрос ##{s.id}"
       end unless s.submitted?
     end
-    current_session_reports.each do |r|
+    reports.where(session_id: session.id).each do |r|
       faults.create! do |fault|
-        fault.kind = :report
-        fault.reference = r
+        fault.kind = "custom"
+        fault.kind_of_block = "user"
         fault.description = "Не отправлен отчет ##{r.id}"
       end unless r.passed?
     end

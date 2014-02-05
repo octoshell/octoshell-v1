@@ -38,9 +38,12 @@ class Session < ActiveRecord::Base
       session.touch :started_at
     end
     
-    inside_transition :on => :stop do |session|
-      session.touch :ended_at
-      User.find_each &:examine!
+    around_transition :on => :stop do |session, _, block|
+      session.transaction do
+        session.touch :ended_at
+        User.find_each { |u| u.delay.examine!(session.id) }
+        block.call
+      end
     end
   end
   
