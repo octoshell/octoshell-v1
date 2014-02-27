@@ -34,7 +34,7 @@ class Stat < ActiveRecord::Base
         [type, raw_survey_values.map { |value| value.value[i].to_i }.sum]
       end
     else
-      survey_values.group_by(&:to_s).map { |k, v| [k, v.map(&:to_i).sum] }.
+      survey_values.group_by(&:to_s).map { |k, v| [k, v.size] }.
         sort_by(&:last).reverse
     end
   end
