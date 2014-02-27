@@ -30,6 +30,7 @@ class Admin::StatsController < Admin::ApplicationController
   def edit
     @session = Session.find(params[:session_id])
     @stat = @session.stats.find(params[:id])
+    render :new
   end
   
   def update

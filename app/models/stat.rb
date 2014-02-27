@@ -24,14 +24,26 @@ class Stat < ActiveRecord::Base
   end
   
   def graph_data_for_count
-    survey_values.group_by(&:to_s).map { |k, v| [k, v.size] }.
-      sort_by(&:last).reverse
+    if survey_field.kind == "scientometrics"
+      user_surveys = UserSurvey.select(:id).with_state(:submitted).
+        where(survey_id: session.survey_ids).to_sql
+      raw_survey_values = Survey::Value.where(survey_field_id: survey_field_id).
+        where("user_survey_id in (#{user_surveys})")
+    
+      survey_field.collection_values.each_with_index.map do |type, i|
+        [type, raw_survey_values.map { |value| value.value[i].to_i }.sum]
+      end
+    else
+      survey_values.group_by(&:to_s).map { |k, v| [k, v.map(:to_i).sum] }.
+        sort_by(&:last).reverse
+    end
   end
   
   def graph_data_for_count_in_org
     hash = {}
     organization.subdivisions.each do |subdivision|
-      user_surveys = UserSurvey.select(:id).with_state(:submitted).where(survey_id: session.survey_ids).to_sql
+      user_surveys = UserSurvey.select(:id).with_state(:submitted).
+        where(survey_id: session.survey_ids).to_sql
       raw_survey_values = Survey::Value.includes(:field).
         joins(user_survey: { user: :memberships }).
         where("user_survey_id in (#{user_surveys})").
