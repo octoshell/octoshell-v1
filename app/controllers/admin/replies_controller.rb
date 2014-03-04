@@ -6,7 +6,7 @@ class Admin::RepliesController < Admin::ApplicationController
     @reply.user = current_user
     if @reply.save
       @reply.user.track! :create_reply, @reply, current_user
-      redirect_to [:admin, @reply.ticket]
+      redirect_to admin_tickets_path
     else
       @ticket = @reply.ticket
       @replies = @ticket.replies
