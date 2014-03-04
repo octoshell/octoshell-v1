@@ -363,6 +363,12 @@ $ ->
     $shower.prev().show()
     $shower.remove()
     false
+
+  $(".ticket-show-raw a").on "click", (e) ->
+    $shower = $(@).parents(".ticket-show-raw")
+    $shower.prev().show()
+    $shower.remove()
+    false
   
   $("@block-account-form-opener").on "click", ->
     $link = $(@)

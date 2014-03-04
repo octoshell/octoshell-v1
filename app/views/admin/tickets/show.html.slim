@@ -50,6 +50,8 @@ h3 Подписчики
 
 h3 = Ticket.human_attribute_name(:message)
 = markdown @ticket.message
+div class="ticket-raw" = @ticket.message
+div class="ticket-show-raw" = link_to "показать как текст", "#"
 
 h3 Переписка
 

@@ -39,6 +39,8 @@ table class="table table-bordered"
   
 h3 = Ticket.human_attribute_name(:message)
 = markdown @ticket.message
+div class="ticket-raw" = @ticket.message
+div class="ticket-show-raw" = link_to "показать как текст", "#"
 
 h2 = t('.conversation', default: 'Conversation')
 
@@ -54,6 +56,8 @@ h2 = t('.conversation', default: 'Conversation')
       div class="span8"
         blockquote class="#{reply.user_id == reply.ticket.user_id ? 'admin' : 'user'}"
           = markdown reply.message
+          div class="reply-raw" = reply.message
+          div class="reply-show-raw" = link_to "показать как текст", "#"
           - if reply.attachment?
             small
               | Приложено: 
