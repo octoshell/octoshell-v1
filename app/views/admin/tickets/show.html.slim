@@ -65,4 +65,9 @@ h3 Переписка
     = f.input :message, input_html: { rows: 5, class: 'span6' }, hint: %{Для разметки используется <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> <br/ > #{link_to('Создать шаблон из текущего сообщения', new_admin_ticket_template_path, id: 'ticket-template-maker', target: '_blank')}}
     = f.input :attachment
     div class="form-actions"
-      = f.button :submit, 'Отправить', class: 'btn-primary'
+      = f.button :submit, 'Отправить', class: 'btn btn-primary'
+      |  
+      = f.button :submit, 'Отправить и показать результат', name: :show_self, class: 'btn btn-primary'
+      - if @next_ticket.present?
+        |  
+        = f.button :submit, 'Отправить и открыть следующий', name: :show_next, class: 'btn btn-primary'
