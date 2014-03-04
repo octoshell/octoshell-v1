@@ -49,6 +49,7 @@ h3 Подписчики
     = f.button :submit
 
 h3 = Ticket.human_attribute_name(:message)
+h5 #{time_tag @ticket.created_at} / #{time_tag @ticket.updated_at}
 = markdown @ticket.message
 div class="ticket-raw" = @ticket.message
 div class="ticket-show-raw" = link_to "показать как текст", "#"
