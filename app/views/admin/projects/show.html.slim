@@ -141,7 +141,7 @@ table class="table"
           tr class="#{'without-top-border' if i == 0} #{state}"
             td class="span4" style="padding-bottom: 0;"
               = render_status_icon surety.active?
-              = link_to_if current_user == @project.user, "Поручительство ##{surety.id}", surety
+              = link_to "Поручительство ##{surety.id}", [:admin, surety]
             td style="#{'padding-bottom: 0;' unless surety.generated? && surety.has_loaded_scan?}"
               span class="label label-#{state}" = surety.human_state_name
           - unless surety.generated? && surety.has_loaded_scan?
