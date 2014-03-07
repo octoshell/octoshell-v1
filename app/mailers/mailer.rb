@@ -19,10 +19,9 @@ class Mailer < ActionMailer::Base
     mail to: @user.emails, subject: 'Восстановление пароля', user_id: @user.id
   end
   
-  def notify_new_organization(organization)
+  def notify_new_organization(organization, emails)
     @organization = organization
     @admin = true
-    emails = User.admins.pluck(:email)
     mail to: emails, subject: 'Создана новая организация'
   end
   
