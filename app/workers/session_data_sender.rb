@@ -6,11 +6,11 @@ class SessionDataSender < Struct.new(:id, :email)
     zip = path[/\/([\-\w]+\.zip)/, 1]
     Mailer.delay.session_archive_is_ready(email, zip)
   end
-  
+
   private
   def create_archive!
     path = "#{Rails.root}/public/archive-#{SecureRandom.hex(8)}.zip"
-    
+
     Zip::ZipFile.open(path, Zip::ZipFile::CREATE) do |z|
       @session.users.each do |user|
         dir = "#{I18n.transliterate(user.full_name)} (##{user.id})"
@@ -20,7 +20,8 @@ class SessionDataSender < Struct.new(:id, :email)
           end
         end
         user.user_surveys.where(survey_id: @session.survey_ids).each do |us|
-          z.add "#{dir}/survey_#{us.id}.html", us.save_as_html
+          z.add "#{dir}/survey_#{us.id}.html", us.save_as_file(:html)
+          z.add "#{dir}/survey_#{us.id}.json", us.save_as_file(:json)
         end
       end
     end
