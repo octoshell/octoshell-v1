@@ -47,7 +47,13 @@ div class="row"
           table class="table table-condensed"
             - sureties.each do |surety|
               tr
-                td class="span4" = link_to_if @user == surety.project.user, surety.project.title, surety
+                td class="span4"
+                  - if  @user == surety.project.user
+                    span class="label label-warning" Автор
+                    |  
+                    = link_to surety.project.title, surety
+                  - else
+                    = surety.project.title
                 td
                   span class="label #{'label-success' if surety.active?}" = surety.human_state_name
     
