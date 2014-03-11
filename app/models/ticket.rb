@@ -103,11 +103,12 @@ class Ticket < ActiveRecord::Base
   end
 
   def find_next_ticket_from(tickets_list)
-    tickets = tickets_list.is_a?(Array) ? tickets_list : tickets_list.split(',')
-    ticket_index = tickets.find_index(self.id.to_s).next
-    next_ticket_id = tickets[ticket_index]
-
-    Ticket.find(next_ticket_id)
+    tickets_list = tickets_list || ""
+    tickets = tickets_list.split(',')
+    ticket_index = tickets.find_index(self.id.to_s)
+    if ticket_index && (next_ticket_id = tickets[ticket_index])
+      Ticket.find(next_ticket_id)
+    end
   end
   
 private
