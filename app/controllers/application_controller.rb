@@ -8,6 +8,15 @@ class ApplicationController < ActionController::Base
   
   rescue_from ActiveRecord::RecordInProcess, with: :record_in_process
   rescue_from MayMay::Unauthorized, with: :not_authorized
+  rescue_from ActiveRecord::RecordNotFound, ActionController::RoutingError do |exception|
+    admin_path = "/admin" + request.fullpath
+    recognized_path = Rails.application.routes.recognize_path(admin_path) rescue nil
+    if may?(:access, :admin) && recognized_path.present?
+      redirect_to admin_path
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
   
   def dashboard
     if may? :access, :admin
