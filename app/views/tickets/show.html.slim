@@ -38,7 +38,10 @@ table class="table table-bordered"
     td = @ticket.human_state_name
   
 h3 = Ticket.human_attribute_name(:message)
+h5 #{time_tag @ticket.created_at} / #{time_tag @ticket.updated_at}
 = markdown @ticket.message
+div class="ticket-raw" = @ticket.message
+div class="ticket-show-raw" = link_to "показать как текст", "#"
 
 h2 = t('.conversation', default: 'Conversation')
 
@@ -54,6 +57,8 @@ h2 = t('.conversation', default: 'Conversation')
       div class="span8"
         blockquote class="#{reply.user_id == reply.ticket.user_id ? 'admin' : 'user'}"
           = markdown reply.message
+          div class="reply-raw" = reply.message
+          div class="reply-show-raw" = link_to "показать как текст", "#"
           - if reply.attachment?
             small
               | Приложено: 
@@ -64,7 +69,7 @@ h2 = t('.conversation', default: 'Conversation')
 - if @ticket.actual?
   = simple_form_for @reply, html: { class: 'form-horizontal' } do |f|
     = f.input :ticket_id, as: :hidden
-    = f.input :message, input_html: { rows: 5, class: 'span6' }
+    = f.input :message, input_html: { rows: 5, class: 'span6' }, hint: %{Для разметки используется <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>}
     = f.input :attachment
     div class="form-actions"
       = f.button :submit, 'Отправить', class: 'btn-primary'

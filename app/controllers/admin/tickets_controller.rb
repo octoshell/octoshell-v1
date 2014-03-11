@@ -6,10 +6,14 @@ class Admin::TicketsController < Admin::ApplicationController
   def index
     @search = Ticket.search(params[:q])
     @tickets = show_all? ? @search.all : @search.result(distinct: true).page(params[:page])
+
+    # записываем отрисованные тикеты в куки, для перехода к следующему тикету после ответа
+    cookies[:tickets_list] = @tickets.map(&:id).join(',')
   end
     
   def show
     @ticket = Ticket.find(params[:id])
+    @next_ticket = @ticket.find_next_ticket_from(cookies[:tickets_list])
     @replies = @ticket.replies.dup
     @reply = @ticket.replies.build do |reply|
       reply.user = current_user
