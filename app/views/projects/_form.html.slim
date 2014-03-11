@@ -39,9 +39,6 @@
     div class="controls"
       - ResearchArea.all.group_by(&:group).each do |group, collection|
         h6 = group
-        - collection.each do |area|
-          label class="checkbox"
-            = check_box_tag "project[research_area_ids][]", area.id, area.in?(@project.research_areas)
-            = area.name
+        = f.input :research_area_ids, as: :check_boxes, collection: collection, label: false, error_html: { class: 'hidden' }
   div class="form-actions"
     = f.button :submit, class: 'btn-primary'
