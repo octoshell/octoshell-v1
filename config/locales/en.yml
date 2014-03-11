@@ -8,6 +8,10 @@ en:
         create: Use
       user:
         create: Sign Up
+  markdown_helpers:
+    edit: Edit
+    preview: Preview
+    syntax: Flavored with <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> syntax
   activerecord:
     attributes:
       project:

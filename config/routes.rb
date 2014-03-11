@@ -9,6 +9,8 @@ MSU::Application.routes.draw do
   
   get "/notices/:token/view" => "notices#view", as: :view_notice
   
+  post '/markdown', to: 'markdown#create'
+
   # activations
   resources :activations, only: [:new, :create]
 

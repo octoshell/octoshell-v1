@@ -359,13 +359,13 @@ $ ->
     false
 
   $(".reply-show-raw a").on "click", (e) ->
-    $shower = $(@).parents(".reply-show-raw")
+    $shower = $(@).closest(".reply-show-raw")
     $shower.prev().show()
     $shower.remove()
     false
 
   $(".ticket-show-raw a").on "click", (e) ->
-    $shower = $(@).parents(".ticket-show-raw")
+    $shower = $(@).closest(".ticket-show-raw")
     $shower.prev().show()
     $shower.remove()
     false

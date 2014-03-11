@@ -376,6 +376,10 @@ ru:
       long: ! '%d %B %Y, %H:%M'
       short: ! '%d %b, %H:%M'
     pm: вечера
+  markdown_helpers:
+    edit: Редактировать
+    preview: Просмотр
+    syntax: Для разметки используется <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   activemodel:
     errors:

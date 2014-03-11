@@ -56,7 +56,7 @@ legend Переписка
 div class="row"
   div class="well well-small span6"
     = simple_form_for @reply, url: admin_report_replies_path(@report) do |f|
-      = f.input :message, input_html: { rows: 3, class: 'input-block-level' }, label: false, placeholder: 'Сообщение'
+      = f.input :message, as: :markdown_text, input_html: { rows: 3, class: 'input-block-level' }, label: false, placeholder: 'Сообщение'
       div class="text-right"
         = f.button :submit, 'Отправить', class: 'btn-primary btn-small'
 

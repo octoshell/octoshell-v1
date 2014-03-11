@@ -69,7 +69,7 @@ h2 = t('.conversation', default: 'Conversation')
 - if @ticket.actual?
   = simple_form_for @reply, html: { class: 'form-horizontal' } do |f|
     = f.input :ticket_id, as: :hidden
-    = f.input :message, input_html: { rows: 5, class: 'span6' }, hint: %{Для разметки используется <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>}
+    = f.input :message, as: :markdown_text, input_html: { rows: 5, class: 'span6' }
     = f.input :attachment
     div class="form-actions"
       = f.button :submit, 'Отправить', class: 'btn-primary'
