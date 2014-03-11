@@ -23,7 +23,7 @@ legend Переписка
 div class="row"
   div class="well well-small span6"
     = simple_form_for [:admin, @fault, @reply] do |f|
-      = f.input :message, input_html: { rows: 3, class: 'input-block-level' }, label: false, placeholder: 'Сообщение'
+      = f.input :message, as: :markdown_text, input_html: { rows: 3, class: 'input-block-level' }, label: false, placeholder: 'Сообщение'
       div style="text-align: right"
         = f.button :submit, 'Отправить', class: 'btn-primary btn-small'
 

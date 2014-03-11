@@ -3,7 +3,7 @@
 = simple_form_for @ticket, html: { class: 'form-horizontal' } do |f|
   = f.input :subject
   = f.input :url
-  = f.input :message, input_html: { rows: 5 }, hint: %{Для разметки используется <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>}
+  = f.input :message, as: :markdown_text, input_html: { rows: 5 }
   = f.input :attachment
   = f.association :project, label_method: :name_with_state, input_html: { class: 'chosen' }
   = f.association :cluster, input_html: { class: 'chosen' }
