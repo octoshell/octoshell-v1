@@ -106,7 +106,7 @@ class Ticket < ActiveRecord::Base
     tickets_list = tickets_list || ""
     tickets = tickets_list.split(',')
     ticket_index = tickets.find_index(self.id.to_s)
-    if ticket_index && (next_ticket_id = tickets[ticket_index])
+    if ticket_index && (next_ticket_id = tickets[ticket_index.next])
       Ticket.find(next_ticket_id)
     end
   end
