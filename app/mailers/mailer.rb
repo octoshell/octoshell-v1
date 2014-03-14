@@ -103,6 +103,13 @@ class Mailer < ActionMailer::Base
     @notice = un.notice
     mail to: @user.emails, subject: @notice.subject
   end
+
+  def junk_project_clearence(user_full_name, project_id, project_title, emails)
+    @user_full_name = user_full_name
+    @project_id = project_id
+    @project_title = project_title
+    mail to: emails
+  end
   
 private
 

@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'config', 'environment'))
+
+# 1. Выбираем проекты из списка.
+project_ids = File.readlines('tmp/del.txt').map(&:to_i)
+
+# 2. Выбираем проекты для работы.
+projects = Project.includes(:card, :user,
+                            :research_areas,
+                            :direction_of_sciences,
+                            :critical_technologies).where(id: project_ids)
+
+# 3. a. Все поля карточек проектов = "none";
+#    b. "Направления исследований"="Информационно-телекоммуникационные системы";
+#    c. "Критические технологии"="Компьютерное моделирование наноматериалов, наноустройств и нанотехнологий";
+#    d. "Области науки"="Информатика".
+project = projects.first
+card_attrs = project.card
+                    .attributes
+                    .except("id", "project_id")
+                    .each_with_object({}) { |(k, v), h| h[k] = "none" }
+research_area = ResearchArea.find_by_name("Информатика")
+direction_of_science = DirectionOfScience.find_by_name("Информационно-телекоммуникационные системы")
+critical_technology = CriticalTechnology.find_by_name("Компьютерное моделирование наноматериалов, наноустройств и нанотехнологий")
+
+Project.transaction do
+  projects.each do |project|
+    project.card.update_attributes(card_attrs)
+    project.research_areas = [research_area]
+    project.direction_of_sciences = [direction_of_science]
+    project.critical_technologies = [critical_technology]
+
+    # 4. Рассылаем пользователям извещение об удалении проекта.
+    Mailer.delay.junk_project_clearence(project.user.full_name,
+                                        project.id, project.title,
+                                        project.user.emails)
+  end
+end
