@@ -12,7 +12,7 @@ div class="row"
 div class="row"
   div class="offset2"
     h4 Работа
-    - memberships = @user.memberships.with_state(:active)
+    - memberships = @user.memberships
     
     div class="row"
       span class="span5"
@@ -20,11 +20,16 @@ div class="row"
           - if memberships.any?
             - memberships.each do |m|
               tr
-                td class="span4"
+                td class="span2"
                   = link_to m.organization.name, m
                   - if m.subdivision
                     | , 
                     = m.subdivision.name
+                td
+                  = m.post_in_organization
+                td
+                  - if m.active?
+                    label class="label label-success" = m.human_state_name
                 td
                   small
                     = link_to m, class: 'muted' do

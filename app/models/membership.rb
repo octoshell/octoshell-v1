@@ -59,6 +59,10 @@ class Membership < ActiveRecord::Base
   def revalidate_user
     user.revalidate!
   end
+
+  def post_in_organization
+    positions.find{ |p| p.name == "Должность по РФФИ" }.try(:value)
+  end
   
   def subdivision_name
     subdivision.try(:name)
