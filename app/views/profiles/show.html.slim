@@ -89,10 +89,9 @@ div class="row"
         span class="span9"
           table class="table table-condensed"
             - @user.notices.with_state(:viewed).each do |user_notice|
-              - if (notice = user_notice.notice).present?
-                tr
-                  td
-                    = link_to notice.subject, "#", class: "muted", role: "notice-shower", data: { id: notice.id }
-                    div class="hidden" data-id="#{notice.id}" role="notice-body"
-                      = markdown notice.body
+              tr
+                td
+                  = link_to user_notice.notice.subject, "#", class: "muted", role: "notice-shower", data: { id: user_notice.notice_id }
+                  div class="hidden" data-id="#{user_notice.notice_id}" role="notice-body"
+                    = markdown user_notice.notice.body
     
