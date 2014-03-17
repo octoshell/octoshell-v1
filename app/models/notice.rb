@@ -1,5 +1,5 @@
 class Notice < ActiveRecord::Base
-  has_many :user_notices, class_name: :"User::Notice"
+  has_many :user_notices, class_name: :"User::Notice", dependent: :destroy
   
   attr_accessible :body, :subject, :start_at, :end_at, :url, as: :admin
   

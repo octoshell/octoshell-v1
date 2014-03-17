@@ -88,10 +88,10 @@ div class="row"
       div class="row"
         span class="span9"
           table class="table table-condensed"
-            - @user.notices.with_state(:viewed).each do |n|
+            - @user.notices.with_state(:viewed).each do |user_notice|
               tr
                 td
-                  = link_to n.notice.subject, "#", class: "muted", role: "notice-shower", data: { id: n.notice_id }
-                  div class="hidden" data-id="#{n.notice_id}" role="notice-body"
-                    = markdown n.notice.body
+                  = link_to user_notice.notice.subject, "#", class: "muted", role: "notice-shower", data: { id: user_notice.notice_id }
+                  div class="hidden" data-id="#{user_notice.notice_id}" role="notice-body"
+                    = markdown user_notice.notice.body
     
