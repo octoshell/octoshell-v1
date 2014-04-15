@@ -21,8 +21,9 @@
 - if @project.disabled?
   div class="lead well text-error"
     strong Проект отключен. (Не прошел перерегистрацию)
-    |  
-    = link_to "Включить", [:admin, @project, :enable], method: :put
+    - if may? :manage, :projects
+      |  
+      = link_to "Включить", [:admin, @project, :enable], method: :put
 
 - unless @project.filled?
   div class="lead well text-error"
