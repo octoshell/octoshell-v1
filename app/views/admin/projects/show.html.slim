@@ -30,24 +30,46 @@
 
 legend Карточка
 
-blockquote
-  h4 = Project::Card.human_attribute_name :name
-  p = @project.card.name
+div class="row"
+  div class="span6"
+    blockquote
+      h4 = Project::Card.human_attribute_name :name
+      p = @project.card.name
 
-  h4 = Project::Card.human_attribute_name :driver
-  p = @project.card.driver
+      h4 = Project::Card.human_attribute_name :driver
+      p = @project.card.driver
 
-  h4 = Project::Card.human_attribute_name :strategy
-  p = @project.card.strategy
+      h4 = Project::Card.human_attribute_name :strategy
+      p = @project.card.strategy
 
-  h4 = Project::Card.human_attribute_name :objective
-  p = @project.card.objective
+      h4 = Project::Card.human_attribute_name :objective
+      p = @project.card.objective
 
-  h4 = Project::Card.human_attribute_name :impact
-  p  = @project.card.impact
+      h4 = Project::Card.human_attribute_name :impact
+      p  = @project.card.impact
 
-  h4 = Project::Card.human_attribute_name :usage
-  p  = @project.card.usage
+      h4 = Project::Card.human_attribute_name :usage
+      p  = @project.card.usage
+
+  div class="span6"
+    blockquote
+      h4 = Project::Card.human_attribute_name :en_name
+      p = @project.card.en_name
+
+      h4 = Project::Card.human_attribute_name :en_driver
+      p = @project.card.en_driver
+
+      h4 = Project::Card.human_attribute_name :en_strategy
+      p = @project.card.en_strategy
+
+      h4 = Project::Card.human_attribute_name :en_objective
+      p = @project.card.en_objective
+
+      h4 = Project::Card.human_attribute_name :en_impact
+      p  = @project.card.en_impact
+
+      h4 = Project::Card.human_attribute_name :en_usage
+      p  = @project.card.en_usage
 
 legend Доступы к ресурсам
 
