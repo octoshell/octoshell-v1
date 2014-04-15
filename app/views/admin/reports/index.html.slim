@@ -29,7 +29,7 @@ p
             |  
             label class="label label-#{report.bootstrap_status}" = report.human_state_name
           div
-            = link_to_if may?(:manage, :projects), report.project.title, [:admin, report.project]
+            = link_to_if may?(:review, :projects), report.project.title, [:admin, report.project]
           div
             = link_to_if may?(:manage, :users), report.project.user.full_name, [:admin, report.project.user], class: "muted"
             |  

@@ -27,6 +27,7 @@ organization_kinds:
 position_names:
   - manage
 projects:
+  - review
   - manage
 project_prefixes:
   - manage
