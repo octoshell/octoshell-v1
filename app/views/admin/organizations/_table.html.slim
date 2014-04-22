@@ -15,6 +15,11 @@ table class="table table-bordered"
       - else
         | Активных проектов
     th
+      - if @search
+        = sort_link @search, :active_memberships_count, 'Активных сотрудников', default_order: :desc
+      - else
+        | Активных сотрудников
+    th
   - organizations.each do |organization|
     tr
       td = organization.id
@@ -23,4 +28,5 @@ table class="table table-bordered"
       td = organization.kind
       td = organization.human_state_name
       td = organization.active_projects_count
+      td = organization.active_memberships_count
       td = link_to 'открыть', [:admin, organization]
