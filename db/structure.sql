@@ -881,7 +881,8 @@ CREATE TABLE organizations (
     abbreviation character varying(255),
     organization_kind_id integer,
     active_projects_count integer DEFAULT 0,
-    subdivision_required boolean DEFAULT false
+    subdivision_required boolean DEFAULT false,
+    active_memberships_count integer DEFAULT 0
 );
 
 
@@ -4532,3 +4533,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130722151531');
 INSERT INTO schema_migrations (version) VALUES ('20140307135340');
 
 INSERT INTO schema_migrations (version) VALUES ('20140317094013');
+
+INSERT INTO schema_migrations (version) VALUES ('20140422135357');
