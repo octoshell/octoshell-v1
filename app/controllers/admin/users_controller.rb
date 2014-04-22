@@ -4,8 +4,8 @@ class Admin::UsersController < Admin::ApplicationController
   before_filter { authorize! :manage, :users }
   
   def index
-    @search = User.includes(:membershiped_organizations).search(params[:q])
-    @users = show_all? ? @search.all : @search.result.page(params[:page])
+    @search = User.includes(:membershiped_organizations).search(params[:q]).result
+    @users = show_all? ? @search : @search.page(params[:page])
   end
   
   def show

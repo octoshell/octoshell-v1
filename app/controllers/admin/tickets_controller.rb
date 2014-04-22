@@ -4,8 +4,8 @@ class Admin::TicketsController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
-    @search = Ticket.search(params[:q])
-    @tickets = show_all? ? @search.all : @search.result(distinct: true).page(params[:page])
+    @search = Ticket.search(params[:q]).result(distinct: true)
+    @tickets = show_all? ? @search : @search.page(params[:page])
 
     # записываем отрисованные тикеты в куки, для перехода к следующему тикету после ответа
     cookies[:tickets_list] = @tickets.map(&:id).join(',')

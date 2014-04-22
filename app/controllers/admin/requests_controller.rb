@@ -3,8 +3,8 @@ class Admin::RequestsController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
-    @search = Request.order("id desc").search(params[:q])
-    @requests = show_all? ? @search.result : @search.result(distinct: true).page(params[:page])
+    @search = Request.order("id desc").search(params[:q]).result(distinct: true)
+    @requests = show_all? ? @search : @search.page(params[:page])
   end
   
   def edit

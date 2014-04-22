@@ -6,8 +6,8 @@ class Admin::ProjectsController < Admin::ApplicationController
   def index
     respond_to do |format|
       format.html do
-        @search = Project.search(params[:q])
-        @projects = show_all? ? @search.all : @search.result(distinct: true).page(params[:page])
+        @search = Project.search(params[:q]).result(distinct: true)
+        @projects = show_all? ? @search : @search.page(params[:page])
       end
       format.json do
         @projects = Project.finder(params[:q]).order('projects.name asc')

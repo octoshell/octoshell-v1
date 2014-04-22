@@ -4,8 +4,8 @@ class Admin::TasksController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
   
   def index
-    @search = Task.search(params[:q])
-    @tasks = show_all? ? @search.all : @search.result(distinct: true).page(params[:page])
+    @search = Task.search(params[:q]).result(distinct: true)
+    @tasks = show_all? ? @search : @search.page(params[:page])
   end
   
   def show

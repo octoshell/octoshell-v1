@@ -5,8 +5,8 @@ class Admin::TicketTagsController < Admin::ApplicationController
   end
   
   def index
-    @search = TicketTag.search(params[:q])
-    @ticket_tags = show_all? ? @search.all : @search.result(distinct: true).page(params[:page])
+    @search = TicketTag.search(params[:q]).result(distinct: true)
+    @ticket_tags = show_all? ? @search : @search.page(params[:page])
   end
   
   def show
