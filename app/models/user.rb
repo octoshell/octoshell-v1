@@ -188,6 +188,12 @@ class User < ActiveRecord::Base
       i.present? && i != '-'
     end.join(' ')
   end
+
+  def initials
+    [first_name, middle_name].find_all do |i|
+      i.present? && i != '-'
+    end.join(' ')
+  end
   
   def project_steps
     steps = []

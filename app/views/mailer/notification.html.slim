@@ -1,5 +1,7 @@
-= render "header"
+p style="padding-bottom: 16px;"
+  - if name = @user.try(:initials)
+    = "Уважаемый(ая) #{name}!"
+  - else
+    = "Здравствуйте!"
 
 = markdown @body
-
-= render "signature"
