@@ -12,7 +12,7 @@ h3 = t('.additional_fields')
     - @cluster_fields.each do |cluster_field|
       tr id="cluster-field-#{cluster_field.id}"
         td = cluster_field.name
-        td = link_to t('.destroy', default: 'Destroy'), cluster_field, class: 'btn btn-small btn-danger', method: :delete, data: { confirm: t('.confirm_destroy', default: 'Are you sure?') }
+        td = link_to t('.destroy', default: 'Destroy'), [:admin, cluster_field], class: 'btn btn-small btn-danger', method: :delete, data: { confirm: t('.confirm_destroy', default: 'Are you sure?') }
 - else
   p = t('.no_cluster_fields', default: 'There are no cluster fields')
 
