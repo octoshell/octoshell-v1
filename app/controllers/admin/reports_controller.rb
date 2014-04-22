@@ -3,7 +3,8 @@ class Admin::ReportsController < Admin::ApplicationController
   
   def index
     @search = Report.search(params[:q] || default_index_params)
-    @reports = @search.result(distinct: true).page(params[:page])
+    search_result = @search.result(distinct: true)
+    @reports = show_all? ? search_result : search_result.page(params[:page])
   end
   
   def edit

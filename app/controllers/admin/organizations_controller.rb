@@ -9,8 +9,9 @@ class Admin::OrganizationsController < Admin::ApplicationController
   def index
     respond_to do |format|
       format.html do
-        @search = Organization.search(params[:q]).result(distinct: true)
-        @organizations = show_all? ? @search : @search.page(params[:page])
+        @search = Organization.search(params[:q])
+        search_result = @search.result(distinct: true)
+        @organizations = show_all? ? search_result : search_result.page(params[:page])
       end
       format.json do
         @organizations = Organization.finder(params[:q])

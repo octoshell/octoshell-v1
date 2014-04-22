@@ -4,8 +4,9 @@ class Admin::ClustersController < Admin::ApplicationController
   before_filter { authorize! :manage, :clusters }
   
   def index
-    @search = Cluster.search(params[:q]).result(distinct: true)
-    @clusters = show_all? ? @search : @search.page(params[:page])
+    @search = Cluster.search(params[:q])
+    search_result = @search.result(distinct: true)
+    @clusters = show_all? ? search_result : search_result.page(params[:page])
   end
   
   def show

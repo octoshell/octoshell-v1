@@ -11,9 +11,6 @@
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary btn-small'
 
-p
-  em == page_entries_info(@reports)
-
 - if @reports.any?
   table class="table table-striped"
     tr
@@ -43,6 +40,3 @@ p
   p Нет отчетов
 
 = safe_paginate @reports
-
-p
-  em == page_entries_info(@reports)

@@ -5,8 +5,9 @@ class Admin::TicketTemplatesController < Admin::ApplicationController
   end
   
   def index
-    @search = TicketTemplate.search(params[:q]).result(distinct: true)
-    @ticket_templates = show_all? ? @search : @search.page(params[:page])
+    @search = TicketTemplate.search(params[:q])
+    search_result = @search.result(distinct: true)
+    @ticket_templates = show_all? ? search_result : search_result.page(params[:page])
   end
   
   def show
