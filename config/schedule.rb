@@ -5,6 +5,7 @@ job_type :rake, "cd :path && RAILS_ENV=:environment #{ruby_path} bin/rake :task 
 
 every 5.minutes do
   rake "counters:active_projects"
+  rake "counters:active_memberships"
 end
 
 every 1.hour do
