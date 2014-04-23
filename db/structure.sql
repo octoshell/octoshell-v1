@@ -3,6 +3,7 @@
 --
 
 SET statement_timeout = 0;
+SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -882,7 +883,9 @@ CREATE TABLE organizations (
     organization_kind_id integer,
     active_projects_count integer DEFAULT 0,
     subdivision_required boolean DEFAULT false,
-    active_memberships_count integer DEFAULT 0
+    active_memberships_count integer DEFAULT 0,
+    active_users_count integer DEFAULT 0,
+    sured_users_count integer DEFAULT 0
 );
 
 
@@ -4535,3 +4538,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140307135340');
 INSERT INTO schema_migrations (version) VALUES ('20140317094013');
 
 INSERT INTO schema_migrations (version) VALUES ('20140422135357');
+
+INSERT INTO schema_migrations (version) VALUES ('20140423130538');
