@@ -101,6 +101,8 @@ private
     params[:show_all] == '1' && may?(:access, :admin)
   end
 
+  helper_method :show_all?
+
   def authorize_access_to_controller
     authorize! :full_access, params[:controller].to_sym
   end

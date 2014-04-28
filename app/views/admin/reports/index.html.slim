@@ -12,6 +12,8 @@
     = f.button :submit, 'Найти', class: 'btn-primary btn-small'
 
 - if @reports.any?
+  - if show_all?
+    h4 Всего отчётов #{@reports.count}
   table class="table table-striped"
     tr
       th class="span1" #

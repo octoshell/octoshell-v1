@@ -1,4 +1,6 @@
 - if sureties.any?
+  - if show_all?
+    h4 Всего поручительств #{sureties.count}
   table class="table table-bordered table-striped"
     tr
       th class="span1" #

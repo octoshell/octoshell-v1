@@ -1,4 +1,6 @@
 - if tasks.any?
+  - if show_all?
+    h4 Всего процедур #{tasks.count}
   table class="table table-bordered"
     tr
       th class="span1" #

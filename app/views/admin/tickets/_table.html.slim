@@ -1,4 +1,6 @@
 - if tickets.any?
+  - if show_all?
+    h4 Всего заявок #{tickets.count}
   table class="table table-bordered table-striped"
     tr
       th class="span1" #
