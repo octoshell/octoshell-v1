@@ -4,10 +4,14 @@
       th = Organization.model_name.human
       th = t('.post_in_organization', default: 'Post in organization')
       th = User.model_name.human
+      th = Membership.human_attribute_name(:state)
     - memberships.each do |membership|
       tr
         td = smart_link_to membership.organization
         td = membership.post_in_organization
         td = smart_link_to membership.user
+        td
+          - state = { active: "success", closed: "default" }[membership.state_name]
+          span class="label label-#{state}" = membership.human_state_name
 - else
   p = t('.no_memberships', default: 'There is no memberships')

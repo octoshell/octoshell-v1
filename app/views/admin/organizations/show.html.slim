@@ -26,18 +26,18 @@ table class="table table-bordered"
 
 h3 Активные проекты
 = render partial: 'admin/projects/table', locals: { projects: @organization.projects.with_state(:active).limit(10) }
-p = link_to "Все проекты (#{@organization.projects.count})", admin_projects_path(search: { state_in: Project.state_names, organization_id_eq: @organization.id })
+p = link_to "Все проекты (#{@organization.projects.count})", admin_projects_path(q: { state_in: Project.state_names, organization_id_eq: @organization.id })
 
 h3 Активные поручительства
 = render partial: 'admin/sureties/table', locals: { sureties: @organization.sureties.with_state(:active).limit(10) }
-p = link_to "Все поручительства (#{@organization.sureties.count})", admin_sureties_path(search: { state_in: Surety.state_names, organization_id_eq: @organization.id })
+p = link_to "Все поручительства (#{@organization.sureties.count})", admin_sureties_path(q: { state_in: Surety.state_names, organization_id_eq: @organization.id })
 
 h3 Активные сотрудники
 p
   | Активных сотрудников: 
   strong #{@organization.active_memberships_count}
 = render partial: 'admin/memberships/table', locals: { memberships: @organization.memberships.limit(10) }
-p = link_to "Все сотрудники (#{@organization.memberships.count})", admin_memberships_path(search: { state_in: Membership.state_names, organization_id_eq: @organization.id })
+p = link_to "Все сотрудники (#{@organization.memberships.count})", admin_memberships_path(q: { state_in: Membership.state_names, organization_id_eq: @organization.id })
 
 h2 Объединение
 = simple_form_for @organization, url: admin_organization_merge_path(@organization), method: :put, html: { class: 'form-horizontal' } do |f|

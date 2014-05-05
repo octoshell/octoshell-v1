@@ -222,6 +222,9 @@ MSU::Application.routes.draw do
       put :default, on: :collection
     end
 
+    # memberships
+    resources :memberships, only: :index
+
     # sureties
     resources :sureties, only: [:index, :show] do
       collection do

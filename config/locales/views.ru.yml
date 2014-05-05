@@ -2,6 +2,8 @@
 ru:
   admin:
     memberships:
+      index:
+        title: Сотрудники
       table:
         post_in_organization: Должность по РФФИ
         no_memberships: Нет сотрудников
