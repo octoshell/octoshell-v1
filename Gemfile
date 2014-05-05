@@ -34,6 +34,7 @@ gem "honeybadger"
 group :development do
   gem 'capistrano'
   gem 'quiet_assets'
+  gem 'jazz_hands'
   # gem 'yard-rails-plugin', github: 'ogeidix/yard-rails-plugin', tag: 'v0.0.1'
 end
 
