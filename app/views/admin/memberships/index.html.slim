@@ -1,0 +1,5 @@
+- title t('.title', default: 'Memberships')
+
+= safe_paginate @memberships
+= render partial: 'table', locals: { memberships: @memberships }
+= safe_paginate @memberships
