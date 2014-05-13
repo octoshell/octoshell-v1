@@ -1,15 +1,17 @@
 development:
   encoding: utf8
   adapter: postgresql
-  host: localhost
-  username: ci
-  password: ci
   database: octoshell_development
+  pool: 5
+  timeout: 5000
+  host: localhost
+  username: postgres
 
 test:
   encoding: utf8
   adapter: postgresql
-  host: localhost
-  username: ci
-  password: ci
   database: octoshell_test
+  pool: 5
+  timeout: 5000
+  host: localhost
+  username: postgres
