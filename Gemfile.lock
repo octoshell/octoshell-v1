@@ -155,8 +155,6 @@ GEM
     highline (1.6.13)
     hike (1.2.3)
     hirb (0.7.1)
-    honeybadger (1.11.2)
-      json
     http_parser.rb (0.5.3)
     httpauth (0.2.0)
     i18n (0.6.1)
@@ -369,7 +367,6 @@ DEPENDENCIES
   delayed_job_web
   delorean
   factory_girl_rails
-  honeybadger
   jazz_hands
   jquery-rails
   json (= 1.7.7)
