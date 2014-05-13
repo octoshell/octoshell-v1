@@ -7,7 +7,6 @@ set :bundle_flags, "--deployment --quiet --binstubs --shebang ruby-local-exec"
 set :rake, "bin/rake"
 
 require 'bundler/capistrano'
-require 'honeybadger/capistrano'
 require "cocaine"
 
 set :application, "octoshell"
