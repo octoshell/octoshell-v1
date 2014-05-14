@@ -165,6 +165,36 @@ ALTER SEQUENCE additional_emails_id_seq OWNED BY additional_emails.id;
 
 
 --
+-- Name: cities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cities (
+    id integer NOT NULL,
+    country_id integer NOT NULL,
+    title character varying(255)
+);
+
+
+--
+-- Name: cities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE cities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE cities_id_seq OWNED BY cities.id;
+
+
+--
 -- Name: cluster_fields; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -291,6 +321,35 @@ CREATE SEQUENCE cohorts_id_seq
 --
 
 ALTER SEQUENCE cohorts_id_seq OWNED BY cohorts.id;
+
+
+--
+-- Name: countries; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE countries (
+    id integer NOT NULL,
+    title character varying(255)
+);
+
+
+--
+-- Name: countries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE countries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: countries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE countries_id_seq OWNED BY countries.id;
 
 
 --
@@ -2166,6 +2225,13 @@ ALTER TABLE ONLY additional_emails ALTER COLUMN id SET DEFAULT nextval('addition
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY cities ALTER COLUMN id SET DEFAULT nextval('cities_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY cluster_fields ALTER COLUMN id SET DEFAULT nextval('cluster_fields_id_seq'::regclass);
 
 
@@ -2188,6 +2254,13 @@ ALTER TABLE ONLY clusters ALTER COLUMN id SET DEFAULT nextval('clusters_id_seq':
 --
 
 ALTER TABLE ONLY cohorts ALTER COLUMN id SET DEFAULT nextval('cohorts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY countries ALTER COLUMN id SET DEFAULT nextval('countries_id_seq'::regclass);
 
 
 --
@@ -2573,6 +2646,14 @@ ALTER TABLE ONLY additional_emails
 
 
 --
+-- Name: cities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cities
+    ADD CONSTRAINT cities_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: cluster_fields_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2602,6 +2683,14 @@ ALTER TABLE ONLY clusters
 
 ALTER TABLE ONLY cohorts
     ADD CONSTRAINT cohorts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: countries_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY countries
+    ADD CONSTRAINT countries_pkey PRIMARY KEY (id);
 
 
 --
@@ -4540,3 +4629,7 @@ INSERT INTO schema_migrations (version) VALUES ('20140317094013');
 INSERT INTO schema_migrations (version) VALUES ('20140422135357');
 
 INSERT INTO schema_migrations (version) VALUES ('20140423130538');
+
+INSERT INTO schema_migrations (version) VALUES ('20140514101157');
+
+INSERT INTO schema_migrations (version) VALUES ('20140514104612');
