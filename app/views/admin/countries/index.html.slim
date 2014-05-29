@@ -1,0 +1,9 @@
+- title "Страны"
+
+div class="row"
+  table class="table"
+    - @countries.each do |country|
+      tr
+        td = country.title_ru
+        td = country.cities.count
+        td = link_to "del", [:admin, country], method: :delete, class: "btn btn-danger"

@@ -165,6 +165,37 @@ ALTER SEQUENCE additional_emails_id_seq OWNED BY additional_emails.id;
 
 
 --
+-- Name: cities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cities (
+    id integer NOT NULL,
+    country_id integer NOT NULL,
+    title_ru character varying(255),
+    title_en character varying(255)
+);
+
+
+--
+-- Name: cities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE cities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE cities_id_seq OWNED BY cities.id;
+
+
+--
 -- Name: cluster_fields; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -291,6 +322,36 @@ CREATE SEQUENCE cohorts_id_seq
 --
 
 ALTER SEQUENCE cohorts_id_seq OWNED BY cohorts.id;
+
+
+--
+-- Name: countries; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE countries (
+    id integer NOT NULL,
+    title_ru character varying(255),
+    title_en character varying(255)
+);
+
+
+--
+-- Name: countries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE countries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: countries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE countries_id_seq OWNED BY countries.id;
 
 
 --
@@ -885,7 +946,9 @@ CREATE TABLE organizations (
     subdivision_required boolean DEFAULT false,
     active_memberships_count integer DEFAULT 0,
     active_users_count integer DEFAULT 0,
-    sured_users_count integer DEFAULT 0
+    sured_users_count integer DEFAULT 0,
+    country_id integer,
+    city_id integer
 );
 
 
@@ -2166,6 +2229,13 @@ ALTER TABLE ONLY additional_emails ALTER COLUMN id SET DEFAULT nextval('addition
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY cities ALTER COLUMN id SET DEFAULT nextval('cities_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY cluster_fields ALTER COLUMN id SET DEFAULT nextval('cluster_fields_id_seq'::regclass);
 
 
@@ -2188,6 +2258,13 @@ ALTER TABLE ONLY clusters ALTER COLUMN id SET DEFAULT nextval('clusters_id_seq':
 --
 
 ALTER TABLE ONLY cohorts ALTER COLUMN id SET DEFAULT nextval('cohorts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY countries ALTER COLUMN id SET DEFAULT nextval('countries_id_seq'::regclass);
 
 
 --
@@ -2538,6 +2615,22 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 --
 
 ALTER TABLE ONLY versions ALTER COLUMN id SET DEFAULT nextval('versions_id_seq'::regclass);
+
+
+--
+-- Name: _cities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cities
+    ADD CONSTRAINT _cities_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: _countries_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY countries
+    ADD CONSTRAINT _countries_pkey PRIMARY KEY (id);
 
 
 --
@@ -3089,6 +3182,34 @@ CREATE INDEX index_additional_emails_on_user_id ON additional_emails USING btree
 
 
 --
+-- Name: index_cities_on_country_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_cities_on_country_id ON cities USING btree (country_id);
+
+
+--
+-- Name: index_cities_on_title_en; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_cities_on_title_en ON cities USING btree (title_en);
+
+
+--
+-- Name: index_cities_on_title_en_and_title_ru; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_cities_on_title_en_and_title_ru ON cities USING btree (title_en, title_ru);
+
+
+--
+-- Name: index_cities_on_title_ru; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_cities_on_title_ru ON cities USING btree (title_ru);
+
+
+--
 -- Name: index_cluster_fields_on_cluster_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3107,6 +3228,27 @@ CREATE INDEX index_cluster_logs_on_cluster_id_and_id ON cluster_logs USING btree
 --
 
 CREATE INDEX index_clusters_on_state ON clusters USING btree (state);
+
+
+--
+-- Name: index_countries_on_title_en; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_countries_on_title_en ON countries USING btree (title_en);
+
+
+--
+-- Name: index_countries_on_title_en_and_title_ru; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_countries_on_title_en_and_title_ru ON countries USING btree (title_en, title_ru);
+
+
+--
+-- Name: index_countries_on_title_ru; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_countries_on_title_ru ON countries USING btree (title_ru);
 
 
 --
@@ -4540,3 +4682,15 @@ INSERT INTO schema_migrations (version) VALUES ('20140317094013');
 INSERT INTO schema_migrations (version) VALUES ('20140422135357');
 
 INSERT INTO schema_migrations (version) VALUES ('20140423130538');
+
+INSERT INTO schema_migrations (version) VALUES ('20140514101157');
+
+INSERT INTO schema_migrations (version) VALUES ('20140514104612');
+
+INSERT INTO schema_migrations (version) VALUES ('20140522081059');
+
+INSERT INTO schema_migrations (version) VALUES ('20140522084417');
+
+INSERT INTO schema_migrations (version) VALUES ('20140522113629');
+
+INSERT INTO schema_migrations (version) VALUES ('20140522113800');

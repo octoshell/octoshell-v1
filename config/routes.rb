@@ -91,6 +91,10 @@ MSU::Application.routes.draw do
     get :subdivisions, only: [:index]
   end
 
+  resources :countries, only: :index do
+    resources :cities, only: [:index, :show]
+  end
+
   # reports
   resources :reports, only: [:show] do
     put :accept
@@ -142,6 +146,8 @@ MSU::Application.routes.draw do
   end
 
   namespace :admin do
+    resources :countries, only: [:index, :destroy]
+
     resources :cohortes, only: :index do
       post :calc, on: :collection
     end

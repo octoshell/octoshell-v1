@@ -21,6 +21,8 @@ table class="table table-bordered"
         = sort_link @search, :active_memberships_count, 'Сотрудников (всего [активные,  доверенные])', default_order: :desc
       - else
         | Сотрудников (всего [активные,  доверенные])
+    th = Organization.human_attribute_name(:country)
+    th = Organization.human_attribute_name(:city)
     th
   - organizations.each do |organization|
     tr
@@ -33,4 +35,6 @@ table class="table table-bordered"
       td
         strong = organization.active_memberships_count
         |  [#{organization.active_users_count}, #{organization.sured_users_count}]
+      td = organization.country
+      td = organization.city
       td = link_to 'открыть', [:admin, organization]

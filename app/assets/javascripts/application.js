@@ -25,7 +25,7 @@
 
 $(document).ready(function(){
   
-  var localization = {
+  select2_localization = {
     ru: "Выберите значение",
     en: "Choose"
   }
@@ -37,7 +37,7 @@ $(document).ready(function(){
       $(options[0]).select()
     }
     options = {
-      placeholder: localization[window.locale],
+      placeholder: select2_localization[window.locale],
       allowClear: $(this).hasClass('clearable')
     }
     

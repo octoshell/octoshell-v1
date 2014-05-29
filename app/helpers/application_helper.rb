@@ -106,6 +106,12 @@ module ApplicationHelper
         name: :project_id_eq,
         admin: true,
         source: projects_path
+      },
+      city: {
+        label: City.model_name.human,
+        name: :city_id_eq,
+        admin: true,
+        source: country_cities_path(1)
       }
     }
     

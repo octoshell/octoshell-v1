@@ -23,6 +23,12 @@ table class="table table-bordered"
   tr
     th = Organization.human_attribute_name(:organization_kind_id)
     td = smart_link_to @organization.organization_kind
+  tr
+    th = Organization.human_attribute_name(:country)
+    td = @organization.country
+  tr
+    th = Organization.human_attribute_name(:city)
+    td = @organization.city
 
 h3 Активные проекты
 = render partial: 'admin/projects/table', locals: { projects: @organization.projects.with_state(:active).limit(10) }

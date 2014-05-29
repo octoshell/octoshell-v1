@@ -2,6 +2,9 @@
   = f.input :name
   = f.input :abbreviation
   = f.association :organization_kind, collection: OrganizationKind.with_state(:active)
+  = f.association :country, collection: Country.order(:title_ru)
+  = f.input :city_title, type: :text, label: "Город"
+
   
   div class="form-actions"
     = f.button :submit, class: 'btn-primary'
