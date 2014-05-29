@@ -92,7 +92,7 @@ MSU::Application.routes.draw do
   end
 
   resources :countries, only: :index do
-    resources :cities, only: :index
+    resources :cities, only: [:index, :show]
   end
 
   # reports

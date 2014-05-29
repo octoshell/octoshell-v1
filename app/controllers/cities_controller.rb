@@ -7,5 +7,10 @@ class CitiesController < ApplicationController
     json = { records: @cities.page(params[:page]).per(params[:per]), total: @cities.count }
     respond_with(json)
   end
+
+  def show
+    country = Country.find(params[:country_id])
+    @city = country.cities.find(params[:id])
+    respond_with({ id: @city.id, text: @city.title_ru })
   end
 end
