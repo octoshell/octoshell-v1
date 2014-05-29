@@ -8,7 +8,7 @@ $ ->
         $.getJSON $("#organization_city_title").data('source-url'), { q: query }, (data) ->
           process(
             data.records.map (r) ->
-              r.title_ru
+              r.text
           )
 
   $("#organization_country_id").change ->
@@ -22,5 +22,5 @@ $ ->
         $.getJSON $("#organization_city_title").data('source-url'), { q: query }, (data) ->
           process(
             data.records.map (r) ->
-              r.title_ru
+              r.text
           )

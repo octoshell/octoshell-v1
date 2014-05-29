@@ -1,11 +1,11 @@
 class CitiesController < ApplicationController
+  respond_to :json
+
   def index
-    respond_to do |format|
-      format.json do
-        country = Country.find(params[:country_id])
-        @cities = country.cities.finder(params[:q])
-        render json: { records: @cities, total: @cities.count }, state: :ok
-      end
-    end
+    country = Country.find(params[:country_id])
+    @cities = country.cities.finder(params[:q])
+    json = { records: @cities.page(params[:page]).per(params[:per]), total: @cities.count }
+    respond_with(json)
+  end
   end
 end

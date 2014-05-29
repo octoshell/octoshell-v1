@@ -6,4 +6,8 @@ class City < ActiveRecord::Base
   def to_s
     title_ru
   end
+
+  def as_json(options)
+    { id: id, text: title_ru }
+  end
 end
