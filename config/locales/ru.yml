@@ -707,6 +707,9 @@ ru:
         name: Название
         organization_kind: Тип организации
         organization_kind_id: Тип организации
+        country: Страна
+        city: Город
+        city_title: Город
         abbreviation: Аббревиатура
         merge_id: Объединить с
         state: Статус

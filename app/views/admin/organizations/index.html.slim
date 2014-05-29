@@ -7,6 +7,7 @@ div class="well"
   = autocomplete :organization, f, name: :id_eq, label: "Название", role: 'instance-search', url: '/admin/organizations/%s'
   = f.input :abbreviation_cont, required: false, label: 'Аббревиатура'
   = f.input :organization_kind_id_eq, collection: OrganizationKind.all, required: false, label: 'Тип'
+  = f.input :country_id_eq, label: "Страна", required: false, collection: Country.order(:title_ru)
   = f.input :state_in, collection: Organization.human_state_names, input_html: { multiple: true }, required: false, label: 'Состояние'
   div class="form-actions"
     = f.button :submit, 'Найти', class: 'btn-primary'
