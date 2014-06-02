@@ -56,7 +56,7 @@ class Account < ActiveRecord::Base
     
     around_transition on: :deny do |account, _, block|
       account.transaction do
-        account.close
+        account.close unless account.closed?
         block.call
       end
     end
