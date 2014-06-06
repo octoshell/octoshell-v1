@@ -19,7 +19,7 @@
         td
           = smart_link_to surety.organization
           |  / 
-          = smart_link_to surety.project, nil, class: "muted"
+          = link_to_project surety.project, class: "muted"
         td
           - state = { generated: "warning", filling: "default", active: "success", closed: "default" }[surety.state_name]
           span class="label label-#{state}" = surety.human_state_name

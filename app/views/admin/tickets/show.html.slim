@@ -26,7 +26,7 @@ table class="table table-bordered"
     td = link_to_attachment @ticket
   tr
     th = Ticket.human_attribute_name(:project)
-    td = smart_link_to @ticket.project
+    td = link_to_project @ticket.project
   tr
     th = Ticket.human_attribute_name(:cluster)
     td = smart_link_to @ticket.cluster

@@ -25,7 +25,7 @@
           span class="label label-#{state}" = ticket.human_state_name
           br
           = smart_link_to(ticket.user, nil, class: "muted")
-        td class="span3" = smart_link_to ticket.project
+        td class="span3" = link_to_project ticket.project
         td class="span1" = smart_link_to ticket.cluster
         td class="span1"
           = ticket.created_at.strftime("%Y-%m-%d")

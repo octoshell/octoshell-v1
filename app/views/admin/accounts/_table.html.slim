@@ -9,7 +9,7 @@
       tr id="account-#{account.id}"
         td = account.id
         td = smart_link_to account.user
-        td = smart_link_to account.project
+        td = link_to_project account.project
         td = account.human_state_name
 - else
   p = t('.no_accounts', default: 'There are no accounts')
