@@ -1,6 +1,5 @@
 # coding: utf-8
 class Admin::ProjectsController < Admin::ApplicationController
-  before_filter :require_login
   before_filter :setup_default_filter, only: :index
   
   def index
