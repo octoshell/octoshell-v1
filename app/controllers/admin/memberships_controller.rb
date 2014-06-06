@@ -1,5 +1,4 @@
 class Admin::MembershipsController < Admin::ApplicationController
-  before_filter :require_login
 
   def index
     search_result = Membership.search(params[:q]).result(distinct: true)
