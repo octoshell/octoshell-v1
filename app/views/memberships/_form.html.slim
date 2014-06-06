@@ -18,6 +18,6 @@
       = f.button :submit, class: 'btn-primary'
 - else
   = simple_form_for @membership, url: new_membership_path, html: { class: 'form-horizontal' }, method: :get do |f|
-    = f.association :organization, hint: link_to(t('.add_organization', default: 'Add organization'), new_organization_path), collection: Organization.with_state(:active), input_html: { class: 'chosen' }
+    = f.association :organization, hint: link_to(t('.add_organization', default: 'Add organization'), new_organization_path), collection: Organization.with_state(:active).order(:name), input_html: { class: 'chosen' }
     div class="form-actions"
       = f.button :submit, 'Продолжить', class: 'btn-primary'
