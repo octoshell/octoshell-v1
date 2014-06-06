@@ -24,4 +24,9 @@ module AdminHelper
     options[:class] << " shorted"
     link_to_if may?(:manage, record.models_name), name, [:admin, record], options
   end
+
+  def link_to_project(project, options = {})
+    return unless project
+    link_to_if (may?(:manage, :projects) || may?(:review, :projects)), project.link_name, [:admin, project], options
+  end
 end

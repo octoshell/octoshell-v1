@@ -17,7 +17,7 @@ div class="request"
     tr
       th = Project.model_name.human
       td
-        strong = smart_link_to @request.project
+        strong = link_to_project @request.project
         |  
         - state = { active: "success", closed: "important", closing: "important"}[@request.project.state_name]
         span class="label label-#{state}" = @request.project.human_state_name
@@ -90,7 +90,7 @@ div class="request"
       td = smart_link_to surety.user
     tr
       th = Project.model_name.human
-      td = smart_link_to surety.project
+      td = link_to_project surety.project
     tr
       td colspan="2"
         div id="surety" class=""

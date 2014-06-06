@@ -19,7 +19,7 @@
       tr
         td = project.id
         td
-          strong = smart_link_to project
+          strong = link_to_project project
           |  
           - color = { active: 'success' }[project.state_name] || 'default'
           span class="label label-#{color}" = project.human_state_name
