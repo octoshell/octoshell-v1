@@ -66,7 +66,8 @@ class Mailer < ActionMailer::Base
   def notification(recipient)
     @user = recipient.user
     @body = recipient.notification.body
-    mail to: @user.emails, subject: recipient.notification.title, user_id: @user.id
+    mail to: @user.emails, reply_to: recipient.notification.reply_to || 'service@users.parallel.ru',
+         subject: recipient.notification.title, user_id: @user.id
   end
   
   def session_archive_is_ready(email, path)

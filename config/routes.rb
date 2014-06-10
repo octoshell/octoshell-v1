@@ -133,6 +133,7 @@ MSU::Application.routes.draw do
     put    "/notifications/:id/deliver"                             => "notifications#deliver", as: :json
     delete "/notifications/:id/recipients"                          => "notifications#destroy_recipients", as: :json
     put    "/notifications/:id/add_all_users"                       => "notifications#add_all_users", as: :json
+    put    "/notifications/:id/add_all_info_subscribers"            => "notifications#add_all_info_subscribers", as: :json
     put    "/notifications/:id/add_from_cluster"                    => "notifications#add_from_cluster", as: :json
     put    "/notifications/:id/add_from_organization_kind"          => "notifications#add_from_organization_kind", as: :json
     put    "/notifications/:id/add_from_organization"               => "notifications#add_from_organization", as: :json
@@ -192,6 +193,7 @@ MSU::Application.routes.draw do
       put :deliver
       put :remove_all_recipients
       put :add_all_recipients
+      put :add_all_info_subscribers
       put :add_from_cluster
       put :add_from_organization_kind
       put :add_from_organization

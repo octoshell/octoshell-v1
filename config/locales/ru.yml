@@ -528,6 +528,7 @@ ru:
       notification:
         title: Тема
         body: Сообщение
+        is_information: Информационная
       notice:
         subject: Тема
         body: Сообщение
@@ -641,6 +642,7 @@ ru:
         avatar: Фото
         created_at: Создан
         groups: Группы
+        receive_info_notifications: Получать информационные рассылки
       surety_member:
         full_name: ФИО
         email: Email

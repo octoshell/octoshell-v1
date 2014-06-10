@@ -874,7 +874,9 @@ CREATE TABLE notifications (
     body text,
     state character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    is_information boolean,
+    reply_to character varying(255)
 );
 
 
@@ -2139,7 +2141,8 @@ CREATE TABLE users (
     avatar_content_type character varying(255),
     avatar_file_size integer,
     avatar_updated_at timestamp without time zone,
-    phone character varying(255)
+    phone character varying(255),
+    receive_info_notifications boolean DEFAULT true
 );
 
 
@@ -4694,3 +4697,9 @@ INSERT INTO schema_migrations (version) VALUES ('20140522084417');
 INSERT INTO schema_migrations (version) VALUES ('20140522113629');
 
 INSERT INTO schema_migrations (version) VALUES ('20140522113800');
+
+INSERT INTO schema_migrations (version) VALUES ('20140609121758');
+
+INSERT INTO schema_migrations (version) VALUES ('20140609134316');
+
+INSERT INTO schema_migrations (version) VALUES ('20140610050706');

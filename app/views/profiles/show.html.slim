@@ -94,4 +94,8 @@ div class="row"
                   = link_to user_notice.notice.subject, "#", class: "muted", role: "notice-shower", data: { id: user_notice.notice_id }
                   div class="hidden" data-id="#{user_notice.notice_id}" role="notice-body"
                     = markdown user_notice.notice.body
+    h4 Информационные рассылки
+    div class="row"
+      span class="span9"
+        = @user.receive_info_notifications ? "Подписан" : "Не подписан"
     
