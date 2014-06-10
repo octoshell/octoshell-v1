@@ -138,4 +138,12 @@ class Notification < ActiveRecord::Base
       end
     end
   end
+
+  def add_all_info_subscribers
+    transaction do
+      User.without_state(:closed).where(receive_info_notifications: true).each do |u|
+        recipients.where(user_id: u.id).first_or_create!
+      end
+    end
+  end
 end
