@@ -19,18 +19,18 @@ class Notification < ActiveRecord::Base
         end
       end
     end
-    
+
     event :deliver do
       transition :pending => :delivering
     end
-    
+
     event :complete_delivering do
       transition :delivering => :delivered
     end
-    
+
     inside_transition on: :deliver, &:send_emails
   end
-  
+
   def add_all_recipients
     transaction do
       User.without_state(:closed).each do |u|
@@ -38,11 +38,11 @@ class Notification < ActiveRecord::Base
       end
     end
   end
-  
+
   def add_user(id)
     recipients.where(user_id: id).first_or_create!
   end
-  
+
   def add_from_cluster(id)
     User.without_state(:closed).each do |u|
       if u.all_projects.any? { |p| p.requests.where(cluster_id: id).with_state(:active).any? }
@@ -50,19 +50,19 @@ class Notification < ActiveRecord::Base
       end
     end
   end
-  
+
   def add_from_project(id)
     Project.find(id).accounts.with_access_state(:allowed).each do |account|
       recipients.where(user_id: account.user_id).first_or_create!
     end
   end
-  
+
   def add_from_organization(id)
     Organization.find(id).memberships.with_state(:active).each do |mem|
       recipients.where(user_id: mem.user_id).first_or_create!
     end
   end
-  
+
   def add_from_organization_kind(id)
     OrganizationKind.find(id).organizations.with_state(:active).each do |organization|
       organization.memberships.with_state(:active).each do |mem|
@@ -70,7 +70,7 @@ class Notification < ActiveRecord::Base
       end
     end
   end
-  
+
   def test_send(user)
     rec = Recipient.new do |r|
       r.user = user
@@ -78,17 +78,17 @@ class Notification < ActiveRecord::Base
     end
     Mailer.delay.notification(rec)
   end
-  
+
   def remove_all_recipients
     recipients.delete_all
   end
-  
+
   def send_emails
     recipients.each do |rec|
       Delayed::Job.enqueue NotificationsSender.new(rec.id)
     end
   end
-  
+
   def add_with_projects
     User.without_state(:closed).each do |u|
       if u.all_projects.with_state(:active).any?
@@ -96,7 +96,7 @@ class Notification < ActiveRecord::Base
       end
     end
   end
-  
+
   def add_with_accounts
     User.without_state(:closed).each do |u|
       if u.accounts.with_access_state(:allowed).any? { |a| a.project.requests.with_state(:active).any? }
@@ -104,7 +104,7 @@ class Notification < ActiveRecord::Base
       end
     end
   end
-  
+
   def add_with_refused_accounts
     User.without_state(:closed).each do |u|
       if u.all_projects.with_state(:active).any? { |p| p.requests.with_state(:blocked).any? }
@@ -112,12 +112,12 @@ class Notification < ActiveRecord::Base
       end
     end
   end
-  
+
   def add_from_session(id)
     session = Session.find(id)
     User.without_state(:closed).each do |u|
       has_fault_with_session = proc do |s|
-        u.faults.where(kind: "survey", reference_id: u.user_surveys.where(survey_id: session.survey_ids).pluck(:id)).with_state(:actual).any? || 
+        u.faults.where(kind: "survey", reference_id: u.user_surveys.where(survey_id: session.survey_ids).pluck(:id)).with_state(:actual).any? ||
           u.faults.with_state(:actual).where(kind: "report", reference_id: u.reports.where(session_id: session.id)).any?
       end
       if u.faults.with_state(:actual).any? && has_fault_with_session.call
@@ -125,7 +125,7 @@ class Notification < ActiveRecord::Base
       end
     end
   end
-  
+
   def add_unsuccessful_of_current_session
     if session = Session.current
       User.without_state(:closed).each do |u|

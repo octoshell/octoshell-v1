@@ -1,18 +1,18 @@
 class Admin::NotificationsController < Admin::ApplicationController
   before_filter { authorize! :manage, :notifications }
-  
+
   def index
     @notifications = Notification.order("id desc")
   end
-  
+
   def show
     @notification = Notification.find(params[:id])
   end
-  
+
   def new
     @notification = Notification.new
   end
-  
+
   def create
     @notification = Notification.new(params[:notification], as: :admin)
     if @notification.save
@@ -21,11 +21,11 @@ class Admin::NotificationsController < Admin::ApplicationController
       render :new
     end
   end
-  
+
   def edit
     @notification = Notification.find(params[:id])
   end
-  
+
   def update
     @notification = Notification.find(params[:id])
     if @notification.update_attributes(params[:notification], as: :admin)
