@@ -72,10 +72,7 @@ class Notification < ActiveRecord::Base
   end
 
   def test_send(user)
-    rec = Recipient.new do |r|
-      r.user = user
-      r.notification = self
-    end
+    rec = recipients.where(user_id: user).first_or_create!
     Delayed::Job.enqueue NotificationsSender.new(rec.id)
   end
 
