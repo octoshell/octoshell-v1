@@ -76,7 +76,7 @@ class Notification < ActiveRecord::Base
       r.user = user
       r.notification = self
     end
-    Mailer.delay.notification(rec)
+    Delayed::Job.enqueue NotificationsSender.new(rec.id)
   end
 
   def remove_all_recipients
