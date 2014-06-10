@@ -2,13 +2,13 @@
 class Notification < ActiveRecord::Base
   include Models::Limitable
   has_paper_trail
-  
+
   validates :title, :body, presence: true
-  
-  attr_accessible :title, :body, as: :admin
-  
+
+  attr_accessible :title, :body, :is_information, :reply_to, as: :admin
+
   has_many :recipients, dependent: :destroy
-  
+
   state_machine initial: :pending do
     state :pending
     state :delivering

@@ -8,6 +8,7 @@
 - f.object.errors.add(:avatar, error) if error.present?
 = f.input :avatar, hint: 'до 150 Кб'
 = f.input :phone
+= f.input :receive_info_notifications
 - if f.object.persisted?
   h4 = t('.additional_emails', default: 'Additional emails for notifications')
   = f.fields_for :additional_emails do |f|
