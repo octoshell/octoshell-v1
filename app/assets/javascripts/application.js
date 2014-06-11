@@ -21,6 +21,7 @@
 //= require select2
 //= require tablesorter
 //= require datepicker
+//= require jquery.expander.js
 //= require_tree .
 
 $(document).ready(function(){

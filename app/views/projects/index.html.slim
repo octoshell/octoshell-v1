@@ -13,11 +13,14 @@ div class="join-project-form hidden"
     = f.button :submit, 'Отправить', class: 'btn-success btn-block'
 
 - if @projects.any?
-  table class="table"
+  table class="table table-hover"
     thead
       tr
         th #
         th Название
+        th Доступы
+        th Участники
+        th Поручительства
     - @projects.find_all(&:enabled?).each do |project|
       - klass = 'success'
       - if project.closing?
@@ -27,6 +30,22 @@ div class="join-project-form hidden"
       tr class="#{klass}"
         td class="muted span1" ##{project.id}
         td = link_to project.title, project
+        td = project.requests.with_state(:active).map {|r| r.cluster.name}.join(", ")
+        td class="span5"
+          ul class="unstyled members expandable"
+            - project.accounts.without_access_state(:denied).each_with_index do |account|
+              li
+                = account.user.full_name
+                |  
+                code= account.login
+
+        td class="span1"
+          ul class="unstyled"
+            - project.sureties.without_states(:filling).reorder('id asc').each do |surety|
+              li
+                = render_status_icon surety.active?
+                = link_to_if current_user == project.user, "##{surety.id}", surety
+
     - disabled = @projects.find_all(&:disabled?)
     - if disabled.any?
       tr class="link"
