@@ -1,7 +1,7 @@
 # coding: utf-8
 class Admin::TicketsController < Admin::ApplicationController
   before_filter :setup_default_filter, only: :index
-  
+
   def index
     @search = Ticket.search(params[:q])
     search_result = @search.result(distinct: true)
@@ -10,7 +10,7 @@ class Admin::TicketsController < Admin::ApplicationController
     # записываем отрисованные тикеты в куки, для перехода к следующему тикету после ответа
     cookies[:tickets_list] = @tickets.map(&:id).join(',')
   end
-    
+
   def show
     @ticket = Ticket.find(params[:id])
     @next_ticket = @ticket.find_next_ticket_from(cookies[:tickets_list])
@@ -20,7 +20,7 @@ class Admin::TicketsController < Admin::ApplicationController
     end
     @ticket_tag = TicketTag.new
   end
-  
+
   def close
     @ticket = Ticket.find(params[:ticket_id])
     if @ticket.close
@@ -30,11 +30,11 @@ class Admin::TicketsController < Admin::ApplicationController
       redirect_to [:admin, @ticket], alert: @ticket.errors.full_messages.join(', ')
     end
   end
-  
+
   def edit
     @ticket = Ticket.find(params[:id])
   end
-  
+
   def update
     @ticket = Ticket.find(params[:id])
     if @ticket.update_attributes(params[:ticket], as: :admin)
@@ -44,7 +44,7 @@ class Admin::TicketsController < Admin::ApplicationController
       render :edit
     end
   end
-  
+
   def tag_relations_form
     @ticket = Ticket.find(params[:ticket_id])
     render partial: 'tag_relations_form', locals: { ticket: @ticket }
@@ -55,7 +55,7 @@ class Admin::TicketsController < Admin::ApplicationController
     @ticket.accept(current_user)
     redirect_to [:admin, @ticket]
   end
-  
+
 private
 
   def default_breadcrumb
