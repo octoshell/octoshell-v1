@@ -3,21 +3,21 @@ class Admin::TicketQuestionsController < Admin::ApplicationController
   before_filter do
     params[:controller] = :'admin/tickets'
   end
-  
+
   def index
     @search = TicketQuestion.search(params[:q])
     search_result = @search.result(distinct: true)
     @ticket_questions = show_all? ? search_result : search_result.page(params[:page])
   end
-  
+
   def show
     @ticket_question = find_ticket_question(params[:id])
   end
-  
+
   def new
     @ticket_question = TicketQuestion.new(params[:ticket_question], as: :admin)
   end
-  
+
   def create
     @ticket_question = TicketQuestion.new(params[:ticket_question], as: :admin)
     if @ticket_question.save
@@ -26,11 +26,11 @@ class Admin::TicketQuestionsController < Admin::ApplicationController
       render :new
     end
   end
-  
+
   def edit
     @ticket_question = find_ticket_question(params[:id])
   end
-  
+
   def update
     @ticket_question = find_ticket_question(params[:id])
     if @ticket_question.update_attributes(params[:ticket_question], as: :admin)
@@ -39,7 +39,7 @@ class Admin::TicketQuestionsController < Admin::ApplicationController
       render :edit
     end
   end
-  
+
   def close
     @ticket_question = find_ticket_question(params[:ticket_question_id])
     if @ticket_question.close
@@ -48,17 +48,17 @@ class Admin::TicketQuestionsController < Admin::ApplicationController
       render :show
     end
   end
-  
+
 private
-  
+
   def find_ticket_question(id)
     TicketQuestion.find(id)
   end
-  
+
   def redirect_to_index
     redirect_to admin_ticket_questions_path
   end
-  
+
   def setup_default_filter
     params[:q] ||= { state_in: ['active'] }
   end

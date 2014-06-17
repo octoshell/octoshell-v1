@@ -3,21 +3,21 @@ class Admin::TicketTemplatesController < Admin::ApplicationController
   before_filter do
     params[:controller] = :'admin/tickets'
   end
-  
+
   def index
     @search = TicketTemplate.search(params[:q])
     search_result = @search.result(distinct: true)
     @ticket_templates = show_all? ? search_result : search_result.page(params[:page])
   end
-  
+
   def show
     @ticket_template = find_ticket_template(params[:id])
   end
-  
+
   def new
     @ticket_template = TicketTemplate.new(params[:ticket_template], as: :admin)
   end
-  
+
   def create
     @ticket_template = TicketTemplate.new(params[:ticket_template], as: :admin)
     if @ticket_template.save
@@ -26,11 +26,11 @@ class Admin::TicketTemplatesController < Admin::ApplicationController
       render :new
     end
   end
-  
+
   def edit
     @ticket_template = find_ticket_template(params[:id])
   end
-  
+
   def update
     @ticket_template = find_ticket_template(params[:id])
     if @ticket_template.update_attributes(params[:ticket_template], as: :admin)
@@ -39,19 +39,19 @@ class Admin::TicketTemplatesController < Admin::ApplicationController
       render :new
     end
   end
-  
+
   def close
     @ticket_template = find_ticket_template(params[:ticket_template_id])
     @ticket_template.close
     redirect_to @ticket_template
   end
-  
+
 private
-  
+
   def find_ticket_template(id)
     TicketTemplate.find(id)
   end
-  
+
   def setup_default_filter
     params[:q] ||= { state_in: ['active'] }
   end
