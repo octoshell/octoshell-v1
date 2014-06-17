@@ -50,6 +50,13 @@ class Admin::TicketsController < Admin::ApplicationController
     render partial: 'tag_relations_form', locals: { ticket: @ticket }
   end
 
+  def update_subscribers
+    @ticket = Ticket.find(params[:ticket_id])
+    @ticket.update_attributes(params[:ticket], as: :admin)
+    @ticket.user.track! :update_ticket_subscribers, @ticket, current_user
+    render partial: 'ticket_subscribers', locals: { ticket: @ticket }
+  end
+
   def accept
     @ticket = Ticket.find(params[:ticket_id])
     @ticket.accept(current_user)

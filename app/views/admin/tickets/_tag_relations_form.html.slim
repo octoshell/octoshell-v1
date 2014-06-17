@@ -1,8 +1,7 @@
-= form_for [:admin, ticket], html: { id: 'tag_relations', class: 'form-inline', data: { 'reload-url' => admin_ticket_tag_relations_form_path(ticket) } } do |f|
+= form_for [:admin, ticket], remote: true, html: { id: 'tag_relations', class: 'form-inline', data: { 'reload-url' => admin_ticket_tag_relations_form_path(ticket) } } do |f|
   legend Теги
   = f.fields_for :ticket_tag_relations, ticket.ticket_tag_relations.active do |f|
       = f.label :active, class: 'checkbox' do
         = f.object.ticket_tag.name
-        = f.check_box(:active)
+        = f.check_box(:active, onclick: "$('#tag_relations').submit(); $('#tag_relations').trigger('reload_form')")
       = " "
-  = f.submit class: 'btn btn-small'
