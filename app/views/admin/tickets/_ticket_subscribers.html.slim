@@ -1,0 +1,4 @@
+= simple_form_for [:admin, ticket], html: { class: 'form-horizontal' } do |f|
+  = f.association :users, collection: f.object.available_users, as: :check_boxes, label_method: :full_name
+  div class="form-actions"
+    = f.button :submit

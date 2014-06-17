@@ -38,15 +38,15 @@ table class="table table-bordered"
     th = Ticket.human_attribute_name(:state)
     td = @ticket.human_state_name
 
-= render partial: 'tag_relations_form', locals: { ticket: @ticket }
-= render partial: 'admin/ticket_tags/remote_form', locals: { ticket_tag: @ticket_tag }
+div id="related-tags"
+  = render partial: 'tag_relations_form', locals: { ticket: @ticket }
+div id="new-tag"
+  = render partial: 'admin/ticket_tags/remote_form', locals: { ticket_tag: @ticket_tag }
 
 h3 Подписчики
 
-= simple_form_for [:admin, @ticket], html: { class: 'form-horizontal' } do |f|
-  = f.association :users, collection: f.object.available_users, as: :check_boxes, label_method: :full_name
-  div class="form-actions"
-    = f.button :submit
+div id="ticket-subscribers"
+  = render "ticket_subscribers", {ticket: @ticket}
 
 h3 = Ticket.human_attribute_name(:message)
 h5 #{time_tag @ticket.created_at} / #{time_tag @ticket.updated_at}
