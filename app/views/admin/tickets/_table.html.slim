@@ -1,9 +1,4 @@
 - if tickets.any?
-  - if show_all?
-    h4 Всего заявок #{tickets.count}
-  - else
-    h4= page_entries_info tickets
-
   table class="table table-bordered table-striped"
     tr
       th class="span1" #

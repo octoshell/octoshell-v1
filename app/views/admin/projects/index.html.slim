@@ -15,6 +15,11 @@
 
 div class="row"
   div class="span9"
+    - if @projects.any?
+      - if show_all?
+        h4 Всего проектов #{@projects.count}
+      - else
+        h4= page_entries_info @projects
     = render partial: 'table', locals: { projects: @projects }
   div class="span3"
     = simple_form_for @search, url: admin_projects_path, method: :get do |f|

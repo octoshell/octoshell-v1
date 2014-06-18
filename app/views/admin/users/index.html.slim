@@ -13,6 +13,11 @@
       i class="icon-search"
 div class="row"
   div class="span9"
+    - if @users.any?
+      - if show_all?
+        h4 Всего поручительств #{@users.count}
+      - else
+        h4= page_entries_info @users
     = render partial: "table", locals: { users: @users }
   div class="span3"
     = simple_form_for @search, method: :get, url: admin_users_path do |f|

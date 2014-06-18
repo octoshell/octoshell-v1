@@ -21,6 +21,12 @@
 
 = safe_paginate @tickets
 
+- if @tickets.any?
+  - if show_all?
+    h4 Всего заявок #{@tickets.count}
+  - else
+    h4= page_entries_info @tickets
+
 = render partial: 'table', locals: { tickets: @tickets }
 
 = safe_paginate @tickets

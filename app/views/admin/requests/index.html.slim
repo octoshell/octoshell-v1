@@ -2,6 +2,11 @@
 
 div class="row"
   div class="span9"
+    - if @requests.any?
+      - if show_all?
+        h4 Всего заявок #{@requests.count}
+      - else
+        h4= page_entries_info @requests
     = render partial: 'table', locals: { requests: @requests }
   div class="span3"
     = simple_form_for @search, url: admin_requests_path, method: :get do |f|

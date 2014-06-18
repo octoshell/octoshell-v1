@@ -12,6 +12,11 @@ div class="well"
 
 div class="row"
   div class="span9"
+    - if @sureties.any?
+      - if show_all?
+        h4 Всего поручительств #{@sureties.count}
+      - else
+        h4= page_entries_info @sureties
     = render partial: 'admin/sureties/table', locals: { sureties: @sureties }
   div class="span3"
     = simple_form_for @search, method: :get, url: admin_sureties_path do |f|
