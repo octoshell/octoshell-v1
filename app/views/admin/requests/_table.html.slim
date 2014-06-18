@@ -1,6 +1,9 @@
 - if requests.any?
   - if show_all?
     h4 Всего заявок #{requests.count}
+  - else
+    h4= page_entries_info requests
+
   table class="table table-bordered table-striped"
     tr
       th class="span1" #

@@ -1,5 +1,8 @@
 - if show_all?
   h4 Всего пользователей #{users.count}
+- else
+  h4= page_entries_info users
+
 table class="table table-bordered table-striped"
   tr
     th class="span1" #

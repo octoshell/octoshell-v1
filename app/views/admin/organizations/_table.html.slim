@@ -1,5 +1,8 @@
 - if show_all? && organizations.any?
   h4 Всего организаций #{organizations.count}
+- else
+  h4= page_entries_info organizations
+
 table class="table table-bordered"
   tr
     th class="span1" #

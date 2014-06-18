@@ -1,6 +1,9 @@
 - if projects.any?
   - if show_all?
     h4 Всего проектов #{projects.count}
+  - else
+    h4= page_entries_info projects
+
   table class="table table-bordered table-striped"
     tr
       th #
