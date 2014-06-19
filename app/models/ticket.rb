@@ -120,6 +120,11 @@ class Ticket < ActiveRecord::Base
 
     accounts.map(&:login).join(", ")
   end
+
+  def has_blank_fields?
+    ![url, attachment, project, cluster].all?(&:present?) ||
+      (!ticket_field_values.blank? && ticket_field_values.any?{ |fv| fv.value.blank? })
+  end
   
 private
   

@@ -333,6 +333,12 @@ $ ->
     $link.parents("table:first").find("tr.hidden").removeClass("hidden")
     $link.parents("tr:first").remove()
     false
+
+  $("@show-empty-ticket-field").on "click", ->
+    $link = $(@)
+    $link.parents("table:first").find("tr.hidden").removeClass("hidden")
+    $link.parents("tr:first").remove()
+    false
   
   $("@queue-shower").on "click", ->
     $link = $(@)
