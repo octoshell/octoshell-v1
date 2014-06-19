@@ -2,17 +2,17 @@
 class TicketsController < ApplicationController
   before_filter :require_login
   before_filter :setup_default_filter, only: :index
-  
+
   def index
     @search = current_user.tickets.search(params[:q])
     @tickets = @search.result(distinct: true).page(params[:page])
   end
-  
+
   def new
     @ticket = current_user.tickets.build(params[:ticket])
     @projects = current_user.all_projects
   end
-  
+
   def continue
     @ticket = current_user.tickets.build(params[:ticket])
     if @ticket.show_form?
@@ -24,7 +24,7 @@ class TicketsController < ApplicationController
     end
     render :new
   end
-  
+
   def create
     @ticket = current_user.tickets.build(params[:ticket])
     if @ticket.save
@@ -34,7 +34,7 @@ class TicketsController < ApplicationController
       render :new
     end
   end
-  
+
   def show
     @ticket = find_ticket(params[:id])
     @replies = @ticket.replies.dup
@@ -43,7 +43,7 @@ class TicketsController < ApplicationController
     end
     @ticket_tag = TicketTag.new
   end
-  
+
   def close
     @ticket = find_ticket(params[:ticket_id])
     if @ticket.close
@@ -53,7 +53,7 @@ class TicketsController < ApplicationController
       redirect_to @ticket, alert: @ticket.errors.full_messages.join(', ')
     end
   end
-  
+
   def resolve
     @ticket = find_ticket(params[:ticket_id])
     if @ticket.resolve
@@ -63,11 +63,11 @@ class TicketsController < ApplicationController
       redirect_to @ticket, alert: @ticket.errors.full_messages.join(', ')
     end
   end
-  
+
   def edit
     @ticket = find_ticket(params[:id])
   end
-  
+
   def update
     @ticket = find_ticket(params[:id])
     if @ticket.update_attributes(params[:ticket], as: :admin)
@@ -77,17 +77,17 @@ class TicketsController < ApplicationController
       render :edit
     end
   end
-  
+
 private
 
   def find_ticket(id)
     current_user.tickets.find(id)
   end
-  
+
   def namespace
     may?(:access, :admin) ? :dashboard : :tickets
   end
-  
+
   def setup_default_filter
     params[:q] ||= { state_in: ['active', 'answered', 'resolved'] }
     params[:meta_sort] ||= 'id.asc'

@@ -1,0 +1,4 @@
+= simple_form_for [:admin, ticket], url: admin_ticket_update_subscribers_path(ticket), remote: true, method: :post, html: { id: 'ticket_subscribers', class: 'form-horizontal' } do |f|
+  = f.association :users, collection: ticket.available_users,
+                          as: :check_boxes, label_method: :full_name,
+                          input_html: {onclick: "$('#ticket_subscribers').submit()"}

@@ -339,6 +339,7 @@ MSU::Application.routes.draw do
     # tickets
     resources :tickets, only: [:index, :show, :edit, :update] do
       get :tag_relations_form
+      post :update_subscribers
       put :close
       post :accept
       resources :versions, only: [:index, :show], resource: 'Ticket'
