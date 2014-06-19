@@ -14,7 +14,10 @@ div class="well"
 table class="table table-bordered"
   tr
     th class="span4" = User.model_name.human
-    td = smart_link_to(@ticket.user)
+    td
+      = link_to @ticket.user.full_name, [:admin, @ticket.user]
+      |  логины: 
+      = @ticket.user_logins
   tr
     th = Ticket.human_attribute_name(:subject)
     td = @ticket.subject

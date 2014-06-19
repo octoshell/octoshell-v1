@@ -110,6 +110,16 @@ class Ticket < ActiveRecord::Base
       Ticket.find(next_ticket_id)
     end
   end
+
+  def user_logins
+    accounts = if project
+                 user.accounts.where(project_id: project)
+               else
+                 user.accounts
+               end
+
+    accounts.map(&:login).join(", ")
+  end
   
 private
   
