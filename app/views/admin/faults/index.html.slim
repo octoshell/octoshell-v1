@@ -1,0 +1,25 @@
+- title t('.title', default: 'Faults')
+
+= simple_form_for @search, url: admin_faults_path, method: :get, html: { class: 'form-horizontal', role: 'autosubmit' } do |f|
+  div class="row"
+    div class="span5"
+      = autocomplete :user, f
+      = f.input :state_in, collection: Fault.human_state_names, input_html: { multiple: true }, required: false, label: 'Состояние'
+    div class="span6"
+      - options = { required: false, include_blank: true, start_year: 2012, end_year: Date.current.year, input_html: { class: 'datepicker' } }
+      = f.input :created_at_gt, options.merge(label: 'Создана после')
+      = f.input :created_at_lt, options.merge(label: 'Создана до')
+  div class="form-actions"
+    = f.button :submit, 'Найти', class: 'btn-primary'
+
+= safe_paginate @faults
+
+- if @faults.any?
+  - if show_all?
+    h4 Всего проблем #{@faults.count}
+  - else
+    h4= page_entries_info @faults
+
+= render partial: 'table', locals: { faults: @faults }
+
+= safe_paginate @faults
