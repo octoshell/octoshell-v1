@@ -21,7 +21,7 @@ class SuretiesController < ApplicationController
       @surety.project.user.track! :generate_surety, @surety, current_user
       redirect_to @surety
     else
-      redirect_to @project
+      redirect_to @surety.project, alert: @surety.errors.full_messages.to_sentence
     end
   end
   
