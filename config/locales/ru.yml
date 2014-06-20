@@ -450,6 +450,7 @@ ru:
       task: Задание
       report: Отчет
       survey/value: Значение
+      fault: Проблема
     errors:
       models:
         report/project:
@@ -838,6 +839,10 @@ ru:
         ticket_field: Дополнительное поле
         use: Использовать?
         required: Обязательное поле?
+      fault:
+        description: Описание
+        created_at: Дата создания
+        replies_count: Количество ответов
     state_machines:
       surety:
         state:

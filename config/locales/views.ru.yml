@@ -73,6 +73,9 @@ ru:
         tags: Теги
         questions: Вопросы
         fields: Поля
+    faults:
+      index:
+        title: Проблемы
   credentials:
     new:
       title: Новый публичный ключ
@@ -266,7 +269,8 @@ ru:
       sureties: Поручительства
       tasks: Процедуры
       users: Пользователи
-      tickets: "Поддержка (%{count})"
+      tickets: Поддержка (%{count})
+      faults: Проблемы
       pages: Справка
       reports: Отчеты
     dashboard_menu:

@@ -401,7 +401,7 @@ MSU::Application.routes.draw do
     resources :research_areas, except: :show
     
     # faults
-    resources :faults, only: :show do
+    resources :faults, only: [:index, :show] do
       put :resolve
       
       resources :fault_replies, only: [:create]

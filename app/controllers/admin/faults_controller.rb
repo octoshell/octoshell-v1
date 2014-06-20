@@ -1,5 +1,11 @@
 class Admin::FaultsController < Admin::ApplicationController
   before_filter { authorize! :manage, :users }
+
+  def index
+    @search = Fault.search(params[:q])
+    search_result = @search.result(distinct: true).includes(:user)
+    @faults = show_all? ? search_result : search_result.page(params[:page])
+  end
   
   def show
     @fault = Fault.find(params[:id])

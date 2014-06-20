@@ -1,0 +1,25 @@
+- if faults.any?
+  table class="table table-bordered table-striped"
+    tr
+      th class="span1" #
+      th = Fault.human_attribute_name(:description)
+      th = Fault.human_attribute_name(:replies_count)
+      th
+        - if @search
+          = sort_link @search, :id, Fault.human_attribute_name(:created_at), default_order: :asc
+        - else
+          = Fault.human_attribute_name(:created_at)
+    - faults.each do |fault|
+      tr id="ticket-#{fault.id}"
+        td = fault.id
+        td class="span4"
+          strong = link_to fault.description, [:admin, fault]
+          |  
+          - state = { actual: "important", resolved: "success" }[fault.state_name]
+          span class="label label-#{state}" = fault.human_state_name
+          br
+          = smart_link_to(fault.user, nil, class: "muted")
+        td class="span1" = fault.replies.count
+        td class="span1" = fault.created_at.strftime("%Y-%m-%d")
+- else
+  p Нет проблем
