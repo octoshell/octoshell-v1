@@ -101,7 +101,7 @@ $(document).ready(function(){
 	
 	$(document)
 	  .on('ajax:success #new_ticket_tag', function(e, data, xhr){
-  	  setTimeout($('#tag_relations').trigger('reload_form'), 1000)
+  	  $('#tag_relations').trigger('reload_form')
   	})
   	.on('ajax:beforeSend #new_ticket_tag', function(e){
   	  $(e.target).find(':input').each(function(i, e){
