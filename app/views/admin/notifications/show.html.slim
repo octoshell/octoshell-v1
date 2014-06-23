@@ -9,6 +9,8 @@ div class="row"
       h3 = @notification.title
       p = markdown(@notification.body)
       
+      - if @notification.attachment.present?
+        h5 Вложение: #{link_to @notification.attachment_file_name, @notification.attachment.url}
       p class="text-right"
         strong
           = link_to [:edit, :admin, @notification] do
