@@ -1,8 +1,9 @@
-= simple_form_for [:admin, @notification], html: { class: "form-horizontal" } do |f|
+= simple_form_for [:admin, @notification], html: { class: "form-horizontal", multipart: true } do |f|
   = f.input :title, input_html: { class: "input-xxlarge" }
   = f.input :reply_to, placeholder: 'service@users.parallel.ru', input_html: { class: "input-xxlarge" }
   = f.input :is_information, as: :boolean
   = f.input :body, as: :markdown_text, input_html: { rows: "6", class: "input-xxlarge" }
+  = f.input :attachment
   div class="form-actions"
     = f.button :submit, "Создать рассылку", class: "btn-primary"
   

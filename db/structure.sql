@@ -876,7 +876,11 @@ CREATE TABLE notifications (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     is_information boolean,
-    reply_to character varying(255)
+    reply_to character varying(255),
+    attachment_file_name character varying(255),
+    attachment_content_type character varying(255),
+    attachment_file_size integer,
+    attachment_updated_at timestamp without time zone
 );
 
 
@@ -4703,3 +4707,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140609121758');
 INSERT INTO schema_migrations (version) VALUES ('20140609134316');
 
 INSERT INTO schema_migrations (version) VALUES ('20140610050706');
+
+INSERT INTO schema_migrations (version) VALUES ('20140623124712');

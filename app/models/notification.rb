@@ -3,9 +3,11 @@ class Notification < ActiveRecord::Base
   include Models::Limitable
   has_paper_trail
 
+  has_attached_file :attachment
+
   validates :title, :body, presence: true
 
-  attr_accessible :title, :body, :is_information, :reply_to, as: :admin
+  attr_accessible :title, :body, :is_information, :reply_to, :attachment, as: :admin
 
   has_many :recipients, dependent: :destroy
 

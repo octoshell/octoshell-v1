@@ -530,6 +530,7 @@ ru:
         title: Тема
         body: Сообщение
         is_information: Информационная
+        attachment: Вложение
       notice:
         subject: Тема
         body: Сообщение

@@ -65,9 +65,11 @@ class Mailer < ActionMailer::Base
   
   def notification(recipient)
     @user = recipient.user
-    @body = recipient.notification.body
-    mail to: @user.emails, reply_to: recipient.notification.reply_to || 'service@users.parallel.ru',
-         subject: recipient.notification.title, user_id: @user.id
+    notification = recipient.notification
+    @body = notification.body
+    attachments[notification.attachment_file_name] = File.read(notification.attachment.path) if notification.attachment.present?
+    mail to: @user.emails, reply_to: notification.reply_to || 'service@users.parallel.ru',
+         subject: notification.title, user_id: @user.id
   end
   
   def session_archive_is_ready(email, path)
