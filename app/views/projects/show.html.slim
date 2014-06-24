@@ -84,7 +84,8 @@ table class="table"
         th
   - have_requests = @project.requests.with_state(:active).any?
   - @project.accounts.without_access_state(:denied).each_with_index do |account|
-    - active_member = account.allowed? && account.active? && account.user.faults.with_state(:actual).empty?
+    - faults = account.user.faults.with_state(:actual)
+    - active_member = account.allowed? && account.active? && faults.empty?
     tr class="#{ active_member ? 'success' : 'warning'}"
       td class="span4"
         = account.user.full_name
@@ -100,6 +101,12 @@ table class="table"
         - unless have_requests
           |  
           small (Нет доступных ресурсов)
+
+        - if faults.any?
+          ul class="unstyled"
+            - faults.each do |f|
+              li
+                = link_to f.description, [:admin, f], target: "_blank"
       - if current_user == @project.user
         td
           - unless account.user == @project.user

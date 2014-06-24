@@ -129,8 +129,6 @@ table class="table"
               - faults.each do |f|
                 li
                   = link_to f.description, [:admin, f], target: "_blank"
-                  |  
-                  span class="label label-important" = f.human_state_name
           
           - if may? :manage, :projects
             div class="block-account-form"
