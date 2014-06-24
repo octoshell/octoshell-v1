@@ -5,6 +5,16 @@
     - if surveys.any? || reports.any?
       div class="well well-collapseble #{'well-collapsed' if cookies[:hide_session] == '1'}"
         h3 Перерегистрация: #{session.description}
+        div class="alert alert-danger"
+          - if session.motivation?
+            strong = session.motivation
+            br
+          | У Вас есть неотправленные или отклонённые опросы и/или отчёт.
+          br
+          | Опросы и отчет нужно сдать 
+          strong не позднее #{l session.receiving_to}
+          | . Не прошедшим перерегистрацию закроется доступ на кластеры!
+
         div class="well-body"
           - if surveys.any?
             p
@@ -48,11 +58,4 @@
                       = link_to "Прислать отчет", [report, :accept], method: :put, class: 'btn btn-mini btn-success'
                     - else
                       small = link_to "Открыть", report_path(report, anchor: "start-page")
-          div class="alert alert-#{teaser_status}"
-            - if session.motivation?
-              strong = session.motivation
-              br
-            | Опросы и отчет нужно сдать 
-            strong не позднее #{session.receiving_to}
-            | . Не прошедшим перерегистрацию закроется доступ на кластеры.
         div class="well-close" ●

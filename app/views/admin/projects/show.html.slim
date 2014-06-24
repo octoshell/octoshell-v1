@@ -92,14 +92,15 @@ table class="table"
     tr
       th Пользователь
       th Логины
-      th Доступ
+      th Доступ к проекту
       th Доступ на кластеры
   tbody
     - have_requests = @project.requests.with_state(:active).any?
     - @project.accounts.sort_by { |a| a.denied? ? 1 : 0 }.each do |account|
-      tr class="#{account.allowed? ? (account.active? ? 'success' : 'warning') : 'striped'}"
+      - faults = account.user.faults.with_state(:actual)
+
+      tr class="#{account.allowed? ? (account.active? && faults.empty? ? 'success' : 'warning') : 'striped'}"
         td class="span4"
-          = render_status_icon(account.allowed? && account.active?)
           = link_to_if (may?(:manage, :projects)), account.user.full_name, [:admin, account.user], class: "#{"muted" if account.denied?}"
           - if account.user == @project.user
             |  
@@ -118,22 +119,18 @@ table class="table"
             div class="block-account-form-opener"
               small = link_to "заблокировать", "#", role: "block-account-form-opener"
           
-          - if account.active?
-            span class="label label-success" = account.human_cluster_state_name
-          - if account.closed?
-            span class="label label-important" = account.human_cluster_state_name
+          = render_status_icon(account.active? && faults.empty?)
           - unless have_requests
             |  
             small (Нет доступных ресурсов)
           
-          - faults = Fault.where(reference_id: account.id, kind_of_block: :account).order("id")
           - if faults.any?
             ul class="unstyled"
               - faults.each do |f|
                 li
                   = link_to f.description, [:admin, f], target: "_blank"
                   |  
-                  span class="label #{f.actual? ? "label-important" : "label-success"}" = f.human_state_name
+                  span class="label label-important" = f.human_state_name
           
           - if may? :manage, :projects
             div class="block-account-form"
@@ -146,16 +143,13 @@ table class="table"
     - unregistered_members.each do |sm|
       tr class="striped"
         td colspan="2"
-          = render_status_icon false
           = sm.full_name
           br
           small
             = link_to 'Код приглашения', '#', data: { content: "<code>#{sm.account_code.code}</code>" }, role: 'project-invite-code-viewer'
             |  отправлен на #{sm.email}
         td
-          span class="label label-important" Закрыт
-          |  
-          small (Не зарегистрирован)
+          span class="label label-important" Не зарегистрирован
 
 - sureties = @project.sureties.reorder('id asc')
 - if sureties.any?
