@@ -78,6 +78,7 @@ table class="table"
     tr
       th Пользователь
       th Логины
+      th Доступ к проекту
       th Доступ на кластеры
       - if current_user == @project.user
         th
@@ -92,6 +93,8 @@ table class="table"
           i class="icon-flag muted" title="Руководитель проекта"
       td
         code = account.login
+      td
+        = render_status_icon(account.allowed?)
       td
         = render_status_icon(active_member)
         - unless have_requests
