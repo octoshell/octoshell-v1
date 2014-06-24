@@ -47,16 +47,8 @@ h3 Проблемы
     ul
       - faults.each do |fault|
         li = link_to fault.description, [:admin, fault]
-
-- faults = @user.faults.with_state(:resolved)
-- if faults.any?
-  div class="well alert alert-success"
-    ul
-      - faults.each do |fault|
-        li = link_to fault.description, [:admin, fault]
-
-- if @user.faults.empty?
-  p Нет проблем
+- else
+  p Нет актуальных проблем.
 
 h3 Перерегистрации
 
