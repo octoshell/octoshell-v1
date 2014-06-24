@@ -26,48 +26,50 @@
 
   table class="table"
     - @project.requests.with_state(:active).each do |r|
-      tr class="#{r.maintain_requested_at? ? 'warning' : 'success'}"
+      - access_state = current_user.faults.any? ? 'error' : (r.maintain_requested_at? ? 'warning' : 'success')
+      tr class="#{access_state}"
         td style="vertical-align: middle" class="span4"
           - if r.maintain_requested_at?
             i class="icon-time" title="Выполняются процедуры на серверах"
-          - else
-            i class="icon-ok-circle" title="Доступ разрешен"
           |  
           = r.cluster.name
         td
           - a = @project.accounts.where(user_id: current_user.id).first
-          code class="public-key expanded" data-trigger="focus" title="#{copy_combo}" ssh #{a.login}@#{r.cluster.host}
-
-legend Доступы к ресурсам
-
-div class="row"
-  div class="span6"
-    table class="table"
-      - Cluster.with_state(:active).order('name').each_with_index do |cluster, i|
-        - request = @project.requests.without_state(:closed).find_by_cluster_id(cluster.id)
-        tr class="#{'without-top-border' if i == 0} #{(request && request.active?) ? 'success' : 'warning'}"
-          td
-            - if request
-              = render_status_icon request.active?
-              | Кластер "#{cluster.name}": 
-              = link_to_if current_user == @project.user, "Заявка ##{request.id}", request
-              |  
-              small class="muted" (#{request.human_state_name})
+          code class="public-key expanded" data-trigger="focus" title="#{copy_combo}"
+            - if current_user.faults.any?
+              | доступ закрыт
             - else
-              = render_status_icon false
-              |  Не выделены ресурсы на кластер "#{cluster.name}". 
-              - if current_user == @project.user
-                = button_tag 'Создать заявку', class: 'btn btn-success btn-mini pull-right inplace-new-request', data: { content: ".request-#{@project.id}-#{cluster.id}", title: 'Новая заявка' }, type: 'button', role: 'popoverable'
-          
-                div class="request-#{@project.id}-#{cluster.id} hidden"
-                  - request = Request.new { |r| r.project = @project; r.cluster = cluster }
-                  = simple_form_for request, html: { style: 'margin-bottom: 0;' } do |f|
-                    = f.input :project_id, as: :hidden
-                    = f.input :cluster_id, as: :hidden
-                    = f.input :cpu_hours, input_html: { class: 'input-block-level' }
-                    = f.input :gpu_hours, input_html: { class: 'input-block-level' }
-                    = f.input :size, input_html: { class: 'input-block-level' }, hint: 'Более 50ти обговаривается отдельно'
-                    = f.button :submit, class: 'btn-success btn-block'
+              | ssh #{a.login}@#{r.cluster.host}
+
+- if current_user == @project.user
+  legend Заявки на ресурсы
+
+  table class="table"
+    - Cluster.with_state(:active).order('name').each_with_index do |cluster, i|
+      - request = @project.requests.without_state(:closed).find_by_cluster_id(cluster.id)
+      tr class="#{(request && request.active?) ? 'success' : 'warning'}"
+        td
+          - if request
+            = cluster.name 
+          - else
+            |  Не выделены ресурсы на кластер "#{cluster.name}". 
+        td
+          - if request
+            = link_to "Заявка ##{request.id}", request
+            |  
+            small class="muted" (#{request.human_state_name})
+          - else
+            = button_tag 'Создать заявку', class: 'btn btn-success btn-mini inplace-new-request', data: { content: ".request-#{@project.id}-#{cluster.id}", title: 'Новая заявка' }, type: 'button', role: 'popoverable'
+        
+            div class="request-#{@project.id}-#{cluster.id} hidden"
+              - request = Request.new { |r| r.project = @project; r.cluster = cluster }
+              = simple_form_for request, html: { style: 'margin-bottom: 0;' } do |f|
+                = f.input :project_id, as: :hidden
+                = f.input :cluster_id, as: :hidden
+                = f.input :cpu_hours, input_html: { class: 'input-block-level' }
+                = f.input :gpu_hours, input_html: { class: 'input-block-level' }
+                = f.input :size, input_html: { class: 'input-block-level' }, hint: 'Более 50ти обговаривается отдельно'
+                = f.button :submit, class: 'btn-success btn-block'
 
 legend id="members" Участники проекта
 
