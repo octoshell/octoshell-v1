@@ -108,7 +108,6 @@ table class="table"
   - unregistered_members.each do |sm|
     tr class="striped"
       td colspan="2"
-        = render_status_icon false
         = sm.full_name
         - if current_user == @project.user
           br
@@ -116,9 +115,7 @@ table class="table"
             = link_to 'Код приглашения', '#', data: { content: "<code>#{sm.account_code.code}</code>" }, role: 'project-invite-code-viewer'
             |  отправлен на #{sm.email}
       td
-        span class="label label-important" Закрыт
-        |  
-        small (Не зарегистрирован)
+        span class="label label-important" Не зарегистрирован
       - if current_user == @project.user
         td
           strong = link_to '&times;'.html_safe, [@project, sm.account_code], method: :delete, class: 'danger', role: 'remove-member'

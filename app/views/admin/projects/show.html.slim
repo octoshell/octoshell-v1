@@ -143,16 +143,13 @@ table class="table"
     - unregistered_members.each do |sm|
       tr class="striped"
         td colspan="2"
-          = render_status_icon false
           = sm.full_name
           br
           small
             = link_to 'Код приглашения', '#', data: { content: "<code>#{sm.account_code.code}</code>" }, role: 'project-invite-code-viewer'
             |  отправлен на #{sm.email}
         td
-          span class="label label-important" Закрыт
-          |  
-          small (Не зарегистрирован)
+          span class="label label-important" Не зарегистрирован
 
 - sureties = @project.sureties.reorder('id asc')
 - if sureties.any?
