@@ -815,7 +815,7 @@ ru:
         user: Пользователь
         ticket_question: Вопрос
         project: Проект
-        project_id: Проект
+        project_id: ID проекта
         cluster: Кластер
         cluster_id: Кластер
         ticket_tag_relations_ticket_tag_name: Теги

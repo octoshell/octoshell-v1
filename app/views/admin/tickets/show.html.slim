@@ -43,6 +43,9 @@ table class="table table-bordered"
     tr
       th = Ticket.human_attribute_name(:project)
       td = link_to_project @ticket.project
+    tr
+      th = Ticket.human_attribute_name(:project_id)
+      td = @ticket.project.id
   - else
     tr class="hidden"
       th = Ticket.human_attribute_name(:project)
