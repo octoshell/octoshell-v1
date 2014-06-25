@@ -11,8 +11,8 @@ div class="well"
 = safe_paginate @clusters
 - if clusters.any?
   - if show_all?
-    h4 Всего кластеров #{clusters.count}
+    h4 Всего кластеров #{@clusters.count}
   - else
-    h4= page_entries_info clusters
+    h4= page_entries_info @clusters
 = render partial: 'admin/clusters/table', locals: { clusters: @clusters }
 = safe_paginate @clusters
