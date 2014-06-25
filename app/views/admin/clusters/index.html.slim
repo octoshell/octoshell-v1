@@ -9,7 +9,7 @@ div class="well"
     = f.button :submit, 'Найти', class: 'btn-primary'
 
 = safe_paginate @clusters
-- if clusters.any?
+- if @clusters.any?
   - if show_all?
     h4 Всего кластеров #{@clusters.count}
   - else
