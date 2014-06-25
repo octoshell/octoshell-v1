@@ -31,14 +31,6 @@
   
   = f.association :direction_of_sciences, as: :check_boxes, required: true, wrapper_html: { class: 'limited-height' }
   = f.association :critical_technologies, as: :check_boxes, required: true, wrapper_html: { class: 'limited-height' }
-  div class="control-group limited-height"
-    label class="check_boxes required control-label"
-      abbr title="required" *
-      |  
-      = Project.human_attribute_name(:research_areas)
-    div class="controls"
-      - ResearchArea.all.group_by(&:group).each do |group, collection|
-        h6 = group
-        = f.input :research_area_ids, as: :check_boxes, collection: collection, label: false, error_html: { class: 'hidden' }
+  = f.association :research_areas, as: :grouped_select, collection: ResearchArea.all.group_by(&:group), group_method: :last, label_method: :name, value_method: :id, required: true, input_html: { class: 'input-xxlarge' }
   div class="form-actions"
     = f.button :submit, class: 'btn-primary'
