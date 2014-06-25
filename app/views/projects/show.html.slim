@@ -104,9 +104,9 @@ table class="table"
 
         - if faults.any?
           ul class="unstyled faults expandable"
-            - faults.each do |f|
+            - faults.each do |fault|
               li
-                = link_to f.description, [:admin, f], target: "_blank"
+                = fault.description
       - if current_user == @project.user
         td
           - unless account.user == @project.user
