@@ -125,7 +125,7 @@ table class="table"
             small (Нет доступных ресурсов)
           
           - if faults.any?
-            ul class="unstyled"
+            ul class="unstyled faults expandable"
               - faults.each do |f|
                 li
                   = link_to f.description, [:admin, f], target: "_blank"
