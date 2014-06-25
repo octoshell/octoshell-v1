@@ -30,7 +30,7 @@ feature 'Create project', js: true do
     
     check direction_of_science.name
     check critical_technology.name
-    select research_area, from: 'Области науки'
+    select research_area.name, from: 'Области науки'
     
     # fill_in 'ФИО руководителя организации', with: 'Palpatine'
     # fill_in 'Должность руководителя организации', with: 'Emperor'
