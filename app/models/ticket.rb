@@ -38,11 +38,11 @@ class Ticket < ActiveRecord::Base
     state :closed
     
     event :answer do
-      transition [:active, :resolved, :answered] => :answered
+      transition [:active, :resolved, :answered, :closed] => :answered
     end
     
     event :reply do
-      transition [:active, :resolved, :answered] => :active
+      transition [:active, :resolved, :answered, :closed] => :active
     end
     
     event :resolve do
