@@ -31,6 +31,16 @@ class Admin::TicketsController < Admin::ApplicationController
     end
   end
 
+  def reactivate
+    @ticket = Ticket.find(params[:ticket_id])
+    if @ticket.reactivate
+      @ticket.user.track! :reactivate_ticket, @ticket, current_user
+      redirect_to [:admin, @ticket]
+    else
+      redirect_to [:admin, @ticket], alert: @ticket.errors.full_messages.join(', ')
+    end
+  end
+
   def edit
     @ticket = Ticket.find(params[:id])
   end

@@ -975,6 +975,7 @@ ru:
           events:
             resolve: Проблема решена
             close: Закрыть
+            reactivate: Заново активировать
       organization_kind:
         state:
           states:

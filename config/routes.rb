@@ -341,6 +341,7 @@ MSU::Application.routes.draw do
       get :tag_relations_form
       post :update_subscribers
       put :close
+      put :reactivate
       post :accept
       resources :versions, only: [:index, :show], resource: 'Ticket'
     end
