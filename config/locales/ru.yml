@@ -843,7 +843,7 @@ ru:
       fault:
         description: Описание
         created_at: Дата создания
-        replies_count: Количество ответов
+        state: Статус
     state_machines:
       surety:
         state:
