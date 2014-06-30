@@ -100,7 +100,7 @@ private
   end
 
   def create_surveys_for_sured!
-    User.with_state(:sured).each do |user|
+    User.with_state(:sured).joins(:owned_projects).where(projects: {state: :active}).each do |user|
       user.user_surveys.create! do |us|
         us.survey = personal_survey
       end
