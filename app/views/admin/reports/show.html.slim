@@ -1,16 +1,18 @@
 - title @report.human_name
 
-div class="well"
-  - if @report.materials?
-    = link_to 'Скачать материалы', @report.materials.url, class: 'btn btn-large btn-primary'
-  - else
-    = link_to 'Скачать материалы', '', class: 'btn btn-large btn-primary', disabled: true
-  |  
-  span style="margin-left: 20px; position: relative; top: 6px;" class="mute"
-    - if @report.materials?
-      | #{@report.materials_file_name}, #{number_to_human_size(@report.materials_file_size)}. Обновлен: #{@report.materials_updated_at.to_s(:datetime)}
-    - else
-      | Нет материалов
+- if @report.materials?
+  table class="table table-bordered"
+    tr
+      th Наименование файла
+      th Размер
+      th Обновлён
+    tr
+      td class="span5" = @report.materials_file_name
+      td class="span1" = number_to_human_size(@report.materials_file_size)
+      td class="span2" = l @report.materials_updated_at, format: :long
+      td class="span2" = link_to 'Скачать материалы', @report.materials.url, class: 'btn btn-primary'
+- else
+  | Нет материалов
 
 legend Оценки
 - if @report.can_assess? && may?(:access, :reports) && current_user = @report.expert

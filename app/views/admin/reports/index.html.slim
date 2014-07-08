@@ -21,6 +21,7 @@
     tr
       th class="span1" #
       td Отчет
+      td Обновлён
       td class="span4" Эксперт
     - @reports.each do |report|
       tr
@@ -36,6 +37,8 @@
             = link_to_if may?(:manage, :users), report.project.user.full_name, [:admin, report.project.user], class: "muted"
             |  
             i class="icon-flag muted"
+        td class="span2"
+          = l report.materials_updated_at, format: :long unless report.materials_updated_at.nil?
         td
           - if report.expert
             = smart_link_to report.expert

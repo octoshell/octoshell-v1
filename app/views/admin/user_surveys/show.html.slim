@@ -1,5 +1,12 @@
 - title @us.human_name if respond_to?(:title)
 
+dl class="dl-horizontal"
+  dt Создан:
+  dd = l @us.created_at, format: :long
+  dt Обновлён:
+  dd = l @us.updated_at, format: :long
+legend
+
 - fields = @us.survey.fields.sorted
 - fields.each do |field|
   div style="margin-bottom: 40px;"
