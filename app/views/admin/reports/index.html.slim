@@ -25,7 +25,11 @@
         - else
           | #
       td Отчет
-      td Обновлён
+      th class="span1"
+        - if @search
+          = sort_link @search, :materials_updated_at, 'Обновлён', default_order: :desc
+        - else
+          | Обновлён
       td class="span4" Эксперт
     - @reports.each do |report|
       tr
