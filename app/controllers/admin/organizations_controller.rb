@@ -9,7 +9,7 @@ class Admin::OrganizationsController < Admin::ApplicationController
     respond_to do |format|
       format.html do
         @search = Organization.search(params[:q])
-        search_result = @search.result(distinct: true)
+        search_result = @search.result(distinct: true).includes(:organization_kind, :city, :country)
         @organizations = show_all? ? search_result : search_result.page(params[:page])
       end
       format.json do
