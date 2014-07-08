@@ -46,6 +46,7 @@ legend Переписка
 - if replies.any?
   - replies.each do |r|
     blockquote
+      small = l r.created_at, format: :long
       small class="reply"
         - if @report.user == r.user
           = r.user.full_name
