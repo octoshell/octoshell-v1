@@ -5,7 +5,7 @@
       div class="controls"
         span class="uneditable-input" = @membership.organization.short_name
     = f.input :organization_id, as: :hidden
-    - if @membership.organization.subdivision_required?
+    - if @membership.subdivision.present?
       = f.input :subdivision_name, as: :string, input_html: { data: { provide: 'typeahead', source: @membership.organization.subdivisions.pluck(:name) }, autocomplete: 'off' }
     = f.simple_fields_for :positions do |f|
       = f.input :name, as: :hidden
