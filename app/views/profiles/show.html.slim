@@ -15,22 +15,21 @@ div class="row"
     - memberships = @user.memberships
     
     div class="row"
-      span class="span10"
+      span class="span9"
         table class="table table-condensed"
           - if memberships.any?
             - memberships.each do |m|
               tr
-                td class="span2"
+                td class="span5"
                   = link_to m.organization.short_name, m
                   - if m.subdivision
                     | , 
                     = m.subdivision.name
-                td
-                  = m.post_in_organization
-                td
                   - m.position_info.each do |p|
                     ul class="unstyled"
                       li #{p.name}: #{p.value}
+                td
+                  = m.post_in_organization
                 td
                   - if m.active?
                     label class="label label-success" = m.human_state_name
@@ -43,7 +42,7 @@ div class="row"
             tr class="warning"
               td colspan="2" Добавьте место работы
           tr
-            td colspan="5"
+            td colspan="4"
               strong
                 small = link_to 'Добавить', new_membership_path
     

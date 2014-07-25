@@ -65,7 +65,7 @@ class Membership < ActiveRecord::Base
   end
 
   def position_info
-    (positions.select{ |p| p.name != "Должность по РФФИ" })
+    (positions.select{ |p| not ["Должность по РФФИ", "Должность"].include?(p.name) })
   end
   
   def subdivision_name
