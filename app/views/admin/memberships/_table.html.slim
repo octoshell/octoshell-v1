@@ -7,7 +7,14 @@
       th = Membership.human_attribute_name(:state)
     - memberships.each do |membership|
       tr
-        td = smart_link_to membership.organization
+        td
+          = smart_link_to membership.organization
+          - if membership.subdivision
+            | , 
+            = membership.subdivision_name
+          - membership.position_info.each do |p|
+            ul class="unstyled"
+              li #{p.name}: #{p.value}
         td = membership.post_in_organization
         td = smart_link_to membership.user
         td

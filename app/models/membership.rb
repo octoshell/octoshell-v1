@@ -63,6 +63,10 @@ class Membership < ActiveRecord::Base
   def post_in_organization
     positions.find{ |p| p.name == "Должность по РФФИ" }.try(:value)
   end
+
+  def position_info
+    (positions.select{ |p| p.name != "Должность по РФФИ" })
+  end
   
   def subdivision_name
     subdivision.try(:name)
