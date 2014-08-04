@@ -10,10 +10,10 @@ module Models
         'boss_full_name'         => boss_full_name,
         'boss_position'          => boss_position,
         'members'                => surety_members.map(&:full_name),
-        'project_name'           => project.title,
+        'project_name'           => project.card.name,
         'direction_of_sciences'  => direction_of_sciences.map(&:name),
         'critical_technologies'  => critical_technologies.map(&:name),
-        'project_description'    => project.description,
+        'project_description'    => project.card.objective,
         'cpu_hours'              => cpu_hours,
         'gpu_hours'              => gpu_hours,
         'size'                   => size,
@@ -84,11 +84,11 @@ module Models
         text.gsub! %r{\{\{ critical_technologies \}\}}, begin
           critical_technologies.map(&:name).join(', ')
         end
-        text.gsub! %r{\{\{ project_description \}\}}, project.card.driver
+        text.gsub! %r{\{\{ project_description \}\}}, project.card.objective
         text.gsub! %r{\{\{ cpu_hours \}\}}, cpu_hours.to_s
         text.gsub! %r{\{\{ gpu_hours \}\}}, gpu_hours.to_s
         text.gsub! %r{\{\{ size \}\}}, size.to_s
-        text.gsub! %r{\{\{ date \}\}}, Date.today.to_s
+        text.gsub! %r{\{\{ date \}\}}, Date.current.to_s
         text.gsub! %r{\{\{ other_organizations \}\}}, begin
           project.organizations.map(&:name).join(', ')
         end
