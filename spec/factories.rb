@@ -116,7 +116,6 @@ FactoryGirl.define do
   end
 
   factory :project_card, class: 'Project::Card' do
-    project
     name         'Проект'
     en_name      'Project'
     driver       'Драйвер'
@@ -168,6 +167,10 @@ FactoryGirl.define do
     direction_of_sciences { [factory(:direction_of_science)] }
     research_areas        { [factory(:research_area)] }
     critical_technologies { [factory(:critical_technology)] }
+
+    after(:build) do |project|
+      FactoryGirl.build(:project_card, project: project)
+    end
 
     factory :closing_project do
       after(:create) { |p| p.close! }
