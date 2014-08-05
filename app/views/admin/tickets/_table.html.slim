@@ -1,13 +1,17 @@
 - if tickets.any?
   table class="table table-bordered table-striped"
     tr
-      th class="span1" #
+      th class="span1"
+        - if @search
+          = sort_link @search, :id, "#", default_order: :desc
+        - else
+          | #
       th = Ticket.human_attribute_name(:subject)
       th = Ticket.human_attribute_name(:project)
       th = Ticket.human_attribute_name(:cluster)
       th
         - if @search
-          = sort_link @search, :id, Ticket.human_attribute_name(:created_at), default_order: :asc
+          = sort_link @search, :created_at, Ticket.human_attribute_name(:created_at), default_order: :desc
         - else
           = Ticket.human_attribute_name(:created_at)
         
@@ -15,20 +19,20 @@
         = Ticket.human_attribute_name(:updated_at)
     - tickets.each do |ticket|
       tr id="ticket-#{ticket.id}"
-        td = ticket.id
-        td class="span4"
-          strong = smart_link_to(ticket)
+        td class="span1"= ticket.id
+        td class="span5"
+          strong = link_to ticket.link_name, [:admin, ticket]
           |  
           - state = { active: "important", answered: "warning", resolved: "success", closed: "default" }[ticket.state_name]
           span class="label label-#{state}" = ticket.human_state_name
           br
-          = smart_link_to(ticket.user, nil, class: "muted")
-        td class="span3" = link_to_project ticket.project
+          = link_to ticket.user.link_name, [:admin, ticket.user], class: "muted"
+        td class="span2" = link_to_project ticket.project
         td class="span1" = smart_link_to ticket.cluster
         td class="span1"
-          = ticket.created_at.strftime("%Y-%m-%d")
+          = l ticket.created_at, format: :long
           |  / 
           br
-          span class="muted" = ticket.updated_at.strftime("%Y-%m-%d")
+          span class="muted" = l ticket.updated_at, format: :long
 - else
   p Нет заявок

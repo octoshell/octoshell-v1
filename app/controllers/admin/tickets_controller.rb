@@ -4,7 +4,7 @@ class Admin::TicketsController < Admin::ApplicationController
 
   def index
     @search = Ticket.search(params[:q])
-    search_result = @search.result(distinct: true)
+    search_result = @search.result(distinct: true).order("id DESC, updated_at DESC")
     @tickets = show_all? ? search_result : search_result.page(params[:page])
 
     # записываем отрисованные тикеты в куки, для перехода к следующему тикету после ответа
@@ -81,7 +81,5 @@ private
 
   def setup_default_filter
     params[:q] ||= { state_in: ['active'] }
-    params[:q][:meta_sort] ||= 'updated_at desc'
-    params[:q][:ticket_tag_relations_ticket_tag_name_in] ||= TicketTag.with_state(:active).pluck(:name)
   end
 end
