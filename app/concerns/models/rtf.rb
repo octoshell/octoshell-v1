@@ -17,7 +17,7 @@ module Models
         'cpu_hours'              => cpu_hours,
         'gpu_hours'              => gpu_hours,
         'size'                   => size,
-        'date'                   => Date.today.to_s,
+        'date'                   => I18n.l(Date.current),
         'other_organizations'    => project.organizations.map(&:name)
       })
     end
@@ -88,7 +88,7 @@ module Models
         text.gsub! %r{\{\{ cpu_hours \}\}}, cpu_hours.to_s
         text.gsub! %r{\{\{ gpu_hours \}\}}, gpu_hours.to_s
         text.gsub! %r{\{\{ size \}\}}, size.to_s
-        text.gsub! %r{\{\{ date \}\}}, Date.current.to_s
+        text.gsub! %r{\{\{ date \}\}}, I18n.l(Date.current)
         text.gsub! %r{\{\{ other_organizations \}\}}, begin
           project.organizations.map(&:name).join(', ')
         end
