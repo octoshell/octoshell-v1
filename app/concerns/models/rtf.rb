@@ -10,7 +10,7 @@ module Models
         'boss_full_name'         => boss_full_name,
         'boss_position'          => boss_position,
         'members'                => surety_members.map(&:full_name),
-        'project_name'           => project.card.name,
+        'project_name'           => project.title,
         'direction_of_sciences'  => direction_of_sciences.map(&:name),
         'critical_technologies'  => critical_technologies.map(&:name),
         'project_description'    => project.card.objective,
@@ -77,7 +77,7 @@ module Models
         text.gsub! %r{\{\{ members \}\}}, begin
           surety_members.map(&:full_name).join(', ')
         end
-        text.gsub! %r{\{\{ project_name \}\}},      project.card.name
+        text.gsub! %r{\{\{ project_name \}\}},      project.title
         text.gsub! %r{\{\{ direction_of_sciences \}\}}, begin
           direction_of_sciences.map(&:name).join(', ')
         end
