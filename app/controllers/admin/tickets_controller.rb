@@ -80,6 +80,6 @@ private
   end
 
   def setup_default_filter
-    params[:q] ||= { state_in: ['active'] }
+    params[:q] ||= { state_in: ['active', 'answered'] }
   end
 end
