@@ -15,7 +15,7 @@ div class="row"
   div class="span9"
     - if @users.any?
       - if show_all?
-        h4 Всего поручительств #{@users.count}
+        h4 Всего пользователей #{@users.count}
       - else
         h4= page_entries_info @users
     = render partial: "table", locals: { users: @users }
