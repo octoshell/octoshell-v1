@@ -20,13 +20,15 @@ module AdminHelper
   def smart_link_to(record, name = nil, options = {})
     return unless record
     name ||= record.link_name if record
-    options[:class] ||= ""
-    options[:class] << " shorted"
     link_to_if may?(:manage, record.models_name), name, [:admin, record], options
   end
 
   def link_to_project(project, options = {})
     return unless project
     link_to_if (may?(:manage, :projects) || may?(:review, :projects)), project.link_name, [:admin, project], options
+  end
+
+  def report_human_name(project)
+    "Отчет по проекту #{link_to project.title, [:admin, project]}".html_safe
   end
 end

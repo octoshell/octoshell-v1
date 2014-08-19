@@ -67,7 +67,7 @@ class Report < ActiveRecord::Base
   end
   
   def human_name
-    %{Отчет по проекту "#{project.title.truncate(20)}"}
+    %{Отчет по проекту "#{project.title}"}
   end
   
   def bootstrap_status
