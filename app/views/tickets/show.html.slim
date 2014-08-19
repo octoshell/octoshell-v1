@@ -11,31 +11,69 @@ div class="well"
 
 table class="table table-bordered"
   tr
+    th class="span4" = User.model_name.human
+    td = link_to @ticket.user.full_name, [:admin, @ticket.user]
+  tr
+    th Логины
+    td = @ticket.user_logins
+  tr
     th = Ticket.human_attribute_name(:subject)
     td = @ticket.subject
-  tr
-    th = Ticket.human_attribute_name(:url)
-    td = link_to @ticket.url, @ticket.url if @ticket.url?
-  tr
-    th = Ticket.human_attribute_name(:attachment)
-    td = link_to_attachment @ticket
-  tr
-    th = Ticket.human_attribute_name(:project)
-    td = link_to_project @ticket.project if @ticket.project
-  tr
-    th = Ticket.human_attribute_name(:cluster)
-    td = @ticket.cluster.name if @ticket.cluster
-  - @ticket.ticket_field_values.each do |value|
+
+  - if @ticket.url.present?
     tr
-      th = value.ticket_field_relation.ticket_field.name
+      th = Ticket.human_attribute_name(:url)
+      td = link_to @ticket.url, @ticket.url
+  - else
+    tr class="hidden"
+      th = Ticket.human_attribute_name(:url)
       td
-        - if value.ticket_field_relation.ticket_field.url?
-          = link_to value.value, value.value
-        - else
-          = value.value
+  - if @ticket.attachment.present?
+    tr
+      th = Ticket.human_attribute_name(:attachment)
+      td = link_to_attachment @ticket
+  - else
+    tr class="hidden"
+      th = Ticket.human_attribute_name(:attachment)
+      td
+
+  - if @ticket.project.present?
+    tr
+      th = Ticket.human_attribute_name(:project)
+      td = link_to_project @ticket.project
+    tr
+      th = Ticket.human_attribute_name(:project_id)
+      td = @ticket.project.id
+  - else
+    tr class="hidden"
+      th = Ticket.human_attribute_name(:project)
+      td
+
+  - if @ticket.cluster.present?
+    tr
+      th = Ticket.human_attribute_name(:cluster)
+      td = smart_link_to @ticket.cluster
+  - else
+    tr class="hidden"
+      th = Ticket.human_attribute_name(:cluster)
+      td
+
+  - @ticket.ticket_field_values.each do |value|
+    - if value.value.present?
+      tr
+        th = value.ticket_field_relation.ticket_field.name
+        td = markdown value.value
+    - else
+      tr class="hidden"
+        th = value.ticket_field_relation.ticket_field.name
+        td
   tr
     th = Ticket.human_attribute_name(:state)
     td = @ticket.human_state_name
+  - if @ticket.has_blank_fields?
+    tr class="link"
+      td colspan="2"
+        small = link_to "Показать пустые поля", "#", role: "show-empty-ticket-field"
   
 h3 = Ticket.human_attribute_name(:message)
 h5 #{time_tag @ticket.created_at} / #{time_tag @ticket.updated_at}
