@@ -97,6 +97,10 @@ class Organization < ActiveRecord::Base
     short_name
   end
 
+  def to_s
+    short_name
+  end
+
   def short_name
     abbreviation? ? abbreviation : name
   end
