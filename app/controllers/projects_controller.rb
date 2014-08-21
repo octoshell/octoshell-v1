@@ -59,7 +59,7 @@ class ProjectsController < ApplicationController
       @project.user.track! :invite_members, params[:members], current_user
       redirect_to @project, notice: 'Участники добавлены'
     else
-      redirect_to @project, alert: 'Не верно заполнены поля'
+      redirect_to @project, alert: 'Неверно заполнены поля'
     end
   end
   
@@ -72,7 +72,7 @@ class ProjectsController < ApplicationController
     if @inviter.invite
       redirect_to @project, notice: 'Участники добавлены'
     else
-      redirect_to project_members_csv_path(@project), alert: 'Не верно заполнены поля'
+      redirect_to project_members_csv_path(@project), alert: 'Неверно заполнены поля'
     end
   end
   
