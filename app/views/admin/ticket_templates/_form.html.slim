@@ -1,6 +1,6 @@
 = simple_form_for [:admin, @ticket_template], html: { class: 'form-horizontal' } do |f|
   = f.input :subject
-  = f.input :message, as: :markdown_text input_html: { rows: 5 }
+  = f.input :message, as: :markdown_text, input_html: { rows: 5 }
     
   div class="form-actions"
     = f.button :submit, class: 'btn-primary'
