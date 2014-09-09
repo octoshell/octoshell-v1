@@ -936,6 +936,7 @@ ru:
         events:
           close: Завершить
           erase: Завершить и Стереть данные
+          reactivate: Возобновить
       request:
         state:
           states:

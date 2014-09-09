@@ -264,6 +264,7 @@ MSU::Application.routes.draw do
       put :close
       put :enable
       put :erase
+      put :reactivate
       put :move_to
       post :block
       resources :versions, only: [:index, :show], resource: 'Project'

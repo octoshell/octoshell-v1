@@ -12,6 +12,8 @@
     = link_to Project.human_state_event_name(:close), admin_project_close_path(@project), method: :put, class: "btn btn-warning #{'disabled' unless @project.can_close?}", data: { confirm: 'Вы уверены?' }
     |  
     = link_to Project.human_state_event_name(:erase), admin_project_erase_path(@project), method: :put, class: "btn btn-danger #{'disabled' unless @project.can_erase?}", data: { confirm: 'Вы уверены?' }
+    |  
+    = link_to Project.human_state_event_name(:reactivate), admin_project_reactivate_path(@project), method: :put, class: "btn btn-info #{'disabled' unless @project.can_reactivate?}", data: { confirm: 'Вы уверены?' }
 
 
 - if @project.closed?

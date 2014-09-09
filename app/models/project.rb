@@ -60,12 +60,20 @@ class Project < ActiveRecord::Base
       transition :closing => :closed
     end
 
+    event :reactivate do
+      transition :closed => :active
+    end
+
     inside_transition :on => :close do |p|
       p.requests.with_state(:active).each &:block!
     end
 
     inside_transition :on => :erase do |p|
       p.requests.with_state(:blocked).each &:close!
+    end
+
+    inside_transition :on => :reactivate do |p|
+      p.requests.with_state(:closed).each &:reactivate!
     end
   end
 
