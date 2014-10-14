@@ -38,7 +38,7 @@ class Report < ActiveRecord::Base
     end
     
     event :pick do
-      transition :submitted => :assessing
+      transition [:accepted, :submitted] => :assessing
     end
     
     event :assess do
