@@ -475,13 +475,13 @@ ru:
         account:
           attributes:
             raw_emails:
-              invalid_email: "Не верный формат email: %{email}"
+              invalid_email: "Неверный формат email: %{email}"
             base:
               not_ready_to_be_activated: Не может быть активирован. Необходимо подтвержденное поручительство и заполненное место работы.
         session:
           attributes:
             base:
-              date_is_out_of_available_range: Не подходящий период
+              date_is_out_of_available_range: Неподходящий период
         request:
           attributes:
             base:
@@ -489,7 +489,7 @@ ru:
         credential:
           attributes:
             base:
-              pending_tasks_present: "Удаление пока не доступно. Попробуйте немного позже"
+              pending_tasks_present: "Удаление пока недоступно. Попробуйте немного позже"
         cluster:
           attributes:
             base:
