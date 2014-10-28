@@ -47,7 +47,7 @@ div class="row"
                 small = link_to 'Добавить', new_membership_path
     
     
-    - sureties = @user.sureties
+    - sureties = @user.all_sureties
     - if sureties.any?
       h4 Поручительства
       div class="row"
@@ -55,6 +55,7 @@ div class="row"
           table class="table table-condensed"
             - sureties.each do |surety|
               tr
+                td = surety.id
                 td class="span4"
                   - if  @user == surety.project.user
                     span class="label label-warning" Автор

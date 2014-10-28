@@ -160,14 +160,16 @@ class User < ActiveRecord::Base
   end
 
   def all_sureties
-    Surety.where("id in (?) or project_id in (?)", surety_ids, owned_project_ids)
+    sureties = Surety.arel_table
+    projects = Project.arel_table
+    Surety.eager_load(:project).where(sureties[:id].in(surety_ids).or(
+                                      projects[:id].in(owned_project_ids)))
   end
   
   def all_projects
     condition = "(accounts.access_state = 'allowed' and accounts.user_id = 
       :id) or projects.user_id = :id"
-    ids = Project.joins("left join accounts on accounts.project_id = projects.id").
-      where(condition, id: id).uniq.pluck(:id)
+    ids = Project.joins(:accounts).where(condition, id: id).pluck(:id)
     Project.where(id: ids)
   end
   

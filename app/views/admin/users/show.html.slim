@@ -86,7 +86,7 @@ h3 Перерегистрации
         span class="label label-#{state}" = us.human_state_name
 
 h3 = t('.sureties')
-= render partial: 'admin/sureties/table', locals: { sureties: @user.sureties }
+= render partial: 'admin/sureties/table', locals: { sureties: @user.all_sureties }
 
 h3 = t('.memberships')
 = render partial: 'admin/memberships/table', locals: { memberships: @user.memberships }
