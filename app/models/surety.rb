@@ -10,6 +10,7 @@ class Surety < ActiveRecord::Base
   
   delegate :user, :direction_of_sciences, :critical_technologies,
     to: :project, allow_nil: true
+  delegate :organization, to: :project, allow_nil: false
   
   belongs_to :organization
   belongs_to :project, inverse_of: :sureties
