@@ -25,7 +25,8 @@ class Organization < ActiveRecord::Base
 
   after_create :notify_admins
 
-  scope :finder, lambda { |q| where("lower(name) like :q", q: "%#{q.mb_chars.downcase}%").order("name asc") }
+  scope :finder, lambda { |q| where("lower(name) like :q OR lower(abbreviation) like :q",
+                                    q: "%#{q.mb_chars.downcase}%").order("name asc") }
 
   state_machine initial: :active do
     state :active
@@ -103,6 +104,10 @@ class Organization < ActiveRecord::Base
 
   def short_name
     abbreviation? ? abbreviation : name
+  end
+
+  def full_name
+    "#{name} #{abbreviation}"
   end
 
   def city_title
